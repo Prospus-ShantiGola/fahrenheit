@@ -41,6 +41,10 @@
         <dl class="dl-horizontal">
             <dt>name</dt>
             <dd>{{ $users->name }}</dd>
+            <dt>Company</dt>
+            <dd>{{ $users->company }}</dd>
+            <dt>Tel</dt>
+            <dd>{{ $users->phoneno }}</dd>
             <dt>email</dt>
             <dd>{{ $users->email }}</dd>
 
