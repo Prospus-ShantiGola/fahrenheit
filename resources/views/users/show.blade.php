@@ -43,7 +43,7 @@
             <dd>{{ $users->name }}</dd>
             <dt>Company</dt>
             <dd>{{ $users->company }}</dd>
-            <dt>Tel</dt>
+            <dt>Tel. No.</dt>
             <dd>{{ $users->phoneno }}</dd>
             <dt>email</dt>
             <dd>{{ $users->email }}</dd>

@@ -37,6 +37,7 @@
             <input name="_method" type="hidden" value="PUT">
             @include ('users.form', [
                                         'users' => $users,
+                                        'mode' =>'edit'
                                       ])
 
                 <div class="form-group">

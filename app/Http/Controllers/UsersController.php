@@ -18,8 +18,7 @@ class UsersController extends Controller
     public $layout = 'layouts.app';
     public function index()
     {
-        $usersObjects = Users::paginate(25);
-
+        $usersObjects = Users::paginate(5);
         return view('users.index', compact('usersObjects'));
     }
 
@@ -47,14 +46,13 @@ class UsersController extends Controller
         try {
 
             $data = $this->getData($request);
-
             Users::create($data);
 
             return redirect()->route('users.users.index')
                              ->with('success_message', 'Users was successfully added!');
 
         } catch (Exception $exception) {
-
+            dd($exception);
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }
@@ -104,13 +102,13 @@ class UsersController extends Controller
             $data = $this->getData($request);
 
             $users = Users::findOrFail($id);
+
             $users->update($data);
 
             return redirect()->route('users.users.index')
                              ->with('success_message', 'Users was successfully updated!');
 
         } catch (Exception $exception) {
-
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }
@@ -150,11 +148,10 @@ class UsersController extends Controller
     {
         $rules = [
             'name' => 'required|string|min:1|max:255',
+            'company' => 'required|string|min:1|max:255',
+            'phoneno' => 'required|string|min:1|max:255',
             'email' => 'required|string|min:1|max:255',
-            'password' => 'required|string|min:1|max:255',
-            'remember_token' => 'nullable|string|min:0|max:100',
-            'created_at' => 'nullable|date_format:n/j/Y H:i A',
-            'updated_at' => 'nullable|date_format:n/j/Y H:i A',
+            'password' => 'string|min:1|max:255'
 
         ];
 

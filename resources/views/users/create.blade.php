@@ -12,7 +12,7 @@
 
             <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('users.users.index') }}" class="btn btn-primary" title="Show All Users">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back</span>
                 </a>
             </div>
 
@@ -32,6 +32,7 @@
             {{ csrf_field() }}
             @include ('users.form', [
                                         'users' => null,
+                                        'mode' =>'create'
                                       ])
 
                 <div class="form-group">

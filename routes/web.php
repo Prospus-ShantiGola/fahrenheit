@@ -25,28 +25,28 @@ Route::group(
 ], function () {
 
     Route::get('/', 'UsersController@index')
-         ->name('users.users.index');
+         ->name('users.users.index')->middleware('auth');;
 
     Route::get('/create','UsersController@create')
-         ->name('users.users.create');
+         ->name('users.users.create')->middleware('auth');;
 
     Route::get('/show/{users}','UsersController@show')
          ->name('users.users.show')
-         ->where('id', '[0-9]+');
+         ->where('id', '[0-9]+')->middleware('auth');;
 
     Route::get('/{users}/edit','UsersController@edit')
          ->name('users.users.edit')
-         ->where('id', '[0-9]+');
+         ->where('id', '[0-9]+')->middleware('auth');;
 
     Route::post('/', 'UsersController@store')
-         ->name('users.users.store');
-               
+         ->name('users.users.store')->middleware('auth');;
+
     Route::put('users/{users}', 'UsersController@update')
          ->name('users.users.update')
-         ->where('id', '[0-9]+');
+         ->where('id', '[0-9]+')->middleware('auth');;
 
     Route::delete('/users/{users}','UsersController@destroy')
          ->name('users.users.destroy')
-         ->where('id', '[0-9]+');
+         ->where('id', '[0-9]+')->middleware('auth');;
 
 });
