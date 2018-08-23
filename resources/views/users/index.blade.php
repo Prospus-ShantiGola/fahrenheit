@@ -20,11 +20,7 @@
 
 
 
-                                <div class="btn-group btn-group-sm pull-right" role="group">
-                                    <a href="{{ route('users.users.create') }}" class="btn btn-success" title="Create New Users">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
-                                    </a>
-                                </div>
+
 
 
 
@@ -45,7 +41,11 @@
                                                 <th>Email</th>
 
 
-                                                <th></th>
+                                                <th><div class="btn-group btn-group-sm pull-right" role="group">
+                                                        <a href="{{ route('users.users.create') }}" class="btn btn-success" title="Create New Users">
+                                                            <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
+                                                        </a>
+                                                    </div></th>
                                             </tr>
                                         </thead>
                                         <tbody>

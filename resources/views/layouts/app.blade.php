@@ -81,12 +81,27 @@
                                     <div class="card-header">Dashboard</div>
 
                                     <div class="card-body">
-                                            <div class="container-fluid">
-                                                    sidebar
+                                            <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="container-fluid left-panel">
+                                                            <div>
+                                                                    <a href="{{ route('users.users.create') }}" title="Reports"> Reports </a>
+                                                            </div>
+                                                            <div>
+                                                                    <a href="{{ route('users.users.index') }}" title="Users"> User Settings </a>
+                                                                </div>
+                                                                <div>
+                                                                        <a href="{{ route('users.users.create') }}"  title="Management Settings">Management Settings</a>
+                                                                    </div>
+                                                          </div></div>
+                                                    <div class="col-9">
+                                                        <div class="container-fluid">
+                                                            @yield('content')
+                                                            </div>
+                                                        </div>
                                                   </div>
-                                        <div class="container-fluid">
-                                            @yield('content')
-                                            </div>
+
+
 
         </div>
                             </div>
