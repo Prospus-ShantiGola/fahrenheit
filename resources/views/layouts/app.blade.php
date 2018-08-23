@@ -78,9 +78,18 @@
             <div class="container">
                     <div class="row justify-content-center">
                             <div class="card">
+                                    <div class="card-header">Dashboard</div>
 
-            @yield('content')
+                                    <div class="card-body">
+                                            <div class="container-fluid">
+                                                    sidebar
+                                                  </div>
+                                        <div class="container-fluid">
+                                            @yield('content')
+                                            </div>
+
         </div>
+                            </div>
                     </div>
     </div>
         </main>

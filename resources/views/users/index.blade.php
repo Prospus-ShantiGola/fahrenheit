@@ -14,9 +14,7 @@
         </div>
     @endif
 
-                    <div class="card-header">Dashboard</div>
 
-                    <div class="card-body">
                         <div class="panel panel-default">
 
 
@@ -95,7 +93,6 @@
 
                         </div>
 
-                    </div>
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="disable-modal">
                             <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
