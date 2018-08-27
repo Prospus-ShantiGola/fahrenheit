@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Permission\Traits\HasRoles;
 class Users extends Model
 {
 
 
+    use HasRoles;
+
+    protected $guard_name = 'web'; // or whatever guard you want to use
     /**
      * The database table used by the model.
      *

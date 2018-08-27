@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
 use Exception;
 
 class UsersController extends Controller
@@ -16,10 +19,11 @@ class UsersController extends Controller
      * @return Illuminate\View\View
      */
     public $layout = 'layouts.app';
-    public function index()
+    public function index(Request $request)
     {
-        $usersObjects = Users::paginate(5);
-        return view('users.index', compact('usersObjects'));
+        $usersObjects = Users::orderBy('id','DESC')->paginate(5);
+        return view('users.index', compact('usersObjects'))
+        ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -30,7 +34,7 @@ class UsersController extends Controller
     public function create()
     {
 
-
+        $roles = Role::pluck('name','name')->all();
         return view('users.create');
     }
 
@@ -45,14 +49,26 @@ class UsersController extends Controller
     {
         try {
 
-            $data = $this->getData($request);
-            Users::create($data);
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|same:confirm-password',
+                'roles' => 'required'
+            ]);
+
+
+            $input = $request->all();
+            $input['password'] = Hash::make($input['password']);
+
+
+            $user = Users::create($input);
+            $user->assignRole($request->input('roles'));
 
             return redirect()->route('users.users.index')
                              ->with('success_message', 'Users was successfully added!');
 
         } catch (Exception $exception) {
-            dd($exception);
+            //dd($exception);
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }
@@ -82,9 +98,10 @@ class UsersController extends Controller
     public function edit($id)
     {
         $users = Users::findOrFail($id);
+        $roles = Role::pluck('name','name')->all();
+        $userRole = $users->roles->pluck('name','name')->all();
 
-
-        return view('users.edit', compact('users'));
+        return view('users.edit', compact('users','roles','userRole'));
     }
 
     /**
@@ -99,12 +116,28 @@ class UsersController extends Controller
     {
         try {
 
-            $data = $this->getData($request);
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,'.$id,
+                'password' => 'same:confirm-password',
+                'roles' => 'required'
+            ]);
+
+
+            $input = $request->all();
+            if(!empty($input['password'])){
+                $input['password'] = Hash::make($input['password']);
+            }else{
+                $input = array_except($input,array('password'));
+            }
+
+
 
             $users = Users::findOrFail($id);
 
-            $users->update($data);
-
+            $users->update($input);
+            DB::table('model_has_roles')->where('model_id',$id)->delete();
+            $users->assignRole($request->input('roles'));
             return redirect()->route('users.users.index')
                              ->with('success_message', 'Users was successfully updated!');
 
