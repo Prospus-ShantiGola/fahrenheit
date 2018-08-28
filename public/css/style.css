@@ -1,0 +1,38 @@
+
+.card{
+    width: 100%;
+}
+.hide{
+    display: none;
+}
+.container{
+    padding: 20px;
+}
+.left-panel{
+    line-height: 30px;
+}
+.btn-group.btn-group-sm.pull-right{
+    float: right;
+    padding :10px;
+}
+table.table.table-striped {
+    border: 1px solid #dee2e6;
+}
+.mt-5, .my-5 {
+    margin-top: 0px !important;
+}
+.pageheader{
+    vertical-align: text-top;
+    width: 20px;
+    height: 20px;
+}
+.btn-group.btn-group-sm {
+    float: right;
+}
+.disabled{
+    color:grey;
+    pointer-events: none;
+}
+a:active{
+    text-decoration: underline;
+}

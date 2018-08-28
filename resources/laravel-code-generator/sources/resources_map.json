@@ -1,0 +1,12 @@
+[
+    {
+        "model-name": "UserType",
+        "resource-file": "user_types.json",
+        "table-name": "user_types"
+    },
+    {
+        "model-name": "UserReport",
+        "resource-file": "user_reports.json",
+        "table-name": "user_reports"
+    }
+]
