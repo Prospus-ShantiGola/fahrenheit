@@ -201,5 +201,33 @@ class UsersController extends Controller
 
         return $data;
     }
+    public function loginUser(Request $request)
+    {
+
+    	$email	       = $request->email;
+    	$password      = $request->password;
+    	$rememberToken = $request->remember;
+        // now we use the Auth to Authenticate the users Credentials
+        try {
+            if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password], $rememberToken)) {
+                $msg = array(
+                    'status'  => 'success',
+                    'message' => 'Login Successful'
+                );
+                return response()->json($msg);
+            } else {
+                $msg = array(
+                    'status'  => 'error',
+                    'message' => 'These credentials do not match our records.'
+                );
+                return response()->json($msg);
+            }
+
+        } catch (Exception $exception) {
+            return response()->json(['response' => 'Please check the credentials !!']);
+        }
+		// Attempt Login for members
+
+    }
 
 }

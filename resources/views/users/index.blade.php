@@ -162,6 +162,6 @@
 
                             });
 
-
+#sourceURL=user.js
                           </script>
 @endsection
