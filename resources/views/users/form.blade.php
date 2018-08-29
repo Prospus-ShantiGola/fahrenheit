@@ -17,21 +17,21 @@
 <div class="form-group {{ $errors->has('phoneno') ? 'has-error' : '' }}">
     <label for="phoneno" class="col-md-2 control-label">Tel. No.</label>
     <div class="col-md-10">
-        <input class="form-control" name="phoneno" type="text" id="phoneno" value="{{ old('phoneno', optional($users)->phoneno) }}" minlength="1" maxlength="255" required="true" placeholder="Enter tel no. here...">
+        <input class="form-control" name="phoneno" type="mobile" id="phoneno" value="{{ old('phoneno', optional($users)->phoneno) }}" minlength="1" maxlength="255" required="true" placeholder="Enter tel no. here...">
         {!! $errors->first('phoneno', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
     <label for="email" class="col-md-2 control-label">Email</label>
     <div class="col-md-10">
-        <input class="form-control" name="email" type="text" id="email" value="{{ old('email', optional($users)->email) }}" minlength="1" maxlength="255" required="true" placeholder="Enter email here...">
+        <input class="form-control" name="email" type="email" id="email" value="{{ old('email', optional($users)->email) }}" minlength="1" maxlength="255" required="true" placeholder="Enter email here...">
         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }} {{ ($mode == 'create') ? '':'hide' }}">
     <label for="password" class="col-md-2 control-label">Password</label>
     <div class="col-md-10">
-        <input class="form-control" name="password" type="text" id="password" value="{{ old('password', optional($users)->password) }}" minlength="1" maxlength="255" required="true" placeholder="Enter password here...">
+        <input class="form-control" name="password" type="password" id="password" value="{{ old('password', optional($users)->password) }}" minlength="1" maxlength="255" required="true" placeholder="Enter password here...">
         {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -46,7 +46,7 @@
                     </select>
             {!! $errors->first('user_type_id', '<p class="help-block">:message</p>') !!}
         </div>
-    </div>
+</div>
 
 
 

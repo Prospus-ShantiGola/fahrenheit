@@ -68,14 +68,14 @@
 
 
                                                         <div class="btn-group btn-group-xs pull-right" role="group">
-                                                            <a href="{{ route('users.users.show', $users->id ) }}" class="btn btn-info " title="Show Users">
+                                                            <a href="{{ route('users.users.show', $users->id ) }}" class="btn btn-info " title="Show User">
                                                                 <span class="glyphicon glyphicon-open" aria-hidden="true">View</span>
                                                             </a>
-                                                            <a href="{{ route('users.users.edit', $users->id ) }}" class="btn btn-primary" title="Edit Users">
+                                                            <a href="{{ route('users.users.edit', $users->id ) }}" class="btn btn-primary" title="Edit User">
                                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
                                                             </a>
 
-                                                            <button type="button" class="btn btn-danger" title="Delete Users" data-user="{{ $users->id }}" data-status="{{ !$users->status }}"  data-toggle="modal" data-target="#disable-modal"  data-backdrop="false" id="disable_userbutton-{{ $users->id }}">
+                                                            <button type="button" class="btn btn-danger" title='{{ ($users->status == 1) ? "Disable" : "Enable"  }} User' data-user="{{ $users->id }}" data-status="{{ !$users->status }}"  data-toggle="modal" data-target="#disable-modal"  data-backdrop="false" id="disable_userbutton-{{ $users->id }}">
                                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true" id="status-button-{{ $users->id }}">{{ ($users->status == 1) ? "Disable" : "Enable"  }}</span>
                                                             </button>
                                                         </div>
