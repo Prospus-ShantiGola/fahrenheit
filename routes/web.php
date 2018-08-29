@@ -49,6 +49,7 @@ Route::group(
          ->name('users.users.destroy')
          ->where('id', '[0-9]+')->middleware('auth');
     Route::post('/updatestatus', 'UsersController@updatestatus');
+    Route::post('/loginUser', 'UsersController@loginUser');
 
 });
 
