@@ -37,6 +37,7 @@ a:active{
     text-decoration: underline;
 }
 
+
 input:not([type="file"]).error,
 textarea.error,
 select.error {
@@ -52,4 +53,13 @@ select.no-error {
 div.error-field {
   color: red;
   font-size: small;
+
+.action-button a{
+    color: #e73c37 !important;
+
+}
+.action-button a:not(:first-child){
+    border-left:1px solid #000;
+    padding: 0px 10px 0px 10px;
+
 }

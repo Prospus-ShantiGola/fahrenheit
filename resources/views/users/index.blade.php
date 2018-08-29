@@ -67,7 +67,7 @@
 
 
 
-                                                        <div class="btn-group btn-group-xs pull-right" role="group">
+     <div class="btn-group btn-group-xs pull-right" role="group">
                                                             <a href="{{ route('users.users.show', $users->id ) }}" class="btn btn-info " title="Show User">
                                                                 <span class="glyphicon glyphicon-open" aria-hidden="true">View</span>
                                                             </a>

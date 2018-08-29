@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <style>
+        .hide{
+            display: none;
+        }
+    </style>
     </head>
     <body>
 
@@ -39,20 +44,21 @@
 
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                        <form id="login-form" method="post" onsubmit="return LoginUser()" role="form" style="display: block;">
                             @csrf
 
+
                             <div class="form-group row">
+
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
+
+                                        <span class="invalid-feedback invalid-login hide" role="alert">
+                                            <strong></strong>
                                         </span>
-                                    @endif
                                 </div>
                             </div>
 
@@ -70,7 +76,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -80,7 +86,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
@@ -100,6 +106,45 @@
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript">
+            function LoginUser()
+            {
+                var token    = $("input[name=_token]").val();
+                var email    = $("input[name=email]").val();
+                var password = $("input[name=password]").val();
+                var data = {
+                    _token:token,
+                    email:email,
+                    password:password
+                };
+                // Ajax Post
+                $.ajax({
+                    type: "post",
+                    url: "/users/loginUser",
+                    data: data,
+                    cache: false,
+                    success: function (data)
+                    {
+                        console.log('login request sent !');
+                        console.log('status: ' +data.status);
+                        console.log('message: ' +data.message);
+                        if(data.status=="success"){
+                            window.location.href="/user_reports";
+                        }
+                        else{
+                            $("input[name=email]").addClass('is-invalid');
+                            $(".invalid-login strong").removeClass('hide').text(data.message);
+                        }
+                    },
+                    error: function (data){
+                        alert('Fail to run Login..');
+                    }
+                });
+                return false;
+            }
+            //# sourceURL=user.js
+        </script>
     </body>
 
 

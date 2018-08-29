@@ -22,6 +22,19 @@ header {
     height: 25px;
     text-align: center;
 }
+.loggedin-div a {
+    color: #bbb;
+    background: #fff;
+    border-radius: 28px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    width: auto;
+    height: 25px;
+    text-align: center;
+}
 .header-search-form {
     text-align: right;
 }
@@ -45,7 +58,7 @@ section.top-header {
 }
 .top-navigation li.nav-item {
     padding-left: 10px;
-    padding-right: 10px; 
+    padding-right: 10px;
 }
 .top-navigation li.nav-item a:hover { color: #f92156; }
 .top-navigation li.nav-item a { position:relative; }
@@ -295,7 +308,7 @@ footer {
 .footer-section1 h5 {
     color: #00648c;
 }
-footer a{ color:#00648c;} 
+footer a{ color:#00648c;}
 footer p{ color:#00648c;}
 .footer-section1 p {
     margin-top: 20px;
@@ -336,7 +349,7 @@ section.copyrite p a { color:#00618c;}
     margin-top: 10px;
     margin-left: 28px;
 }
-.login-div {
+.login-div, .loggedin-div {
     float: left;
 }
 .language-change-div {
@@ -355,7 +368,7 @@ section.copyrite p a { color:#00618c;}
     color: #f8283c;
     font-size: 14px; vertical-align:top;
 }
-.breadcrumbs .breadcrumb-item.active { color:#00618c; font-size:14px;} 
+.breadcrumbs .breadcrumb-item.active { color:#00618c; font-size:14px;}
 .breadcrumbs .breadcrumb-item+.breadcrumb-item::before {
     content: "\f105";
     font-family: FontAwesome; color:#fa283c;
@@ -366,7 +379,7 @@ section.copyrite p a { color:#00618c;}
 .breadcrumbs ol.breadcrumb {
     background: transparent;
     margin: 0; padding-left:0; padding-right:0;
-} 
+}
 .adcalc-inner-content {
     background: #fff;
     padding: 15px;
@@ -436,11 +449,11 @@ ul.price-listt {
 .heat-sources {background: url(../images/gb4.jpg);}
 .heating-load-profiles  {
     background: url(../images/gb5.jpg);
-} 
+}
 .fahrenheit-system-box { background: url(../images/gb8.jpg);}
 .compression-chillers  {
     background: url(../images/gb6.jpg);
-} 
+}
 .cooling-load-profiles {    background: url(../images/gb7.jpg);}
 .price-listt p {
     margin: 0;
@@ -487,7 +500,7 @@ ul.price-listt {
     background: #0387c3;
     padding: 25px;
 }
-.data-box:hover .main-hover-box {display:block;} 
+.data-box:hover .main-hover-box {display:block;}
 .add-icon {
     position: absolute;
     bottom: 13px;
@@ -538,15 +551,15 @@ ul.right-list-content {
 
 .compression-chillers-hover  p {
     padding-top: 25px;
-} 
+}
 .cooling-load-hover  p {
     padding-top: 45px;
-} 
+}
 
 .fahrenheit-system-hover p {
     padding-top: 20px;
-} 
- 
+}
+
  /* The Modal (background) */
       .modal {
             display: none; /* Hidden by default */

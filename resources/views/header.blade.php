@@ -4,9 +4,19 @@
     <div class="container">
         <div class="row">
             <div class="col-6 col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                <div class="login-div">
-                        <a href="#" data-toggle="modal" data-backdrop="false" data-target="#loginModal">Login</a>
-                </div>
+                    @if (Route::has('login'))
+
+                        @auth
+                        <div class="loggedin-div">
+                                <a href="{{ url('/user_reports') }}">Dashboard</a>
+                        </div>
+                        @else
+                        <div class="login-div">
+                                <a href="#" data-toggle="modal" data-backdrop="false" data-target="#loginModal">Login</a>
+                        </div>
+                        @endauth
+                    @endif
+
                 <div class="language-change-div">
                  <a href="#">DE</a>
                   <a href="#" class="active">EN</a>
