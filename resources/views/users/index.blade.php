@@ -24,7 +24,7 @@
                                 </div>
 
                                 <div class="btn-group btn-group-sm pull-right" role="group">
-                                    <a href="{{ route('users.users.create') }}" class="btn btn-success" title="Create New Users">
+                                    <a href="{{ route('users.users.create') }}" class="btn btn-primary" title="Create New Users">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
                                     </a>
                                 </div>
@@ -68,7 +68,7 @@
 
 
                                                         <div  class="action-button" role="group">
-                                                            <a href="#"  title="Show Users" data-user="{{ $users->id }}" data-status="{{ !$users->status }}"  data-toggle="modal" data-target="#disable-modal"  data-backdrop="false" id="disable_userbutton-{{ $users->id }}">
+                                                            <a href="#"  title="Disable User" data-user="{{ $users->id }}" data-status="{{ !$users->status }}"  data-toggle="modal" data-target="#disable-modal"  data-backdrop="false" id="disable_userbutton-{{ $users->id }}">
 
                                                                 <i class="fas fa-user-times fa-lg">
                                                                     </i>
