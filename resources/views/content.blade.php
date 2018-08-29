@@ -4,7 +4,8 @@
             <div class="row">
                 <div class="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-3">
                     <div class="header-logo">
-                        <img src="images/logo.png">
+
+                        <img src="{{ asset('images/logo.png') }}">
                     </div>
                 </div>
                 <div class="col-12 col-md-9 col-sm-9 col-lg-9 col-xl-9">
@@ -65,7 +66,7 @@
         <div class="owl-carousel" id="home-banner">
             <div class="item">
                 <div class="banner-img">
-                    <img src="images/bg_wtauscher.jpg" alt="banner-img" />
+                    <img src="{{ asset('images/bg_wtauscher.jpg') }}" alt="banner-img" />
                     <div class="container">
                         <div class="banner-content">
                             <h1>We set new standards
@@ -77,7 +78,7 @@
             </div>
             <div class="item">
                 <div class="banner-img">
-                    <img src="images/bg_maschine.jpg" alt="banner-img" />
+                    <img src="{{ asset('images/bg_maschine.jpg') }}" alt="banner-img" />
                     <div class="container">
                         <div class="banner-content">
                             <h1>Versatile use<span>for stationary and mobile applications.</span></h1>
@@ -88,7 +89,7 @@
             </div>
             <div class="item">
                 <div class="banner-img">
-                    <img src="images/product-portfolio.jpg" alt="banner-img" />
+                    <img src="{{ asset('images/product-portfolio.jpg') }}" alt="banner-img" />
                     <div class="container">
                         <div class="banner-content">
                             <h1>Our new
@@ -101,7 +102,7 @@
             </div>
             <div class="item">
                 <div class="banner-img">
-                    <img src="images/slider_02.jpg" alt="banner-img" />
+                    <img src="{{ asset('images/slider_02.jpg') }}" alt="banner-img" />
                     <div class="container">
                         <div class="banner-content">
                             <h1>Zeolite technology:
@@ -134,7 +135,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="services-boxes">
-                        <img src="images/bg1.jpg" alt="" />
+                        <img src="{{ asset('images/bg1.jpg') }}" alt="" />
                         <div class="service-box-content">
                            <h3> Industry
                             <br> & Trade</h3>
@@ -143,7 +144,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="services-boxes">
-                        <img src="images/bg2.jpg" alt="" />
+                        <img src="{{ asset('images/bg2.jpg') }}" alt="" />
                         <div class="service-box-content">
                             <h3>Data centers & server rooms</h3>
                         </div>
@@ -151,7 +152,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="services-boxes">
-                        <img src="images/bg3.jpg" alt="" />
+                        <img src="{{ asset('images/bg3.jpg') }}" alt="" />
                         <div class="service-box-content">
                             <h3>Combined heat and power plants (CHP)</h3>
                         </div>
@@ -159,7 +160,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="services-boxes">
-                        <img src="images/bg4.jpg" alt="" />
+                        <img src="{{ asset('images/bg4.jpg') }}" alt="" />
                         <div class="service-box-content">
                             <h3>Solar
                             <br> cooling</h3>
@@ -168,7 +169,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="services-boxes">
-                        <img src="images/bg5.jpg" alt="" />
+                        <img src="{{ asset('images/bg5.jpg') }}" alt="" />
                         <div class="service-box-content">
                             <h3>Automotive & Transportation</h3>
                         </div>
@@ -176,7 +177,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="services-boxes">
-                        <img src="images/bg6.jpg" alt="" />
+                        <img src="{{ asset('images/bg6.jpg') }}" alt="" />
                         <div class="service-box-content">
                             <h3>Excellent technology</h3>
                         </div>
@@ -224,11 +225,13 @@
     </section>
 
 
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.9.2/jarallax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.9.2/jarallax-element.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript">
         jQuery('.jarallax').jarallax({
             speed: 0.1
