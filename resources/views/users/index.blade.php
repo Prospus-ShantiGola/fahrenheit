@@ -68,6 +68,7 @@
 
 
 
+
                                                         <div  class="action-button" role="group">
                                                             <a href="#"  title="Show Users" data-user="{{ $users->id }}" data-status="{{ !$users->status }}"  data-toggle="modal" data-target="#disable-modal"  data-backdrop="false" id="disable_userbutton-{{ $users->id }}">
 
@@ -82,6 +83,7 @@
                                                                 <i class="fas fa-user-edit fa-lg">
                                                                     </i>
                                                             </a>
+
 
                                                         </div>
 
