@@ -22,11 +22,11 @@
                 <h4 class="mt-5 mb-5"><img src="{{ asset('images/cropped-flake-32x32.png') }}" class="pageheader" alt="fahrenheit" />User Reports</h4>
             </div>
 
-            <div class="btn-group btn-group-sm pull-right" role="group">
+            <!-- <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('user_reports.user_report.create') }}" class="btn btn-success" title="Create New User Report">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
                 </a>
-            </div>
+            </div> -->
 
         </div>
 
