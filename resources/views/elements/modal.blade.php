@@ -56,10 +56,12 @@
                                         if(msg.responsecode==1 && msg.enable=="Enable"){
                                             $("#status-button-"+userId).text("Enable");
                                             $("#disable_userbutton-"+userId).data('status',userStatus)
+                                            $("#disable_userbutton-"+userId).find('.fa-lg').removeClass('fa-user-times').addClass('fa-user-check');
                                         }
                                         else if (msg.responsecode==1 && msg.enable=="Disable"){
                                             $("#status-button-"+userId).text("Disable");
                                             $("#disable_userbutton-"+userId).data('status',userStatus)
+                                                 $("#disable_userbutton-"+userId).find('.fa-lg').removeClass('fa-user-check').addClass('fa-user-times');
                                         }
                                         else {
                                             $("#error-modal").modal('show');
