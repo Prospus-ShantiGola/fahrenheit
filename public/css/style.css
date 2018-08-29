@@ -36,3 +36,11 @@ table.table.table-striped {
 a:active{
     text-decoration: underline;
 }
+.action-button a{
+    color: #e73c37 !important;
+
+}
+.action-button a:not(:first-child){
+    border-left:1px solid #000;
+    padding: 0px 10px 0px 10px;
+}

@@ -22,11 +22,11 @@
                 <h4 class="mt-5 mb-5"><img src="{{ asset('images/cropped-flake-32x32.png') }}" class="pageheader" alt="fahrenheit" />User Reports</h4>
             </div>
 
-            <div class="btn-group btn-group-sm pull-right" role="group">
+            {{-- <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('user_reports.user_report.create') }}" class="btn btn-success" title="Create New User Report">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
                 </a>
-            </div>
+            </div> --}}
 
         </div>
 
@@ -63,17 +63,20 @@
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
 
-                                    <div class="btn-group btn-group-xs pull-right" role="group">
-                                        <a href="{{ route('user_reports.user_report.show', $userReport->id ) }}" class="btn btn-info" title="Show User Report">
-                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true">View</span>
+                                    <div class="action-button" role="group">
+                                        <a href="{{ route('user_reports.user_report.show', $userReport->id ) }}"  title="Show User Report">
+                                            <i class="fas fa-eye fa-lg">
+                                                </i>
                                         </a>
-                                        <a href="{{ route('user_reports.user_report.edit', $userReport->id ) }}" class="btn btn-primary" title="Edit User Report">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
+                                        <a href="{{ route('user_reports.user_report.edit', $userReport->id ) }}"  title="Edit User Report">
+                                            <i class="fas fa-file-pdf fa-lg">
+                                            </i>
+                                        </a>
+                                        <a href="#"   title="Delete User Report" data-toggle="modal" data-target="#delete-modal">
+                                                <i class="fas fa-trash-alt fa-lg">
+                                                    </i>
                                         </a>
 
-                                        <button type="button" class="btn btn-danger" title="Delete User Report" data-toggle="modal" data-target="#delete-modal">
-                                            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
-                                        </button>
                                     </div>
 
                                 </form>
