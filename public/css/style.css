@@ -36,6 +36,24 @@ table.table.table-striped {
 a:active{
     text-decoration: underline;
 }
+
+
+input:not([type="file"]).error,
+textarea.error,
+select.error {
+  border: 1px solid red !important;
+}
+
+input:not([type="file"]).no-error,
+textarea.no-error,
+select.no-error {
+  border: 1px solid green !important;
+}
+
+div.error-field {
+  color: red;
+  font-size: small;
+
 .action-button a{
     color: #e73c37 !important;
 
@@ -43,4 +61,5 @@ a:active{
 .action-button a:not(:first-child){
     border-left:1px solid #000;
     padding: 0px 10px 0px 10px;
+
 }
