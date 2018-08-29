@@ -68,19 +68,17 @@
 
 
                                                         <div  class="action-button" role="group">
-                                                            <a href="#"  title="Disable User" data-user="{{ $users->id }}" data-status="{{ !$users->status }}"  data-toggle="modal" data-target="#disable-modal"  data-backdrop="false" id="disable_userbutton-{{ $users->id }}">
+                                                            <a href="#"  title='{{ ($users->status == 1) ? "Disable" : "Enable"  }} User' data-user="{{ $users->id }}" data-status="{{ !$users->status }}"  data-toggle="modal" data-target="#disable-modal"  data-backdrop="false" id="disable_userbutton-{{ $users->id }}">
 
-                                                                <i class="fas fa-user-times fa-lg">
+                                                                <i class="fas {{ ($users->status == 1) ? 'fa-user-times' : 'fa-user-check'  }} fa-lg">
                                                                     </i>
                                                             </a>
-
-
-
-                                                            <a href="{{ route('users.users.edit', $users->id ) }}"  title="Edit Users">
-
+                                                            <a href="{{ route('users.users.edit', $users->id ) }}"  title="Edit User">
                                                                 <i class="fas fa-user-edit fa-lg">
                                                                     </i>
                                                             </a>
+
+
                                                         </div>
 
 
