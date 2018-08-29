@@ -121,10 +121,14 @@ class UsersController extends Controller
     public function updatestatus(Request $request)
     {
         try {
-            $status = ($request['status']==1) ? 1 : 0;
+            // echo $request['status'];
+            // die;
+          $status = ($request['status']==1) ? 1 : 0;
+
             $statusText = ($request['status']==1) ? "Disable" : "Enable";
             User::where('id', $request['id'])->update(array('status' =>$status));
             return response()->json(['response' => 'This is success method','responsecode'=>1,'enable'=>$statusText]);
+            //return 'qwwq';
 
         } catch (Exception $exception) {
             dd($exception);
