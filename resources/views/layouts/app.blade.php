@@ -100,7 +100,9 @@
                                                             <a href="#"  class="disabled" title="Management Settings">Management Settings</a>
                                                         </div>
                                                             @endcan
-
+                                                            <div>
+                                                                    <a href="{{ route('users.users.edit', Auth::id() ) }}"   title="Account Settings">Account Settings</a>
+                                                                </div>
 
                                                           </div></div>
                                                     <div class="col-9">

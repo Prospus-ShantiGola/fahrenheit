@@ -51,7 +51,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         try {
-            $request['password'] = Hash::make($request['password']);
+            $request['password']= bcrypt($request['password']);
             $data = $this->getDataCreate($request);
             User::create($data);
 
@@ -104,7 +104,7 @@ class UsersController extends Controller
     public function update($id, Request $request)
     {
         try {
-
+            $request['password']= bcrypt($request['password']);
             $data = $this->getData($request);
             $user = User::findOrFail($id);
             $user->update($data);
@@ -112,7 +112,7 @@ class UsersController extends Controller
                              ->with('success_message', trans('users.model_was_updated'));
 
         } catch (Exception $exception) {
-            dd($data);
+            dd($exception);
             //dd($exception);
             return back()->withInput()
                          ->withErrors(['unexpected_error' => trans('users.unexpected_error')]);
@@ -173,6 +173,7 @@ class UsersController extends Controller
             'company' => 'required|string|min:1|max:191',
             'phoneno' => 'required|string|min:1|max:191',
             'email' => 'required|string|min:1|max:191',
+            'password' => 'nullable|string|min:1|max:191',
             'user_type_id' => 'required|string|min:1|max:191'
 
         ];

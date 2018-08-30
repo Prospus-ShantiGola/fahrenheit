@@ -28,14 +28,15 @@
         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }} {{ ($mode == 'create') ? '':'hide' }}">
+<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }} ">
     <label for="password" class="col-md-2 control-label">Password</label>
     <div class="col-md-10">
-        <input class="form-control" name="password" type="password" id="password" value="{{ old('password', optional($users)->password) }}" minlength="1" maxlength="255" required="true" placeholder="Enter password here...">
+        <input class="form-control" name="password" type="password" id="password" value="" minlength="1" maxlength="255" required="true" placeholder="Enter password here...">
         {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('user_type_id') ? 'has-error' : '' }} ">
+@can('isAdmin')
+<div class="form-group {{ $errors->has('user_type_id') ? 'has-error' : '' }} {{ (Auth::id()==optional($users)->id) ? 'hide':''}} ">
         <label for="user_type_id" class="col-md-2 control-label">User Type</label>
         <div class="col-md-10">
                 <select name="user_type_id" class="form-control">
@@ -47,6 +48,7 @@
             {!! $errors->first('user_type_id', '<p class="help-block">:message</p>') !!}
         </div>
 </div>
+@endcan
 
 
 

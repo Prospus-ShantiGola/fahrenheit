@@ -18,7 +18,7 @@
 			    </option>
 			@endforeach
         </select>
-        
+
         {!! $errors->first('user_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
