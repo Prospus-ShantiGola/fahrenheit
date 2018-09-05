@@ -30,7 +30,7 @@ table.table.table-striped {
     float: right;
 }
 .disabled{
-    color:grey;
+    color:#808080a6;
     pointer-events: none;
 }
 a:active{
