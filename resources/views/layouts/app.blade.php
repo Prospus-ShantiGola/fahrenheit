@@ -24,11 +24,51 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/frontstyle.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
 </head>
 <body>
     <div id="app">
+            <section class="top-header">
+                    <div class="container dashboardcontainer">
+                        <div class="row">
+                            <div class="col-6 col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                    @if (Route::has('login'))
+
+                                        @auth
+                                        <div class="loggedin-div">
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                        </div>
+                                        @else
+                                        <div class="login-div">
+                                                <a href="#" data-toggle="modal" data-backdrop="false" data-target="#loginModal">Login</a>
+                                        </div>
+                                        @endauth
+                                    @endif
+
+                                <div class="language-change-div">
+                                 <a href="#" class="disabled">DE</a>
+                                  <a href="#" class="disabled">EN</a>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                <div class="header-search-form">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -56,11 +96,10 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+
+                                {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -70,7 +109,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                </div>
+                                </div> --}}
                             </li>
                         @endguest
                     </ul>
