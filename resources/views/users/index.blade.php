@@ -19,10 +19,7 @@
 
                             <div class="panel-heading clearfix">
 
-                                <div class="pull-left">
-                                    <h4 class="mt-5 mb-5"><img src="{{ asset('images/cropped-flake-32x32.png') }}" class="pageheader" alt="fahrenheit" />Users</h4>
-                                </div>
-
+                                
                                 <div class="btn-group btn-group-sm pull-right" role="group">
                                     <a href="{{ route('users.users.create') }}" class="btn btn-primary" title="Create New Users">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
