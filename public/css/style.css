@@ -90,3 +90,9 @@ a:hover{
     padding: 10px;
     border-right: 1px solid grey;
 }
+.dashboardcontainer{
+padding:0px !important;
+}
+.useredit{
+    padding:0px !important;
+}
