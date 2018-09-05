@@ -52,12 +52,12 @@
                                 {{ csrf_field() }}
 
                                     <div class="action-button" role="group">
-                                        <a href="#"  title="Show User Report">
-                                            <i class="fas fa-eye fa-lg">
+                                        <a href="#" class="disabled"  >
+                                            <i class="fas fa-eye fa-lg disabled">
                                                 </i>
                                         </a>
-                                        <a href="#"  title="Edit User Report">
-                                            <i class="fas fa-file-pdf fa-lg">
+                                        <a href="#"  class="disabled"  >
+                                            <i class="fas fa-file-pdf fa-lg disabled">
                                             </i>
                                         </a>
                                         <a href="#"   title="Delete User Report" data-toggle="modal" data-target="#delete-modal">
