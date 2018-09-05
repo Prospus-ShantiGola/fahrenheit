@@ -215,6 +215,13 @@ class UsersController extends Controller
         // now we use the Auth to Authenticate the users Credentials
         try {
             if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password], $rememberToken)) {
+                if(!Auth::user()->status){
+                    $msg = array(
+                        'status'  => 'error',
+                        'message' => 'Your account is disabled'
+                    );
+                    return response()->json($msg);
+                }
                 $msg = array(
                     'status'  => 'success',
                     'message' => 'Login Successful'
@@ -229,6 +236,7 @@ class UsersController extends Controller
             }
 
         } catch (Exception $exception) {
+            //dd($exception);
             return response()->json(['response' => 'Please check the credentials !!']);
         }
 		// Attempt Login for members
