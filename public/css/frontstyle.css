@@ -697,7 +697,10 @@ input.required-field {
 .modal-backdrop.show{
     opacity: 0;
 }
-
+.disabled{
+    color:grey !important;
+    pointer-events: none;
+}
 
 
 

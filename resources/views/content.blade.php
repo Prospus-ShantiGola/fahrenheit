@@ -16,31 +16,10 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">FAHRENHEIT</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Innovation</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Applications</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Products</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Services</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="adcalc.html">Adcalc</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Contact Us</a>
-                                    </li>
 
+                                    <li class="nav-item ">
+                                        <a class="nav-link disabled" href="adcalc.html">Adcalc</a>
+                                    </li>
                                     <!-- <li class="nav-item dropdown">
                                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  Browse
@@ -62,60 +41,11 @@
     </header>
     <!--header end-->
     <!--banner section start-->
-    <section class="home-banner">
-        <div class="owl-carousel" id="home-banner">
-            <div class="item">
-                <div class="banner-img">
-                    <img src="{{ asset('images/bg_wtauscher.jpg') }}" alt="banner-img" />
-                    <div class="container">
-                        <div class="banner-content">
-                            <h1>We set new standards
-                             <span>in adsorption technology.</span></h1>
-                            <a href="#">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="banner-img">
-                    <img src="{{ asset('images/bg_maschine.jpg') }}" alt="banner-img" />
-                    <div class="container">
-                        <div class="banner-content">
-                            <h1>Versatile use<span>for stationary and mobile applications.</span></h1>
-                            <a href="#">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="banner-img">
-                    <img src="{{ asset('images/product-portfolio.jpg') }}" alt="banner-img" />
-                    <div class="container">
-                        <div class="banner-content">
-                            <h1>Our new
-                              <span>product portfolio</span>
-                              <span>is now available!</span></h1>
-                            <a href="#">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="banner-img">
-                    <img src="{{ asset('images/slider_02.jpg') }}" alt="banner-img" />
-                    <div class="container">
-                        <div class="banner-content">
-                            <h1>Zeolite technology:
-                            <span>A revolution in air conditioning technology. in der Adsorptionstechnik.</h1>
-                            <a href="#">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+     <section class="home-banner">
+        <div style="height:800px;"></div>
     </section>
     <!-- banner section end -->
-    <section class="convert-heat-to-cool">
+   {{-- <section class="convert-heat-to-cool">
         <div class="container">
             <div class="heat-to-cold">
                 <div class="row">
@@ -222,7 +152,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
