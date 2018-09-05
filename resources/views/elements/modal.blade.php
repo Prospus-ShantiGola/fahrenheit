@@ -81,7 +81,7 @@
                                     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                                     //alert(recipient+ '________button'+recipientstatus)
                                     var modal = $(this)
-                                    var statusText= (recipientstatus==1)? "Disable" : "Enable";
+                                    var statusText= (recipientstatus==1)? "disable" : "enable";
                                     modal.find('.modal-body span#user-status').text(statusText)
                                     modal.find('.modal-body input#recipient-id').val(recipient)
                                     modal.find('.modal-body input#recipient-status').val(recipientstatus)

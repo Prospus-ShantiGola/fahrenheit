@@ -21,11 +21,11 @@
                 <a href="#" onclick="javascript:window.history.go(-1);" class="btn btn-primary" title="Show All Users">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back</span>
                 </a>
-                @can('isAdmin')
+              <!--   @can('isAdmin')
                 <a href="{{ route('users.users.create') }}" class="btn btn-success" title="Create New Users">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
                 </a>
-                @endcan
+                @endcan -->
 
             </div>
         </div>

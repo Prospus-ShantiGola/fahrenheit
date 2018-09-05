@@ -101,7 +101,7 @@
                                                         </div>
                                                             @endcan
                                                             <div>
-                                                                    <a href="{{ route('users.users.edit', Auth::id() ) }}"   title="Account Settings">Account Settings</a>
+                                                                    <a href="{{ route('users.users.edit', Auth::id() ) }}"   title="My Profile">My Profile</a>
                                                                 </div>
 
                                                           </div></div>
