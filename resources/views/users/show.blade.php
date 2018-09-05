@@ -39,7 +39,7 @@
 
     <div class="panel-body">
         <dl class="dl-horizontal">
-            <dt>name</dt>
+            <dt>User Name</dt>
             <dd>{{ $users->name }}</dd>
             <dt>Company</dt>
             <dd>{{ $users->company }}</dd>

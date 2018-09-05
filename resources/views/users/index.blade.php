@@ -47,7 +47,7 @@
                                     <table class="table table-striped ">
                                         <thead>
                                             <tr>
-                                                <th>Full name</th>
+                                                <th>User Name</th>
                                                 <th>Company</th>
                                                 <th>Tel. No.</th>
                                                 <th>Email</th>
