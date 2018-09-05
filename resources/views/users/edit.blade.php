@@ -6,7 +6,7 @@
 
         <div class="panel-heading clearfix">
 
-            <div class="pull-left">
+         <!--    <div class="pull-left">
                 <h4 class="mt-5 mb-5">
                         @can('isAdmin')
                     {{ !empty($users->name) ? $users->name : 'Users' }}
@@ -14,21 +14,20 @@
                     @can('isUser')
                     <img src="{{ asset('images/cropped-flake-32x32.png') }}" class="pageheader" alt="fahrenheit" />My Profile
                     @endcan
-                    <div class="btn-group btn-group-sm pull-right useredit" role="group">
-
-                            <a href="#" onclick="javascript:window.history.go(-1);" class="btn btn-primary" title="Show All Users">
-                                <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back</span>
-                            </a>
-                          <!--   @can('isAdmin')
-                            <a href="{{ route('users.users.create') }}" class="btn btn-success" title="Create New Users">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
-                            </a>
-                            @endcan -->
-
-                        </div>
                 </h4>
-            </div>
+            </div> -->
+            <div class="btn-group btn-group-sm pull-right" role="group">
 
+                <a href="#" onclick="javascript:window.history.go(-1);" class="btn btn-primary" title="Show All Users">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back</span>
+                </a>
+              <!--   @can('isAdmin')
+                <a href="{{ route('users.users.create') }}" class="btn btn-success" title="Create New Users">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Add New</span>
+                </a>
+                @endcan -->
+
+            </div>
         </div>
 
         <div class="panel-body">
