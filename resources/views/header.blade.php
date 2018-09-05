@@ -18,8 +18,8 @@
                     @endif
 
                 <div class="language-change-div">
-                 <a href="#">DE</a>
-                  <a href="#" class="active">EN</a>
+                 <a href="#" class="disabled">DE</a>
+                  <a href="#" class="disabled">EN</a>
                 </div>
             </div>
             <div class="col-6 col-md-6 col-sm-6 col-lg-6 col-xl-6">

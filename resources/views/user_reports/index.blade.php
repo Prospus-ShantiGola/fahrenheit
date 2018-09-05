@@ -100,7 +100,7 @@
                         <form method="POST" action="{!! route('user_reports.user_report.destroy', $userReport->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
-                  <button type="submit" class="btn btn-danger" title="Delete User Report">Yes</button>
+                  <button type="submit" class="btn btn-default" title="Delete User Report">Yes</button>
                 </form>
                   <button type="button" class="btn btn-primary" id="modal-btn-no"  data-dismiss="modal">No</button>
                 </div>

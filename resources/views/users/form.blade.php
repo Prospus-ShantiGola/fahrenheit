@@ -31,7 +31,7 @@
 <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }} ">
     <label for="password" class="col-md-2 control-label">Password</label>
     <div class="col-md-10">
-        <input class="form-control" name="password" type="password" id="password" value="" minlength="1" maxlength="255" required="true" placeholder="Enter password here...">
+        <input class="form-control" name="password" type="password" id="password" value="" minlength="1" maxlength="255"  placeholder="Enter password here...">
         {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

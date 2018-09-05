@@ -83,3 +83,11 @@ a:hover{
 .dashboard{
     color: #e73c37;
 }
+.modal-title img {
+    height: 24px;
+}
+
+.left-menu{
+    padding: 10px;
+    border-right: 1px solid grey;
+}

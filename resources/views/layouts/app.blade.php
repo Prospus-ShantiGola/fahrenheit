@@ -87,7 +87,7 @@
 
                                     <div class="card-body">
                                             <div class="row">
-                                                    <div class="col-3">
+                                                    <div class="col-3 left-menu">
                                                         <div class="container-fluid left-panel menu">
                                                             <div>
                                                                     <a href="{{ route('user_reports.user_report.index') }}" title="Reports"> Reports </a>

@@ -126,9 +126,6 @@
                     cache: false,
                     success: function (data)
                     {
-                        console.log('login request sent !');
-                        console.log('status: ' +data.status);
-                        console.log('message: ' +data.message);
                         if(data.status=="success"){
                             window.location.href="/user_reports";
                         }
