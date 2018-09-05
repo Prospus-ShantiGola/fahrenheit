@@ -6,7 +6,7 @@
 
         <div class="panel-heading clearfix">
 
-            <div class="pull-left">
+         <!--    <div class="pull-left">
                 <h4 class="mt-5 mb-5">
                         @can('isAdmin')
                     {{ !empty($users->name) ? $users->name : 'Users' }}
@@ -15,7 +15,7 @@
                     <img src="{{ asset('images/cropped-flake-32x32.png') }}" class="pageheader" alt="fahrenheit" />My Profile
                     @endcan
                 </h4>
-            </div>
+            </div> -->
             <div class="btn-group btn-group-sm pull-right" role="group">
 
                 <a href="#" onclick="javascript:window.history.go(-1);" class="btn btn-primary" title="Show All Users">
