@@ -52,11 +52,11 @@
                                 {{ csrf_field() }}
 
                                     <div class="action-button" role="group">
-                                        <a href="{{ route('user_reports.user_report.show', $userReport->id ) }}"  title="Show User Report">
+                                        <a href="#"  title="Show User Report">
                                             <i class="fas fa-eye fa-lg">
                                                 </i>
                                         </a>
-                                        <a href="{{ route('user_reports.user_report.edit', $userReport->id ) }}"  title="Edit User Report">
+                                        <a href="#"  title="Edit User Report">
                                             <i class="fas fa-file-pdf fa-lg">
                                             </i>
                                         </a>
