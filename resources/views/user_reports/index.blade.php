@@ -94,7 +94,7 @@
 
                 </div>
                 <div class="modal-body">
-                        Are you sure you want to delete the report? Please Confirm by clicking Yes.
+                        Are you sure you want to delete the report? Please confirm by clicking Yes.
                 </div>
                 <div class="modal-footer">
                         <form method="POST" action="{!! route('user_reports.user_report.destroy', $userReport->id) !!}" accept-charset="UTF-8">
