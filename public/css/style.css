@@ -63,3 +63,23 @@ div.error-field {
     padding: 0px 10px 0px 10px;
 
 }
+
+
+
+
+
+/* css changes */
+a.active {
+    color: #e73c37;
+    text-decoration: underline !important;
+
+}
+a:hover{
+    text-decoration: none !important;
+}
+.action-button a:first-child {
+    padding-right: 5px;
+}
+.dashboard{
+    color: #e73c37;
+}

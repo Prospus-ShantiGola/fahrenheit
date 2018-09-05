@@ -16,15 +16,7 @@
 
     <div class="panel panel-default">
 
-        <div class="panel-heading clearfix">
 
-            <div class="pull-left">
-                <h4 class="mt-5 mb-5"><img src="{{ asset('images/cropped-flake-32x32.png') }}" class="pageheader" alt="fahrenheit" />User Reports</h4>
-            </div>
-
-
-
-        </div>
 
         @if(count($userReports) == 0)
             <div class="panel-body text-center">

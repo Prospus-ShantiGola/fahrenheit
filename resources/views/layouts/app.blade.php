@@ -83,12 +83,12 @@
             <div class="container">
                     <div class="row justify-content-center">
                             <div class="card">
-                                    <div class="card-header">Dashboard</div>
+                                    <div class="card-header dashboard">Dashboard</div>
 
                                     <div class="card-body">
                                             <div class="row">
                                                     <div class="col-3">
-                                                        <div class="container-fluid left-panel">
+                                                        <div class="container-fluid left-panel menu">
                                                             <div>
                                                                     <a href="{{ route('user_reports.user_report.index') }}" title="Reports"> Reports </a>
                                                             </div>
@@ -101,7 +101,7 @@
                                                         </div>
                                                             @endcan
                                                             <div>
-                                                                    <a href="{{ route('users.users.edit', Auth::id() ) }}"   title="Account Settings">Account Settings</a>
+                                                                    <a href="{{ route('users.users.edit', Auth::id() ) }}"   title="Account Settings">My Profile</a>
                                                                 </div>
 
                                                           </div></div>
@@ -120,5 +120,16 @@
     </div>
         </main>
     </div>
+    <script>
+        var url =window.location.pathname,
+        urlRegExp = new RegExp(url.replace(/\/$/,'') + "$"); // create regexp to match current url pathname and remove trailing slash if present as it could collide with the link in navigation in case trailing slash wasn't present there
+        // now grab every link from the navigation
+        $('a').each(function(){
+            // and test its normalized href against the url pathname regexp
+            if(urlRegExp.test(this.href.replace(/\/$/,''))){
+                $(this).addClass('active');
+            }
+        });
+    </script>
 </body>
 </html>
