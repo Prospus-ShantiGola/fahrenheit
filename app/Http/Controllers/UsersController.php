@@ -213,6 +213,7 @@ class UsersController extends Controller
     	$password      = $request->password;
     	$rememberToken = $request->remember;
         // now we use the Auth to Authenticate the users Credentials
+
         try {
             if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password], $rememberToken)) {
                 $msg = array(

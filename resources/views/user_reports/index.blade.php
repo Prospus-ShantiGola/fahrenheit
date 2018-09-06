@@ -60,7 +60,7 @@
                                             <i class="fas fa-file-pdf fa-lg disabled">
                                             </i>
                                         </a>
-                                        <a href="#"   title="Delete User Report" data-toggle="modal" data-target="#delete-modal">
+                                        <a href="#"   title="Delete User Report" data-toggle="modal" data-backdrop="false" data-target="#delete-modal">
                                                 <i class="fas fa-trash-alt fa-lg">
                                                     </i>
                                         </a>

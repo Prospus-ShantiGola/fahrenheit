@@ -45,7 +45,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="login-form" method="post" onsubmit="return LoginUser()" role="form" style="display: block;">
-                            @csrf
+                                <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
 
 
                             <div class="form-group row">
@@ -94,9 +94,9 @@
                                         {{ __('Login') }}
                                     </button>
 
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
                         </form>
@@ -108,6 +108,11 @@
         </div>
 
         <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
             function LoginUser()
             {
                 var token    = $("input[name=_token]").val();
