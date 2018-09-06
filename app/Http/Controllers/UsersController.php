@@ -219,7 +219,7 @@ class UsersController extends Controller
                 if(!Auth::user()->status){
                     $msg = array(
                         'status'  => 'error',
-                        'message' => 'Your account is disabled'
+                        'message' => 'Your account has been disabled'
                     );
                     return response()->json($msg);
                 }
