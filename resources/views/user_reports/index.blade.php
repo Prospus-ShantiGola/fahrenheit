@@ -85,6 +85,7 @@
         @endif
 
     </div>
+    @if(count($userReports) != 0)
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="delete-modal">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -107,4 +108,5 @@
               </div>
             </div>
           </div>
+          @endif
 @endsection
