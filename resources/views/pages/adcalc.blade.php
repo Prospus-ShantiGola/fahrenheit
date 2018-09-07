@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <style>
         .hide{
             display: none;
