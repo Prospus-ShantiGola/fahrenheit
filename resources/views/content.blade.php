@@ -1,49 +1,190 @@
-<header>
-        <div class="container">
-
-            <div class="row">
-                <div class="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-3">
-                    <div class="header-logo">
-
-                        <img src="{{ asset('images/logo.png') }}">
-                    </div>
-                </div>
-                <div class="col-12 col-md-9 col-sm-9 col-lg-9 col-xl-9">
-                    <div class="top-navigation">
-                        <nav class="navbar navbar-expand-lg">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav mr-auto">
-
-                                    <li class="nav-item ">
-                                        <a class="nav-link disabled" href="adcalc.html">Adcalc</a>
-                                    </li>
-                                    <!-- <li class="nav-item dropdown">
-                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 Browse
-                                 </a>
-                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action 1</a>
-                                    <a class="dropdown-item" href="#">Action 2</a>
-                                    <a class="dropdown-item" href="#">Action 3</a>
-                                 </div>
-                              </li>-->
-
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!--header end-->
+<section class="breadcrumbs">
+    <div class="container">
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Adcalc</li>
+       </ol>
+    </div>
+ </section>
     <!--banner section start-->
-     <section class="home-banner">
-        <div style="height:800px;"></div>
-    </section>
+    <section class="adcalc-content">
+        <div class="container">
+           <div class="adcalc-inner-content">
+              <!-- top icon -->
+              <div class="icon-area">
+                 <div class="row">
+                    <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+                       <ul class="list-inline left-icon-list">
+                          <li><a href="#"><img src="images/icon_1.png" alt="" /></a></li>
+                          <li><div data-toggle="modal" data-target="#message-popup-modal"><img src="images/icon_2.png" alt="" /></div></li>
+                          <li><a href="#"><img src="images/icon_3.png" alt="" /></a></li>
+                       </ul>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+                       <ul class="list-inline right-icon-list">
+                          <li class=""><a href="#"><img src="images/icon_4.png" alt="" /></a></li>
+                          <li><a href="#"><img src="images/icon_5.png" alt="" /></a></li>
+                          <li><a href="#"><img src="images/icon_6.png" alt="" /></a></li>
+                          <li><div data-toggle="modal" data-target="#contact-form-modal"><img src="images/icon_7.png" alt="" /></div></li>
+                          <li><div data-toggle="modal" data-target="#login-modal"><img src="images/icon_8.png" alt="" /></a></li>
+                       </ul>
+                    </div>
+                 </div>
+              </div>
+              <!-- top icon end -->
+              <div class="bootom-data-box">
+                 <!--first row-->
+                 <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                       <div class="general-information data-box">
+                          <h1>General Information</h1>
+                          <h5 class="input-required">An input is required</h5>
+                          <div class="main-hover-box general-info-hover">
+                             <h1>General Information</h1>
+                             <div class="edit-icon myBtn_multi"><img src="images/edit-icon.png" alt="" /></div>
+                             <p>We need the location to get the specific weather data.</p>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                       <div class="economic-data data-box">
+                          <h1>Economic Data</h1>
+                          <ul class="price-listt">
+                             <li>
+                                <p>Electricity Price</p>
+                                <h3>0.1800 €/kWh</h3>
+                             </li>
+                          </ul>
+                          <div class="main-hover-box economic-hover">
+                             <h1>Economic Data</h1>
+                             <div class="edit-icon myBtn_multi"><img src="images/edit-icon.png" alt="" /></div>
+                             <ul class="price-listt">
+                                <li>
+                                   <p>Electricity Price</p>
+                                   <h3>0.1800 €/kWh</h3>
+                                </li>
+                                <li>
+                                   <p>Gas Price</p>
+                                   <h3>0.035 €/kWh</h3>
+                                </li>
+                             </ul>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                       <div class="options data-box">
+                          <h1>Options</h1>
+                          <ul class="price-listt">
+                             <li>
+                                <p>Re-cooling Type</p>
+                                <h3>DRY</h3>
+                             </li>
+                             <li>
+                                <p>Free cooling</p>
+                                <h3>YES <span>(chilled water temperature)</span></h3>
+                             </li>
+                          </ul>
+                          <div class="main-hover-box options-hover">
+                             <h1>Options</h1>
+                             <div class="edit-icon myBtn_multi"><img src="images/edit-icon.png" alt="" /></div>
+                             <ul class="price-listt">
+                                <li>
+                                   <p>Language</p>
+                                   <h3>English</h3>
+                                </li>
+                                <li>
+                                   <p>BAFA 2018</p>
+                                   <h3>Calculate</h3>
+                                </li>
+                                <li>
+                                   <p>Re-cooling Type</p>
+                                   <h3>Dry</h3>
+                                </li>
+                             </ul>
+                             <ul class="right-list-content">
+                                <li>
+                                   <p>Free cooling</p>
+                                   <h3>Yes <span>(chilled water temperature)</span></h3>
+                                </li>
+                             </ul>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <!--first row end -->
+                 <div class="row">
+                    <div class="col-md-12 col-sm-12 col-12 col-lg-8 col-xl-8">
+                       <div class="row">
+                          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                             <div class="heat-sources data-box">
+                                <h1>Heat Sources</h1>
+                                <div class="main-hover-box heat-sources-hover">
+                                   <h1>Heat Sources</h1>
+                                   <p>Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those
+                                      sources.
+                                   </p>
+                                   <div class="add-icon myBtn_multi"><img src="images/add-icon.png" alt="no-image" /></div>
+                                </div>
+                             </div>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                             <div class="heating-load-profiles data-box">
+                                <h1>Heating Load Profile</h1>
+                                <div class="main-hover-box heating-load-hover">
+                                   <h1>Heating Load Profile</h1>
+                                   <p>Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources.
+                                   <br>
+                                      Are you planning a new heat source? Then we can calculate the profitability of the whole system!
+                                   </p>
+                                   <div class="add-icon myBtn_multi"><img src="images/add-icon.png" alt="no-image" /></div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="row">
+                          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                             <div class="compression-chillers data-box">
+                                <h1>Compression Chillers</h1>
+                                <div class="main-hover-box compression-chillers-hover">
+                                   <h1>Compression Chillers</h1>
+                                   <p>Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.</p>
+                                   <div class="add-icon myBtn_multi"><img src="images/add-icon.png" alt="no-image" /></div>
+                                </div>
+                             </div>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                             <div class="cooling-load-profiles data-box">
+                                <h1>Cooling Load Profile</h1>
+                                <h5 class="input-required">An input is required</h5>
+                                <div class="main-hover-box cooling-load-hover">
+                                   <h1>Cooling Load Profile</h1>
+                                   <p>Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!</p>
+                                   <div class="add-icon myBtn_multi"><img src="images/add-icon.png" alt="no-image" /></div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4">
+                       <div class="fahrenheit-system-box data-box">
+                          <h1>Fahrenheit System</h1>
+                          <h5 class="input-required">More inputs are required
+                             to suggest a system
+                          </h5>
+                          <div class="main-hover-box fahrenheit-system-hover">
+                             <h1>Fahrenheit System</h1>
+                             <p>Please provide the required inputs so we can suggest a Fahrenheit system for you.</p>
+                             <div class="add-icon myBtn_multi"><img src="images/add-icon.png" alt="no-image" /></div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        </div>
+        </div>
+     </section>
     <!-- banner section end -->
    {{-- <section class="convert-heat-to-cool">
         <div class="container">

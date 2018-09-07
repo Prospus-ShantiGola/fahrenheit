@@ -30,6 +30,48 @@
         </div>
     </div>
 </section>
+<header>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-3">
+                <div class="header-logo">
+
+                    <img src="{{ asset('images/logo.png') }}">
+                </div>
+            </div>
+            <div class="col-12 col-md-9 col-sm-9 col-lg-9 col-xl-9">
+                <div class="top-navigation">
+                    <nav class="navbar navbar-expand-lg">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="">Adcalc</a>
+                                </li>
+                                <!-- <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Browse
+                             </a>
+                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action 1</a>
+                                <a class="dropdown-item" href="#">Action 2</a>
+                                <a class="dropdown-item" href="#">Action 3</a>
+                             </div>
+                          </li>-->
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--header end-->
 {{--  <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">

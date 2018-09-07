@@ -30,9 +30,11 @@
                     <thead>
                         <tr>
                             <th>Timestamp</th>
-                            <th>PDF</th>
+                            <th>Project</th>
+                            @can('isAdmin')
                             <th>User</th>
                             <th>Company Name</th>
+                            @endcan
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -41,9 +43,10 @@
                         <tr>
                             <td>{{ $userReport->timestamp->format('m.d.y H:m') }}</td>
                             <td>{{ $userReport->title }}</td>
+                            @can('isAdmin')
                             <td>{{ optional($userReport->user)->name }}</td>
                             <td>{{ optional($userReport->user)->company }}</td>
-
+                            @endcan
 
                             <td>
 
