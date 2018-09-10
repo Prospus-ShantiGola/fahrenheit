@@ -702,7 +702,11 @@ input.required-field {
     pointer-events: none;
 }
 
-
+.disableCard {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    pointer-events: none;
+}
 
 
 

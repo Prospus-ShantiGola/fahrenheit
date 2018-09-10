@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,8 +70,8 @@
 "use strict";
 
 
-var bind = __webpack_require__(6);
-var isBuffer = __webpack_require__(25);
+var bind = __webpack_require__(7);
+var isBuffer = __webpack_require__(26);
 
 /*global toString:true*/
 
@@ -378,10 +378,24 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+if (false) {
+  module.exports = require('./cjs/react.production.min.js');
+} else {
+  module.exports = __webpack_require__(45);
+}
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(28);
+var normalizeHeaderName = __webpack_require__(29);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -397,10 +411,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(8);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(8);
   }
   return adapter;
 }
@@ -475,10 +489,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -520,7 +534,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -547,7 +561,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3085,10 +3099,10 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13459,7 +13473,7 @@ return jQuery;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13477,19 +13491,19 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(29);
-var buildURL = __webpack_require__(31);
-var parseHeaders = __webpack_require__(32);
-var isURLSameOrigin = __webpack_require__(33);
-var createError = __webpack_require__(8);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(34);
+var settle = __webpack_require__(30);
+var buildURL = __webpack_require__(32);
+var parseHeaders = __webpack_require__(33);
+var isURLSameOrigin = __webpack_require__(34);
+var createError = __webpack_require__(9);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(35);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13586,7 +13600,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(35);
+      var cookies = __webpack_require__(36);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13664,13 +13678,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(30);
+var enhanceError = __webpack_require__(31);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13689,7 +13703,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13701,7 +13715,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13724,20 +13738,6 @@ Cancel.prototype.toString = function toString() {
 Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-if (false) {
-  module.exports = require('./cjs/react.production.min.js');
-} else {
-  module.exports = __webpack_require__(44);
-}
 
 
 /***/ }),
@@ -13934,7 +13934,7 @@ module.exports = emptyObject;
 
 
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -14004,7 +14004,7 @@ module.exports = warning;
 var printWarning = function() {};
 
 if (true) {
-  var ReactPropTypesSecret = __webpack_require__(45);
+  var ReactPropTypesSecret = __webpack_require__(46);
   var loggedTypeFailures = {};
 
   printWarning = function(text) {
@@ -14089,12 +14089,57 @@ module.exports = checkPropTypes;
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(18);
-module.exports = __webpack_require__(58);
+"use strict";
+
+
+function checkDCE() {
+  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+  if (
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
+  ) {
+    return;
+  }
+  if (true) {
+    // This branch is unreachable because this function is only called
+    // in production, but the condition is true only in development.
+    // Therefore if the branch is still here, dead code elimination wasn't
+    // properly applied.
+    // Don't change the message. React DevTools relies on it. Also make sure
+    // this message doesn't occur elsewhere in this function, or it will cause
+    // a false positive.
+    throw new Error('^_^');
+  }
+  try {
+    // Verify that the code above has been dead code eliminated (DCE'd).
+    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
+  } catch (err) {
+    // DevTools shouldn't crash React, no matter what.
+    // We should still report in case we break this code.
+    console.error(err);
+  }
+}
+
+if (false) {
+  // DCE check should happen before ReactDOM bundle executes so that
+  // DevTools can report bad minification during injection.
+  checkDCE();
+  module.exports = require('./cjs/react-dom.production.min.js');
+} else {
+  module.exports = __webpack_require__(47);
+}
 
 
 /***/ }),
 /* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(19);
+module.exports = __webpack_require__(60);
+
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -14104,7 +14149,7 @@ module.exports = __webpack_require__(58);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(19);
+__webpack_require__(20);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -14112,15 +14157,16 @@ __webpack_require__(19);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(43);
+__webpack_require__(44);
+__webpack_require__(58);
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(20);
-window.Popper = __webpack_require__(4).default;
+window._ = __webpack_require__(21);
+window.Popper = __webpack_require__(5).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -14129,9 +14175,9 @@ window.Popper = __webpack_require__(4).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(5);
+  window.$ = window.jQuery = __webpack_require__(6);
 
-  __webpack_require__(22);
+  __webpack_require__(23);
 } catch (e) {}
 
 /**
@@ -14140,7 +14186,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(23);
+window.axios = __webpack_require__(24);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -14176,7 +14222,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31286,10 +31332,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(21)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(22)(module)))
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -31317,7 +31363,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -31326,7 +31372,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(5), __webpack_require__(4)) :
+   true ? factory(exports, __webpack_require__(6), __webpack_require__(5)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -35267,22 +35313,22 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(24);
+module.exports = __webpack_require__(25);
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(6);
-var Axios = __webpack_require__(26);
-var defaults = __webpack_require__(1);
+var bind = __webpack_require__(7);
+var Axios = __webpack_require__(27);
+var defaults = __webpack_require__(2);
 
 /**
  * Create an instance of Axios
@@ -35315,15 +35361,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(10);
-axios.CancelToken = __webpack_require__(41);
-axios.isCancel = __webpack_require__(9);
+axios.Cancel = __webpack_require__(11);
+axios.CancelToken = __webpack_require__(42);
+axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(42);
+axios.spread = __webpack_require__(43);
 
 module.exports = axios;
 
@@ -35332,7 +35378,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 /*!
@@ -35359,16 +35405,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(36);
-var dispatchRequest = __webpack_require__(37);
+var InterceptorManager = __webpack_require__(37);
+var dispatchRequest = __webpack_require__(38);
 
 /**
  * Create a new instance of Axios
@@ -35445,7 +35491,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -35635,7 +35681,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35654,13 +35700,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(8);
+var createError = __webpack_require__(9);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -35687,7 +35733,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35715,7 +35761,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35788,7 +35834,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35848,7 +35894,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35923,7 +35969,7 @@ module.exports = (
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35966,7 +36012,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36026,7 +36072,7 @@ module.exports = (
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36085,18 +36131,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(38);
-var isCancel = __webpack_require__(9);
-var defaults = __webpack_require__(1);
-var isAbsoluteURL = __webpack_require__(39);
-var combineURLs = __webpack_require__(40);
+var transformData = __webpack_require__(39);
+var isCancel = __webpack_require__(10);
+var defaults = __webpack_require__(2);
+var isAbsoluteURL = __webpack_require__(40);
+var combineURLs = __webpack_require__(41);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -36178,7 +36224,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36205,7 +36251,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36226,7 +36272,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36247,13 +36293,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(10);
+var Cancel = __webpack_require__(11);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -36311,7 +36357,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36345,14 +36391,14 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -36405,15 +36451,12 @@ var Breadcrumb = function (_Component) {
     return Breadcrumb;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Breadcrumb);
-
-
 if (document.getElementById('breadcrumb')) {
     __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Breadcrumb, null), document.getElementById('breadcrumb'));
 }
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36438,7 +36481,7 @@ var _assign = __webpack_require__(12);
 var invariant = __webpack_require__(13);
 var emptyObject = __webpack_require__(14);
 var warning = __webpack_require__(15);
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(16);
 
 // TODO: this is special because it gets imported during build.
@@ -37906,7 +37949,7 @@ module.exports = react;
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37922,51 +37965,6 @@ module.exports = react;
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
-
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function checkDCE() {
-  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
-  if (
-    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
-    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
-  ) {
-    return;
-  }
-  if (true) {
-    // This branch is unreachable because this function is only called
-    // in production, but the condition is true only in development.
-    // Therefore if the branch is still here, dead code elimination wasn't
-    // properly applied.
-    // Don't change the message. React DevTools relies on it. Also make sure
-    // this message doesn't occur elsewhere in this function, or it will cause
-    // a false positive.
-    throw new Error('^_^');
-  }
-  try {
-    // Verify that the code above has been dead code eliminated (DCE'd).
-    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
-  } catch (err) {
-    // DevTools shouldn't crash React, no matter what.
-    // We should still report in case we break this code.
-    console.error(err);
-  }
-}
-
-if (false) {
-  // DCE check should happen before ReactDOM bundle executes so that
-  // DevTools can report bad minification during injection.
-  checkDCE();
-  module.exports = require('./cjs/react-dom.production.min.js');
-} else {
-  module.exports = __webpack_require__(47);
-}
 
 
 /***/ }),
@@ -37992,11 +37990,11 @@ if (true) {
 'use strict';
 
 var invariant = __webpack_require__(13);
-var React = __webpack_require__(11);
+var React = __webpack_require__(1);
 var warning = __webpack_require__(15);
 var ExecutionEnvironment = __webpack_require__(48);
 var _assign = __webpack_require__(12);
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(16);
 var getActiveElement = __webpack_require__(49);
 var shallowEqual = __webpack_require__(50);
@@ -55816,6 +55814,471 @@ module.exports = camelize;
 
 /***/ }),
 /* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Tiles__ = __webpack_require__(59);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+var Adcalc = function (_Component) {
+    _inherits(Adcalc, _Component);
+
+    function Adcalc() {
+        _classCallCheck(this, Adcalc);
+
+        return _possibleConstructorReturn(this, (Adcalc.__proto__ || Object.getPrototypeOf(Adcalc)).apply(this, arguments));
+    }
+
+    _createClass(Adcalc, [{
+        key: 'render',
+        value: function render() {
+            var _React$createElement, _React$createElement2, _React$createElement3, _React$createElement4, _React$createElement5, _React$createElement6, _React$createElement7, _React$createElement8;
+
+            var tiles = {
+                general: {
+                    title: 'General Information',
+                    tileCls: 'general-information data-box',
+                    required: "yes",
+                    edit: 'yes',
+                    editCls: 'edit-icon myBtn_multi',
+                    editIcon: 'images/edit-icon.png',
+                    add: 'no',
+                    hoverText: 'We need the location to get the specific weather data.',
+                    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+                    hoverCls: 'main-hover-box general-info-hover',
+                    priceLst: 'no',
+                    priceData: {},
+                    rightpriceList: 'no',
+                    rightpriceListeData: {}
+                },
+                Economic: {
+                    title: 'Economic Data',
+                    tileCls: 'economic-data data-box',
+                    required: "yes",
+                    edit: 'yes',
+                    editCls: 'edit-icon myBtn_multi',
+                    editIcon: 'images/edit-icon.png',
+                    add: 'no',
+                    hoverText: 'We need the location to get the specific weather data.',
+                    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 disableCard',
+                    hoverCls: 'main-hover-box general-info-hover',
+                    priceLst: 'no',
+                    priceData: {},
+                    rightpriceList: 'no',
+                    rightpriceListeData: {}
+                },
+                Options: {
+                    title: 'Options',
+                    tileCls: 'options data-box',
+                    required: "yes",
+                    edit: 'yes',
+                    editCls: 'edit-icon myBtn_multi',
+                    editIcon: 'images/edit-icon.png',
+                    add: 'no',
+                    hoverText: 'We need the location to get the specific weather data.',
+                    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 disableCard',
+                    hoverCls: 'main-hover-box options-hover',
+                    priceLst: 'no',
+                    priceData: {},
+                    rightpriceList: 'no',
+                    rightpriceListeData: {}
+                },
+                HeatSource: {
+                    title: 'Heat Source',
+                    tileCls: 'heat-sources data-box',
+                    required: "yes",
+                    edit: 'yes',
+                    editCls: 'edit-icon myBtn_multi',
+                    editIcon: 'images/edit-icon.png',
+                    add: 'no',
+                    hoverText: 'Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.',
+                    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
+                    hoverCls: 'main-hover-box heat-sources-hover',
+                    priceLst: 'no',
+                    priceData: {},
+                    rightpriceList: 'no',
+                    rightpriceListeData: {}
+                },
+                HeatingLoadProfile: {
+                    title: 'Heating Load Profile',
+                    tileCls: 'heating-load-profiles data-box',
+                    required: "yes",
+                    edit: 'yes',
+                    editCls: 'add-icon myBtn_multi',
+                    editIcon: 'images/add-icon.png',
+                    add: 'no',
+                    hoverText: 'Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources.<br />Are you planning a new heat source? Then we can calculate the profitability of the whole system!',
+                    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
+                    hoverCls: 'main-hover-box heating-load-hover',
+                    priceLst: 'no',
+                    priceData: {},
+                    rightpriceList: 'no',
+                    rightpriceListeData: {}
+                },
+                CompressionChiller: {
+                    title: 'Compression Chiller',
+                    tileCls: 'compression-chillers data-box',
+                    required: "no",
+                    edit: 'yes',
+                    editCls: 'add-icon myBtn_multi',
+                    editIcon: 'images/add-icon.png',
+                    add: 'no',
+                    hoverText: 'Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.',
+                    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
+                    hoverCls: 'main-hover-box compression-chillers-hover',
+                    priceLst: 'no',
+                    priceData: {},
+                    rightpriceList: 'no',
+                    rightpriceListeData: {}
+                },
+                CoolingLoadProfile: {
+                    title: 'Cooling Load Profile',
+                    tileCls: 'cooling-load-profiles data-box',
+                    required: "yes",
+                    edit: 'yes',
+                    editCls: 'add-icon myBtn_multi',
+                    editIcon: 'images/add-icon.png',
+                    add: 'no',
+                    hoverText: 'Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!',
+                    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
+                    hoverCls: 'main-hover-box cooling-load-hover',
+                    priceLst: 'no',
+                    priceData: {},
+                    rightpriceList: 'no',
+                    rightpriceListeData: {}
+                },
+                FahrenheitSystem: {
+                    title: 'Fahrenheit System',
+                    tileCls: 'fahrenheit-system-box data-box',
+                    required: "yes",
+                    edit: 'yes',
+                    editCls: 'add-icon myBtn_multi',
+                    editIcon: 'images/add-icon.png',
+                    add: 'no',
+                    hoverText: 'Please provide the required inputs so we can suggest a Fahrenheit system for you.',
+                    mainClass: 'col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4 disableCard',
+                    hoverCls: 'main-hover-box fahrenheit-system-hover',
+                    priceLst: 'no',
+                    priceData: {},
+                    rightpriceList: 'no',
+                    rightpriceListeData: {}
+                }
+
+            };
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'bootom-data-box' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement = {
+                        title: tiles.general.title,
+                        required: tiles.general.required,
+                        edit: tiles.edit,
+                        mainclass: tiles.general.mainClass,
+                        tileCls: tiles.general.tileCls
+                    }, _defineProperty(_React$createElement, 'required', tiles.general.required), _defineProperty(_React$createElement, 'edit', tiles.general.edit), _defineProperty(_React$createElement, 'editCls', tiles.general.editCls), _defineProperty(_React$createElement, 'editIcon', tiles.general.editIcon), _defineProperty(_React$createElement, 'add', tiles.general.add), _defineProperty(_React$createElement, 'hoverText', tiles.general.hoverText), _defineProperty(_React$createElement, 'hoverCls', tiles.general.hoverCls), _defineProperty(_React$createElement, 'priceLst', tiles.general.priceLst), _defineProperty(_React$createElement, 'priceData', tiles.general.priceData), _defineProperty(_React$createElement, 'rightpriceList', tiles.general.rightpriceList), _defineProperty(_React$createElement, 'rightpriceListeData', tiles.general.rightpriceListeData), _React$createElement)),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement2 = {
+                        title: tiles.Economic.title,
+                        required: tiles.Economic.required,
+                        edit: tiles.Economic.edit,
+                        mainclass: tiles.Economic.mainClass,
+                        tileCls: tiles.Economic.tileCls }, _defineProperty(_React$createElement2, 'required', tiles.Economic.required), _defineProperty(_React$createElement2, 'edit', tiles.Economic.edit), _defineProperty(_React$createElement2, 'editCls', tiles.Economic.editCls), _defineProperty(_React$createElement2, 'editIcon', tiles.Economic.editIcon), _defineProperty(_React$createElement2, 'add', tiles.Economic.add), _defineProperty(_React$createElement2, 'hoverText', tiles.Economic.hoverText), _defineProperty(_React$createElement2, 'hoverCls', tiles.Economic.hoverCls), _defineProperty(_React$createElement2, 'priceLst', tiles.Economic.priceLst), _defineProperty(_React$createElement2, 'priceData', tiles.Economic.priceData), _defineProperty(_React$createElement2, 'rightpriceList', tiles.Economic.rightpriceList), _defineProperty(_React$createElement2, 'rightpriceListeData', tiles.Economic.rightpriceListeData), _React$createElement2)),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement3 = {
+                        title: tiles.Options.title,
+                        required: tiles.Options.required,
+                        edit: tiles.Options.edit,
+                        mainclass: tiles.Options.mainClass,
+                        tileCls: tiles.Options.tileCls }, _defineProperty(_React$createElement3, 'required', tiles.Options.required), _defineProperty(_React$createElement3, 'edit', tiles.Options.edit), _defineProperty(_React$createElement3, 'editCls', tiles.Options.editCls), _defineProperty(_React$createElement3, 'editIcon', tiles.Options.editIcon), _defineProperty(_React$createElement3, 'add', tiles.Options.add), _defineProperty(_React$createElement3, 'hoverText', tiles.Options.hoverText), _defineProperty(_React$createElement3, 'hoverCls', tiles.Options.hoverCls), _defineProperty(_React$createElement3, 'priceLst', tiles.Options.priceLst), _defineProperty(_React$createElement3, 'priceData', tiles.Options.priceData), _defineProperty(_React$createElement3, 'rightpriceList', tiles.Options.rightpriceList), _defineProperty(_React$createElement3, 'rightpriceListeData', tiles.Options.rightpriceListeData), _React$createElement3))
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-12 col-sm-12 col-12 col-lg-8 col-xl-8' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement4 = { name: tiles.HeatSource.title,
+                                required: tiles.HeatSource.required,
+                                edit: tiles.HeatSource.edit,
+                                mainclass: tiles.HeatSource.mainClass,
+                                tileCls: tiles.HeatSource.tileCls }, _defineProperty(_React$createElement4, 'required', tiles.HeatSource.required), _defineProperty(_React$createElement4, 'edit', tiles.HeatSource.edit), _defineProperty(_React$createElement4, 'editCls', tiles.HeatSource.editCls), _defineProperty(_React$createElement4, 'editIcon', tiles.HeatSource.editIcon), _defineProperty(_React$createElement4, 'add', tiles.HeatSource.add), _defineProperty(_React$createElement4, 'hoverText', tiles.HeatSource.hoverText), _defineProperty(_React$createElement4, 'hoverCls', tiles.HeatSource.hoverCls), _defineProperty(_React$createElement4, 'priceLst', tiles.HeatSource.priceLst), _defineProperty(_React$createElement4, 'priceData', tiles.HeatSource.priceData), _defineProperty(_React$createElement4, 'rightpriceList', tiles.HeatSource.rightpriceList), _defineProperty(_React$createElement4, 'rightpriceListeData', tiles.HeatSource.rightpriceListeData), _React$createElement4)),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement5 = { title: tiles.HeatingLoadProfile.title,
+                                required: tiles.HeatingLoadProfile.required,
+                                edit: tiles.HeatingLoadProfile.edit,
+                                mainclass: tiles.HeatingLoadProfile.mainClass,
+                                tileCls: tiles.HeatingLoadProfile.tileCls }, _defineProperty(_React$createElement5, 'required', tiles.HeatingLoadProfile.required), _defineProperty(_React$createElement5, 'edit', tiles.HeatingLoadProfile.edit), _defineProperty(_React$createElement5, 'editCls', tiles.HeatingLoadProfile.editCls), _defineProperty(_React$createElement5, 'editIcon', tiles.HeatingLoadProfile.editIcon), _defineProperty(_React$createElement5, 'add', tiles.HeatingLoadProfile.add), _defineProperty(_React$createElement5, 'hoverText', tiles.HeatingLoadProfile.hoverText), _defineProperty(_React$createElement5, 'hoverCls', tiles.HeatingLoadProfile.hoverCls), _defineProperty(_React$createElement5, 'priceLst', tiles.HeatingLoadProfile.priceLst), _defineProperty(_React$createElement5, 'priceData', tiles.HeatingLoadProfile.priceData), _defineProperty(_React$createElement5, 'rightpriceList', tiles.HeatingLoadProfile.rightpriceList), _defineProperty(_React$createElement5, 'rightpriceListeData', tiles.HeatingLoadProfile.rightpriceListeData), _React$createElement5))
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement6 = { title: tiles.CompressionChiller.title,
+                                required: tiles.CompressionChiller.required,
+                                edit: tiles.CompressionChiller.edit,
+                                mainclass: tiles.CompressionChiller.mainClass,
+                                tileCls: tiles.CompressionChiller.tileCls }, _defineProperty(_React$createElement6, 'required', tiles.CompressionChiller.required), _defineProperty(_React$createElement6, 'edit', tiles.CompressionChiller.edit), _defineProperty(_React$createElement6, 'editCls', tiles.CompressionChiller.editCls), _defineProperty(_React$createElement6, 'editIcon', tiles.CompressionChiller.editIcon), _defineProperty(_React$createElement6, 'add', tiles.CompressionChiller.add), _defineProperty(_React$createElement6, 'hoverText', tiles.CompressionChiller.hoverText), _defineProperty(_React$createElement6, 'hoverCls', tiles.CompressionChiller.hoverCls), _defineProperty(_React$createElement6, 'priceLst', tiles.CompressionChiller.priceLst), _defineProperty(_React$createElement6, 'priceData', tiles.CompressionChiller.priceData), _defineProperty(_React$createElement6, 'rightpriceList', tiles.CompressionChiller.rightpriceList), _defineProperty(_React$createElement6, 'rightpriceListeData', tiles.CompressionChiller.rightpriceListeData), _React$createElement6)),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement7 = { title: tiles.CoolingLoadProfile.title,
+                                required: tiles.CoolingLoadProfile.required,
+                                edit: tiles.CoolingLoadProfile.edit,
+                                mainclass: tiles.CoolingLoadProfile.mainClass,
+                                tileCls: tiles.CoolingLoadProfile.tileCls }, _defineProperty(_React$createElement7, 'required', tiles.CoolingLoadProfile.required), _defineProperty(_React$createElement7, 'edit', tiles.CoolingLoadProfile.edit), _defineProperty(_React$createElement7, 'editCls', tiles.CoolingLoadProfile.editCls), _defineProperty(_React$createElement7, 'editIcon', tiles.CoolingLoadProfile.editIcon), _defineProperty(_React$createElement7, 'add', tiles.CoolingLoadProfile.add), _defineProperty(_React$createElement7, 'hoverText', tiles.CoolingLoadProfile.hoverText), _defineProperty(_React$createElement7, 'hoverCls', tiles.CoolingLoadProfile.hoverCls), _defineProperty(_React$createElement7, 'priceLst', tiles.CoolingLoadProfile.priceLst), _defineProperty(_React$createElement7, 'priceData', tiles.CoolingLoadProfile.priceData), _defineProperty(_React$createElement7, 'rightpriceList', tiles.CoolingLoadProfile.rightpriceList), _defineProperty(_React$createElement7, 'rightpriceListeData', tiles.CoolingLoadProfile.rightpriceListeData), _React$createElement7))
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement8 = { title: tiles.FahrenheitSystem.title,
+                        required: tiles.FahrenheitSystem.required,
+                        edit: tiles.FahrenheitSystem.edit,
+                        mainclass: tiles.FahrenheitSystem.mainClass,
+                        tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _React$createElement8))
+                )
+            );
+        }
+    }]);
+
+    return Adcalc;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Adcalc);
+
+
+if (document.getElementById('adcalc')) {
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Adcalc, null), document.getElementById('adcalc'));
+}
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Tiles; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Tiles = function (_React$Component) {
+    _inherits(Tiles, _React$Component);
+
+    function Tiles(props) {
+        _classCallCheck(this, Tiles);
+
+        var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
+
+        _this.state = {};
+        return _this;
+    }
+
+    _createClass(Tiles, [{
+        key: "render",
+        value: function render() {
+            var priceFullList,
+                pricelist,
+                requiredMsg = "";
+
+            if (this.props.priceList == "yes") {
+                var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "ul",
+                    { className: "price-listt" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Re-cooling Type"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "DRY"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Free cooling"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "YES ",
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "span",
+                                null,
+                                "(chilled water temperature)"
+                            )
+                        )
+                    )
+                );
+                var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "ul",
+                    { className: "price-listt" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Language"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "English"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "BAFA 2018"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "Calculate"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Re-cooling Type"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "Dry"
+                        )
+                    )
+                );
+            }
+            if (this.props.rightpriceList == "yes") {
+                var rightList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "ul",
+                    { className: "right-list-content" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Free cooling"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "Yes ",
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "span",
+                                null,
+                                "(chilled water temperature)"
+                            )
+                        )
+                    )
+                );
+            }
+            if (this.props.required == "yes") {
+                var requiredMsg = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "h5",
+                    { "class": "input-required" },
+                    "An input is required"
+                );
+            }
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                { className: this.props.mainclass },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "div",
+                    { className: this.props.tileCls },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "h1",
+                        null,
+                        this.props.title
+                    ),
+                    requiredMsg,
+                    pricelist,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { className: this.props.hoverCls },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h1",
+                            null,
+                            this.props.title
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "div",
+                            { className: this.props.editCls },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.editIcon, alt: "" })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            this.props.hoverText
+                        ),
+                        priceFullList,
+                        rightList
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Tiles;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+Tiles.defaultProps = {
+    title: 'General Information',
+    tileCls: 'general-information data-box',
+    required: "yes",
+    edit: 'yes',
+    editCls: 'edit-icon myBtn_multi',
+    editIcon: 'images/edit-icon.png',
+    add: 'no',
+    hoverText: 'We need the location to get the specific weather data.',
+    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+    hoverCls: 'main-hover-box general-info-hover',
+    priceLst: 'no',
+    priceData: {},
+    rightpriceList: 'no',
+    rightpriceListeData: {}
+};
+
+/***/ }),
+/* 60 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

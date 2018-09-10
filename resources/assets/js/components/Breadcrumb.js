@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-export default class Breadcrumb extends Component {
+class Breadcrumb extends Component {
+
     render() {
         return (
             <div className="container" >
@@ -13,6 +14,7 @@ export default class Breadcrumb extends Component {
         );
     }
 }
+
 
 if (document.getElementById('breadcrumb')) {
     ReactDOM.render(<Breadcrumb />, document.getElementById('breadcrumb'));
