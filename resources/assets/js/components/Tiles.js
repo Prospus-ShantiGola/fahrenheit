@@ -4,23 +4,46 @@ export class Tiles extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        };
+            compressionChiller:[],
+            generalInfo:[]
+               };
     }
 
     render() {
         var priceFullList,pricelist,requiredMsg="";
-
+        if(this.props.dataChange=="yes"){
+            var pricelist=(
+                <ul class="price-listt">
+                                    <li>
+                                       <p>Cooling Capacity</p>
+                                       <h3>100.0 kW</h3>
+                                    </li>
+                                    <li>
+                                       <p>Number of Compressors</p>
+                                       <h3>3</h3>
+                                    </li>
+                                    <li>
+                                       <p>Temperature</p>
+                                       <h3><img src="images/degree-icon.png" alt="" /> 6°C</h3>
+                                    </li>
+                </ul>
+            );
+        }
         if(this.props.priceList=="yes"){
             var pricelist=(
-                <ul className="price-listt">
-                    <li>
-                        <p>Re-cooling Type</p>
-                        <h3>DRY</h3>
-                    </li>
-                    <li>
-                        <p>Free cooling</p>
-                        <h3>YES <span>(chilled water temperature)</span></h3>
-                    </li>
+                <ul class="price-listt">
+                                    <li>
+                                       <p>Cooling Capacity</p>
+                                       <h3>100.0 kW</h3>
+                                    </li>
+                                    <li>
+                                       <p>Number of Compressors</p>
+                                       <h3>3</h3>
+                                    </li>
+                                    <li>
+                                       <p>Temperature</p>
+                                       <h3><img src="images/degree-icon.png" alt="" /> 6°C</h3>
+                                    </li>
                 </ul>
             );
             var priceFullList=(
@@ -51,28 +74,24 @@ export class Tiles extends React.Component {
             );
         }
         if(this.props.required=="yes"){
-            var requiredMsg=<h5 class="input-required">An input is required</h5>;
+            var requiredMsg=<h5 className="input-required">An input is required</h5>;
         }
 
         return (
-
-
-<div className={this.props.mainclass}>
-<div className={this.props.tileCls}>
-   <h1>{this.props.title}</h1>
-   {requiredMsg}
-   {pricelist}
-   <div className={this.props.hoverCls}>
-      <h1>{this.props.title}</h1>
-      <div className={this.props.editCls}><img src={this.props.editIcon} alt="" /></div>
-      <p>{this.props.hoverText}</p>
-      {priceFullList}
-      {rightList}
-   </div>
-</div>
-</div>
-
-
+                <div className={this.props.mainclass}>
+                    <div className={this.props.tileCls}>
+                        <h1>{this.props.title}</h1>
+                        {requiredMsg}
+                        {pricelist}
+                        <div className={this.props.hoverCls}>
+                            <h1>{this.props.title}</h1>
+                            <div className={this.props.editCls}><img src={this.props.editIcon} alt="" data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} /></div>
+                            <p>{this.props.hoverText}</p>
+                            {priceFullList}
+                            {rightList}
+                        </div>
+                    </div>
+                </div>
 
         );
     }

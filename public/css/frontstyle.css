@@ -22,19 +22,6 @@ header {
     height: 25px;
     text-align: center;
 }
-.loggedin-div a {
-    color: #bbb;
-    background: #fff;
-    border-radius: 28px;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 3px 10px;
-    display: inline-block;
-    text-transform: uppercase;
-    width: auto;
-    height: 25px;
-    text-align: center;
-}
 .header-search-form {
     text-align: right;
 }
@@ -73,11 +60,42 @@ section.top-header {
     position: absolute;
     left: 0;
 }
+td.input-label {
+    width: 33%;
+}
+.button-div {
+    clear: both;
+    border-top: 1px solid #ddd;
+    padding-top: 33px;
+    text-align: center;
+    padding-bottom: 15px;
+}
+.button-div a {
+    border: 1px solid #00618c;
+    padding: 13px;
+    display: inline-block;
+    width: 400px;
+    height: 58px;
+    vertical-align: middle;
+    font-size: 20px;
+    color: #00618c;
+    font-weight: 400;
+    border-radius: 60px;
+    margin: 0 13px;
+}
+.button-div a:hover { text-decoration:none;}
+.button-div a:last-child { background:#afcedb;}
+.eco-investment-div td:nth-child(3){
+    width: 16%;
+}
 .top-navigation li.nav-item a:hover::after {
     width: 100%;
 }
 .top-navigation li.nav-item.active a.nav-link {
     border-bottom: 2px solid #f92156; color: #f92156;
+}
+span.center-text {
+    padding-left: 18px;
 }
 .banner-img {
     position: relative;
@@ -148,7 +166,7 @@ section.top-header {
 }
 .heat-to-cold {
     background: #fff;
-    padding: 40px;
+    padding: 25px;
 }
 
 section.convert-heat-to-cool {
@@ -167,7 +185,7 @@ section.convert-heat-to-cool {
 .heat-to-cold h1 {
     font-weight: 700;
     color: #00618c;
-    font-size: 40px;
+    font-size: 35px;
     padding-top: 10px;
     padding-left: 38px;
     background: url(../images/flake.png);
@@ -198,7 +216,7 @@ section.convert-heat-to-cool {
 .service-box-content h3 {
     text-align: left;
     font-weight: 700;
-    font-size: 34px;
+    font-size: 30px;
     color: #fff;
     line-height: 40px;
     background: url(../images/flake.png);
@@ -270,6 +288,10 @@ section.convert-heat-to-cool {
     font-weight: 600;
     line-height: 45px;
 }
+.right-list-content h3 span {
+    font-size: 15px;
+    font-weight: 400;
+}
 
 .alles-ber h2 span { display:block;}
 
@@ -299,19 +321,27 @@ section.german-data {
 
 footer {
     background: #fff;
-    padding: 40px 0 25px;
+    padding: 51px 0 20px;
 }
 .footer-section1 img {
     max-width: 60px;
-    width: 100%; vertical-align:bottom;
+    width: 100%;
+    vertical-align: middle;
+    margin-top: -17px;
+    margin-right: 7px;
 }
 .footer-section1 h5 {
     color: #00648c;
 }
 footer a{ color:#00648c;}
-footer p{ color:#00648c;}
+footer p{ color:#00648c; font-size:14px;}
 .footer-section1 p {
     margin-top: 20px;
+    font-size: 14px;
+}
+.footer-section1 h5 {
+    color: #00648c;
+    font-size: 15px;
 }
 footer h3 {
     color: #f92156;
@@ -330,18 +360,25 @@ ul.footer-nav {
 .footer-nav li a {
     color: #00648c;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
 }
 .footer-nav li {
-    padding: 4px 0;
+    padding: 1px 0;
 }
-
+.footer-section4 {
+    margin-top: -10px;
+}
 .footer-nav li:first-child { padding-top:0;}
 section.copyrite {
     text-align: center;
-    padding: 20px 0;
+    padding: 17px 0;
 }
-section.copyrite p{ margin:0; font-size:14px; color:#00618c;}
+section.copyrite p {
+    margin: 0;
+    font-size: 13px;
+    color: #00618c;
+    font-weight: 500;
+}
 
 section.copyrite p a { color:#00618c;}
 
@@ -349,7 +386,7 @@ section.copyrite p a { color:#00618c;}
     margin-top: 10px;
     margin-left: 28px;
 }
-.login-div, .loggedin-div {
+.login-div {
     float: left;
 }
 .language-change-div {
@@ -382,21 +419,34 @@ section.copyrite p a { color:#00618c;}
 }
 .adcalc-inner-content {
     background: #fff;
-    padding: 15px;
+    padding: 15px 15px 0px;
 }
 section.adcalc-content {
     padding-bottom: 30px;
 }
 .left-icon-list li {
     display: inline-block;
-    padding: 0 3px;
+    padding: 0 3px; cursor: pointer;
 }
 
 .right-icon-list li {
     display: inline-block;
-    padding: 0 3px;
+    padding: 0 3px; cursor: pointer;
+}
+td.form-submitbtn {
+    text-align: center;
+    padding-top: 15px!important;
+}
+.form-submitbtn button.btn {
+    width: 187px;
+    color: #00618c;
+    border-radius: 0;
+    border: 1px solid #a5a5a5;
+    font-weight: 500;
+    font-size: 14px;
 }
 
+#login-modal {background:transparent; z-index:9999;}
 ul.list-inline.right-icon-list {
     text-align: right;
     margin: 0;
@@ -412,7 +462,7 @@ ul.list-inline.left-icon-list {
     }
 .data-box { background-position: right!important;
     background-size: cover!important;
-    padding: 25px; position: relative; margin-bottom:30px;
+    padding: 20px; position: relative; margin-bottom:30px;
     min-height: 242px;
 	    transition: all 0.4s linear 0s;
     -webkit-transition: all 0.4s linear 0s;
@@ -463,13 +513,14 @@ ul.price-listt {
 }
 .price-listt h3 {
     color: #fff;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 500;
     font-family: Roboto;
+    text-transform: capitalize;
 }
 .price-listt h3 span {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 16px; text-transform: lowercase;
 }
 .fahrenheit-system-box h5.input-required {
     padding-top: 190px;
@@ -477,7 +528,7 @@ ul.price-listt {
     margin: 0 auto;
 }
 .edit-icon {
-    float: right;
+    float: right;     cursor: pointer;
 }
 .main-hover-box h1 {
     float: left;
@@ -498,13 +549,13 @@ ul.price-listt {
     display:none;
     left: 0;
     background: #0387c3;
-    padding: 25px;
+    padding: 20px;
 }
 .data-box:hover .main-hover-box {display:block;}
 .add-icon {
     position: absolute;
     bottom: 13px;
-    right: 13px;
+    right: 13px; cursor:pointer;
 }
 .option-hover .right-list-content {
     float: right;
@@ -521,7 +572,30 @@ ul.right-list-content {
     bottom: 0;
     left: 151px;
 }
+#message-popup-modal p {
+    /* text-align: center; */
+    width: 88%;
+    /* margin: 0 auto; */
+    color: red;
+    line-height: 25px;
+    font-size: 15px;
+}
+#message-popup-modal ul li {
+    color: red;
+    line-height: 25px;
+    font-size: 14px;     list-style-position: inside;
+}
+#message-popup-modal ul { margin-left:0; padding-left:0;}
+#message-popup-modal .modal-body-content {
+    padding: 30px 34px 0;
+}
 
+#message-popup-modal .modal-content {
+    padding: 10px 20px 50px;     width: 448px;}
+#message-popup-modal {
+    z-index: 9999!important;
+    background-color: transparent;     padding-top: 12%;
+}
 .right-list-content p {
     margin: 0;
     color: #fff;
@@ -542,13 +616,45 @@ ul.right-list-content {
 .heat-sources-hover p {
     padding-top: 40px;
 }
+#login-modal .modal-content {
+    padding: 10px 10px;
+    width: 340px;
+    border-radius: 0;
+}
+#login-modal .form-group input {
+    height: 40px;
+    border: 1px solid #eeeef3;
+    border-radius: 60px;
+    font-size: 13px; font-weight:500;
+    padding: 10px 20px;     color: #00618c;
+    width: 100%; outline:none;
+}
 
-
-
+.close-div {
+    text-align: right;
+}
+.left-head.center-data {
+    float: none;
+    text-align: center; font-size: 30px; line-height:30px;
+}
 .heating-load-hover p {
     padding-top: 20px;
 }
-
+.login-btn button.btn {
+    background: transparent;
+    border: 1px solid #00648c;
+    border-radius: 70px;
+    font-size: 14px;
+    color: #00648c;
+    width: 174px;
+    font-weight: 500;
+    height: 40px;
+}
+.login-btn {text-align:center;}
+ .login-btn .btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
 .compression-chillers-hover  p {
     padding-top: 25px;
 }
@@ -574,12 +680,13 @@ ul.right-list-content {
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
         }
-
+		#calender-popup .modal-content { width:80%; }
+#calender-popupp .modal-content { width:80%; }
         /* Modal Content */
       .modal-content {
             background-color: #fff;
             margin: auto;
-            padding: 20px;
+            padding: 10px 20px 20px;
             border: 1px solid #888;
             width: 600px;
         }
@@ -603,7 +710,6 @@ ul.right-list-content {
     color: #00618c;
     font-weight: bold;
     font-size: 20px;
-    text-transform: capitalize;
     letter-spacing: 0.5px;
 }
 .right-head {
@@ -614,11 +720,11 @@ ul.right-list-content {
     float: left;
     padding: 0 5px;
 }
-.modal-body-content ul li.nav-item {
+.modal-body-content #tabsJustified ul li.nav-item {
     width: 50%;
 }
 .modal-body-content {
-    padding-top: 40px;
+    padding-top: 27px;
 }
 .modal-body-content a.nav-link {
     color: #00618c;
@@ -631,10 +737,12 @@ ul.right-list-content {
 
 .modal-body-content .table td, .modal-body-content .table th {
     border-top: none;
+    vertical-align: middle;
+    padding: 5px;
 }
 td.input-label {
     color: #00618c;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.5px;
 }
@@ -652,11 +760,18 @@ td.input-label {
     color: #00618c;
     opacity:1;
 }
+#login-modal .form-group input::placeholder {
+    color: #00618c;
+    opacity:1;
+}
 td.input-help-label {
     padding-right: 0;
     text-align: right;
+    padding-left: 0;
+    width: 10%;
 }
-.project-data-div {
+
+.modal-body-content .tab-pane {
     padding-top: 25px;
 }
 .popover { background-color: #00618c; font-family:Roboto;}
@@ -676,11 +791,11 @@ td.input-help-label {
 
 .bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after {     border-bottom-color: #00618c;}
 
-i.fa.fa-map-marker {
+.input-fields i {
     position: absolute;
     right: 23px;
     font-size: 19px;
-    top: 21px; color:#00618c;
+    top: 14px; color:#00618c;
 }
 
 td.input-fields {
@@ -689,11 +804,1065 @@ td.input-fields {
 input.required-field {
     border-color: red;
 }
-.personal-data-div {
-    padding-top: 25px;
+h3.inner-table-heading {
+    color: #00618c;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px; margin:0;
+}
+
+.modal-body-content #tabsJustified1 li.nav-item {
+    width: 25%;
+}
+
+.eco-chp-data-div td.input-label {
+    width: 40%;
+}
+.chp-base {
+    width: 18%;
+}
+
+.caculator-divv {
+    display: none;
+}
+.calci-div {
+    position: absolute;
+    top: 102px;
+    width: 250px;
+    right: -54px;
+    background: #fff;
+    border: 1px solid #00618c;
+    padding: 15px;
+    /* z-index: 9; */
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+.calci-div input#input {
+    width: 100%;
+    margin-bottom: 11px;
+    border: 1px solid #00618c;
+    padding: 5px 10px;
+    outline: none;
+}
+
+.calci-div button {
+    background: transparent;
+    border: 1px solid #ddd;
+    /* margin: -1px; */
+    padding: 0;
+   width: 37px;
+    height: 43px;
+    margin-left: -1px;
+    margin-bottom: -1px;
+}
+.eco-investment-div .input-label i {
+    font-size: 20px;
+    vertical-align: middle;
+    padding: 0 3px;
+}
+.eco-investment-div tr td:first-child {
+    width: 35%;
+}
+
+#contact-form-modal {
+    z-index: 9999!important;
+	  background-color: transparent;
+}
+
+.input-fields textarea {
+    color: #00618c;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 10px;
+    height: 93px;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #00618c;
+    resize: none;
+}
+td.input-label.text-area-label {
+    vertical-align: top;
+    padding-top: 10px;
+}
+
+.edit-divv {
+    display: inline-block;
+}
+.delete-divv {
+    display: inline-block;
+}
+.modal .table {
+    margin-bottom: 0;}
+
+
+.new-row-addition {
+    float: right;
+    color: #00618c;
+    font-size: 29px;
+    padding-right: 12px;
+}
+.add-new-row {display:none;}
+.eco-maintenance-div .input-label i {
+    font-size: 20px;
+    vertical-align: middle;
+    padding: 0 3px;
+}
+
+#tabsJustified li.nav-item {
+    width: 50%;
 }
 
 
+#tabsJustified2 li.nav-item {
+    width: 50%;
+}
+
+.input-fields ul li {
+    float: left;
+    padding: 0 3px;
+}
+.input-fields select {
+    color: #00618c;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 10px;
+    height: 37px;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #00618c;
+    appearance: none;
+    background: url(../images/select-arrow.png);
+    background-repeat: no-repeat;
+    -webkit-appearance: none; -moz-appearance: none;
+    background-position: 96% 50%;
+}
+
+.heating-load-general-div .input-fields ul li:first-child {
+    width: 43%;
+    vertical-align: middle;
+}
+.heating-load-general-div .input-fields ul li {padding:0;}
+.heating-load-general-div .input-fields ul li:nth-child(2) {
+    width: 14%;
+    font-size: 14px;
+    color: #00618c;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 7px;
+}
+
+.heating-load-general-div .input-fields ul li:last-child {
+    width: 43%;
+}
+.additional-options {
+    color: #e73c37;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+    padding-top: 10px;
+}
+
+select.required-field {
+    border-color: red;
+}
+.modal-body-content a.nav-link.active {
+    border-top-right-radius: 30px 62px;
+    border-color: #005986;
+    border-bottom: transparent;
+    border-top-left-radius: 9px 14px;
+    border-width: 2px;     color: #00618c;
+}
+.modal-body-content a.nav-link {
+    border-top-right-radius: 30px 70px;
+    border-bottom: transparent;
+    border-top-left-radius: 9px 14px;
+    border-width: 2px; background:#99bdcf; color:#fff;
+}
+ .modal-body-content .nav-tabs .nav-link:hover {
+    border-color: transparent;  border-width: 2px;
+
+}
+.modal-body-content a.nav-link.active:hover {
+    border-color: #005986;  border-width: 2px;
+
+}
+.modal-body-content .nav-tabs .nav-link:focus {   outline: none;}
+#tabsJustifiedlast li.nav-item {
+    width: 50%;
+    position: relative;
+}
+
+.chiller-div td p {
+    margin: 0;
+    font-size: 14px;
+    color: #00618c;
+    text-align: center;
+    font-weight: 500;
+
+    width: 78%;
+}
+.chiller-div li {
+    display: inline-block;
+    color: #1e749a;
+    font-size: 25px;
+    padding: 0 7px;
+    vertical-align: top;
+    font-weight: 300; line-height: 20px;
+}
+.chiller-div table td:last-child {
+    text-align: right;
+    vertical-align: top;
+}
+.recooling-system-data-div table td:last-child {
+    text-align: right;
+    vertical-align: top;
+}
+.chiller-div ul.list-inline {
+    margin: 0;
+    vertical-align: top;
+}
+.recooling-system-data-div ul.list-inline {
+    margin: 0;
+    vertical-align: top;
+}
+#tabsJustifiedlast li.nav-item img.modal-openn {
+    position: absolute;
+    left: 7px;
+    font-size: 30px;
+    color: #00618c;
+    top: 4px;
+}
+
+#tabsJustifiedlast li.nav-item a img {
+    float: right;
+    width: 30px;
+    /* height: 27px; */
+    background: #00618c;
+    border-radius: 50%;
+    /* line-height: 26px; */
+    text-align: center;
+    font-size: 14px;
+    /* padding: 0 7px; */
+    margin-top: -6px;
+    color: #fff;
+}
+#tabsJustifiedContentt td.input-label {
+    width: 28%;
+    padding-left: 0;
+    padding-right: 0;
+}
+.nav-tabs .nav-item {
+  width: 50%;
+}
+#tabsJustifiedContenttt td.input-label {
+    width: 35%;
+}
+
+.recooling-system-data-div td p {
+    margin: 0;
+    font-size: 14px;     width: 78%;
+    color: #00618c;
+    text-align: center; font-weight:500;
+}
+.chiller-div li:last-child {
+    padding-right: 21px;
+}
+.recooling-system-data-div li:last-child {
+    padding-right: 21px;
+}
+.recooling-system-data-div li {
+    display: inline-block;
+    color: #00618c;
+    font-size: 25px;
+    padding: 0 7px;
+    vertical-align: top; line-height: 20px;
+}
+.recooling-system-data-div ul.list-inline {
+    text-align: right;
+}
+#cooling-technical-data .calci-div {
+    top: 56%;
+    right: 12%;}
+
+#heating-technical-data .calci-div {
+    top: 51%;
+    right: 12%;}
+
+
+#tabsJustifiedlast .calci-div {
+    top: 45px;}
+
+.modal-body-content .nav-tabs .nav-item {
+    margin-bottom: -3px;  position:relative;
+}
+
+
+.modal-body-content li.nav-item a::after {
+    content: "";
+    position: absolute;
+    background: #00618c;
+    width: 101%;
+    display: block;
+    height: 2px;
+    bottom: 0;
+    left: -2px;
+}
+.modal-body-content li.nav-item a.active::after {
+   visibility:hidden;
+}
+
+.hover-list .table td{
+    padding: 1px 0;
+    vertical-align: top;
+    border-top: none;
+    color: #fff;
+    font-size: 14px;     letter-spacing: 0.5px;
+    font-weight: 400; text-align:right;
+}
+
+.hover-list .table th {
+    padding: 1px 0;
+    vertical-align: top;
+    border-top: none;
+    color: #bfe0ee;
+    font-size: 14px;     letter-spacing: 0.5px;
+    font-weight: 400; text-align:left;
+}
+
+.hover-list {
+    padding-top: 3px;
+    clear: both;
+}
+.hover-list table td span {
+    font-size: 20px;
+    padding: 0 4px;
+}
+
+.hover-list table ul li {
+    display: inline-block;
+    padding: 0 8px 0 0;
+    color: #fff;
+}
+.hover-list table ul {margin:0; padding:0;}
+.hover-list h3 {
+    font-size: 14px;
+    color: #bfe0ee;
+    margin: 0 0 6px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* The container */
+.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-container input:checked ~ .checkmark {
+    background-color: transparent;
+    border: 4px solid #fff;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-container .checkmark:after {
+ top: -1px;
+    left: -1px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: red;
+}
+
+
+.fahrenheit-system-hover .hover-list table td span {
+    font-size: 20px;
+    padding: 0 2px;
+}
+.fahrenheit-system-hover .hover-list .table td {
+    padding: 2px 3px;
+    vertical-align: top;
+    border-top: none;
+    color: #fff;
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-align: left;
+}
+
+
+.manual-sysytemm {
+    background: #5ca5c5;
+    padding: 10px 20px;
+    margin: 0 -20px;
+}
+.manual-sysytemm table {
+    margin: 0;
+}
+
+h6.note-textt {
+    color: #bfe0ee;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    padding-top: 13px;
+}
+
+.clone-system {
+    display: none;
+}
+
+.modal.loginmodal {
+	z-index:9999;}
+
+
+.loginmodal .modal-content {
+    width: 350px;
+    border-radius: 0;
+    border: none;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+
+
+
+/*====================media query=====================*/
+
+@media (min-width:992px) and (max-width:1200px) {
+.top-navigation a.nav-link {
+    font-size: 14px;
+}
+.top-navigation li.nav-item {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.jqyc-month {
+    width: 28%;
+}
+.service-box-content h3 {
+    font-size: 27px;
+    line-height: 33px;
+}
+.german-data h1 {
+    font-size: 33px;
+    margin-bottom: 10px;
+}
+.alles-ber h2 {
+    font-size: 36px;
+
+}
+
+}
+@media (min-width:768px) and (max-width:991px) {
+
+.service-box-content h3 {
+    font-size: 19px;
+
+    line-height: 23px;}
+
+.services-boxes {
+    height: 165px;
+}
+.service-box-content {
+    padding-top: 50px;}
+	german-data h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.alles-ber h2 {
+    font-size: 25px;
+    line-height: 30px;
+}
+.alles-ber a {
+    font-size: 14px;
+    width: 183px;
+    height: 44px;
+    line-height: 42px;
+}
+.german-data h1 {
+    font-size: 25px;
+}
+footer {
+    text-align: center;
+}
+.data-box {
+    background-position: right bottom!important;}
+
+	.navbar-toggler {
+    text-align: center;
+    margin: 20px auto 0;
+    background: #eee;
+    width: 100%;
+}
+span.navbar-toggler-icon::after {
+    content: "Menu";
+    position: absolute;
+    color: #00618c;
+    left: 11px;
+    top: 31px;
+    font-size: 18px;
+}
+
+.navbar-toggler:after {
+    position: absolute;
+    content: "\f0c9";
+    /* top: 13px; */
+    right: 15px;
+    font-family: FontAwesome;
+    font-size: 20px;
+    color: #00618c;
+    -moz-transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    font-weight: bold;
+    margin-top: 6px;
+}
+.top-navigation {
+    width: 100%;
+}
+.header-logo {
+    text-align: center;
+}
+
+
+
+
+	}
+@media (min-width:577px) and (max-width:767px) {
+	footer {
+    text-align: center;
+}
+.banner-img {
+    height: auto;
+}
+.banner-content {
+    top: 40px;
+}
+.banner-content h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+#home-banner .owl-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 33px;
+}
+.services-boxes {
+    height: 185px;}
+.footer-section2 {
+    padding: 15px 0;
+}
+.service-box-content h3 {
+    font-size: 23px;
+    line-height: 29px;
+}
+.footer-section4 {
+    padding-top: 15px;
+}
+.navbar-toggler {
+    text-align: center;
+    margin: 20px auto 0;
+    background: #eee;
+    width: 100%;
+}
+.service-box-content {
+    padding-top: 59px;
+
+}
+.alles-ber h2 {
+    font-size: 32px;
+}
+.alles-ber a {
+    margin: 15px 0 35px 0;}
+span.navbar-toggler-icon::after {
+    content: "Menu";
+    position: absolute;
+    color: #00618c;
+    left: 11px;
+    top: 31px;
+    font-size: 18px;
+}
+
+.navbar-toggler:after {
+    position: absolute;
+    content: "\f0c9";
+    /* top: 13px; */
+    right: 15px;
+    font-family: FontAwesome;
+    font-size: 20px;
+    color: #00618c;
+    -moz-transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    font-weight: bold;
+    margin-top: 6px;
+}
+.top-navigation {
+    width: 100%;
+}
+.header-logo {
+    text-align: center;
+}
+.modal-content {
+    width: 560px;
+}
+.modal-body-content a.nav-link {
+
+    font-size: 13px;
+    padding: 10px 7px;
+}
+#calender-popupp .modal-content {
+    width: 95%;
+}
+#calender-popup .modal-content {
+    width: 95%;
+}
+.jqyc-month {
+    width: 42%!important;
+    min-height: 225px !important;
+}
+.input-fields input {
+    padding: 5px 5px;}
+
+	.input-fields select {
+    padding: 5px 5px;}
+
+	#tabsJustifiedlast li.nav-item img.modal-openn {
+    left: 4px;}
+
+	#tabsJustifiedlast li.nav-item a img {
+    margin-top: -6px;
+    margin-right: 4px;
+}
+#tabsJustifiedlast .calci-div {
+    right: 0;
+}
+.calci-div {
+    right: 10px;
+}
+.eco-investment-div .input-label i {
+    font-size: 18px;
+    padding: 0 0px;
+}
+.footer-section4 {
+    padding-top: 20px;
+}
+ul.navbar-nav.mr-auto {
+    padding-top: 20px;
+}
+.data-box {
+    background-position: right bottom!important;}
+	.footer-section4 {
+    margin-top: 0px;
+}
+}
+@media (max-width:576px) {
+.top-navigation {
+    float: left;
+    width: 100%;
+}
+#message-popup-modal .modal-content {
+	   width: 90%;}
+.modal .nav-tabs {
+    border-bottom: none;
+}
+.right-list-content h3 {
+    font-size: 14px;
+}
+.input-fields ul li {
+    padding: 0 2px;
+}
+.input-fields ul li img {
+    max-width: 26px;
+}
+.data-box {
+    background-position: right bottom!important;}
+.adcalc-inner-content {
+    padding: 8px;
+}
+.hover-list .table td {
+    font-size: 13px;}
+	.hover-list table td span {
+    font-size: 15px;
+    padding: 0 2px;
+}
+.main-hover-box {
+    padding: 10px;
+}
+.data-box {
+    padding: 10px;}
+	.hover-list .table th {
+    font-size: 13px}
+ul.navbar-nav.mr-auto {
+    padding-top: 20px;
+}
+.bootom-data-box h1 {
+    font-size: 18px;
+}
+.price-listt h3 {
+    font-size: 18px;
+}
+.hover-list h3 {
+    font-size: 13px;
+    margin: 0 0 4px;
+}
+.fahrenheit-system-hover .hover-list table td span {
+    font-size: 10px;
+    padding: 0 1px;
+}
+.edit-optionss img {
+    max-width: 12px;
+    width: 100%;
+}
+.checkmark {
+    height: 12px;
+    width: 12px;
+}
+.radio-container .checkmark:after {
+    top: -2px;
+    left: -2px;
+    width: 8px;
+    height: 8px;
+}
+.manual-sysytemm {
+    margin: 0 -10px; padding: 10px 5px;
+}
+.fahrenheit-system-hover .hover-list .table td {
+    padding: 2px 2px;}
+h6.note-textt {
+    font-size: 13px;
+}
+.banner-img {
+    height: auto;
+}
+.heat-to-cold h1 {
+    font-size: 25px;
+    padding-top: 0;
+    width: 100%;
+}
+.footer-section2 {
+    padding: 15px 0;
+}
+.service-box-content h3 {
+    font-size: 27px;
+    line-height: 32px;
+}
+.services-boxes {
+
+    height: 190px;
+}
+.service-box-content {
+    padding-top: 50px;}
+.input-fields i {
+    right: 5px;
+    top: 21px;
+}
+.german-data h1 {
+    font-size: 22px;
+}
+.alles-ber h2 {
+    font-size: 33px;
+    line-height: 35px;
+}
+.banner-content {
+    top: 10%;
+}
+.banner-content h1 {
+    font-size: 20px;
+    margin-bottom: 9px;
+}
+.banner-content a {
+    font-size: 15px;
+    width: 155px;
+    height: 43px;
+
+}
+.heat-to-cold {
+    padding: 20px;
+}
+.german-inner-section {
+
+    padding: 20px 20px;
+}
+.footer-section4 {
+    padding-top: 20px;
+}
+#home-banner .owl-dots {
+    bottom: 0;
+    left: 10px;
+}
+#calender-popupp .modal-content {
+    width: 97%;
+}
+#calender-popup .modal-content {
+    width: 97%;
+}
+#calender-popup .modal-body-content {
+    padding-top: 0;
+}
+#calender-popupp .modal-body-content {
+    padding-top: 0;
+}
+.jqyc-month {
+    width: 100%!important;
+    margin: 20px 0px 0!important;
+    min-height: 198px;
+}
+.top-navigation .navbar-expand-lg .navbar-nav .nav-link {
+    padding-bottom: 6px;
+    padding-top: 6px;
+}
+.navbar-toggler {
+    text-align: center;
+    margin: 20px auto 0;
+    background: #eee;
+    width: 100%;
+}
+span.navbar-toggler-icon::after {
+    content: "Menu";
+    position: absolute;
+    color: #00618c;
+    left: 11px;
+    top: 31px;
+    font-size: 18px;
+}
+
+.navbar-toggler:after {
+    position: absolute;
+    content: "\f0c9";
+    /* top: 13px; */
+    right: 15px;
+    font-family: FontAwesome;
+    font-size: 20px;
+    color: #00618c;
+    -moz-transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    font-weight: bold;
+    margin-top: 6px;
+}
+/*.navbar-toggler.collapsed:after {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}*/
+
+.modal-content {
+    width: 97%;
+}
+.header-logo {
+    text-align: center;
+}
+ul.list-inline.left-icon-list {
+    text-align: center;
+}
+ul.list-inline.right-icon-list {
+    text-align: center;
+    margin: 13px 0 0;
+}
+td.input-help-label {
+    padding-left: 0;
+}
+td.input-label {
+    padding-left: 0!important; padding-right: 0!important; font-size:13px;
+}
+td.input-fields {
+   padding-left: 0!important; padding-right: 0!important;
+}
+.left-head {
+    width: 100%;
+    text-align: center;
+}
+.right-head {
+    float: left;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+.right-head ul li {
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+}
+.modal-body-content {
+    padding-top: 10px;
+}
+.modal-content {
+    padding: 10px;}
+
+	#login-modal .modal-content {
+    width: 305px;}
+
+.modal-body-content a.nav-link {
+    font-size: 12px;
+    padding: 8px 0px;   border-top-right-radius: 30px 80px;
+}
+
+
+footer {
+    text-align: center;
+}
+
+
+.input-fields select {
+    padding: 5px 28px 5px 5px;}
+
+.input-fields input {
+    padding: 5px 5px; font-size:13px;}
+
+.modal-body-content #tabsJustified1 li.nav-item {
+    width: 50%;
+    margin: 2px 0;
+}
+.eco-investment-div tr td:first-child {
+    width: 53%;
+    display: block;
+    float: left;
+}
+.eco-investment-div tr td:nth-child(2) {
+    width: 47%;
+    display: block;
+    float: left;
+}
+.eco-investment-div tr td:nth-child(3) {
+  width: 53%;
+    display: block;
+    float: left;
+}
+.eco-investment-div tr td:last-child {
+    width: 47%;
+    display: block;
+    float: left;
+}
+.eco-investment-div .input-label i {
+    font-size: 18px;
+    padding: 0 0px;
+}
+.eco-maintenance-div tr td:first-child {
+    width: 43%;
+
+}
+.eco-maintenance-div tr td:last-child {
+    width: 37%;
+}
+.eco-maintenance-div .input-label i {
+    font-size: 18px;
+    padding: 0 0px;
+}
+
+
+.calci-div {
+    right: 20px;
+}
+
+#tabsJustifiedlast li.nav-item {
+    width: 100%;
+    margin: 1px 0;
+}
+#tabsJustifiedlast li.nav-item img.modal-openn {
+    left: 4px;
+    top: 5px;
+}
+
+.chiller-div li {
+    font-size: 21px;
+    padding: 0 3px;
+    text-align: center;
+}
+.modal-body-content #tabsJustifiedlast a.nav-link {
+    padding: 10px 14px;
+}
+.recooling-system-data-div li {
+    font-size: 20px;
+    line-height: 20px;
+}
+
+
+.heating-load-general-div td.input-label {
+    width: 38%;
+}
+.heating-load-general-div td.input-help-label {
+    padding-left: 0;
+    width: 12%;
+}
+.heating-load-general-div .input-fields ul li:first-child {
+    width: 100%;
+}
+.heating-load-general-div .input-fields ul li:nth-child(2) {
+    width: 100%; padding-top: 3px;
+
+}
+.heating-load-general-div .input-fields ul li:last-child {
+    width: 100%;
+    position: relative;
+}
+.heating-load-general-div .input-fields li i {
+    right: 8px;
+    top: 9px;
+}
+.project-specifications li.nav-item:first-child {
+    width: 34%!important;
+}
+.project-specifications li.nav-item:last-child {
+    width: 66%!important;
+}
+.option-general-div td.input-help-label {
+    width: 12%;
+}
+.personal-data-div td.input-help-label {
+    width: 12%;
+}
+.footer-section4 {
+    margin-top: 0px;
+}
+}
 .modal-backdrop.show{
     opacity: 0;
 }

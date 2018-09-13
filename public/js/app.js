@@ -14135,7 +14135,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(19);
-module.exports = __webpack_require__(60);
+module.exports = __webpack_require__(61);
 
 
 /***/ }),
@@ -55823,6 +55823,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Tiles__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ChillerModal__ = __webpack_require__(60);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -55837,16 +55838,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var Adcalc = function (_Component) {
     _inherits(Adcalc, _Component);
 
-    function Adcalc() {
+    function Adcalc(props) {
+        var _this$state;
+
         _classCallCheck(this, Adcalc);
 
-        return _possibleConstructorReturn(this, (Adcalc.__proto__ || Object.getPrototypeOf(Adcalc)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Adcalc.__proto__ || Object.getPrototypeOf(Adcalc)).call(this, props));
+
+        _this.state = (_this$state = {
+            EconomicStateChange: 'no',
+            generalStateChange: 'no',
+            OptionsStateChange: 'no',
+            HeatSourceStateChange: 'no',
+            HeatingLoadProfileStateChange: 'no'
+        }, _defineProperty(_this$state, 'generalStateChange', 'no'), _defineProperty(_this$state, 'compressionChilerStateChange', 'no'), _this$state);
+        _this.handleLanguage = _this.handleLanguage.bind(_this);
+        return _this;
     }
 
     _createClass(Adcalc, [{
+        key: 'handleLanguage',
+        value: function handleLanguage(state) {
+            this.setState({ compressionChilerStateChange: state });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _React$createElement, _React$createElement2, _React$createElement3, _React$createElement4, _React$createElement5, _React$createElement6, _React$createElement7, _React$createElement8;
@@ -55866,7 +55885,8 @@ var Adcalc = function (_Component) {
                     priceLst: 'no',
                     priceData: {},
                     rightpriceList: 'no',
-                    rightpriceListeData: {}
+                    rightpriceListeData: {},
+                    modalId: '#compression-chiller'
                 },
                 Economic: {
                     title: 'Economic Data',
@@ -55882,7 +55902,8 @@ var Adcalc = function (_Component) {
                     priceLst: 'no',
                     priceData: {},
                     rightpriceList: 'no',
-                    rightpriceListeData: {}
+                    rightpriceListeData: {},
+                    modalId: '#compression-chiller'
                 },
                 Options: {
                     title: 'Options',
@@ -55898,7 +55919,8 @@ var Adcalc = function (_Component) {
                     priceLst: 'no',
                     priceData: {},
                     rightpriceList: 'no',
-                    rightpriceListeData: {}
+                    rightpriceListeData: {},
+                    modalId: '#compression-chiller'
                 },
                 HeatSource: {
                     title: 'Heat Source',
@@ -55914,7 +55936,8 @@ var Adcalc = function (_Component) {
                     priceLst: 'no',
                     priceData: {},
                     rightpriceList: 'no',
-                    rightpriceListeData: {}
+                    rightpriceListeData: {},
+                    modalId: '#compression-chiller'
                 },
                 HeatingLoadProfile: {
                     title: 'Heating Load Profile',
@@ -55930,7 +55953,8 @@ var Adcalc = function (_Component) {
                     priceLst: 'no',
                     priceData: {},
                     rightpriceList: 'no',
-                    rightpriceListeData: {}
+                    rightpriceListeData: {},
+                    modalId: '#compression-chiller'
                 },
                 CompressionChiller: {
                     title: 'Compression Chiller',
@@ -55946,7 +55970,8 @@ var Adcalc = function (_Component) {
                     priceLst: 'no',
                     priceData: {},
                     rightpriceList: 'no',
-                    rightpriceListeData: {}
+                    rightpriceListeData: {},
+                    modalId: '#compression-chiller'
                 },
                 CoolingLoadProfile: {
                     title: 'Cooling Load Profile',
@@ -55962,7 +55987,8 @@ var Adcalc = function (_Component) {
                     priceLst: 'no',
                     priceData: {},
                     rightpriceList: 'no',
-                    rightpriceListeData: {}
+                    rightpriceListeData: {},
+                    modalId: '#compression-chiller'
                 },
                 FahrenheitSystem: {
                     title: 'Fahrenheit System',
@@ -55978,10 +56004,12 @@ var Adcalc = function (_Component) {
                     priceLst: 'no',
                     priceData: {},
                     rightpriceList: 'no',
-                    rightpriceListeData: {}
+                    rightpriceListeData: {},
+                    modalId: '#compression-chiller'
                 }
 
             };
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'bootom-data-box' },
@@ -55994,19 +56022,19 @@ var Adcalc = function (_Component) {
                         edit: tiles.edit,
                         mainclass: tiles.general.mainClass,
                         tileCls: tiles.general.tileCls
-                    }, _defineProperty(_React$createElement, 'required', tiles.general.required), _defineProperty(_React$createElement, 'edit', tiles.general.edit), _defineProperty(_React$createElement, 'editCls', tiles.general.editCls), _defineProperty(_React$createElement, 'editIcon', tiles.general.editIcon), _defineProperty(_React$createElement, 'add', tiles.general.add), _defineProperty(_React$createElement, 'hoverText', tiles.general.hoverText), _defineProperty(_React$createElement, 'hoverCls', tiles.general.hoverCls), _defineProperty(_React$createElement, 'priceLst', tiles.general.priceLst), _defineProperty(_React$createElement, 'priceData', tiles.general.priceData), _defineProperty(_React$createElement, 'rightpriceList', tiles.general.rightpriceList), _defineProperty(_React$createElement, 'rightpriceListeData', tiles.general.rightpriceListeData), _React$createElement)),
+                    }, _defineProperty(_React$createElement, 'required', tiles.general.required), _defineProperty(_React$createElement, 'edit', tiles.general.edit), _defineProperty(_React$createElement, 'editCls', tiles.general.editCls), _defineProperty(_React$createElement, 'editIcon', tiles.general.editIcon), _defineProperty(_React$createElement, 'add', tiles.general.add), _defineProperty(_React$createElement, 'hoverText', tiles.general.hoverText), _defineProperty(_React$createElement, 'hoverCls', tiles.general.hoverCls), _defineProperty(_React$createElement, 'priceLst', tiles.general.priceLst), _defineProperty(_React$createElement, 'priceData', tiles.general.priceData), _defineProperty(_React$createElement, 'rightpriceList', tiles.general.rightpriceList), _defineProperty(_React$createElement, 'rightpriceListeData', tiles.general.rightpriceListeData), _defineProperty(_React$createElement, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement, 'dataChange', this.state.generalStateChange), _React$createElement)),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement2 = {
                         title: tiles.Economic.title,
                         required: tiles.Economic.required,
                         edit: tiles.Economic.edit,
                         mainclass: tiles.Economic.mainClass,
-                        tileCls: tiles.Economic.tileCls }, _defineProperty(_React$createElement2, 'required', tiles.Economic.required), _defineProperty(_React$createElement2, 'edit', tiles.Economic.edit), _defineProperty(_React$createElement2, 'editCls', tiles.Economic.editCls), _defineProperty(_React$createElement2, 'editIcon', tiles.Economic.editIcon), _defineProperty(_React$createElement2, 'add', tiles.Economic.add), _defineProperty(_React$createElement2, 'hoverText', tiles.Economic.hoverText), _defineProperty(_React$createElement2, 'hoverCls', tiles.Economic.hoverCls), _defineProperty(_React$createElement2, 'priceLst', tiles.Economic.priceLst), _defineProperty(_React$createElement2, 'priceData', tiles.Economic.priceData), _defineProperty(_React$createElement2, 'rightpriceList', tiles.Economic.rightpriceList), _defineProperty(_React$createElement2, 'rightpriceListeData', tiles.Economic.rightpriceListeData), _React$createElement2)),
+                        tileCls: tiles.Economic.tileCls }, _defineProperty(_React$createElement2, 'required', tiles.Economic.required), _defineProperty(_React$createElement2, 'edit', tiles.Economic.edit), _defineProperty(_React$createElement2, 'editCls', tiles.Economic.editCls), _defineProperty(_React$createElement2, 'editIcon', tiles.Economic.editIcon), _defineProperty(_React$createElement2, 'add', tiles.Economic.add), _defineProperty(_React$createElement2, 'hoverText', tiles.Economic.hoverText), _defineProperty(_React$createElement2, 'hoverCls', tiles.Economic.hoverCls), _defineProperty(_React$createElement2, 'priceLst', tiles.Economic.priceLst), _defineProperty(_React$createElement2, 'priceData', tiles.Economic.priceData), _defineProperty(_React$createElement2, 'rightpriceList', tiles.Economic.rightpriceList), _defineProperty(_React$createElement2, 'rightpriceListeData', tiles.Economic.rightpriceListeData), _defineProperty(_React$createElement2, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement2, 'dataChange', this.state.HeatSourceStateChange), _React$createElement2)),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement3 = {
                         title: tiles.Options.title,
                         required: tiles.Options.required,
                         edit: tiles.Options.edit,
                         mainclass: tiles.Options.mainClass,
-                        tileCls: tiles.Options.tileCls }, _defineProperty(_React$createElement3, 'required', tiles.Options.required), _defineProperty(_React$createElement3, 'edit', tiles.Options.edit), _defineProperty(_React$createElement3, 'editCls', tiles.Options.editCls), _defineProperty(_React$createElement3, 'editIcon', tiles.Options.editIcon), _defineProperty(_React$createElement3, 'add', tiles.Options.add), _defineProperty(_React$createElement3, 'hoverText', tiles.Options.hoverText), _defineProperty(_React$createElement3, 'hoverCls', tiles.Options.hoverCls), _defineProperty(_React$createElement3, 'priceLst', tiles.Options.priceLst), _defineProperty(_React$createElement3, 'priceData', tiles.Options.priceData), _defineProperty(_React$createElement3, 'rightpriceList', tiles.Options.rightpriceList), _defineProperty(_React$createElement3, 'rightpriceListeData', tiles.Options.rightpriceListeData), _React$createElement3))
+                        tileCls: tiles.Options.tileCls }, _defineProperty(_React$createElement3, 'required', tiles.Options.required), _defineProperty(_React$createElement3, 'edit', tiles.Options.edit), _defineProperty(_React$createElement3, 'editCls', tiles.Options.editCls), _defineProperty(_React$createElement3, 'editIcon', tiles.Options.editIcon), _defineProperty(_React$createElement3, 'add', tiles.Options.add), _defineProperty(_React$createElement3, 'hoverText', tiles.Options.hoverText), _defineProperty(_React$createElement3, 'hoverCls', tiles.Options.hoverCls), _defineProperty(_React$createElement3, 'priceLst', tiles.Options.priceLst), _defineProperty(_React$createElement3, 'priceData', tiles.Options.priceData), _defineProperty(_React$createElement3, 'rightpriceList', tiles.Options.rightpriceList), _defineProperty(_React$createElement3, 'rightpriceListeData', tiles.Options.rightpriceListeData), _defineProperty(_React$createElement3, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement3, 'dataChange', this.state.HeatSourceStateChange), _React$createElement3))
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
@@ -56021,12 +56049,12 @@ var Adcalc = function (_Component) {
                                 required: tiles.HeatSource.required,
                                 edit: tiles.HeatSource.edit,
                                 mainclass: tiles.HeatSource.mainClass,
-                                tileCls: tiles.HeatSource.tileCls }, _defineProperty(_React$createElement4, 'required', tiles.HeatSource.required), _defineProperty(_React$createElement4, 'edit', tiles.HeatSource.edit), _defineProperty(_React$createElement4, 'editCls', tiles.HeatSource.editCls), _defineProperty(_React$createElement4, 'editIcon', tiles.HeatSource.editIcon), _defineProperty(_React$createElement4, 'add', tiles.HeatSource.add), _defineProperty(_React$createElement4, 'hoverText', tiles.HeatSource.hoverText), _defineProperty(_React$createElement4, 'hoverCls', tiles.HeatSource.hoverCls), _defineProperty(_React$createElement4, 'priceLst', tiles.HeatSource.priceLst), _defineProperty(_React$createElement4, 'priceData', tiles.HeatSource.priceData), _defineProperty(_React$createElement4, 'rightpriceList', tiles.HeatSource.rightpriceList), _defineProperty(_React$createElement4, 'rightpriceListeData', tiles.HeatSource.rightpriceListeData), _React$createElement4)),
+                                tileCls: tiles.HeatSource.tileCls }, _defineProperty(_React$createElement4, 'required', tiles.HeatSource.required), _defineProperty(_React$createElement4, 'edit', tiles.HeatSource.edit), _defineProperty(_React$createElement4, 'editCls', tiles.HeatSource.editCls), _defineProperty(_React$createElement4, 'editIcon', tiles.HeatSource.editIcon), _defineProperty(_React$createElement4, 'add', tiles.HeatSource.add), _defineProperty(_React$createElement4, 'hoverText', tiles.HeatSource.hoverText), _defineProperty(_React$createElement4, 'hoverCls', tiles.HeatSource.hoverCls), _defineProperty(_React$createElement4, 'priceLst', tiles.HeatSource.priceLst), _defineProperty(_React$createElement4, 'priceData', tiles.HeatSource.priceData), _defineProperty(_React$createElement4, 'rightpriceList', tiles.HeatSource.rightpriceList), _defineProperty(_React$createElement4, 'rightpriceListeData', tiles.HeatSource.rightpriceListeData), _defineProperty(_React$createElement4, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement4, 'dataChange', this.state.HeatSourceStateChange), _React$createElement4)),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement5 = { title: tiles.HeatingLoadProfile.title,
                                 required: tiles.HeatingLoadProfile.required,
                                 edit: tiles.HeatingLoadProfile.edit,
                                 mainclass: tiles.HeatingLoadProfile.mainClass,
-                                tileCls: tiles.HeatingLoadProfile.tileCls }, _defineProperty(_React$createElement5, 'required', tiles.HeatingLoadProfile.required), _defineProperty(_React$createElement5, 'edit', tiles.HeatingLoadProfile.edit), _defineProperty(_React$createElement5, 'editCls', tiles.HeatingLoadProfile.editCls), _defineProperty(_React$createElement5, 'editIcon', tiles.HeatingLoadProfile.editIcon), _defineProperty(_React$createElement5, 'add', tiles.HeatingLoadProfile.add), _defineProperty(_React$createElement5, 'hoverText', tiles.HeatingLoadProfile.hoverText), _defineProperty(_React$createElement5, 'hoverCls', tiles.HeatingLoadProfile.hoverCls), _defineProperty(_React$createElement5, 'priceLst', tiles.HeatingLoadProfile.priceLst), _defineProperty(_React$createElement5, 'priceData', tiles.HeatingLoadProfile.priceData), _defineProperty(_React$createElement5, 'rightpriceList', tiles.HeatingLoadProfile.rightpriceList), _defineProperty(_React$createElement5, 'rightpriceListeData', tiles.HeatingLoadProfile.rightpriceListeData), _React$createElement5))
+                                tileCls: tiles.HeatingLoadProfile.tileCls }, _defineProperty(_React$createElement5, 'required', tiles.HeatingLoadProfile.required), _defineProperty(_React$createElement5, 'edit', tiles.HeatingLoadProfile.edit), _defineProperty(_React$createElement5, 'editCls', tiles.HeatingLoadProfile.editCls), _defineProperty(_React$createElement5, 'editIcon', tiles.HeatingLoadProfile.editIcon), _defineProperty(_React$createElement5, 'add', tiles.HeatingLoadProfile.add), _defineProperty(_React$createElement5, 'hoverText', tiles.HeatingLoadProfile.hoverText), _defineProperty(_React$createElement5, 'hoverCls', tiles.HeatingLoadProfile.hoverCls), _defineProperty(_React$createElement5, 'priceLst', tiles.HeatingLoadProfile.priceLst), _defineProperty(_React$createElement5, 'priceData', tiles.HeatingLoadProfile.priceData), _defineProperty(_React$createElement5, 'rightpriceList', tiles.HeatingLoadProfile.rightpriceList), _defineProperty(_React$createElement5, 'rightpriceListeData', tiles.HeatingLoadProfile.rightpriceListeData), _defineProperty(_React$createElement5, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement5, 'dataChange', this.state.HeatSourceStateChange), _React$createElement5))
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
@@ -56035,20 +56063,21 @@ var Adcalc = function (_Component) {
                                 required: tiles.CompressionChiller.required,
                                 edit: tiles.CompressionChiller.edit,
                                 mainclass: tiles.CompressionChiller.mainClass,
-                                tileCls: tiles.CompressionChiller.tileCls }, _defineProperty(_React$createElement6, 'required', tiles.CompressionChiller.required), _defineProperty(_React$createElement6, 'edit', tiles.CompressionChiller.edit), _defineProperty(_React$createElement6, 'editCls', tiles.CompressionChiller.editCls), _defineProperty(_React$createElement6, 'editIcon', tiles.CompressionChiller.editIcon), _defineProperty(_React$createElement6, 'add', tiles.CompressionChiller.add), _defineProperty(_React$createElement6, 'hoverText', tiles.CompressionChiller.hoverText), _defineProperty(_React$createElement6, 'hoverCls', tiles.CompressionChiller.hoverCls), _defineProperty(_React$createElement6, 'priceLst', tiles.CompressionChiller.priceLst), _defineProperty(_React$createElement6, 'priceData', tiles.CompressionChiller.priceData), _defineProperty(_React$createElement6, 'rightpriceList', tiles.CompressionChiller.rightpriceList), _defineProperty(_React$createElement6, 'rightpriceListeData', tiles.CompressionChiller.rightpriceListeData), _React$createElement6)),
+                                tileCls: tiles.CompressionChiller.tileCls }, _defineProperty(_React$createElement6, 'required', tiles.CompressionChiller.required), _defineProperty(_React$createElement6, 'edit', tiles.CompressionChiller.edit), _defineProperty(_React$createElement6, 'editCls', tiles.CompressionChiller.editCls), _defineProperty(_React$createElement6, 'editIcon', tiles.CompressionChiller.editIcon), _defineProperty(_React$createElement6, 'add', tiles.CompressionChiller.add), _defineProperty(_React$createElement6, 'hoverText', tiles.CompressionChiller.hoverText), _defineProperty(_React$createElement6, 'hoverCls', tiles.CompressionChiller.hoverCls), _defineProperty(_React$createElement6, 'priceLst', tiles.CompressionChiller.priceLst), _defineProperty(_React$createElement6, 'priceData', tiles.CompressionChiller.priceData), _defineProperty(_React$createElement6, 'rightpriceList', tiles.CompressionChiller.rightpriceList), _defineProperty(_React$createElement6, 'rightpriceListeData', tiles.CompressionChiller.rightpriceListeData), _defineProperty(_React$createElement6, 'modalId', tiles.CompressionChiller.modalId), _defineProperty(_React$createElement6, 'dataChange', this.state.compressionChilerStateChange), _React$createElement6)),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement7 = { title: tiles.CoolingLoadProfile.title,
                                 required: tiles.CoolingLoadProfile.required,
                                 edit: tiles.CoolingLoadProfile.edit,
                                 mainclass: tiles.CoolingLoadProfile.mainClass,
-                                tileCls: tiles.CoolingLoadProfile.tileCls }, _defineProperty(_React$createElement7, 'required', tiles.CoolingLoadProfile.required), _defineProperty(_React$createElement7, 'edit', tiles.CoolingLoadProfile.edit), _defineProperty(_React$createElement7, 'editCls', tiles.CoolingLoadProfile.editCls), _defineProperty(_React$createElement7, 'editIcon', tiles.CoolingLoadProfile.editIcon), _defineProperty(_React$createElement7, 'add', tiles.CoolingLoadProfile.add), _defineProperty(_React$createElement7, 'hoverText', tiles.CoolingLoadProfile.hoverText), _defineProperty(_React$createElement7, 'hoverCls', tiles.CoolingLoadProfile.hoverCls), _defineProperty(_React$createElement7, 'priceLst', tiles.CoolingLoadProfile.priceLst), _defineProperty(_React$createElement7, 'priceData', tiles.CoolingLoadProfile.priceData), _defineProperty(_React$createElement7, 'rightpriceList', tiles.CoolingLoadProfile.rightpriceList), _defineProperty(_React$createElement7, 'rightpriceListeData', tiles.CoolingLoadProfile.rightpriceListeData), _React$createElement7))
+                                tileCls: tiles.CoolingLoadProfile.tileCls }, _defineProperty(_React$createElement7, 'required', tiles.CoolingLoadProfile.required), _defineProperty(_React$createElement7, 'edit', tiles.CoolingLoadProfile.edit), _defineProperty(_React$createElement7, 'editCls', tiles.CoolingLoadProfile.editCls), _defineProperty(_React$createElement7, 'editIcon', tiles.CoolingLoadProfile.editIcon), _defineProperty(_React$createElement7, 'add', tiles.CoolingLoadProfile.add), _defineProperty(_React$createElement7, 'hoverText', tiles.CoolingLoadProfile.hoverText), _defineProperty(_React$createElement7, 'hoverCls', tiles.CoolingLoadProfile.hoverCls), _defineProperty(_React$createElement7, 'priceLst', tiles.CoolingLoadProfile.priceLst), _defineProperty(_React$createElement7, 'priceData', tiles.CoolingLoadProfile.priceData), _defineProperty(_React$createElement7, 'rightpriceList', tiles.CoolingLoadProfile.rightpriceList), _defineProperty(_React$createElement7, 'rightpriceListeData', tiles.CoolingLoadProfile.rightpriceListeData), _defineProperty(_React$createElement7, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement7, 'dataChange', this.state.HeatSourceStateChange), _React$createElement7))
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement8 = { title: tiles.FahrenheitSystem.title,
                         required: tiles.FahrenheitSystem.required,
                         edit: tiles.FahrenheitSystem.edit,
                         mainclass: tiles.FahrenheitSystem.mainClass,
-                        tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _React$createElement8))
-                )
+                        tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.HeatSourceStateChange), _React$createElement8))
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ChillerModal__["a" /* ChillerModal */], { role: 'expert', onSelectLanguage: this.handleLanguage })
             );
         }
     }]);
@@ -56089,33 +56118,41 @@ var Tiles = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
-        _this.state = {};
+        _this.state = {
+            compressionChiller: [],
+            generalInfo: []
+        };
+        _this.changeView = _this.changeView.bind(_this);
         return _this;
     }
 
     _createClass(Tiles, [{
+        key: "changeView",
+        value: function changeView(tile) {
+            console.log(tile);
+        }
+    }, {
         key: "render",
         value: function render() {
             var priceFullList,
                 pricelist,
                 requiredMsg = "";
-
-            if (this.props.priceList == "yes") {
+            if (this.props.dataChange == "yes") {
                 var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "ul",
-                    { className: "price-listt" },
+                    { "class": "price-listt" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "li",
                         null,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "p",
                             null,
-                            "Re-cooling Type"
+                            "Cooling Capacity"
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "h3",
                             null,
-                            "DRY"
+                            "100.0 kW"
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -56124,17 +56161,76 @@ var Tiles = function (_React$Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "p",
                             null,
-                            "Free cooling"
+                            "Number of Compressors"
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "h3",
                             null,
-                            "YES ",
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "span",
-                                null,
-                                "(chilled water temperature)"
-                            )
+                            "3"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Temperature"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
+                            " 6\xB0C"
+                        )
+                    )
+                );
+            }
+            if (this.props.priceList == "yes") {
+                var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "ul",
+                    { "class": "price-listt" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Cooling Capacity"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "100.0 kW"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Number of Compressors"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "3"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Temperature"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
+                            " 6\xB0C"
                         )
                     )
                 );
@@ -56213,14 +56309,14 @@ var Tiles = function (_React$Component) {
             if (this.props.required == "yes") {
                 var requiredMsg = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "h5",
-                    { "class": "input-required" },
+                    { className: "input-required" },
                     "An input is required"
                 );
             }
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
-                { className: this.props.mainclass },
+                { className: this.props.mainclass, onMouseEnter: this.changeView(this) },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: this.props.tileCls },
@@ -56242,7 +56338,7 @@ var Tiles = function (_React$Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "div",
                             { className: this.props.editCls },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.editIcon, alt: "" })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.editIcon, alt: "", "data-toggle": "modal", "data-backdrop": "false", "data-target": this.props.modalId })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "p",
@@ -56279,6 +56375,500 @@ Tiles.defaultProps = {
 
 /***/ }),
 /* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChillerModal; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var ChillerModal = function (_React$Component) {
+   _inherits(ChillerModal, _React$Component);
+
+   function ChillerModal(props) {
+      _classCallCheck(this, ChillerModal);
+
+      var _this = _possibleConstructorReturn(this, (ChillerModal.__proto__ || Object.getPrototypeOf(ChillerModal)).call(this, props));
+
+      _this.state = { compressionChiler: '', role: 'user' };
+      _this.handleSubmit = _this.handleSubmit.bind(_this);
+
+      return _this;
+   }
+
+   _createClass(ChillerModal, [{
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+         jQuery(".help-toggle").click(function () {
+            jQuery(".input-help-label").toggle();
+         });
+      }
+   }, {
+      key: 'handleLangChange',
+      value: function handleLangChange() {
+         this.props.onSelectLanguage("yes");
+      }
+   }, {
+      key: 'handleSubmit',
+      value: function handleSubmit(e) {
+         var that = this;
+         e.preventDefault();
+         var refrigerant = $("#compression-chiller-form").find("select[name=refrigerant]").val();
+         var manufacturer = $("#compression-chiller-form").find("select[name=manufacturer]").val();
+         var compressor = $("#compression-chiller-form").find("select[name=compressor]").val();
+
+         fetch('/adcalc/storeCompressionChiller', {
+            method: 'POST',
+            headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+               refrigerant: refrigerant,
+               manufacturer: manufacturer,
+               compressor: compressor
+            })
+         }).then(function (a) {
+            return a.json();
+         }).then(function (data) {
+            $("#compression-chiller-form").find('.invalid-feedback').hide();
+            jQuery.each(data.errors, function (key, value) {
+               $("#compression-chiller-form").find('#' + value).siblings('.invalid-feedback').show();
+            });
+            if (typeof data.errors == "undefined") {
+               that.setState({
+                  compressionChiler: $('#compression-chiller-form').serializeArray()
+               });
+               that.handleLangChange();
+               compressionChiller.push($('#compression-chiller-form').serializeArray());
+               $("#compression-chiller").modal("hide");
+            }
+         }).catch(function (err) {
+            console.log(err);
+         });
+      }
+   }, {
+      key: 'render',
+      value: function render() {
+         if (this.state.role == "expert") {
+            var expertRoleHtml = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               'li',
+               { 'class': 'nav-item' },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'a',
+                  { href: '', 'data-target': '#compression-calculation-data', 'data-toggle': 'tab', 'class': 'nav-link' },
+                  'CALCULATION DATA'
+               )
+            );
+         }
+
+         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { 'class': 'modal ', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'compression-chiller' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               'form',
+               { onSubmit: this.handleSubmit },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'div',
+                  { 'class': 'modal-content' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     'div',
+                     { 'class': 'modal-heading' },
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { 'class': 'left-head' },
+                        'Compression Chillers'
+                     ),
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { 'class': 'right-head' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           'ul',
+                           { 'class': 'list-inline' },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'li',
+                              { 'class': 'help-toggle' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-icon.png', alt: '' })
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'li',
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'image', src: 'images/verifie-icon.png', alt: 'Submit' })
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'li',
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 'span',
+                                 { 'class': 'close close_multi' },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/cancle-icon.png', alt: '', 'class': 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' })
+                              )
+                           )
+                        )
+                     )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     'div',
+                     { 'class': 'modal-body-content' },
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'ul',
+                        { id: 'tabsJustified2', 'class': 'nav nav-tabs' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           'li',
+                           { 'class': 'nav-item' },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'a',
+                              { href: '', 'data-target': '#compression-technical-data', 'data-toggle': 'tab', 'class': 'nav-link small active' },
+                              'TECHNICAL DATA'
+                           )
+                        ),
+                        expertRoleHtml
+                     ),
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { id: 'tabsJustifiedContent2', 'class': 'tab-content' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           'div',
+                           { id: 'compression-technical-data', 'class': 'tab-pane fade  active show' },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'div',
+                              { 'class': 'heating-load-general-div' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 'div',
+                                 { 'class': 'table-responsive' },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'form',
+                                    { action: '', id: 'compression-chiller-form' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', id: '_token', name: '_token', value: '{{ csrf_token() }}' }),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       'table',
+                                       { 'class': 'table' },
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-label' },
+                                             ' Name: '
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Project number explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Chiller 1' })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-label' },
+                                             'Refrigerant:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'select',
+                                                { required: 'required', id: 'refrigerant', name: 'refrigerant', 'class': 'required-field' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: '' },
+                                                   'Select Refrigerant'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'R134a' },
+                                                   'R134a'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'option1' },
+                                                   'option1'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'option2' },
+                                                   'option2'
+                                                )
+                                             ),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { 'class': 'invalid-feedback', role: 'alert' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'strong',
+                                                   null,
+                                                   'Required field'
+                                                )
+                                             )
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-label' },
+                                             'Manufacturer:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'select',
+                                                { required: 'required', id: 'manufacturer', name: 'manufacturer', 'class': 'required-field' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: '' },
+                                                   'Select Manufacturer'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'unknown' },
+                                                   'unknown'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'option1' },
+                                                   'option1'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'option2' },
+                                                   'option2'
+                                                )
+                                             ),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { 'class': 'invalid-feedback', role: 'alert' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'strong',
+                                                   null,
+                                                   'Required field'
+                                                )
+                                             )
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-label' },
+                                             'Compressor type:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'select',
+                                                { required: 'required', id: 'compressor', name: 'compressor', 'class': 'required-field' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: '' },
+                                                   'Select Compressor type'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'unknown' },
+                                                   'unknown'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'option1' },
+                                                   'option1'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'option',
+                                                   { value: 'option2' },
+                                                   'option2'
+                                                )
+                                             ),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { 'class': 'invalid-feedback', role: 'alert' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'strong',
+                                                   null,
+                                                   'Required field'
+                                                )
+                                             )
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-label' },
+                                             'Chilled water temperature:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { 'class': 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '6 \xB0C' })
+                                          )
+                                       )
+                                    )
+                                 )
+                              )
+                           )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           'div',
+                           { id: 'compression-calculation-data', 'class': 'tab-pane fade expert' },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'div',
+                              { 'class': 'personal-data-div' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 'div',
+                                 { 'class': 'table-responsive' },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'table',
+                                    { 'class': 'table' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       'tr',
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-label' },
+                                          'Investment costs: '
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-help-label' },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'button',
+                                             { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Editor explanation/tip' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-fields' },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '\u20AC' }),
+                                          ' '
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       'tr',
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-label' },
+                                          'Discount:'
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-help-label' },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'button',
+                                             { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Company explanation/tip' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-fields' },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '%' })
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       'tr',
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-label' },
+                                          ' Maintenance costs: '
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-help-label' },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'button',
+                                             { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Address explanation/tip' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'td',
+                                          { 'class': 'input-fields' },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '\u20AC/a' }),
+                                          ' '
+                                       )
+                                    )
+                                 )
+                              )
+                           )
+                        )
+                     )
+                  )
+               )
+            )
+         );
+      }
+   }]);
+
+   return ChillerModal;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/***/ }),
+/* 61 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

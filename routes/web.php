@@ -116,3 +116,11 @@ Route::group(
          ->where('id', '[0-9]+')->middleware('auth');
 
 });
+Route::group(
+    [
+        'prefix' => 'adcalc',
+    ], function () {
+
+        Route::post('/storeCompressionChiller', 'AdcalcController@storeCompressionChiller');
+
+    });

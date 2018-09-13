@@ -1,9 +1,43 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {Tiles} from './Tiles'
+import {Tiles} from './Tiles';
+import {ChillerModal} from './ChillerModal';
 
 export default class Adcalc extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            EconomicStateChange: {
+                stateChange:'no'
+            },
+            generalStateChange: {
+                stateChange:'no'
+            },
+            OptionsStateChange: {
+                stateChange:'no'
+            },
+            HeatSourceStateChange: {
+                stateChange:'no'
+            },
+            HeatingLoadProfileStateChange: {
+                stateChange:'no'
+            },
+            generalStateChange: {
+                stateChange:'no'
+            },
+            compressionChilerStateChange:{
+                stateChange:'no',
+                content:""
+            }
+        };
+        this.handleLanguage = this.handleLanguage.bind(this);
+    }
+    handleLanguage (state)  {
+        this.setState({compressionChilerStateChange{
+            stateChange:state,
+            content:'yes changed'
+        },});
+    }
     render() {
         const tiles={
             general:{
@@ -25,6 +59,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
+                modalId:'#compression-chiller'
             },
             Economic:{
                 title:'Economic Data',
@@ -45,6 +80,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
+                modalId:'#compression-chiller'
             },
             Options:{
                 title:'Options',
@@ -65,6 +101,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
+                modalId:'#compression-chiller'
             },
             HeatSource:{
                 title:'Heat Source',
@@ -85,6 +122,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
+                modalId:'#compression-chiller'
             },
             HeatingLoadProfile:{
                 title:'Heating Load Profile',
@@ -105,6 +143,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
+                modalId:'#compression-chiller'
             },
             CompressionChiller:{
                 title:'Compression Chiller',
@@ -125,6 +164,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
+                modalId:'#compression-chiller'
             },
             CoolingLoadProfile:{
                 title:'Cooling Load Profile',
@@ -145,6 +185,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
+                modalId:'#compression-chiller'
             },
             FahrenheitSystem:{
                 title:'Fahrenheit System',
@@ -165,14 +206,17 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
+                modalId:'#compression-chiller'
             }
 
         }
+
         return (
+
             <div className="bootom-data-box">
                  <div className="row" >
 
-                    <Tiles
+                <Tiles
                 title={tiles.general.title}
                 required={tiles.general.required}
                 edit={tiles.edit}
@@ -188,7 +232,9 @@ export default class Adcalc extends Component {
                 priceLst={tiles.general.priceLst}
                 priceData={tiles.general.priceData}
                 rightpriceList={tiles.general.rightpriceList}
-                rightpriceListeData={tiles.general.rightpriceListeData} />
+                rightpriceListeData={tiles.general.rightpriceListeData}
+                modalId={tiles.general.modalId}
+                dataChange={this.state.generalStateChange}/>
                 <Tiles
                 title={tiles.Economic.title}
                 required={tiles.Economic.required}
@@ -204,7 +250,9 @@ export default class Adcalc extends Component {
                 priceLst={tiles.Economic.priceLst}
                 priceData={tiles.Economic.priceData}
                 rightpriceList={tiles.Economic.rightpriceList}
-                rightpriceListeData={tiles.Economic.rightpriceListeData}/>
+                rightpriceListeData={tiles.Economic.rightpriceListeData}
+                modalId={tiles.general.modalId}
+                dataChange={this.state.HeatSourceStateChange} />
                 <Tiles
                 title={tiles.Options.title}
                 required={tiles.Options.required}
@@ -220,7 +268,9 @@ export default class Adcalc extends Component {
                 priceLst={tiles.Options.priceLst}
                 priceData={tiles.Options.priceData}
                 rightpriceList={tiles.Options.rightpriceList}
-                rightpriceListeData={tiles.Options.rightpriceListeData}/>
+                rightpriceListeData={tiles.Options.rightpriceListeData}
+                modalId={tiles.general.modalId}
+                dataChange={this.state.HeatSourceStateChange}/>
                  </div>
                  <div className="row">
                     <div className="col-md-12 col-sm-12 col-12 col-lg-8 col-xl-8">
@@ -239,7 +289,10 @@ export default class Adcalc extends Component {
                         priceLst={tiles.HeatSource.priceLst}
                         priceData={tiles.HeatSource.priceData}
                         rightpriceList={tiles.HeatSource.rightpriceList}
-                        rightpriceListeData={tiles.HeatSource.rightpriceListeData}/>
+                        rightpriceListeData={tiles.HeatSource.rightpriceListeData}
+                        modalId={tiles.general.modalId}
+                dataChange={this.state.HeatSourceStateChange} />
+
                         <Tiles  title={tiles.HeatingLoadProfile.title}
                         required={tiles.HeatingLoadProfile.required}
                         edit={tiles.HeatingLoadProfile.edit}
@@ -254,7 +307,9 @@ export default class Adcalc extends Component {
                         priceLst={tiles.HeatingLoadProfile.priceLst}
                         priceData={tiles.HeatingLoadProfile.priceData}
                         rightpriceList={tiles.HeatingLoadProfile.rightpriceList}
-                        rightpriceListeData={tiles.HeatingLoadProfile.rightpriceListeData}/>
+                        rightpriceListeData={tiles.HeatingLoadProfile.rightpriceListeData}
+                        modalId={tiles.general.modalId}
+                dataChange={this.state.HeatSourceStateChange} />
                        </div>
                        <div className="row">
                         <Tiles  title={tiles.CompressionChiller.title}
@@ -271,7 +326,10 @@ export default class Adcalc extends Component {
                         priceLst={tiles.CompressionChiller.priceLst}
                         priceData={tiles.CompressionChiller.priceData}
                         rightpriceList={tiles.CompressionChiller.rightpriceList}
-                        rightpriceListeData={tiles.CompressionChiller.rightpriceListeData}/>
+                        rightpriceListeData={tiles.CompressionChiller.rightpriceListeData}
+                        modalId={tiles.CompressionChiller.modalId}
+                       dataChange={this.state.compressionChilerStateChange} />
+
                         <Tiles  title={tiles.CoolingLoadProfile.title}
                         required={tiles.CoolingLoadProfile.required}
                         edit={tiles.CoolingLoadProfile.edit}
@@ -286,7 +344,9 @@ export default class Adcalc extends Component {
                         priceLst={tiles.CoolingLoadProfile.priceLst}
                         priceData={tiles.CoolingLoadProfile.priceData}
                         rightpriceList={tiles.CoolingLoadProfile.rightpriceList}
-                        rightpriceListeData={tiles.CoolingLoadProfile.rightpriceListeData}/>
+                        rightpriceListeData={tiles.CoolingLoadProfile.rightpriceListeData}
+                        modalId={tiles.general.modalId}
+                        dataChange={this.state.HeatSourceStateChange}/>
                        </div>
                     </div>
                     <Tiles  title={tiles.FahrenheitSystem.title}
@@ -303,8 +363,11 @@ export default class Adcalc extends Component {
                 priceLst={tiles.FahrenheitSystem.priceLst}
                 priceData={tiles.FahrenheitSystem.priceData}
                 rightpriceList={tiles.FahrenheitSystem.rightpriceList}
-                rightpriceListeData={tiles.FahrenheitSystem.rightpriceListeData}/>
+                rightpriceListeData={tiles.FahrenheitSystem.rightpriceListeData}
+                modalId={tiles.general.modalId}
+                dataChange={this.state.HeatSourceStateChange}/>
                  </div>
+                 <ChillerModal role="expert" onSelectLanguage={this.handleLanguage}/>
               </div>
         );
     }
