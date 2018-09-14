@@ -56165,18 +56165,17 @@ var Tiles = function (_React$Component) {
                 }
                 jQuery(".scrollbar-macosx").scrollbar();
                 if (typeof $('.compressionTableBody')[0] != "undefined") {
+                    var that = this;
                     Sortable.create($('.compressionTableBody')[0], {
                         animation: 150,
                         scroll: true,
                         handle: '.drag-handler',
                         onEnd: function onEnd( /**Event*/evt) {
-                            var itemEl = evt.item; // dragged HTMLElement
-                            evt.to; // target list
-                            evt.from; // previous list
                             evt.oldIndex; // element's old index within old parent
-                            evt.newIndex; // element's new index within new parent
-                            console.log(itemEl);
-                            console.log(this.state.compressionChillerData[evt.oldIndex]);
+                            evt.newIndex; // element's new index within new parent=
+                            var tempKey = that.state.compressionChillerData[evt.oldIndex];
+                            that.state.compressionChillerData[evt.oldIndex] = that.state.compressionChillerData[evt.newIndex];
+                            that.state.compressionChillerData[evt.newIndex] = tempKey;
                         }
                     });
                 }

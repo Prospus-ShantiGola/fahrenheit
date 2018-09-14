@@ -25,6 +25,7 @@ export class Tiles extends React.Component {
         }
           jQuery(".scrollbar-macosx").scrollbar();
           if(typeof $('.compressionTableBody')[0] !="undefined"){
+              var that=this;
             Sortable.create(
                 $('.compressionTableBody')[0],
                 {
@@ -34,7 +35,9 @@ export class Tiles extends React.Component {
                 onEnd:function (/**Event*/evt) {
                     evt.oldIndex;  // element's old index within old parent
                     evt.newIndex;  // element's new index within new parent=
-                    console.log(this.state.compressionChillerData[evt.oldIndex]);
+                    var tempKey=that.state.compressionChillerData[evt.oldIndex];
+                    that.state.compressionChillerData[evt.oldIndex]=that.state.compressionChillerData[evt.newIndex];
+                    that.state.compressionChillerData[evt.newIndex]=tempKey;
                 }
                 }
                 );
