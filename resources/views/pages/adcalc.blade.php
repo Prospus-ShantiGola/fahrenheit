@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.scrollbar.js') }}" defer></script>
+    <script src="{{ asset('js/Sortable.js') }}" defer></script>
     <style>
         .hide{
             display: none;

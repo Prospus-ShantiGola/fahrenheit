@@ -4,13 +4,40 @@ export class Tiles extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            compressionChiller:[],
+            compressionChillerData:[],
             generalInfo:[]
                };
+        this.editRecord=this.editRecord.bind(this);
+        this.deleteRecord=this.deleteRecord.bind(this);
+    }
+    componentWillReceiveProps(nextProps){
+        console.log("componentWillReceiveProps",nextProps);
+        this.setState({
+            compressionChillerData: this.state.compressionChillerData.concat(nextProps.dataRecord)
+          })
+          jQuery(".scrollbar-macosx").scrollbar();
+          if(typeof $('.compressionTableBody')[0] !="undefined"){
+            Sortable.create(
+                $('.compressionTableBody')[0],
+                {
+                animation: 150,
+                scroll: true,
+                handle: '.drag-handler',
+                }
+                );
+          }
+
+    }
+    editRecord(eleM){
+        console.log("edit",eleM);
+    }
+    deleteRecord(eleM){
+        console.log("deleteRecord",eleM)
     }
 
     render() {
         console.log("tiles",this.props.dataRecord);
+
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.dataChange=="yes"){
             var pricelist=(
@@ -25,7 +52,7 @@ export class Tiles extends React.Component {
                                     </li>
                                     <li>
                                        <p>Temperature</p>
-                                       <h3><img src="images/degree-icon.png" alt="" /> 6°C</h3>
+                                       <h3><img src="images/degree-icon.png" alt="" /> {this.state.compressionChillerData[0].temperature}°C</h3>
                                     </li>
                 </ul>
             );
@@ -33,21 +60,25 @@ export class Tiles extends React.Component {
                 <div className="hover-list scrollbar-macosx">
                                        <div className="table-responsive">
                                           <table className="table">
-                                           <tbody className="heatsourcesTableBody">
-                                             <tr>
-                                                <th>
-                                                   Oven waste heat
-                                                   <ul className="list-inline">
-                                                      <li>120.30 kW
-                                                      </li>
-                                                      <li>	85°C </li>
-                                                   </ul>
-                                                </th>
-                                                <td><span className="edit-option"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                                                   <span className="delete-optionn"><i className="fa fa-trash-o" aria-hidden="true"></i></span>
-                                                   <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
-                                                </td>
-                                             </tr>
+                                           <tbody className="compressionTableBody">
+                                           {this.state.compressionChillerData.map((data,i) => (
+         <tr key={i}>
+         <th>
+         {data.chillername}
+            <ul className="list-inline">
+               <li>120.30 kW
+               </li>
+               <li>	{data.temperature}°C </li>
+            </ul>
+         </th>
+         <td><span className="edit-option" data-id={i} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editRecord(this)}></i></span>
+            <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" onClick={()=>this.deleteRecord(this)}></i></span>
+            <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+         </td>
+      </tr>
+        ))}
+
+
                                              </tbody>
                                           </table>
                                        </div>
@@ -96,6 +127,7 @@ export class Tiles extends React.Component {
         }
 
         return (
+
                 <div className={this.props.mainclass}>
                     <div className={this.props.tileCls}>
                         <h1>{this.props.title}</h1>

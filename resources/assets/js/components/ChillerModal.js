@@ -7,9 +7,8 @@ export class ChillerModal extends React.Component {
         super(props);
         this.state = {compressionChiler: '',role:'user'};
         this.handleSubmit = this.handleSubmit.bind(this);
-
-
       }
+
       componentDidMount(){
         jQuery(".help-toggle").click(function(){
             jQuery(".input-help-label").toggle();
@@ -104,6 +103,7 @@ export class ChillerModal extends React.Component {
                            <div className="table-responsive">
                                <form action="" id="compression-chiller-form">
                               <table className="table">
+                              <tbody>
                                  <tr>
                                     <td className="input-label"> Name:	</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
@@ -176,6 +176,7 @@ export class ChillerModal extends React.Component {
                                     </td>
                                     <td className="input-fields"><input type="text" placeholder="6 °C" name="temperature"/></td>
                                  </tr>
+                                 </tbody>
                               </table>
                              </form>
                            </div>
