@@ -15,8 +15,12 @@ export class ChillerModal extends React.Component {
             jQuery(".input-help-label").toggle();
         });
       }
-      handleLangChange () {
-        this.props.onSelectLanguage("yes");
+      handleLangChange (compressionChiler) {
+        var result={
+            compressionChiller:compressionChiler,
+            state:"yes"
+        }
+        this.props.onChillerSubmit(result);
      }
       handleSubmit(e){
         const that = this;
@@ -44,122 +48,133 @@ export class ChillerModal extends React.Component {
                             jQuery.each(data.errors, function(key, value){
                                 $("#compression-chiller-form").find('#'+value).siblings('.invalid-feedback').show();
                             });
+
                             if(typeof data.errors=="undefined"){
+                                var $form = $("#compression-chiller-form");
+                                var data = that.getFormData($form);
                                 that.setState({
-                                    compressionChiler:$('#compression-chiller-form').serializeArray()
+                                    compressionChiler:data
                                 })
-                                that.handleLangChange();
-                                compressionChiller.push($('#compression-chiller-form').serializeArray());
+                                that.handleLangChange(that.state.compressionChiler);
                                 $("#compression-chiller").modal("hide");
 
                             }
         })
         .catch((err) => {console.log(err)})
       }
+     getFormData($form){
+        var unindexed_array = $form.serializeArray();
+        var indexed_array = {};
+
+        $.map(unindexed_array, function(n, i){
+            indexed_array[n['name']] = n['value'];
+        });
+
+        return indexed_array;
+    }
 
     render() {
         if(this.state.role=="expert"){
-            var expertRoleHtml=<li class="nav-item"><a href="" data-target="#compression-calculation-data" data-toggle="tab" class="nav-link">CALCULATION DATA</a></li>;
+            var expertRoleHtml=<li className="nav-item"><a href="" data-target="#compression-calculation-data" data-toggle="tab" className="nav-link">CALCULATION DATA</a></li>;
         }
 
         return (
-            <div class="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-chiller">
+            <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-chiller">
             <form  onSubmit={this.handleSubmit}>
-            <div class="modal-content">
-               <div class="modal-heading">
-                  <div class="left-head">Compression Chillers</div>
-                  <div class="right-head">
-                     <ul class="list-inline">
-                        <li class="help-toggle"><img src="images/help-icon.png" alt="" /></li>
+            <div className="modal-content">
+               <div className="modal-heading">
+                  <div className="left-head">Compression Chillers</div>
+                  <div className="right-head">
+                     <ul className="list-inline">
+                        <li className="help-toggle"><img src="images/help-icon.png" alt="" /></li>
                         <li>
                          <input type="image" src="images/verifie-icon.png" alt="Submit" /></li>
-                        <li><span class="close close_multi"><img src="images/cancle-icon.png" alt="" class="close" data-dismiss="modal" aria-label="Close"/></span></li>
+                        <li><span className="close close_multi"><img src="images/cancle-icon.png" alt="" className="close" data-dismiss="modal" aria-label="Close"/></span></li>
                      </ul>
                   </div>
                </div>
-               <div class="modal-body-content">
-                  <ul id="tabsJustified2" class="nav nav-tabs">
-                     <li class="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" class="nav-link small active">TECHNICAL DATA</a></li>
+               <div className="modal-body-content">
+                  <ul id="tabsJustified2" className="nav nav-tabs">
+                     <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
                      {expertRoleHtml}
                   </ul>
-                  <div id="tabsJustifiedContent2" class="tab-content">
-                     <div id="compression-technical-data" class="tab-pane fade  active show">
-                        <div class="heating-load-general-div">
-                           <div class="table-responsive">
+                  <div id="tabsJustifiedContent2" className="tab-content">
+                     <div id="compression-technical-data" className="tab-pane fade  active show">
+                        <div className="heating-load-general-div">
+                           <div className="table-responsive">
                                <form action="" id="compression-chiller-form">
-                                     <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
-                              <table class="table">
+                              <table className="table">
                                  <tr>
-                                    <td class="input-label"> Name:	</td>
-                                    <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
+                                    <td className="input-label"> Name:	</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td class="input-fields"><input type="text" placeholder="Chiller 1" /></td>
+                                    <td className="input-fields"><input type="text" placeholder="Chiller 1"      /></td>
                                  </tr>
                                  <tr>
-                                    <td class="input-label">Refrigerant:</td>
-                                    <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
+                                    <td className="input-label">Refrigerant:</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td class="input-fields">
-                                       <select required="required" id="refrigerant" name="refrigerant" class="required-field">
+                                    <td className="input-fields">
+                                       <select required="required" id="refrigerant" name="refrigerant" className="required-field">
                                          <option value="">Select Refrigerant</option>
                                           <option value="R134a">R134a</option>
                                           <option value="option1">option1</option>
                                           <option value="option2">option2</option>
                                        </select>
-                                       <span class="invalid-feedback" role="alert">
+                                       <span className="invalid-feedback" role="alert">
                                              <strong>Required field</strong>
                                        </span>
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td class="input-label">Manufacturer:</td>
-                                    <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
+                                    <td className="input-label">Manufacturer:</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td class="input-fields">
-                                       <select required="required"  id="manufacturer" name="manufacturer" class="required-field">
+                                    <td className="input-fields">
+                                       <select required="required"  id="manufacturer" name="manufacturer" className="required-field">
                                           <option value="">Select Manufacturer</option>
                                           <option value="unknown">unknown</option>
                                           <option value="option1">option1</option>
                                           <option value="option2">option2</option>
                                        </select>
-                                       <span class="invalid-feedback" role="alert">
+                                       <span className="invalid-feedback" role="alert">
                                              <strong>Required field</strong>
                                        </span>
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td class="input-label">Compressor type:</td>
-                                    <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
+                                    <td className="input-label">Compressor type:</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td class="input-fields">
-                                       <select required="required"  id="compressor" name="compressor" class="required-field">
+                                    <td className="input-fields">
+                                       <select required="required"  id="compressor" name="compressor" className="required-field">
                                           <option value="">Select Compressor type</option>
                                           <option value="unknown">unknown</option>
                                           <option value="option1">option1</option>
                                           <option value="option2">option2</option>
                                        </select>
-                                       <span class="invalid-feedback" role="alert">
+                                       <span className="invalid-feedback" role="alert">
                                              <strong>Required field</strong>
                                        </span>
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td class="input-label">Chilled water
+                                    <td className="input-label">Chilled water
                                        temperature:
                                     </td>
-                                    <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td class="input-fields"><input type="text" placeholder="6 °C" /></td>
+                                    <td className="input-fields"><input type="text" placeholder="6 °C" name="temperature"/></td>
                                  </tr>
                               </table>
                              </form>
@@ -167,33 +182,33 @@ export class ChillerModal extends React.Component {
                         </div>
                      </div>
 
-                     <div id="compression-calculation-data" class="tab-pane fade expert">
-                        <div class="personal-data-div">
-                           <div class="table-responsive">
-                              <table class="table">
+                     <div id="compression-calculation-data" className="tab-pane fade expert">
+                        <div className="personal-data-div">
+                           <div className="table-responsive">
+                              <table className="table">
                                  <tr>
-                                    <td class="input-label">Investment costs:	</td>
-                                    <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
+                                    <td className="input-label">Investment costs:	</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td class="input-fields"><input type="text" placeholder="€" /> </td>
+                                    <td className="input-fields"><input type="text" placeholder="€" /> </td>
                                  </tr>
                                  <tr>
-                                    <td class="input-label">Discount:</td>
-                                    <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
+                                    <td className="input-label">Discount:</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td class="input-fields"><input type="text" placeholder="%" /></td>
+                                    <td className="input-fields"><input type="text" placeholder="%" /></td>
                                  </tr>
                                  <tr>
-                                    <td class="input-label"> Maintenance costs: </td>
-                                    <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
+                                    <td className="input-label"> Maintenance costs: </td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td class="input-fields"><input type="text" placeholder="€/a" /> </td>
+                                    <td className="input-fields"><input type="text" placeholder="€/a" /> </td>
                                  </tr>
                               </table>
                            </div>

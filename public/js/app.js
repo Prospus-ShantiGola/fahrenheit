@@ -55850,20 +55850,41 @@ var Adcalc = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Adcalc.__proto__ || Object.getPrototypeOf(Adcalc)).call(this, props));
 
         _this.state = (_this$state = {
-            EconomicStateChange: 'no',
-            generalStateChange: 'no',
-            OptionsStateChange: 'no',
-            HeatSourceStateChange: 'no',
-            HeatingLoadProfileStateChange: 'no'
-        }, _defineProperty(_this$state, 'generalStateChange', 'no'), _defineProperty(_this$state, 'compressionChilerStateChange', 'no'), _this$state);
-        _this.handleLanguage = _this.handleLanguage.bind(_this);
+            EconomicStateChange: {
+                stateChange: 'no'
+            },
+            generalStateChange: {
+                stateChange: 'no'
+            },
+            OptionsStateChange: {
+                stateChange: 'no'
+            },
+            HeatSourceStateChange: {
+                stateChange: 'no'
+            },
+            HeatingLoadProfileStateChange: {
+                stateChange: 'no'
+            }
+        }, _defineProperty(_this$state, 'generalStateChange', {
+            stateChange: 'no'
+        }), _defineProperty(_this$state, 'compressionChilerStateChange', {
+            stateChange: 'no',
+            content: "Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
+            chillerRecord: {}
+        }), _this$state);
+        _this.handleChillerForm = _this.handleChillerForm.bind(_this);
         return _this;
     }
 
     _createClass(Adcalc, [{
-        key: 'handleLanguage',
-        value: function handleLanguage(state) {
-            this.setState({ compressionChilerStateChange: state });
+        key: 'handleChillerForm',
+        value: function handleChillerForm(result) {
+            console.log(result.state);
+            this.setState({ compressionChilerStateChange: {
+                    stateChange: result.state,
+                    chillerRecord: result.compressionChiller
+                }
+            });
         }
     }, {
         key: 'render',
@@ -56063,7 +56084,7 @@ var Adcalc = function (_Component) {
                                 required: tiles.CompressionChiller.required,
                                 edit: tiles.CompressionChiller.edit,
                                 mainclass: tiles.CompressionChiller.mainClass,
-                                tileCls: tiles.CompressionChiller.tileCls }, _defineProperty(_React$createElement6, 'required', tiles.CompressionChiller.required), _defineProperty(_React$createElement6, 'edit', tiles.CompressionChiller.edit), _defineProperty(_React$createElement6, 'editCls', tiles.CompressionChiller.editCls), _defineProperty(_React$createElement6, 'editIcon', tiles.CompressionChiller.editIcon), _defineProperty(_React$createElement6, 'add', tiles.CompressionChiller.add), _defineProperty(_React$createElement6, 'hoverText', tiles.CompressionChiller.hoverText), _defineProperty(_React$createElement6, 'hoverCls', tiles.CompressionChiller.hoverCls), _defineProperty(_React$createElement6, 'priceLst', tiles.CompressionChiller.priceLst), _defineProperty(_React$createElement6, 'priceData', tiles.CompressionChiller.priceData), _defineProperty(_React$createElement6, 'rightpriceList', tiles.CompressionChiller.rightpriceList), _defineProperty(_React$createElement6, 'rightpriceListeData', tiles.CompressionChiller.rightpriceListeData), _defineProperty(_React$createElement6, 'modalId', tiles.CompressionChiller.modalId), _defineProperty(_React$createElement6, 'dataChange', this.state.compressionChilerStateChange), _React$createElement6)),
+                                tileCls: tiles.CompressionChiller.tileCls }, _defineProperty(_React$createElement6, 'required', tiles.CompressionChiller.required), _defineProperty(_React$createElement6, 'edit', tiles.CompressionChiller.edit), _defineProperty(_React$createElement6, 'editCls', tiles.CompressionChiller.editCls), _defineProperty(_React$createElement6, 'editIcon', tiles.CompressionChiller.editIcon), _defineProperty(_React$createElement6, 'add', tiles.CompressionChiller.add), _defineProperty(_React$createElement6, 'hoverText', this.state.compressionChilerStateChange.content), _defineProperty(_React$createElement6, 'hoverCls', tiles.CompressionChiller.hoverCls), _defineProperty(_React$createElement6, 'priceLst', tiles.CompressionChiller.priceLst), _defineProperty(_React$createElement6, 'priceData', tiles.CompressionChiller.priceData), _defineProperty(_React$createElement6, 'rightpriceList', tiles.CompressionChiller.rightpriceList), _defineProperty(_React$createElement6, 'rightpriceListeData', tiles.CompressionChiller.rightpriceListeData), _defineProperty(_React$createElement6, 'modalId', tiles.CompressionChiller.modalId), _defineProperty(_React$createElement6, 'dataChange', this.state.compressionChilerStateChange.stateChange), _defineProperty(_React$createElement6, 'dataRecord', this.state.compressionChilerStateChange.chillerRecord), _React$createElement6)),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement7 = { title: tiles.CoolingLoadProfile.title,
                                 required: tiles.CoolingLoadProfile.required,
                                 edit: tiles.CoolingLoadProfile.edit,
@@ -56077,7 +56098,7 @@ var Adcalc = function (_Component) {
                         mainclass: tiles.FahrenheitSystem.mainClass,
                         tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.HeatSourceStateChange), _React$createElement8))
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ChillerModal__["a" /* ChillerModal */], { role: 'expert', onSelectLanguage: this.handleLanguage })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ChillerModal__["a" /* ChillerModal */], { role: 'expert', onChillerSubmit: this.handleChillerForm })
             );
         }
     }]);
@@ -56111,266 +56132,294 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var Tiles = function (_React$Component) {
-    _inherits(Tiles, _React$Component);
+   _inherits(Tiles, _React$Component);
 
-    function Tiles(props) {
-        _classCallCheck(this, Tiles);
+   function Tiles(props) {
+      _classCallCheck(this, Tiles);
 
-        var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
+      var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
-        _this.state = {
-            compressionChiller: [],
-            generalInfo: []
-        };
-        _this.changeView = _this.changeView.bind(_this);
-        return _this;
-    }
+      _this.state = {
+         compressionChiller: [],
+         generalInfo: []
+      };
+      return _this;
+   }
 
-    _createClass(Tiles, [{
-        key: "changeView",
-        value: function changeView(tile) {
-            console.log(tile);
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            var priceFullList,
-                pricelist,
-                requiredMsg = "";
-            if (this.props.dataChange == "yes") {
-                var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "ul",
-                    { "class": "price-listt" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Cooling Capacity"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "100.0 kW"
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Number of Compressors"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "3"
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Temperature"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
-                            " 6\xB0C"
-                        )
-                    )
-                );
-            }
-            if (this.props.priceList == "yes") {
-                var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "ul",
-                    { "class": "price-listt" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Cooling Capacity"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "100.0 kW"
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Number of Compressors"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "3"
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Temperature"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
-                            " 6\xB0C"
-                        )
-                    )
-                );
-                var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "ul",
-                    { className: "price-listt" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Language"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "English"
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "BAFA 2018"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "Calculate"
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Re-cooling Type"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "Dry"
-                        )
-                    )
-                );
-            }
-            if (this.props.rightpriceList == "yes") {
-                var rightList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "ul",
-                    { className: "right-list-content" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Free cooling"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "Yes ",
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "span",
-                                null,
-                                "(chilled water temperature)"
-                            )
-                        )
-                    )
-                );
-            }
-            if (this.props.required == "yes") {
-                var requiredMsg = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "h5",
-                    { className: "input-required" },
-                    "An input is required"
-                );
-            }
-
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: this.props.mainclass, onMouseEnter: this.changeView(this) },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: this.props.tileCls },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "h1",
-                        null,
-                        this.props.title
-                    ),
-                    requiredMsg,
-                    pricelist,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: this.props.hoverCls },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h1",
-                            null,
-                            this.props.title
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "div",
-                            { className: this.props.editCls },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.editIcon, alt: "", "data-toggle": "modal", "data-backdrop": "false", "data-target": this.props.modalId })
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            this.props.hoverText
-                        ),
-                        priceFullList,
-                        rightList
-                    )
-                )
+   _createClass(Tiles, [{
+      key: "render",
+      value: function render() {
+         console.log("tiles", this.props.dataRecord);
+         var priceFullList,
+             pricelist,
+             requiredMsg = "";
+         if (this.props.dataChange == "yes") {
+            var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               "ul",
+               { className: "price-listt" },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "Cooling Capacity"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     "100.0 kW"
+                  )
+               ),
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "Number of Compressors"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     "3"
+                  )
+               ),
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "Temperature"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
+                     " 6\xB0C"
+                  )
+               )
             );
-        }
-    }]);
+            var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               "div",
+               { className: "hover-list scrollbar-macosx" },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "div",
+                  { className: "table-responsive" },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "table",
+                     { className: "table" },
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "tbody",
+                        { className: "heatsourcesTableBody" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           "tr",
+                           null,
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "th",
+                              null,
+                              "Oven waste heat",
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 "ul",
+                                 { className: "list-inline" },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "li",
+                                    null,
+                                    "120.30 kW"
+                                 ),
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "li",
+                                    null,
+                                    " 85\xB0C "
+                                 )
+                              )
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "td",
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 "span",
+                                 { className: "edit-option" },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-pencil-square-o", "aria-hidden": "true" })
+                              ),
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 "span",
+                                 { className: "delete-optionn" },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-trash-o", "aria-hidden": "true" })
+                              ),
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 "span",
+                                 { className: "menu-bar-option drag-handler" },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-bars", "aria-hidden": "true" })
+                              )
+                           )
+                        )
+                     )
+                  )
+               )
+            );
+         } else {
+            var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               "p",
+               null,
+               this.props.hoverText
+            );
+         }
+         if (this.props.priceList == "yes") {
+            var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               "ul",
+               { className: "price-listt" },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "Cooling Capacity"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     "100.0 kW"
+                  )
+               ),
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "Number of Compressors"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     "3"
+                  )
+               ),
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "Temperature"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
+                     " 6\xB0C"
+                  )
+               )
+            );
+            var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               "ul",
+               { className: "price-listt" },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "Language"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     "English"
+                  )
+               ),
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "BAFA 2018"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     "Calculate"
+                  )
+               ),
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "li",
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "p",
+                     null,
+                     "Re-cooling Type"
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h3",
+                     null,
+                     "Dry"
+                  )
+               )
+            );
+         }
+         if (this.props.required == "yes") {
+            var requiredMsg = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               "h5",
+               { className: "input-required" },
+               "An input is required"
+            );
+         }
 
-    return Tiles;
+         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: this.props.mainclass },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               "div",
+               { className: this.props.tileCls },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "h1",
+                  null,
+                  this.props.title
+               ),
+               requiredMsg,
+               pricelist,
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "div",
+                  { className: this.props.hoverCls },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "h1",
+                     null,
+                     this.props.title
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "div",
+                     { className: this.props.editCls },
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.editIcon, alt: "", "data-toggle": "modal", "data-backdrop": "false", "data-target": this.props.modalId })
+                  ),
+                  priceFullList
+               )
+            )
+         );
+      }
+   }]);
+
+   return Tiles;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 Tiles.defaultProps = {
-    title: 'General Information',
-    tileCls: 'general-information data-box',
-    required: "yes",
-    edit: 'yes',
-    editCls: 'edit-icon myBtn_multi',
-    editIcon: 'images/edit-icon.png',
-    add: 'no',
-    hoverText: 'We need the location to get the specific weather data.',
-    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
-    hoverCls: 'main-hover-box general-info-hover',
-    priceLst: 'no',
-    priceData: {},
-    rightpriceList: 'no',
-    rightpriceListeData: {}
+   title: 'General Information',
+   tileCls: 'general-information data-box',
+   required: "yes",
+   edit: 'yes',
+   editCls: 'edit-icon myBtn_multi',
+   editIcon: 'images/edit-icon.png',
+   add: 'no',
+   hoverText: 'We need the location to get the specific weather data.',
+   mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+   hoverCls: 'main-hover-box general-info-hover',
+   priceLst: 'no',
+   priceData: {},
+   rightpriceList: 'no',
+   rightpriceListeData: {}
 };
 
 /***/ }),
@@ -56414,8 +56463,12 @@ var ChillerModal = function (_React$Component) {
       }
    }, {
       key: 'handleLangChange',
-      value: function handleLangChange() {
-         this.props.onSelectLanguage("yes");
+      value: function handleLangChange(compressionChiler) {
+         var result = {
+            compressionChiller: compressionChiler,
+            state: "yes"
+         };
+         this.props.onChillerSubmit(result);
       }
    }, {
       key: 'handleSubmit',
@@ -56445,12 +56498,14 @@ var ChillerModal = function (_React$Component) {
             jQuery.each(data.errors, function (key, value) {
                $("#compression-chiller-form").find('#' + value).siblings('.invalid-feedback').show();
             });
+
             if (typeof data.errors == "undefined") {
+               var $form = $("#compression-chiller-form");
+               var data = that.getFormData($form);
                that.setState({
-                  compressionChiler: $('#compression-chiller-form').serializeArray()
+                  compressionChiler: data
                });
-               that.handleLangChange();
-               compressionChiller.push($('#compression-chiller-form').serializeArray());
+               that.handleLangChange(that.state.compressionChiler);
                $("#compression-chiller").modal("hide");
             }
          }).catch(function (err) {
@@ -56458,15 +56513,27 @@ var ChillerModal = function (_React$Component) {
          });
       }
    }, {
+      key: 'getFormData',
+      value: function getFormData($form) {
+         var unindexed_array = $form.serializeArray();
+         var indexed_array = {};
+
+         $.map(unindexed_array, function (n, i) {
+            indexed_array[n['name']] = n['value'];
+         });
+
+         return indexed_array;
+      }
+   }, {
       key: 'render',
       value: function render() {
          if (this.state.role == "expert") {
             var expertRoleHtml = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'li',
-               { 'class': 'nav-item' },
+               { className: 'nav-item' },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'a',
-                  { href: '', 'data-target': '#compression-calculation-data', 'data-toggle': 'tab', 'class': 'nav-link' },
+                  { href: '', 'data-target': '#compression-calculation-data', 'data-toggle': 'tab', className: 'nav-link' },
                   'CALCULATION DATA'
                )
             );
@@ -56474,30 +56541,30 @@ var ChillerModal = function (_React$Component) {
 
          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
-            { 'class': 'modal ', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'compression-chiller' },
+            { className: 'modal ', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'compression-chiller' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'form',
                { onSubmit: this.handleSubmit },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'div',
-                  { 'class': 'modal-content' },
+                  { className: 'modal-content' },
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                      'div',
-                     { 'class': 'modal-heading' },
+                     { className: 'modal-heading' },
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { 'class': 'left-head' },
+                        { className: 'left-head' },
                         'Compression Chillers'
                      ),
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { 'class': 'right-head' },
+                        { className: 'right-head' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                            'ul',
-                           { 'class': 'list-inline' },
+                           { className: 'list-inline' },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'li',
-                              { 'class': 'help-toggle' },
+                              { className: 'help-toggle' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-icon.png', alt: '' })
                            ),
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -56510,8 +56577,8 @@ var ChillerModal = function (_React$Component) {
                               null,
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                  'span',
-                                 { 'class': 'close close_multi' },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/cancle-icon.png', alt: '', 'class': 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' })
+                                 { className: 'close close_multi' },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/cancle-icon.png', alt: '', className: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' })
                               )
                            )
                         )
@@ -56519,16 +56586,16 @@ var ChillerModal = function (_React$Component) {
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                      'div',
-                     { 'class': 'modal-body-content' },
+                     { className: 'modal-body-content' },
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'ul',
-                        { id: 'tabsJustified2', 'class': 'nav nav-tabs' },
+                        { id: 'tabsJustified2', className: 'nav nav-tabs' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                            'li',
-                           { 'class': 'nav-item' },
+                           { className: 'nav-item' },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'a',
-                              { href: '', 'data-target': '#compression-technical-data', 'data-toggle': 'tab', 'class': 'nav-link small active' },
+                              { href: '', 'data-target': '#compression-technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
                               'TECHNICAL DATA'
                            )
                         ),
@@ -56536,43 +56603,42 @@ var ChillerModal = function (_React$Component) {
                      ),
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { id: 'tabsJustifiedContent2', 'class': 'tab-content' },
+                        { id: 'tabsJustifiedContent2', className: 'tab-content' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                            'div',
-                           { id: 'compression-technical-data', 'class': 'tab-pane fade  active show' },
+                           { id: 'compression-technical-data', className: 'tab-pane fade  active show' },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'div',
-                              { 'class': 'heating-load-general-div' },
+                              { className: 'heating-load-general-div' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                  'div',
-                                 { 'class': 'table-responsive' },
+                                 { className: 'table-responsive' },
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'form',
                                     { action: '', id: 'compression-chiller-form' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', id: '_token', name: '_token', value: '{{ csrf_token() }}' }),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                        'table',
-                                       { 'class': 'table' },
+                                       { className: 'table' },
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'tr',
                                           null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-label' },
+                                             { className: 'input-label' },
                                              ' Name: '
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-help-label' },
+                                             { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Project number explanation/tip' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Project number explanation/tip' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-fields' },
+                                             { className: 'input-fields' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Chiller 1' })
                                           )
                                        ),
@@ -56581,24 +56647,24 @@ var ChillerModal = function (_React$Component) {
                                           null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-label' },
+                                             { className: 'input-label' },
                                              'Refrigerant:'
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-help-label' },
+                                             { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-fields' },
+                                             { className: 'input-fields' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'select',
-                                                { required: 'required', id: 'refrigerant', name: 'refrigerant', 'class': 'required-field' },
+                                                { required: 'required', id: 'refrigerant', name: 'refrigerant', className: 'required-field' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                    'option',
                                                    { value: '' },
@@ -56622,7 +56688,7 @@ var ChillerModal = function (_React$Component) {
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'span',
-                                                { 'class': 'invalid-feedback', role: 'alert' },
+                                                { className: 'invalid-feedback', role: 'alert' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                    'strong',
                                                    null,
@@ -56636,24 +56702,24 @@ var ChillerModal = function (_React$Component) {
                                           null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-label' },
+                                             { className: 'input-label' },
                                              'Manufacturer:'
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-help-label' },
+                                             { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-fields' },
+                                             { className: 'input-fields' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'select',
-                                                { required: 'required', id: 'manufacturer', name: 'manufacturer', 'class': 'required-field' },
+                                                { required: 'required', id: 'manufacturer', name: 'manufacturer', className: 'required-field' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                    'option',
                                                    { value: '' },
@@ -56677,7 +56743,7 @@ var ChillerModal = function (_React$Component) {
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'span',
-                                                { 'class': 'invalid-feedback', role: 'alert' },
+                                                { className: 'invalid-feedback', role: 'alert' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                    'strong',
                                                    null,
@@ -56691,24 +56757,24 @@ var ChillerModal = function (_React$Component) {
                                           null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-label' },
+                                             { className: 'input-label' },
                                              'Compressor type:'
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-help-label' },
+                                             { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-fields' },
+                                             { className: 'input-fields' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'select',
-                                                { required: 'required', id: 'compressor', name: 'compressor', 'class': 'required-field' },
+                                                { required: 'required', id: 'compressor', name: 'compressor', className: 'required-field' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                    'option',
                                                    { value: '' },
@@ -56732,7 +56798,7 @@ var ChillerModal = function (_React$Component) {
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'span',
-                                                { 'class': 'invalid-feedback', role: 'alert' },
+                                                { className: 'invalid-feedback', role: 'alert' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                    'strong',
                                                    null,
@@ -56746,22 +56812,22 @@ var ChillerModal = function (_React$Component) {
                                           null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-label' },
+                                             { className: 'input-label' },
                                              'Chilled water temperature:'
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-help-label' },
+                                             { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
-                                             { 'class': 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '6 \xB0C' })
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '6 \xB0C', name: 'temperature' })
                                           )
                                        )
                                     )
@@ -56771,36 +56837,36 @@ var ChillerModal = function (_React$Component) {
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                            'div',
-                           { id: 'compression-calculation-data', 'class': 'tab-pane fade expert' },
+                           { id: 'compression-calculation-data', className: 'tab-pane fade expert' },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'div',
-                              { 'class': 'personal-data-div' },
+                              { className: 'personal-data-div' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                  'div',
-                                 { 'class': 'table-responsive' },
+                                 { className: 'table-responsive' },
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'table',
-                                    { 'class': 'table' },
+                                    { className: 'table' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                        'tr',
                                        null,
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-label' },
+                                          { className: 'input-label' },
                                           'Investment costs: '
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-help-label' },
+                                          { className: 'input-help-label' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'button',
-                                             { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Editor explanation/tip' },
+                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Editor explanation/tip' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-fields' },
+                                          { className: 'input-fields' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '\u20AC' }),
                                           ' '
                                        )
@@ -56810,21 +56876,21 @@ var ChillerModal = function (_React$Component) {
                                        null,
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-label' },
+                                          { className: 'input-label' },
                                           'Discount:'
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-help-label' },
+                                          { className: 'input-help-label' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'button',
-                                             { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Company explanation/tip' },
+                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Company explanation/tip' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-fields' },
+                                          { className: 'input-fields' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '%' })
                                        )
                                     ),
@@ -56833,21 +56899,21 @@ var ChillerModal = function (_React$Component) {
                                        null,
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-label' },
+                                          { className: 'input-label' },
                                           ' Maintenance costs: '
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-help-label' },
+                                          { className: 'input-help-label' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'button',
-                                             { type: 'button', 'class': '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Address explanation/tip' },
+                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Address explanation/tip' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/help-red.png', alt: '' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'td',
-                                          { 'class': 'input-fields' },
+                                          { className: 'input-fields' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '\u20AC/a' }),
                                           ' '
                                        )

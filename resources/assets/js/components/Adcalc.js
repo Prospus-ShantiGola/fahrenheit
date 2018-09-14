@@ -27,16 +27,19 @@ export default class Adcalc extends Component {
             },
             compressionChilerStateChange:{
                 stateChange:'no',
-                content:""
+                content:"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
+                chillerRecord:{}
             }
         };
-        this.handleLanguage = this.handleLanguage.bind(this);
+        this.handleChillerForm = this.handleChillerForm.bind(this);
     }
-    handleLanguage (state)  {
-        this.setState({compressionChilerStateChange{
-            stateChange:state,
-            content:'yes changed'
-        },});
+    handleChillerForm (result)  {
+        console.log(result.state)
+        this.setState({compressionChilerStateChange:{
+                                                    stateChange:result.state,
+                                                    chillerRecord:result.compressionChiller
+                                                    }
+        });
     }
     render() {
         const tiles={
@@ -291,7 +294,7 @@ export default class Adcalc extends Component {
                         rightpriceList={tiles.HeatSource.rightpriceList}
                         rightpriceListeData={tiles.HeatSource.rightpriceListeData}
                         modalId={tiles.general.modalId}
-                dataChange={this.state.HeatSourceStateChange} />
+                        dataChange={this.state.HeatSourceStateChange} />
 
                         <Tiles  title={tiles.HeatingLoadProfile.title}
                         required={tiles.HeatingLoadProfile.required}
@@ -309,7 +312,7 @@ export default class Adcalc extends Component {
                         rightpriceList={tiles.HeatingLoadProfile.rightpriceList}
                         rightpriceListeData={tiles.HeatingLoadProfile.rightpriceListeData}
                         modalId={tiles.general.modalId}
-                dataChange={this.state.HeatSourceStateChange} />
+                        dataChange={this.state.HeatSourceStateChange} />
                        </div>
                        <div className="row">
                         <Tiles  title={tiles.CompressionChiller.title}
@@ -321,14 +324,15 @@ export default class Adcalc extends Component {
                         editCls={tiles.CompressionChiller.editCls}
                         editIcon={tiles.CompressionChiller.editIcon}
                         add={tiles.CompressionChiller.add}
-                        hoverText={tiles.CompressionChiller.hoverText}
+                        hoverText={this.state.compressionChilerStateChange.content}
                         hoverCls={tiles.CompressionChiller.hoverCls}
                         priceLst={tiles.CompressionChiller.priceLst}
                         priceData={tiles.CompressionChiller.priceData}
                         rightpriceList={tiles.CompressionChiller.rightpriceList}
                         rightpriceListeData={tiles.CompressionChiller.rightpriceListeData}
                         modalId={tiles.CompressionChiller.modalId}
-                       dataChange={this.state.compressionChilerStateChange} />
+                        dataChange={this.state.compressionChilerStateChange.stateChange}
+                        dataRecord={this.state.compressionChilerStateChange.chillerRecord} />
 
                         <Tiles  title={tiles.CoolingLoadProfile.title}
                         required={tiles.CoolingLoadProfile.required}
@@ -367,7 +371,7 @@ export default class Adcalc extends Component {
                 modalId={tiles.general.modalId}
                 dataChange={this.state.HeatSourceStateChange}/>
                  </div>
-                 <ChillerModal role="expert" onSelectLanguage={this.handleLanguage}/>
+                 <ChillerModal role="expert" onChillerSubmit={this.handleChillerForm}/>
               </div>
         );
     }

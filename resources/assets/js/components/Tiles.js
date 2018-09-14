@@ -10,10 +10,11 @@ export class Tiles extends React.Component {
     }
 
     render() {
+        console.log("tiles",this.props.dataRecord);
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.dataChange=="yes"){
             var pricelist=(
-                <ul class="price-listt">
+                <ul className="price-listt">
                                     <li>
                                        <p>Cooling Capacity</p>
                                        <h3>100.0 kW</h3>
@@ -28,10 +29,37 @@ export class Tiles extends React.Component {
                                     </li>
                 </ul>
             );
+            var priceFullList=(
+                <div className="hover-list scrollbar-macosx">
+                                       <div className="table-responsive">
+                                          <table className="table">
+                                           <tbody className="heatsourcesTableBody">
+                                             <tr>
+                                                <th>
+                                                   Oven waste heat
+                                                   <ul className="list-inline">
+                                                      <li>120.30 kW
+                                                      </li>
+                                                      <li>	85°C </li>
+                                                   </ul>
+                                                </th>
+                                                <td><span className="edit-option"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                                   <span className="delete-optionn"><i className="fa fa-trash-o" aria-hidden="true"></i></span>
+                                                   <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+                                                </td>
+                                             </tr>
+                                             </tbody>
+                                          </table>
+                                       </div>
+            </div>
+            );
+        }
+        else{
+            var priceFullList= <p>{this.props.hoverText}</p>;
         }
         if(this.props.priceList=="yes"){
             var pricelist=(
-                <ul class="price-listt">
+                <ul className="price-listt">
                                     <li>
                                        <p>Cooling Capacity</p>
                                        <h3>100.0 kW</h3>
@@ -63,16 +91,6 @@ export class Tiles extends React.Component {
       </ul>
             );
         }
-        if(this.props.rightpriceList=="yes"){
-            var rightList=(
-                <ul className="right-list-content">
-                <li>
-                   <p>Free cooling</p>
-                   <h3>Yes <span>(chilled water temperature)</span></h3>
-                </li>
-             </ul>
-            );
-        }
         if(this.props.required=="yes"){
             var requiredMsg=<h5 className="input-required">An input is required</h5>;
         }
@@ -86,9 +104,7 @@ export class Tiles extends React.Component {
                         <div className={this.props.hoverCls}>
                             <h1>{this.props.title}</h1>
                             <div className={this.props.editCls}><img src={this.props.editIcon} alt="" data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} /></div>
-                            <p>{this.props.hoverText}</p>
                             {priceFullList}
-                            {rightList}
                         </div>
                     </div>
                 </div>
