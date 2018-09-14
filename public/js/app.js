@@ -56145,34 +56145,71 @@ var Tiles = function (_React$Component) {
         };
         _this.editRecord = _this.editRecord.bind(_this);
         _this.deleteRecord = _this.deleteRecord.bind(_this);
+        _this.updateCompressionList = _this.updateCompressionList.bind(_this);
         return _this;
     }
 
     _createClass(Tiles, [{
         key: "componentWillReceiveProps",
         value: function componentWillReceiveProps(nextProps) {
-            console.log("componentWillReceiveProps", nextProps);
-            this.setState({
-                compressionChillerData: this.state.compressionChillerData.concat(nextProps.dataRecord)
-            });
-            jQuery(".scrollbar-macosx").scrollbar();
-            if (typeof $('.compressionTableBody')[0] != "undefined") {
-                Sortable.create($('.compressionTableBody')[0], {
-                    animation: 150,
-                    scroll: true,
-                    handle: '.drag-handler'
-                });
+            //console.log("componentWillReceiveProps",nextProps);
+            if (typeof nextProps.dataRecord != "undefined") {
+                if (nextProps.dataRecord.chillerformMode == "add") {
+                    this.setState({
+                        compressionChillerData: this.state.compressionChillerData.concat(nextProps.dataRecord)
+                    });
+                } else {
+
+                    this.state.compressionChillerData[nextProps.dataRecord.chillerformModeKey] = nextProps.dataRecord;
+                    this.forceUpdate();
+                }
+                jQuery(".scrollbar-macosx").scrollbar();
+                if (typeof $('.compressionTableBody')[0] != "undefined") {
+                    Sortable.create($('.compressionTableBody')[0], {
+                        animation: 150,
+                        scroll: true,
+                        handle: '.drag-handler',
+                        onEnd: function onEnd( /**Event*/evt) {
+                            var itemEl = evt.item; // dragged HTMLElement
+                            evt.to; // target list
+                            evt.from; // previous list
+                            evt.oldIndex; // element's old index within old parent
+                            evt.newIndex; // element's new index within new parent
+                            console.log(itemEl);
+                            console.log(this.state.compressionChillerData[evt.oldIndex]);
+                        }
+                    });
+                }
             }
         }
     }, {
+        key: "updateCompressionList",
+        value: function updateCompressionList() {
+            console.log("sorting finish");
+        }
+    }, {
         key: "editRecord",
-        value: function editRecord(eleM) {
-            console.log("edit", eleM);
+        value: function editRecord(elemKey) {
+            var dataObj = this.state.compressionChillerData[elemKey];
+            for (var key in dataObj) {
+                if (dataObj.hasOwnProperty(key)) {
+                    //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+                    $(this.props.modalId).find('#' + key).val(dataObj[key]);
+                }
+            }
+            $(this.props.modalId).find('#chillerformMode').val("edit");
+            $(this.props.modalId).find('#chillerformModeKey').val(elemKey);
+            //$(this.props.modalId).find
         }
     }, {
         key: "deleteRecord",
         value: function deleteRecord(eleM) {
-            console.log("deleteRecord", eleM);
+            this.setState({
+                compressionChillerData: this.state.compressionChillerData.filter(function (_, i) {
+                    return i !== eleM;
+                })
+            });
+            //console.log("deleteRecord",eleM)
         }
     }, {
         key: "render",
@@ -56276,16 +56313,16 @@ var Tiles = function (_React$Component) {
                                             null,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 "span",
-                                                { className: "edit-option", "data-id": i },
+                                                { className: "edit-option", "data-id": i, "data-toggle": "modal", "data-backdrop": "false", "data-target": _this2.props.modalId },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-pencil-square-o", "aria-hidden": "true", onClick: function onClick() {
-                                                        return _this2.editRecord(_this2);
+                                                        return _this2.editRecord(i);
                                                     } })
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 "span",
                                                 { className: "delete-optionn", "data-id": i },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-trash-o", "aria-hidden": "true", onClick: function onClick() {
-                                                        return _this2.deleteRecord(_this2);
+                                                        return _this2.deleteRecord(i);
                                                     } })
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -56500,6 +56537,19 @@ var ChillerModal = function (_React$Component) {
          jQuery(".help-toggle").click(function () {
             jQuery(".input-help-label").toggle();
          });
+         jQuery('body').on('click', function (e) {
+            jQuery('[data-toggle="popover"]').each(function () {
+               //the 'is' for buttons that trigger popups
+               //the 'has' for icons within a button that triggers a popup
+               if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                  jQuery(this).popover('hide');
+               }
+            });
+         });
+         $(document).on('hide.bs.modal', '#compression-chiller', function () {
+            $("#compression-chiller-form")[0].reset();
+            //Do stuff here
+         });
       }
    }, {
       key: 'handleLangChange',
@@ -56682,7 +56732,9 @@ var ChillerModal = function (_React$Component) {
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
                                                 { className: 'input-fields' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Chiller 1', name: 'chillername' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Chiller 1', id: 'chillername', name: 'chillername' }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'chillerformMode', name: 'chillerformMode', value: 'add' }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'chillerformModeKey', name: 'chillerformModeKey', value: '' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -56870,7 +56922,7 @@ var ChillerModal = function (_React$Component) {
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
                                                 { className: 'input-fields' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '6 \xB0C', name: 'temperature' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'temperature', placeholder: '6 \xB0C', name: 'temperature' })
                                              )
                                           )
                                        )

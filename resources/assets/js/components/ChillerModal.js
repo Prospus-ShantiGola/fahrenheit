@@ -13,6 +13,21 @@ export class ChillerModal extends React.Component {
         jQuery(".help-toggle").click(function(){
             jQuery(".input-help-label").toggle();
         });
+        jQuery('body').on('click', function (e) {
+            jQuery('[data-toggle="popover"]').each(function () {
+                //the 'is' for buttons that trigger popups
+                //the 'has' for icons within a button that triggers a popup
+                if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    jQuery(this).popover('hide');
+                }
+            });
+        });
+        $(document).on('hide.bs.modal','#compression-chiller', function () {
+                $("#compression-chiller-form")[0].reset()
+                    //Do stuff here
+                });
+
+
       }
       handleLangChange (compressionChiler) {
         var result={
@@ -79,7 +94,7 @@ export class ChillerModal extends React.Component {
 
         return (
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-chiller">
-            <form  onSubmit={this.handleSubmit}>
+            <form  onSubmit={this.handleSubmit} >
             <div className="modal-content">
                <div className="modal-heading">
                   <div className="left-head">Compression Chillers</div>
@@ -110,7 +125,10 @@ export class ChillerModal extends React.Component {
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="Chiller 1"    name="chillername"  /></td>
+                                    <td className="input-fields"><input type="text" placeholder="Chiller 1" id="chillername"   name="chillername"  />
+                                    <input type="hidden" placeholder="Chiller 1" id="chillerformMode"   name="chillerformMode" value="add" />
+                                    <input type="hidden" placeholder="Chiller 1" id="chillerformModeKey"   name="chillerformModeKey" value="" />
+                                    </td>
                                  </tr>
                                  <tr>
                                     <td className="input-label">Refrigerant:</td>
@@ -174,7 +192,7 @@ export class ChillerModal extends React.Component {
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="6 °C" name="temperature"/></td>
+                                    <td className="input-fields"><input type="text"  id="temperature" placeholder="6 °C" name="temperature"/></td>
                                  </tr>
                                  </tbody>
                               </table>

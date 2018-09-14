@@ -9,12 +9,20 @@ export class Tiles extends React.Component {
                };
         this.editRecord=this.editRecord.bind(this);
         this.deleteRecord=this.deleteRecord.bind(this);
+        this.updateCompressionList=this.updateCompressionList.bind(this);
     }
     componentWillReceiveProps(nextProps){
-        console.log("componentWillReceiveProps",nextProps);
+        //console.log("componentWillReceiveProps",nextProps);
+        if(typeof nextProps.dataRecord!="undefined"){
+        if(nextProps.dataRecord.chillerformMode=="add"){
         this.setState({
             compressionChillerData: this.state.compressionChillerData.concat(nextProps.dataRecord)
           })
+        }else{
+
+              this.state.compressionChillerData[nextProps.dataRecord.chillerformModeKey]= nextProps.dataRecord
+              this.forceUpdate()
+        }
           jQuery(".scrollbar-macosx").scrollbar();
           if(typeof $('.compressionTableBody')[0] !="undefined"){
             Sortable.create(
@@ -23,16 +31,38 @@ export class Tiles extends React.Component {
                 animation: 150,
                 scroll: true,
                 handle: '.drag-handler',
+                onEnd:function (/**Event*/evt) {
+                    evt.oldIndex;  // element's old index within old parent
+                    evt.newIndex;  // element's new index within new parent=
+                    console.log(this.state.compressionChillerData[evt.oldIndex]);
+                }
                 }
                 );
           }
+        }
+
 
     }
-    editRecord(eleM){
-        console.log("edit",eleM);
+    updateCompressionList(){
+        console.log("sorting finish");
+    }
+    editRecord(elemKey){
+        let dataObj=this.state.compressionChillerData[elemKey];
+        for (var key in dataObj) {
+            if (dataObj.hasOwnProperty(key)) {
+                //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+                $(this.props.modalId).find('#'+key).val(dataObj[key]);
+            }
+        }
+        $(this.props.modalId).find('#chillerformMode').val("edit");
+        $(this.props.modalId).find('#chillerformModeKey').val(elemKey);
+        //$(this.props.modalId).find
     }
     deleteRecord(eleM){
-        console.log("deleteRecord",eleM)
+        this.setState({
+            compressionChillerData: this.state.compressionChillerData.filter((_, i) => i !== eleM)
+          });
+        //console.log("deleteRecord",eleM)
     }
 
     render() {
@@ -71,8 +101,8 @@ export class Tiles extends React.Component {
                <li>	{data.temperature}°C </li>
             </ul>
          </th>
-         <td><span className="edit-option" data-id={i} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editRecord(this)}></i></span>
-            <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" onClick={()=>this.deleteRecord(this)}></i></span>
+         <td><span className="edit-option" data-id={i}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editRecord(i)}></i></span>
+            <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" onClick={()=>this.deleteRecord(i)}></i></span>
             <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
          </td>
       </tr>
