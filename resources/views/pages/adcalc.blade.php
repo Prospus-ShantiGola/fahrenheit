@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="shortcut icon" href="{{ asset('images/cropped-flake-32x32.png') }}" >
 
         <title>FAHRENHEIT</title>
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+
    <link rel="stylesheet" href="{{ asset('css/jquery.bootstrap.year.calendar.css') }}">
 
     <!--   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -31,6 +33,9 @@
 
 
 
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/script.js') }}" defer></script>
 
     <style>
         .hide{

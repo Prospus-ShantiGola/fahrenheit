@@ -115,6 +115,7 @@
               });
             function LoginUser()
             {
+
                 var token    = $("input[name=_token]").val();
                 var email    = $("input[name=email]").val();
                 var password = $("input[name=password]").val();

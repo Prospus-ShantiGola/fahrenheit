@@ -14,3 +14,4 @@ require('./bootstrap');
  */
 
 require('./components/Breadcrumb');
+require('./components/Adcalc');
