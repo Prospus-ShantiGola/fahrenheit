@@ -32,7 +32,7 @@ export class ChillerModal extends React.Component {
       handleLangChange (compressionChiler) {
         var result={
             compressionChiller:compressionChiler,
-            state:"yes"
+            state:true
         }
         this.props.onChillerSubmit(result);
      }

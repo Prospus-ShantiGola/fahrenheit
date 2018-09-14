@@ -5,6 +5,7 @@ export class Tiles extends React.Component {
         super(props);
         this.state = {
             compressionChillerData:[],
+            compressionDataChange:false,
             generalInfo:[]
                };
         this.editRecord=this.editRecord.bind(this);
@@ -13,6 +14,9 @@ export class Tiles extends React.Component {
     }
     componentWillReceiveProps(nextProps){
         //console.log("componentWillReceiveProps",nextProps);
+        this.setState({
+            compressionDataChange: nextProps.dataChange
+          });
         if(typeof nextProps.dataRecord!="undefined"){
         if(nextProps.dataRecord.chillerformMode=="add"){
         this.setState({
@@ -25,25 +29,44 @@ export class Tiles extends React.Component {
         }
           jQuery(".scrollbar-macosx").scrollbar();
           if(typeof $('.compressionTableBody')[0] !="undefined"){
-              var that=this;
-            Sortable.create(
-                $('.compressionTableBody')[0],
-                {
-                animation: 150,
-                scroll: true,
-                handle: '.drag-handler',
-                onEnd:function (/**Event*/evt) {
-                    evt.oldIndex;  // element's old index within old parent
-                    evt.newIndex;  // element's new index within new parent=
-                    var tempKey=that.state.compressionChillerData[evt.oldIndex];
-                    that.state.compressionChillerData[evt.oldIndex]=that.state.compressionChillerData[evt.newIndex];
-                    that.state.compressionChillerData[evt.newIndex]=tempKey;
-                }
-                }
-                );
-          }
+            var that=this;
+
+          Sortable.create(
+              $('.compressionTableBody')[0],
+              {
+              animation: 150,
+              scroll: true,
+              handle: '.drag-handler',
+              onEnd:function (/**Event*/evt) {
+                  evt.oldIndex;  // element's old index within old parent
+                  evt.newIndex;  // element's new index within new parent=
+                  console.log(evt.oldIndex,evt.newIndex);
+                  var clonedArr=that.state.compressionChillerData;
+                  var tempKey=clonedArr[evt.oldIndex];
+                  clonedArr[evt.oldIndex]=clonedArr[evt.newIndex];
+                  clonedArr[evt.newIndex]=tempKey;
+                  console.log(clonedArr);
+                  that.setState({
+                      compressionChillerData: clonedArr
+                    })
+
+              }
+              }
+              );
         }
 
+        }
+
+
+    }
+    componentDidMount(){
+
+        if(this.state.compressionChillerData.length==0)
+        {
+          this.setState({
+              compressionDataChange: false
+            });
+        }
 
     }
     updateCompressionList(){
@@ -65,14 +88,16 @@ export class Tiles extends React.Component {
         this.setState({
             compressionChillerData: this.state.compressionChillerData.filter((_, i) => i !== eleM)
           });
+
+
         //console.log("deleteRecord",eleM)
     }
 
     render() {
-        console.log("tiles",this.props.dataRecord);
+        console.log("tiles",this.state.compressionChillerData," State ",this.state.compressionDataChange,this.props.title,this.props.hoverText);
 
         var priceFullList,pricelist,requiredMsg="";
-        if(this.props.dataChange=="yes"){
+        if(this.state.compressionDataChange==true && this.state.compressionChillerData.length!=0){
             var pricelist=(
                 <ul className="price-listt">
                                     <li>

@@ -55851,24 +55851,24 @@ var Adcalc = function (_Component) {
 
         _this.state = (_this$state = {
             EconomicStateChange: {
-                stateChange: 'no'
+                stateChange: false
             },
             generalStateChange: {
-                stateChange: 'no'
+                stateChange: false
             },
             OptionsStateChange: {
-                stateChange: 'no'
+                stateChange: false
             },
             HeatSourceStateChange: {
-                stateChange: 'no'
+                stateChange: false
             },
             HeatingLoadProfileStateChange: {
-                stateChange: 'no'
+                stateChange: false
             }
         }, _defineProperty(_this$state, 'generalStateChange', {
-            stateChange: 'no'
+            stateChange: false
         }), _defineProperty(_this$state, 'compressionChilerStateChange', {
-            stateChange: 'no',
+            stateChange: false,
             content: "Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
             chillerRecord: {}
         }), _this$state);
@@ -56084,7 +56084,7 @@ var Adcalc = function (_Component) {
                                 required: tiles.CompressionChiller.required,
                                 edit: tiles.CompressionChiller.edit,
                                 mainclass: tiles.CompressionChiller.mainClass,
-                                tileCls: tiles.CompressionChiller.tileCls }, _defineProperty(_React$createElement6, 'required', tiles.CompressionChiller.required), _defineProperty(_React$createElement6, 'edit', tiles.CompressionChiller.edit), _defineProperty(_React$createElement6, 'editCls', tiles.CompressionChiller.editCls), _defineProperty(_React$createElement6, 'editIcon', tiles.CompressionChiller.editIcon), _defineProperty(_React$createElement6, 'add', tiles.CompressionChiller.add), _defineProperty(_React$createElement6, 'hoverText', this.state.compressionChilerStateChange.content), _defineProperty(_React$createElement6, 'hoverCls', tiles.CompressionChiller.hoverCls), _defineProperty(_React$createElement6, 'priceLst', tiles.CompressionChiller.priceLst), _defineProperty(_React$createElement6, 'priceData', tiles.CompressionChiller.priceData), _defineProperty(_React$createElement6, 'rightpriceList', tiles.CompressionChiller.rightpriceList), _defineProperty(_React$createElement6, 'rightpriceListeData', tiles.CompressionChiller.rightpriceListeData), _defineProperty(_React$createElement6, 'modalId', tiles.CompressionChiller.modalId), _defineProperty(_React$createElement6, 'dataChange', this.state.compressionChilerStateChange.stateChange), _defineProperty(_React$createElement6, 'dataRecord', this.state.compressionChilerStateChange.chillerRecord), _React$createElement6)),
+                                tileCls: tiles.CompressionChiller.tileCls }, _defineProperty(_React$createElement6, 'required', tiles.CompressionChiller.required), _defineProperty(_React$createElement6, 'edit', tiles.CompressionChiller.edit), _defineProperty(_React$createElement6, 'editCls', tiles.CompressionChiller.editCls), _defineProperty(_React$createElement6, 'editIcon', tiles.CompressionChiller.editIcon), _defineProperty(_React$createElement6, 'add', tiles.CompressionChiller.add), _defineProperty(_React$createElement6, 'hoverText', tiles.CompressionChiller.hoverText), _defineProperty(_React$createElement6, 'hoverCls', tiles.CompressionChiller.hoverCls), _defineProperty(_React$createElement6, 'priceLst', tiles.CompressionChiller.priceLst), _defineProperty(_React$createElement6, 'priceData', tiles.CompressionChiller.priceData), _defineProperty(_React$createElement6, 'rightpriceList', tiles.CompressionChiller.rightpriceList), _defineProperty(_React$createElement6, 'rightpriceListeData', tiles.CompressionChiller.rightpriceListeData), _defineProperty(_React$createElement6, 'modalId', tiles.CompressionChiller.modalId), _defineProperty(_React$createElement6, 'dataChange', this.state.compressionChilerStateChange.stateChange), _defineProperty(_React$createElement6, 'dataRecord', this.state.compressionChilerStateChange.chillerRecord), _React$createElement6)),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tiles__["a" /* Tiles */], (_React$createElement7 = { title: tiles.CoolingLoadProfile.title,
                                 required: tiles.CoolingLoadProfile.required,
                                 edit: tiles.CoolingLoadProfile.edit,
@@ -56141,6 +56141,7 @@ var Tiles = function (_React$Component) {
 
         _this.state = {
             compressionChillerData: [],
+            compressionDataChange: false,
             generalInfo: []
         };
         _this.editRecord = _this.editRecord.bind(_this);
@@ -56153,6 +56154,9 @@ var Tiles = function (_React$Component) {
         key: "componentWillReceiveProps",
         value: function componentWillReceiveProps(nextProps) {
             //console.log("componentWillReceiveProps",nextProps);
+            this.setState({
+                compressionDataChange: nextProps.dataChange
+            });
             if (typeof nextProps.dataRecord != "undefined") {
                 if (nextProps.dataRecord.chillerformMode == "add") {
                     this.setState({
@@ -56166,6 +56170,7 @@ var Tiles = function (_React$Component) {
                 jQuery(".scrollbar-macosx").scrollbar();
                 if (typeof $('.compressionTableBody')[0] != "undefined") {
                     var that = this;
+
                     Sortable.create($('.compressionTableBody')[0], {
                         animation: 150,
                         scroll: true,
@@ -56173,12 +56178,28 @@ var Tiles = function (_React$Component) {
                         onEnd: function onEnd( /**Event*/evt) {
                             evt.oldIndex; // element's old index within old parent
                             evt.newIndex; // element's new index within new parent=
-                            var tempKey = that.state.compressionChillerData[evt.oldIndex];
-                            that.state.compressionChillerData[evt.oldIndex] = that.state.compressionChillerData[evt.newIndex];
-                            that.state.compressionChillerData[evt.newIndex] = tempKey;
+                            console.log(evt.oldIndex, evt.newIndex);
+                            var clonedArr = that.state.compressionChillerData;
+                            var tempKey = clonedArr[evt.oldIndex];
+                            clonedArr[evt.oldIndex] = clonedArr[evt.newIndex];
+                            clonedArr[evt.newIndex] = tempKey;
+                            console.log(clonedArr);
+                            that.setState({
+                                compressionChillerData: clonedArr
+                            });
                         }
                     });
                 }
+            }
+        }
+    }, {
+        key: "componentDidMount",
+        value: function componentDidMount() {
+
+            if (this.state.compressionChillerData.length == 0) {
+                this.setState({
+                    compressionDataChange: false
+                });
             }
         }
     }, {
@@ -56208,6 +56229,7 @@ var Tiles = function (_React$Component) {
                     return i !== eleM;
                 })
             });
+
             //console.log("deleteRecord",eleM)
         }
     }, {
@@ -56215,12 +56237,12 @@ var Tiles = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            console.log("tiles", this.props.dataRecord);
+            console.log("tiles", this.state.compressionChillerData, " State ", this.state.compressionDataChange, this.props.title, this.props.hoverText);
 
             var priceFullList,
                 pricelist,
                 requiredMsg = "";
-            if (this.props.dataChange == "yes") {
+            if (this.state.compressionDataChange == true && this.state.compressionChillerData.length != 0) {
                 var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "ul",
                     { className: "price-listt" },
@@ -56555,7 +56577,7 @@ var ChillerModal = function (_React$Component) {
       value: function handleLangChange(compressionChiler) {
          var result = {
             compressionChiller: compressionChiler,
-            state: "yes"
+            state: true
          };
          this.props.onChillerSubmit(result);
       }
