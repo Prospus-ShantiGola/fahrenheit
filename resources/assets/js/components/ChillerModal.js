@@ -110,7 +110,7 @@ export class ChillerModal extends React.Component {
                                        <img src="images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="Chiller 1"      /></td>
+                                    <td className="input-fields"><input type="text" placeholder="Chiller 1"    name="chillername"  /></td>
                                  </tr>
                                  <tr>
                                     <td className="input-label">Refrigerant:</td>

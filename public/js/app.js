@@ -56639,7 +56639,7 @@ var ChillerModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Chiller 1' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Chiller 1', name: 'chillername' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
