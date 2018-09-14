@@ -2,8 +2,8 @@
   <section class="breadcrumbs">
          <div class="container">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-               <li class="breadcrumb-item active" aria-current="page">Adcalc</li>
+    <!--            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li> -->
+        <li class="breadcrumb-item active" aria-current="page"><a href="{{ url('/') }}">Adcalc</a></li>
             </ol>
          </div>
       </section>
@@ -2033,6 +2033,7 @@ by customer:</td>
 
 
 
+
 <div class="modal" id="contact-form-modal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -2066,12 +2067,12 @@ by customer:</td>
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
                                      
-                                       <td class="input-fields"><input type="text" name= "contact_number" placeholder="Enter your contact number" minlength="1" maxlength="25"  required="true" class="required-field contact_number"></td>
+                                       <td class="input-fields"><input type="number" name= "contact_number" placeholder="Enter your contact number" minlength="1" maxlength="50"  required="true" class="required-field contact_number"></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label">Email:</td>
                                      
-                                       <td class="input-fields"><input type="text" name= "email_address" placeholder="Enter your email address"  minlength="1" maxlength="25"  required="true" class="required-field email_address"></td>
+                                       <td class="input-fields"><input type="email" name= "email_address" placeholder="Enter your email address"  minlength="1" maxlength="50"  required="true" class="required-field email_address"></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label text-area-label">Message:</td>
@@ -2256,10 +2257,17 @@ by customer:</td>
                        if(data=='success')
                        {
 
-                           $('#contact-us-modal').modal('show');
+                          $('#contact-us-modal').modal('show');    
                            $('#contact-us-modal .modal-body').html('show');
 
                        }
+                       else
+                       {
+                            $('#contact-us-modal').modal('show');
+                              $('#contact-us-modal .modal-body').html('error');
+                       }
+
+                       $(".fahrenheit-contact")[0].reset();
                     },
                     error: function (data){
                       //  alert('Fail to run Login..');
@@ -2280,10 +2288,175 @@ by customer:</td>
          }
    })
 
-            });
+ });
+           //# sourceURL=user.js
+        </script> 
 
-          
+
+    <!-- <script src="js/jquery-3.2.1.min.js"></script> -->
+    <!--   // <script src="js/popper.min.js"></script> -->
+      <script src="{{ asset('js/popper.min.js') }}" defer></script>
+     <!--  // <script src="js/bootstrap.min.js"></script> -->
+<!--        // <script src="js/jquery.bootstrap.year.calendar.js"></script> -->
+<script src="{{ asset('js/jquery.bootstrap.year.calendar.js') }}" defer></script>
 
 
-            //# sourceURL=user.js
-        </script>     
+      <script>
+         // Get the modal
+         var modalparent = document.getElementsByClassName("modal_multi");
+         
+         // Get the button that opens the modal
+         
+         var modal_btn_multi = document.getElementsByClassName("myBtn_multi");
+         
+         // Get the <span> element that closes the modal
+         var span_close_multi = document.getElementsByClassName("close_multi");
+       var z = document.body;
+         
+         // When the user clicks the button, open the modal
+         function setDataIndex() {
+         
+             for (i = 0; i < modal_btn_multi.length; i++)
+             {
+                 modal_btn_multi[i].setAttribute('data-index', i);
+                 modalparent[i].setAttribute('data-index', i);
+                 span_close_multi[i].setAttribute('data-index', i);
+             }
+         }
+         
+         
+         
+         for (i = 0; i < modal_btn_multi.length; i++)
+         {
+             modal_btn_multi[i].onclick = function() {
+                 var ElementIndex = this.getAttribute('data-index');
+                 modalparent[ElementIndex].style.display = "block";
+            // if(!jQuery(modalparent[ElementIndex]).hasClass('mainmodal')){jQuery('.mainmodal').hide();
+            document.body.classList.add('modal-open');
+             };
+         
+             // When the user clicks on <span> (x), close the modal
+             span_close_multi[i].onclick = function() {
+                 var ElementIndex = this.getAttribute('data-index');
+                 modalparent[ElementIndex].style.display = "none";
+             document.body.classList.remove('modal-open');
+            // if(!jQuery(modalparent[ElementIndex]).hasClass('mainmodal')){jQuery('.mainmodal').show();}
+             };
+         
+         }
+         
+         window.onload = function() {
+         
+             setDataIndex();
+         };
+         
+         window.onclick = function(event) {
+             if (event.target === modalparent[event.target.getAttribute('data-index')]) {
+                 modalparent[event.target.getAttribute('data-index')].style.display = "none";
+             }
+         
+             // OLD CODE
+            // if (event.target === modal) {
+//                 modal.style.display = "none";
+//             }
+         };
+       
+       
+
+
+       
+       
+       
+      </script>
+     
+      <script>
+         jQuery('[data-toggle="popover"]').popover();
+         
+         jQuery('body').on('click', function (e) {
+             jQuery('[data-toggle="popover"]').each(function () {
+                 //the 'is' for buttons that trigger popups
+                 //the 'has' for icons within a button that triggers a popup
+                 if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                     jQuery(this).popover('hide');
+                 }
+             });
+         });
+         
+         jQuery(document).ready(function(){
+             jQuery(".help-toggle").click(function(){
+                 jQuery(".input-help-label").toggle();
+             });
+         });
+      </script>
+      <script>
+         $(function () {
+           
+           // Add containers to the DOM
+           var $calculator = $('<div/>', {id: 'calculator'}).appendTo('.calci-div');
+           var $input = $('<input/>', {id: 'input'}).appendTo($calculator);
+           var $buttons = $('<div/>', {id: 'buttons'}).appendTo($calculator);
+           
+           // Add buttons to the DOM
+           jQuery.each('1234567890.=+-*/←C'.split(''), function () {
+             var $button = $('<button/>', {text: this.toString(), click: function () {
+               // Handle button clicks
+               switch (jQuery(this).text()) {
+                 // '=' will fetch the current expression string, evaluate it,
+                 // and write the result back into the input/output field.
+                 // That's where the actual calculation happens. 
+                 case '=': try {$input.val(eval($input.val()));} catch (e) {$input.val('ERROR');}
+                 // 'C' will clear the input/output field
+                 break; case 'C': return $input.val('');
+                 // 'CE' will delete the last character from the input/output field
+                 break; case '←': return $input.val($input.val().replace(/.$/, ''));
+                 // All other buttons will add a character to the input/output field
+                 break; default: $input.val($input.val() + $(this).text()); 
+               }
+             }}).appendTo($buttons);
+           });
+         });
+         
+
+    jQuery(document).ready(function(){
+    jQuery('.dropdown-calci').click(function(event){
+        event.stopPropagation();
+         jQuery(".caculator-divv").slideToggle("fast");
+    });
+    jQuery(".caculator-divv").on("click", function (event) {
+        event.stopPropagation();
+    });
+});
+
+jQuery(document).on("click", function () {
+    jQuery(".caculator-divv").hide();
+});
+      
+      </script>
+      <script>
+         jQuery(document).ready(function(){
+             jQuery(".new-row-addition").click(function(){
+                 jQuery(".add-new-row").toggle();
+             });
+         });
+      </script>
+      <script>
+    jQuery('.calendar').calendar();
+
+    jQuery('.calendar').on('jqyc.changeYearToPrevious', function (event) {
+        var currentYear = jQuery(this).find('.jqyc-change-year').data('year');
+        console.log(currentYear);
+    });
+
+    jQuery('.calendar').on('jqyc.changeYearToNext', function (event) {
+        var currentYear = jQuery(this).find('.jqyc-next-year').data('year');
+        console.log(currentYear);
+    });
+
+    jQuery('.calendar').on('jqyc.dayChoose', function (event) {
+        var choosenYear = jQuery(this).data('year');
+        var choosenMonth = jQuery(this).data('month');
+        var choosenDay = jQuery(this).data('day-of-month');
+        var date = new Date(choosenYear, choosenMonth, choosenDay);
+        console.log(date);
+    });
+</script>    
