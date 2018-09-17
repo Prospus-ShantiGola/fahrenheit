@@ -9,25 +9,25 @@ export default class Adcalc extends Component {
         super(props);
         this.state = {
             EconomicStateChange: {
-                stateChange:'no'
+                stateChange:false
             },
             generalStateChange: {
-                stateChange:'no'
+                stateChange:false
             },
             OptionsStateChange: {
-                stateChange:'no'
+                stateChange:false
             },
             HeatSourceStateChange: {
-                stateChange:'no'
+                stateChange:false
             },
             HeatingLoadProfileStateChange: {
-                stateChange:'no'
+                stateChange:false
             },
             generalStateChange: {
-                stateChange:'no'
+                stateChange:false
             },
             compressionChilerStateChange:{
-                stateChange:'no',
+                stateChange:false,
                 content:"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
                 chillerRecord:{}
             }
@@ -325,7 +325,7 @@ export default class Adcalc extends Component {
                         editCls={tiles.CompressionChiller.editCls}
                         editIcon={tiles.CompressionChiller.editIcon}
                         add={tiles.CompressionChiller.add}
-                        hoverText={this.state.compressionChilerStateChange.content}
+                        hoverText={tiles.CompressionChiller.hoverText}
                         hoverCls={tiles.CompressionChiller.hoverCls}
                         priceLst={tiles.CompressionChiller.priceLst}
                         priceData={tiles.CompressionChiller.priceData}

@@ -4,15 +4,104 @@ export class Tiles extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            compressionChiller:[],
+            compressionChillerData:[],
+            compressionDataChange:false,
             generalInfo:[]
                };
+        this.editRecord=this.editRecord.bind(this);
+        this.deleteRecord=this.deleteRecord.bind(this);
+        this.updateCompressionList=this.updateCompressionList.bind(this);
+    }
+    componentWillReceiveProps(nextProps){
+        //console.log("componentWillReceiveProps",nextProps);
+        this.setState({
+            compressionDataChange: nextProps.dataChange
+          });
+        if(typeof nextProps.dataRecord!="undefined"){
+        if(nextProps.dataRecord.chillerformMode=="add"){
+        this.setState({
+            compressionChillerData: this.state.compressionChillerData.concat(nextProps.dataRecord)
+          })
+        }else{
+
+              this.state.compressionChillerData[nextProps.dataRecord.chillerformModeKey]= nextProps.dataRecord
+              this.forceUpdate()
+        }
+          jQuery(".scrollbar-macosx").scrollbar();
+          if(typeof $('.compressionTableBody')[0] !="undefined"){
+            var that=this;
+
+          Sortable.create(
+              $('.compressionTableBody')[0],
+              {
+              animation: 150,
+              scroll: true,
+              handle: '.drag-handler',
+              onEnd:function (/**Event*/evt) {
+                  evt.oldIndex;  // element's old index within old parent
+                  evt.newIndex;  // element's new index within new parent=
+                  console.log(evt.oldIndex,evt.newIndex);
+                  var clonedArr=that.state.compressionChillerData;
+                  var tempKey=clonedArr[evt.oldIndex];
+                  clonedArr[evt.oldIndex]=clonedArr[evt.newIndex];
+                  clonedArr[evt.newIndex]=tempKey;
+                  console.log(clonedArr);
+                  that.updateView(clonedArr);
+
+              }
+              }
+              );
+        }
+
+        }
+
+
+    }
+    updateView(clonedArr){
+        that.setState({
+            compressionChillerData: clonedArr
+          })
+    }
+
+    componentDidMount(){
+
+
+
+    }
+    updateCompressionList(){
+        console.log("sorting finish");
+    }
+    editRecord(elemKey){
+        let dataObj=this.state.compressionChillerData[elemKey];
+        for (var key in dataObj) {
+            if (dataObj.hasOwnProperty(key)) {
+                //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+                $(this.props.modalId).find('#'+key).val(dataObj[key]);
+            }
+        }
+        $(this.props.modalId).find('#chillerformMode').val("edit");
+        $(this.props.modalId).find('#chillerformModeKey').val(elemKey);
+        //$(this.props.modalId).find
+    }
+    deleteRecord(eleM){
+        this.setState({
+            compressionChillerData: this.state.compressionChillerData.filter((_, i) => i !== eleM)
+          });
+
+          if(this.state.compressionChillerData.length==0)
+        {
+          this.setState({
+              compressionDataChange: false
+            });
+        }
+        //console.log("deleteRecord",eleM)
     }
 
     render() {
-        console.log("tiles",this.props.dataRecord);
+        console.log("tiles",this.state.compressionChillerData," State ",this.state.compressionDataChange,this.props.title,this.props.hoverText);
+
         var priceFullList,pricelist,requiredMsg="";
-        if(this.props.dataChange=="yes"){
+        if(this.state.compressionDataChange==true && this.state.compressionChillerData.length!=0){
             var pricelist=(
                 <ul className="price-listt">
                                     <li>
@@ -25,7 +114,7 @@ export class Tiles extends React.Component {
                                     </li>
                                     <li>
                                        <p>Temperature</p>
-                                       <h3><img src="images/degree-icon.png" alt="" /> 6°C</h3>
+                                       <h3><img src="images/degree-icon.png" alt="" /> {this.state.compressionChillerData[0].temperature}°C</h3>
                                     </li>
                 </ul>
             );
@@ -33,21 +122,25 @@ export class Tiles extends React.Component {
                 <div className="hover-list scrollbar-macosx">
                                        <div className="table-responsive">
                                           <table className="table">
-                                           <tbody className="heatsourcesTableBody">
-                                             <tr>
-                                                <th>
-                                                   Oven waste heat
-                                                   <ul className="list-inline">
-                                                      <li>120.30 kW
-                                                      </li>
-                                                      <li>	85°C </li>
-                                                   </ul>
-                                                </th>
-                                                <td><span className="edit-option"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                                                   <span className="delete-optionn"><i className="fa fa-trash-o" aria-hidden="true"></i></span>
-                                                   <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
-                                                </td>
-                                             </tr>
+                                           <tbody className="compressionTableBody">
+                                           {this.state.compressionChillerData.map((data,i) => (
+         <tr key={i}>
+         <th>
+         {data.chillername}
+            <ul className="list-inline">
+               <li>120.30 kW
+               </li>
+               <li>	{data.temperature}°C </li>
+            </ul>
+         </th>
+         <td><span className="edit-option" data-id={i}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editRecord(i)}></i></span>
+            <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" onClick={()=>this.deleteRecord(i)}></i></span>
+            <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+         </td>
+      </tr>
+        ))}
+
+
                                              </tbody>
                                           </table>
                                        </div>
@@ -96,6 +189,7 @@ export class Tiles extends React.Component {
         }
 
         return (
+
                 <div className={this.props.mainclass}>
                     <div className={this.props.tileCls}>
                         <h1>{this.props.title}</h1>
