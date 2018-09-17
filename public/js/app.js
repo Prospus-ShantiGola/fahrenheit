@@ -56184,24 +56184,22 @@ var Tiles = function (_React$Component) {
                             clonedArr[evt.oldIndex] = clonedArr[evt.newIndex];
                             clonedArr[evt.newIndex] = tempKey;
                             console.log(clonedArr);
-                            that.setState({
-                                compressionChillerData: clonedArr
-                            });
+                            that.updateView(clonedArr);
                         }
                     });
                 }
             }
         }
     }, {
-        key: "componentDidMount",
-        value: function componentDidMount() {
-
-            if (this.state.compressionChillerData.length == 0) {
-                this.setState({
-                    compressionDataChange: false
-                });
-            }
+        key: "updateView",
+        value: function updateView(clonedArr) {
+            that.setState({
+                compressionChillerData: clonedArr
+            });
         }
+    }, {
+        key: "componentDidMount",
+        value: function componentDidMount() {}
     }, {
         key: "updateCompressionList",
         value: function updateCompressionList() {
@@ -56230,6 +56228,11 @@ var Tiles = function (_React$Component) {
                 })
             });
 
+            if (this.state.compressionChillerData.length == 0) {
+                this.setState({
+                    compressionDataChange: false
+                });
+            }
             //console.log("deleteRecord",eleM)
         }
     }, {

@@ -46,9 +46,7 @@ export class Tiles extends React.Component {
                   clonedArr[evt.oldIndex]=clonedArr[evt.newIndex];
                   clonedArr[evt.newIndex]=tempKey;
                   console.log(clonedArr);
-                  that.setState({
-                      compressionChillerData: clonedArr
-                    })
+                  that.updateView(clonedArr);
 
               }
               }
@@ -59,14 +57,15 @@ export class Tiles extends React.Component {
 
 
     }
+    updateView(clonedArr){
+        that.setState({
+            compressionChillerData: clonedArr
+          })
+    }
+
     componentDidMount(){
 
-        if(this.state.compressionChillerData.length==0)
-        {
-          this.setState({
-              compressionDataChange: false
-            });
-        }
+
 
     }
     updateCompressionList(){
@@ -89,7 +88,12 @@ export class Tiles extends React.Component {
             compressionChillerData: this.state.compressionChillerData.filter((_, i) => i !== eleM)
           });
 
-
+          if(this.state.compressionChillerData.length==0)
+        {
+          this.setState({
+              compressionDataChange: false
+            });
+        }
         //console.log("deleteRecord",eleM)
     }
 
