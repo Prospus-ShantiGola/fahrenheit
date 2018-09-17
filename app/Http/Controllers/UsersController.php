@@ -11,6 +11,7 @@ use Exception;
 use Gate;
 use Hash;
 
+
 class UsersController extends Controller
 {
 

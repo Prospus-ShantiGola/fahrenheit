@@ -52,16 +52,7 @@
                                 <li class="nav-item ">
                                     <a class="nav-link" href="">Adcalc</a>
                                 </li>
-                                <!-- <li class="nav-item dropdown">
-                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Browse
-                             </a>
-                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action 1</a>
-                                <a class="dropdown-item" href="#">Action 2</a>
-                                <a class="dropdown-item" href="#">Action 3</a>
-                             </div>
-                          </li>-->
+                            
 
                             </ul>
                         </div>
@@ -72,7 +63,9 @@
     </div>
 </header>
 <!--header end-->
-{{--  <div class="flex-center position-ref full-height">
+
+
+    {{--  <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">
                 @auth
@@ -86,6 +79,44 @@
 
 
     </div>  --}}
+
+
+
+ <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.9.2/jarallax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.9.2/jarallax-element.min.js"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery('.jarallax').jarallax({
+            speed: 0.1
+        });
+    </script>
+    <script>
+        var owl = jQuery('#home-banner');
+        owl.owlCarousel({
+            margin: 10,
+            loop: true,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        //loggin variable for jQuery
+       var loggedIn = {{ auth()->check() ? 'true' : 'false' }};
+
+    </script>        
 
 
 
