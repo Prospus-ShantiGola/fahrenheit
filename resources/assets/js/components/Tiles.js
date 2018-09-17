@@ -114,7 +114,7 @@ export class Tiles extends React.Component {
                                     </li>
                                     <li>
                                        <p>Temperature</p>
-                                       <h3><img src="images/degree-icon.png" alt="" /> {this.state.compressionChillerData[0].temperature}°C</h3>
+                                       <h3><img src="public/images/degree-icon.png" alt="" /> {this.state.compressionChillerData[0].temperature}°C</h3>
                                     </li>
                 </ul>
             );
@@ -163,7 +163,7 @@ export class Tiles extends React.Component {
                                     </li>
                                     <li>
                                        <p>Temperature</p>
-                                       <h3><img src="images/degree-icon.png" alt="" /> 6°C</h3>
+                                       <h3><img src="public/images/degree-icon.png" alt="" /> 6°C</h3>
                                     </li>
                 </ul>
             );

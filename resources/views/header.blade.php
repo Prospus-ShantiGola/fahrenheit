@@ -37,7 +37,7 @@
             <div class="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-3">
                 <div class="header-logo">
 
-                    <img src="{{ asset('images/logo.png') }}">
+                    <img src="{{ asset('public/images/logo.png') }}">
                 </div>
             </div>
             <div class="col-12 col-md-9 col-sm-9 col-lg-9 col-xl-9">
