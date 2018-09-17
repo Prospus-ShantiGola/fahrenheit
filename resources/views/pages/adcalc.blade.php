@@ -32,8 +32,6 @@
 
 
 
-
-
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
 
@@ -48,7 +46,7 @@
                     <div class="content">
                             <div class="title m-b-md">
                       
-                                   @include('pages.adcalc_content')
+                               @include('content')    
 
                             </div>
                             @include('footer')

@@ -14135,7 +14135,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(19);
-module.exports = __webpack_require__(61);
+module.exports = __webpack_require__(62);
 
 
 /***/ }),
@@ -55824,6 +55824,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Tiles__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ChillerModal__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__GeneralModal__ = __webpack_require__(61);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -55833,6 +55834,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -55907,7 +55909,7 @@ var Adcalc = function (_Component) {
                     priceData: {},
                     rightpriceList: 'no',
                     rightpriceListeData: {},
-                    modalId: '#compression-chiller'
+                    modalId: '#general-information'
                 },
                 Economic: {
                     title: 'Economic Data',
@@ -56098,7 +56100,8 @@ var Adcalc = function (_Component) {
                         mainclass: tiles.FahrenheitSystem.mainClass,
                         tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.HeatSourceStateChange), _React$createElement8))
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ChillerModal__["a" /* ChillerModal */], { role: 'expert', onChillerSubmit: this.handleChillerForm })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ChillerModal__["a" /* ChillerModal */], { role: 'expert', onChillerSubmit: this.handleChillerForm }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__GeneralModal__["a" /* GeneralModal */], { role: 'expert', onChillerSubmit: this.handleChillerForm })
             );
         }
     }]);
@@ -56132,294 +56135,294 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var Tiles = function (_React$Component) {
-   _inherits(Tiles, _React$Component);
+    _inherits(Tiles, _React$Component);
 
-   function Tiles(props) {
-      _classCallCheck(this, Tiles);
+    function Tiles(props) {
+        _classCallCheck(this, Tiles);
 
-      var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
-      _this.state = {
-         compressionChiller: [],
-         generalInfo: []
-      };
-      return _this;
-   }
+        _this.state = {
+            compressionChiller: [],
+            generalInfo: []
+        };
+        return _this;
+    }
 
-   _createClass(Tiles, [{
-      key: "render",
-      value: function render() {
-         console.log("tiles", this.props.dataRecord);
-         var priceFullList,
-             pricelist,
-             requiredMsg = "";
-         if (this.props.dataChange == "yes") {
-            var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               "ul",
-               { className: "price-listt" },
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "Cooling Capacity"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     "100.0 kW"
-                  )
-               ),
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "Number of Compressors"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     "3"
-                  )
-               ),
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "Temperature"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
-                     " 6\xB0C"
-                  )
-               )
-            );
-            var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               "div",
-               { className: "hover-list scrollbar-macosx" },
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "div",
-                  { className: "table-responsive" },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "table",
-                     { className: "table" },
-                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "tbody",
-                        { className: "heatsourcesTableBody" },
+    _createClass(Tiles, [{
+        key: "render",
+        value: function render() {
+            console.log("tiles", this.props.dataRecord);
+            var priceFullList,
+                pricelist,
+                requiredMsg = "";
+            if (this.props.dataChange == "yes") {
+                var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "ul",
+                    { className: "price-listt" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           "tr",
-                           null,
-                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              "th",
-                              null,
-                              "Oven waste heat",
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "ul",
-                                 { className: "list-inline" },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    "120.30 kW"
-                                 ),
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    " 85\xB0C "
-                                 )
-                              )
-                           ),
-                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              "td",
-                              null,
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "span",
-                                 { className: "edit-option" },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-pencil-square-o", "aria-hidden": "true" })
-                              ),
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "span",
-                                 { className: "delete-optionn" },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-trash-o", "aria-hidden": "true" })
-                              ),
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "span",
-                                 { className: "menu-bar-option drag-handler" },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-bars", "aria-hidden": "true" })
-                              )
-                           )
+                            "p",
+                            null,
+                            "Cooling Capacity"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "100.0 kW"
                         )
-                     )
-                  )
-               )
-            );
-         } else {
-            var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               "p",
-               null,
-               this.props.hoverText
-            );
-         }
-         if (this.props.priceList == "yes") {
-            var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               "ul",
-               { className: "price-listt" },
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "Cooling Capacity"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     "100.0 kW"
-                  )
-               ),
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "Number of Compressors"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     "3"
-                  )
-               ),
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "Temperature"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
-                     " 6\xB0C"
-                  )
-               )
-            );
-            var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               "ul",
-               { className: "price-listt" },
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "Language"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     "English"
-                  )
-               ),
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "BAFA 2018"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     "Calculate"
-                  )
-               ),
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "li",
-                  null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "p",
-                     null,
-                     "Re-cooling Type"
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h3",
-                     null,
-                     "Dry"
-                  )
-               )
-            );
-         }
-         if (this.props.required == "yes") {
-            var requiredMsg = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               "h5",
-               { className: "input-required" },
-               "An input is required"
-            );
-         }
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Number of Compressors"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "3"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Temperature"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
+                            " 6\xB0C"
+                        )
+                    )
+                );
+                var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "div",
+                    { className: "hover-list scrollbar-macosx" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { className: "table-responsive" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "table",
+                            { className: "table" },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "tbody",
+                                { className: "heatsourcesTableBody" },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "tr",
+                                    null,
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        "th",
+                                        null,
+                                        "Oven waste heat",
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "ul",
+                                            { className: "list-inline" },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "li",
+                                                null,
+                                                "120.30 kW"
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "li",
+                                                null,
+                                                " 85\xB0C "
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        "td",
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "span",
+                                            { className: "edit-option" },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-pencil-square-o", "aria-hidden": "true" })
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "span",
+                                            { className: "delete-optionn" },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-trash-o", "aria-hidden": "true" })
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "span",
+                                            { className: "menu-bar-option drag-handler" },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-bars", "aria-hidden": "true" })
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
+            } else {
+                var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "p",
+                    null,
+                    this.props.hoverText
+                );
+            }
+            if (this.props.priceList == "yes") {
+                var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "ul",
+                    { className: "price-listt" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Cooling Capacity"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "100.0 kW"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Number of Compressors"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "3"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Temperature"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
+                            " 6\xB0C"
+                        )
+                    )
+                );
+                var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "ul",
+                    { className: "price-listt" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Language"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "English"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "BAFA 2018"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "Calculate"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "li",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "p",
+                            null,
+                            "Re-cooling Type"
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h3",
+                            null,
+                            "Dry"
+                        )
+                    )
+                );
+            }
+            if (this.props.required == "yes") {
+                var requiredMsg = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "h5",
+                    { className: "input-required" },
+                    "An input is required"
+                );
+            }
 
-         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { className: this.props.mainclass },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               "div",
-               { className: this.props.tileCls },
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "h1",
-                  null,
-                  this.props.title
-               ),
-               requiredMsg,
-               pricelist,
-               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "div",
-                  { className: this.props.hoverCls },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "h1",
-                     null,
-                     this.props.title
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "div",
-                     { className: this.props.editCls },
-                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.editIcon, alt: "", "data-toggle": "modal", "data-backdrop": "false", "data-target": this.props.modalId })
-                  ),
-                  priceFullList
-               )
-            )
-         );
-      }
-   }]);
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                { className: this.props.mainclass },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "div",
+                    { className: this.props.tileCls },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "h1",
+                        null,
+                        this.props.title
+                    ),
+                    requiredMsg,
+                    pricelist,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { className: this.props.hoverCls },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "h1",
+                            null,
+                            this.props.title
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "div",
+                            { className: this.props.editCls },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.editIcon, alt: "", "data-toggle": "modal", "data-backdrop": "false", "data-target": this.props.modalId })
+                        ),
+                        priceFullList
+                    )
+                )
+            );
+        }
+    }]);
 
-   return Tiles;
+    return Tiles;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 Tiles.defaultProps = {
-   title: 'General Information',
-   tileCls: 'general-information data-box',
-   required: "yes",
-   edit: 'yes',
-   editCls: 'edit-icon myBtn_multi',
-   editIcon: 'images/edit-icon.png',
-   add: 'no',
-   hoverText: 'We need the location to get the specific weather data.',
-   mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
-   hoverCls: 'main-hover-box general-info-hover',
-   priceLst: 'no',
-   priceData: {},
-   rightpriceList: 'no',
-   rightpriceListeData: {}
+    title: 'General Information',
+    tileCls: 'general-information data-box',
+    required: "yes",
+    edit: 'yes',
+    editCls: 'edit-icon myBtn_multi',
+    editIcon: 'images/edit-icon.png',
+    add: 'no',
+    hoverText: 'We need the location to get the specific weather data.',
+    mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+    hoverCls: 'main-hover-box general-info-hover',
+    priceLst: 'no',
+    priceData: {},
+    rightpriceList: 'no',
+    rightpriceListeData: {}
 };
 
 /***/ }),
@@ -56502,11 +56505,11 @@ var ChillerModal = function (_React$Component) {
             if (typeof data.errors == "undefined") {
                var $form = $("#compression-chiller-form");
                var data = that.getFormData($form);
-               that.setState({
-                  compressionChiler: data
-               });
+               // that.setState({
+               //     compressionChiler:data
+               // })
                that.handleLangChange(that.state.compressionChiler);
-               $("#compression-chiller").modal("hide");
+               // $("#compression-chiller").modal("hide");
             }
          }).catch(function (err) {
             console.log(err);
@@ -56935,6 +56938,535 @@ var ChillerModal = function (_React$Component) {
 
 /***/ }),
 /* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GeneralModal; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var GeneralModal = function (_React$Component) {
+   _inherits(GeneralModal, _React$Component);
+
+   function GeneralModal() {
+      _classCallCheck(this, GeneralModal);
+
+      var _this = _possibleConstructorReturn(this, (GeneralModal.__proto__ || Object.getPrototypeOf(GeneralModal)).call(this));
+
+      _this.handleSubmit = _this.handleSubmit.bind(_this);
+      return _this;
+   }
+
+   _createClass(GeneralModal, [{
+      key: "handleSubmit",
+      value: function handleSubmit(event) {
+         event.preventDefault();
+         var that = this;
+
+         var location = $(".general-information-form").find("input[name=location]").val();
+         var address = $(".general-information-form").find("input[name=address]").val();
+
+         fetch('/adcalc/storeGeneralInformation', {
+            method: 'POST',
+            headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+               location: location,
+               address: address
+
+            })
+         }).then(function (a) {
+            return a.json();
+         }).then(function (data) {
+            $(".general-information-form").find('.invalid-feedback').hide();
+            jQuery.each(data.errors, function (key, value) {
+               $(".general-information-form").find('#' + value).siblings('.invalid-feedback').show();
+            });
+
+            if (typeof data.errors == "undefined") {
+               var $form = $(".general-information-form");
+               var data = that.getFormData($form);
+               console.log(data);
+               // that.setState({
+               //     compressionChiler:data
+               // })
+               // that.handleLangChange(that.state.compressionChiler);
+               // $("#general-information").modal("hide");
+            }
+         }).catch(function (err) {
+            console.log(err);
+         });
+      }
+   }, {
+      key: "getFormData",
+      value: function getFormData($form) {
+         var unindexed_array = $form.serializeArray();
+         var indexed_array = {};
+
+         $.map(unindexed_array, function (n, i) {
+            indexed_array[n['name']] = n['value'];
+         });
+
+         return indexed_array;
+      }
+   }, {
+      key: "render",
+      value: function render() {
+
+         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "modal ", role: "dialog", "aria-labelledby": "mySmallModalLabel", "aria-hidden": "true", id: "general-information" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               "form",
+               { onSubmit: this.handleSubmit, className: "general-information-form" },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "div",
+                  { className: "modal-content" },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "div",
+                     { className: "modal-heading" },
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { className: "left-head" },
+                        " General Information"
+                     ),
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { className: "right-head" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           "ul",
+                           { className: "list-inline" },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "li",
+                              { className: "help-toggle" },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-icon.png", alt: "no-image" })
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "li",
+                              null,
+                              " ",
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "image", src: "images/verifie-icon.png", alt: "Submit" })
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "li",
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 "span",
+                                 { className: "close close_multi" },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/cancle-icon.png", alt: "", className: "close", "data-dismiss": "modal", "aria-label": "Close" })
+                              )
+                           )
+                        )
+                     )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     "div",
+                     { className: "modal-body-content" },
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "ul",
+                        { id: "tabsJustified", className: "nav nav-tabs" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           "li",
+                           { className: "nav-item" },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "a",
+                              { href: "", "data-target": "#project-data", "data-toggle": "tab", className: "nav-link small active" },
+                              "PROJECT DATA"
+                           )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           "li",
+                           { className: "nav-item" },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "a",
+                              { href: "", "data-target": "#personal-data", "data-toggle": "tab", className: "nav-link" },
+                              "PERSONAL DATA"
+                           )
+                        )
+                     ),
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { id: "tabsJustifiedContent", className: "tab-content" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           "div",
+                           { id: "project-data", className: "tab-pane fade  active show" },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "div",
+                              { className: "project-data-div" },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 "div",
+                                 { className: "table-responsive" },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "table",
+                                    { className: "table" },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          " Project number:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Project number explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", placeholder: "New Project", name: "project_number", id: "project_number" }),
+                                          " "
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          " Project name: "
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", placeholder: "Test Project", name: "project_name", id: "project_name" })
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          " Location:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Location explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", placeholder: "Halle/Saale", className: "required-field", name: "location", id: "location" }),
+                                          " ",
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-map-marker", "aria-hidden": "true" }),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "span",
+                                             { className: "invalid-feedback", role: "alert" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "strong",
+                                                null,
+                                                "Required field"
+                                             )
+                                          )
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Customer:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Customer explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "customer", id: "customer", placeholder: "HabWarmWillKalt Gmbh " })
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Contact:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Contact explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "contact", id: "contact", placeholder: "Mr. Inhaber" })
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Tel. Number:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Tel. number explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "phone_number", id: "phone_number", placeholder: "0123 456" })
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Email:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Email explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "email_address", id: "email_address", placeholder: "inhaber@gmbh.de" })
+                                       )
+                                    )
+                                 )
+                              )
+                           )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           "div",
+                           { id: "personal-data", className: "tab-pane fade" },
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              "div",
+                              { className: "personal-data-div" },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 "div",
+                                 { className: "table-responsive" },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "table",
+                                    { className: "table" },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Editor:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Editor explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "editor", id: "editor", placeholder: "HabWarmWillKalt Gmbh" }),
+                                          " "
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Company:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Company explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "company", id: "company", placeholder: "Gmbh" })
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          " Address:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Address explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "address", id: "address", placeholder: "Halle/Saale", className: "required-field" }),
+                                          " ",
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-map-marker", "aria-hidden": "true" }),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "span",
+                                             { className: "invalid-feedback", role: "alert" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "strong",
+                                                null,
+                                                "Required field"
+                                             )
+                                          )
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Tel. Number:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Tel. number explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "phone_number", id: "phone_number", placeholder: "0123 456" })
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Mobile:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Mobile explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "mobile_number", id: "mobile_number", placeholder: "Mr. Inhaber" })
+                                       )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                       "tr",
+                                       null,
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-label" },
+                                          "Email:"
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-help-label" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             "button",
+                                             { type: "button", className: "", "data-container": "body", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Email explanation/tip" },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/help-red.png", alt: "" })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          "td",
+                                          { className: "input-fields" },
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "email_address", id: "email_address", placeholder: "inhaber@gmbh.de" })
+                                       )
+                                    )
+                                 )
+                              )
+                           )
+                        )
+                     )
+                  )
+               )
+            )
+         );
+      }
+   }]);
+
+   return GeneralModal;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/***/ }),
+/* 62 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

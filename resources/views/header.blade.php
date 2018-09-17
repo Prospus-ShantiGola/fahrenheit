@@ -52,16 +52,7 @@
                                 <li class="nav-item ">
                                     <a class="nav-link" href="">Adcalc</a>
                                 </li>
-                                <!-- <li class="nav-item dropdown">
-                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Browse
-                             </a>
-                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action 1</a>
-                                <a class="dropdown-item" href="#">Action 2</a>
-                                <a class="dropdown-item" href="#">Action 3</a>
-                             </div>
-                          </li>-->
+                            
 
                             </ul>
                         </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {Tiles} from './Tiles';
 import {ChillerModal} from './ChillerModal';
+import {GeneralModal} from './GeneralModal';
 
 export default class Adcalc extends Component {
     constructor(props) {
@@ -62,7 +63,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#compression-chiller'
+                modalId:'#general-information'
             },
             Economic:{
                 title:'Economic Data',
@@ -372,6 +373,7 @@ export default class Adcalc extends Component {
                 dataChange={this.state.HeatSourceStateChange}/>
                  </div>
                  <ChillerModal role="expert" onChillerSubmit={this.handleChillerForm}/>
+                 <GeneralModal role="expert" onChillerSubmit={this.handleChillerForm}/>
               </div>
         );
     }
