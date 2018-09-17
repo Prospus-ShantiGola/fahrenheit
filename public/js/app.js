@@ -56143,11 +56143,6 @@ var Tiles = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
         _this.state = {
-
-            compressionChiller: [],
-            generalInfo: []
-        };
-
             compressionChillerData: [],
             compressionDataChange: false,
             generalInfo: []
@@ -56155,20 +56150,10 @@ var Tiles = function (_React$Component) {
         _this.editRecord = _this.editRecord.bind(_this);
         _this.deleteRecord = _this.deleteRecord.bind(_this);
         _this.updateCompressionList = _this.updateCompressionList.bind(_this);
-
         return _this;
     }
 
     _createClass(Tiles, [{
-
-        key: "render",
-        value: function render() {
-            console.log("tiles", this.props.dataRecord);
-            var priceFullList,
-                pricelist,
-                requiredMsg = "";
-            if (this.props.dataChange == "yes") {
-
         key: "componentWillReceiveProps",
         value: function componentWillReceiveProps(nextProps) {
             //console.log("componentWillReceiveProps",nextProps);
@@ -56264,7 +56249,6 @@ var Tiles = function (_React$Component) {
                 pricelist,
                 requiredMsg = "";
             if (this.state.compressionDataChange == true && this.state.compressionChillerData.length != 0) {
-
                 var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "ul",
                     { className: "price-listt" },
@@ -56280,96 +56264,6 @@ var Tiles = function (_React$Component) {
                             "h3",
                             null,
                             "100.0 kW"
-
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Number of Compressors"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            "3"
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "li",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "p",
-                            null,
-                            "Temperature"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "h3",
-                            null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/degree-icon.png", alt: "" }),
-                            " 6\xB0C"
-                        )
-                    )
-                );
-                var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "hover-list scrollbar-macosx" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: "table-responsive" },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "table",
-                            { className: "table" },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "tbody",
-                                { className: "heatsourcesTableBody" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "tr",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "th",
-                                        null,
-                                        "Oven waste heat",
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            "ul",
-                                            { className: "list-inline" },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "li",
-                                                null,
-                                                "120.30 kW"
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "li",
-                                                null,
-                                                " 85\xB0C "
-                                            )
-                                        )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "td",
-                                        null,
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            "span",
-                                            { className: "edit-option" },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-pencil-square-o", "aria-hidden": "true" })
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            "span",
-                                            { className: "delete-optionn" },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-trash-o", "aria-hidden": "true" })
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            "span",
-                                            { className: "menu-bar-option drag-handler" },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-bars", "aria-hidden": "true" })
-                                        )
-                                    )
-                                )
-                            )
-                        )
-
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -56468,7 +56362,6 @@ var Tiles = function (_React$Component) {
                                 })
                             )
                         )
-
                     )
                 );
             } else {
@@ -56726,11 +56619,11 @@ var ChillerModal = function (_React$Component) {
             if (typeof data.errors == "undefined") {
                var $form = $("#compression-chiller-form");
                var data = that.getFormData($form);
-               // that.setState({
-               //     compressionChiler:data
-               // })
+               that.setState({
+                  compressionChiler: data
+               });
                that.handleLangChange(that.state.compressionChiler);
-               // $("#compression-chiller").modal("hide");
+               $("#compression-chiller").modal("hide");
             }
          }).catch(function (err) {
             console.log(err);
@@ -56852,7 +56745,7 @@ var ChillerModal = function (_React$Component) {
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',
                                                 { className: 'input-label' },
-                                                ' Name: '
+                                                ' Name:  '
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'td',

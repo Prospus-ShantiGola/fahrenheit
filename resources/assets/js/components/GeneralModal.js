@@ -2,10 +2,33 @@ import React from 'react';
 
 export class GeneralModal extends React.Component {
 
- constructor() {
-    super();
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  constructor(props){
+        super(props);
+        this.state = {generalInformation: '',role:'user'};
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+
+
+       componentDidMount(){
+        jQuery(".help-toggle").click(function(){
+            jQuery(".input-help-label").toggle();
+        });
+        jQuery('body').on('click', function (e) {
+            jQuery('[data-toggle="popover"]').each(function () {
+                //the 'is' for buttons that trigger popups
+                //the 'has' for icons within a button that triggers a popup
+                if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    jQuery(this).popover('hide');
+                }
+            });
+        });
+        $(document).on('hide.bs.modal','#general-information', function () {
+                $(".general-information-form")[0].reset()
+                    //Do stuff here
+                });
+
+
+      }
 
 
 handleSubmit(event) {
@@ -40,10 +63,10 @@ handleSubmit(event) {
                                 var $form = $(".general-information-form");
                                 var data = that.getFormData($form);
                                 console.log(data);
-                                // that.setState({
-                                //     compressionChiler:data
-                                // })
-                                // that.handleLangChange(that.state.compressionChiler);
+                                that.setState({
+                                    generalInformation:data
+                                })
+                                // that.handleLangChange(that.state.generalInformation);
                                // $("#general-information").modal("hide");
 
                             }

@@ -66,18 +66,16 @@ export class ChillerModal extends React.Component {
                             if(typeof data.errors=="undefined"){
                                 var $form = $("#compression-chiller-form");
                                 var data = that.getFormData($form);
-                                // that.setState({
-                                //     compressionChiler:data
-                                // })
+                                that.setState({
+                                    compressionChiler:data
+                                })
                                 that.handleLangChange(that.state.compressionChiler);
-                               // $("#compression-chiller").modal("hide");
+                                $("#compression-chiller").modal("hide");
 
                             }
         })
         .catch((err) => {console.log(err)})
       }
-
-
      getFormData($form){
         var unindexed_array = $form.serializeArray();
         var indexed_array = {};
@@ -122,7 +120,7 @@ export class ChillerModal extends React.Component {
                               <table className="table">
                               <tbody>
                                  <tr>
-                                    <td className="input-label"> Name:	</td>
+                                    <td className="input-label"> Name:  </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
@@ -208,7 +206,7 @@ export class ChillerModal extends React.Component {
                            <div className="table-responsive">
                               <table className="table">
                                  <tr>
-                                    <td className="input-label">Investment costs:	</td>
+                                    <td className="input-label">Investment costs: </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
                                        <img src="images/help-red.png" alt="" />
                                        </button>
@@ -244,5 +242,4 @@ export class ChillerModal extends React.Component {
         );
     }
 }
-
 
