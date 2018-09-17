@@ -31,6 +31,22 @@ class AdcalcController extends Controller
   }
 
 
+   public function storeGeneralInformation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'location' => 'required',
+            'address' => 'required'
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->keys()]);
+        }
+        return response()->json(['success'=>'Record is successfully added']);
+
+  }
+
+
 
 
 

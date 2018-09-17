@@ -1240,9 +1240,30 @@ select.required-field {
     top: 56%;
     right: 12%;}
 
+
+.modal-backdrop {
+    /* bug fix - no overlay */    
+    display: none;    
+}
+
+.input-fields textarea {
+    color: #00618c;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 10px;
+    height: 93px;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #00618c;
+    resize: none;
+}
+
+
 #heating-technical-data .calci-div {
     top: 51%;
     right: 12%;}
+
 
 
 #tabsJustifiedlast .calci-div {

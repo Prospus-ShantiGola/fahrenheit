@@ -21,6 +21,19 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(
 [
+    'prefix' => 'pages',
+], function () {
+
+  
+    Route::post('/submitContactForm', 'PagesController@submitContactForm');
+
+});
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');
+
+Route::group(
+[
     'prefix' => 'users',
 ], function () {
 
@@ -122,5 +135,6 @@ Route::group(
     ], function () {
 
         Route::post('/storeCompressionChiller', 'AdcalcController@storeCompressionChiller');
+        Route::post('/storeGeneralInformation', 'AdcalcController@storeGeneralInformation');
 
     });

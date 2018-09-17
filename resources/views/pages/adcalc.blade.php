@@ -14,13 +14,32 @@
 
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    
+      <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+
+   <link rel="stylesheet" href="{{ asset('css/jquery.bootstrap.year.calendar.css') }}">
+
+    <!--   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+   
+
+    // <script src="{{ asset('js/app.js') }}" defer></script> -->
+
+
+
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
+
+
+
     <script src="{{ asset('js/jquery.scrollbar.js') }}" defer></script>
     <script src="{{ asset('js/Sortable.js') }}" defer></script>
+
     <style>
         .hide{
             display: none;
@@ -31,7 +50,9 @@
                     @include('header')
                     <div class="content">
                             <div class="title m-b-md">
-                                    @include('content')
+                      
+                               @include('content')    
+
                             </div>
                             @include('footer')
 
@@ -39,119 +60,10 @@
 
 
 
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Login</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-                    </div>
-                    <div class="modal-body">
-                        <form id="login-form" method="post" onsubmit="return LoginUser()" role="form" style="display: block;">
-                                <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
-
-
-                            <div class="form-group row">
-
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-
-                                        <span class="invalid-feedback invalid-login hide" role="alert">
-                                            <strong></strong>
-                                        </span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            {{-- <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Login') }}
-                                    </button>
-
-                                    {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a> --}}
-                                </div>
-                            </div>
-                        </form>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script type="text/javascript">
-            $.ajaxSetup({
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
-            function LoginUser()
-            {
-                var token    = $("input[name=_token]").val();
-                var email    = $("input[name=email]").val();
-                var password = $("input[name=password]").val();
-                var data = {
-                    _token:token,
-                    email:email,
-                    password:password
-                };
-                // Ajax Post
-                $.ajax({
-                    type: "post",
-                    url: "/users/loginUser",
-                    data: data,
-                    cache: false,
-                    success: function (data)
-                    {
-                        if(data.status=="success"){
-                            window.location.href="/user_reports";
-                        }
-                        else{
-                            $("input[name=email]").addClass('is-invalid');
-                            $(".invalid-login strong").removeClass('hide').text(data.message);
-                        }
-                    },
-                    error: function (data){
-                        alert('Fail to run Login..');
-                    }
-                });
-                return false;
-            }
-            //# sourceURL=user.js
-        </script>
-    </body>
+   </body>
 
 
 </html>
+
+
+        
