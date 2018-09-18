@@ -57,41 +57,45 @@ export class Tiles extends React.Component {
                   this.forceUpdate()
             }
 
-          jQuery(".scrollbar-macosx").scrollbar();
-          if(typeof $('.compressionTableBody')[0] !="undefined"){
-            var that=this;
 
-          Sortable.create(
-              $('.compressionTableBody')[0],
-              {
-              animation: 150,
-              scroll: true,
-              handle: '.drag-handler',
-              onEnd:function (/**Event*/evt) {
-                  evt.oldIndex;  // element's old index within old parent
-                  evt.newIndex;  // element's new index within new parent=
-                 // console.log(evt.oldIndex,evt.newIndex);
-                  var clonedArr=that.state.compressionChillerData;
-                  var tempKey=clonedArr[evt.oldIndex];
-                  clonedArr[evt.oldIndex]=clonedArr[evt.newIndex];
-                  clonedArr[evt.newIndex]=tempKey;
-                 // console.log(clonedArr);
-                  that.setState({
-                      compressionChillerData: clonedArr
-                    })
-
-              }
-              }
-              );
-        }
 
         }
 
 
     }
+    componentDidUpdate(){
+        var that=this;
+        if(typeof $('.compressionTableBody')[0] !="undefined"){
+            if(that.props.title==CHILLER_TITLE){
+            Sortable.create(
+                $('.compressionTableBody')[0],
+                {
+                animation: 150,
+                scroll: true,
+                handle: '.drag-handler',
+                onEnd:function (/**Event*/evt) {
+                    evt.oldIndex;  // element's old index within old parent
+                    evt.newIndex;  // element's new index within new parent=
+                    var clonedArr=that.state.compressionChillerData;
+                    var tempKey=clonedArr[evt.oldIndex];
+                    clonedArr[evt.oldIndex]=clonedArr[evt.newIndex];
+                    clonedArr[evt.newIndex]=tempKey;
+                    that.updateCompressionList(clonedArr);
+                }
+                }
+                );
+            }
 
+
+        }
+    }
+    componentWillUnmount(){
+        console.log("component unmount")
+    }
     componentDidMount(){
-        const that=this;
+        var that=this;
+
+
         if(this.state.compressionChillerData.length==0)
         {
           this.setState({
@@ -117,8 +121,13 @@ export class Tiles extends React.Component {
 
 
     }
-    updateCompressionList(){
-       // console.log("sorting finish");
+    updateCompressionList(clonedArr){
+       console.log("sorting finish",clonedArr);
+       $('.compressionTableBody').unbind();
+    //    this.setState({
+    //     compressionChillerData: clonedArr
+    //   });
+
     }
     editRecord(elemKey){
         let dataObj=this.state.compressionChillerData[elemKey];

@@ -55992,7 +55992,7 @@ var Adcalc = function (_Component) {
                     modalId: '#compression-chiller'
                 },
                 CompressionChiller: {
-                    title: 'Compression Chiller',
+                    title: CHILLER_TITLE,
                     tileCls: 'compression-chillers data-box',
                     required: "no",
                     edit: 'yes',
@@ -56209,11 +56209,14 @@ var Tiles = function (_React$Component) {
                     this.state.generalData[0] = nextProps.dataRecord;
                     this.forceUpdate();
                 }
-
-                jQuery(".scrollbar-macosx").scrollbar();
-                if (typeof $('.compressionTableBody')[0] != "undefined") {
-                    var that = this;
-
+            }
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+            var that = this;
+            if (typeof $('.compressionTableBody')[0] != "undefined") {
+                if (that.props.title == CHILLER_TITLE) {
                     Sortable.create($('.compressionTableBody')[0], {
                         animation: 150,
                         scroll: true,
@@ -56221,24 +56224,26 @@ var Tiles = function (_React$Component) {
                         onEnd: function onEnd( /**Event*/evt) {
                             evt.oldIndex; // element's old index within old parent
                             evt.newIndex; // element's new index within new parent=
-                            // console.log(evt.oldIndex,evt.newIndex);
                             var clonedArr = that.state.compressionChillerData;
                             var tempKey = clonedArr[evt.oldIndex];
                             clonedArr[evt.oldIndex] = clonedArr[evt.newIndex];
                             clonedArr[evt.newIndex] = tempKey;
-                            // console.log(clonedArr);
-                            that.setState({
-                                compressionChillerData: clonedArr
-                            });
+                            that.updateCompressionList(clonedArr);
                         }
                     });
                 }
             }
         }
     }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log("component unmount");
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var that = this;
+
             if (this.state.compressionChillerData.length == 0) {
                 this.setState({
                     compressionDataChange: false
@@ -56263,8 +56268,12 @@ var Tiles = function (_React$Component) {
         }
     }, {
         key: 'updateCompressionList',
-        value: function updateCompressionList() {
-            // console.log("sorting finish");
+        value: function updateCompressionList(clonedArr) {
+            console.log("sorting finish", clonedArr);
+            $('.compressionTableBody').unbind();
+            //    this.setState({
+            //     compressionChillerData: clonedArr
+            //   });
         }
     }, {
         key: 'editRecord',
@@ -56769,7 +56778,6 @@ var DeleteModal = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            console.log(this.props);
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'modal fade', tabIndex: '-1', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: this.props.id },
@@ -56853,7 +56861,7 @@ var ChillerModal = function (_React$Component) {
 
       var _this = _possibleConstructorReturn(this, (ChillerModal.__proto__ || Object.getPrototypeOf(ChillerModal)).call(this, props));
 
-      _this.state = { compressionChiler: '', role: 'user' };
+      _this.state = { compressionChiler: '', role: LOGGED_IN_ROLE };
       _this.handleSubmit = _this.handleSubmit.bind(_this);
       return _this;
    }
@@ -56897,7 +56905,7 @@ var ChillerModal = function (_React$Component) {
          var manufacturer = $("#compression-chiller-form").find("select[name=manufacturer]").val();
          var compressor = $("#compression-chiller-form").find("select[name=compressor]").val();
 
-         fetch('/adcalc/storeCompressionChiller', {
+         fetch('adcalc/storeCompressionChiller', {
             method: 'POST',
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

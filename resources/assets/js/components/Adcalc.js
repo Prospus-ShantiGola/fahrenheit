@@ -162,7 +162,7 @@ export default class Adcalc extends Component {
                 modalId:'#compression-chiller'
             },
             CompressionChiller:{
-                title:'Compression Chiller',
+                title:CHILLER_TITLE,
                 tileCls:'compression-chillers data-box',
                 required:"no",
                 edit:'yes',
