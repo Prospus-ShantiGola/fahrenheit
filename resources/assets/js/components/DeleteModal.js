@@ -18,21 +18,21 @@ export class DeleteModal extends Component {
     render() {
         console.log(this.props)
         return (
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id={this.props.id}>
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel"><img src="public/images/fahrenheit_logo.png" alt="" /></h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id={this.props.id}>
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                        <h4 className="modal-title" id="myModalLabel"><img src="public/images/fahrenheit_logo.png" alt="" /></h4>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                         Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.
                 </div>
-                <div class="modal-footer">
+                <div className="modal-footer">
 
-                  <button type="submit" class="btn btn-default" title="Delete" data-id="" id="entry-id" onClick={()=>this.acceptChange(this)}>Yes</button>
-                  <button type="button" class="btn btn-primary" id="modal-btn-no"  data-dismiss="modal">No</button>
+                  <button type="submit" className="btn btn-default" title="Delete" data-id="" id="entry-id" onClick={()=>this.acceptChange(this)}>Yes</button>
+                  <button type="button" className="btn btn-primary" id="modal-btn-no"  data-dismiss="modal">No</button>
                 </div>
               </div>
             </div>
