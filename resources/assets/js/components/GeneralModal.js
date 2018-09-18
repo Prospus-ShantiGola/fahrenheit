@@ -22,13 +22,33 @@ export class GeneralModal extends React.Component {
                 }
             });
         });
-        $(document).on('hide.bs.modal','#general-information', function () {
-                $(".general-information-form")[0].reset()
-                    //Do stuff here
-                });
+        $('.close-modal-general').on('click',function (e) {
+
+          const obj = this;
+   
+
+               if ($('.general-information-form').hasClass('form-edited')) {
+                  // alert('eeee')
+                 e.preventDefault();
+    
+                $('#general-modal-confirm').modal('show');
+             
+       
+                }
+                else
+                {
+                 $('#general-information').modal('hide');
+                 $('.general-information-form')[0].reset()
+                }
+
+              
+
+          })
+               //Do stuff here
+          }
 
 
-      }
+   
 
 
 handleSubmit(event) {
@@ -102,7 +122,7 @@ handleSubmit(event) {
                   <ul className="list-inline">
                      <li className="help-toggle"><img src="images/help-icon.png" alt="no-image" /></li>
                      <li> <input type="image" src="images/verifie-icon.png" alt="Submit"/></li>
-                      <li><span className="close close_multi"><img src="images/cancle-icon.png" alt="" className="close" data-dismiss="modal" aria-label="Close"/></span></li>
+                      <li><span className="close close_multi"><img src="images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
                   </ul>
                </div>
             </div>

@@ -139,7 +139,7 @@ class MailController extends Controller {
           $message->from('support@prospus.com','Fahrenheit');
       });
 
-  		echo "HTML Email Sent. Check your inbox.";
+  		echo "success";
    }
 
    /**
@@ -210,7 +210,7 @@ class MailController extends Controller {
           $message->from('support@prospus.com','Fahrenheit');
       });
 
-  		echo "HTML Email Sent. Check your inbox.";
+  		echo "success";
 
    }
 }

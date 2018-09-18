@@ -22,10 +22,35 @@ export class ChillerModal extends React.Component {
                 }
             });
         });
-        $(document).on('hide.bs.modal','#compression-chiller', function () {
-                $("#compression-chiller-form")[0].reset()
-                    //Do stuff here
-                });
+        // $(document).on('hide.bs.modal','#compression-chiller', function () {
+        //         $("#compression-chiller-form")[0].reset()
+        //             //Do stuff here
+        //         });
+
+
+         $('.close-modal-compression').on('click',function (e) {
+
+          const obj = this;
+         // alert('chiller')
+
+               if ($('#compression-chiller-form').hasClass('form-edited')) {
+                   //alert('ccccccc')
+                 e.preventDefault();
+    
+                $('#compression-modal-confirm').modal('show');
+             
+       
+                }
+                else
+                {
+                  $("#compression-chiller").modal("hide");
+                 $("#compression-chiller-form")[0].reset()
+                }
+
+              
+
+          })
+
 
 
       }
@@ -94,7 +119,7 @@ export class ChillerModal extends React.Component {
 
         return (
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-chiller">
-            <form  onSubmit={this.handleSubmit} >
+            <form  onSubmit={this.handleSubmit}  >
             <div className="modal-content">
                <div className="modal-heading">
                   <div className="left-head">Compression Chillers</div>
@@ -103,7 +128,7 @@ export class ChillerModal extends React.Component {
                         <li className="help-toggle"><img src="images/help-icon.png" alt="" /></li>
                         <li>
                          <input type="image" src="images/verifie-icon.png" alt="Submit" /></li>
-                        <li><span className="close close_multi"><img src="images/cancle-icon.png" alt="" className="close" data-dismiss="modal" aria-label="Close"/></span></li>
+                        <li><span className="close close_multi"><img src="images/cancle-icon.png" alt="" className="close"  className="close-modal-compression" aria-label="Close"/></span></li>
                      </ul>
                   </div>
                </div>
