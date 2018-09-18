@@ -36431,17 +36431,12 @@ var Breadcrumb = function (_Component) {
                     { className: 'breadcrumb' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'li',
-                        { className: 'breadcrumb-item' },
+                        { className: 'breadcrumb-item active', 'aria-current': 'page' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'a',
-                            { href: '#' },
-                            'Home'
+                            { href: '/fahrenheit' },
+                            'Adcalc'
                         )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'li',
-                        { className: 'breadcrumb-item active', 'aria-current': 'page' },
-                        'Adcalc page'
                     )
                 )
             );

@@ -42,7 +42,11 @@ class PagesController extends Controller
 	    // app('App\Http\Controllers\MailController')->html_email();
 
 		app('App\Http\Controllers\MailController')->contactUsUserMail($contact_form);
-		app('App\Http\Controllers\MailController')->contactUsAdminMail($contact_form);
+		$return_val = app('App\Http\Controllers\MailController')->contactUsAdminMail($contact_form);
+		if($return_val)
+		{
+			echo 'success';
+		}
     }
 
 

@@ -7,8 +7,8 @@ class Breadcrumb extends Component {
         return (
             <div className="container" >
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item active" aria-current="page">Adcalc page</li>
+                  
+                    <li className="breadcrumb-item active" aria-current="page"><a href="/fahrenheit">Adcalc</a></li>
                 </ol>
             </div>
         );
