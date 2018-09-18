@@ -24,13 +24,33 @@ export class GeneralModal extends React.Component {
                 }
             });
         });
-        $(document).on('hide.bs.modal','#general-information', function () {
-                $(".general-information-form")[0].reset()
-                    //Do stuff here
-                });
+        $('.close-modal-general').on('click',function (e) {
+
+          const obj = this;
+   
+
+               if ($('.general-information-form').hasClass('form-edited')) {
+                  // alert('eeee')
+                 e.preventDefault();
+    
+                $('#general-modal-confirm').modal('show');
+             
+       
+                }
+                else
+                {
+                 $('#general-information').modal('hide');
+                 $('.general-information-form')[0].reset()
+                }
+
+              
+
+          })
+               //Do stuff here
+          }
 
 
-      }
+   
 
 
 handleSubmit(event) {
@@ -108,9 +128,11 @@ handleSubmit(event) {
                <div className="left-head"> General Information</div>
                <div className="right-head">
                   <ul className="list-inline">
+
                      <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li>
                      <li> <input type="image" src="public/images/verifie-icon.png" alt="Submit"/></li>
-                      <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close" data-dismiss="modal" aria-label="Close"/></span></li>
+                      <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
+
                   </ul>
                </div>
             </div>
@@ -124,6 +146,7 @@ handleSubmit(event) {
                      <div className="project-data-div">
                         <div className="table-responsive">
                            <table className="table">
+                                   <tbody>
                               <tr>
                                  <td className="input-label"> Project number:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
@@ -186,6 +209,7 @@ handleSubmit(event) {
                                  </td>
                                  <td className="input-fields"><input type="text"  name = "email_address" id = "email_address" placeholder="inhaber@gmbh.de" /></td>
                               </tr>
+                                      </tbody>
                            </table>
                         </div>
                      </div>
@@ -194,6 +218,7 @@ handleSubmit(event) {
                      <div className="personal-data-div">
                         <div className="table-responsive">
                            <table className="table">
+                                   <tbody>
                               <tr>
                                  <td className="input-label">Editor:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
@@ -247,6 +272,7 @@ handleSubmit(event) {
                                  </td>
                                  <td className="input-fields"><input type="text"  name = "personal_email_address" id = "personal_email_address" placeholder="inhaber@gmbh.de" /></td>
                               </tr>
+                                      </tbody>
                            </table>
                         </div>
                      </div>

@@ -36431,17 +36431,12 @@ var Breadcrumb = function (_Component) {
                     { className: 'breadcrumb' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'li',
-                        { className: 'breadcrumb-item' },
+                        { className: 'breadcrumb-item active', 'aria-current': 'page' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'a',
-                            { href: '#' },
-                            'Home'
+                            { href: '/fahrenheit' },
+                            'Adcalc'
                         )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'li',
-                        { className: 'breadcrumb-item active', 'aria-current': 'page' },
-                        'Adcalc page'
                     )
                 )
             );
@@ -56882,9 +56877,26 @@ var ChillerModal = function (_React$Component) {
                }
             });
          });
-         $(document).on('hide.bs.modal', '#compression-chiller', function () {
-            $("#compression-chiller-form")[0].reset();
-            //Do stuff here
+         // $(document).on('hide.bs.modal','#compression-chiller', function () {
+         //         $("#compression-chiller-form")[0].reset()
+         //             //Do stuff here
+         //         });
+
+
+         $('.close-modal-compression').on('click', function (e) {
+
+            var obj = this;
+            // alert('chiller')
+
+            if ($('#compression-chiller-form').hasClass('form-edited')) {
+               //alert('ccccccc')
+               e.preventDefault();
+
+               $('#compression-modal-confirm').modal('show');
+            } else {
+               $("#compression-chiller").modal("hide");
+               $("#compression-chiller-form")[0].reset();
+            }
          });
       }
    }, {
@@ -57004,7 +57016,7 @@ var ChillerModal = function (_React$Component) {
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                  'span',
                                  { className: 'close close_multi' },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/cancle-icon.png', alt: '', className: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' })
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/cancle-icon.png', alt: '', className: 'close close-modal-compression ', 'aria-label': 'Close' })
                               )
                            )
                         )
@@ -57413,10 +57425,21 @@ var GeneralModal = function (_React$Component) {
                }
             });
          });
-         $(document).on('hide.bs.modal', '#general-information', function () {
-            $(".general-information-form")[0].reset();
-            //Do stuff here
+         $('.close-modal-general').on('click', function (e) {
+
+            var obj = this;
+
+            if ($('.general-information-form').hasClass('form-edited')) {
+               // alert('eeee')
+               e.preventDefault();
+
+               $('#general-modal-confirm').modal('show');
+            } else {
+               $('#general-information').modal('hide');
+               $('.general-information-form')[0].reset();
+            }
          });
+         //Do stuff here
       }
    }, {
       key: 'handleSubmit',
@@ -57526,7 +57549,7 @@ var GeneralModal = function (_React$Component) {
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                  'span',
                                  { className: 'close close_multi' },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/cancle-icon.png', alt: '', className: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' })
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/cancle-icon.png', alt: '', className: 'close-modal-general', 'aria-label': 'Close' })
                               )
                            )
                         )
@@ -57573,177 +57596,181 @@ var GeneralModal = function (_React$Component) {
                                     'table',
                                     { className: 'table' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
+                                       'tbody',
                                        null,
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          ' Project number:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Project number explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                          )
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'New Project', name: 'project_number', id: 'project_number' }),
-                                          ' '
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          ' Project name: '
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                             'td',
+                                             { className: 'input-label' },
+                                             ' Project number:'
+                                          ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                          )
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Test Project', name: 'project_name', id: 'project_name' }),
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'generalformMode', name: 'generalformMode', value: 'add' })
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          ' Location:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Location explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                          )
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Halle/Saale', className: 'required-field', name: 'location', id: 'location' }),
-                                          ' ',
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'span',
-                                             { className: 'invalid-feedback', role: 'alert' },
+                                             'td',
+                                             { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'strong',
-                                                null,
-                                                'Required field'
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Project number explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'New Project', name: 'project_number', id: 'project_number' }),
+                                             ' '
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             ' Project name: '
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Test Project', name: 'project_name', id: 'project_name' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'generalformMode', name: 'generalformMode', value: 'add' })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             ' Location:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Location explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Halle/Saale', className: 'required-field', name: 'location', id: 'location' }),
+                                             ' ',
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { className: 'invalid-feedback', role: 'alert' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'strong',
+                                                   null,
+                                                   'Required field'
+                                                )
                                              )
                                           )
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Customer:'
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Customer:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'customer', id: 'customer', placeholder: 'HabWarmWillKalt Gmbh ' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'customer', id: 'customer', placeholder: 'HabWarmWillKalt Gmbh ' })
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Contact:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Contact explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Contact:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Contact explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'contact', id: 'contact', placeholder: 'Mr. Inhaber' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'contact', id: 'contact', placeholder: 'Mr. Inhaber' })
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Tel. Number:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Tel. number explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Tel. Number:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Tel. number explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'phone_number', id: 'phone_number', placeholder: '0123 456' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'phone_number', id: 'phone_number', placeholder: '0123 456' })
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Email:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Email explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Email:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Email explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'email_address', id: 'email_address', placeholder: 'inhaber@gmbh.de' })
                                           )
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'email_address', id: 'email_address', placeholder: 'inhaber@gmbh.de' })
                                        )
                                     )
                                  )
@@ -57763,153 +57790,157 @@ var GeneralModal = function (_React$Component) {
                                     'table',
                                     { className: 'table' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
+                                       'tbody',
                                        null,
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Editor:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Editor explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                          )
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'editor', id: 'editor', placeholder: 'HabWarmWillKalt Gmbh' }),
-                                          ' '
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Company:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Editor:'
+                                          ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Company explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                          )
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'company', id: 'company', placeholder: 'Gmbh' })
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          ' Address:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Address explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                          )
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'address', id: 'address', placeholder: 'Halle/Saale', className: 'required-field' }),
-                                          ' ',
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'span',
-                                             { className: 'invalid-feedback', role: 'alert' },
+                                             'td',
+                                             { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'strong',
-                                                null,
-                                                'Required field'
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Editor explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'editor', id: 'editor', placeholder: 'HabWarmWillKalt Gmbh' }),
+                                             ' '
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Company:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Company explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'company', id: 'company', placeholder: 'Gmbh' })
+                                          )
+                                       ),
+                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                          'tr',
+                                          null,
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             ' Address:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Address explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'address', id: 'address', placeholder: 'Halle/Saale', className: 'required-field' }),
+                                             ' ',
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { className: 'invalid-feedback', role: 'alert' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                   'strong',
+                                                   null,
+                                                   'Required field'
+                                                )
                                              )
                                           )
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Tel. Number:'
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Tel. number explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Tel. Number:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Tel. number explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'personal_phone_number', id: 'personal_phone_number', placeholder: '0123 456' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'personal_phone_number', id: 'personal_phone_number', placeholder: '0123 456' })
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Mobile:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Mobile explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Mobile:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Mobile explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'mobile_number', id: 'mobile_number', placeholder: 'Mr. Inhaber' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'mobile_number', id: 'mobile_number', placeholder: 'Mr. Inhaber' })
-                                       )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       'tr',
-                                       null,
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-label' },
-                                          'Email:'
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-help-label' },
+                                          'tr',
+                                          null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             'button',
-                                             { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Email explanation/tip' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             'td',
+                                             { className: 'input-label' },
+                                             'Email:'
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Email explanation/tip' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'personal_email_address', id: 'personal_email_address', placeholder: 'inhaber@gmbh.de' })
                                           )
-                                       ),
-                                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          'td',
-                                          { className: 'input-fields' },
-                                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'personal_email_address', id: 'personal_email_address', placeholder: 'inhaber@gmbh.de' })
                                        )
                                     )
                                  )
