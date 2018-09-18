@@ -1242,8 +1242,8 @@ select.required-field {
 
 
 .modal-backdrop {
-    /* bug fix - no overlay */    
-    display: none;    
+    /* bug fix - no overlay */
+    display: none;
 }
 
 .input-fields textarea {
@@ -2066,6 +2066,10 @@ footer {
     width: auto;
     height: 25px;
     text-align: center;
+}
+
+.delete-optionn{
+    cursor: pointer;
 }
 
 
