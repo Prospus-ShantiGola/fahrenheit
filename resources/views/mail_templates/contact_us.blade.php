@@ -1,9 +1,9 @@
 
  <?php //
- $siteUrl =  url('/').'/images/fahrenheit_logo.png';
+ $siteUrl =  url('/').'/public/images/logo-banner.jpg';
 // die;
 
- $siteUrl = 'C:\xampp7\htdocs\fahrenheit\public\images\fahrenheit_logo.png' ;//public_path().'\images\fahrenheit_logo.png';
+ //$siteUrl = 'C:\xampp7\htdocs\fahrenheit\public\images\logo-banner.jpg' ;//public_path().'\images\fahrenheit_logo.png';
 
 
 if($type =='User')

@@ -11,18 +11,18 @@
                     <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
                        <ul class="list-inline left-icon-list">
 
-                          <li><a href="{{ url('/') }}" class = "add-new-adcalc"><img src="public/images/icon_1.png" alt=""  /></a></li>
-                          <li><div data-toggle="modal" data-target="#message-popup-modal"><img src="public/images/icon_2.png" alt="" /></div></li>
-                          <li><a href="#"><img src="public/images/icon_3.png" alt="" /></a></li>
+                          <li class ="disabled"><a href="{{ url('/') }}" class = "add-new-adcalc "><img src="public/images/icon_1.png" alt=""  /></a></li>
+                          <li class ="disabled"><div data-toggle="modal" data-target=""><img src="public/images/icon_2.png" alt="" /></div></li>
+                          <li class ="disabled"><a href="#"><img src="public/images/icon_3.png" alt="" /></a></li>
 
                        </ul>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
                        <ul class="list-inline right-icon-list">
-                          <li class=""><a href="#"><img src="public/images/icon_4.png" alt="" /></a></li>
-                          <li><a href="#"><img src="public/images/icon_5.png" alt="" /></a></li>
-                          <li><a href="#"><img src="public/images/icon_6.png" alt="" /></a></li>
-                          <li><div data-toggle="modal" data-target="#contact-form-modal"><img src="public/images/icon_7.png" alt="" /></div></li>
+                          <li class ="disabled"><a href="#"><img src="public/images/icon_4.png" alt="" /></a></li>
+                          <li class ="disabled"><a href="#"><img src="public/images/icon_5.png" alt="" /></a></li>
+                          <li class ="disabled"><a href="#"><img src="public/images/icon_6.png" alt="" /></a></li>
+                          <li><div data-toggle="modal" data-target="#contact-form-modal" data-backdrop="false"><img src="public/images/icon_7.png" alt="" /></div></li>
                           <li><div data-toggle="modal" data-target="#loginModal"><img src="public/images/icon_8.png" alt="" /></a></li>
                        </ul>
                     </div>
@@ -72,7 +72,11 @@
             }
         })
     </script>
-<div class="modal" id="contact-form-modal" >
+<!-- <div class="modal" id="contact-form-modal" >
+ -->
+
+
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="contact-form-modal">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -102,7 +106,12 @@
                                        <td class="input-label"> Name:</td>
 
                                       
-                                       <td class="input-fields "><input type="text" name = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required="true" class="required-field full_name" ></input></td>
+                                       <td class="input-fields "><input type="text" name = "full_name" id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25"  class="required-field full_name" ></input>
+
+                                         <span class="invalid-feedback  " role="alert">
+                                            <strong></strong>
+                                        </span>
+                                       </td>
                                     </tr>
                                     <tr>
                                        <td class="input-label"> Company:   </td>
@@ -112,12 +121,21 @@
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
                                      
-                                       <td class="input-fields"><input type="number" name= "contact_number" placeholder="Enter your contact number" minlength="10" maxlength="50"  required="true" class="required-field contact_number"></input></td>
+                                       <td class="input-fields"><input type="text" name= "contact_number" id = "contact_number" placeholder="Enter your contact number" minlength="10" maxlength="16"   class="required-field contact_number"></input>
+                                         <span class="invalid-feedback  " role="alert">
+                                            <strong></strong>
+                                        </span>
+                                       </td>
                                     </tr>
                                     <tr>
                                        <td class="input-label">Email:</td>
                                      
-                                       <td class="input-fields"><input type="email" name= "email_address" placeholder="Enter your email address"  minlength="1" maxlength="50"  required="true" class="required-field email_address"></input></td>
+                                       <td class="input-fields"><input type="email" name= "emailaddress" id = "emailaddress" placeholder="Enter your email address"  minlength="1" maxlength="50"   class="required-field email_address"></input>
+                                         <span class="invalid-feedback " role="alert">
+                                            <strong>dfsdf</strong>
+                                        </span> 
+
+                                       </td>
 
 
                                      
@@ -217,8 +235,46 @@
             </div>
         </div>
 
+
+            <!-- The Modal -->
+<div class="modal" id="message-popup-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+   
+  
+        <div class="modal-heading">
+          
+               <div class="right-head">
+                
+                    <span class="close" data-dismiss="modal"><img src="images/cancle-icon.png" alt=""></span>
+                
+               </div>
+            </div>
+
+      <div class="modal-body-content">
+       <p>Make sure you fill in all required fields in the following tiles:</p>
+       <ul>
+       <li>General Information</li>
+        <li> Economic Data</li>
+         <li> Cooling load profile</li>
+       </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+      <!-- message modal end -->    
+
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="contact-us-modal">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
@@ -245,7 +301,7 @@
 
 
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-modal-confirm">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
@@ -265,7 +321,7 @@
     </div>
   </div>  
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-modal-confirm">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
@@ -289,7 +345,7 @@
   </div> 
 
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="sure-modal">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
@@ -377,22 +433,27 @@
                     cache: false,
                     success: function (data)
                     {
-                     $('#contact-form-modal').modal('hide');
-                       if(data=='success')
-                       {
+
+                         if(typeof data.errors=="undefined"){
+                    
+                         $('#contact-form-modal').modal('hide');
 
                           $('#contact-us-modal').modal('show');    
                          //  $('#contact-us-modal .modal-body').html('show');
 
-
+$(".fahrenheit-contact")[0].reset();
                        }
                        else
                        {
-                            $('#contact-us-modal').modal('show');
-                             $('#contact-us-modal .modal-body').html('There is some error please contact admin.');
+                       $(".fahrenheit-contact").find('.invalid-feedback').show().children('strong').html('');
+                           jQuery.each(data.errors, function(key, value){
+                            //alert('value'+value+'key'+key)
+                                          
+                                $(".fahrenheit-contact").find('#'+key).siblings('.invalid-feedback').show().children('strong').html(value);
+                            });
                        }
 
-                       $(".fahrenheit-contact")[0].reset();
+                       
                     },
                     error: function (data){
                       //  alert('Fail to run Login..');
@@ -451,11 +512,9 @@ $('.add-new-adcalc').on('click',function(e){
 
                if ( $('#contact-form-modal .fahrenheit-contact').hasClass('form-edited')) {
                 // alert('eeee')
-             
-    
+               
                 $('#sure-modal').modal('show');
-             
-       
+                    
                 }
                 else
                 {
