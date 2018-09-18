@@ -112,7 +112,7 @@
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
                                      
-                                       <td class="input-fields"><input type="number" name= "contact_number" placeholder="Enter your contact number" minlength="1" maxlength="50"  required="true" class="required-field contact_number"></input></td>
+                                       <td class="input-fields"><input type="number" name= "contact_number" placeholder="Enter your contact number" minlength="10" maxlength="50"  required="true" class="required-field contact_number"></input></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label">Email:</td>
@@ -120,7 +120,7 @@
                                        <td class="input-fields"><input type="email" name= "email_address" placeholder="Enter your email address"  minlength="1" maxlength="50"  required="true" class="required-field email_address"></input></td>
 
 
-                                       <td class="input-fields "><input type="text" name = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required="true" class="required-field full_name"> </td>
+                                     
                                     </tr>
                                    
                                     <tr>
@@ -248,7 +248,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('images/fahrenheit_logo.png') }}" alt=""></h4>
+          <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
         </div>
@@ -268,7 +268,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('images/fahrenheit_logo.png') }}" alt=""></h4>
+                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
         </div>
@@ -292,7 +292,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('images/fahrenheit_logo.png') }}" alt=""></h4>
+                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
         </div>
@@ -325,7 +325,7 @@
                 // Ajax Post
                 $.ajax({
                     type: "post",
-                    url: "/users/loginUser",
+                    url: "users/loginUser",
                     data: data,
                     cache: false,
                     success: function (data)
@@ -334,7 +334,7 @@
                         console.log('status: ' +data.status);
                         console.log('message: ' +data.message);
                         if(data.status=="success"){
-                            window.location.href="/user_reports";
+                            window.location.href="user_reports";
                         }
                         else{
                             $("input[name=email]").addClass('is-invalid');
@@ -372,7 +372,7 @@
                        headers: {
                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                        },
-                    url: "/pages/submitContactForm",
+                    url: "pages/submitContactForm",
                     data: data,
                     cache: false,
                     success: function (data)
@@ -404,7 +404,7 @@
       $('.login-modal').on('click',function(e){
          if (loggedIn)
          {
-           window.location = "/user_reports"
+           window.location = "user_reports"
          }
 
          else
