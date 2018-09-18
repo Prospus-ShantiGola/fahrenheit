@@ -39,13 +39,19 @@ class PagesController extends Controller
         if ($validator->fails())
         {
            return response()->json(['errors'=>$validator->errors()]);
+
+//$return_val = 'success';
+        	//app('App\Http\Controllers\MailController')->contactUsUserMail($contact_form);
+	//	$return_val = app('App\Http\Controllers\MailController')->contactUsAdminMail($contact_form);
+		return response()->json(['success'=>$return_val]);
+
         // return 	response()->json($validator->errors(), 422);
         }
         else
         {
-
-        	app('App\Http\Controllers\MailController')->contactUsUserMail($contact_form);
-		$return_val = app('App\Http\Controllers\MailController')->contactUsAdminMail($contact_form);
+// $return_val = 'success';
+        app('App\Http\Controllers\MailController')->contactUsUserMail($contact_form);
+	$return_val = app('App\Http\Controllers\MailController')->contactUsAdminMail($contact_form);
 		return response()->json(['success'=>$return_val]);
         }
        

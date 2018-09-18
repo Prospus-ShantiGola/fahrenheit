@@ -1018,7 +1018,7 @@ h3.inner-table-heading {
 }
 
 #contact-form-modal {
-    z-index: 9999!important;
+  /*  z-index: 9999!important;*/
 	  background-color: transparent;
 }
 
@@ -1240,11 +1240,6 @@ select.required-field {
     top: 56%;
     right: 12%;}
 
-
-.modal-backdrop {
-    /* bug fix - no overlay */    
-    display: none;    
-}
 
 .input-fields textarea {
     color: #00618c;
@@ -2068,6 +2063,13 @@ footer {
     text-align: center;
 }
 
+#sure-modal{
+z-index:1;
+}
 
+.modal-backdrop {
+ 
+    display: none;    
+}
 
 
