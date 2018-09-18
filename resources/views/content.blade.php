@@ -344,7 +344,7 @@
     </div>
   </div> 
 
-  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="sure-modal">
+  <div class="modal fade m" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="sure-modal">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -436,7 +436,7 @@
 
                          if(typeof data.errors=="undefined"){
                     
-                         $('#contact-form-modal').modal('hide');
+                          $('#contact-form-modal').modal('hide');
 
                           $('#contact-us-modal').modal('show');    
                          //  $('#contact-us-modal .modal-body').html('show');
