@@ -3,7 +3,7 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3">
                     <div class="footer-section1">
-                        <h5><img src="{{ asset('images/f-logo.png') }}" alt="" />
+                        <h5><img src="{{ asset('public/images/f-logo.png') }}" alt="" />
                           Cooling innovation.</h5>
                         <p>Do you have questions about our technology, its applications or our company?
                             <br> Do not hesitate to contact us.</p>
@@ -25,7 +25,7 @@
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3">
                     <div class="footer-section3">
                         <h3>EXCELLENT TECHNOLOGY</h3>
-                         <img src="{{ asset('images/footer-img.jpg') }}" alt="" />
+                         <img src="{{ asset('public/images/footer-img.jpg') }}" alt="" />
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3">

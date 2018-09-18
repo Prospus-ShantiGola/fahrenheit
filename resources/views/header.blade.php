@@ -52,7 +52,7 @@
                                 <li class="nav-item ">
                                     <a class="nav-link" href="">Adcalc</a>
                                 </li>
-                            
+
 
                             </ul>
                         </div>
@@ -82,13 +82,13 @@
 
 
 
- <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+ <script src="{{ asset('public/js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.9.2/jarallax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.9.2/jarallax-element.min.js"></script>
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript">
         jQuery('.jarallax').jarallax({
             speed: 0.1
@@ -116,7 +116,7 @@
         //loggin variable for jQuery
        var loggedIn = {{ auth()->check() ? 'true' : 'false' }};
 
-    </script>        
+    </script>
 
 
 

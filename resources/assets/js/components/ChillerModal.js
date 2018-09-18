@@ -10,6 +10,7 @@ export class ChillerModal extends React.Component {
       }
 
       componentDidMount(){
+        jQuery(".help-toggle").unbind('click');
         jQuery(".help-toggle").click(function(){
             jQuery(".input-help-label").toggle();
         });

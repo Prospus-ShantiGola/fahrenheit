@@ -6,6 +6,7 @@ import {GeneralModal} from './GeneralModal';
 
 export default class Adcalc extends Component {
     constructor(props) {
+
         super(props);
         this.state = {
             EconomicStateChange: {
@@ -24,7 +25,8 @@ export default class Adcalc extends Component {
                 stateChange:false
             },
             generalStateChange: {
-                stateChange:false
+                stateChange:false,
+                generalRecord:{}
             },
             compressionChilerStateChange:{
                 stateChange:false,
@@ -33,6 +35,7 @@ export default class Adcalc extends Component {
             }
         };
         this.handleChillerForm = this.handleChillerForm.bind(this);
+        this.handleGeneralForm = this.handleGeneralForm.bind(this);
     }
     handleChillerForm (result)  {
         console.log(result.state)
@@ -42,10 +45,19 @@ export default class Adcalc extends Component {
                                                     }
         });
     }
+    handleGeneralForm (result)  {
+        console.log(result.state)
+        this.setState({generalStateChange:{
+                                            generalRecord:result.generalInformation,
+                                            stateChange:result.state
+                                          }
+        });
+    }
+
     render() {
         const tiles={
             general:{
-                title:'General Information',
+                title: GENERAL_TILE,
                 tileCls:'general-information data-box',
                 required:"yes",
                 edit:'yes',
@@ -68,7 +80,7 @@ export default class Adcalc extends Component {
             Economic:{
                 title:'Economic Data',
                 tileCls:'economic-data data-box',
-                required:"yes",
+                required:"no",
                 edit:'yes',
                 editCls:'edit-icon myBtn_multi',
                 editIcon:'public/images/edit-icon.png',
@@ -89,7 +101,7 @@ export default class Adcalc extends Component {
             Options:{
                 title:'Options',
                 tileCls:'options data-box',
-                required:"yes",
+                required:"no",
                 edit:'yes',
                 editCls:'edit-icon myBtn_multi',
                 editIcon:'public/images/edit-icon.png',
@@ -110,7 +122,7 @@ export default class Adcalc extends Component {
             HeatSource:{
                 title:'Heat Source',
                 tileCls:'heat-sources data-box',
-                required:"yes",
+                required:"no",
                 edit:'yes',
                 editCls:'edit-icon myBtn_multi',
                 editIcon:'public/images/edit-icon.png',
@@ -131,7 +143,7 @@ export default class Adcalc extends Component {
             HeatingLoadProfile:{
                 title:'Heating Load Profile',
                 tileCls:'heating-load-profiles data-box',
-                required:"yes",
+                required:"no",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
                 editIcon:'public/images/add-icon.png',
@@ -168,7 +180,8 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#compression-chiller'
+                modalId:'#compression-chiller',
+                multiple:true
             },
             CoolingLoadProfile:{
                 title:'Cooling Load Profile',
@@ -194,7 +207,7 @@ export default class Adcalc extends Component {
             FahrenheitSystem:{
                 title:'Fahrenheit System',
                 tileCls:'fahrenheit-system-box data-box',
-                required:"yes",
+                required:"no",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
                 editIcon:'public/images/add-icon.png',
@@ -238,7 +251,8 @@ export default class Adcalc extends Component {
                 rightpriceList={tiles.general.rightpriceList}
                 rightpriceListeData={tiles.general.rightpriceListeData}
                 modalId={tiles.general.modalId}
-                dataChange={this.state.generalStateChange}/>
+                dataChange={this.state.generalStateChange.stateChange}
+                dataRecord={this.state.generalStateChange.generalRecord}/>
                 <Tiles
                 title={tiles.Economic.title}
                 required={tiles.Economic.required}
@@ -279,7 +293,7 @@ export default class Adcalc extends Component {
                  <div className="row">
                     <div className="col-md-12 col-sm-12 col-12 col-lg-8 col-xl-8">
                        <div className="row">
-                        <Tiles  name={tiles.HeatSource.title}
+                        <Tiles  title={tiles.HeatSource.title}
                         required={tiles.HeatSource.required}
                         edit={tiles.HeatSource.edit}
                         mainclass={tiles.HeatSource.mainClass}
@@ -333,7 +347,8 @@ export default class Adcalc extends Component {
                         rightpriceListeData={tiles.CompressionChiller.rightpriceListeData}
                         modalId={tiles.CompressionChiller.modalId}
                         dataChange={this.state.compressionChilerStateChange.stateChange}
-                        dataRecord={this.state.compressionChilerStateChange.chillerRecord} />
+                        dataRecord={this.state.compressionChilerStateChange.chillerRecord}
+                        multiple={tiles.CompressionChiller.multiple} />
 
                         <Tiles  title={tiles.CoolingLoadProfile.title}
                         required={tiles.CoolingLoadProfile.required}
@@ -373,7 +388,8 @@ export default class Adcalc extends Component {
                 dataChange={this.state.HeatSourceStateChange}/>
                  </div>
                  <ChillerModal role="expert" onChillerSubmit={this.handleChillerForm}/>
-                 <GeneralModal role="expert" onChillerSubmit={this.handleChillerForm}/>
+                 <GeneralModal role="expert" onGeneralSubmit={this.handleGeneralForm}/>
+
               </div>
         );
     }

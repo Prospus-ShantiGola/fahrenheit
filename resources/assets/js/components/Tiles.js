@@ -1,22 +1,42 @@
 import React from 'react';
 
+import {DeleteModal} from './DeleteModal';
+
 export class Tiles extends React.Component {
+
     constructor(props) {
+
         super(props);
         this.state = {
             compressionChillerData:[],
             compressionDataChange:false,
-            generalInfo:[]
+            generalData:[],
+            generalDataChange:false
                };
         this.editRecord=this.editRecord.bind(this);
         this.deleteRecord=this.deleteRecord.bind(this);
         this.updateCompressionList=this.updateCompressionList.bind(this);
+        this.handleChillerDeleteEntry=this.handleChillerDeleteEntry.bind(this);
     }
     componentWillReceiveProps(nextProps){
-        //console.log("componentWillReceiveProps",nextProps);
-        this.setState({
-            compressionDataChange: nextProps.dataChange
-          });
+        console.log("componentWillReceiveProps",nextProps);
+        switch (nextProps.title) {
+            case "Compression Chiller":
+            this.setState({
+                compressionDataChange: nextProps.dataChange
+              });
+                break;
+            case GENERAL_TILE:
+                this.setState({
+                    generalDataChange:nextProps.dataChange
+                  });
+
+
+
+            default:
+                break;
+        }
+
         if(typeof nextProps.dataRecord!="undefined"){
         if(nextProps.dataRecord.chillerformMode=="add"){
         this.setState({
@@ -27,6 +47,16 @@ export class Tiles extends React.Component {
               this.state.compressionChillerData[nextProps.dataRecord.chillerformModeKey]= nextProps.dataRecord
               this.forceUpdate()
         }
+        if(nextProps.dataRecord.generalformMode=="add"){
+            this.setState({
+                generalData: this.state.generalData.concat(nextProps.dataRecord)
+              })
+            }else{
+
+                  this.state.generalData[0]= nextProps.dataRecord
+                  this.forceUpdate()
+            }
+
           jQuery(".scrollbar-macosx").scrollbar();
           if(typeof $('.compressionTableBody')[0] !="undefined"){
             var that=this;
@@ -46,7 +76,9 @@ export class Tiles extends React.Component {
                   clonedArr[evt.oldIndex]=clonedArr[evt.newIndex];
                   clonedArr[evt.newIndex]=tempKey;
                   console.log(clonedArr);
-                  that.updateView(clonedArr);
+                  that.setState({
+                      compressionChillerData: clonedArr
+                    })
 
               }
               }
@@ -57,14 +89,31 @@ export class Tiles extends React.Component {
 
 
     }
-    updateView(clonedArr){
-        that.setState({
-            compressionChillerData: clonedArr
-          })
-    }
 
     componentDidMount(){
+        const that=this;
+        if(this.state.compressionChillerData.length==0)
+        {
+          this.setState({
+              compressionDataChange: false
+            });
+        }
+        $(document).on('show.bs.modal','#general-information', function () {
+            if(that.props.title==GENERAL_TILE){
+                var dataObj=that.state.generalData[0];
+                if(typeof dataObj !='undefined'){
 
+                for (var key in dataObj) {
+                    if (dataObj.hasOwnProperty(key)) {
+                        //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+                        $(that.props.modalId).find('#'+key).val(dataObj[key]);
+                    }
+                }
+                $(that.props.modalId).find('#generalformMode').val("edit");
+                 }
+                }
+                //Do stuff here
+            });
 
 
     }
@@ -84,23 +133,28 @@ export class Tiles extends React.Component {
         //$(this.props.modalId).find
     }
     deleteRecord(eleM){
-        this.setState({
-            compressionChillerData: this.state.compressionChillerData.filter((_, i) => i !== eleM)
+        $("#delete-modal").find("#entry-id").attr('data-id',eleM);
+        $("#delete-modal").modal("show");
+    }
+    handleChillerDeleteEntry(result){
+        console.log(this.state.compressionChillerData);
+       this.setState({
+            compressionChillerData: this.state.compressionChillerData.filter((_, i) => i !== parseInt(result.elementId))
           });
-
-          if(this.state.compressionChillerData.length==0)
-        {
-          this.setState({
-              compressionDataChange: false
-            });
-        }
-        //console.log("deleteRecord",eleM)
     }
 
     render() {
-        console.log("tiles",this.state.compressionChillerData," State ",this.state.compressionDataChange,this.props.title,this.props.hoverText);
 
         var priceFullList,pricelist,requiredMsg="";
+        if(this.props.required=="yes"){
+            var requiredMsg=<h5 className="input-required">An input is required</h5>;
+        }
+        if(this.props.multiple){
+            var deleteModal=<DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} id="delete-modal"/>
+        }
+        else{
+            var deleteModal=""
+        }
         if(this.state.compressionDataChange==true && this.state.compressionChillerData.length!=0){
             var pricelist=(
                 <ul className="price-listt">
@@ -150,6 +204,52 @@ export class Tiles extends React.Component {
         else{
             var priceFullList= <p>{this.props.hoverText}</p>;
         }
+
+        if(this.state.generalDataChange){
+            var pricelist=(
+                <ul class="price-listt">
+                              <li>
+                                 <p>Location</p>
+                                 <h3>{this.state.generalData[0].location}</h3>
+                              </li>
+                           </ul>
+            );
+            var priceFullList=(<div class="hover-list">
+                                 <div class="table-responsive">
+                                    <table class="table">
+                                       <tr>
+                                          <th>Project name:</th>
+                                          <td>{this.state.generalData[0].project_name}</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Project number:</th>
+                                          <td>{this.state.generalData[0].project_number}</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Editor: </th>
+                                          <td>{this.state.generalData[0].editor}</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Location:</th>
+                                          <td>{this.state.generalData[0].location}</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Contact person: </th>
+                                          <td>{this.state.generalData[0].customer}</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Tel. Number:</th>
+                                          <td>{this.state.generalData[0].phone_number}</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Email:</th>
+                                          <td>{this.state.generalData[0].email_address}</td>
+                                       </tr>
+                                    </table>
+                                 </div>
+                              </div>);
+        var requiredMsg="";
+        }
         if(this.props.priceList=="yes"){
             var pricelist=(
                 <ul className="price-listt">
@@ -184,9 +284,7 @@ export class Tiles extends React.Component {
       </ul>
             );
         }
-        if(this.props.required=="yes"){
-            var requiredMsg=<h5 className="input-required">An input is required</h5>;
-        }
+
 
         return (
 
@@ -201,8 +299,8 @@ export class Tiles extends React.Component {
                             {priceFullList}
                         </div>
                     </div>
+                    {deleteModal}
                 </div>
-
         );
     }
 }
@@ -210,7 +308,7 @@ export class Tiles extends React.Component {
 Tiles.defaultProps = {
     title:'General Information',
     tileCls:'general-information data-box',
-    required:"yes",
+    required:"no",
     edit:'yes',
     editCls:'edit-icon myBtn_multi',
     editIcon:'images/edit-icon.png',
@@ -225,5 +323,7 @@ Tiles.defaultProps = {
     rightpriceList:'no',
     rightpriceListeData:{
 
-    }
+    },
+    multiple:false
+
   };
