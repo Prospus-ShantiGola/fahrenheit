@@ -10,9 +10,11 @@
                  <div class="row">
                     <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
                        <ul class="list-inline left-icon-list">
-                          <li><a href="#"><img src="public/images/icon_1.png" alt="" /></a></li>
+
+                          <li><a href="{{ url('/') }}" class = "add-new-adcalc"><img src="public/images/icon_1.png" alt=""  /></a></li>
                           <li><div data-toggle="modal" data-target="#message-popup-modal"><img src="public/images/icon_2.png" alt="" /></div></li>
                           <li><a href="#"><img src="public/images/icon_3.png" alt="" /></a></li>
+
                        </ul>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
@@ -70,7 +72,7 @@
             }
         })
     </script>
-<div class="modal" id="contact-form-modal">
+<div class="modal" id="contact-form-modal" >
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -80,47 +82,59 @@
                <div class="left-head">Contact Fahrenheit</div>
                <div class="right-head">
 
-                    <span class="close" data-dismiss="modal"><img src="public/images/cancle-icon.png" alt=""></span>
+                
+                    <span class="close close-contact-modal" ><img src="public/images/cancle-icon.png" alt=""></span>
+                
+
+
 
                </div>
-            </div>
+        </div>
       <!-- Modal body -->
       <div class="modal-body-content">
        <div class="table-responsive">
+         <form name = "adad" class="fahrenheit-contact" method ="post">
                            <table class="table">
-                              <form id = "fahrenheit-contact" class = "fahrenheit-contact" >
-                                 <meta name="csrf-token" content="{{ csrf_token() }}">
-                                    <tbody><tr>
+                             
+                                 <meta name="csrf-token" content="{{ csrf_token() }}"/>
+                                    <tbody>
+                                      <tr>
                                        <td class="input-label"> Name:</td>
 
-                                       <td class="input-fields "><input type="text" name = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required="true" class="required-field full_name"> </td>
+                                      
+                                       <td class="input-fields "><input type="text" name = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required="true" class="required-field full_name" ></input></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label"> Company:   </td>
-
-                                       <td class="input-fields"><input type="text" name= "company_type" placeholder="Enter your company name" minlength="1" maxlength="25" class="company_type" ></td>
+                                     
+                                       <td class="input-fields"><input type="text" name= "company_type" placeholder="Enter your company name" minlength="1" maxlength="25" class="company_type" ></input></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
-
-                                       <td class="input-fields"><input type="number" name= "contact_number" placeholder="Enter your contact number" minlength="1" maxlength="50"  required="true" class="required-field contact_number"></td>
+                                     
+                                       <td class="input-fields"><input type="number" name= "contact_number" placeholder="Enter your contact number" minlength="1" maxlength="50"  required="true" class="required-field contact_number"></input></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label">Email:</td>
+                                     
+                                       <td class="input-fields"><input type="email" name= "email_address" placeholder="Enter your email address"  minlength="1" maxlength="50"  required="true" class="required-field email_address"></input></td>
 
-                                       <td class="input-fields"><input type="email" name= "email_address" placeholder="Enter your email address"  minlength="1" maxlength="50"  required="true" class="required-field email_address"></td>
+
+                                       <td class="input-fields "><input type="text" name = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required="true" class="required-field full_name"> </td>
                                     </tr>
+                                   
                                     <tr>
                                        <td class="input-label text-area-label">Message:</td>
 
                                        <td class="input-fields textarea-place"><textarea name= "message" class = "message"></textarea></td>
                                     </tr>
                                     <tr>
-                                     <td colspan="2" class="form-submitbtn"><button type="submit" class="btn submit-contact-form" >Submit</button></td>
+                                     <td colspan="2" class="form-submitbtn"><button type="submit" class="btn submit-contact-form">Submit</button></td>
                                     </tr>
                                  </tbody>
-                           </form>
+                          
                         </table>
+                         </form>
                         </div>
       </div>
 
@@ -213,6 +227,11 @@
         </div>
         <div class="modal-body ">
 
+               
+            Your enquiry message for AdCalc has been sent to the Fahrenheit team. We will be in touch in the next 48 hours. 
+    
+
+
 
         </div>
         <div class="modal-footer">
@@ -221,9 +240,77 @@
         </div>
       </div>
     </div>
-</div>
 
-        <script type="text/javascript">
+</div>    
+
+
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-modal-confirm">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('images/fahrenheit_logo.png') }}" alt=""></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        </div>
+        <div class="modal-body ">
+           <p> Are you sure want to cancel? </p>
+          
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" class= "modal-confirm" onclick ="jQuery('#general-information').modal('hide'); $('.general-information-form').removeClass('form-edited'); $('.general-information-form')[0].reset()">Yes</button>
+          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >No</button>
+
+        </div>
+      </div>
+    </div>
+  </div>  
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-modal-confirm">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('images/fahrenheit_logo.png') }}" alt=""></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        </div>
+        <div class="modal-body ">
+           <p> Are you sure want to cancel? </p>
+          
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" onclick ="jQuery('#compression-chiller').modal('hide'); $('#compression-chiller-form').removeClass('form-edited');  $('#compression-chiller-form')[0].reset()">Yes</button>
+          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >No</button>
+
+       </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="sure-modal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('images/fahrenheit_logo.png') }}" alt=""></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        </div>
+        <div class="modal-body ">
+           <p> Are you sure want to cancel? </p>
+          
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" onclick ="jQuery('#contact-form-modal').modal('hide'); $('.fahrenheit-contact').removeClass('form-edited');  $('.fahrenheit-contact')[0].reset()">Yes</button>
+          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >No</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+        <script type="text/javascript"> 
             function LoginUser()
             {
 
@@ -294,14 +381,15 @@
                        if(data=='success')
                        {
 
-                          $('#contact-us-modal').modal('show');
-                           $('#contact-us-modal .modal-body').html('show');
+                          $('#contact-us-modal').modal('show');    
+                         //  $('#contact-us-modal .modal-body').html('show');
+
 
                        }
                        else
                        {
                             $('#contact-us-modal').modal('show');
-                              $('#contact-us-modal .modal-body').html('error');
+                             $('#contact-us-modal .modal-body').html('There is some error please contact admin.');
                        }
 
                        $(".fahrenheit-contact")[0].reset();
@@ -324,6 +412,61 @@
            $('#loginModal').modal('show');
          }
    })
+
+$('.add-new-adcalc').on('click',function(e){
+
+
+// if(('#adcalc .general-information-form, #compression-chiller-form').hasClass('form-edited'))
+// {
+
+// }
+        
+})
+
+
+
+   $('#adcalc .general-information-form, #compression-chiller-form').on('keyup change paste', 'input, select, textarea', function(){
+        // $('#business-flyin #business_profile_modal').removeClass('form-edited');
+       // alert('dsd')
+        $('#adcalc .general-information-form, #compression-chiller-form').addClass('form-edited');
+
+        // alert( $('#business-flyin').data('backdrop'));
+
+    });
+
+
+
+   $('.fahrenheit-contact').on('keyup change paste', 'input, select, textarea', function(){
+
+
+        $('.fahrenheit-contact').addClass('form-edited');
+
+    });
+
+    $('.close-contact-modal').on('click',function (e) {
+     e.preventDefault();
+
+          var obj = this;
+   
+
+               if ( $('#contact-form-modal .fahrenheit-contact').hasClass('form-edited')) {
+                // alert('eeee')
+             
+    
+                $('#sure-modal').modal('show');
+             
+       
+                }
+                else
+                {
+                 $('#contact-form-modal').modal('hide');
+                 $('.fahrenheit-contact')[0].reset()
+                }
+
+              
+
+          })
+
 
  });
            //# sourceURL=user.js

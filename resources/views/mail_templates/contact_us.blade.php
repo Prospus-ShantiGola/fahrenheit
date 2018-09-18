@@ -1,5 +1,10 @@
 
- <?php   $siteUrl =  asset('/images/');
+ <?php //
+ $siteUrl =  url('/').'/images/fahrenheit_logo.png';
+// die;
+
+ $siteUrl = 'C:\xampp7\htdocs\fahrenheit\public\images\fahrenheit_logo.png' ;//public_path().'\images\fahrenheit_logo.png';
+
 
 if($type =='User')
 {
@@ -12,7 +17,7 @@ if($type =='User')
                 <td>
                     <table cellpadding='0' cellspacing='0'>
                         <tr>
-                            <td><img src="<?php echo $siteUrl; ?>/fahrenheit_logo.png"></td>
+                            <td><img src="<?php echo $siteUrl; ?>"></td>
                         </tr>
                         <tr>
                             <td><table style='font-family: Arial, Helvetica, sans-serif; color:#000; font-size:12px; background:#fff' cellpadding='0' cellspacing='20'>
@@ -75,7 +80,7 @@ FAHRENHEIT GmbH is not liable for the proper and complete transmission of the in
                 <td>
                     <table cellpadding='0' cellspacing='0'>
                         <tr>
-                            <td><img src="<?php echo $siteUrl ;?>/fahrenheit_logo.png"></td>
+                            <td><img src="<?php echo $siteUrl ;?>"></td>
                         </tr>
                         <tr>
                             <td><table style='font-family: Arial, Helvetica, sans-serif; color:#000; font-size:12px; background:#fff' cellpadding='0' cellspacing='20'>
@@ -89,17 +94,17 @@ FAHRENHEIT GmbH is not liable for the proper and complete transmission of the in
                             </td>
                         </tr>
                         <tr>
-                            <td width='800'><b>Name:</b> <?php echo $user_name; ?> <br/>   
-                            <b>Company:</b><?php echo $company_type; ?>  <br/>   
-                             <b>Tel No.:</b><?php echo $contact_number; ?>  <br/>   
+                            <td width='800'><b>Name:</b>  <?php echo $user_name; ?> <br/>   
+                            <b>Company:</b> <?php echo $company_type; ?>  <br/>   
+                             <b>Tel No.:</b> <?php echo $contact_number; ?>  <br/>   
                                
-                               <b>Email:</b><?php echo $email_address; ?>
+                               <b>Email:</b> <?php echo $email_address; ?>
                                 </td>   </tr>
                     
 
 
                         <tr>
-                            <td ><b>Message:</b><?php echo $contact_message; ?>  </td>
+                            <td ><b>Message:</b> <?php echo $contact_message; ?>  </td>
                         </tr>
                        
                    
