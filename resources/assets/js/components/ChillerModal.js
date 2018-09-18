@@ -10,6 +10,7 @@ export class ChillerModal extends React.Component {
       }
 
       componentDidMount(){
+        jQuery(".help-toggle").unbind('click');
         jQuery(".help-toggle").click(function(){
             jQuery(".input-help-label").toggle();
         });
@@ -119,16 +120,20 @@ export class ChillerModal extends React.Component {
 
         return (
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-chiller">
-            <form  onSubmit={this.handleSubmit}  >
+
+            <form  onSubmit={this.handleSubmit} id="compression-chiller-form">
+
             <div className="modal-content">
                <div className="modal-heading">
                   <div className="left-head">Compression Chillers</div>
                   <div className="right-head">
                      <ul className="list-inline">
-                        <li className="help-toggle"><img src="images/help-icon.png" alt="" /></li>
+                        <li className="help-toggle"><img src="public/images/help-icon.png" alt="" /></li>
                         <li>
-                         <input type="image" src="images/verifie-icon.png" alt="Submit" /></li>
-                        <li><span className="close close_multi"><img src="images/cancle-icon.png" alt="" className="close"  className="close-modal-compression" aria-label="Close"/></span></li>
+
+                         <input type="image" src="public/images/verifie-icon.png" alt="Submit" /></li>
+                        <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-compression "  aria-label="Close"/></span></li>
+
                      </ul>
                   </div>
                </div>
@@ -141,13 +146,12 @@ export class ChillerModal extends React.Component {
                      <div id="compression-technical-data" className="tab-pane fade  active show">
                         <div className="heating-load-general-div">
                            <div className="table-responsive">
-                               <form action="" id="compression-chiller-form">
                               <table className="table">
                               <tbody>
                                  <tr>
                                     <td className="input-label"> Name:  </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
-                                       <img src="images/help-red.png" alt="" />
+                                       <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
                                     <td className="input-fields"><input type="text" placeholder="Chiller 1" id="chillername"   name="chillername"  />
@@ -158,7 +162,7 @@ export class ChillerModal extends React.Component {
                                  <tr>
                                     <td className="input-label">Refrigerant:</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                       <img src="images/help-red.png" alt="" />
+                                       <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
                                     <td className="input-fields">
@@ -176,7 +180,7 @@ export class ChillerModal extends React.Component {
                                  <tr>
                                     <td className="input-label">Manufacturer:</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                       <img src="images/help-red.png" alt="" />
+                                       <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
                                     <td className="input-fields">
@@ -194,7 +198,7 @@ export class ChillerModal extends React.Component {
                                  <tr>
                                     <td className="input-label">Compressor type:</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                       <img src="images/help-red.png" alt="" />
+                                       <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
                                     <td className="input-fields">
@@ -214,14 +218,13 @@ export class ChillerModal extends React.Component {
                                        temperature:
                                     </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                       <img src="images/help-red.png" alt="" />
+                                       <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
                                     <td className="input-fields"><input type="text"  id="temperature" placeholder="6 °C" name="temperature"/></td>
                                  </tr>
                                  </tbody>
                               </table>
-                             </form>
                            </div>
                         </div>
                      </div>
@@ -230,30 +233,32 @@ export class ChillerModal extends React.Component {
                         <div className="personal-data-div">
                            <div className="table-responsive">
                               <table className="table">
+                              <tbody>
                                  <tr>
                                     <td className="input-label">Investment costs: </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
-                                       <img src="images/help-red.png" alt="" />
+                                       <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="€" /> </td>
+                                    <td className="input-fields"><input type="text" placeholder="€" name="investment_cost" id="investment_cost"/> </td>
                                  </tr>
                                  <tr>
                                     <td className="input-label">Discount:</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
-                                       <img src="images/help-red.png" alt="" />
+                                       <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="%" /></td>
+                                    <td className="input-fields"><input type="text" placeholder="%"  name="discount" id="discount" /></td>
                                  </tr>
                                  <tr>
                                     <td className="input-label"> Maintenance costs: </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                       <img src="images/help-red.png" alt="" />
+                                       <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="€/a" /> </td>
+                                    <td className="input-fields"><input type="text" placeholder="€/a"  name="maintenence_costs" id="maintenence_costs" /> </td>
                                  </tr>
+                                 </tbody>
                               </table>
                            </div>
                         </div>

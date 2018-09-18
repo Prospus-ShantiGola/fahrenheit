@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.adcalc');
-});
+
+Route::get('/', 'AdcalcController@index')->name('home');
 
 Auth::routes();
 
@@ -24,7 +23,7 @@ Route::group(
     'prefix' => 'pages',
 ], function () {
 
-  
+
     Route::post('/submitContactForm', 'PagesController@submitContactForm');
 
 });

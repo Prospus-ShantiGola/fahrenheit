@@ -14,6 +14,11 @@ use Hash;
 class AdcalcController extends Controller
 {
 
+    public function index()
+    {
+        //  dd(Auth::user());
+        return view('pages.adcalc');
+    }
     public function storeCompressionChiller(Request $request)
     {
         $validator = \Validator::make($request->all(), [

@@ -1265,7 +1265,6 @@ select.required-field {
     right: 12%;}
 
 
-
 #tabsJustifiedlast .calci-div {
     top: 45px;}
 
@@ -2054,7 +2053,20 @@ footer {
     pointer-events: none;
 }
 
-
+.loggedin-div {
+    float: left;
+    color: #bbb;
+    background: #fff;
+    border-radius: 28px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 6px 3px 6px;
+    display: inline-block;
+    text-transform: uppercase;
+    width: auto;
+    height: 25px;
+    text-align: center;
+}
 
 
 

@@ -10,23 +10,23 @@
        <section class="adcalc-content">
          <div class="container">
             <div class="adcalc-inner-content">
-               <!-- top icon --> 
+               <!-- top icon -->
                <div class="icon-area">
                   <div class="row">
                      <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
                         <ul class="list-inline left-icon-list">
-                           <li><a href="#"><img src="{{ asset('images/icon_1.png') }}" alt="" /></a></li>
-                           <li><a href="#"><img src="{{ asset('images/icon_2.png') }}" alt="" /></a></li>
-                           <li><a href="#"><img src="{{ asset('images/icon_3.png') }}" alt="" /></a></li>
+                           <li><a href="#"><img src="{{ asset('public/images/icon_1.png') }}" alt="" /></a></li>
+                           <li><a href="#"><img src="{{ asset('public/images/icon_2.png') }}" alt="" /></a></li>
+                           <li><a href="#"><img src="{{ asset('public/images/icon_3.png') }}" alt="" /></a></li>
                         </ul>
                      </div>
                      <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
                         <ul class="list-inline right-icon-list">
-                           <li class=""><a href="#"><img src="{{ asset('images/icon_4.png') }}" alt="" /></a></li>
-                           <li><a href="#"><img src="{{ asset('images/icon_5.png') }}" alt="" /></a></li>
-                           <li><a href="#"><img src="{{ asset('images/icon_6.png') }}" alt="" /></a></li>
+                           <li class=""><a href="#"><img src="{{ asset('public/images/icon_4.png') }}" alt="" /></a></li>
+                           <li><a href="#"><img src="{{ asset('public/images/icon_5.png') }}" alt="" /></a></li>
+                           <li><a href="#"><img src="{{ asset('public/images/icon_6.png') }}" alt="" /></a></li>
                             <li><div data-toggle="modal" data-target="#contact-form-modal"><img src="images/icon_7.png" alt="" /></div></li>
-                           <li><div data-toggle="modal"  class = "login-modal"><img src="images/icon_8.png" alt="" /></div></li> 
+                           <li><div data-toggle="modal"  class = "login-modal"><img src="images/icon_8.png" alt="" /></div></li>
 
                         </ul>
                      </div>
@@ -42,7 +42,7 @@
                            <h5 class="input-required">An input is required</h5>
                            <div class="main-hover-box general-info-hover">
                               <h1>General Information</h1>
-                              <div class="edit-icon myBtn_multi"><img src="{{ asset('images/edit-icon.png') }}" alt="" /></div>
+                              <div class="edit-icon myBtn_multi"><img src="{{ asset('public/images/edit-icon.png') }}" alt="" /></div>
                               <p>We need the location to get the specific weather data.</p>
                            </div>
                         </div>
@@ -58,7 +58,7 @@
                            </ul>
                            <div class="main-hover-box economic-hover">
                               <h1>Economic Data</h1>
-                              <div class="edit-icon myBtn_multi"><img src="{{ asset('images/edit-icon.png') }}" alt="" /></div>
+                              <div class="edit-icon myBtn_multi"><img src="{{ asset('public/images/edit-icon.png') }}" alt="" /></div>
                               <ul class="price-listt">
                                  <li>
                                     <p>Electricity Price</p>
@@ -87,7 +87,7 @@
                            </ul>
                            <div class="main-hover-box options-hover">
                               <h1>Options</h1>
-                              <div class="edit-icon myBtn_multi"><img src="{{ asset('images/edit-icon.png') }}" alt="" /></div>
+                              <div class="edit-icon myBtn_multi"><img src="{{ asset('public/images/edit-icon.png') }}" alt="" /></div>
                               <ul class="price-listt">
                                  <li>
                                     <p>Language</p>
@@ -121,10 +121,10 @@
                                  <h1>Heat Sources</h1>
                                  <div class="main-hover-box heat-sources-hover">
                                     <h1>Heat Sources</h1>
-                                    <p>Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those 
+                                    <p>Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those
                                        sources.
                                     </p>
-                                    <div class="add-icon myBtn_multi"><img src="{{ asset('images/add-icon.png') }}" alt="no-image" /></div>
+                                    <div class="add-icon myBtn_multi"><img src="{{ asset('public/images/add-icon.png') }}" alt="no-image" /></div>
                                  </div>
                               </div>
                            </div>
@@ -137,7 +137,7 @@
                                     <br>
                                        Are you planning a new heat source? Then we can calculate the profitability of the whole system!
                                     </p>
-                                    <div class="add-icon myBtn_multi"><img src="{{ asset('images/add-icon.png') }}" alt="no-image" /></div>
+                                    <div class="add-icon myBtn_multi"><img src="{{ asset('public/images/add-icon.png') }}" alt="no-image" /></div>
                                  </div>
                               </div>
                            </div>
@@ -149,7 +149,7 @@
                                  <div class="main-hover-box compression-chillers-hover">
                                     <h1>Compression Chillers</h1>
                                     <p>Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.</p>
-                                    <div class="add-icon myBtn_multi"><img src="{{ asset('images/add-icon.png') }}" alt="no-image" /></div>
+                                    <div class="add-icon myBtn_multi"><img src="{{ asset('public/images/add-icon.png') }}" alt="no-image" /></div>
                                  </div>
                               </div>
                            </div>
@@ -160,7 +160,7 @@
                                  <div class="main-hover-box cooling-load-hover">
                                     <h1>Cooling Load Profile</h1>
                                     <p>Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!</p>
-                                    <div class="add-icon myBtn_multi"><img src="{{ asset('images/add-icon.png') }}" alt="no-image" /></div>
+                                    <div class="add-icon myBtn_multi"><img src="{{ asset('public/images/add-icon.png') }}" alt="no-image" /></div>
                                  </div>
                               </div>
                            </div>
@@ -175,7 +175,7 @@
                            <div class="main-hover-box fahrenheit-system-hover">
                               <h1>Fahrenheit System</h1>
                               <p>Please provide the required inputs so we can suggest a Fahrenheit system for you.</p>
-                              <div class="add-icon myBtn_multi"><img src="{{ asset('images/add-icon.png') }}" alt="no-image" /></div>
+                              <div class="add-icon myBtn_multi"><img src="{{ asset('public/images/add-icon.png') }}" alt="no-image" /></div>
                            </div>
                         </div>
                      </div>
@@ -186,8 +186,8 @@
          </div>
          </div>
       </section>
-     
- 
+
+
       <!-- General Information Modal -->
       <div class="modal modal_multi">
          <div class="modal-content">
@@ -195,9 +195,9 @@
                <div class="left-head"> General Information</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt="no-image" /></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt="" /></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt="no-image" /></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt="" /></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span></li>
                   </ul>
                </div>
             </div>
@@ -214,7 +214,7 @@
                               <tr>
                                  <td class="input-label"> Project number:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="New Project"> </td>
@@ -222,7 +222,7 @@
                               <tr>
                                  <td class="input-label"> Project name: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Test Project"></td>
@@ -230,7 +230,7 @@
                               <tr>
                                  <td class="input-label"> Location:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Halle/Saale" class="required-field"> <i class="fa fa-map-marker" aria-hidden="true"></i> </td>
@@ -238,7 +238,7 @@
                               <tr>
                                  <td class="input-label">Customer:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="HabWarmWillKalt Gmbh "></td>
@@ -246,7 +246,7 @@
                               <tr>
                                  <td class="input-label">Contact:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Contact explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Mr. Inhaber"></td>
@@ -254,7 +254,7 @@
                               <tr>
                                  <td class="input-label">Tel. Number:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="0123 456"></td>
@@ -262,7 +262,7 @@
                               <tr>
                                  <td class="input-label">Email:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Email explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="inhaber@gmbh.de"></td>
@@ -278,7 +278,7 @@
                               <tr>
                                  <td class="input-label">Editor:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="HabWarmWillKalt Gmbh"> </td>
@@ -286,7 +286,7 @@
                               <tr>
                                  <td class="input-label">Company:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Gmbh"></td>
@@ -294,7 +294,7 @@
                               <tr>
                                  <td class="input-label"> Address:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Halle/Saale" class="required-field"> <i class="fa fa-map-marker" aria-hidden="true"></i> </td>
@@ -302,7 +302,7 @@
                               <tr>
                                  <td class="input-label">Tel. Number:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="0123 456"></td>
@@ -310,7 +310,7 @@
                               <tr>
                                  <td class="input-label">Mobile:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Mobile explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Mr. Inhaber"></td>
@@ -318,7 +318,7 @@
                               <tr>
                                  <td class="input-label">Email:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Email explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="inhaber@gmbh.de"></td>
@@ -331,7 +331,7 @@
             </div>
          </div>
       </div>
-      <!-- General Information Modal end --> 
+      <!-- General Information Modal end -->
       <!--  Economic data Modal -->
       <div class="modal modal_multi">
          <div class="modal-content">
@@ -339,9 +339,9 @@
                <div class="left-head"> Economic Data</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt="" /></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt="" /></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt="" /></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt="" /></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span></li>
                   </ul>
                </div>
             </div>
@@ -360,7 +360,7 @@
                               <tr>
                                  <td class="input-label"> Electricity price:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Electricity price explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="0.180 €/kWh"> </td>
@@ -368,7 +368,7 @@
                               <tr>
                                  <td class="input-label"> Heat price:   </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Heat Price">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="0.000 €/kWh"></td>
@@ -376,7 +376,7 @@
                               <tr>
                                  <td class="input-label">Electricity price increase:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="2.000 %/a"></td>
@@ -384,7 +384,7 @@
                               <tr>
                                  <td class="input-label">Calculated interest rate:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Calculated interest rate explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="0.700 %/a"></td>
@@ -392,7 +392,7 @@
                               <tr>
                                  <td class="input-label">Inflation rate:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Inflation rate explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="1.600 %/a"></td>
@@ -408,18 +408,18 @@
                               <tr>
                                  <td class="input-label"> Own usage of electricity:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Electricity price explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="100%"> </td>
                               </tr>
                               <tr>
-                                 <td class="input-label">KWK-subsidy for 
-                                    electricity:    
+                                 <td class="input-label">KWK-subsidy for
+                                    electricity:
                                  </td>
-                                 <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="KWK-subsidy for 
+                                 <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="KWK-subsidy for
                                     electricity">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="2016"></td>
@@ -427,12 +427,12 @@
                               <tr>
                                  <td class="input-label">Gas price:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="0.03500 €/kWh"></td>
                               </tr>
-                              
+
                               <tr>
                                  <td colspan="3">
                                     <h3 class="inner-table-heading">FOR EXPERTS</h3>
@@ -440,7 +440,7 @@
                               </tr>
                               <td class="input-label">Electricity sales price:</td>
                               <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Electricity sales price explanation/tip">
-                                 <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                 <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                  </button>
                               </td>
                               <td class="input-fields"><input type="text" placeholder="0.03500 €/kWh"></td>
@@ -450,7 +450,7 @@
                                     Rückerstattung:
                                  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Inflation rate explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="0.00550 €/kWh"></td>
@@ -458,7 +458,7 @@
                               <tr>
                                  <td class="input-label">EEG-Umlage-Anteil:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="EEG-Umlage-Anteil explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="40%"></td>
@@ -466,7 +466,7 @@
                               <tr>
                                  <td class="input-label">EEG-Umlage-Kosten:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Inflation rate explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="0.06792 €/kWh"></td>
@@ -511,7 +511,7 @@
                               </tr>
                               <tr>
                                  <td class="input-label">
-                                    Project planning: 
+                                    Project planning:
                                     <div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
                                     <div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true"></i></div>
                                  </td>
@@ -522,7 +522,7 @@
                               </tr>
                               <tr class="add-new-row">
                                  <td class="input-label">
-                                    Project planning: 
+                                    Project planning:
                                     <div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
                                     <div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true"></i></div>
                                  </td>
@@ -534,7 +534,7 @@
                            </table>
                         </div>
                         <div class="new-row-addition">
-                          <img src="{{ asset('images/plus-icon.png') }}"  alt="" />
+                          <img src="{{ asset('public/images/plus-icon.png') }}"  alt="" />
                         </div>
                      </div>
                      <div class="caculator-divv">
@@ -569,7 +569,7 @@
                               </tr>
                               <tr>
                                  <td class="input-label">
-                                    Project planning: 
+                                    Project planning:
                                     <div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
                                     <div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true"></i></div>
                                  </td>
@@ -578,7 +578,7 @@
                               </tr>
                               <tr class="add-new-row">
                                  <td class="input-label">
-                                    Project planning: 
+                                    Project planning:
                                     <div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
                                     <div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true"></i></div>
                                  </td>
@@ -588,7 +588,7 @@
                            </table>
                         </div>
                         <div class="new-row-addition">
-                           <img src="{{ asset('images/plus-icon.png') }}"  alt="" />
+                           <img src="{{ asset('public/images/plus-icon.png') }}"  alt="" />
                         </div>
                      </div>
                      <div class="caculator-divv">
@@ -599,7 +599,7 @@
             </div>
          </div>
       </div>
-      <!-- Economic data Modal end -->       
+      <!-- Economic data Modal end -->
       <!-- option modal start-->
       <div class="modal modal_multi">
          <div class="modal-content">
@@ -607,9 +607,9 @@
                <div class="left-head"> Options</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt="" /></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt="" /></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt="" /></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt="" /></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span></li>
                   </ul>
                </div>
             </div>
@@ -626,24 +626,24 @@
                               <tr>
                                  <td class="input-label"> Language:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
                                     <ul class="list-inline">
-                                       <li><img src="{{ asset('images/germany-flag.png') }}" alt="" />
+                                       <li><img src="{{ asset('public/images/germany-flag.png') }}" alt="" />
                                        <li>
-                                       <li><img src="{{ asset('images/united-kingdom.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/poland-flag.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/italy.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/greece-flag.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/united-kingdom.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/poland-flag.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/italy.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/greece-flag.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
                               <tr>
                                  <td class="input-label">BAFA 2018:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -657,7 +657,7 @@
                               <tr>
                                  <td class="input-label">Re-cooling Method:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -671,7 +671,7 @@
                               <tr>
                                  <td class="input-label">Re-cooling Temperature:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Contact explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="25 °C"></td>
@@ -679,7 +679,7 @@
                               <tr>
                                  <td class="input-label">Free Cooling:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -693,7 +693,7 @@
                               <tr>
                                  <td class="input-label">Heat Sources:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -707,7 +707,7 @@
                               <tr>
                                  <td class="input-label">Heat Supply:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -721,7 +721,7 @@
                               <tr>
                                  <td class="input-label"> Conventional heat source:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Boiler, 2x 100 kW"></td>
@@ -729,7 +729,7 @@
                               <tr>
                                  <td class="input-label">Calculation method:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -743,7 +743,7 @@
                               <tr>
                                  <td class="input-label">Ambient temperature step:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -757,7 +757,7 @@
                               <tr>
                                  <td class="input-label">Heating load profile:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -771,7 +771,7 @@
                               <tr>
                                  <td class="input-label">Cooling load profile:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -793,7 +793,7 @@
                               <tr>
                                  <td class="input-label">Bus system:    </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder=""> </td>
@@ -801,7 +801,7 @@
                               <tr>
                                  <td class="input-label">Controller:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder=""></td>
@@ -809,7 +809,7 @@
                               <tr>
                                  <td class="input-label"> Pressure drop in the piping:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="" > </td>
@@ -822,7 +822,7 @@
             </div>
          </div>
       </div>
-      <!-- option modal end-->   
+      <!-- option modal end-->
       <!--  heat sources  modal start-->
       <div class="modal modal_multi">
          <div class="modal-content">
@@ -830,9 +830,9 @@
                <div class="left-head"> Heat Source</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt="" /></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt="" /></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt="" /></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt="" /></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span></li>
                   </ul>
                </div>
             </div>
@@ -849,7 +849,7 @@
                               <tr>
                                  <td class="input-label"> Name: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="CHP in the basement"></td>
@@ -857,7 +857,7 @@
                               <tr>
                                  <td class="input-label">Type of heat source:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -871,7 +871,7 @@
                               <tr>
                                  <td class="input-label">Drive temperature:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="85°C" class="required-field"></td>
@@ -879,7 +879,7 @@
                               <tr>
                                  <td class="input-label">Heat capacity:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Contact explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="36 kw" class="required-field"></td>
@@ -887,7 +887,7 @@
                               <tr>
                                  <td class="input-label">Electric capacity: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="18 kw"></td>
@@ -895,7 +895,7 @@
                               <tr>
                                  <td class="input-label">Thermal efficiency:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="54.8 %"></td>
@@ -905,7 +905,7 @@
                                     Electric efficiency:
                                  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="34.5 %"></td>
@@ -913,7 +913,7 @@
                               <tr>
                                  <td class="input-label">Manufacturer:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -927,7 +927,7 @@
                               <tr>
                                  <td class="input-label">Type:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -941,18 +941,18 @@
                               <tr>
                                  <td class="input-label"> Operation hours:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="4.000 h/a"><i class="fa fa-calculator myBtn_multi" aria-hidden="true" data-index="4"></i>
-                                 
-                                 
+
+
                                  </td>
                               </tr>
                               <tr>
                                  <td class="input-label"> New installation:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -975,7 +975,7 @@
                               <tr>
                                  <td class="input-label">Investment costs:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€"> </td>
@@ -983,7 +983,7 @@
                               <tr>
                                  <td class="input-label">Discount:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="%"></td>
@@ -991,7 +991,7 @@
                               <tr>
                                  <td class="input-label"> Maintenance costs: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€/kWh" > </td>
@@ -1004,8 +1004,8 @@
             </div>
          </div>
       </div>
-      <!-- heat sources modal end--> 
-     
+      <!-- heat sources modal end-->
+
       <!-- heating-load-profiles -->
       <div class="modal modal_multi">
          <div class="modal-content">
@@ -1013,9 +1013,9 @@
                <div class="left-head"> Heating Load Profile</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt="" /></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt="" /></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt="" /></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt="" /></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span></li>
                   </ul>
                </div>
             </div>
@@ -1032,7 +1032,7 @@
                               <tr>
                                  <td class="input-label"> Name: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Office South"></td>
@@ -1040,7 +1040,7 @@
                               <tr>
                                  <td class="input-label">Profile Type:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1054,7 +1054,7 @@
                               <tr>
                                  <td class="input-label">Max. heating load:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1069,7 +1069,7 @@
                               <tr>
                                  <td class="input-label">Base load:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1083,7 +1083,7 @@
                               <tr>
                                  <td class="input-label">Zero load:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1109,7 +1109,7 @@
                               <tr>
                                  <td class="input-label">Investment costs:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€"> </td>
@@ -1117,7 +1117,7 @@
                               <tr>
                                  <td class="input-label">Discount:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="%"></td>
@@ -1125,7 +1125,7 @@
                               <tr>
                                  <td class="input-label"> Maintenance costs: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€/a" > </td>
@@ -1138,7 +1138,7 @@
             </div>
          </div>
       </div>
-      <!-- heating-load profile modal end -->       
+      <!-- heating-load profile modal end -->
       <!-- Compression Chillers modal start -->
       <div class="modal modal_multi">
          <div class="modal-content">
@@ -1146,9 +1146,9 @@
                <div class="left-head">Compression Chillers</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt="" /></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt="" /></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt="" /></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt="" /></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span></li>
                   </ul>
                </div>
             </div>
@@ -1165,7 +1165,7 @@
                               <tr>
                                  <td class="input-label"> Name: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Chiller 1"></td>
@@ -1173,7 +1173,7 @@
                               <tr>
                                  <td class="input-label">Refrigerant:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1187,7 +1187,7 @@
                               <tr>
                                  <td class="input-label">Manufacturer:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1201,7 +1201,7 @@
                               <tr>
                                  <td class="input-label">Compressor type:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1213,11 +1213,11 @@
                                  </td>
                               </tr>
                               <tr>
-                                 <td class="input-label">Chilled water 
+                                 <td class="input-label">Chilled water
                                     temperature:
                                  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="6 °C" >
@@ -1233,7 +1233,7 @@
                               <tr>
                                  <td class="input-label">Investment costs:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€"> </td>
@@ -1241,7 +1241,7 @@
                               <tr>
                                  <td class="input-label">Discount:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="%"></td>
@@ -1249,7 +1249,7 @@
                               <tr>
                                  <td class="input-label"> Maintenance costs: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€/a" > </td>
@@ -1262,7 +1262,7 @@
             </div>
          </div>
       </div>
-      <!-- Compression Chillers modal end -->    
+      <!-- Compression Chillers modal end -->
       <!-- cooling-load-profiles -->
       <div class="modal modal_multi">
          <div class="modal-content">
@@ -1270,9 +1270,9 @@
                <div class="left-head"> Cooling Load Profile</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt="" /></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt="" /></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt="" /></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt="" /></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span></li>
                   </ul>
                </div>
             </div>
@@ -1289,7 +1289,7 @@
                               <tr>
                                  <td class="input-label"> Name: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="Radiant cooling office"></td>
@@ -1297,7 +1297,7 @@
                               <tr>
                                  <td class="input-label">Profile Type:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1309,21 +1309,21 @@
                                  </td>
                               </tr>
                               <tr>
-                                 <td class="input-label"> Chilled water 
-                                    temperature: 
+                                 <td class="input-label"> Chilled water
+                                    temperature:
                                  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="16°C" > </td>
                               </tr>
                               <tr>
-                                 <td class="input-label"> Chilled water inlet 
-                                    temperature: 
+                                 <td class="input-label"> Chilled water inlet
+                                    temperature:
                                  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="19°C" > </td>
@@ -1331,7 +1331,7 @@
                               <tr>
                                  <td class="input-label">Max. cooling load:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1346,7 +1346,7 @@
                               <tr>
                                  <td class="input-label">Base load:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1360,7 +1360,7 @@
                               <tr>
                                  <td class="input-label">Zero load:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1375,7 +1375,7 @@
                               <tr>
                                  <td class="input-label">Cooling hours:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1396,7 +1396,7 @@
                               <tr>
                                  <td class="input-label">Investment costs:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€"> </td>
@@ -1404,7 +1404,7 @@
                               <tr>
                                  <td class="input-label">Discount:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="%"></td>
@@ -1412,7 +1412,7 @@
                               <tr>
                                  <td class="input-label"> Maintenance costs: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="" />
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="" />
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€/a" > </td>
@@ -1425,8 +1425,8 @@
             </div>
          </div>
       </div>
-      <!-- Cooling Load Profile modal end -->    
-        
+      <!-- Cooling Load Profile modal end -->
+
       <!-- fahrenhiet modal start -->
       <div class="modal modal_multi mainmodal">
          <div class="modal-content">
@@ -1434,21 +1434,21 @@
                <div class="left-head"> Fahrenheit System  </div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt="" /></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt="" /></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt="" /></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt="" /></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span></li>
                   </ul>
                </div>
             </div>
             <div class="modal-body-content">
                <ul id="tabsJustifiedlast" class="nav nav-tabs">
-                  <li class="nav-item"><img src="{{ asset('images/plus-icon.png') }}" class="myBtn_multi modal-openn" alt="" /> <a href="" data-target="#chillar" data-toggle="tab" class="nav-link small active"> Chiller</a></li>
-                  <li class="nav-item"><img src="{{ asset('images/plus-icon.png') }}" class="myBtn_multi modal-openn" alt="" /> <a href="JavaScript:Void(0)" data-target="#recooling-system" data-toggle="tab" class="nav-link"> <span class="center-text">Re-cooling System</span> <img src="{{ asset('images/cacli-icon.png') }}" class="dropdown-calci" alt="caculator" /></a>
+                  <li class="nav-item"><img src="{{ asset('public/images/plus-icon.png') }}" class="myBtn_multi modal-openn" alt="" /> <a href="" data-target="#chillar" data-toggle="tab" class="nav-link small active"> Chiller</a></li>
+                  <li class="nav-item"><img src="{{ asset('public/images/plus-icon.png') }}" class="myBtn_multi modal-openn" alt="" /> <a href="JavaScript:Void(0)" data-target="#recooling-system" data-toggle="tab" class="nav-link"> <span class="center-text">Re-cooling System</span> <img src="{{ asset('public/images/cacli-icon.png') }}" class="dropdown-calci" alt="caculator" /></a>
                    <div class="caculator-divv">
                         <div class="calci-div"></div>
                      </div>
                      </li>
-                  
+
                </ul>
                <div id="tabsJustifiedContentlast" class="tab-content">
                   <div id="chillar" class="tab-pane fade  active show">
@@ -1468,9 +1468,9 @@
                                  </td>
                                  <td>
                                     <ul class="list-inline">
-                                       <li><img src="{{ asset('images/edit-ico.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/del-icon.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/bar-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/edit-ico.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/del-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/bar-icon.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
@@ -1482,9 +1482,9 @@
                                  <td></td>
                                  <td>
                                     <ul class="list-inline">
-                                      <li><img src="{{ asset('images/edit-ico.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/del-icon.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/bar-icon.png') }}" alt="" /></li>
+                                      <li><img src="{{ asset('public/images/edit-ico.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/del-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/bar-icon.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
@@ -1496,9 +1496,9 @@
                                  <td></td>
                                  <td>
                                     <ul class="list-inline">
-                                      <li><img src="{{ asset('images/edit-ico.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/del-icon.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/bar-icon.png') }}" alt="" /></li>
+                                      <li><img src="{{ asset('public/images/edit-ico.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/del-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/bar-icon.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
@@ -1510,9 +1510,9 @@
                                  <td></td>
                                  <td>
                                     <ul class="list-inline">
-                                      <li><img src="{{ asset('images/edit-ico.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/del-icon.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/bar-icon.png') }}" alt="" /></li>
+                                      <li><img src="{{ asset('public/images/edit-ico.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/del-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/bar-icon.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
@@ -1537,9 +1537,9 @@
                                  </td>
                                  <td>
                                     <ul class="list-inline">
-                                      <li><img src="{{ asset('images/edit-ico.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/del-icon.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/bar-icon.png') }}" alt="" /></li>
+                                      <li><img src="{{ asset('public/images/edit-ico.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/del-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/bar-icon.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
@@ -1551,9 +1551,9 @@
                                  <td></td>
                                  <td>
                                     <ul class="list-inline">
-                                     <li><img src="{{ asset('images/edit-ico.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/del-icon.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/bar-icon.png') }}" alt="" /></li>
+                                     <li><img src="{{ asset('public/images/edit-ico.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/del-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/bar-icon.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
@@ -1565,9 +1565,9 @@
                                  <td></td>
                                  <td>
                                     <ul class="list-inline">
-                                      <li><img src="{{ asset('images/edit-ico.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/del-icon.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/bar-icon.png') }}" alt="" /></li>
+                                      <li><img src="{{ asset('public/images/edit-ico.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/del-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/bar-icon.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
@@ -1579,16 +1579,16 @@
                                  <td></td>
                                  <td>
                                     <ul class="list-inline">
-                                      <li><img src="{{ asset('images/edit-ico.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/del-icon.png') }}" alt="" /></li>
-                                       <li><img src="{{ asset('images/bar-icon.png') }}" alt="" /></li>
+                                      <li><img src="{{ asset('public/images/edit-ico.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/del-icon.png') }}" alt="" /></li>
+                                       <li><img src="{{ asset('public/images/bar-icon.png') }}" alt="" /></li>
                                     </ul>
                                  </td>
                               </tr>
                            </table>
                         </div>
                      </div>
-                    
+
                   </div>
                </div>
             </div>
@@ -1601,9 +1601,9 @@
          <div class="modal-heading">
                <div class="left-head"> Operation Hours</div>
                <div class="right-head">
-                
-                   <span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span>
-                
+
+                   <span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span>
+
                </div>
             </div>
          <div class="modal-body-content">
@@ -1612,20 +1612,20 @@
            <a href="#">Apply hours for the whole year</a>
            <a href="#">Remove this month</a>
           </div>
-          
+
          </div>
          </div>
          </div>
-      <!-- calender popup for heat sources end --> 
+      <!-- calender popup for heat sources end -->
        <!--- calender popup for cooling load profile modal start-->
        <div class="modal modal_multi" id="calender-popupp">
          <div class="modal-content">
          <div class="modal-heading">
                <div class="left-head"> Operation Hours</div>
                <div class="right-head">
-                
-                   <span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt="" /></span>
-                
+
+                   <span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt="" /></span>
+
                </div>
             </div>
          <div class="modal-body-content">
@@ -1634,11 +1634,11 @@
            <a href="#">Apply hours for the whole year</a>
            <a href="#">Remove this month</a>
           </div>
-          
+
          </div>
          </div>
          </div>
-      <!-- calender popup for cooling load profile  end --> 
+      <!-- calender popup for cooling load profile  end -->
       <!-- add a chiller modal start-->
       <div class="modal modal_multi">
          <div class="modal-content">
@@ -1646,9 +1646,9 @@
                <div class="left-head"> Add a Chiller</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt=""></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt=""></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt=""></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt=""></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt=""></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt=""></span></li>
                   </ul>
                </div>
             </div>
@@ -1666,7 +1666,7 @@
                               <tr>
                                  <td class="input-label">Chiller type:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1677,12 +1677,12 @@
                                     </select>
                                  </td>
                               </tr>
-                              
-                              
+
+
                               <tr>
                                  <td class="input-label">Adsorbent:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1696,7 +1696,7 @@
                               <tr>
                                  <td class="input-label">Product:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1710,7 +1710,7 @@
                               <tr>
                                  <td class="input-label">Number of chillers:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1722,10 +1722,10 @@
                                  </td>
                               </tr>
                               <tr>
-                                 <td class="input-label">Product 
+                                 <td class="input-label">Product
 interconnection:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1739,7 +1739,7 @@ interconnection:</td>
                               <tr>
                                  <td class="input-label">Group interconnection:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1753,7 +1753,7 @@ interconnection:</td>
                               <tr>
                                  <td class="input-label">Function:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1764,14 +1764,14 @@ interconnection:</td>
                                     </select>
                                  </td>
                               </tr>
-                             
-                              
-                             
-                                 
-                           
+
+
+
+
+
                            </tbody></table>
                         </div>
-                       
+
                      </div>
                   </div>
                   <div id="addchillar-calculation-data" class="tab-pane fade">
@@ -1781,7 +1781,7 @@ interconnection:</td>
                               <tbody><tr>
                                  <td class="input-label">Investment costs:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€"> </td>
@@ -1789,7 +1789,7 @@ interconnection:</td>
                               <tr>
                                  <td class="input-label">Discount:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="%"></td>
@@ -1797,7 +1797,7 @@ interconnection:</td>
                               <tr>
                                  <td class="input-label"> Maintenance costs: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="€/a"> </td>
@@ -1818,9 +1818,9 @@ interconnection:</td>
                <div class="left-head">Add a Re-cooling System</div>
                <div class="right-head">
                   <ul class="list-inline">
-                     <li class="help-toggle"><img src="{{ asset('images/help-icon.png') }}" alt=""></li>
-                     <li><img src="{{ asset('images/verifie-icon.png') }}" alt=""></li>
-                     <li><span class="close close_multi"><img src="{{ asset('images/cancle-icon.png') }}" alt=""></span></li>
+                     <li class="help-toggle"><img src="{{ asset('public/images/help-icon.png') }}" alt=""></li>
+                     <li><img src="{{ asset('public/images/verifie-icon.png') }}" alt=""></li>
+                     <li><span class="close close_multi"><img src="{{ asset('public/images/cancle-icon.png') }}" alt=""></span></li>
                   </ul>
                </div>
             </div>
@@ -1838,7 +1838,7 @@ interconnection:</td>
                               <tr>
                                  <td class="input-label">Components:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1852,7 +1852,7 @@ interconnection:</td>
                               <tr>
                                  <td class="input-label">Re-cooling method:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1866,7 +1866,7 @@ interconnection:</td>
                               <tr>
                                  <td class="input-label">Product:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1877,80 +1877,80 @@ interconnection:</td>
                                     </select>
                                  </td>
                               </tr>
-                              
-                              
+
+
                               <tr>
                                  <td class="input-label"> Number of units:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="1 piece" class="required-field"></td>
                               </tr>
-                            
+
                               <tr>
                                  <td class="input-label"> Name: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder=""></td>
                               </tr>
-                          
+
                               <tr>
                                  <td class="input-label"> Re-cooling capacity:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="58 kW" class="required-field"></td>
                               </tr>
-                            
+
                               <tr>
                                  <td class="input-label"> Temperature difference:   </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="2 K" class="required-field"></td>
                               </tr>
-                            
+
                               <tr>
-                                 <td class="input-label"> Primary volume 
+                                 <td class="input-label"> Primary volume
 flow rate:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="" class="required-field"></td>
                               </tr>
-                              
+
                               <tr>
-                                 <td class="input-label"> Secondary volume 
+                                 <td class="input-label"> Secondary volume
 flow rate:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="" class="required-field"></td>
                               </tr>
-                            
+
                               <tr>
-                                 <td class="input-label">Electrical power 
+                                 <td class="input-label">Electrical power
 consumption:    </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder="" class="required-field"></td>
                               </tr>
                               <tr>
-                              
-                              
-                                 <td class="input-label">Available/provided 
+
+
+                                 <td class="input-label">Available/provided
 by customer:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields">
@@ -1961,11 +1961,11 @@ by customer:</td>
                                     </select>
                                  </td>
                               </tr>
-                             
-                              
+
+
                            </tbody></table>
                         </div>
-                       
+
                      </div>
                   </div>
                   <div id="addrecooling-calculation-data" class="tab-pane fade">
@@ -1975,7 +1975,7 @@ by customer:</td>
                               <tbody><tr>
                                  <td class="input-label">Investment costs:  </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder=""> </td>
@@ -1983,7 +1983,7 @@ by customer:</td>
                               <tr>
                                  <td class="input-label">Discount:</td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder=""></td>
@@ -1991,7 +1991,7 @@ by customer:</td>
                               <tr>
                                  <td class="input-label"> Maintenance costs: </td>
                                  <td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip" data-original-title="" title="">
-                                    <img src="{{ asset('images/help-red.png') }}" alt="">
+                                    <img src="{{ asset('public/images/help-red.png') }}" alt="">
                                     </button>
                                  </td>
                                  <td class="input-fields"><input type="text" placeholder=""> </td>
@@ -2039,13 +2039,13 @@ by customer:</td>
     <div class="modal-content">
 
       <!-- Modal Header -->
-  
+
         <div class="modal-heading">
                <div class="left-head">Contact Fahrenheit</div>
                <div class="right-head">
-                
+
                     <span class="close" data-dismiss="modal"><img src="images/cancle-icon.png" alt=""></span>
-                
+
                </div>
             </div>
       <!-- Modal body -->
@@ -2056,27 +2056,27 @@ by customer:</td>
                                  <meta name="csrf-token" content="{{ csrf_token() }}">
                                     <tbody><tr>
                                        <td class="input-label"> Name:</td>
-                                      
+
                                        <td class="input-fields "><input type="text" name = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required="true" class="required-field full_name"> </td>
                                     </tr>
                                     <tr>
                                        <td class="input-label"> Company:   </td>
-                                     
+
                                        <td class="input-fields"><input type="text" name= "company_type" placeholder="Enter your company name" minlength="1" maxlength="25" class="company_type" ></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
-                                     
+
                                        <td class="input-fields"><input type="number" name= "contact_number" placeholder="Enter your contact number" minlength="1" maxlength="50"  required="true" class="required-field contact_number"></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label">Email:</td>
-                                     
+
                                        <td class="input-fields"><input type="email" name= "email_address" placeholder="Enter your email address"  minlength="1" maxlength="50"  required="true" class="required-field email_address"></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label text-area-label">Message:</td>
-                                      
+
                                        <td class="input-fields textarea-place"><textarea name= "message" class = "message"></textarea></td>
                                     </tr>
                                     <tr>
@@ -2171,13 +2171,13 @@ by customer:</td>
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('images/fahrenheit_logo.png') }}" alt=""></h4>
+                <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
         </div>
         <div class="modal-body ">
-               
-                
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal">Ok</button>
@@ -2185,7 +2185,7 @@ by customer:</td>
         </div>
       </div>
     </div>
-</div>      
+</div>
 
         <script type="text/javascript">
             function LoginUser()
@@ -2233,14 +2233,14 @@ by customer:</td>
                    e.preventDefault();
 
                   //stopPropagation();
-             
+
                 var form_data = $('.fahrenheit-contact').serialize();
-           
+
                 var data = {
-                 
+
                     form_data:form_data
-                   
-                   
+
+
                 };
                 // Ajax Post
                 $.ajax({
@@ -2253,11 +2253,11 @@ by customer:</td>
                     cache: false,
                     success: function (data)
                     {
-                     $('#contact-form-modal').modal('hide');  
+                     $('#contact-form-modal').modal('hide');
                        if(data=='success')
                        {
 
-                          $('#contact-us-modal').modal('show');    
+                          $('#contact-us-modal').modal('show');
                            $('#contact-us-modal .modal-body').html('show');
 
                        }
@@ -2290,7 +2290,7 @@ by customer:</td>
 
  });
            //# sourceURL=user.js
-        </script> 
+        </script>
 
 
     <!-- <script src="js/jquery-3.2.1.min.js"></script> -->
@@ -2304,18 +2304,18 @@ by customer:</td>
       <script>
          // Get the modal
          var modalparent = document.getElementsByClassName("modal_multi");
-         
+
          // Get the button that opens the modal
-         
+
          var modal_btn_multi = document.getElementsByClassName("myBtn_multi");
-         
+
          // Get the <span> element that closes the modal
          var span_close_multi = document.getElementsByClassName("close_multi");
        var z = document.body;
-         
+
          // When the user clicks the button, open the modal
          function setDataIndex() {
-         
+
              for (i = 0; i < modal_btn_multi.length; i++)
              {
                  modal_btn_multi[i].setAttribute('data-index', i);
@@ -2323,9 +2323,9 @@ by customer:</td>
                  span_close_multi[i].setAttribute('data-index', i);
              }
          }
-         
-         
-         
+
+
+
          for (i = 0; i < modal_btn_multi.length; i++)
          {
              modal_btn_multi[i].onclick = function() {
@@ -2334,7 +2334,7 @@ by customer:</td>
             // if(!jQuery(modalparent[ElementIndex]).hasClass('mainmodal')){jQuery('.mainmodal').hide();
             document.body.classList.add('modal-open');
              };
-         
+
              // When the user clicks on <span> (x), close the modal
              span_close_multi[i].onclick = function() {
                  var ElementIndex = this.getAttribute('data-index');
@@ -2342,36 +2342,36 @@ by customer:</td>
              document.body.classList.remove('modal-open');
             // if(!jQuery(modalparent[ElementIndex]).hasClass('mainmodal')){jQuery('.mainmodal').show();}
              };
-         
+
          }
-         
+
          window.onload = function() {
-         
+
              setDataIndex();
          };
-         
+
          window.onclick = function(event) {
              if (event.target === modalparent[event.target.getAttribute('data-index')]) {
                  modalparent[event.target.getAttribute('data-index')].style.display = "none";
              }
-         
+
              // OLD CODE
             // if (event.target === modal) {
 //                 modal.style.display = "none";
 //             }
          };
-       
-       
 
 
-       
-       
-       
+
+
+
+
+
       </script>
-     
+
       <script>
          jQuery('[data-toggle="popover"]').popover();
-         
+
          jQuery('body').on('click', function (e) {
              jQuery('[data-toggle="popover"]').each(function () {
                  //the 'is' for buttons that trigger popups
@@ -2381,7 +2381,7 @@ by customer:</td>
                  }
              });
          });
-         
+
          jQuery(document).ready(function(){
              jQuery(".help-toggle").click(function(){
                  jQuery(".input-help-label").toggle();
@@ -2390,12 +2390,12 @@ by customer:</td>
       </script>
       <script>
          $(function () {
-           
+
            // Add containers to the DOM
            var $calculator = $('<div/>', {id: 'calculator'}).appendTo('.calci-div');
            var $input = $('<input/>', {id: 'input'}).appendTo($calculator);
            var $buttons = $('<div/>', {id: 'buttons'}).appendTo($calculator);
-           
+
            // Add buttons to the DOM
            jQuery.each('1234567890.=+-*/←C'.split(''), function () {
              var $button = $('<button/>', {text: this.toString(), click: function () {
@@ -2403,19 +2403,19 @@ by customer:</td>
                switch (jQuery(this).text()) {
                  // '=' will fetch the current expression string, evaluate it,
                  // and write the result back into the input/output field.
-                 // That's where the actual calculation happens. 
+                 // That's where the actual calculation happens.
                  case '=': try {$input.val(eval($input.val()));} catch (e) {$input.val('ERROR');}
                  // 'C' will clear the input/output field
                  break; case 'C': return $input.val('');
                  // 'CE' will delete the last character from the input/output field
                  break; case '←': return $input.val($input.val().replace(/.$/, ''));
                  // All other buttons will add a character to the input/output field
-                 break; default: $input.val($input.val() + $(this).text()); 
+                 break; default: $input.val($input.val() + $(this).text());
                }
              }}).appendTo($buttons);
            });
          });
-         
+
 
     jQuery(document).ready(function(){
     jQuery('.dropdown-calci').click(function(event){
@@ -2430,7 +2430,7 @@ by customer:</td>
 jQuery(document).on("click", function () {
     jQuery(".caculator-divv").hide();
 });
-      
+
       </script>
       <script>
          jQuery(document).ready(function(){
@@ -2459,4 +2459,4 @@ jQuery(document).on("click", function () {
         var date = new Date(choosenYear, choosenMonth, choosenDay);
         console.log(date);
     });
-</script>    
+</script>
