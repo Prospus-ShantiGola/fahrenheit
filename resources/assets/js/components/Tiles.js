@@ -19,7 +19,7 @@ export class Tiles extends React.Component {
         this.handleChillerDeleteEntry=this.handleChillerDeleteEntry.bind(this);
     }
     componentWillReceiveProps(nextProps){
-        console.log("componentWillReceiveProps",nextProps);
+       // console.log("componentWillReceiveProps",nextProps);
         switch (nextProps.title) {
             case "Compression Chiller":
             this.setState({
@@ -70,12 +70,12 @@ export class Tiles extends React.Component {
               onEnd:function (/**Event*/evt) {
                   evt.oldIndex;  // element's old index within old parent
                   evt.newIndex;  // element's new index within new parent=
-                  console.log(evt.oldIndex,evt.newIndex);
+                 // console.log(evt.oldIndex,evt.newIndex);
                   var clonedArr=that.state.compressionChillerData;
                   var tempKey=clonedArr[evt.oldIndex];
                   clonedArr[evt.oldIndex]=clonedArr[evt.newIndex];
                   clonedArr[evt.newIndex]=tempKey;
-                  console.log(clonedArr);
+                 // console.log(clonedArr);
                   that.setState({
                       compressionChillerData: clonedArr
                     })
@@ -118,7 +118,7 @@ export class Tiles extends React.Component {
 
     }
     updateCompressionList(){
-        console.log("sorting finish");
+       // console.log("sorting finish");
     }
     editRecord(elemKey){
         let dataObj=this.state.compressionChillerData[elemKey];
@@ -137,7 +137,7 @@ export class Tiles extends React.Component {
         $("#delete-modal").modal("show");
     }
     handleChillerDeleteEntry(result){
-        console.log(this.state.compressionChillerData);
+        //console.log(this.state.compressionChillerData);
        this.setState({
             compressionChillerData: this.state.compressionChillerData.filter((_, i) => i !== parseInt(result.elementId))
           });

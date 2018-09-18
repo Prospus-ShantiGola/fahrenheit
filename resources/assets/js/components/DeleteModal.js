@@ -11,12 +11,10 @@ export class DeleteModal extends Component {
             state:true,
             elementId:$("#delete-modal").find("#entry-id").attr('data-id')
         }
-        console.log(eleM);
         this.props.onDeleteChillerSubmit(result);
         jQuery("#delete-modal").modal("hide");
      }
     render() {
-        console.log(this.props)
         return (
             <div className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id={this.props.id}>
             <div className="modal-dialog modal-dialog-centered">

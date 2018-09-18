@@ -95,7 +95,7 @@ export class ChillerModal extends React.Component {
 
         return (
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-chiller">
-            <form  onSubmit={this.handleSubmit} >
+            <form  onSubmit={this.handleSubmit} id="compression-chiller-form">
             <div className="modal-content">
                <div className="modal-heading">
                   <div className="left-head">Compression Chillers</div>
@@ -117,7 +117,6 @@ export class ChillerModal extends React.Component {
                      <div id="compression-technical-data" className="tab-pane fade  active show">
                         <div className="heating-load-general-div">
                            <div className="table-responsive">
-                               <form action="" id="compression-chiller-form">
                               <table className="table">
                               <tbody>
                                  <tr>
@@ -197,7 +196,6 @@ export class ChillerModal extends React.Component {
                                  </tr>
                                  </tbody>
                               </table>
-                             </form>
                            </div>
                         </div>
                      </div>
@@ -206,13 +204,14 @@ export class ChillerModal extends React.Component {
                         <div className="personal-data-div">
                            <div className="table-responsive">
                               <table className="table">
+                              <tbody>
                                  <tr>
                                     <td className="input-label">Investment costs: </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="€" /> </td>
+                                    <td className="input-fields"><input type="text" placeholder="€" name="investment_cost" id="investment_cost"/> </td>
                                  </tr>
                                  <tr>
                                     <td className="input-label">Discount:</td>
@@ -220,7 +219,7 @@ export class ChillerModal extends React.Component {
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="%" /></td>
+                                    <td className="input-fields"><input type="text" placeholder="%"  name="discount" id="discount" /></td>
                                  </tr>
                                  <tr>
                                     <td className="input-label"> Maintenance costs: </td>
@@ -228,8 +227,9 @@ export class ChillerModal extends React.Component {
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="€/a" /> </td>
+                                    <td className="input-fields"><input type="text" placeholder="€/a"  name="maintenence_costs" id="maintenence_costs" /> </td>
                                  </tr>
+                                 </tbody>
                               </table>
                            </div>
                         </div>

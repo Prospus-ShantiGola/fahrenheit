@@ -30,15 +30,7 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3">
                     <div class="footer-section4">
-                        <ul class="footer-nav">
-                            <li><a href="#"> HOME</a></li>
-                            <li><a href="#">FAHRENHEIT</a></li>
-                            <li><a href="#">INNOVATION</a></li>
-                            <li><a href="#">AREAS OF APPLICATION</a></li>
-                            <li><a href="#">PRODUCTS</a></li>
-                            <li><a href="#">SERVICE</a></li>
-                            <li><a href="#">CONTACT</a></li>
-                        </ul>
+
                     </div>
                 </div>
             </div>

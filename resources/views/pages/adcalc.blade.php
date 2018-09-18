@@ -47,9 +47,11 @@
     </style>
     <script>
         GENERAL_TILE= "General Information";
+        LOGGED_IN_ROLE= "General Information";
     </script>
     </head>
     <body>
+
                     @include('header')
                     <div class="content">
                             <div class="title m-b-md">
