@@ -5,7 +5,7 @@ export class ChillerModal extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {compressionChiler: '',role:'user'};
+        this.state = {compressionChiler: '',role:LOGGED_IN_ROLE};
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
@@ -69,7 +69,7 @@ export class ChillerModal extends React.Component {
         var manufacturer    = $("#compression-chiller-form").find("select[name=manufacturer]").val();
         var compressor = $("#compression-chiller-form").find("select[name=compressor]").val();
 
-        fetch('/adcalc/storeCompressionChiller', {
+        fetch('adcalc/storeCompressionChiller', {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

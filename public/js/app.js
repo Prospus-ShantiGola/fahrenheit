@@ -55987,7 +55987,7 @@ var Adcalc = function (_Component) {
                     modalId: '#compression-chiller'
                 },
                 CompressionChiller: {
-                    title: 'Compression Chiller',
+                    title: CHILLER_TITLE,
                     tileCls: 'compression-chillers data-box',
                     required: "no",
                     edit: 'yes',
@@ -56151,6 +56151,8 @@ var Tiles = function (_React$Component) {
     function Tiles(props) {
         _classCallCheck(this, Tiles);
 
+        var sort = void 0;
+
         var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
         _this.state = {
@@ -56163,6 +56165,7 @@ var Tiles = function (_React$Component) {
         _this.deleteRecord = _this.deleteRecord.bind(_this);
         _this.updateCompressionList = _this.updateCompressionList.bind(_this);
         _this.handleChillerDeleteEntry = _this.handleChillerDeleteEntry.bind(_this);
+        _this.arrayMove = _this.arrayMove.bind(_this);
         return _this;
     }
 
@@ -56180,7 +56183,6 @@ var Tiles = function (_React$Component) {
                     this.setState({
                         generalDataChange: nextProps.dataChange
                     });
-
                 default:
                     break;
             }
@@ -56204,36 +56206,21 @@ var Tiles = function (_React$Component) {
                     this.state.generalData[0] = nextProps.dataRecord;
                     this.forceUpdate();
                 }
-
-                jQuery(".scrollbar-macosx").scrollbar();
-                if (typeof $('.compressionTableBody')[0] != "undefined") {
-                    var that = this;
-
-                    Sortable.create($('.compressionTableBody')[0], {
-                        animation: 150,
-                        scroll: true,
-                        handle: '.drag-handler',
-                        onEnd: function onEnd( /**Event*/evt) {
-                            evt.oldIndex; // element's old index within old parent
-                            evt.newIndex; // element's new index within new parent=
-                            // console.log(evt.oldIndex,evt.newIndex);
-                            var clonedArr = that.state.compressionChillerData;
-                            var tempKey = clonedArr[evt.oldIndex];
-                            clonedArr[evt.oldIndex] = clonedArr[evt.newIndex];
-                            clonedArr[evt.newIndex] = tempKey;
-                            // console.log(clonedArr);
-                            that.setState({
-                                compressionChillerData: clonedArr
-                            });
-                        }
-                    });
-                }
             }
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {}
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log("component unmount");
         }
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var that = this;
+
             if (this.state.compressionChillerData.length == 0) {
                 this.setState({
                     compressionDataChange: false
@@ -56258,8 +56245,12 @@ var Tiles = function (_React$Component) {
         }
     }, {
         key: 'updateCompressionList',
-        value: function updateCompressionList() {
-            // console.log("sorting finish");
+        value: function updateCompressionList(clonedArr) {
+            console.log("sorting finish", clonedArr);
+            $('.compressionTableBody').unbind();
+            this.setState({
+                compressionChillerData: clonedArr
+            });
         }
     }, {
         key: 'editRecord',
@@ -56292,10 +56283,23 @@ var Tiles = function (_React$Component) {
             });
         }
     }, {
+        key: 'arrayMove',
+        value: function arrayMove(arr, old_index, new_index) {
+            if (new_index >= arr.length) {
+                var k = new_index - arr.length + 1;
+                while (k--) {
+                    arr.push(undefined);
+                }
+            }
+            arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+            return arr; // for testing
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
+            var dragSet = false;
             var priceFullList,
                 pricelist,
                 requiredMsg = "";
@@ -56356,11 +56360,11 @@ var Tiles = function (_React$Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/degree-icon.png', alt: '' }),
                             ' ',
-                            this.state.compressionChillerData[0].temperature,
-                            '\xB0C'
+                            this.state.compressionChillerData[0].temperature != "" ? this.state.compressionChillerData[0].temperature + "°C" : ""
                         )
                     )
                 );
+                var chillerData = this.state.compressionChillerData;
                 var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'hover-list scrollbar-macosx' },
@@ -56373,17 +56377,17 @@ var Tiles = function (_React$Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'tbody',
                                 { className: 'compressionTableBody' },
-                                this.state.compressionChillerData.map(function (data, i) {
+                                chillerData.map(function (data, i) {
                                     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'tr',
-                                        { key: i },
+                                        { key: i, 'data-id': i },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'th',
                                             null,
                                             data.chillername,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'ul',
-                                                { className: 'list-inline' },
+                                                { className: 'list-inline', key: i },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'li',
                                                     null,
@@ -56393,8 +56397,8 @@ var Tiles = function (_React$Component) {
                                                     'li',
                                                     null,
                                                     ' ',
-                                                    data.temperature,
-                                                    '\xB0C '
+                                                    data.temperature != "" ? data.temperature + '°C' : "",
+                                                    ' '
                                                 )
                                             )
                                         ),
@@ -56427,6 +56431,36 @@ var Tiles = function (_React$Component) {
                         )
                     )
                 );
+                jQuery(".scrollbar-macosx").scrollbar();
+                var that = this;
+                if (typeof $('.compressionTableBody')[0] != "undefined") {
+
+                    if (that.props.title == CHILLER_TITLE) {
+
+                        this.sort = Sortable.create($('.compressionTableBody')[0], {
+                            animation: 150,
+                            scroll: true,
+                            sort: true,
+                            dataIdAttr: 'data-id',
+                            handle: '.drag-handler',
+                            onEnd: function onEnd( /**Event*/evt) {
+                                evt.oldIndex; // element's old index within old parent
+                                evt.newIndex; // element's new index within new parent
+                            },
+                            onUpdate: function onUpdate( /**Event*/evt) {
+                                // same properties as onEnd
+                                evt.oldIndex; // element's old index within old parent
+                                evt.newIndex; // element's new index within new parent
+
+                                var clonedArr = that.state.compressionChillerData;
+                                clonedArr = that.arrayMove(clonedArr, evt.oldIndex, evt.newIndex);
+                                that.updateCompressionList(clonedArr);
+                            }
+                        });
+                        var order = this.sort.toArray();
+                        this.sort.sort(order.sort());
+                    }
+                }
             } else {
                 var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'p',
@@ -56847,7 +56881,7 @@ var ChillerModal = function (_React$Component) {
 
       var _this = _possibleConstructorReturn(this, (ChillerModal.__proto__ || Object.getPrototypeOf(ChillerModal)).call(this, props));
 
-      _this.state = { compressionChiler: '', role: 'user' };
+      _this.state = { compressionChiler: '', role: LOGGED_IN_ROLE };
       _this.handleSubmit = _this.handleSubmit.bind(_this);
       return _this;
    }
@@ -56908,7 +56942,7 @@ var ChillerModal = function (_React$Component) {
          var manufacturer = $("#compression-chiller-form").find("select[name=manufacturer]").val();
          var compressor = $("#compression-chiller-form").find("select[name=compressor]").val();
 
-         fetch('/adcalc/storeCompressionChiller', {
+         fetch('adcalc/storeCompressionChiller', {
             method: 'POST',
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -57441,7 +57475,7 @@ var GeneralModal = function (_React$Component) {
          var location = $(".general-information-form").find("input[name=location]").val();
          var address = $(".general-information-form").find("input[name=address]").val();
 
-         fetch('/adcalc/storeGeneralInformation', {
+         fetch('adcalc/storeGeneralInformation', {
             method: 'POST',
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

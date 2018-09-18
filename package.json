@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "jquery-validation": "^1.17.0",
-        "react-redux": "^5.0.7"
+        "react-redux": "^5.0.7",
+        "react-sortable-hoc": "^0.8.3"
     }
 }
