@@ -41,9 +41,9 @@
     <script src="{{ asset('public/js/Sortable.js') }}" defer></script>
 
     <style>
-        .hide{
+       /* .hide{
             display: none;
-        }
+        }*/
     </style>
     <script>
        <?php

@@ -62,7 +62,7 @@ class MailController extends Controller {
 		$user_name = $contact_form['full_name'];
 		$company_type = $contact_form['company_type'];
 		$contact_number = $contact_form['contact_number'];
-		$email_address = $contact_form['email_address'];
+		$email_address = $contact_form['emailaddress'];
 		$contact_message = $contact_form['message'];
 
 
@@ -89,7 +89,7 @@ class MailController extends Controller {
 		$user_name = $contact_form['full_name'];
 		$company_type = $contact_form['company_type'];
 		$contact_number = $contact_form['contact_number'];
-		$email_address = $contact_form['email_address'];
+		$email_address = $contact_form['emailaddress'];
 		$contact_message = $contact_form['message'];
 
 		
@@ -105,7 +105,7 @@ class MailController extends Controller {
           $message->from('support@prospus.com','Fahrenheit');
       });
 
-  		echo "success";
+  		return  "success";
 
    }
 }
