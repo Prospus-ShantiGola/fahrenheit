@@ -129,7 +129,7 @@ handleSubmit(event) {
                <div className="right-head">
                   <ul className="list-inline">
 
-                     <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li>
+                     // <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li>
                      <li> <input type="image" src="public/images/verifie-icon.png" alt="Submit"/></li>
                       <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
 
@@ -149,15 +149,15 @@ handleSubmit(event) {
                                    <tbody>
                               <tr>
                                  <td className="input-label"> Project number:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
-                                    <img src="public/images/help-red.png" alt="" />
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
+                                    <img src="public/images/help-red.png" alt=""  />
                                     </button>
                                  </td>
                                  <td className="input-fields"><input type="text" placeholder="New Project" name = "project_number" id = "project_number" /> </td>
                               </tr>
                               <tr>
                                  <td className="input-label"> Project name: </td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -166,11 +166,11 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label"> Location:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="Halle/Saale" className="required-field" name = "location" id = "location" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
+                                 <td className="input-fields"><input type="text" placeholder="Halle/Saale" required  className="required-field" name = "location" id = "location" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
 
                                  <span className="invalid-feedback" role="alert">
                                              <strong>Required field</strong>
@@ -179,7 +179,7 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Customer:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -187,7 +187,7 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Contact:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Contact explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Contact explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -195,7 +195,7 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Tel. Number:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -203,7 +203,7 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Email:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Email explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Email explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -221,7 +221,7 @@ handleSubmit(event) {
                                    <tbody>
                               <tr>
                                  <td className="input-label">Editor:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -229,7 +229,7 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Company:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -237,11 +237,11 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label"> Address:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text"  name = "address" id = "address" placeholder="Halle/Saale" className="required-field" /> <i className="fa fa-map-marker" aria-hidden="true"></i>
+                                 <td className="input-fields"><input type="text"  name = "address" required   id = "address" placeholder="Halle/Saale" className="required-field" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
                                  <span className="invalid-feedback" role="alert">
                                              <strong>Required field</strong>
                                        </span>
@@ -250,7 +250,7 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Tel. Number:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -258,7 +258,7 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Mobile:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Mobile explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Mobile explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -266,7 +266,7 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Email:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Email explanation/tip">
+                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Email explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
