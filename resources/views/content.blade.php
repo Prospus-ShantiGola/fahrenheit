@@ -23,7 +23,7 @@
                           <li class ="disabled"><a href="#"><img src="public/images/icon_5.png" alt="" /></a></li>
                           <li class ="disabled"><a href="#"><img src="public/images/icon_6.png" alt="" /></a></li>
                           <li><div data-toggle="modal" data-target="#contact-form-modal" ><img src="public/images/icon_7.png" alt="" /></div></li>
-                          <li><div data-toggle="modal" data-target="#loginModal"><img src="public/images/icon_8.png" alt="" /></a></li>
+                          <li><div data-toggle="modal" class = "login-modal"><img src="public/images/icon_8.png" alt="" /></a></li>
                        </ul>
                     </div>
                  </div>
@@ -463,6 +463,7 @@ $(".fahrenheit-contact")[0].reset();
 
 
       $('.login-modal').on('click',function(e){
+        alert
          if (loggedIn)
          {
            window.location = "user_reports"
