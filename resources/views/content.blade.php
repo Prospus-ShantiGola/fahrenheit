@@ -22,7 +22,7 @@
                           <li class ="disabled"><a href="#"><img src="public/images/icon_4.png" alt="" /></a></li>
                           <li class ="disabled"><a href="#"><img src="public/images/icon_5.png" alt="" /></a></li>
                           <li class ="disabled"><a href="#"><img src="public/images/icon_6.png" alt="" /></a></li>
-                          <li><div data-toggle="modal" data-target="#contact-form-modal" data-backdrop="false"><img src="public/images/icon_7.png" alt="" /></div></li>
+                          <li><div data-toggle="modal" data-target="#contact-form-modal" ><img src="public/images/icon_7.png" alt="" /></div></li>
                           <li><div data-toggle="modal" data-target="#loginModal"><img src="public/images/icon_8.png" alt="" /></a></li>
                        </ul>
                     </div>
@@ -72,11 +72,9 @@
             }
         })
     </script>
-<!-- <div class="modal" id="contact-form-modal" >
- -->
 
 
-  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="contact-form-modal">
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  aria-hidden="true" id="contact-form-modal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -87,7 +85,8 @@
                <div class="right-head">
 
                 
-                    <span class="close close-contact-modal" ><img src="public/images/cancle-icon.png" alt=""></span>
+                    <span class="close " 
+ ><img src="public/images/cancle-icon.png" alt="" class ="close-contact-modals" data-dismiss="modal"   ></span>
                 
 
 
@@ -357,7 +356,7 @@
           
         </div>
         <div class="modal-footer">
-           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" onclick ="jQuery('#contact-form-modal').modal('hide'); $('.fahrenheit-contact').removeClass('form-edited');  $('.fahrenheit-contact')[0].reset()">Yes</button>
+           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal"  onclick ="jQuery('#contact-form-modal').modal('hide'); $('.fahrenheit-contact').removeClass('form-edited');  $('.fahrenheit-contact')[0].reset()" >Yes</button>
           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >No</button>
 
         </div>
@@ -407,6 +406,8 @@
 
               jQuery(document).ready(function() {
 
+
+
                $('.fahrenheit-contact').on('submit',function(e){
                   // alert('dsa')
 
@@ -440,7 +441,7 @@
 
                           $('#contact-us-modal').modal('show');    
                          //  $('#contact-us-modal .modal-body').html('show');
-
+                         $('#contact-form-modal .fahrenheit-contact').removeClass('form-edited');
 $(".fahrenheit-contact")[0].reset();
                        }
                        else
@@ -504,30 +505,63 @@ $('.add-new-adcalc').on('click',function(e){
 
     });
 
-    $('.close-contact-modal').on('click',function (e) {
-     e.preventDefault();
+//     $('body').on('click','.close-contact-modals',function (e) {
+//      // e.preventDefault();
+//      // e.stopPropagation();
 
-          var obj = this;
+//           var obj = this;
    
-
-               if ( $('#contact-form-modal .fahrenheit-contact').hasClass('form-edited')) {
-                // alert('eeee')
+// alert('1')
+//                if ( $('#contact-form-modal .fahrenheit-contact').hasClass('form-edited')) {
+//                 alert('2')
                
-                $('#sure-modal').modal('show');
+//                 $('#sure-modal').modal('show');
+//                  // $('#contact-form-modal .fahrenheit-contact').removeClass('form-edited');
+                    
+//                 }
+//                 else
+//                 {
+//                  $('#contact-form-modal').modal('hide');
+//                  $('#sure-modal').modal('hide');
+//                  $('.fahrenheit-contact')[0].reset()
+//                 }
+
+              
+
+//           })
+
+
+
+
+ 
+
+
+ });
+
+
+    $('#contact-form-modal').on('hide.bs.modal', function (event) {
+
+   event.preventDefault();
+   event.stopPropagation();
+
+  // return false;
+      
+         if ( $('.fahrenheit-contact').hasClass('form-edited')) {
+  
+ 
+         $('#sure-modal').modal('show');
                     
                 }
                 else
                 {
+                   alert('444444')
                  $('#contact-form-modal').modal('hide');
                  $('.fahrenheit-contact')[0].reset()
                 }
-
-              
-
-          })
+return false;
 
 
- });
+    });
            //# sourceURL=user.js
         </script>
 
