@@ -2075,7 +2075,7 @@ footer {
 z-index:1;
 }
 
-.delete-optionn{
+.delete-optionn,.edit-option{
     cursor: pointer;
 }
 

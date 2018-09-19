@@ -17,7 +17,7 @@ class PagesController extends Controller
     {
 
 
-  		$request_data = $request->all();        
+  		$request_data = $request->all();
 	    $contact_form =  array();
 	    parse_str($request_data['form_data'], $contact_form);
 	    $message_val =  [
@@ -31,7 +31,7 @@ class PagesController extends Controller
             'full_name' => 'required',
             'contact_number' =>  'required|numeric',
             'emailaddress' =>'required|email'
-           
+
             // 'manufacturer' => 'required',
             // 'compressor' => 'required',
         ], $message_val);
@@ -51,12 +51,12 @@ class PagesController extends Controller
         {
 // $return_val = 'success';
         app('App\Http\Controllers\MailController')->contactUsUserMail($contact_form);
-	$return_val = app('App\Http\Controllers\MailController')->contactUsAdminMail($contact_form);
+	    $return_val = app('App\Http\Controllers\MailController')->contactUsAdminMail($contact_form);
 		return response()->json(['success'=>$return_val]);
         }
-       
 
- 
+
+
 
 // 	  //  print_r($contact_form);
 // 		//echo 'success';
@@ -81,8 +81,8 @@ class PagesController extends Controller
 
 	    // app('App\Http\Controllers\MailController')->html_email();
 
-		
-		
+
+
     }
 
 

@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class MailController extends Controller {
    public function basic_email(){
       $data = array('name'=>"Virat Gandhi");
-   
+
       Mail::send(['text'=>'mail'], $data, function($message) {
          $message->to('prospus.artisharma@gmail.com', 'Tutorials Point')->subject
             ('Laravel Basic Testing Mail');
@@ -27,7 +27,7 @@ class MailController extends Controller {
 
 	$user_name = $message_ary['user_name'] ;
 	$subject = $message_ary['subject'];
-	
+
 
 
       $data = array('name'=>$user_name,'email_address'=>$email_address);
@@ -69,14 +69,14 @@ class MailController extends Controller {
 		$subject ='Contact via Contact Us Form';
 		$data = array('user_name'=>$user_name,'contact_message'=>$contact_message,'type'=>'User');
 		// $data = array('user_name'=>$user_name,'contact_message'=>$contact_message,'type'=>'Admin','company_type'=>$company_type,'email_address'=>$email_address,'contact_number'=>$contact_number);
-        Mail::send('mail_templates.contact_us', $data, function($message) use($email_address,$subject) {
-       //  $message->to($data['email_address_to'],  'asasas' );
+    //     Mail::send('mail_templates.contact_us', $data, function($message) use($email_address,$subject) {
+    //    //  $message->to($data['email_address_to'],  'asasas' );
 
-         $message->to($email_address, $name = null);
-         $message->subject($subject);
-           // ('sssssssssssssssssss');
-          $message->from('support@prospus.com','Fahrenheit');
-      });
+    //      $message->to($email_address, $name = null);
+    //      $message->subject($subject);
+    //        // ('sssssssssssssssssss');
+    //       $message->from('support@prospus.com','Fahrenheit');
+    //   });
 
   		//echo "success";
    }
@@ -92,18 +92,18 @@ class MailController extends Controller {
 		$email_address = $contact_form['emailaddress'];
 		$contact_message = $contact_form['message'];
 
-		
+
 		$subject ='Enquiry via Contact Us Form';
 		$data = array('user_name'=>$user_name,'contact_message'=>$contact_message,'type'=>'Admin','company_type'=>$company_type,'email_address'=>$email_address,'contact_number'=>$contact_number);
-      
-        Mail::send('mail_templates.contact_us', $data, function($message) use($email_address,$subject) {
-   
 
-         $message->to($email_address, $name = null);
-         $message->subject($subject);
+    //     Mail::send('mail_templates.contact_us', $data, function($message) use($email_address,$subject) {
 
-          $message->from('support@prospus.com','Fahrenheit');
-      });
+
+    //      $message->to($email_address, $name = null);
+    //      $message->subject($subject);
+
+    //       $message->from('support@prospus.com','Fahrenheit');
+    //   });
 
   		return  "success";
 

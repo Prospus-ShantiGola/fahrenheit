@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {DeleteModal} from './DeleteModal';
+import {ErrorBoundary} from './ErrorBoundary';
 
 export class Tiles extends React.Component {
 
@@ -77,6 +78,9 @@ export class Tiles extends React.Component {
               compressionDataChange: false
             });
         }
+        else{
+            jQuery(".scrollbar-macosx").scrollbar();
+        }
         $(document).on('show.bs.modal','#general-information', function () {
             if(that.props.title==GENERAL_TILE){
                 var dataObj=that.state.generalData[0];
@@ -97,8 +101,7 @@ export class Tiles extends React.Component {
 
     }
     updateCompressionList(clonedArr){
-       console.log("sorting finish",clonedArr);
-       $('.compressionTableBody').unbind();
+       //console.log("sorting finish",clonedArr);
        this.setState({
         compressionChillerData: clonedArr
       });
@@ -121,10 +124,10 @@ export class Tiles extends React.Component {
         $("#delete-modal").modal("show");
     }
     handleChillerDeleteEntry(result){
-        //console.log(this.state.compressionChillerData);
-       this.setState({
-            compressionChillerData: this.state.compressionChillerData.filter((_, i) => i !== parseInt(result.elementId))
-          });
+        var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
+        clonedArrDelete.splice(result.elementId, 1);
+        this.setState({compressionChillerData: clonedArrDelete});
+
     }
     arrayMove(arr, old_index, new_index) {
         if (new_index >= arr.length) {
@@ -149,6 +152,7 @@ export class Tiles extends React.Component {
         else{
             var deleteModal=""
         }
+
         if(this.state.compressionDataChange==true && this.state.compressionChillerData.length!=0){
             var pricelist=(
                 <ul className="price-listt">
@@ -168,6 +172,7 @@ export class Tiles extends React.Component {
             );
             let chillerData=this.state.compressionChillerData;
             var priceFullList=(
+                <div>
                 <div className="hover-list scrollbar-macosx">
                                        <div className="table-responsive">
                                           <table className="table">
@@ -195,11 +200,12 @@ export class Tiles extends React.Component {
                                           </table>
                                        </div>
             </div>
+            </div>
             );
-            jQuery(".scrollbar-macosx").scrollbar();
-            var that=this;
-        if(typeof $('.compressionTableBody')[0] !="undefined"){
 
+            var that=this;
+            if(typeof $('.compressionTableBody')[0] !="undefined"){
+                jQuery(".compression-chillers-hover .scrollbar-macosx").scrollbar();
 
                 if(that.props.title==CHILLER_TITLE){
 
@@ -230,14 +236,10 @@ export class Tiles extends React.Component {
                        this.sort.sort(order.sort());
 
                     }
-
-
-
-
         }
         }
         else{
-            var priceFullList= <p>{this.props.hoverText}</p>;
+            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
         }
 
         if(this.state.generalDataChange){
@@ -318,12 +320,13 @@ export class Tiles extends React.Component {
          </li>
       </ul>
             );
+
         }
 
 
         return (
-
-                <div className={this.props.mainclass}>
+            <ErrorBoundary>
+                <div className={this.props.mainclass} >
                     <div className={this.props.tileCls}>
                         <h1>{this.props.title}</h1>
                         {requiredMsg}
@@ -336,6 +339,7 @@ export class Tiles extends React.Component {
                     </div>
                     {deleteModal}
                 </div>
+                </ErrorBoundary>
         );
     }
 }

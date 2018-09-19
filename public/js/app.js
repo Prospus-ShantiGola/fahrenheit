@@ -14135,7 +14135,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(19);
-module.exports = __webpack_require__(63);
+module.exports = __webpack_require__(64);
 
 
 /***/ }),
@@ -55818,8 +55818,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Tiles__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ChillerModal__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__GeneralModal__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ChillerModal__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__GeneralModal__ = __webpack_require__(63);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -56133,6 +56133,7 @@ if (document.getElementById('adcalc')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DeleteModal__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ErrorBoundary__ = __webpack_require__(61);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56140,6 +56141,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -56225,6 +56227,8 @@ var Tiles = function (_React$Component) {
                 this.setState({
                     compressionDataChange: false
                 });
+            } else {
+                jQuery(".scrollbar-macosx").scrollbar();
             }
             $(document).on('show.bs.modal', '#general-information', function () {
                 if (that.props.title == GENERAL_TILE) {
@@ -56246,8 +56250,7 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'updateCompressionList',
         value: function updateCompressionList(clonedArr) {
-            console.log("sorting finish", clonedArr);
-            $('.compressionTableBody').unbind();
+            //console.log("sorting finish",clonedArr);
             this.setState({
                 compressionChillerData: clonedArr
             });
@@ -56275,12 +56278,9 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'handleChillerDeleteEntry',
         value: function handleChillerDeleteEntry(result) {
-            //console.log(this.state.compressionChillerData);
-            this.setState({
-                compressionChillerData: this.state.compressionChillerData.filter(function (_, i) {
-                    return i !== parseInt(result.elementId);
-                })
-            });
+            var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
+            clonedArrDelete.splice(result.elementId, 1);
+            this.setState({ compressionChillerData: clonedArrDelete });
         }
     }, {
         key: 'arrayMove',
@@ -56315,6 +56315,7 @@ var Tiles = function (_React$Component) {
             } else {
                 var deleteModal = "";
             }
+
             if (this.state.compressionDataChange == true && this.state.compressionChillerData.length != 0) {
                 var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'ul',
@@ -56367,73 +56368,78 @@ var Tiles = function (_React$Component) {
                 var chillerData = this.state.compressionChillerData;
                 var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'hover-list scrollbar-macosx' },
+                    null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: 'table-responsive' },
+                        { className: 'hover-list scrollbar-macosx' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'table',
-                            { className: 'table' },
+                            'div',
+                            { className: 'table-responsive' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'tbody',
-                                { className: 'compressionTableBody' },
-                                chillerData.map(function (data, i) {
-                                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'tr',
-                                        { key: i, 'data-id': i },
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'th',
-                                            null,
-                                            data.chillername,
+                                'table',
+                                { className: 'table' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'tbody',
+                                    { className: 'compressionTableBody' },
+                                    chillerData.map(function (data, i) {
+                                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'tr',
+                                            { key: i, 'data-id': i },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'ul',
-                                                { className: 'list-inline', key: i },
+                                                'th',
+                                                null,
+                                                data.chillername,
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'li',
-                                                    null,
-                                                    '120.30 kW'
+                                                    'ul',
+                                                    { className: 'list-inline', key: i },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'li',
+                                                        null,
+                                                        '120.30 kW'
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'li',
+                                                        null,
+                                                        ' ',
+                                                        data.temperature != "" ? data.temperature + '°C' : "",
+                                                        ' '
+                                                    )
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'td',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'span',
+                                                    { className: 'edit-option', 'data-id': i, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this2.props.modalId },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
+                                                            return _this2.editRecord(i);
+                                                        } })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'li',
-                                                    null,
-                                                    ' ',
-                                                    data.temperature != "" ? data.temperature + '°C' : "",
-                                                    ' '
+                                                    'span',
+                                                    { className: 'delete-optionn', 'data-id': i },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', onClick: function onClick() {
+                                                            return _this2.deleteRecord(i);
+                                                        } })
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'span',
+                                                    { className: 'menu-bar-option drag-handler' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bars', 'aria-hidden': 'true' })
                                                 )
                                             )
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'td',
-                                            null,
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'span',
-                                                { className: 'edit-option', 'data-id': i, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this2.props.modalId },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                        return _this2.editRecord(i);
-                                                    } })
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'span',
-                                                { className: 'delete-optionn', 'data-id': i },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                        return _this2.deleteRecord(i);
-                                                    } })
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'span',
-                                                { className: 'menu-bar-option drag-handler' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bars', 'aria-hidden': 'true' })
-                                            )
-                                        )
-                                    );
-                                })
+                                        );
+                                    })
+                                )
                             )
                         )
                     )
                 );
-                jQuery(".scrollbar-macosx").scrollbar();
+
                 var that = this;
                 if (typeof $('.compressionTableBody')[0] != "undefined") {
+                    jQuery(".compression-chillers-hover .scrollbar-macosx").scrollbar();
 
                     if (that.props.title == CHILLER_TITLE) {
 
@@ -56464,7 +56470,7 @@ var Tiles = function (_React$Component) {
             } else {
                 var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'p',
-                    null,
+                    { className: 'scrollbar-macosx' },
                     this.props.hoverText
                 );
             }
@@ -56697,35 +56703,39 @@ var Tiles = function (_React$Component) {
             }
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: this.props.mainclass },
+                __WEBPACK_IMPORTED_MODULE_2__ErrorBoundary__["a" /* ErrorBoundary */],
+                null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: this.props.tileCls },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'h1',
-                        null,
-                        this.props.title
-                    ),
-                    requiredMsg,
-                    pricelist,
+                    { className: this.props.mainclass },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: this.props.hoverCls },
+                        { className: this.props.tileCls },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h1',
                             null,
                             this.props.title
                         ),
+                        requiredMsg,
+                        pricelist,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
-                            { className: this.props.editCls },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.props.editIcon, alt: '', 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': this.props.modalId })
-                        ),
-                        priceFullList
-                    )
-                ),
-                deleteModal
+                            { className: this.props.hoverCls },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'h1',
+                                null,
+                                this.props.title
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: this.props.editCls },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.props.editIcon, alt: '', 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': this.props.modalId })
+                            ),
+                            priceFullList
+                        )
+                    ),
+                    deleteModal
+                )
             );
         }
     }]);
@@ -56857,6 +56867,63 @@ var DeleteModal = function (_Component) {
 
 /***/ }),
 /* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorBoundary; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var ErrorBoundary = function (_React$Component) {
+  _inherits(ErrorBoundary, _React$Component);
+
+  function ErrorBoundary(props) {
+    _classCallCheck(this, ErrorBoundary);
+
+    var _this = _possibleConstructorReturn(this, (ErrorBoundary.__proto__ || Object.getPrototypeOf(ErrorBoundary)).call(this, props));
+
+    _this.state = { hasError: false };
+    return _this;
+  }
+
+  _createClass(ErrorBoundary, [{
+    key: 'componentDidCatch',
+    value: function componentDidCatch(error, info) {
+      // Display fallback UI
+      this.setState({ hasError: true });
+      // You can also log the error to an error reporting service
+      console.log(error, info);
+      //logErrorToMyService(error, info);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.state.hasError) {
+        // You can render any custom fallback UI
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h1',
+          null,
+          'Something went wrong.'
+        );
+      }
+      return this.props.children;
+    }
+  }]);
+
+  return ErrorBoundary;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/***/ }),
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57403,7 +57470,7 @@ var ChillerModal = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57984,7 +58051,7 @@ var GeneralModal = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -86,9 +86,9 @@
                <div class="left-head">Contact Fahrenheit</div>
                <div class="right-head">
 
-                
+
                     <span class="close close-contact-modal" ><img src="public/images/cancle-icon.png" alt=""></span>
-                
+
 
 
 
@@ -99,13 +99,13 @@
        <div class="table-responsive">
          <form name = "adad" class="fahrenheit-contact" method ="post">
                            <table class="table">
-                             
+
                                  <meta name="csrf-token" content="{{ csrf_token() }}"/>
                                     <tbody>
                                       <tr>
                                        <td class="input-label"> Name:</td>
 
-                                      
+
                                        <td class="input-fields "><input type="text" name = "full_name" id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25"  class="required-field full_name" ></input>
 
                                          <span class="invalid-feedback  " role="alert">
@@ -115,12 +115,12 @@
                                     </tr>
                                     <tr>
                                        <td class="input-label"> Company:   </td>
-                                     
+
                                        <td class="input-fields"><input type="text" name= "company_type" placeholder="Enter your company name" minlength="1" maxlength="25" class="company_type" ></input></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
-                                     
+
                                        <td class="input-fields"><input type="text" name= "contact_number" id = "contact_number" placeholder="Enter your contact number" minlength="10" maxlength="16"   class="required-field contact_number"></input>
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
@@ -129,18 +129,18 @@
                                     </tr>
                                     <tr>
                                        <td class="input-label">Email:</td>
-                                     
+
                                        <td class="input-fields"><input type="email" name= "emailaddress" id = "emailaddress" placeholder="Enter your email address"  minlength="1" maxlength="50"   class="required-field email_address"></input>
                                          <span class="invalid-feedback " role="alert">
                                             <strong>dfsdf</strong>
-                                        </span> 
+                                        </span>
 
                                        </td>
 
 
-                                     
+
                                     </tr>
-                                   
+
                                     <tr>
                                        <td class="input-label text-area-label">Message:</td>
 
@@ -150,7 +150,7 @@
                                      <td colspan="2" class="form-submitbtn"><button type="submit" class="btn submit-contact-form">Submit</button></td>
                                     </tr>
                                  </tbody>
-                          
+
                         </table>
                          </form>
                         </div>
@@ -241,14 +241,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-   
-  
+
+
         <div class="modal-heading">
-          
+
                <div class="right-head">
-                
+
                     <span class="close" data-dismiss="modal"><img src="images/cancle-icon.png" alt=""></span>
-                
+
                </div>
             </div>
 
@@ -271,7 +271,7 @@
 
 
 
-      <!-- message modal end -->    
+      <!-- message modal end -->
 
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="contact-us-modal">
     <div class="modal-dialog ">
@@ -283,9 +283,9 @@
         </div>
         <div class="modal-body ">
 
-               
-            Your enquiry message for AdCalc has been sent to the Fahrenheit team. We will be in touch in the next 48 hours. 
-    
+
+            Your enquiry message for AdCalc has been sent to the Fahrenheit team. We will be in touch in the next 48 hours.
+
 
 
 
@@ -297,7 +297,7 @@
       </div>
     </div>
 
-</div>    
+</div>
 
 
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-modal-confirm">
@@ -310,7 +310,7 @@
         </div>
         <div class="modal-body ">
            <p> Are you sure want to cancel? </p>
-          
+
         </div>
         <div class="modal-footer">
            <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" class= "modal-confirm" onclick ="jQuery('#general-information').modal('hide'); $('.general-information-form').removeClass('form-edited'); $('.general-information-form')[0].reset()">Yes</button>
@@ -319,7 +319,7 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-modal-confirm">
     <div class="modal-dialog ">
       <div class="modal-content">
@@ -330,7 +330,7 @@
         </div>
         <div class="modal-body ">
            <p> Are you sure want to cancel? </p>
-          
+
         </div>
         <div class="modal-footer">
            <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" onclick ="jQuery('#compression-chiller').modal('hide'); $('#compression-chiller-form').removeClass('form-edited');  $('#compression-chiller-form')[0].reset()">Yes</button>
@@ -342,7 +342,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 
   <div class="modal fade m" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="sure-modal">
     <div class="modal-dialog ">
@@ -354,7 +354,7 @@
         </div>
         <div class="modal-body ">
            <p> Are you sure want to cancel? </p>
-          
+
         </div>
         <div class="modal-footer">
            <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" onclick ="jQuery('#contact-form-modal').modal('hide'); $('.fahrenheit-contact').removeClass('form-edited');  $('.fahrenheit-contact')[0].reset()">Yes</button>
@@ -366,7 +366,7 @@
   </div>
 
 
-        <script type="text/javascript"> 
+        <script type="text/javascript">
             function LoginUser()
             {
 
@@ -435,10 +435,10 @@
                     {
 
                          if(typeof data.errors=="undefined"){
-                    
+
                           $('#contact-form-modal').modal('hide');
 
-                          $('#contact-us-modal').modal('show');    
+                          $('#contact-us-modal').modal('show');
                          //  $('#contact-us-modal .modal-body').html('show');
 
 $(".fahrenheit-contact")[0].reset();
@@ -448,12 +448,12 @@ $(".fahrenheit-contact")[0].reset();
                        $(".fahrenheit-contact").find('.invalid-feedback').show().children('strong').html('');
                            jQuery.each(data.errors, function(key, value){
                             //alert('value'+value+'key'+key)
-                                          
+
                                 $(".fahrenheit-contact").find('#'+key).siblings('.invalid-feedback').show().children('strong').html(value);
                             });
                        }
 
-                       
+
                     },
                     error: function (data){
                       //  alert('Fail to run Login..');
@@ -481,7 +481,7 @@ $('.add-new-adcalc').on('click',function(e){
 // {
 
 // }
-        
+
 })
 
 
@@ -508,13 +508,13 @@ $('.add-new-adcalc').on('click',function(e){
      e.preventDefault();
 
           var obj = this;
-   
+
 
                if ( $('#contact-form-modal .fahrenheit-contact').hasClass('form-edited')) {
                 // alert('eeee')
-               
+
                 $('#sure-modal').modal('show');
-                    
+
                 }
                 else
                 {
@@ -522,7 +522,7 @@ $('.add-new-adcalc').on('click',function(e){
                  $('.fahrenheit-contact')[0].reset()
                 }
 
-              
+
 
           })
 
