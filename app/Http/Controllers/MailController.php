@@ -68,15 +68,15 @@ class MailController extends Controller {
 
 		$subject ='Contact via Contact Us Form';
 		$data = array('user_name'=>$user_name,'contact_message'=>$contact_message,'type'=>'User');
-		// $data = array('user_name'=>$user_name,'contact_message'=>$contact_message,'type'=>'Admin','company_type'=>$company_type,'email_address'=>$email_address,'contact_number'=>$contact_number);
-    //     Mail::send('mail_templates.contact_us', $data, function($message) use($email_address,$subject) {
-    //    //  $message->to($data['email_address_to'],  'asasas' );
+		
+        Mail::send('mail_templates.contact_us', $data, function($message) use($email_address,$subject) {
+       //  $message->to($data['email_address_to'],  'asasas' );
 
-    //      $message->to($email_address, $name = null);
-    //      $message->subject($subject);
-    //        // ('sssssssssssssssssss');
-    //       $message->from('support@prospus.com','Fahrenheit');
-    //   });
+         $message->to($email_address, $name = null);
+         $message->subject($subject);
+           // ('sssssssssssssssssss');
+          $message->from('support@prospus.com','Fahrenheit');
+      });
 
   		//echo "success";
    }
@@ -96,14 +96,14 @@ class MailController extends Controller {
 		$subject ='Enquiry via Contact Us Form';
 		$data = array('user_name'=>$user_name,'contact_message'=>$contact_message,'type'=>'Admin','company_type'=>$company_type,'email_address'=>$email_address,'contact_number'=>$contact_number);
 
-    //     Mail::send('mail_templates.contact_us', $data, function($message) use($email_address,$subject) {
+        Mail::send('mail_templates.contact_us', $data, function($message) use($email_address,$subject) {
 
 
-    //      $message->to($email_address, $name = null);
-    //      $message->subject($subject);
+         $message->to('bhanu.bhowmik@prospus.com', $name = null);
+         $message->subject($subject);
 
-    //       $message->from('support@prospus.com','Fahrenheit');
-    //   });
+          $message->from('support@prospus.com','Fahrenheit');
+      });
 
   		return  "success";
 
