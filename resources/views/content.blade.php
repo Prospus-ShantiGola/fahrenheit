@@ -74,7 +74,7 @@
     </script>
 
 
-  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  aria-hidden="true" id="contact-form-modal" data-backdrop="static" data-keyboard="false">
+  <div class="modal fade"  id="contact-form-modal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -85,8 +85,7 @@
                <div class="right-head">
 
 
-                    <span class="close "
- ><img src="public/images/cancle-icon.png" alt="" class ="close-contact-modals" data-dismiss="modal"   ></span>
+                <button type="button" class="close" onclick="checkConfirmClose()"><span aria-hidden="true">&times;</span></button>
 
 
 
@@ -272,7 +271,7 @@
 
       <!-- message modal end -->
 
-  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="contact-us-modal">
+  <div class="modal fade"  id="contact-us-modal">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -343,7 +342,7 @@
     </div>
   </div>
 
-  <div class="modal fade m" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="sure-modal">
+  <div class="modal fade "  id="sure-modal">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -356,7 +355,7 @@
 
         </div>
         <div class="modal-footer">
-           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal"  onclick ="jQuery('#contact-form-modal').modal('hide'); $('.fahrenheit-contact').removeClass('form-edited');  $('.fahrenheit-contact')[0].reset()" >Yes</button>
+           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" onclick="confirmClose()"  >Yes</button>
           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >No</button>
 
         </div>
@@ -437,7 +436,7 @@
 
                          if(typeof data.errors=="undefined"){
 
-                          $('#contact-form-modal').modal('hide');
+                          $('#contact_form_modal').modal('hide');
 
                           $('#contact-us-modal').modal('show');
                          //  $('#contact-us-modal .modal-body').html('show');
@@ -504,64 +503,28 @@ $('.add-new-adcalc').on('click',function(e){
         $('.fahrenheit-contact').addClass('form-edited');
 
     });
-
-//     $('body').on('click','.close-contact-modals',function (e) {
-//      // e.preventDefault();
-//      // e.stopPropagation();
-
-//           var obj = this;
-
-// alert('1')
-//                if ( $('#contact-form-modal .fahrenheit-contact').hasClass('form-edited')) {
-//                 alert('2')
-
-//                 $('#sure-modal').modal('show');
-//                  // $('#contact-form-modal .fahrenheit-contact').removeClass('form-edited');
-
-//                 }
-//                 else
-//                 {
-//                  $('#contact-form-modal').modal('hide');
-//                  $('#sure-modal').modal('hide');
-//                  $('.fahrenheit-contact')[0].reset()
-//                 }
+});
 
 
 
-//           })
+    function checkConfirmClose(){
+        if ( $('.fahrenheit-contact').hasClass('form-edited')) {
+            $('#sure-modal').modal('show');
 
+           }
+           else
+           {
+            $('.fahrenheit-contact')[0].reset()
+            $('#contact-form-modal').modal('hide');
 
+           }
+    }
+    function confirmClose(){
+        $('.fahrenheit-contact')[0].reset()
+        $('#contact-form-modal').modal('hide');
+        $('.fahrenheit-contact').removeClass('form-edited');
 
-
-
-
-
- });
-
-
-    $('#contact-form-modal').on('hide.bs.modal', function (event) {
-
-   event.preventDefault();
-   event.stopPropagation();
-
-  // return false;
-
-         if ( $('.fahrenheit-contact').hasClass('form-edited')) {
-
-
-         $('#sure-modal').modal('show');
-
-                }
-                else
-                {
-                   alert('444444')
-                 $('#contact-form-modal').modal('hide');
-                 $('.fahrenheit-contact')[0].reset()
-                }
-return false;
-
-
-    });
+    }
            //# sourceURL=user.js
         </script>
 
