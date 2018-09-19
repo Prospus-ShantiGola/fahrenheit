@@ -554,7 +554,7 @@ $('.add-new-adcalc').on('click',function(e){
                 }
                 else
                 {
-                   alert('444444')
+                  // alert('444444')
                  $('#contact-form-modal').modal('hide');
                  $('.fahrenheit-contact')[0].reset()
                 }
