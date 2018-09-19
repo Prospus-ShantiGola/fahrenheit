@@ -119,7 +119,7 @@
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
 
-                                       <td class="input-fields"><input  type="number"   name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true" minlength="10" maxlength="12"   class="required-field contact_number"></input>
+                                       <td class="input-fields"><input  type="number"   name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true" max="10"   class="required-field contact_number"></input>
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
                                         </span>
