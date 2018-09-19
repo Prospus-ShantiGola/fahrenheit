@@ -16,8 +16,12 @@ class AdcalcController extends Controller
 
     public function index()
     {
-        //  dd(Auth::user());
-        return view('pages.adcalc');
+        $user=array();
+        if($user = Auth::user())
+        {
+            $user= Auth::user()->user_type_id;
+        }
+        return view('pages.adcalc')->with(compact('user'));
     }
     public function storeCompressionChiller(Request $request)
     {

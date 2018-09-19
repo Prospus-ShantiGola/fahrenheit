@@ -27,15 +27,15 @@ export class GeneralModal extends React.Component {
         $('.close-modal-general').on('click',function (e) {
 
           const obj = this;
-   
+
 
                if ($('.general-information-form').hasClass('form-edited')) {
                   // alert('eeee')
                  e.preventDefault();
-    
+
                 $('#general-modal-confirm').modal('show');
-             
-       
+
+
                 }
                 else
                 {
@@ -43,14 +43,14 @@ export class GeneralModal extends React.Component {
                  $('.general-information-form')[0].reset()
                 }
 
-              
+
 
           })
                //Do stuff here
           }
 
 
-   
+
 
 
 handleSubmit(event) {
@@ -61,7 +61,7 @@ handleSubmit(event) {
        var address    = $(".general-information-form").find("input[name=address]").val();
 
 
-        fetch('/adcalc/storeGeneralInformation', {
+        fetch('adcalc/storeGeneralInformation', {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

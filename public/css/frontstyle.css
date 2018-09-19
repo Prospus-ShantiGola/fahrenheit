@@ -1241,6 +1241,13 @@ select.required-field {
     right: 12%;}
 
 
+
+.modal-backdrop {
+    /* bug fix - no overlay */
+    display: none;
+}
+
+
 .input-fields textarea {
     color: #00618c;
     font-weight: 400;
@@ -2063,13 +2070,15 @@ footer {
     text-align: center;
 }
 
+
 #sure-modal{
 z-index:1;
 }
 
-.modal-backdrop {
- 
-    display: none;    
+.delete-optionn{
+    cursor: pointer;
 }
+
+
 
 
