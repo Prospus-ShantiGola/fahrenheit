@@ -57758,7 +57758,7 @@ var GeneralModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Halle/Saale', className: 'required-field', name: 'location', id: 'location' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Halle/Saale', required: true, className: 'required-field', name: 'location', id: 'location' }),
                                              ' ',
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker disabled', 'aria-hidden': 'true' }),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -57951,9 +57951,9 @@ var GeneralModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'address', id: 'address', placeholder: 'Halle/Saale', className: 'required-field' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'address', required: true, id: 'address', placeholder: 'Halle/Saale', className: 'required-field' }),
                                              ' ',
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker disabled', 'aria-hidden': 'true' }),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'span',
                                                 { className: 'invalid-feedback', role: 'alert' },

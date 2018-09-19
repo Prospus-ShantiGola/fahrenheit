@@ -104,7 +104,7 @@
                                        <td class="input-label"> Name:</td>
 
 
-                                       <td class="input-fields "><input type="text" name = "full_name" id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25"  class="required-field full_name" ></input>
+                                       <td class="input-fields "><input type="text" name = "full_name" id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required ="true"  class="required-field full_name" ></input>
 
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
@@ -114,12 +114,12 @@
                                     <tr>
                                        <td class="input-label"> Company:   </td>
 
-                                       <td class="input-fields"><input type="text" name= "company_type" placeholder="Enter your company name" minlength="1" maxlength="25" class="company_type" ></input></td>
+                                       <td class="input-fields"><input type="text" name= "company_type" placeholder="Enter your company name" minlength="1" maxlength="25"  class="company_type" ></input></td>
                                     </tr>
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
 
-                                       <td class="input-fields"><input type="text" name= "contact_number" id = "contact_number" placeholder="Enter your contact number" minlength="10" maxlength="16"   class="required-field contact_number"></input>
+                                       <td class="input-fields"><input  type="number"   name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true" minlength="10" maxlength="12"   class="required-field contact_number"></input>
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
                                         </span>
@@ -128,7 +128,7 @@
                                     <tr>
                                        <td class="input-label">Email:</td>
 
-                                       <td class="input-fields"><input type="email" name= "emailaddress" id = "emailaddress" placeholder="Enter your email address"  minlength="1" maxlength="50"   class="required-field email_address"></input>
+                                       <td class="input-fields"><input type="email" name= "emailaddress" id = "emailaddress" placeholder="Enter your email address"  required ="true" minlength="1" maxlength="50"   class="required-field email_address"></input>
                                          <span class="invalid-feedback " role="alert">
                                             <strong>dfsdf</strong>
                                         </span>
