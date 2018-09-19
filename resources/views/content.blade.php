@@ -509,16 +509,6 @@ $('.add-new-adcalc').on('click',function(e){
 //      // e.preventDefault();
 //      // e.stopPropagation();
 
-<<<<<<< HEAD
-          var obj = this;
-
-
-               if ( $('#contact-form-modal .fahrenheit-contact').hasClass('form-edited')) {
-                // alert('eeee')
-
-                $('#sure-modal').modal('show');
-
-=======
 //           var obj = this;
 
 // alert('1')
@@ -561,7 +551,6 @@ $('.add-new-adcalc').on('click',function(e){
 
          $('#sure-modal').modal('show');
 
->>>>>>> e825002df528b6f46caef709b66bfa4f262aa8a8
                 }
                 else
                 {
@@ -571,12 +560,6 @@ $('.add-new-adcalc').on('click',function(e){
                 }
 return false;
 
-<<<<<<< HEAD
-
-
-          })
-=======
->>>>>>> e825002df528b6f46caef709b66bfa4f262aa8a8
 
     });
            //# sourceURL=user.js
