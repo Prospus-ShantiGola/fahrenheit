@@ -49,7 +49,7 @@ if($type =='User')
                                 <td> IMPORTANT INFORMATION *</td>
                         </tr>
                         <tr>
-                                <td >This document should be read only by those persons to whom it is addressed and its content is not intended for use by any other persons. If you have received this message in error, please notify us immediately at <a href ='mailto:hq@theentropolis.com' style='color:blue;'>info@fahrenheit.cool</a>. Please also destroy and delete the message from your computer. Any unauthorised form of reproduction of this message is strictly prohibited.
+                                <td >This document should be read only by those persons to whom it is addressed and its content is not intended for use by any other persons. If you have received this message in error, please notify us immediately at <a href ='mailto:info@fahrenheit.cool' style='color:blue;'>info@fahrenheit.cool</a>. Please also destroy and delete the message from your computer. Any unauthorised form of reproduction of this message is strictly prohibited.
 FAHRENHEIT GmbH is not liable for the proper and complete transmission of the information contained in this communication, nor for any delay in its receipt.
  </td><br/>
                         </tr>
