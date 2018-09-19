@@ -170,7 +170,7 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="Halle/Saale" className="required-field" name = "location" id = "location" /> <i className="fa fa-map-marker" aria-hidden="true"></i>
+                                 <td className="input-fields"><input type="text" placeholder="Halle/Saale" className="required-field" name = "location" id = "location" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
 
                                  <span className="invalid-feedback" role="alert">
                                              <strong>Required field</strong>
