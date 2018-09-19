@@ -57693,7 +57693,7 @@ var GeneralModal = function (_React$Component) {
                                              { className: 'input-fields' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Halle/Saale', className: 'required-field', name: 'location', id: 'location' }),
                                              ' ',
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker disabled', 'aria-hidden': 'true' }),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'span',
                                                 { className: 'invalid-feedback', role: 'alert' },
