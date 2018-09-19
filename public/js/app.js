@@ -56478,7 +56478,35 @@ var Tiles = function (_React$Component) {
             if (this.state.generalDataChange) {
                 var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'ul',
-                    { 'class': 'price-listt' },
+                    { className: 'price-listt' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'li',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            null,
+                            'Project Name'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'h3',
+                            { className: 'textUpper' },
+                            this.state.generalData[0].project_name
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'li',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            null,
+                            'Editor'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'h3',
+                            { className: 'textUpper' },
+                            this.state.generalData[0].editor
+                        )
+                    ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'li',
                         null,
@@ -56489,20 +56517,20 @@ var Tiles = function (_React$Component) {
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h3',
-                            null,
+                            { className: 'textUpper' },
                             this.state.generalData[0].location
                         )
                     )
                 );
                 var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { 'class': 'hover-list' },
+                    { className: 'hover-list' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { 'class': 'table-responsive' },
+                        { className: 'table-responsive' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'table',
-                            { 'class': 'table' },
+                            { className: 'table' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'tr',
                                 null,
@@ -57094,13 +57122,8 @@ var ChillerModal = function (_React$Component) {
                            { className: 'list-inline' },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'li',
-                              { className: 'help-toggle' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-icon.png', alt: '' })
-                           ),
-                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'li',
                               null,
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'image', src: 'public/images/verifie-icon.png', alt: 'Submit' })
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'save-changes-btn', type: 'button', alt: 'Submit', value: 'Save Changes' })
                            ),
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'li',
@@ -57162,7 +57185,7 @@ var ChillerModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Project number explanation/tip' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Project number explanation/tip', 'data-trigger': 'hover' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),
@@ -57187,7 +57210,7 @@ var ChillerModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.', 'data-trigger': 'hover' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),
@@ -57242,7 +57265,7 @@ var ChillerModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.', 'data-trigger': 'hover' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),
@@ -57297,7 +57320,7 @@ var ChillerModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.', 'data-trigger': 'hover' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),
@@ -57352,7 +57375,7 @@ var ChillerModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Customer explanation/tip', 'data-trigger': 'hover' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),
@@ -57395,7 +57418,7 @@ var ChillerModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Editor explanation/tip' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Editor explanation/tip', 'data-trigger': 'hover' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),
@@ -57419,7 +57442,7 @@ var ChillerModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Company explanation/tip' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Company explanation/tip', 'data-trigger': 'hover' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),
@@ -57442,7 +57465,7 @@ var ChillerModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Address explanation/tip' },
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Address explanation/tip', 'data-trigger': 'hover' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),

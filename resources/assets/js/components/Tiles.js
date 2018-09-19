@@ -244,16 +244,25 @@ export class Tiles extends React.Component {
 
         if(this.state.generalDataChange){
             var pricelist=(
-                <ul class="price-listt">
+                <ul className="price-listt">
+                 <li>
+                                 <p>Project Name</p>
+                                 <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
+                              </li>
+                              <li>
+                                 <p>Editor</p>
+                                 <h3 className="textUpper">{this.state.generalData[0].editor}</h3>
+                              </li>
                               <li>
                                  <p>Location</p>
-                                 <h3>{this.state.generalData[0].location}</h3>
+                                 <h3 className="textUpper">{this.state.generalData[0].location}</h3>
                               </li>
                            </ul>
+
             );
-            var priceFullList=(<div class="hover-list">
-                                 <div class="table-responsive">
-                                    <table class="table">
+            var priceFullList=(<div className="hover-list">
+                                 <div className="table-responsive">
+                                    <table className="table">
                                        <tr>
                                           <th>Project name:</th>
                                           <td>{this.state.generalData[0].project_name}</td>

@@ -2079,6 +2079,30 @@ z-index:1;
     cursor: pointer;
 }
 
+.textUpper{
+    text-transform: uppercase !important;
+}
+/*==========================19/9/2018======================*/
+.save-changes-btn  {
+    border: 1px solid #005971;
+    color: #005971;
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 5px 5px 5px 15px !important;
+    font-weight: 500; text-decoration:none;
+    background: transparent url(../images/verify-icon.png) no-repeat;
+}
+li.save-changes-btn {
+    margin-top: 2px;
+}
+.data-box:hover .price-listt {
+    display: none;
+}
+.data-box:hover .main-hover-box .price-listt {
+    display: block;
+}
+/*==========================19/9/2018 end======================*/
+
 
 
 
