@@ -69,7 +69,7 @@
                                        <td class="input-label"> Name:</td>
 
 
-                                       <td class="input-fields "><input type="text" name = "full_name" id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required ="true"  class="required-field full_name" ></input>
+                                       <td class="input-fields "><input type="text" name = "full_name"  id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required ="true"  class="required-field full_name" ></input>
 
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
@@ -84,7 +84,7 @@
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
 
-                                       <td class="input-fields"><input  type="number"   name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true" max="10"   class="required-field contact_number"></input>
+                                       <td class="input-fields"><input type="text" pattern="^\d{11}$"    name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true"    class="required-field contact_number"></input>
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
                                         </span>
@@ -400,7 +400,7 @@
 
                          if(typeof data.errors=="undefined"){
 
-                          $('#contact_form_modal').modal('hide');
+                          $('#contact-form-modal').modal('hide');
 
                           $('#contact-us-modal').modal('show');
                          //  $('#contact-us-modal .modal-body').html('show');

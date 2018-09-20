@@ -57844,7 +57844,7 @@ var GeneralModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'phone_number', id: 'phone_number', placeholder: '0123 456' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '^\\d{11}$', name: 'phone_number', id: 'phone_number', placeholder: '0123 456' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -57867,7 +57867,7 @@ var GeneralModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'email_address', id: 'email_address', placeholder: 'inhaber@gmbh.de' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'email', name: 'email_address', id: 'email_address', placeholder: 'inhaber@gmbh.de' })
                                           )
                                        )
                                     )
@@ -57984,14 +57984,14 @@ var GeneralModal = function (_React$Component) {
                                              { className: 'input-help-label' },
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'button',
-                                                { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Tel. number explanation/tip' },
+                                                { type: 'button', pattern: '^\\d{11}$', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Tel. number explanation/tip' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'personal_phone_number', id: 'personal_phone_number', placeholder: '0123 456' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '^\\d{11}$', name: 'personal_phone_number', id: 'personal_phone_number', placeholder: '0123 456' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58014,7 +58014,7 @@ var GeneralModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'mobile_number', id: 'mobile_number', placeholder: 'Mr. Inhaber' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '^\\d{11}$', name: 'mobile_number', id: 'mobile_number', placeholder: 'Mr. Inhaber' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58037,7 +58037,7 @@ var GeneralModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'personal_email_address', id: 'personal_email_address', placeholder: 'inhaber@gmbh.de' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'email', name: 'personal_email_address', id: 'personal_email_address', placeholder: 'inhaber@gmbh.de' })
                                           )
                                        )
                                     )
