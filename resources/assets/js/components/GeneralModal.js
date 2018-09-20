@@ -206,7 +206,7 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text"  pattern="^\d{11}$"   name = "phone_number" id = "phone_number" placeholder="0123 456" /></td>
+                                 <td className="input-fields"><input type="text"  pattern="^\d{10}$"   name = "phone_number" id = "phone_number" placeholder="0123 456" /></td>
                               </tr>
                               <tr>
                                  <td className="input-label">Email:</td>
@@ -257,11 +257,11 @@ handleSubmit(event) {
                               </tr>
                               <tr>
                                  <td className="input-label">Tel. Number:</td>
-                                 <td className="input-help-label"><button type="button" pattern="^\d{11}$"   className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
+                                 <td className="input-help-label"><button type="button"    className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text"  pattern="^\d{11}$"   name = "personal_phone_number" id = "personal_phone_number" placeholder="0123 456" /></td>
+                                 <td className="input-fields"><input type="text"  pattern="^\d{10}$"   name = "personal_phone_number" id = "personal_phone_number" placeholder="0123 456" /></td>
                               </tr>
                               <tr>
                                  <td className="input-label">Mobile:</td>
@@ -269,7 +269,7 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" pattern="^\d{11}$"  name = "mobile_number" id = "mobile_number" placeholder="Mr. Inhaber" /></td>
+                                 <td className="input-fields"><input type="text" pattern="^\d{10}$"  name = "mobile_number" id = "mobile_number" placeholder="Mr. Inhaber" /></td>
                               </tr>
                               <tr>
                                  <td className="input-label">Email:</td>
