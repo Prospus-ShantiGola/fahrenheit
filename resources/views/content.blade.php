@@ -104,7 +104,7 @@
                                        <td class="input-label"> Name:</td>
 
 
-                                       <td class="input-fields "><input type="text" name = "full_name" id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required ="true"  class="required-field full_name" ></input>
+                                       <td class="input-fields "><input type="text" name = "full_name"  id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required ="true"  class="required-field full_name" ></input>
 
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
@@ -119,7 +119,7 @@
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
 
-                                       <td class="input-fields"><input  type="number"   name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true" minlength="10" maxlength="12"    class="required-field contact_number"></input>
+                                       <td class="input-fields"><input type="text" pattern="^\d{10}$"  oninvalid="this.setCustomValidity('Contact number not less than 10 digits')"   name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true"    class="required-field contact_number"></input>
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
                                         </span>
