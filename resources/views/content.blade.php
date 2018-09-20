@@ -119,7 +119,7 @@
                                     <tr>
                                        <td class="input-label"> Tel. Number:</td>
 
-                                       <td class="input-fields"><input type="text" pattern="^\d{10}$"  oninvalid="this.setCustomValidity('Contact number not less than 10 digits')"   name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true"    class="required-field contact_number"></input>
+                                       <td class="input-fields"><input type="text" pattern="^\d{11}$"    name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true"    class="required-field contact_number"></input>
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
                                         </span>
@@ -436,7 +436,7 @@
 
                          if(typeof data.errors=="undefined"){
 
-                          $('#contact_form_modal').modal('hide');
+                          $('#contact-form-modal').modal('hide');
 
                           $('#contact-us-modal').modal('show');
                          //  $('#contact-us-modal .modal-body').html('show');
