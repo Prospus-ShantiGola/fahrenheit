@@ -57511,7 +57511,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Header = {
    padding: "10px 20px",
-   textAlign: "right",
+   textAlign: "center",
    color: "red",
    fontSize: "14px"
 };
