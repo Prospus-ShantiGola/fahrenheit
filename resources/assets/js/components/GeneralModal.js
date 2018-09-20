@@ -1,5 +1,10 @@
 import React from 'react';
-
+const Header = {
+    padding: "10px 20px",
+    textAlign: "right",
+    color: "red",
+    fontSize: "14px"
+  }
 export class GeneralModal extends React.Component {
 
   constructor(props){
@@ -122,7 +127,9 @@ handleSubmit(event) {
 
         return (
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-information">
+            <div className="modal-dialog ">
             <form  onSubmit={this.handleSubmit} className = "general-information-form">
+
            <div className="modal-content">
             <div className="modal-heading">
                <div className="left-head"> General Information</div>
@@ -130,7 +137,7 @@ handleSubmit(event) {
                   <ul className="list-inline">
 
                     {/* <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li> */}
-                     <li> <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" /></li>
+                     <li> <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" title="Save Changes"/></li>
                       <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
 
                   </ul>
@@ -279,8 +286,11 @@ handleSubmit(event) {
                   </div>
                </div>
             </div>
+            <div style={Header}>Note : Please fill the required fields in both tabs</div>
          </div>
+
             </form>
+            </div>
          </div>
 
         );

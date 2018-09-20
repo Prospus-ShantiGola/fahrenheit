@@ -306,7 +306,7 @@
     </div>
   </div>
 
-  <div class="modal fade "  id="sure-modal">
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="sure-modal">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -451,10 +451,10 @@ $('.add-new-adcalc').on('click',function(e){
 
 
 
-   $('#adcalc .general-information-form, #compression-chiller-form').on('keyup change paste', 'input, select, textarea', function(){
+   $('.general-information-form, #compression-chiller-form').on('keyup change paste', 'input, select, textarea', function(){
         // $('#business-flyin #business_profile_modal').removeClass('form-edited');
        // alert('dsd')
-        $('#adcalc .general-information-form, #compression-chiller-form').addClass('form-edited');
+        $('.general-information-form, #compression-chiller-form').addClass('form-edited');
 
         // alert( $('#business-flyin').data('backdrop'));
 

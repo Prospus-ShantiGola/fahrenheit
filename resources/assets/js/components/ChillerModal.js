@@ -122,7 +122,7 @@ export class ChillerModal extends React.Component {
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-chiller">
 
             <form  onSubmit={this.handleSubmit} id="compression-chiller-form">
-
+            <div className="modal-dialog ">
             <div className="modal-content">
                <div className="modal-heading">
                   <div className="left-head">Compression Chillers</div>
@@ -130,7 +130,7 @@ export class ChillerModal extends React.Component {
                      <ul className="list-inline">
                         <li >
 
-                        <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" /></li>
+                        <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" title="Save Changes"/></li>
                         <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-compression "  aria-label="Close"/></span></li>
 
                      </ul>
@@ -220,7 +220,8 @@ export class ChillerModal extends React.Component {
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text"  id="temperature" placeholder="6 °C" name="temperature"/></td>
+                                    <td className="input-fields"><input type="text"  pattern="\d*" onInvalid="this.setCustomValidity('Witinnovation')"
+       onInvalid={()=>this.setCustomValidity('')}  id="temperature" placeholder="6 °C" name="temperature"/></td>
                                  </tr>
                                  </tbody>
                               </table>
@@ -264,6 +265,7 @@ export class ChillerModal extends React.Component {
                      </div>
                   </div>
                </div>
+            </div>
             </div>
             </form>
          </div>
