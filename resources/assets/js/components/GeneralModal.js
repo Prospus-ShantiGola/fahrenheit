@@ -129,8 +129,8 @@ handleSubmit(event) {
                <div className="right-head">
                   <ul className="list-inline">
 
-                     // <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li>
-                     <li> <input type="image" src="public/images/verifie-icon.png" alt="Submit"/></li>
+                    {/* <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li> */}
+                     <li> <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" /></li>
                       <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
 
                   </ul>

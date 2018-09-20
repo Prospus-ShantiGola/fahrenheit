@@ -1,41 +1,6 @@
-<section class="breadcrumbs" id="breadcrumb">
+<div id="content"></div>
 
- </section>
-    <!--banner section start-->
-    <section class="adcalc-content">
-        <div class="container">
-           <div class="adcalc-inner-content">
-              <!-- top icon -->
-              <div class="icon-area">
-                 <div class="row">
-                    <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-                       <ul class="list-inline left-icon-list">
 
-                          <li class ="disabled"><a href="{{ url('/') }}" class = "add-new-adcalc "><img src="public/images/icon_1.png" alt=""  /></a></li>
-                          <li class ="disabled"><div data-toggle="modal" data-target=""><img src="public/images/icon_2.png" alt="" /></div></li>
-                          <li class ="disabled"><a href="#"><img src="public/images/icon_3.png" alt="" /></a></li>
-
-                       </ul>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
-                       <ul class="list-inline right-icon-list">
-                          <li class ="disabled"><a href="#"><img src="public/images/icon_4.png" alt="" /></a></li>
-                          <li class ="disabled"><a href="#"><img src="public/images/icon_5.png" alt="" /></a></li>
-                          <li class ="disabled"><a href="#"><img src="public/images/icon_6.png" alt="" /></a></li>
-                          <li><div data-toggle="modal" data-target="#contact-form-modal" ><img src="public/images/icon_7.png" alt="" /></div></li>
-                          <li><div data-toggle="modal" class = "login-modal"><img src="public/images/icon_8.png" alt="" /></a></li>
-                       </ul>
-                    </div>
-                 </div>
-              </div>
-              <!-- top icon end -->
-<div id="adcalc"></div>
-           </div>
-        </div>
-        </div>
-        </div>
-     </section>
-    <!-- banner section end -->
 
 
 
@@ -85,7 +50,7 @@
                <div class="right-head">
 
 
-                <button type="button" class="close" onclick="checkConfirmClose()"><span aria-hidden="true">&times;</span></button>
+                <span class="close close_multi"><img src="public/images/cancle-icon.png" alt="" onclick="checkConfirmClose()" aria-label="Close"></span>
 
 
 
@@ -145,7 +110,7 @@
                                        <td class="input-fields textarea-place"><textarea name= "message" class = "message"></textarea></td>
                                     </tr>
                                     <tr>
-                                     <td colspan="2" class="form-submitbtn"><button type="submit" class="btn submit-contact-form">Submit</button></td>
+                                     <td colspan="2" class="form-submitbtn"><button type="submit" class="submit-contact-form">Submit</button></td>
                                     </tr>
                                  </tbody>
 
@@ -166,7 +131,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                             <h4 class="modal-title" id="myModalLabel">Login</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <span class="close close_multi"><img src="public/images/cancle-icon.png" alt=""  data-dismiss="modal" aria-label="Close"></span>
 
                     </div>
                     <div class="modal-body">
@@ -245,7 +210,7 @@
 
                <div class="right-head">
 
-                    <span class="close" data-dismiss="modal"><img src="images/cancle-icon.png" alt=""></span>
+                    <span class="close" data-dismiss="modal"><img src="public/images/cancle-icon.png" alt=""></span>
 
                </div>
             </div>
@@ -323,8 +288,7 @@
       <div class="modal-content">
         <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
+          <span class="close close_multi"><img src="public/images/cancle-icon.png" alt="" data-dismiss="modal" aria-label="Close"></span>
         </div>
         <div class="modal-body ">
            <p> Are you sure want to cancel? </p>

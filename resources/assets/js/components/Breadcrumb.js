@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
-class Breadcrumb extends Component {
+export default class Breadcrumb extends Component {
 
     render() {
         return (
-            <div className="container" >
-                <ol className="breadcrumb">
-                  
-                    <li className="breadcrumb-item active" aria-current="page"><a href="/fahrenheit">Adcalc</a></li>
-                </ol>
-            </div>
+            <section className="breadcrumbs" id="breadcrumb">
+                <div className="container" >
+                    <ol className="breadcrumb">
+
+                        <li className="breadcrumb-item active" aria-current="page"><a href="/fahrenheit">Adcalc</a></li>
+                    </ol>
+                </div>
+            </section>
         );
     }
 }
 
 
-if (document.getElementById('breadcrumb')) {
-    ReactDOM.render(<Breadcrumb />, document.getElementById('breadcrumb'));
-}

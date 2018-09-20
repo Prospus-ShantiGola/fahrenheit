@@ -5,7 +5,7 @@ export class ChillerModal extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {compressionChiler: '',role:LOGGED_IN_ROLE};
+        this.state = {compressionChiler: ''};
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
@@ -114,7 +114,7 @@ export class ChillerModal extends React.Component {
     }
 
     render() {
-        if(this.state.role=="expert"){
+        if(this.props.role=="expert"){
             var expertRoleHtml=<li className="nav-item"><a href="" data-target="#compression-calculation-data" data-toggle="tab" className="nav-link">CALCULATION DATA</a></li>;
         }
 
@@ -130,7 +130,7 @@ export class ChillerModal extends React.Component {
                      <ul className="list-inline">
                         <li >
 
-                        <input className="save-changes-btn" type="button" alt="Submit" value="Save Changes" /></li>
+                        <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" /></li>
                         <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-compression "  aria-label="Close"/></span></li>
 
                      </ul>

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {Tiles} from './Tiles';
 import {ChillerModal} from './ChillerModal';
 import {GeneralModal} from './GeneralModal';
 
 export default class Adcalc extends Component {
     constructor(props) {
-
         super(props);
         this.state = {
             EconomicStateChange: {
@@ -33,6 +31,8 @@ export default class Adcalc extends Component {
                 content:"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
                 chillerRecord:{}
             }
+            ,
+            logged_in_role:LOGGED_IN_ROLE
         };
         this.handleChillerForm = this.handleChillerForm.bind(this);
         this.handleGeneralForm = this.handleGeneralForm.bind(this);
@@ -387,14 +387,10 @@ export default class Adcalc extends Component {
                 modalId={tiles.general.modalId}
                 dataChange={this.state.HeatSourceStateChange}/>
                  </div>
-                 <ChillerModal role="expert" onChillerSubmit={this.handleChillerForm}/>
-                 <GeneralModal role="expert" onGeneralSubmit={this.handleGeneralForm}/>
+                 <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm}/>
+                 <GeneralModal role={this.state.logged_in_role} onGeneralSubmit={this.handleGeneralForm}/>
 
               </div>
         );
     }
-}
-
-if (document.getElementById('adcalc')) {
-    ReactDOM.render(<Adcalc />, document.getElementById('adcalc'));
 }
