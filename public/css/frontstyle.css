@@ -4,7 +4,40 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 body {background:#f0f0f0; padding:0; margin:0; font-family: 'Roboto', sans-serif !important;}
 img {max-width:100%;}
-margin{*0;}
+
+ul.price-listt.plnewblock {
+    width: 90%;
+}
+li.pdtnam {
+    float: left;
+    width: 51%;
+}
+.economic-data li.pdtnam {
+    width: 44%;
+}
+.economic-data li.pdtnum {
+    width: 56%;
+}
+li.pdtnum {
+    width: 43%;
+    float: right;
+}
+.price-listt .paybkprd h3 {
+    font-size: 34px;
+    font-weight: 700;
+}
+.clrs {
+    width: 100%;
+    float: left;
+}
+.single-tab.singletabbox a.nav-link.small.active {
+    background: url(../images/active-tab-122.png) no-repeat !important;
+    text-align: left;
+	    padding-left: 92px;
+}
+.single-tab.singletabbox li {
+    width: 100% !important;
+}
 header {
     background: #fff;
     padding: 27px 0;
@@ -259,7 +292,7 @@ span.error-message {
     border-bottom: 2px solid #f92156; color: #f92156;
 }
 span.center-text {
-    padding-left: 18px;
+    padding-left: 2px;
 }
 .banner-img {
     position: relative;
@@ -886,7 +919,7 @@ ul.right-list-content {
             margin: auto;
             padding: 10px 20px 20px;
             border: 1px solid #888;
-            width: 600px;
+            width: 630px;
         }
 
         /* The Close Button */
@@ -1063,7 +1096,7 @@ h3.inner-table-heading {
 }
 
 #contact-form-modal {
-    /* z-index: 9999!important; */
+    z-index: 9999!important;
 	  background-color: transparent;
 }
 
@@ -1107,15 +1140,7 @@ td.input-label.text-area-label {
     padding: 0 3px;
 }
 
-#tabsJustified li.nav-item {
-    width: 50%;
 
-}
-
-
-#tabsJustified2 li.nav-item {
-    width: 50%;
-}
 
 .input-fields ul li {
     float: left;
@@ -1167,27 +1192,7 @@ td.input-label.text-area-label {
 select.required-field {
     border-color: red;
 }
-.modal-body-content a.nav-link.active {
-    border-top-right-radius: 30px 62px;
-    border-color: #005986;
-    border-bottom: transparent;
-    border-top-left-radius: 9px 14px;
-    border-width: 2px;     color: #00618c;
-}
-.modal-body-content a.nav-link {
-    border-top-right-radius: 30px 70px;
-    border-bottom: transparent;
-    border-top-left-radius: 9px 14px;
-    border-width: 2px; background:#99bdcf; color:#fff;
-}
- .modal-body-content .nav-tabs .nav-link:hover {
-    border-color: transparent;  border-width: 2px;
 
-}
-.modal-body-content a.nav-link.active:hover {
-    border-color: #005986;  border-width: 2px;
-
-}
 .modal-body-content .nav-tabs .nav-link:focus {   outline: none;}
 #tabsJustifiedlast li.nav-item {
     width: 50%;
@@ -1229,7 +1234,7 @@ select.required-field {
 }
 #tabsJustifiedlast li.nav-item img.modal-openn {
     position: absolute;
-    left: 7px;
+    left: 13px;
     font-size: 30px;
     color: #00618c;
     top: 4px;
@@ -1245,8 +1250,11 @@ select.required-field {
     text-align: center;
     font-size: 14px;
     /* padding: 0 7px; */
-    margin-top: -6px;
+    margin-top: -4px;
     color: #fff;
+    /* margin-right: 23px; */
+    right: 37px;
+    position: absolute;
 }
 #tabsJustifiedContentt td.input-label {
     width: 28%;
@@ -1314,24 +1322,10 @@ select.required-field {
 #tabsJustifiedlast .calci-div {
     top: 45px;}
 
-.modal-body-content .nav-tabs .nav-item {
-    margin-bottom: -3px;  position:relative;
-}
 
 
-.modal-body-content li.nav-item a::after {
-    content: "";
-    position: absolute;
-    background: #00618c;
-    width: 101%;
-    display: block;
-    height: 2px;
-    bottom: 0;
-    left: -2px;
-}
-.modal-body-content li.nav-item a.active::after {
-   visibility:hidden;
-}
+
+
 
 .hover-list .table td{
     padding: 1px 0;
@@ -1595,9 +1589,70 @@ span.navbar-toggler-icon::after {
 
 	}
 @media (min-width:577px) and (max-width:767px) {
+
+body .modal-content .tripple-tab li.nav-item {
+    width: 172px!important;
+}
+.modal-body-content .tripple-tab li:nth-child(2) .nav-link.active {
+    background-size: 100%!important;
+    background-position: initial!important;
+}
+.modal-body-content .tripple-tab li:nth-child(2) .nav-link {
+    background-size: 100%!important;
+}
+
 	footer {
     text-align: center;
 }
+	.modal-content .nav-tabs li:first-child {
+    width: 50%!important;
+}
+body .single-tab.singletabbox li:first-child{    width: 100% !important;}
+.modal-content .nav-tabs li:last-child {
+    width: 50%!important;
+}
+
+
+.modal-body-content #tabsJustified1 li:first-child .nav-link.active {
+    background-size: cover!important;
+}
+.modal-body-content #tabsJustified1 li:last-child .nav-link {
+    background-size: cover!important;
+}
+.modal-body-content #tabsJustified1 li:last-child .nav-link.active {
+    background-size: cover!important;
+}
+.modal-body-content #tabsJustified1 li:first-child .nav-link {
+    background-size: cover!important;
+}
+
+
+
+
+
+.modal-body-content #tabsJustified1 li:first-child {
+    width: 25%!important;
+}
+.modal-body-content #tabsJustified1 li:last-child {
+    width: 25%!important;
+}
+
+.modal-content .nav-tabs li:first-child .nav-link.active {
+    background-size: 100%!important;
+}
+.modal-content .nav-tabs li:last-child .nav-link {
+    background-size: 97%!important;
+}
+.modal-content .nav-tabs li:last-child .nav-link.active {
+    background-size: 100%!important;
+}
+.modal-content .nav-tabs li:first-child .nav-link {
+    background-size: 100%!important;
+}
+
+
+
+
 .banner-img {
     height: auto;
 }
@@ -1722,7 +1777,50 @@ ul.navbar-nav.mr-auto {
     margin-top: 0px;
 }
 }
+
 @media (max-width:576px) {
+
+body .modal-content .tripple-tab li.nav-item {
+    width: 50%!important;
+    margin-bottom: 10px;
+}
+
+	.modal-content .nav-tabs.tripple-tab .nav-link {
+    height: 41px;
+    background-size: 100%!important;
+}
+.modal-content .nav-tabs.tripple-tab .nav-link {
+    padding: 5px 0 0 0;
+}
+.modal-body-content .tripple-tab li:nth-child(2) .nav-link.active {
+    background-position: initial!important;
+}
+
+
+
+		.modal-content .nav-tabs li:first-child {
+    width: 50%!important;
+}
+body .single-tab.singletabbox li:first-child{    width: 100% !important;}
+.modal-content .nav-tabs li:last-child {
+    width: 50%!important;
+}
+.modal-content .nav-tabs li:first-child .nav-link {
+    padding-right: 0!important;}
+	.modal-content .nav-tabs li:last-child .nav-link.active {
+    padding-right: 0!important;
+}
+.modal-content .nav-tabs li:last-child .nav-link {
+    padding-right: 0!important;
+}
+
+.modal-content .nav-tabs li:first-child .nav-link.active {
+    padding-right: 0!important;
+}
+
+.input-help-label button {
+    padding: 0;
+}
 .top-navigation {
     float: left;
     width: 100%;
@@ -1820,8 +1918,8 @@ h6.note-textt {
 .service-box-content {
     padding-top: 50px;}
 .input-fields i {
-    right: 5px;
-    top: 21px;
+    right: 9px;
+    top: 14px;
 }
 .german-data h1 {
     font-size: 22px;
@@ -1977,7 +2075,7 @@ footer {
     padding: 5px 5px; font-size:13px;}
 
 .modal-body-content #tabsJustified1 li.nav-item {
-    width: 50%;
+    width: 144px!important;
     margin: 2px 0;
 }
 .eco-investment-div tr td:first-child {
@@ -2113,6 +2211,215 @@ footer {
     height: 25px;
     text-align: center;
 }
+.modal-content .nav-tabs {
+    border-bottom: none;
+}
+.modal-content .nav-tabs .nav-link{ border:none;
+height:40px;
+border-radius:0px;
+padding:10px 0 0 0;
+}
+
+.modal-content .nav-tabs .nav-link.active{
+color:#00618c;
+}
+.modal-content .nav-tabs li:first-child{
+width:297px;
+
+
+}
+.modal-content .nav-tabs li:first-child .nav-link{
+padding-right:30px;
+background:url(../images/inactive-tab-1.jpg) no-repeat;
+}
+.modal-content .nav-tabs li:first-child .nav-link.active{
+background:url(../images/active-tab-1.jpg) no-repeat;
+padding-right:8px;
+}
+
+.modal-content .nav-tabs li:last-child{
+width:288px;
+}
+
+.modal-content .nav-tabs li:last-child .nav-link{
+	padding-right:30px;
+}
+.modal-content .nav-tabs li:last-child .nav-link{
+background:url(../images/inactive-tab-2.jpg) no-repeat;
+}
+
+.modal-content .nav-tabs li:last-child .nav-link.active{
+background:url(../images/active-tab-2.jpg) no-repeat;
+ padding-right: 22px;
+}
+
+
+
+
+
+.modal-body-content #tabsJustified1 li:first-child .nav-link.active{
+    background: url(../images/aa.png) no-repeat;
+    margin-top: 0px;
+    height: 44px;
+}
+
+
+.modal-body-content #tabsJustified1 li:nth-child(2) .nav-link {
+background:url(../images/fia2.jpg) no-repeat;	 padding-right: 20px;
+}
+
+.modal-body-content #tabsJustified1 li:nth-child(3) .nav-link {
+background:url(../images/fia3.jpg) no-repeat;	     padding-right: 10px;
+}
+
+.modal-body-content #tabsJustified1 li:last-child .nav-link {
+    background: url(../images/fia4.jpg) no-repeat;
+    padding-left: 12px;
+}
+.modal-body-content #tabsJustified1 li:first-child .nav-link{
+background:url(../images/fia4.jpg) no-repeat;
+}
+
+
+
+.modal-body-content #tabsJustified1 li:nth-child(2) .nav-link.active {
+    background: url(../images/tab3-ac.jpg) no-repeat;
+    padding-right: 21px;
+}
+
+.modal-body-content #tabsJustified1 li:nth-child(3) .nav-link.active{
+background:url(../images/tab3-ac.jpg) no-repeat;
+}
+
+.modal-body-content #tabsJustified1 li:last-child .nav-link.active{
+background:url(../images/tab3-ac.jpg) no-repeat;
+}
+
+
+/*==============25/9/2018==========*/
+.tripple-tab li.nav-item {
+    width: 196px!important;
+}
+.modal-body-content .tripple-tab li:first-child .nav-link.active {
+    background: url(../images/tripleactive1.jpg) no-repeat;
+	height:46px;
+	margin-top:-1px;
+
+}
+.modal-body-content .tripple-tab li:nth-child(2) .nav-link {
+    background: url(../images/triple2.jpg) no-repeat;
+    padding-right: 20px;
+}
+.modal-body-content .tripple-tab li:nth-child(3) .nav-link {
+    background: url(../images/triple3.jpg) no-repeat;
+    padding-right: 10px;
+}
+
+.modal-body-content .tripple-tab li:nth-child(1) .nav-link {
+    background: url(../images/triple2.jpg) no-repeat;
+    padding-right: 20px;
+}
+
+.modal-body-content .tripple-tab li:nth-child(2) .nav-link.active {
+    background: url(../images/tripleactive2.jpg) no-repeat;
+    padding-right: 20px;     background-size: cover;
+    background-position: 72% 100%;
+}
+.modal-body-content .tripple-tab li:nth-child(3) .nav-link.active {
+    background: url(../images/tripleactive2.jpg) no-repeat;
+    padding-right: 10px;     margin-top: 0px;
+}
+
+
+.single-tab a.nav-link.small.active {
+    background: transparent!important;
+    text-align: left;
+}
+
+.modal-content .nav-tabs.tripple-tab .nav-link {height:41px;}
+
+.modal-content .nav-tabs {
+    border-bottom: none;
+}
+.modal-content .nav-tabs .nav-link{ border:none;
+height:40px;
+border-radius:0px;
+padding:10px 0 0 0;
+}
+
+
+.modal-content .nav-tabs li:first-child{
+width:297px;
+
+
+}
+.modal-content .nav-tabs li:first-child .nav-link{
+padding-right:30px;
+background:url(../images/inactive-tab-1.jpg) no-repeat;
+}
+.modal-content .nav-tabs li:first-child .nav-link.active{
+background:url(../images/active-tab-1.jpg) no-repeat;
+padding-right:8px;
+}
+
+.modal-content .nav-tabs li:last-child{
+width:288px;
+}
+
+.modal-content .nav-tabs li:last-child .nav-link{
+	padding-right:30px;
+}
+.modal-content .nav-tabs li:last-child .nav-link{
+background:url(../images/inactive-tab-2.jpg) no-repeat;
+}
+
+.modal-content .nav-tabs li:last-child .nav-link.active{
+background:url(../images/active-tab-2.jpg) no-repeat;
+ padding-right: 22px;
+}
+
+
+
+
+
+.modal-body-content #tabsJustified1 li:first-child .nav-link.active{
+background:url(../images/fa1.jpg) no-repeat;	    margin-top: 1px;
+}
+
+
+.modal-body-content #tabsJustified1 li:nth-child(2) .nav-link {
+background:url(../images/fia2.jpg) no-repeat;	 padding-right: 20px;
+}
+
+.modal-body-content #tabsJustified1 li:nth-child(3) .nav-link {
+background:url(../images/fia3.jpg) no-repeat;	     padding-right: 10px;
+}
+
+.modal-body-content #tabsJustified1 li:last-child .nav-link {
+    background: url(../images/fia4.jpg) no-repeat;
+    padding-left: 12px;
+}
+.modal-body-content #tabsJustified1 li:first-child .nav-link{
+background:url(../images/fia4.jpg) no-repeat;
+}
+
+
+
+.modal-body-content #tabsJustified1 li:nth-child(2) .nav-link.active {
+    background: url(../images/tab3-ac.jpg) no-repeat;
+    padding-right: 21px;
+}
+
+.modal-body-content #tabsJustified1 li:nth-child(3) .nav-link.active{
+background:url(../images/tab3-ac.jpg) no-repeat;
+}
+
+.modal-body-content #tabsJustified1 li:last-child .nav-link.active{
+background:url(../images/tab3-ac.jpg) no-repeat;
+}
+
+
+
 
 
 

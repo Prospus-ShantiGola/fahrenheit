@@ -12,7 +12,9 @@ export class Tiles extends React.Component {
             compressionChillerData:[],
             compressionDataChange:false,
             generalData:[],
-            generalDataChange:false
+            generalDataChange:false,
+            economicData:[],
+            economicDataChange:false
                };
         this.editRecord=this.editRecord.bind(this);
         this.deleteRecord=this.deleteRecord.bind(this);
@@ -32,6 +34,10 @@ export class Tiles extends React.Component {
                 this.setState({
                     generalDataChange:nextProps.dataChange
                   });
+            case ECONOMIC_TITLE:
+            this.setState({
+                economicDataChange:nextProps.dataChange
+            });
             default:
                 break;
         }
@@ -54,6 +60,15 @@ export class Tiles extends React.Component {
 
                   this.state.generalData[0]= nextProps.dataRecord
                   this.forceUpdate()
+            }
+        if(nextProps.dataRecord.economicformMode=="add"){
+            this.setState({
+                economicData: this.state.generalData.concat(nextProps.dataRecord)
+                })
+            }else{
+
+                    this.state.economicData[0]= nextProps.dataRecord
+                    this.forceUpdate()
             }
 
 
@@ -141,6 +156,7 @@ export class Tiles extends React.Component {
     };
 
     render() {
+        console.log(this.state.compressionChillerData);
         const dragSet=false;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
@@ -262,7 +278,9 @@ export class Tiles extends React.Component {
             );
             var priceFullList=(<div className="hover-list">
                                  <div className="table-responsive">
+
                                     <table className="table">
+                                    <tbody>
                                        <tr>
                                           <th>Project name:</th>
                                           <td>{this.state.generalData[0].project_name}</td>
@@ -291,6 +309,7 @@ export class Tiles extends React.Component {
                                           <th>Email:</th>
                                           <td>{this.state.generalData[0].email_address}</td>
                                        </tr>
+                                       </tbody>
                                     </table>
                                  </div>
                               </div>);
@@ -330,6 +349,62 @@ export class Tiles extends React.Component {
       </ul>
             );
 
+        }
+
+        if(this.props.title==ECONOMIC_TITLE){
+            if(this.state.economicDataChange){
+                var pricelist=(
+
+                               <ul className="price-listt plnewblock">
+                               <li className="pdtnam">
+                                  <p>Electricity Price</p>
+                                  <h3>{this.state.economicData[0].electric_price}<br/>
+                                  €/kWh</h3>
+                               </li>
+                               <li className="pdtnum">
+                               <p>own usage of Electricity</p>
+                                  <h3>{this.state.economicData[0].own_usage_of_electricity}%</h3>
+                               </li>
+                               <div className="clrs"></div>
+                                <li className="pdtnam">
+                                  <p>Gas Price</p>
+                                  <h3>{this.state.economicData[0].gas_price}<br/>
+                                  €/kWh</h3>
+                               </li>
+                                <li className="pdtnum">
+                               <p>KWK-Subsidy for <br/>electricity</p>
+                                  <h3>{this.state.economicData[0].subsidy_for_electricity}</h3>
+                               </li>
+                            </ul>
+
+                );
+                var priceFullList=(<div className="hover-list">
+                                     <div className="table-responsive">
+
+                                        <table className="table">
+                                        <tbody>
+                                        <tr>
+                                          <th>Electricity price:</th>
+                                          <td>{this.state.economicData[0].electric_price} €/kWh</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Gas price:</th>
+                                          <td>{this.state.economicData[0].gas_price} €/kWh</td>
+                                       </tr>
+                                       <tr>
+                                          <th>Own usage of electricity: </th>
+                                          <td>{this.state.economicData[0].own_usage_of_electricity}%</td>
+                                       </tr>
+                                       <tr>
+                                          <th>KWK-subsidy for electricity </th>
+                                          <td>{this.state.economicData[0].subsidy_for_electricity}</td>
+                                       </tr>
+                                           </tbody>
+                                        </table>
+                                     </div>
+                                  </div>);
+            var requiredMsg="";
+            }
         }
 
 

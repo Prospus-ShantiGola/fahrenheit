@@ -108,6 +108,7 @@ handleSubmit(event) {
         generalInformation:generalInformation,
         state:true
     }
+    CHANGE_FORM=true;
     this.props.onGeneralSubmit(result);
   }
 

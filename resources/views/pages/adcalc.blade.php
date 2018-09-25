@@ -61,6 +61,8 @@
 ?>
         GENERAL_TILE= "General Information";
        CHILLER_TITLE= "Compression Chiller";
+       ECONOMIC_TITLE= "Economic Data";
+       CHANGE_FORM=false;
 
     </script>
     </head>

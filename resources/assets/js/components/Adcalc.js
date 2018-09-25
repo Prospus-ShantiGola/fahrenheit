@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import {Tiles} from './Tiles';
 import {ChillerModal} from './ChillerModal';
 import {GeneralModal} from './GeneralModal';
+import {EconomicModal} from './EconomicModal';
 
 export default class Adcalc extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            EconomicStateChange: {
-                stateChange:false
-            },
-            generalStateChange: {
-                stateChange:false
+            economicStateChange: {
+                stateChange:false,
+                economicRecord:{}
             },
             OptionsStateChange: {
                 stateChange:false
@@ -36,9 +35,10 @@ export default class Adcalc extends Component {
         };
         this.handleChillerForm = this.handleChillerForm.bind(this);
         this.handleGeneralForm = this.handleGeneralForm.bind(this);
+        this.handleEconomicForm = this.handleEconomicForm.bind(this);
+
     }
     handleChillerForm (result)  {
-        console.log(result.state)
         this.setState({compressionChilerStateChange:{
                                                     stateChange:result.state,
                                                     chillerRecord:result.compressionChiller
@@ -46,9 +46,15 @@ export default class Adcalc extends Component {
         });
     }
     handleGeneralForm (result)  {
-        console.log(result.state)
         this.setState({generalStateChange:{
                                             generalRecord:result.generalInformation,
+                                            stateChange:result.state
+                                          }
+        });
+    }
+    handleEconomicForm (result)  {
+        this.setState({economicStateChange:{
+                                            economicRecord:result.economicInformation,
                                             stateChange:result.state
                                           }
         });
@@ -78,7 +84,7 @@ export default class Adcalc extends Component {
                 modalId:'#general-information'
             },
             Economic:{
-                title:'Economic Data',
+                title:ECONOMIC_TITLE,
                 tileCls:'economic-data data-box',
                 required:"no",
                 edit:'yes',
@@ -86,8 +92,8 @@ export default class Adcalc extends Component {
                 editIcon:'public/images/edit-icon.png',
                 add:'no',
                 hoverText:'We need the location to get the specific weather data.',
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 disableCard',
-                hoverCls:'main-hover-box general-info-hover',
+                mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+                hoverCls:'main-hover-box economic-hover',
                 priceLst:'no',
                 priceData:{
 
@@ -96,7 +102,7 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#compression-chiller'
+                modalId:'#economic-information'
             },
             Options:{
                 title:'Options',
@@ -269,8 +275,9 @@ export default class Adcalc extends Component {
                 priceData={tiles.Economic.priceData}
                 rightpriceList={tiles.Economic.rightpriceList}
                 rightpriceListeData={tiles.Economic.rightpriceListeData}
-                modalId={tiles.general.modalId}
-                dataChange={this.state.HeatSourceStateChange} />
+                modalId={tiles.Economic.modalId}
+                dataChange={this.state.economicStateChange.stateChange}
+                dataRecord={this.state.economicStateChange.economicRecord} />
                 <Tiles
                 title={tiles.Options.title}
                 required={tiles.Options.required}
@@ -387,8 +394,9 @@ export default class Adcalc extends Component {
                 modalId={tiles.general.modalId}
                 dataChange={this.state.HeatSourceStateChange}/>
                  </div>
-                 <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm}/>
-                 <GeneralModal role={this.state.logged_in_role} onGeneralSubmit={this.handleGeneralForm}/>
+                 <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} />
+                 <GeneralModal role={this.state.logged_in_role} onGeneralSubmit={this.handleGeneralForm} />
+                 <EconomicModal role={this.state.logged_in_role} onEconomicSubmit={this.handleEconomicForm} />
 
               </div>
         );

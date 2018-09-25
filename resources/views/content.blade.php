@@ -283,6 +283,46 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="economic-modal-confirm">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        </div>
+        <div class="modal-body ">
+           <p> Are you sure want to cancel? </p>
+
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" class= "modal-confirm" onclick ="jQuery('#economic-information').modal('hide'); $('.economic-information-form').removeClass('form-edited'); $('.economic-information-form')[0].reset()">Yes</button>
+          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >No</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-modal">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"><img src="{{ asset('public/images/fahrenheit_logo.png') }}" alt=""></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        </div>
+        <div class="modal-body ">
+           <p> Your current progress so far will be lost. Are you sure you want to exit? </p>
+
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" class= "modal-confirm" onclick ="javascript:location.reload();">Yes</button>
+          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >No</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="compression-modal-confirm">
     <div class="modal-dialog ">
       <div class="modal-content">
@@ -303,8 +343,8 @@
 
         </div>
       </div>
-    </div>
-  </div>
+     </div>
+</div>
 
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="sure-modal">
     <div class="modal-dialog ">
@@ -451,10 +491,10 @@ $('.add-new-adcalc').on('click',function(e){
 
 
 
-   $('.general-information-form, #compression-chiller-form').on('keyup change paste', 'input, select, textarea', function(){
+   $('.general-information-form, #compression-chiller-form, .economic-information-form').on('keyup change paste', 'input, select, textarea', function(){
         // $('#business-flyin #business_profile_modal').removeClass('form-edited');
        // alert('dsd')
-        $('.general-information-form, #compression-chiller-form').addClass('form-edited');
+        $('.general-information-form, #compression-chiller-form, .economic-information-form').addClass('form-edited');
 
         // alert( $('#business-flyin').data('backdrop'));
 
