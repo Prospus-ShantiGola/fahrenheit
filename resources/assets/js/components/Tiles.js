@@ -81,7 +81,7 @@ export class Tiles extends React.Component {
 
     }
     componentWillUnmount(){
-        console.log("component unmount")
+       // console.log("component unmount")
     }
     componentDidMount(){
         var that=this;
@@ -205,7 +205,7 @@ export class Tiles extends React.Component {
     };
 
     render() {
-        console.log(this.state.compressionChillerData);
+        //console.log(this.state.compressionChillerData);
         const dragSet=false;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){

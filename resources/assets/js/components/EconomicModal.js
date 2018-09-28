@@ -28,7 +28,7 @@ export class EconomicModal extends React.Component {
         var customInputId = elem.currentTarget.getAttribute('data-id');
 
         var customInput = document.getElementById(customInputId);
-        console.log("input",customInput);
+        //console.log("input",customInput);
         if (customInput.contentEditable == "true") {
             customInput.contentEditable = "false";
         } else {
@@ -85,7 +85,7 @@ export class EconomicModal extends React.Component {
             });
             spaninput.eq(0).attr('id', 'custominput_' + i);
             var editStatus =(spaninput.eq(0).attr('contentEditable')=="true") ? "true" : "false";
-            console.log(editStatus);
+            //console.log(editStatus);
             spaninput.eq(0).attr('contentEditable', editStatus);
             editinput.eq(0).attr('data-id', 'custominput_' + i);
             deleteinput.eq(0).attr('data-id', 'FinancialItem_' + i);
@@ -96,9 +96,9 @@ export class EconomicModal extends React.Component {
                 that.deleteInput(event);
             });
         });
-        console.log("maintenence tab",$(this))
+        //console.log("maintenence tab",$(this))
         $('#maintenenceTable tr.multiple').each(function(i) {
-            console.log("maintenence tab",$(this))
+            //console.log("maintenence tab",$(this))
             $(this).attr('id', 'MaintenenceItem_' + i);
             var spaninput = $(this).find('span');
             var editinput = $(this).find('.edit-divv i');
@@ -110,7 +110,7 @@ export class EconomicModal extends React.Component {
             });
             spaninput.eq(0).attr('id', 'customMaintenenceInput_' + i);
             var editStatus =(spaninput.eq(0).attr('contentEditable')=="true") ? "true" : "false";
-            console.log(editStatus);
+           // console.log(editStatus);
             spaninput.eq(0).attr('contentEditable', editStatus);
             editinput.eq(0).attr('data-id', 'customMaintenenceInput_' + i);
             deleteinput.eq(0).attr('data-id', 'MaintenenceItem_' + i);
@@ -121,7 +121,7 @@ export class EconomicModal extends React.Component {
             });
         });
         $('#chpTable tr.multiple').each(function(i) {
-            console.log("chp tab",$(this))
+           // console.log("chp tab",$(this))
             $(this).attr('id', 'chpItem_' + i);
             var spaninput = $(this).find('span');
             var editinput = $(this).find('.edit-divv i');
@@ -133,7 +133,7 @@ export class EconomicModal extends React.Component {
             });
             spaninput.eq(0).attr('id', 'customchpInput_' + i);
             var editStatus =(spaninput.eq(0).attr('contentEditable')=="true") ? "true" : "false";
-            console.log(editStatus);
+            //console.log(editStatus);
             spaninput.eq(0).attr('contentEditable', editStatus);
             editinput.eq(0).attr('data-id', 'customchpInput_' + i);
             deleteinput.eq(0).attr('data-id', 'chpItem_' + i);
@@ -144,7 +144,7 @@ export class EconomicModal extends React.Component {
             });
         });
         $('#generalTable tr.multiple').each(function(i) {
-            console.log("chp tab",$(this))
+            ///console.log("chp tab",$(this))
             $(this).attr('id', 'generalItem_' + i);
             var spaninput = $(this).find('span');
             var editinput = $(this).find('.edit-divv i');
@@ -156,7 +156,7 @@ export class EconomicModal extends React.Component {
             });
             spaninput.eq(0).attr('id', 'customchpInput_' + i);
             var editStatus =(spaninput.eq(0).attr('contentEditable')=="true") ? "true" : "false";
-            console.log(editStatus);
+            ///console.log(editStatus);
             spaninput.eq(0).attr('contentEditable', editStatus);
             editinput.eq(0).attr('data-id', 'customchpInput_' + i);
             deleteinput.eq(0).attr('data-id', 'generalItem_' + i);
@@ -295,7 +295,7 @@ handleSubmit(event) {
                             if(typeof data.errors=="undefined"){
                                 var $form = $(".economic-information-form");
                                 var data = that.getFormData($form);
-                                console.log(data);
+                                //console.log(data);
                                 investmentCounter= $('#investmentTable tbody tr.multiple').length;
                                 maintenenceCounter= $('#maintenenceTable tbody tr.multiple').length;
                                 chpCounter= $('#chpTable tbody tr.multiple').length;
@@ -342,9 +342,9 @@ handleSubmit(event) {
 
 
     render() {
-        console.log(this.state.role);
+        //console.log(this.state.role);
         var expertFields="";
-        if(this.state.role=="user"){
+        if(this.state.role=="expert"){
             var expertFields=(
                 <tr><td className="nested-table" colSpan="3" style={CustomTable}>
                     <table className="table">

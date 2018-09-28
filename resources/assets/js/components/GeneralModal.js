@@ -89,7 +89,7 @@ handleSubmit(event) {
                             if(typeof data.errors=="undefined"){
                                 var $form = $(".general-information-form");
                                 var data = that.getFormData($form);
-                                console.log(data);
+                                //console.log(data);
                                 that.setState({
                                     generalInformation:data
                                 })
