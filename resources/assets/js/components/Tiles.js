@@ -104,6 +104,7 @@ export class Tiles extends React.Component {
                 for (var key in dataObj) {
                     if (dataObj.hasOwnProperty(key)) {
                         //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+
                         $(that.props.modalId).find('#'+key).val(dataObj[key]);
                     }
                 }
@@ -112,6 +113,54 @@ export class Tiles extends React.Component {
                 }
                 //Do stuff here
             });
+            $(document).on('show.bs.modal','#economic-information', function () {
+                if(that.props.title==ECONOMIC_TITLE){
+                    $( "ul.errorMessages" ).addClass('hide');
+                    var dataObj=that.state.economicData[0];
+                    if(NO_CUSTOM_FIELD >0 ){
+                        if($("#FinancialItem_"+(NO_CUSTOM_FIELD-1)).next('tr').length>0){
+                            $("#FinancialItem_"+(NO_CUSTOM_FIELD-1)).nextAll('tr').not('.clone').remove();
+                        }
+                    }else{
+                        $("#FinancialItem_0").nextAll('tr').not('.clone').remove();
+                    }
+                    if(NO_CUSTOM_FIELD_MAINTENENCE >0 ){
+                        if($("#MaintenenceItem_"+(NO_CUSTOM_FIELD_MAINTENENCE-1)).next('tr').length>0){
+                            $("#MaintenenceItem_"+(NO_CUSTOM_FIELD_MAINTENENCE-1)).nextAll('tr').not('.clone').remove();
+                        }
+                    }else{
+                        $("#MaintenenceItem_0").nextAll('tr').not('.clone').remove();
+                    }
+                    if(NO_CUSTOM_FIELD_GENERAL >0 ){
+                        if($("#generalItem_"+(NO_CUSTOM_FIELD_GENERAL-1)).next('tr').length>0){
+                            $("#generalItem_"+(NO_CUSTOM_FIELD_GENERAL-1)).nextAll('tr').not('.clone').remove();
+                        }
+                    }else{
+                        $("#generalItem_").nextAll('tr').not('.clone').remove();
+                    }
+                    if(NO_CUSTOM_FIELD_CHP >0 ){
+                        if($("#chpItem_"+(NO_CUSTOM_FIELD_CHP-1)).next('tr').length>0){
+                            $("#chpItem_"+(NO_CUSTOM_FIELD_CHP-1)).nextAll('tr').not('.clone').remove();
+                        }
+                    }else{
+                        $("#chpTable tr.multiple").remove();
+                    }
+
+                    if(typeof dataObj !='undefined'){
+
+                    for (var key in dataObj) {
+                        if (dataObj.hasOwnProperty(key)) {
+                            //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+                            if(key.indexOf("[]") != -1)  continue;
+                            $(that.props.modalId).find('#'+key).val(dataObj[key]);
+                        }
+                    }
+                    $(that.props.modalId).find('#economicformMode').val("edit");
+
+                     }
+                    }
+                    //Do stuff here
+                });
 
 
     }

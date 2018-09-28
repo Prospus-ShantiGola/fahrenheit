@@ -145,7 +145,7 @@ handleSubmit(event) {
                </div>
             </div>
             <div className="modal-body-content">
-               <ul id="tabsJustified" className="nav nav-tabs">
+               <ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
                   <li className="nav-item"><a href="" data-target="#project-data" data-toggle="tab" className="nav-link small active">PROJECT DATA</a></li>
                   <li className="nav-item"><a href="" data-target="#personal-data" data-toggle="tab" className="nav-link">PERSONAL DATA</a></li>
                </ul>

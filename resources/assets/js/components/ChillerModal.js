@@ -116,7 +116,18 @@ export class ChillerModal extends React.Component {
 
     render() {
         if(this.props.role=="expert"){
-            var expertRoleHtml=<li className="nav-item"><a href="" data-target="#compression-calculation-data" data-toggle="tab" className="nav-link">CALCULATION DATA</a></li>;
+            var expertRoleHtml=(<ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
+            <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
+            <li className="nav-item"><a href="" data-target="#compression-calculation-data" data-toggle="tab" className="nav-link">CALCULATION DATA</a></li>
+         </ul>);
+        }
+        else{
+            var expertRoleHtml=(
+                <ul id="tabsJustifiedsingle" className="nav nav-tabs single-tab singletabbox">
+                     <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
+                     {expertRoleHtml}
+                  </ul>
+            );
         }
 
         return (
@@ -138,10 +149,7 @@ export class ChillerModal extends React.Component {
                   </div>
                </div>
                <div className="modal-body-content">
-                  <ul id="tabsJustified2" className="nav nav-tabs">
-                     <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
-                     {expertRoleHtml}
-                  </ul>
+                 {expertRoleHtml}
                   <div id="tabsJustifiedContent2" className="tab-content">
                      <div id="compression-technical-data" className="tab-pane fade  active show">
                         <div className="heating-load-general-div">

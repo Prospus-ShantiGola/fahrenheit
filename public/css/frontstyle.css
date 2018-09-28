@@ -5,6 +5,13 @@
 body {background:#f0f0f0; padding:0; margin:0; font-family: 'Roboto', sans-serif !important;}
 img {max-width:100%;}
 
+span.icontitle {
+    width: 72%;
+    float: left;
+}
+.modal-body-content #tabsJustified1 li.nav-item:first-child {
+    width: 24%;
+}
 ul.price-listt.plnewblock {
     width: 90%;
 }
@@ -254,7 +261,10 @@ section.top-header {
     left: 0;
 }
 td.input-label {
-    width: 33%;
+    width: 40%;
+}
+tr.expertsbox td {
+    padding-top: 32px !important;
 }
 .button-div {
     clear: both;
@@ -1024,11 +1034,27 @@ td.input-help-label {
 
 .input-fields i {
     position: absolute;
-    right: 23px;
+    right: 13px;
     font-size: 19px;
     top: 14px; color:#00618c;
 }
+.input-fields.symbmain input {
+    padding-left: 22px;
+}
+span.pricesymbol {
+      position: absolute;
+    left: 15px;
+    top: 24%;
+	    color: #00618c;
 
+}
+.modal-content .nav-tabs {
+    border-bottom: none;
+    min-height: 45px;
+}
+td.input-fields.symbmain {
+    position: relative;
+}
 td.input-fields {
     position: relative;
 }
@@ -1086,7 +1112,7 @@ h3.inner-table-heading {
     margin-left: -1px;
     margin-bottom: -1px;
 }
-.eco-investment-div .input-label i {
+.eco-investment-div .input-label i,.eco-chp-data-div .input-label i{
     font-size: 20px;
     vertical-align: middle;
     padding: 0 3px;
@@ -1779,7 +1805,18 @@ ul.navbar-nav.mr-auto {
 }
 
 @media (max-width:576px) {
+.modal-content .nav-tabs.double-tab li:first-child .nav-link.active, .modal-content .nav-tabs.double-tab li:last-child .nav-link.active {
 
+    background-size: 100% 85%;
+    height: 40px;
+}
+.modal-content .nav-tabs.double-tab li:last-child .nav-link, .modal-content .nav-tabs.double-tab li:first-child .nav-link {
+    background: url(../images/inactive-tab-2.jpg) no-repeat;
+    background-size: 100% 85%;
+}
+.modal-content .nav-tabs.double-tab li:first-child {
+    width: 142px!important;
+}
 body .modal-content .tripple-tab li.nav-item {
     width: 50%!important;
     margin-bottom: 10px;
@@ -2217,9 +2254,11 @@ footer {
 .modal-content .nav-tabs .nav-link{ border:none;
 height:40px;
 border-radius:0px;
-padding:10px 0 0 0;
+padding:11px 0 0 0;
 }
-
+td.input-label.thrdlabel {
+    padding-left: 20px;
+}
 .modal-content .nav-tabs .nav-link.active{
 color:#00618c;
 }
@@ -2229,7 +2268,7 @@ width:297px;
 
 }
 .modal-content .nav-tabs li:first-child .nav-link{
-padding-right:30px;
+padding-right:10px;
 background:url(../images/inactive-tab-1.jpg) no-repeat;
 }
 .modal-content .nav-tabs li:first-child .nav-link.active{
@@ -2277,7 +2316,7 @@ background:url(../images/fia3.jpg) no-repeat;	     padding-right: 10px;
     padding-left: 12px;
 }
 .modal-body-content #tabsJustified1 li:first-child .nav-link{
-background:url(../images/fia4.jpg) no-repeat;
+background:url(../images/fia4new.jpg) no-repeat;
 }
 
 
@@ -2304,6 +2343,7 @@ background:url(../images/tab3-ac.jpg) no-repeat;
     background: url(../images/tripleactive1.jpg) no-repeat;
 	height:46px;
 	margin-top:-1px;
+	padding-right: 20px;
 
 }
 .modal-body-content .tripple-tab li:nth-child(2) .nav-link {
@@ -2337,6 +2377,8 @@ background:url(../images/tab3-ac.jpg) no-repeat;
 }
 
 .modal-content .nav-tabs.tripple-tab .nav-link {height:41px;}
+
+
 
 .modal-content .nav-tabs {
     border-bottom: none;
@@ -2382,7 +2424,7 @@ background:url(../images/active-tab-2.jpg) no-repeat;
 
 
 
-.modal-body-content #tabsJustified1 li:first-child .nav-link.active{
+/* .modal-body-content #tabsJustified1 li:first-child .nav-link.active{
 background:url(../images/fa1.jpg) no-repeat;	    margin-top: 1px;
 }
 
@@ -2401,7 +2443,7 @@ background:url(../images/fia3.jpg) no-repeat;	     padding-right: 10px;
 }
 .modal-body-content #tabsJustified1 li:first-child .nav-link{
 background:url(../images/fia4.jpg) no-repeat;
-}
+} */
 
 
 
@@ -2474,6 +2516,19 @@ li.save-changes-btn {
     cursor: pointer;
 }
 
+.clone{
+    display: none;
+}
 
-
-
+.errorMessages
+{
+    float: left;
+    padding: 10px;
+    /* text-align: center; */
+    font-size: 14px;
+    list-style: none;
+    color: red;
+}
+.hide{
+    display: none;
+}

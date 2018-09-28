@@ -2,17 +2,192 @@ import React from 'react';
 const CustomTable = {
     padding: "0px"
   }
+let investmentCounter,maintenenceCounter,chpCounter,generalCounter=0;
 export class EconomicModal extends React.Component {
 
   constructor(props){
         super(props);
-        this.state = {economicInformation: '',role:this.props.role};
+        this.displayData = [];
+        this.state = {
+            economicInformation: '',
+            role:this.props.role,
+            investmentCounter:0,
+            maintenenceCounter:0,
+            showdata : this.displayData};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
+        this.myFunction = this.myFunction.bind(this);
+        this.deleteInput = this.deleteInput.bind(this);
+        this.cloneItem = this.cloneItem.bind(this);
+        this.cloneGeneralItem = this.cloneGeneralItem.bind(this);
+        this.cloneChpItem = this.cloneChpItem.bind(this);
+        this.cloneMaintenenceItem = this.cloneMaintenenceItem.bind(this);
       }
+      myFunction(elem) {
+        if(typeof elem.currentTarget =="undefined") return false;
+        var customInputId = elem.currentTarget.getAttribute('data-id');
 
+        var customInput = document.getElementById(customInputId);
+        console.log("input",customInput);
+        if (customInput.contentEditable == "true") {
+            customInput.contentEditable = "false";
+        } else {
+            customInput.contentEditable = "true";
+        }
+    }
+    deleteInput(elem) {
+     var customTr = elem.currentTarget.getAttribute('data-id');
+      var customInput = document.getElementById(customTr);
+      customInput.remove();
+  }
+    cloneItem(){
+        $('#investmentTable tbody').append($('#investmentTable tbody tr.clone').clone());
+        $('#investmentTable tbody tr:last').not('clone').removeClass('clone').addClass('multiple');
+        this.bindEvents();
+
+    }
+    cloneGeneralItem(){
+        var trHtml='<tr id="generalcustom_"> <td class="input-label"><span id="customGeneral_1" contentEditable="false" suppressContentEditableWarning={true}>Custom Field</span>:<div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs" id="eeg_apportion_costs"/></td></tr>';
+        $('#generalTable tbody:eq(0)').append(trHtml);
+        $('#generalTable tbody tr:last').not('clone').removeClass('clone').addClass('multiple');
+        this.bindEvents();
+
+    }
+    cloneChpItem(){
+
+        var trHtml='<tr id="chpcustom_"> <td class="input-label"><span id="customChp_1" contentEditable="false" suppressContentEditableWarning={true}>Custom Field</span>:<div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs" id="eeg_apportion_costs"/></td></tr>';
+
+        $('#chpTable tbody:eq(0)').append(trHtml);
+        $('#chpTable tbody tr:last').not('clone').removeClass('clone').addClass('multiple');
+        this.bindEvents();
+
+    }
+    cloneMaintenenceItem(){
+        $('#maintenenceTable tbody').append($('#maintenenceTable tbody tr.clone').clone());
+        $('#maintenenceTable tbody tr:last').not('clone').removeClass('clone').addClass('multiple');
+        this.bindEvents();
+
+    }
+
+    bindEvents(){
+        var that = this;
+        $('#investmentTable tr.multiple').each(function(i) {
+
+            $(this).attr('id', 'FinancialItem_' + i);
+            var spaninput = $(this).find('span');
+            var editinput = $(this).find('.edit-divv i');
+            var deleteinput = $(this).find('.delete-divv i');
+            var inputField = $(this).find('input.price');
+            var discountField = $(this).find('input.discount');
+            editinput.unbind('click');
+            editinput.bind('click',function(event){
+                that.myFunction(event);
+            });
+            spaninput.eq(0).attr('id', 'custominput_' + i);
+            var editStatus =(spaninput.eq(0).attr('contentEditable')=="true") ? "true" : "false";
+            console.log(editStatus);
+            spaninput.eq(0).attr('contentEditable', editStatus);
+            editinput.eq(0).attr('data-id', 'custominput_' + i);
+            deleteinput.eq(0).attr('data-id', 'FinancialItem_' + i);
+            inputField.eq(0).attr('id', 'custominputprice_' + i);
+            discountField.eq(0).attr('id', 'custominputdiscount_' + i);
+            deleteinput.unbind('click');
+            deleteinput.bind('click',function(event){
+                that.deleteInput(event);
+            });
+        });
+        console.log("maintenence tab",$(this))
+        $('#maintenenceTable tr.multiple').each(function(i) {
+            console.log("maintenence tab",$(this))
+            $(this).attr('id', 'MaintenenceItem_' + i);
+            var spaninput = $(this).find('span');
+            var editinput = $(this).find('.edit-divv i');
+            var deleteinput = $(this).find('.delete-divv i');
+            var inputField = $(this).find('input');
+            editinput.unbind('click');
+            editinput.bind('click',function(event){
+                that.myFunction(event);
+            });
+            spaninput.eq(0).attr('id', 'customMaintenenceInput_' + i);
+            var editStatus =(spaninput.eq(0).attr('contentEditable')=="true") ? "true" : "false";
+            console.log(editStatus);
+            spaninput.eq(0).attr('contentEditable', editStatus);
+            editinput.eq(0).attr('data-id', 'customMaintenenceInput_' + i);
+            deleteinput.eq(0).attr('data-id', 'MaintenenceItem_' + i);
+            inputField.eq(0).attr('id', 'MaintenenceIteminput_' + i);
+            deleteinput.unbind('click');
+            deleteinput.bind('click',function(event){
+                that.deleteInput(event);
+            });
+        });
+        $('#chpTable tr.multiple').each(function(i) {
+            console.log("chp tab",$(this))
+            $(this).attr('id', 'chpItem_' + i);
+            var spaninput = $(this).find('span');
+            var editinput = $(this).find('.edit-divv i');
+            var deleteinput = $(this).find('.delete-divv i');
+            var inputField = $(this).find('input');
+            editinput.unbind('click');
+            editinput.bind('click',function(event){
+                that.myFunction(event);
+            });
+            spaninput.eq(0).attr('id', 'customchpInput_' + i);
+            var editStatus =(spaninput.eq(0).attr('contentEditable')=="true") ? "true" : "false";
+            console.log(editStatus);
+            spaninput.eq(0).attr('contentEditable', editStatus);
+            editinput.eq(0).attr('data-id', 'customchpInput_' + i);
+            deleteinput.eq(0).attr('data-id', 'chpItem_' + i);
+            inputField.eq(0).attr('id', 'chpIteminput_' + i);
+            deleteinput.unbind('click');
+            deleteinput.bind('click',function(event){
+                that.deleteInput(event);
+            });
+        });
+        $('#generalTable tr.multiple').each(function(i) {
+            console.log("chp tab",$(this))
+            $(this).attr('id', 'generalItem_' + i);
+            var spaninput = $(this).find('span');
+            var editinput = $(this).find('.edit-divv i');
+            var deleteinput = $(this).find('.delete-divv i');
+            var inputField = $(this).find('input');
+            editinput.unbind('click');
+            editinput.bind('click',function(event){
+                that.myFunction(event);
+            });
+            spaninput.eq(0).attr('id', 'customchpInput_' + i);
+            var editStatus =(spaninput.eq(0).attr('contentEditable')=="true") ? "true" : "false";
+            console.log(editStatus);
+            spaninput.eq(0).attr('contentEditable', editStatus);
+            editinput.eq(0).attr('data-id', 'customchpInput_' + i);
+            deleteinput.eq(0).attr('data-id', 'generalItem_' + i);
+            inputField.eq(0).attr('id', 'chpIteminput_' + i);
+            deleteinput.unbind('click');
+            deleteinput.bind('click',function(event){
+                that.deleteInput(event);
+            });
+        });
+    }
 
        componentDidMount(){
+           var that=this;
+           this.bindEvents();
+
+        var input = document.getElementsByClassName('onlynumeric');
+        for (let i = 0; i < input.length; i++){
+            input[i].addEventListener('invalid', function(e) {
+                if(this.validity.valueMissing){
+                    e.target.setCustomValidity("Please provide value");
+                } else if(!this.validity.valid) {
+                    e.target.setCustomValidity("Please enter only numeric value");
+                }
+                // to avoid the 'sticky' invlaid problem when resuming typing after getting a custom invalid message
+                this.addEventListener('input', function(e){
+                    e.target.setCustomValidity('');
+                });
+            }, false);
+
+        }
+
         jQuery(".help-toggle").unbind('click');
         jQuery(".help-toggle").click(function(){
             jQuery(".input-help-label").toggle();
@@ -26,24 +201,20 @@ export class EconomicModal extends React.Component {
                 }
             });
         });
+        $('#economic-information').on('shown.bs.modal', function() {
+            $('#economic-information .nav-tabs li:eq(0) a').tab('show')
+        })
         $('.close-modal-economic').on('click',function (e) {
-
-          const obj = this;
-
-
                if ($('.economic-information-form').hasClass('form-edited')) {
                   // alert('eeee')
                  e.preventDefault();
-
                 $('#economic-modal-confirm').modal('show');
-
-
                 }
                 else
                 {
-                 $('#economic-information').modal('hide');
+                that.hideModal();
                  if($('.economic-information-form #economicformMode').val()=="add"){
-                 $('.economic-information-form')[0].reset()
+                   $('.economic-information-form')[0].reset()
                  }
                 }
 
@@ -53,13 +224,48 @@ export class EconomicModal extends React.Component {
                //Do stuff here
           }
 
+        hideModal()
+        {
+            $("#economic-information").removeClass("in");
+            $(".modal-backdrop").remove();
+            $("#economic-information").hide();
+
+        }
 
 
+        showAllErrorMessages (){
 
+            var form = $('form.economic-information-form'),
+            errorList = $( "ul.errorMessages", form ),
+            errorFound=true;
 
+            errorList.removeClass('hide');
+            errorList.empty();
+            // Find all invalid fields within the form.
+            var invalidFields = form.find( ":invalid" ).each( function( index, node ) {
+
+                // Find the field's corresponding label
+                var label = $("#"+node.id).parent('td').prev(),
+                    // Opera incorrectly does not fill the validationMessage property.
+                    message = node.validationMessage || 'Invalid value.';
+                if(label.hasClass('input-help-label')){
+                    label=label.prev('td.input-label')
+                }
+                errorList
+                    .show()
+                    .append( "<li><span>" + label.text() + "</span> Please enter only numeric value</li>" );
+                    errorFound=false;
+            });
+            return errorFound;
+        }
 handleSubmit(event) {
+
+    if(!this.showAllErrorMessages()){
+        return false;
+    }
     event.preventDefault();
     const that = this;
+
 
        var location    = $(".economic-information-form").find("input[name=location]").val();
        var address    = $(".economic-information-form").find("input[name=address]").val();
@@ -78,8 +284,9 @@ handleSubmit(event) {
 
                 })
         })
-         .then((a) => {return a.json();})
+        .then((a) => {return a.json();})
         .then(function (data) {
+
                             $(".economic-information-form").find('.invalid-feedback').hide();
                             jQuery.each(data.errors, function(key, value){
                                 $(".economic-information-form").find('#'+value).siblings('.invalid-feedback').show();
@@ -89,12 +296,22 @@ handleSubmit(event) {
                                 var $form = $(".economic-information-form");
                                 var data = that.getFormData($form);
                                 console.log(data);
+                                investmentCounter= $('#investmentTable tbody tr.multiple').length;
+                                maintenenceCounter= $('#maintenenceTable tbody tr.multiple').length;
+                                chpCounter= $('#chpTable tbody tr.multiple').length;
+
+                                NO_CUSTOM_FIELD= investmentCounter;
+                                NO_CUSTOM_FIELD_MAINTENENCE=maintenenceCounter;
+                                NO_CUSTOM_FIELD_CHP=chpCounter;
+                                NO_CUSTOM_FIELD_GENERAL=generalCounter;
                                 that.setState({
-                                    economicInformation:data
+                                    economicInformation:data,
+                                    investmentCounter:investmentCounter
                                 })
                                 that.changeState(that.state.economicInformation);
-                                $("#economic-information").modal("hide");
+                                that.hideModal();
                                 $('.economic-information-form').removeClass('form-edited');
+                                $('.economic-information-form #economicformMode').val('edit')
 
                             }
         })
@@ -125,16 +342,19 @@ handleSubmit(event) {
 
 
     render() {
-        if(this.state.role=="expert"){
+        console.log(this.state.role);
+        var expertFields="";
+        if(this.state.role=="user"){
             var expertFields=(
                 <tr><td className="nested-table" colSpan="3" style={CustomTable}>
-                    <table className="table"><tr>
+                    <table className="table">
+                    <tbody><tr>
                                  <td className="input-label">Electricity price increase:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Location explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="2.000 %/a"  name="electric_price_increased" id="electric_price_increased"/></td>
+                                 <td className="input-fields"><input type="text"  pattern="\d*"   className="onlynumeric"placeholder="2.000 %/a"  name="electric_price_increased" id="electric_price_increased"/></td>
                               </tr>
                               <tr>
                                  <td className="input-label">Calculated interest rate:</td>
@@ -142,7 +362,7 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="0.700 %/a" name="calculated_interest_rate" id="calculated_interest_rate" /></td>
+                                 <td className="input-fields"><input type="text"  pattern="\d*" className="onlynumeric" placeholder="0.700 %/a" name="calculated_interest_rate" id="calculated_interest_rate" /></td>
                               </tr>
                               <tr>
                                  <td className="input-label">Inflation rate:</td>
@@ -150,8 +370,10 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="1.600 %/a" name="inflation_rate" id="inflation_rate"/></td>
-                              </tr></table>
+                                 <td className="input-fields"><input type="text"  pattern="\d*" className="onlynumeric" placeholder="1.600 %/a" name="inflation_rate" id="inflation_rate"/></td>
+                              </tr>
+                              </tbody>
+                              </table>
                 </td>
                 </tr>
             );
@@ -162,9 +384,18 @@ handleSubmit(event) {
             <li className="nav-item"><a href="" data-target="#eco-maintenance" data-toggle="tab" className="nav-link">MAINTENANCE</a></li>
          </ul>);
 
-         var expertOption=( <div className="new-row-addition">
-         <img src="public/images/plus-icon.png"  alt="" />
-       </div>);
+            var expertOptionGeneral = (<div className="new-row-addition" onClick={e => this.cloneGeneralItem()}>
+                <img src="public/images/plus-icon.png" alt="" />
+            </div>);
+            var expertOptionCHP = (<div className="new-row-addition" onClick={e => this.cloneChpItem()}>
+                <img src="public/images/plus-icon.png" alt="" />
+            </div>);
+            var expertOptionInvestment = (<div className="new-row-addition" onClick={e => this.cloneItem()}>
+                <img src="public/images/plus-icon.png" alt="" />
+            </div>);
+            var expertOptionMaintenence = (<div className="new-row-addition" onClick={e => this.cloneMaintenenceItem()}>
+                <img src="public/images/plus-icon.png" alt="" />
+            </div>);
 
 
        var expertChp=(<tr><td className="nested-table" colSpan="5" style={CustomTable}><table className="table">
@@ -180,7 +411,7 @@ handleSubmit(event) {
         <img src="public/images/help-red.png" alt="" />
         </button>
      </td>
-     <td className="input-fields"><input type="text" placeholder="0.03500 €/kWh" name="electricity_sales_price" id="electricity_sales_price"/></td>
+     <td className="input-fields"><input type="text" placeholder="0.03500 €/kWh" pattern="\d*" className="onlynumeric" name="electricity_sales_price" id="electricity_sales_price"/></td>
      </tr>
      <tr>
         <td className="input-label">Energy tax refund:
@@ -189,7 +420,7 @@ handleSubmit(event) {
            <img src="public/images/help-red.png" alt="" />
            </button>
         </td>
-        <td className="input-fields"><input type="text" placeholder="0.00550 €/kWh" name="energy_tax_refund" id="energy_tax_refund" /></td>
+        <td className="input-fields"><input type="text" pattern="\d*" className="onlynumeric" placeholder="0.00550 €/kWh" name="energy_tax_refund" id="energy_tax_refund" /></td>
      </tr>
      <tr>
         <td className="input-label">EEG allocation portion:</td>
@@ -197,33 +428,57 @@ handleSubmit(event) {
            <img src="public/images/help-red.png" alt="" />
            </button>
         </td>
-        <td className="input-fields"><input type="text" placeholder="40%" name="eeg_allocation_portion" id="eeg_allocation_portion" /></td>
+        <td className="input-fields"><input type="text" placeholder="40%"  pattern="\d*" className="onlynumeric" name="eeg_allocation_portion" id="eeg_allocation_portion" /></td>
      </tr>
-     <tr>
+     <tr >
         <td className="input-label">EEG apportionment costs:</td>
         <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip">
            <img src="public/images/help-red.png" alt="" />
            </button>
         </td>
-        <td className="input-fields"><input type="text" placeholder="0.06792 €/kWh" name="eeg_apportion_costs" id="eeg_apportion_costs"/></td>
+        <td className="input-fields"><input type="text" pattern="\d*" className="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs" id="eeg_apportion_costs"/></td>
      </tr>
+
            </tbody>
            </table></td></tr> );
         }else{
-            var expertTabs=(<ul id="tabsJustified1" className="nav nav-tabs">
+            var expertTabs=(<ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
             <li className="nav-item"><a href="" data-target="#eco-general" data-toggle="tab" className="nav-link small active">GENERAL</a></li>
             <li className="nav-item"><a href="" data-target="#eco-chp" data-toggle="tab" className="nav-link">CHP</a></li>
          </ul>);
         }
+        let rows=[];
+        // console.log("this.state.investmentCounter",this.state.investmentCounter);
+        // if(this.state.investmentCounter>0){
+
+        //     let rows=[];
+        //     for(let i=0;i<this.state.investmentCounter;i++){
+        //         rows.push(
+        //             <tr  id="custom_{i}" className="multiple">
+        //                          <td className="input-label">
+        //                             <span id="custominput_{i}" contentEditable="false">Project planning</span>:
+        //                             <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true" data-id="custominput_{i}"></i></div>
+        //                             <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true" data-id="custom_{i}" ></i></div>
+        //                          </td>
+        //                          <td className="input-fields"><input type="text" placeholder="3,000 €"  pattern="\d*" className="onlynumeric" name="planning[]" id="planning_{i}" />
+        //                          </td>
+        //                          <td className="input-label">Discount:</td>
+        //                          <td className="input-fields chp-base"><input type="text" placeholder="2%"  pattern="\d*" className="onlynumeric" name="planning_discount[]" id="planning_discount_{i}" /> </td>
+        //                       </tr>
+
+        //         )
+        //     }
+
+        // }
         return (
-    <div className="modal modal_multi" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="economic-information">
-    <form onSubmit={this.handleSubmit} className = "economic-information-form">
+    <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="economic-information">
+    <form  className = "economic-information-form">
          <div className="modal-content">
             <div className="modal-heading">
                <div className="left-head"> Economic Data</div>
                <div className="right-head">
                   <ul className="list-inline">
-                  <li> <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" title="Save Changes"/></li>
+                  <li> <input className="save-changes-btn" type="button" alt="Submit" onClick={this.handleSubmit} value="Save Changes" title="Save Changes"/></li>
                   <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-economic"  aria-label="Close"/></span></li>
                   </ul>
                </div>
@@ -234,8 +489,8 @@ handleSubmit(event) {
 
                   <div id="eco-general" className="tab-pane fade  active show">
                      <div className="eco-general-data-div">
-                        <div className="table-responsive">
-                           <table className="table">
+                        <div className="table-responsive" >
+                           <table className="table" id="generalTable">
                            <tbody>
                               <tr>
                                  <td className="input-label"> Electricity price:</td>
@@ -243,7 +498,7 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="0.180 €/kWh" name="electric_price" id="electric_price" />
+                                 <td className="input-fields"><input type="text" pattern="\d*" className="onlynumeric"  placeholder="0.180 €/kWh" name="electric_price" id="electric_price" title="Username should only contain lowercase letters. e.g. john" />
                                  <input type="hidden" placeholder="Chiller 1" id="economicformMode"   name="economicformMode" value="add" /></td>
                               </tr>
                               <tr>
@@ -252,19 +507,19 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="0.000 €/kWh" name="heat_price" id="heat_price" /></td>
+                                 <td className="input-fields"><input type="text"  pattern="\d*" className="onlynumeric" placeholder="0.000 €/kWh" name="heat_price" id="heat_price" /></td>
                               </tr>
                               {expertFields}
                               </tbody>
                            </table>
                         </div>
-                       {expertOption}
+                        {expertOptionGeneral}
                      </div>
                   </div>
                   <div id="eco-chp" className="tab-pane fade">
                      <div className="eco-chp-data-div">
                         <div className="table-responsive">
-                           <table className="table">
+                           <table className="table" id="chpTable">
                            <tbody>
                               <tr>
                                  <td className="input-label"> Own usage of electricity:</td>
@@ -272,7 +527,7 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="100%" name="own_usage_of_electricity" id="own_usage_of_electricity"/> </td>
+                                 <td className="input-fields"><input type="text"  pattern="\d*" placeholder="100%" name="own_usage_of_electricity" id="own_usage_of_electricity"/> </td>
                               </tr>
                               <tr>
                                  <td className="input-label">KWK-subsidy for
@@ -283,7 +538,7 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="2016" name="subsidy_for_electricity" id="subsidy_for_electricity" /></td>
+                                 <td className="input-fields"><input type="text"  pattern="\d*" className="onlynumeric" placeholder="2016" name="subsidy_for_electricity" id="subsidy_for_electricity" /></td>
                               </tr>
                               <tr>
                                  <td className="input-label">Gas price:</td>
@@ -291,78 +546,79 @@ handleSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="0.03500 €/kWh"  name="gas_price" id="gas_price"/></td>
+                                 <td className="input-fields"><input type="text"  pattern="\d*" className="onlynumeric" placeholder="0.03500 €/kWh"  name="gas_price" id="gas_price"/></td>
                               </tr>
 
-                             {expertChp}
+                              {expertChp}
                               </tbody>
                            </table>
                         </div>
+                        {expertOptionCHP}
                      </div>
                   </div>
                   <div id="eco-investment" className="tab-pane fade">
                      <div className="eco-investment-div">
-                        <div className="table-responsive">
+                        <div className="table-responsive" id="investmentTable">
                            <table className="table">
                            <tbody>
                               <tr>
                                  <td className="input-label"> CHP in the basement:</td>
-                                 <td className="input-fields"><input type="text" placeholder="78,250 €" className="icon-field"  name="chp_basement" id="chp_basement"/>
+                                 <td className="input-fields"><input type="text" placeholder="78,250 €"  pattern="\d*"  className="icon-field onlynumeric"  name="chp_basement" id="chp_basement"/>
                                     <i className="fa fa-calculator dropdown-calci" aria-hidden="true"></i>
                                  </td>
                                  <td className="input-label">Discount:</td>
-                                 <td className="input-fields chp-base"><input type="text" placeholder="0%"  name="discount_chp_basement" id="discount_chp_basement"/> </td>
+                                 <td className="input-fields chp-base"><input type="text"  pattern="\d*" className="onlynumeric" placeholder="0%"  name="discount_chp_basement" id="discount_chp_basement"/> </td>
                               </tr>
                               <tr>
                                  <td className="input-label"> Chiller 1:</td>
-                                 <td className="input-fields"><input type="text" placeholder="16,251 €" className="icon-field"  name="chiller" id="chiller"/>
+                                 <td className="input-fields"><input type="text" placeholder="16,251 €"   pattern="\d*" className="icon-field onlynumeric"  name="chiller" id="chiller"/>
                                     <i className="fa fa-calculator dropdown-calci" aria-hidden="true"></i>
                                  </td>
                                  <td className="input-label">Discount:</td>
-                                 <td className="input-fields chp-base"><input type="text" placeholder="0%"  name="chiller_discount" id="chiller_discount" /> </td>
+                                 <td className="input-fields chp-base"><input type="text"  pattern="\d*" className="onlynumeric" placeholder="0%"  name="chiller_discount" id="chiller_discount" /> </td>
                               </tr>
                               <tr>
                                  <td className="input-label"> Radiant cooling office:</td>
-                                 <td className="input-fields"><input type="text" placeholder="8,550 €" name="radiant_cooling_office" id="radiant_cooling_office" />
+                                 <td className="input-fields"><input type="text" placeholder="8,550 €"  pattern="\d*" className="onlynumeric" name="radiant_cooling_office" id="radiant_cooling_office" />
                                  </td>
                                  <td className="input-label">Discount:</td>
-                                 <td className="input-fields chp-base"><input type="text" placeholder="0%" name="radiant_discount" id="radiant_discount"/> </td>
+                                 <td className="input-fields chp-base"><input type="text" placeholder="0%"  pattern="\d*" className="onlynumeric" name="radiant_discount" id="radiant_discount"/> </td>
                               </tr>
                               <tr>
                                  <td className="input-label"> eCoo 10X:</td>
-                                 <td className="input-fields"><input type="text" placeholder="19,950 €"  name="ecoo" id="ecoo" />
+                                 <td className="input-fields"><input type="text" placeholder="19,950 €"  pattern="\d*"  className="onlynumeric" name="ecoo" id="ecoo" />
                                  </td>
                                  <td className="input-label">Discount:</td>
-                                 <td className="input-fields chp-base"><input type="text" placeholder="5%" name="ecoo_discount" id="ecoo_discount" /> </td>
+                                 <td className="input-fields chp-base"><input type="text" placeholder="5%"  pattern="\d*" className="onlynumeric" name="ecoo_discount" id="ecoo_discount" /> </td>
                               </tr>
-                              <tr>
+                              <tr  id="custom_1" className="multiple">
                                  <td className="input-label">
-                                    Project planning:
-                                    <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></div>
-                                    <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true"></i></div>
+                                    <span id="custominput_1" contentEditable="false" suppressContentEditableWarning={true}>Project planning</span>:
+                                    <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true" data-id="custominput_1"></i></div>
+                                    <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true" data-id="custom_1" ></i></div>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="3,000 €" name="planning_1" id="planning_1" />
+                                 <td className="input-fields"><input type="text" placeholder="3,000 €"  pattern="\d*" className="onlynumeric" name="planning[]" id="planning_1" />
                                  </td>
                                  <td className="input-label">Discount:</td>
-                                 <td className="input-fields chp-base"><input type="text" placeholder="2%" name="planning_discount_1" id="planning_discount_1" /> </td>
+                                 <td className="input-fields chp-base"><input type="text" placeholder="2%"  pattern="\d*" className="onlynumeric" name="planning_discount[]" id="planning_discount_1" /> </td>
                               </tr>
-                              <tr className="add-new-row">
+                              <tr  id="custom_1" className="clone">
                                  <td className="input-label">
-                                    Project planning:
-                                    <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></div>
-                                    <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true"></i></div>
+                                    <span id="custominputt_1" contentEditable="false" suppressContentEditableWarning={true}>Project planning</span>:
+                                    <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true" data-id="custominputt_1"></i></div>
+                                    <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true" data-id="custom_1" ></i></div>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="3,000 €" name="planning_2" id="planning_2" />
+                                 <td className="input-fields"><input type="text" placeholder="3,000 €"  pattern="\d*" className="onlynumeric price" name="planning[]" id="planning_x" />
                                  </td>
                                  <td className="input-label">Discount:</td>
-                                 <td className="input-fields chp-base"><input type="text" placeholder="2%" name="planning_discount_2" id="planning_discount_2"/> </td>
+                                 <td className="input-fields chp-base"><input type="text" placeholder="2%"  pattern="\d*" className="onlynumeric discount" name="planning_discount[]" id="planning_discount_x" /> </td>
                               </tr>
+                              {rows}
+
                               </tbody>
                            </table>
                         </div>
-                        <div className="new-row-addition">
-                          <img src="public/images/plus-icon.png"  alt="" />
-                        </div>
+                        {expertOptionInvestment}
                      </div>
                      <div className="caculator-divv">
                         <div className="calci-div"></div>
@@ -370,61 +626,61 @@ handleSubmit(event) {
                   </div>
                   <div id="eco-maintenance" className="tab-pane fade">
                      <div className="eco-maintenance-div">
-                        <div className="table-responsive">
+                        <div className="table-responsive" id="maintenenceTable">
                            <table className="table">
                            <tbody>
                               <tr>
                                  <td className="input-label"> CHP in the basement:</td>
-                                 <td className="input-fields"><input type="text" placeholder="78,250 €" className="icon-field" name="chp_basement_maintenence" id="chp_basement_maintenence"/>
+                                 <td className="input-fields"><input type="text" placeholder="78,250 €"  pattern="\d*" className="icon-field onlynumeric" name="chp_basement_maintenence" id="chp_basement_maintenence"/>
                                     <i className="fa fa-calculator dropdown-calci" aria-hidden="true"></i>
                                  </td>
                               </tr>
                               <tr>
                                  <td className="input-label"> Chiller 1:</td>
-                                 <td className="input-fields"><input type="text" placeholder="16,251 €" className="icon-field"  name="chiller_maintenence" id="chiller_maintenence"/>
+                                 <td className="input-fields"><input type="text" placeholder="16,251 €"  pattern="\d*" className="icon-field onlynumeric"  name="chiller_maintenence" id="chiller_maintenence"/>
                                     <i className="fa fa-calculator dropdown-calci" aria-hidden="true"></i>
                                  </td>
                               </tr>
                               <tr>
                                  <td className="input-label"> Radiant cooling office:</td>
-                                 <td className="input-fields"><input type="text" placeholder="8,550 €"   name="radiant_maintenence" id="radiant_maintenence"/>
+                                 <td className="input-fields"><input type="text" placeholder="8,550 €"   pattern="\d*" className="onlynumeric" name="radiant_maintenence" id="radiant_maintenence"/>
                                  </td>
                               </tr>
                               <tr>
                                  <td className="input-label"> eCoo 10X:</td>
-                                 <td className="input-fields"><input type="text" placeholder="19,950 €"   name="ecoo_maintenence" id="ecoo_maintenence"/>
+                                 <td className="input-fields"><input type="text" placeholder="19,950 €"   pattern="\d*" className="onlynumeric" name="ecoo_maintenence" id="ecoo_maintenence"/>
                                  </td>
                               </tr>
-                              <tr>
+                              <tr id="customMaintenence_1" className="multiple">
                                  <td className="input-label">
-                                    Project planning:
-                                    <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></div>
-                                    <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true"></i></div>
+                                 <span id="customMaintenenceInput_1" contentEditable="false" suppressContentEditableWarning={true}>Project planning</span>:
+                                    <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true" data-id="customMaintenenceInput_1"></i></div>
+                                    <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true" data-id="customMaintenence_1"></i></div>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="3,000 €" name="planning_maintenence_1" id="planning_maintenence_1" />
+                                 <td className="input-fields"><input type="text" placeholder="3,000 €"  pattern="\d*" className="onlynumeric" name="planning_maintenence[]" id="planning_maintenence_1" />
                                  </td>
                               </tr>
-                              <tr className="add-new-row">
+
+                              <tr  id="customMaint" className="clone">
                                  <td className="input-label">
-                                    Project planning:
-                                    <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></div>
-                                    <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true"></i></div>
+                                    <span id="customMaintenence_1" contentEditable="false" suppressContentEditableWarning={true}>Project planning</span>:
+                                    <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div>
+                                    <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="3,000 €" name="planning_maintenence_2" id="planning_maintenence_2"/>
+                                 <td className="input-fields"><input type="text" placeholder="3,000 €"  pattern="\d*" className="onlynumeric" name="planning[]" id="planningMaint" />
                                  </td>
-                              </tr>
+                                 </tr>
+                              {rows}
                               </tbody>
                            </table>
                         </div>
-                        <div className="new-row-addition">
-                           <img src="public/images/plus-icon.png"  alt="" />
-                        </div>
+                       {expertOptionMaintenence}
                      </div>
                      <div className="caculator-divv">
                         <div className="calci-div"></div>
                      </div>
                   </div>
-
+            <ul className="errorMessages hide">Error on this page</ul>
                </div>
             </div>
          </div>

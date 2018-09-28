@@ -56313,8 +56313,8 @@ var Adcalc = function (_Component) {
                         tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.HeatSourceStateChange), _React$createElement8))
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__ChillerModal__["a" /* ChillerModal */], { role: this.props.role, onChillerSubmit: this.handleChillerForm }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__GeneralModal__["a" /* GeneralModal */], { role: this.state.logged_in_role, onGeneralSubmit: this.handleGeneralForm }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__EconomicModal__["a" /* EconomicModal */], { role: this.state.logged_in_role, onEconomicSubmit: this.handleEconomicForm })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__GeneralModal__["a" /* GeneralModal */], { role: this.props.role, onGeneralSubmit: this.handleGeneralForm }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__EconomicModal__["a" /* EconomicModal */], { role: this.props.role, onEconomicSubmit: this.handleEconomicForm })
             );
         }
     }]);
@@ -56453,10 +56453,58 @@ var Tiles = function (_React$Component) {
                         for (var key in dataObj) {
                             if (dataObj.hasOwnProperty(key)) {
                                 //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+
                                 $(that.props.modalId).find('#' + key).val(dataObj[key]);
                             }
                         }
                         $(that.props.modalId).find('#generalformMode').val("edit");
+                    }
+                }
+                //Do stuff here
+            });
+            $(document).on('show.bs.modal', '#economic-information', function () {
+                if (that.props.title == ECONOMIC_TITLE) {
+                    $("ul.errorMessages").addClass('hide');
+                    var dataObj = that.state.economicData[0];
+                    if (NO_CUSTOM_FIELD > 0) {
+                        if ($("#FinancialItem_" + (NO_CUSTOM_FIELD - 1)).next('tr').length > 0) {
+                            $("#FinancialItem_" + (NO_CUSTOM_FIELD - 1)).nextAll('tr').not('.clone').remove();
+                        }
+                    } else {
+                        $("#FinancialItem_0").nextAll('tr').not('.clone').remove();
+                    }
+                    if (NO_CUSTOM_FIELD_MAINTENENCE > 0) {
+                        if ($("#MaintenenceItem_" + (NO_CUSTOM_FIELD_MAINTENENCE - 1)).next('tr').length > 0) {
+                            $("#MaintenenceItem_" + (NO_CUSTOM_FIELD_MAINTENENCE - 1)).nextAll('tr').not('.clone').remove();
+                        }
+                    } else {
+                        $("#MaintenenceItem_0").nextAll('tr').not('.clone').remove();
+                    }
+                    if (NO_CUSTOM_FIELD_GENERAL > 0) {
+                        if ($("#generalItem_" + (NO_CUSTOM_FIELD_GENERAL - 1)).next('tr').length > 0) {
+                            $("#generalItem_" + (NO_CUSTOM_FIELD_GENERAL - 1)).nextAll('tr').not('.clone').remove();
+                        }
+                    } else {
+                        $("#generalItem_").nextAll('tr').not('.clone').remove();
+                    }
+                    if (NO_CUSTOM_FIELD_CHP > 0) {
+                        if ($("#chpItem_" + (NO_CUSTOM_FIELD_CHP - 1)).next('tr').length > 0) {
+                            $("#chpItem_" + (NO_CUSTOM_FIELD_CHP - 1)).nextAll('tr').not('.clone').remove();
+                        }
+                    } else {
+                        $("#chpTable tr.multiple").remove();
+                    }
+
+                    if (typeof dataObj != 'undefined') {
+
+                        for (var key in dataObj) {
+                            if (dataObj.hasOwnProperty(key)) {
+                                //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+                                if (key.indexOf("[]") != -1) continue;
+                                $(that.props.modalId).find('#' + key).val(dataObj[key]);
+                            }
+                        }
+                        $(that.props.modalId).find('#economicformMode').val("edit");
                     }
                 }
                 //Do stuff here
@@ -57462,13 +57510,41 @@ var ChillerModal = function (_React$Component) {
 
          if (this.props.role == "expert") {
             var expertRoleHtml = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               'li',
-               { className: 'nav-item' },
+               'ul',
+               { id: 'tabsJustifieddouble', className: 'nav nav-tabs double-tab' },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { href: '', 'data-target': '#compression-calculation-data', 'data-toggle': 'tab', className: 'nav-link' },
-                  'CALCULATION DATA'
+                  'li',
+                  { className: 'nav-item' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     'a',
+                     { href: '', 'data-target': '#compression-technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
+                     'TECHNICAL DATA'
+                  )
+               ),
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'li',
+                  { className: 'nav-item' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     'a',
+                     { href: '', 'data-target': '#compression-calculation-data', 'data-toggle': 'tab', className: 'nav-link' },
+                     'CALCULATION DATA'
+                  )
                )
+            );
+         } else {
+            var expertRoleHtml = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               'ul',
+               { id: 'tabsJustifiedsingle', className: 'nav nav-tabs single-tab singletabbox' },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'li',
+                  { className: 'nav-item' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                     'a',
+                     { href: '', 'data-target': '#compression-technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
+                     'TECHNICAL DATA'
+                  )
+               ),
+               expertRoleHtml
             );
          }
 
@@ -57518,20 +57594,7 @@ var ChillerModal = function (_React$Component) {
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         { className: 'modal-body-content' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'ul',
-                           { id: 'tabsJustified2', className: 'nav nav-tabs' },
-                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'li',
-                              { className: 'nav-item' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 'a',
-                                 { href: '', 'data-target': '#compression-technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
-                                 'TECHNICAL DATA'
-                              )
-                           ),
-                           expertRoleHtml
-                        ),
+                        expertRoleHtml,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                            'div',
                            { id: 'tabsJustifiedContent2', className: 'tab-content' },
@@ -58061,7 +58124,7 @@ var GeneralModal = function (_React$Component) {
                         { className: "modal-body-content" },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                            "ul",
-                           { id: "tabsJustified", className: "nav nav-tabs" },
+                           { id: "tabsJustifieddouble", className: "nav nav-tabs double-tab" },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               "li",
                               { className: "nav-item" },
@@ -58485,6 +58548,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var CustomTable = {
    padding: "0px"
 };
+var investmentCounter = void 0,
+    maintenenceCounter = void 0,
+    chpCounter = void 0,
+    generalCounter = 0;
 var EconomicModal = function (_React$Component) {
    _inherits(EconomicModal, _React$Component);
 
@@ -58493,15 +58560,198 @@ var EconomicModal = function (_React$Component) {
 
       var _this = _possibleConstructorReturn(this, (EconomicModal.__proto__ || Object.getPrototypeOf(EconomicModal)).call(this, props));
 
-      _this.state = { economicInformation: '', role: _this.props.role };
+      _this.displayData = [];
+      _this.state = {
+         economicInformation: '',
+         role: _this.props.role,
+         investmentCounter: 0,
+         maintenenceCounter: 0,
+         showdata: _this.displayData };
       _this.handleSubmit = _this.handleSubmit.bind(_this);
       _this.changeState = _this.changeState.bind(_this);
+      _this.myFunction = _this.myFunction.bind(_this);
+      _this.deleteInput = _this.deleteInput.bind(_this);
+      _this.cloneItem = _this.cloneItem.bind(_this);
+      _this.cloneGeneralItem = _this.cloneGeneralItem.bind(_this);
+      _this.cloneChpItem = _this.cloneChpItem.bind(_this);
+      _this.cloneMaintenenceItem = _this.cloneMaintenenceItem.bind(_this);
       return _this;
    }
 
    _createClass(EconomicModal, [{
+      key: 'myFunction',
+      value: function myFunction(elem) {
+         if (typeof elem.currentTarget == "undefined") return false;
+         var customInputId = elem.currentTarget.getAttribute('data-id');
+
+         var customInput = document.getElementById(customInputId);
+         console.log("input", customInput);
+         if (customInput.contentEditable == "true") {
+            customInput.contentEditable = "false";
+         } else {
+            customInput.contentEditable = "true";
+         }
+      }
+   }, {
+      key: 'deleteInput',
+      value: function deleteInput(elem) {
+         var customTr = elem.currentTarget.getAttribute('data-id');
+         var customInput = document.getElementById(customTr);
+         customInput.remove();
+      }
+   }, {
+      key: 'cloneItem',
+      value: function cloneItem() {
+         $('#investmentTable tbody').append($('#investmentTable tbody tr.clone').clone());
+         $('#investmentTable tbody tr:last').not('clone').removeClass('clone').addClass('multiple');
+         this.bindEvents();
+      }
+   }, {
+      key: 'cloneGeneralItem',
+      value: function cloneGeneralItem() {
+         var trHtml = '<tr id="generalcustom_"> <td class="input-label"><span id="customGeneral_1" contentEditable="false" suppressContentEditableWarning={true}>Custom Field</span>:<div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs" id="eeg_apportion_costs"/></td></tr>';
+         $('#generalTable tbody:eq(0)').append(trHtml);
+         $('#generalTable tbody tr:last').not('clone').removeClass('clone').addClass('multiple');
+         this.bindEvents();
+      }
+   }, {
+      key: 'cloneChpItem',
+      value: function cloneChpItem() {
+
+         var trHtml = '<tr id="chpcustom_"> <td class="input-label"><span id="customChp_1" contentEditable="false" suppressContentEditableWarning={true}>Custom Field</span>:<div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs" id="eeg_apportion_costs"/></td></tr>';
+
+         $('#chpTable tbody:eq(0)').append(trHtml);
+         $('#chpTable tbody tr:last').not('clone').removeClass('clone').addClass('multiple');
+         this.bindEvents();
+      }
+   }, {
+      key: 'cloneMaintenenceItem',
+      value: function cloneMaintenenceItem() {
+         $('#maintenenceTable tbody').append($('#maintenenceTable tbody tr.clone').clone());
+         $('#maintenenceTable tbody tr:last').not('clone').removeClass('clone').addClass('multiple');
+         this.bindEvents();
+      }
+   }, {
+      key: 'bindEvents',
+      value: function bindEvents() {
+         var that = this;
+         $('#investmentTable tr.multiple').each(function (i) {
+
+            $(this).attr('id', 'FinancialItem_' + i);
+            var spaninput = $(this).find('span');
+            var editinput = $(this).find('.edit-divv i');
+            var deleteinput = $(this).find('.delete-divv i');
+            var inputField = $(this).find('input.price');
+            var discountField = $(this).find('input.discount');
+            editinput.unbind('click');
+            editinput.bind('click', function (event) {
+               that.myFunction(event);
+            });
+            spaninput.eq(0).attr('id', 'custominput_' + i);
+            var editStatus = spaninput.eq(0).attr('contentEditable') == "true" ? "true" : "false";
+            console.log(editStatus);
+            spaninput.eq(0).attr('contentEditable', editStatus);
+            editinput.eq(0).attr('data-id', 'custominput_' + i);
+            deleteinput.eq(0).attr('data-id', 'FinancialItem_' + i);
+            inputField.eq(0).attr('id', 'custominputprice_' + i);
+            discountField.eq(0).attr('id', 'custominputdiscount_' + i);
+            deleteinput.unbind('click');
+            deleteinput.bind('click', function (event) {
+               that.deleteInput(event);
+            });
+         });
+         console.log("maintenence tab", $(this));
+         $('#maintenenceTable tr.multiple').each(function (i) {
+            console.log("maintenence tab", $(this));
+            $(this).attr('id', 'MaintenenceItem_' + i);
+            var spaninput = $(this).find('span');
+            var editinput = $(this).find('.edit-divv i');
+            var deleteinput = $(this).find('.delete-divv i');
+            var inputField = $(this).find('input');
+            editinput.unbind('click');
+            editinput.bind('click', function (event) {
+               that.myFunction(event);
+            });
+            spaninput.eq(0).attr('id', 'customMaintenenceInput_' + i);
+            var editStatus = spaninput.eq(0).attr('contentEditable') == "true" ? "true" : "false";
+            console.log(editStatus);
+            spaninput.eq(0).attr('contentEditable', editStatus);
+            editinput.eq(0).attr('data-id', 'customMaintenenceInput_' + i);
+            deleteinput.eq(0).attr('data-id', 'MaintenenceItem_' + i);
+            inputField.eq(0).attr('id', 'MaintenenceIteminput_' + i);
+            deleteinput.unbind('click');
+            deleteinput.bind('click', function (event) {
+               that.deleteInput(event);
+            });
+         });
+         $('#chpTable tr.multiple').each(function (i) {
+            console.log("chp tab", $(this));
+            $(this).attr('id', 'chpItem_' + i);
+            var spaninput = $(this).find('span');
+            var editinput = $(this).find('.edit-divv i');
+            var deleteinput = $(this).find('.delete-divv i');
+            var inputField = $(this).find('input');
+            editinput.unbind('click');
+            editinput.bind('click', function (event) {
+               that.myFunction(event);
+            });
+            spaninput.eq(0).attr('id', 'customchpInput_' + i);
+            var editStatus = spaninput.eq(0).attr('contentEditable') == "true" ? "true" : "false";
+            console.log(editStatus);
+            spaninput.eq(0).attr('contentEditable', editStatus);
+            editinput.eq(0).attr('data-id', 'customchpInput_' + i);
+            deleteinput.eq(0).attr('data-id', 'chpItem_' + i);
+            inputField.eq(0).attr('id', 'chpIteminput_' + i);
+            deleteinput.unbind('click');
+            deleteinput.bind('click', function (event) {
+               that.deleteInput(event);
+            });
+         });
+         $('#generalTable tr.multiple').each(function (i) {
+            console.log("chp tab", $(this));
+            $(this).attr('id', 'generalItem_' + i);
+            var spaninput = $(this).find('span');
+            var editinput = $(this).find('.edit-divv i');
+            var deleteinput = $(this).find('.delete-divv i');
+            var inputField = $(this).find('input');
+            editinput.unbind('click');
+            editinput.bind('click', function (event) {
+               that.myFunction(event);
+            });
+            spaninput.eq(0).attr('id', 'customchpInput_' + i);
+            var editStatus = spaninput.eq(0).attr('contentEditable') == "true" ? "true" : "false";
+            console.log(editStatus);
+            spaninput.eq(0).attr('contentEditable', editStatus);
+            editinput.eq(0).attr('data-id', 'customchpInput_' + i);
+            deleteinput.eq(0).attr('data-id', 'generalItem_' + i);
+            inputField.eq(0).attr('id', 'chpIteminput_' + i);
+            deleteinput.unbind('click');
+            deleteinput.bind('click', function (event) {
+               that.deleteInput(event);
+            });
+         });
+      }
+   }, {
       key: 'componentDidMount',
       value: function componentDidMount() {
+         var that = this;
+         this.bindEvents();
+
+         var input = document.getElementsByClassName('onlynumeric');
+         for (var i = 0; i < input.length; i++) {
+            input[i].addEventListener('invalid', function (e) {
+               if (this.validity.valueMissing) {
+                  e.target.setCustomValidity("Please provide value");
+               } else if (!this.validity.valid) {
+                  e.target.setCustomValidity("Please enter only numeric value");
+               }
+               // to avoid the 'sticky' invlaid problem when resuming typing after getting a custom invalid message
+               this.addEventListener('input', function (e) {
+                  e.target.setCustomValidity('');
+               });
+            }, false);
+         }
+
          jQuery(".help-toggle").unbind('click');
          jQuery(".help-toggle").click(function () {
             jQuery(".input-help-label").toggle();
@@ -58515,17 +58765,16 @@ var EconomicModal = function (_React$Component) {
                }
             });
          });
+         $('#economic-information').on('shown.bs.modal', function () {
+            $('#economic-information .nav-tabs li:eq(0) a').tab('show');
+         });
          $('.close-modal-economic').on('click', function (e) {
-
-            var obj = this;
-
             if ($('.economic-information-form').hasClass('form-edited')) {
                // alert('eeee')
                e.preventDefault();
-
                $('#economic-modal-confirm').modal('show');
             } else {
-               $('#economic-information').modal('hide');
+               that.hideModal();
                if ($('.economic-information-form #economicformMode').val() == "add") {
                   $('.economic-information-form')[0].reset();
                }
@@ -58534,8 +58783,45 @@ var EconomicModal = function (_React$Component) {
          //Do stuff here
       }
    }, {
+      key: 'hideModal',
+      value: function hideModal() {
+         $("#economic-information").removeClass("in");
+         $(".modal-backdrop").remove();
+         $("#economic-information").hide();
+      }
+   }, {
+      key: 'showAllErrorMessages',
+      value: function showAllErrorMessages() {
+
+         var form = $('form.economic-information-form'),
+             errorList = $("ul.errorMessages", form),
+             errorFound = true;
+
+         errorList.removeClass('hide');
+         errorList.empty();
+         // Find all invalid fields within the form.
+         var invalidFields = form.find(":invalid").each(function (index, node) {
+
+            // Find the field's corresponding label
+            var label = $("#" + node.id).parent('td').prev(),
+
+            // Opera incorrectly does not fill the validationMessage property.
+            message = node.validationMessage || 'Invalid value.';
+            if (label.hasClass('input-help-label')) {
+               label = label.prev('td.input-label');
+            }
+            errorList.show().append("<li><span>" + label.text() + "</span> Please enter only numeric value</li>");
+            errorFound = false;
+         });
+         return errorFound;
+      }
+   }, {
       key: 'handleSubmit',
       value: function handleSubmit(event) {
+
+         if (!this.showAllErrorMessages()) {
+            return false;
+         }
          event.preventDefault();
          var that = this;
 
@@ -58557,6 +58843,7 @@ var EconomicModal = function (_React$Component) {
          }).then(function (a) {
             return a.json();
          }).then(function (data) {
+
             $(".economic-information-form").find('.invalid-feedback').hide();
             jQuery.each(data.errors, function (key, value) {
                $(".economic-information-form").find('#' + value).siblings('.invalid-feedback').show();
@@ -58566,12 +58853,22 @@ var EconomicModal = function (_React$Component) {
                var $form = $(".economic-information-form");
                var data = that.getFormData($form);
                console.log(data);
+               investmentCounter = $('#investmentTable tbody tr.multiple').length;
+               maintenenceCounter = $('#maintenenceTable tbody tr.multiple').length;
+               chpCounter = $('#chpTable tbody tr.multiple').length;
+
+               NO_CUSTOM_FIELD = investmentCounter;
+               NO_CUSTOM_FIELD_MAINTENENCE = maintenenceCounter;
+               NO_CUSTOM_FIELD_CHP = chpCounter;
+               NO_CUSTOM_FIELD_GENERAL = generalCounter;
                that.setState({
-                  economicInformation: data
+                  economicInformation: data,
+                  investmentCounter: investmentCounter
                });
                that.changeState(that.state.economicInformation);
-               $("#economic-information").modal("hide");
+               that.hideModal();
                $('.economic-information-form').removeClass('form-edited');
+               $('.economic-information-form #economicformMode').val('edit');
             }
          }).catch(function (err) {
             console.log(err);
@@ -58602,7 +58899,11 @@ var EconomicModal = function (_React$Component) {
    }, {
       key: 'render',
       value: function render() {
-         if (this.state.role == "expert") {
+         var _this2 = this;
+
+         console.log(this.state.role);
+         var expertFields = "";
+         if (this.state.role == "user") {
             var expertFields = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'tr',
                null,
@@ -58613,72 +58914,76 @@ var EconomicModal = function (_React$Component) {
                      'table',
                      { className: 'table' },
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'tr',
+                        'tbody',
                         null,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-label' },
-                           'Electricity price increase:'
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-help-label' },
+                           'tr',
+                           null,
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'button',
-                              { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Location explanation/tip' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              'td',
+                              { className: 'input-label' },
+                              'Electricity price increase:'
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Location explanation/tip' },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'td',
+                              { className: 'input-fields' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '2.000 %/a', name: 'electric_price_increased', id: 'electric_price_increased' })
                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-fields' },
-                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '2.000 %/a', name: 'electric_price_increased', id: 'electric_price_increased' })
-                        )
-                     ),
-                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'tr',
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-label' },
-                           'Calculated interest rate:'
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-help-label' },
+                           'tr',
+                           null,
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'button',
-                              { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Calculated interest rate explanation/tip' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              'td',
+                              { className: 'input-label' },
+                              'Calculated interest rate:'
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Calculated interest rate explanation/tip' },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'td',
+                              { className: 'input-fields' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '0.700 %/a', name: 'calculated_interest_rate', id: 'calculated_interest_rate' })
                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-fields' },
-                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0.700 %/a', name: 'calculated_interest_rate', id: 'calculated_interest_rate' })
-                        )
-                     ),
-                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'tr',
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-label' },
-                           'Inflation rate:'
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-help-label' },
+                           'tr',
+                           null,
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'button',
-                              { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Inflation rate explanation/tip' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              'td',
+                              { className: 'input-label' },
+                              'Inflation rate:'
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Inflation rate explanation/tip' },
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'td',
+                              { className: 'input-fields' },
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '1.600 %/a', name: 'inflation_rate', id: 'inflation_rate' })
                            )
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           'td',
-                           { className: 'input-fields' },
-                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '1.600 %/a', name: 'inflation_rate', id: 'inflation_rate' })
                         )
                      )
                   )
@@ -58725,9 +59030,32 @@ var EconomicModal = function (_React$Component) {
                )
             );
 
-            var expertOption = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            var expertOptionGeneral = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'div',
-               { className: 'new-row-addition' },
+               { className: 'new-row-addition', onClick: function onClick(e) {
+                     return _this2.cloneGeneralItem();
+                  } },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/plus-icon.png', alt: '' })
+            );
+            var expertOptionCHP = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               'div',
+               { className: 'new-row-addition', onClick: function onClick(e) {
+                     return _this2.cloneChpItem();
+                  } },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/plus-icon.png', alt: '' })
+            );
+            var expertOptionInvestment = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               'div',
+               { className: 'new-row-addition', onClick: function onClick(e) {
+                     return _this2.cloneItem();
+                  } },
+               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/plus-icon.png', alt: '' })
+            );
+            var expertOptionMaintenence = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               'div',
+               { className: 'new-row-addition', onClick: function onClick(e) {
+                     return _this2.cloneMaintenenceItem();
+                  } },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/plus-icon.png', alt: '' })
             );
 
@@ -58776,7 +59104,7 @@ var EconomicModal = function (_React$Component) {
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'td',
                               { className: 'input-fields' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0.03500 \u20AC/kWh', name: 'electricity_sales_price', id: 'electricity_sales_price' })
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0.03500 \u20AC/kWh', pattern: '\\d*', className: 'onlynumeric', name: 'electricity_sales_price', id: 'electricity_sales_price' })
                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58799,7 +59127,7 @@ var EconomicModal = function (_React$Component) {
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'td',
                               { className: 'input-fields' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0.00550 \u20AC/kWh', name: 'energy_tax_refund', id: 'energy_tax_refund' })
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '0.00550 \u20AC/kWh', name: 'energy_tax_refund', id: 'energy_tax_refund' })
                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58822,7 +59150,7 @@ var EconomicModal = function (_React$Component) {
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'td',
                               { className: 'input-fields' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '40%', name: 'eeg_allocation_portion', id: 'eeg_allocation_portion' })
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '40%', pattern: '\\d*', className: 'onlynumeric', name: 'eeg_allocation_portion', id: 'eeg_allocation_portion' })
                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58845,7 +59173,7 @@ var EconomicModal = function (_React$Component) {
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'td',
                               { className: 'input-fields' },
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0.06792 \u20AC/kWh', name: 'eeg_apportion_costs', id: 'eeg_apportion_costs' })
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '0.06792 \u20AC/kWh', name: 'eeg_apportion_costs', id: 'eeg_apportion_costs' })
                            )
                         )
                      )
@@ -58855,7 +59183,7 @@ var EconomicModal = function (_React$Component) {
          } else {
             var expertTabs = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'ul',
-               { id: 'tabsJustified1', className: 'nav nav-tabs' },
+               { id: 'tabsJustifieddouble', className: 'nav nav-tabs double-tab' },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'li',
                   { className: 'nav-item' },
@@ -58876,12 +59204,35 @@ var EconomicModal = function (_React$Component) {
                )
             );
          }
+         var rows = [];
+         // console.log("this.state.investmentCounter",this.state.investmentCounter);
+         // if(this.state.investmentCounter>0){
+
+         //     let rows=[];
+         //     for(let i=0;i<this.state.investmentCounter;i++){
+         //         rows.push(
+         //             <tr  id="custom_{i}" className="multiple">
+         //                          <td className="input-label">
+         //                             <span id="custominput_{i}" contentEditable="false">Project planning</span>:
+         //                             <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true" data-id="custominput_{i}"></i></div>
+         //                             <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true" data-id="custom_{i}" ></i></div>
+         //                          </td>
+         //                          <td className="input-fields"><input type="text" placeholder="3,000 €"  pattern="\d*" className="onlynumeric" name="planning[]" id="planning_{i}" />
+         //                          </td>
+         //                          <td className="input-label">Discount:</td>
+         //                          <td className="input-fields chp-base"><input type="text" placeholder="2%"  pattern="\d*" className="onlynumeric" name="planning_discount[]" id="planning_discount_{i}" /> </td>
+         //                       </tr>
+
+         //         )
+         //     }
+
+         // }
          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
-            { className: 'modal modal_multi', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'economic-information' },
+            { className: 'modal ', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'economic-information' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'form',
-               { onSubmit: this.handleSubmit, className: 'economic-information-form' },
+               { className: 'economic-information-form' },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'div',
                   { className: 'modal-content' },
@@ -58903,7 +59254,7 @@ var EconomicModal = function (_React$Component) {
                               'li',
                               null,
                               ' ',
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'save-changes-btn', type: 'submit', alt: 'Submit', value: 'Save Changes', title: 'Save Changes' })
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'save-changes-btn', type: 'button', alt: 'Submit', onClick: this.handleSubmit, value: 'Save Changes', title: 'Save Changes' })
                            ),
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'li',
@@ -58935,7 +59286,7 @@ var EconomicModal = function (_React$Component) {
                                  { className: 'table-responsive' },
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'table',
-                                    { className: 'table' },
+                                    { className: 'table', id: 'generalTable' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                        'tbody',
                                        null,
@@ -58959,7 +59310,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0.180 \u20AC/kWh', name: 'electric_price', id: 'electric_price' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '0.180 \u20AC/kWh', name: 'electric_price', id: 'electric_price', title: 'Username should only contain lowercase letters. e.g. john' }),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'economicformMode', name: 'economicformMode', value: 'add' })
                                           )
                                        ),
@@ -58983,14 +59334,14 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0.000 \u20AC/kWh', name: 'heat_price', id: 'heat_price' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '0.000 \u20AC/kWh', name: 'heat_price', id: 'heat_price' })
                                           )
                                        ),
                                        expertFields
                                     )
                                  )
                               ),
-                              expertOption
+                              expertOptionGeneral
                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59004,7 +59355,7 @@ var EconomicModal = function (_React$Component) {
                                  { className: 'table-responsive' },
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'table',
-                                    { className: 'table' },
+                                    { className: 'table', id: 'chpTable' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                        'tbody',
                                        null,
@@ -59028,7 +59379,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '100%', name: 'own_usage_of_electricity', id: 'own_usage_of_electricity' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', placeholder: '100%', name: 'own_usage_of_electricity', id: 'own_usage_of_electricity' }),
                                              ' '
                                           )
                                        ),
@@ -59052,7 +59403,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '2016', name: 'subsidy_for_electricity', id: 'subsidy_for_electricity' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '2016', name: 'subsidy_for_electricity', id: 'subsidy_for_electricity' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59075,13 +59426,14 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0.03500 \u20AC/kWh', name: 'gas_price', id: 'gas_price' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '0.03500 \u20AC/kWh', name: 'gas_price', id: 'gas_price' })
                                           )
                                        ),
                                        expertChp
                                     )
                                  )
-                              )
+                              ),
+                              expertOptionCHP
                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59092,7 +59444,7 @@ var EconomicModal = function (_React$Component) {
                               { className: 'eco-investment-div' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                  'div',
-                                 { className: 'table-responsive' },
+                                 { className: 'table-responsive', id: 'investmentTable' },
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'table',
                                     { className: 'table' },
@@ -59110,7 +59462,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '78,250 \u20AC', className: 'icon-field', name: 'chp_basement', id: 'chp_basement' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '78,250 \u20AC', pattern: '\\d*', className: 'icon-field onlynumeric', name: 'chp_basement', id: 'chp_basement' }),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-calculator dropdown-calci', 'aria-hidden': 'true' })
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59121,7 +59473,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields chp-base' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0%', name: 'discount_chp_basement', id: 'discount_chp_basement' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '0%', name: 'discount_chp_basement', id: 'discount_chp_basement' }),
                                              ' '
                                           )
                                        ),
@@ -59136,7 +59488,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '16,251 \u20AC', className: 'icon-field', name: 'chiller', id: 'chiller' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '16,251 \u20AC', pattern: '\\d*', className: 'icon-field onlynumeric', name: 'chiller', id: 'chiller' }),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-calculator dropdown-calci', 'aria-hidden': 'true' })
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59147,7 +59499,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields chp-base' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0%', name: 'chiller_discount', id: 'chiller_discount' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '\\d*', className: 'onlynumeric', placeholder: '0%', name: 'chiller_discount', id: 'chiller_discount' }),
                                              ' '
                                           )
                                        ),
@@ -59162,7 +59514,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '8,550 \u20AC', name: 'radiant_cooling_office', id: 'radiant_cooling_office' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '8,550 \u20AC', pattern: '\\d*', className: 'onlynumeric', name: 'radiant_cooling_office', id: 'radiant_cooling_office' })
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
@@ -59172,7 +59524,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields chp-base' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0%', name: 'radiant_discount', id: 'radiant_discount' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '0%', pattern: '\\d*', className: 'onlynumeric', name: 'radiant_discount', id: 'radiant_discount' }),
                                              ' '
                                           )
                                        ),
@@ -59187,7 +59539,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '19,950 \u20AC', name: 'ecoo', id: 'ecoo' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '19,950 \u20AC', pattern: '\\d*', className: 'onlynumeric', name: 'ecoo', id: 'ecoo' })
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
@@ -59197,33 +59549,38 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields chp-base' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '5%', name: 'ecoo_discount', id: 'ecoo_discount' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '5%', pattern: '\\d*', className: 'onlynumeric', name: 'ecoo_discount', id: 'ecoo_discount' }),
                                              ' '
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'tr',
-                                          null,
+                                          { id: 'custom_1', className: 'multiple' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-label' },
-                                             'Project planning:',
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { id: 'custominput_1', contentEditable: 'false', suppressContentEditableWarning: true },
+                                                'Project planning'
+                                             ),
+                                             ':',
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
                                                 { className: 'edit-divv' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', 'data-id': 'custominput_1' })
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
                                                 { className: 'delete-divv' },
                                                 ' ',
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-id': 'custom_1' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '3,000 \u20AC', name: 'planning_1', id: 'planning_1' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '3,000 \u20AC', pattern: '\\d*', className: 'onlynumeric', name: 'planning[]', id: 'planning_1' })
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
@@ -59233,33 +59590,38 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields chp-base' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '2%', name: 'planning_discount_1', id: 'planning_discount_1' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '2%', pattern: '\\d*', className: 'onlynumeric', name: 'planning_discount[]', id: 'planning_discount_1' }),
                                              ' '
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'tr',
-                                          { className: 'add-new-row' },
+                                          { id: 'custom_1', className: 'clone' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-label' },
-                                             'Project planning:',
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { id: 'custominputt_1', contentEditable: 'false', suppressContentEditableWarning: true },
+                                                'Project planning'
+                                             ),
+                                             ':',
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
                                                 { className: 'edit-divv' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', 'data-id': 'custominputt_1' })
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
                                                 { className: 'delete-divv' },
                                                 ' ',
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-id': 'custom_1' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '3,000 \u20AC', name: 'planning_2', id: 'planning_2' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '3,000 \u20AC', pattern: '\\d*', className: 'onlynumeric price', name: 'planning[]', id: 'planning_x' })
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
@@ -59269,18 +59631,15 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields chp-base' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '2%', name: 'planning_discount_2', id: 'planning_discount_2' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '2%', pattern: '\\d*', className: 'onlynumeric discount', name: 'planning_discount[]', id: 'planning_discount_x' }),
                                              ' '
                                           )
-                                       )
+                                       ),
+                                       rows
                                     )
                                  )
                               ),
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 'div',
-                                 { className: 'new-row-addition' },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/plus-icon.png', alt: '' })
-                              )
+                              expertOptionInvestment
                            ),
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'div',
@@ -59296,7 +59655,7 @@ var EconomicModal = function (_React$Component) {
                               { className: 'eco-maintenance-div' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                  'div',
-                                 { className: 'table-responsive' },
+                                 { className: 'table-responsive', id: 'maintenenceTable' },
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'table',
                                     { className: 'table' },
@@ -59314,7 +59673,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '78,250 \u20AC', className: 'icon-field', name: 'chp_basement_maintenence', id: 'chp_basement_maintenence' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '78,250 \u20AC', pattern: '\\d*', className: 'icon-field onlynumeric', name: 'chp_basement_maintenence', id: 'chp_basement_maintenence' }),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-calculator dropdown-calci', 'aria-hidden': 'true' })
                                           )
                                        ),
@@ -59329,7 +59688,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '16,251 \u20AC', className: 'icon-field', name: 'chiller_maintenence', id: 'chiller_maintenence' }),
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '16,251 \u20AC', pattern: '\\d*', className: 'icon-field onlynumeric', name: 'chiller_maintenence', id: 'chiller_maintenence' }),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-calculator dropdown-calci', 'aria-hidden': 'true' })
                                           )
                                        ),
@@ -59344,7 +59703,7 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '8,550 \u20AC', name: 'radiant_maintenence', id: 'radiant_maintenence' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '8,550 \u20AC', pattern: '\\d*', className: 'onlynumeric', name: 'radiant_maintenence', id: 'radiant_maintenence' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59358,73 +59717,85 @@ var EconomicModal = function (_React$Component) {
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '19,950 \u20AC', name: 'ecoo_maintenence', id: 'ecoo_maintenence' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '19,950 \u20AC', pattern: '\\d*', className: 'onlynumeric', name: 'ecoo_maintenence', id: 'ecoo_maintenence' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'tr',
-                                          null,
+                                          { id: 'customMaintenence_1', className: 'multiple' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-label' },
-                                             'Project planning:',
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { id: 'customMaintenenceInput_1', contentEditable: 'false', suppressContentEditableWarning: true },
+                                                'Project planning'
+                                             ),
+                                             ':',
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
                                                 { className: 'edit-divv' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', 'data-id': 'customMaintenenceInput_1' })
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
                                                 { className: 'delete-divv' },
                                                 ' ',
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-id': 'customMaintenence_1' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '3,000 \u20AC', name: 'planning_maintenence_1', id: 'planning_maintenence_1' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '3,000 \u20AC', pattern: '\\d*', className: 'onlynumeric', name: 'planning_maintenence[]', id: 'planning_maintenence_1' })
                                           )
                                        ),
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                           'tr',
-                                          { className: 'add-new-row' },
+                                          { id: 'customMaint', className: 'clone' },
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-label' },
-                                             'Project planning:',
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'span',
+                                                { id: 'customMaintenence_1', contentEditable: 'false', suppressContentEditableWarning: true },
+                                                'Project planning'
+                                             ),
+                                             ':',
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
                                                 { className: 'edit-divv' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', 'data-id': 'custom' })
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
                                                 { className: 'delete-divv' },
                                                 ' ',
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-id': 'custom' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                              'td',
                                              { className: 'input-fields' },
-                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '3,000 \u20AC', name: 'planning_maintenence_2', id: 'planning_maintenence_2' })
+                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '3,000 \u20AC', pattern: '\\d*', className: 'onlynumeric', name: 'planning[]', id: 'planningMaint' })
                                           )
-                                       )
+                                       ),
+                                       rows
                                     )
                                  )
                               ),
-                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 'div',
-                                 { className: 'new-row-addition' },
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/plus-icon.png', alt: '' })
-                              )
+                              expertOptionMaintenence
                            ),
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'div',
                               { className: 'caculator-divv' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'calci-div' })
                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                           'ul',
+                           { className: 'errorMessages hide' },
+                           'Error on this page'
                         )
                      )
                   )

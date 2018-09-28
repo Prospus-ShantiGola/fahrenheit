@@ -395,8 +395,8 @@ export default class Adcalc extends Component {
                 dataChange={this.state.HeatSourceStateChange}/>
                  </div>
                  <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} />
-                 <GeneralModal role={this.state.logged_in_role} onGeneralSubmit={this.handleGeneralForm} />
-                 <EconomicModal role={this.state.logged_in_role} onEconomicSubmit={this.handleEconomicForm} />
+                 <GeneralModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
+                 <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} />
 
               </div>
         );
