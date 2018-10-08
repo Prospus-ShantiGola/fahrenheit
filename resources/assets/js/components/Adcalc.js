@@ -3,6 +3,7 @@ import {Tiles} from './Tiles';
 import {ChillerModal} from './ChillerModal';
 import {GeneralModal} from './GeneralModal';
 import {EconomicModal} from './EconomicModal';
+import {HeatSourceModal} from './HeatSourceModal';
 
 export default class Adcalc extends Component {
     constructor(props) {
@@ -15,8 +16,9 @@ export default class Adcalc extends Component {
             OptionsStateChange: {
                 stateChange:false
             },
-            HeatSourceStateChange: {
-                stateChange:false
+            heatSourceStateChange: {
+                stateChange:false,
+                heatSourceRecord:{}
             },
             HeatingLoadProfileStateChange: {
                 stateChange:false
@@ -36,12 +38,20 @@ export default class Adcalc extends Component {
         this.handleChillerForm = this.handleChillerForm.bind(this);
         this.handleGeneralForm = this.handleGeneralForm.bind(this);
         this.handleEconomicForm = this.handleEconomicForm.bind(this);
+        this.handleHeatForm = this.handleHeatForm.bind(this);
 
     }
     handleChillerForm (result)  {
         this.setState({compressionChilerStateChange:{
                                                     stateChange:result.state,
                                                     chillerRecord:result.compressionChiller
+                                                    }
+        });
+    }
+    handleHeatForm (result)  {
+        this.setState({heatSourceStateChange:{
+                                                    stateChange:result.state,
+                                                    heatSourceRecord:result.heatSource
                                                     }
         });
     }
@@ -126,15 +136,15 @@ export default class Adcalc extends Component {
                 modalId:'#compression-chiller'
             },
             HeatSource:{
-                title:'Heat Source',
+                title:HEAT_SOURCE_TITLE,
                 tileCls:'heat-sources data-box',
                 required:"no",
                 edit:'yes',
-                editCls:'edit-icon myBtn_multi',
-                editIcon:'public/images/edit-icon.png',
+                editCls:'add-icon myBtn_multi',
+                editIcon:'public/images/add-icon.png',
                 add:'no',
                 hoverText:'Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.',
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
+                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
                 hoverCls:'main-hover-box heat-sources-hover',
                 priceLst:'no',
                 priceData:{
@@ -144,7 +154,8 @@ export default class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#compression-chiller'
+                modalId:'#heat-source',
+                multiple:true
             },
             HeatingLoadProfile:{
                 title:'Heating Load Profile',
@@ -315,8 +326,10 @@ export default class Adcalc extends Component {
                         priceData={tiles.HeatSource.priceData}
                         rightpriceList={tiles.HeatSource.rightpriceList}
                         rightpriceListeData={tiles.HeatSource.rightpriceListeData}
-                        modalId={tiles.general.modalId}
-                        dataChange={this.state.HeatSourceStateChange} />
+                        modalId={tiles.HeatSource.modalId}
+                        dataChange={this.state.heatSourceStateChange.stateChange}
+                        dataRecord={this.state.heatSourceStateChange.heatSourceRecord}
+                        multiple={tiles.CompressionChiller.multiple} />
 
                         <Tiles  title={tiles.HeatingLoadProfile.title}
                         required={tiles.HeatingLoadProfile.required}
@@ -333,8 +346,7 @@ export default class Adcalc extends Component {
                         priceData={tiles.HeatingLoadProfile.priceData}
                         rightpriceList={tiles.HeatingLoadProfile.rightpriceList}
                         rightpriceListeData={tiles.HeatingLoadProfile.rightpriceListeData}
-                        modalId={tiles.general.modalId}
-                        dataChange={this.state.HeatSourceStateChange} />
+                        modalId={tiles.general.modalId} />
                        </div>
                        <div className="row">
                         <Tiles  title={tiles.CompressionChiller.title}
@@ -397,6 +409,8 @@ export default class Adcalc extends Component {
                  <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} />
                  <GeneralModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
                  <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} />
+                 <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} />
+
 
               </div>
         );

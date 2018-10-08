@@ -14,18 +14,23 @@ export class Tiles extends React.Component {
             generalData:[],
             generalDataChange:false,
             economicData:[],
-            economicDataChange:false
+            economicDataChange:false,
+            heatSourceData:[],
+            heatSourceDataChange:false,
                };
         this.editRecord=this.editRecord.bind(this);
+        this.editHeatRecord=this.editHeatRecord.bind(this);
         this.deleteRecord=this.deleteRecord.bind(this);
         this.updateCompressionList=this.updateCompressionList.bind(this);
+        this.updateHeatSourceList=this.updateHeatSourceList.bind(this);
         this.handleChillerDeleteEntry=this.handleChillerDeleteEntry.bind(this);
+        this.handleHeatSourceDeleteEntry=this.handleHeatSourceDeleteEntry.bind(this);
         this.arrayMove=this.arrayMove.bind(this);
     }
     componentWillReceiveProps(nextProps){
        // console.log("componentWillReceiveProps",nextProps);
         switch (nextProps.title) {
-            case "Compression Chiller":
+            case CHILLER_TITLE:
             this.setState({
                 compressionDataChange: nextProps.dataChange
               });
@@ -37,6 +42,10 @@ export class Tiles extends React.Component {
             case ECONOMIC_TITLE:
             this.setState({
                 economicDataChange:nextProps.dataChange
+            });
+            case HEAT_SOURCE_TITLE:
+            this.setState({
+                heatSourceDataChange:nextProps.dataChange
             });
             default:
                 break;
@@ -52,6 +61,15 @@ export class Tiles extends React.Component {
               this.state.compressionChillerData[nextProps.dataRecord.chillerformModeKey]= nextProps.dataRecord
               this.forceUpdate()
         }
+        if(nextProps.dataRecord.heatsourceformMode=="add"){
+            this.setState({
+                heatSourceData: this.state.heatSourceData.concat(nextProps.dataRecord)
+              })
+            }else{
+
+                  this.state.heatSourceData[nextProps.dataRecord.heatsourceformModeKey]= nextProps.dataRecord
+                  this.forceUpdate()
+            }
         if(nextProps.dataRecord.generalformMode=="add"){
             this.setState({
                 generalData: this.state.generalData.concat(nextProps.dataRecord)
@@ -91,6 +109,15 @@ export class Tiles extends React.Component {
         {
           this.setState({
               compressionDataChange: false
+            });
+        }
+        else{
+            jQuery(".scrollbar-macosx").scrollbar();
+        }
+        if(this.state.heatSourceData.length==0)
+        {
+          this.setState({
+              heatSourceDataChange: false
             });
         }
         else{
@@ -171,6 +198,13 @@ export class Tiles extends React.Component {
       });
 
     }
+    updateHeatSourceList(clonedArr){
+        //console.log("sorting finish",clonedArr);
+        this.setState({
+         heatSourceData: clonedArr
+       });
+
+     }
     editRecord(elemKey){
         let dataObj=this.state.compressionChillerData[elemKey];
         for (var key in dataObj) {
@@ -183,11 +217,30 @@ export class Tiles extends React.Component {
         $(this.props.modalId).find('#chillerformModeKey').val(elemKey);
         //$(this.props.modalId).find
     }
+    editHeatRecord(elemKey){
+        let dataObj=this.state.heatSourceData[elemKey];
+        for (var key in dataObj) {
+            if (dataObj.hasOwnProperty(key)) {
+                //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+                $(this.props.modalId).find('#'+key).val(dataObj[key]);
+            }
+        }
+        $(this.props.modalId).find('#heatsourceformMode').val("edit");
+        $(this.props.modalId).find('#heatsourceformModeKey').val(elemKey);
+        //$(this.props.modalId).find
+    }
     deleteRecord(eleM){
         $("#delete-modal").find("#entry-id").attr('data-id',eleM);
         $("#delete-modal").modal("show");
     }
     handleChillerDeleteEntry(result){
+        var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
+        clonedArrDelete.splice(result.elementId, 1);
+        this.setState({compressionChillerData: clonedArrDelete});
+
+    }
+
+    handleHeatSourceDeleteEntry(result){
         var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
         clonedArrDelete.splice(result.elementId, 1);
         this.setState({compressionChillerData: clonedArrDelete});
@@ -236,8 +289,11 @@ export class Tiles extends React.Component {
                 </ul>
             );
             let chillerData=this.state.compressionChillerData;
+            var bodyContent="Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
             var priceFullList=(
+
                 <div>
+                <DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} id="delete-modal"/>
                 <div className="hover-list scrollbar-macosx">
                                        <div className="table-responsive">
                                           <table className="table">
@@ -306,6 +362,96 @@ export class Tiles extends React.Component {
         else{
             var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
         }
+        if(this.props.title==HEAT_SOURCE_TITLE){
+        if(this.state.heatSourceDataChange==true && this.state.heatSourceData.length!=0){
+            let heatSourceData=this.state.heatSourceData;
+            var pricelist=(
+                <ul className="price-listt scrollbar-macosx">
+                                    <li>
+                                       <p>Heat Capacity</p>
+                                       <h3>{heatSourceData[0].heat_capacity} kW</h3>
+                                    </li>
+                                    <li>
+                                       <p>Available Heat</p>
+                                       <h3>1,767,768 kWh/a</h3>
+                                    </li>
+                                    <li>
+                                       <p>Temperature</p>
+                                       <h3><img src="images/degree-icon.png" alt="" /> 84°C</h3>
+                                    </li>
+                                 </ul>
+            );
+
+            var bodyContent="Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
+            var priceFullList=(
+                <div>
+                    <DeleteModal onDeleteChillerSubmit={this.handleHeatDeleteEntry} bodyContent={bodyContent} id="delete-heat-modal"/>
+                <div className="hover-list scrollbar-macosx">
+                                       <div className="table-responsive">
+                                          <table className="table">
+                                           <tbody className="heatsourcesTableBody">
+{heatSourceData.map((data,h) => (
+                                           <tr key={h} data-id={h}>
+                                                <th>
+                                                   {data.heat_name}
+                                                   <ul className="list-inline">
+                                                      <li>{data.heat_capacity} kW
+                                                      </li>
+                                                      <li>	85°C </li>
+                                                   </ul>
+                                                </th>
+                                                <td><span className="edit-option" data-id={h}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editHeatRecord(h)}></i></span>
+            <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" onClick={()=>this.deleteRecord(h)}></i></span>
+            <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+         </td>
+                                             </tr>
+ ))}
+                                             </tbody>
+                                          </table>
+                                       </div>
+                                    </div>
+            </div>
+            );
+
+            var that=this;
+            if(typeof $('.heatsourcesTableBody')[0] !="undefined"){
+                jQuery(".heat-sources-hover .scrollbar-macosx").scrollbar();
+
+                if(that.props.title==HEAT_SOURCE_TITLE){
+
+                    this.sort=Sortable.create(
+                        $('.heatsourcesTableBody')[0],
+                        {
+                        animation: 150,
+                        scroll: true,
+                        sort: true,
+                        dataIdAttr: 'data-id',
+                        handle: '.drag-handler',
+                        onEnd:function (/**Event*/evt) {
+                            evt.oldIndex;  // element's old index within old parent
+                            evt.newIndex;  // element's new index within new parent
+                        },
+                        onUpdate: function (/**Event*/evt) {
+                            // same properties as onEnd
+                            evt.oldIndex;  // element's old index within old parent
+                            evt.newIndex;  // element's new index within new parent
+
+                            var clonedArr=that.state.heatSourceData;
+                            clonedArr=that.arrayMove(clonedArr,evt.oldIndex,evt.newIndex);
+                            that.updateHeatSourceList(clonedArr);
+                        }
+                        }
+                        );
+                       var order = this.sort.toArray();
+                       this.sort.sort(order.sort());
+
+                    }
+        }
+        }
+        else{
+            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+        }
+    }
 
         if(this.state.generalDataChange){
             var pricelist=(
@@ -401,7 +547,29 @@ export class Tiles extends React.Component {
         }
 
         if(this.props.title==ECONOMIC_TITLE){
+
+            var pricelist=(
+
+                <ul className="price-listt">
+                              <li>
+                                 <p>Electricity Price</p>
+                                 <h3>0.1800 €/kWh</h3>
+                              </li>
+                           </ul>
+
+                        );
+            var priceFullList=(<ul className="price-listt">
+            <li>
+               <p>Electricity Price</p>
+               <h3>0.1800 €/kWh</h3>
+            </li>
+            <li>
+               <p>Gas Price</p>
+               <h3>0.035 €/kWh</h3>
+            </li>
+         </ul>);
             if(this.state.economicDataChange){
+
                 var pricelist=(
 
                                <ul className="price-listt plnewblock">

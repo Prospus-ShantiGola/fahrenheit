@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Breadcrumb from './Breadcrumb';
 import Adcalc from './Adcalc';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
 
 class AppContent extends Component {
     constructor(props) {
@@ -66,7 +68,10 @@ class AppContent extends Component {
                             </div>
                         </div>
                     </div>
+
+                        <Provider store={store}>
                         <Adcalc role={this.state.role} onFormChange={this.handleForm}/>
+                        </Provider>
                 </div>
                 </div>
             </section>

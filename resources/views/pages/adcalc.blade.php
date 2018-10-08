@@ -62,6 +62,7 @@
         GENERAL_TILE= "General Information";
        CHILLER_TITLE= "Compression Chiller";
        ECONOMIC_TITLE= "Economic Data";
+       HEAT_SOURCE_TITLE= "Heat Source";
        CHANGE_FORM=false;
        NO_CUSTOM_FIELD_GENERAL=0;
        NO_CUSTOM_FIELD_CHP=0;

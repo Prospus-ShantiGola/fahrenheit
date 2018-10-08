@@ -5,6 +5,37 @@
 body {background:#f0f0f0; padding:0; margin:0; font-family: 'Roboto', sans-serif !important;}
 img {max-width:100%;}
 
+.ppmb {
+    width: 69%;
+    word-break: break-all;
+}
+.input-fields .fa-calculator {
+       top: 5px;
+    height: 36px;
+    right: 59px;
+    padding: 10px 4px;
+}
+.withunit {
+    position: relative;
+}
+.withunit input {
+    position: relative;
+}
+.withunit span:not(.invalid-feedback) {
+    position: absolute;
+    right: 5px;
+    font-size: 14px;
+    color: #00618c;
+    height: 37px;
+    border-left: 1px solid #00618c;
+    padding: 9px 5px;
+	width: 52px;
+    text-align: center;
+}
+#eco-investment .withunit span {
+    width: auto;
+}
+
 span.icontitle {
     width: 72%;
     float: left;
@@ -927,7 +958,7 @@ ul.right-list-content {
       .modal-content {
             background-color: #fff;
             margin: auto;
-            padding: 10px 20px 20px;
+            padding: 20px 20px 20px;
             border: 1px solid #888;
             width: 630px;
         }
@@ -950,8 +981,9 @@ ul.right-list-content {
     float: left;
     color: #00618c;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     letter-spacing: 0.5px;
+	line-height:normal;
 }
 .right-head {
     float: right;
@@ -965,10 +997,10 @@ ul.right-list-content {
     width: 50%;
 }
 .modal-body-content {
-    padding-top: 27px;
+    padding-top: 20px;
 }
 .modal-body-content a.nav-link {
-    color: #00618c;
+    color: #fff;
     font-size: 14px;
     font-family: Roboto;
     font-weight: bold;
@@ -1039,13 +1071,18 @@ td.input-help-label {
     top: 14px; color:#00618c;
 }
 .input-fields.symbmain input {
-    padding-left: 22px;
+        padding-right: 50px;
 }
 span.pricesymbol {
       position: absolute;
-    left: 15px;
-    top: 24%;
-	    color: #00618c;
+    right: 6px;
+    /* top: 24%; */
+    color: #00618c;
+    height: 37px;
+    padding: 7px 5px;
+    border-left: 1px solid #00618c;
+	text-align:center;
+	width:52px;
 
 }
 .modal-content .nav-tabs {
@@ -1070,7 +1107,7 @@ h3.inner-table-heading {
 }
 
 .modal-body-content #tabsJustified1 li.nav-item {
-    width: 25%;
+    width: 25.3%;
 }
 
 .eco-chp-data-div td.input-label {
@@ -1112,7 +1149,7 @@ h3.inner-table-heading {
     margin-left: -1px;
     margin-bottom: -1px;
 }
-.eco-investment-div .input-label i,.eco-chp-data-div .input-label i{
+.eco-investment-div .input-label i {
     font-size: 20px;
     vertical-align: middle;
     padding: 0 3px;
@@ -2380,92 +2417,6 @@ background:url(../images/tab3-ac.jpg) no-repeat;
 
 
 
-.modal-content .nav-tabs {
-    border-bottom: none;
-}
-.modal-content .nav-tabs .nav-link{ border:none;
-height:40px;
-border-radius:0px;
-padding:10px 0 0 0;
-}
-
-
-.modal-content .nav-tabs li:first-child{
-width:297px;
-
-
-}
-.modal-content .nav-tabs li:first-child .nav-link{
-padding-right:30px;
-background:url(../images/inactive-tab-1.jpg) no-repeat;
-}
-.modal-content .nav-tabs li:first-child .nav-link.active{
-background:url(../images/active-tab-1.jpg) no-repeat;
-padding-right:8px;
-}
-
-.modal-content .nav-tabs li:last-child{
-width:288px;
-}
-
-.modal-content .nav-tabs li:last-child .nav-link{
-	padding-right:30px;
-}
-.modal-content .nav-tabs li:last-child .nav-link{
-background:url(../images/inactive-tab-2.jpg) no-repeat;
-}
-
-.modal-content .nav-tabs li:last-child .nav-link.active{
-background:url(../images/active-tab-2.jpg) no-repeat;
- padding-right: 22px;
-}
-
-
-
-
-
-/* .modal-body-content #tabsJustified1 li:first-child .nav-link.active{
-background:url(../images/fa1.jpg) no-repeat;	    margin-top: 1px;
-}
-
-
-.modal-body-content #tabsJustified1 li:nth-child(2) .nav-link {
-background:url(../images/fia2.jpg) no-repeat;	 padding-right: 20px;
-}
-
-.modal-body-content #tabsJustified1 li:nth-child(3) .nav-link {
-background:url(../images/fia3.jpg) no-repeat;	     padding-right: 10px;
-}
-
-.modal-body-content #tabsJustified1 li:last-child .nav-link {
-    background: url(../images/fia4.jpg) no-repeat;
-    padding-left: 12px;
-}
-.modal-body-content #tabsJustified1 li:first-child .nav-link{
-background:url(../images/fia4.jpg) no-repeat;
-} */
-
-
-
-.modal-body-content #tabsJustified1 li:nth-child(2) .nav-link.active {
-    background: url(../images/tab3-ac.jpg) no-repeat;
-    padding-right: 21px;
-}
-
-.modal-body-content #tabsJustified1 li:nth-child(3) .nav-link.active{
-background:url(../images/tab3-ac.jpg) no-repeat;
-}
-
-.modal-body-content #tabsJustified1 li:last-child .nav-link.active{
-background:url(../images/tab3-ac.jpg) no-repeat;
-}
-
-
-
-
-
-
-
 
 
 #sure-modal{
@@ -2531,4 +2482,24 @@ li.save-changes-btn {
 }
 .hide{
     display: none;
+}
+span.editable {
+    color: #00618c;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 8px 10px;
+    height: 37px;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #00618c;
+    margin-right: 4px;
+}
+div.col-auto i.fa {
+    cursor: pointer;
+}
+.eco-chp-data-div .input-label i, .eco-general-data-div .input-label i{
+    font-size: 20px;
+    vertical-align: middle;
+    padding: 0 3px;
 }

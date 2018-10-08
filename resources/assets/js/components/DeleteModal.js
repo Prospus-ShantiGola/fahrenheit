@@ -25,7 +25,7 @@ export class DeleteModal extends Component {
 
                 </div>
                 <div className="modal-body">
-                        Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.
+                        {this.props.content}
                 </div>
                 <div className="modal-footer">
 

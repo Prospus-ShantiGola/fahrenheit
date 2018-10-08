@@ -67,7 +67,21 @@ class AdcalcController extends Controller
         return response()->json(['success'=>'Record is successfully added']);
 
   }
+  public function storeHeatSourceInformation(Request $request)
+  {
+      $validator = \Validator::make($request->all(), [
+        'heat_type' => 'required',
+        'drive_temp'=>'sometimes|required',
+        'heat_capacity'=>'sometimes|required',
+      ]);
 
+      if ($validator->fails())
+      {
+          return response()->json(['errors'=>$validator->errors()->keys()]);
+      }
+      return response()->json(['success'=>'Record is successfully added']);
+
+}
 
 
 

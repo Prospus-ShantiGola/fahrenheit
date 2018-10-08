@@ -136,5 +136,7 @@ Route::group(
         Route::post('/storeCompressionChiller', 'AdcalcController@storeCompressionChiller');
         Route::post('/storeGeneralInformation', 'AdcalcController@storeGeneralInformation');
         Route::post('/storeEconomicInformation', 'AdcalcController@storeEconomicInformation');
+        Route::post('/storeHeatSourceInformation', 'AdcalcController@storeHeatSourceInformation');
+
 
     });
