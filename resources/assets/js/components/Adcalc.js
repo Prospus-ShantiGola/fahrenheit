@@ -11,26 +11,26 @@ export default class Adcalc extends Component {
         this.state = {
             economicStateChange: {
                 stateChange:false,
-                economicRecord:{}
+                economicRecord:[]
             },
             OptionsStateChange: {
                 stateChange:false
             },
             heatSourceStateChange: {
                 stateChange:false,
-                heatSourceRecord:{}
+                heatSourceRecord:[]
             },
             HeatingLoadProfileStateChange: {
                 stateChange:false
             },
             generalStateChange: {
                 stateChange:false,
-                generalRecord:{}
+                generalRecord:[]
             },
             compressionChilerStateChange:{
                 stateChange:false,
                 content:"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
-                chillerRecord:{}
+                chillerRecord:[]
             }
             ,
             logged_in_role:LOGGED_IN_ROLE
@@ -42,18 +42,34 @@ export default class Adcalc extends Component {
 
     }
     handleChillerForm (result)  {
-        this.setState({compressionChilerStateChange:{
-                                                    stateChange:result.state,
-                                                    chillerRecord:result.compressionChiller
-                                                    }
-        });
+
+        if (result.compressionChiller.chillerformMode == "add") {
+            this.setState({
+                compressionChilerStateChange: {
+                    stateChange: result.state,
+                    chillerRecord: this.state.compressionChilerStateChange.chillerRecord.concat(result.compressionChiller)
+                }
+            });
+        } else {
+
+            this.state.compressionChilerStateChange.chillerRecord[result.compressionChiller.chillerformModeKey] = result.compressionChiller
+            this.forceUpdate()
+
+        }
     }
     handleHeatForm (result)  {
-        this.setState({heatSourceStateChange:{
-                                                    stateChange:result.state,
-                                                    heatSourceRecord:result.heatSource
-                                                    }
-        });
+        if(result.heatSource.heatsourceformMode=="add"){
+            this.setState({heatSourceStateChange:{
+                stateChange:result.state,
+                heatSourceRecord:this.state.heatSourceStateChange.heatSourceRecord.concat(result.heatSource)
+                }
+});
+        }else{
+            this.state.heatSourceStateChange.heatSourceRecord[result.heatSource.heatsourceformModeKey]= result.heatSource
+            this.forceUpdate()
+        }
+
+
     }
     handleGeneralForm (result)  {
         this.setState({generalStateChange:{
@@ -329,7 +345,7 @@ export default class Adcalc extends Component {
                         modalId={tiles.HeatSource.modalId}
                         dataChange={this.state.heatSourceStateChange.stateChange}
                         dataRecord={this.state.heatSourceStateChange.heatSourceRecord}
-                        multiple={tiles.CompressionChiller.multiple} />
+                        multiple={tiles.HeatSource.multiple}/>
 
                         <Tiles  title={tiles.HeatingLoadProfile.title}
                         required={tiles.HeatingLoadProfile.required}

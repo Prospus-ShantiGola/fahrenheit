@@ -56052,26 +56052,26 @@ var Adcalc = function (_Component) {
         _this.state = {
             economicStateChange: {
                 stateChange: false,
-                economicRecord: {}
+                economicRecord: []
             },
             OptionsStateChange: {
                 stateChange: false
             },
             heatSourceStateChange: {
                 stateChange: false,
-                heatSourceRecord: {}
+                heatSourceRecord: []
             },
             HeatingLoadProfileStateChange: {
                 stateChange: false
             },
             generalStateChange: {
                 stateChange: false,
-                generalRecord: {}
+                generalRecord: []
             },
             compressionChilerStateChange: {
                 stateChange: false,
                 content: "Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
-                chillerRecord: {}
+                chillerRecord: []
             },
 
             logged_in_role: LOGGED_IN_ROLE
@@ -56087,20 +56087,33 @@ var Adcalc = function (_Component) {
     _createClass(Adcalc, [{
         key: 'handleChillerForm',
         value: function handleChillerForm(result) {
-            this.setState({ compressionChilerStateChange: {
-                    stateChange: result.state,
-                    chillerRecord: result.compressionChiller
-                }
-            });
+
+            if (result.compressionChiller.chillerformMode == "add") {
+                this.setState({
+                    compressionChilerStateChange: {
+                        stateChange: result.state,
+                        chillerRecord: this.state.compressionChilerStateChange.chillerRecord.concat(result.compressionChiller)
+                    }
+                });
+            } else {
+
+                this.state.compressionChilerStateChange.chillerRecord[result.compressionChiller.chillerformModeKey] = result.compressionChiller;
+                this.forceUpdate();
+            }
         }
     }, {
         key: 'handleHeatForm',
         value: function handleHeatForm(result) {
-            this.setState({ heatSourceStateChange: {
-                    stateChange: result.state,
-                    heatSourceRecord: result.heatSource
-                }
-            });
+            if (result.heatSource.heatsourceformMode == "add") {
+                this.setState({ heatSourceStateChange: {
+                        stateChange: result.state,
+                        heatSourceRecord: this.state.heatSourceStateChange.heatSourceRecord.concat(result.heatSource)
+                    }
+                });
+            } else {
+                this.state.heatSourceStateChange.heatSourceRecord[result.heatSource.heatsourceformModeKey] = result.heatSource;
+                this.forceUpdate();
+            }
         }
     }, {
         key: 'handleGeneralForm',
@@ -56306,7 +56319,7 @@ var Adcalc = function (_Component) {
                                 required: tiles.HeatSource.required,
                                 edit: tiles.HeatSource.edit,
                                 mainclass: tiles.HeatSource.mainClass,
-                                tileCls: tiles.HeatSource.tileCls }, _defineProperty(_React$createElement4, 'required', tiles.HeatSource.required), _defineProperty(_React$createElement4, 'edit', tiles.HeatSource.edit), _defineProperty(_React$createElement4, 'editCls', tiles.HeatSource.editCls), _defineProperty(_React$createElement4, 'editIcon', tiles.HeatSource.editIcon), _defineProperty(_React$createElement4, 'add', tiles.HeatSource.add), _defineProperty(_React$createElement4, 'hoverText', tiles.HeatSource.hoverText), _defineProperty(_React$createElement4, 'hoverCls', tiles.HeatSource.hoverCls), _defineProperty(_React$createElement4, 'priceLst', tiles.HeatSource.priceLst), _defineProperty(_React$createElement4, 'priceData', tiles.HeatSource.priceData), _defineProperty(_React$createElement4, 'rightpriceList', tiles.HeatSource.rightpriceList), _defineProperty(_React$createElement4, 'rightpriceListeData', tiles.HeatSource.rightpriceListeData), _defineProperty(_React$createElement4, 'modalId', tiles.HeatSource.modalId), _defineProperty(_React$createElement4, 'dataChange', this.state.heatSourceStateChange.stateChange), _defineProperty(_React$createElement4, 'dataRecord', this.state.heatSourceStateChange.heatSourceRecord), _defineProperty(_React$createElement4, 'multiple', tiles.CompressionChiller.multiple), _React$createElement4)),
+                                tileCls: tiles.HeatSource.tileCls }, _defineProperty(_React$createElement4, 'required', tiles.HeatSource.required), _defineProperty(_React$createElement4, 'edit', tiles.HeatSource.edit), _defineProperty(_React$createElement4, 'editCls', tiles.HeatSource.editCls), _defineProperty(_React$createElement4, 'editIcon', tiles.HeatSource.editIcon), _defineProperty(_React$createElement4, 'add', tiles.HeatSource.add), _defineProperty(_React$createElement4, 'hoverText', tiles.HeatSource.hoverText), _defineProperty(_React$createElement4, 'hoverCls', tiles.HeatSource.hoverCls), _defineProperty(_React$createElement4, 'priceLst', tiles.HeatSource.priceLst), _defineProperty(_React$createElement4, 'priceData', tiles.HeatSource.priceData), _defineProperty(_React$createElement4, 'rightpriceList', tiles.HeatSource.rightpriceList), _defineProperty(_React$createElement4, 'rightpriceListeData', tiles.HeatSource.rightpriceListeData), _defineProperty(_React$createElement4, 'modalId', tiles.HeatSource.modalId), _defineProperty(_React$createElement4, 'dataChange', this.state.heatSourceStateChange.stateChange), _defineProperty(_React$createElement4, 'dataRecord', this.state.heatSourceStateChange.heatSourceRecord), _defineProperty(_React$createElement4, 'multiple', tiles.HeatSource.multiple), _React$createElement4)),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement5 = { title: tiles.HeatingLoadProfile.title,
                                 required: tiles.HeatingLoadProfile.required,
                                 edit: tiles.HeatingLoadProfile.edit,
@@ -56404,66 +56417,51 @@ var Tiles = function (_React$Component) {
     _createClass(Tiles, [{
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
-            // console.log("componentWillReceiveProps",nextProps);
+
             switch (nextProps.title) {
                 case CHILLER_TITLE:
                     this.setState({
+                        compressionChillerData: nextProps.dataRecord,
                         compressionDataChange: nextProps.dataChange
                     });
+
                     break;
                 case GENERAL_TILE:
                     this.setState({
                         generalDataChange: nextProps.dataChange
                     });
+                    if (nextProps.dataRecord.generalformMode == "add") {
+                        this.setState({
+                            generalData: this.state.generalData.concat(nextProps.dataRecord)
+                        });
+                    } else {
+
+                        this.state.generalData[0] = nextProps.dataRecord;
+                        this.forceUpdate();
+                    }
+                    break;
                 case ECONOMIC_TITLE:
                     this.setState({
                         economicDataChange: nextProps.dataChange
                     });
+                    if (nextProps.dataRecord.economicformMode == "add") {
+                        this.setState({
+                            economicData: this.state.generalData.concat(nextProps.dataRecord)
+                        });
+                    } else {
+
+                        this.state.economicData[0] = nextProps.dataRecord;
+                        this.forceUpdate();
+                    }
+                    break;
                 case HEAT_SOURCE_TITLE:
                     this.setState({
+                        heatSourceData: nextProps.dataRecord,
                         heatSourceDataChange: nextProps.dataChange
                     });
+                    break;
                 default:
                     break;
-            }
-
-            if (typeof nextProps.dataRecord != "undefined") {
-                if (nextProps.dataRecord.chillerformMode == "add") {
-                    this.setState({
-                        compressionChillerData: this.state.compressionChillerData.concat(nextProps.dataRecord)
-                    });
-                } else {
-
-                    this.state.compressionChillerData[nextProps.dataRecord.chillerformModeKey] = nextProps.dataRecord;
-                    this.forceUpdate();
-                }
-                if (nextProps.dataRecord.heatsourceformMode == "add") {
-                    this.setState({
-                        heatSourceData: this.state.heatSourceData.concat(nextProps.dataRecord)
-                    });
-                } else {
-
-                    this.state.heatSourceData[nextProps.dataRecord.heatsourceformModeKey] = nextProps.dataRecord;
-                    this.forceUpdate();
-                }
-                if (nextProps.dataRecord.generalformMode == "add") {
-                    this.setState({
-                        generalData: this.state.generalData.concat(nextProps.dataRecord)
-                    });
-                } else {
-
-                    this.state.generalData[0] = nextProps.dataRecord;
-                    this.forceUpdate();
-                }
-                if (nextProps.dataRecord.economicformMode == "add") {
-                    this.setState({
-                        economicData: this.state.generalData.concat(nextProps.dataRecord)
-                    });
-                } else {
-
-                    this.state.economicData[0] = nextProps.dataRecord;
-                    this.forceUpdate();
-                }
             }
         }
     }, {
@@ -56604,16 +56602,24 @@ var Tiles = function (_React$Component) {
         }
     }, {
         key: 'deleteRecord',
-        value: function deleteRecord(eleM) {
-            $("#delete-modal").find("#entry-id").attr('data-id', eleM);
-            $("#delete-modal").modal("show");
+        value: function deleteRecord(eleId, eleM) {
+            var modalId = eleM.target.getAttribute('data-modal');
+            $("#" + modalId).find("#entry-id").attr('data-id', eleId);
+            $("#" + modalId).modal("show");
         }
     }, {
         key: 'handleChillerDeleteEntry',
         value: function handleChillerDeleteEntry(result) {
-            var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
-            clonedArrDelete.splice(result.elementId, 1);
-            this.setState({ compressionChillerData: clonedArrDelete });
+            console.log(result);
+            if (result.modalFor == "compressionChiller") {
+                var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
+                clonedArrDelete.splice(result.elementId, 1);
+                this.setState({ compressionChillerData: clonedArrDelete });
+            } else {
+                var clonedArrDelete = this.state.heatSourceData; // make a separate copy of the array
+                clonedArrDelete.splice(result.elementId, 1);
+                this.setState({ heatSourceData: clonedArrDelete });
+            }
         }
     }, {
         key: 'handleHeatSourceDeleteEntry',
@@ -56639,7 +56645,7 @@ var Tiles = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            //console.log(this.state.compressionChillerData);
+            console.log("render refresh", this.state.heatSourceData);
             var dragSet = false;
             var priceFullList,
                 pricelist,
@@ -56651,13 +56657,11 @@ var Tiles = function (_React$Component) {
                     'An input is required'
                 );
             }
-            if (this.props.multiple) {
-                var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, id: 'delete-modal' });
-            } else {
-                var deleteModal = "";
-            }
 
+            var deleteModal = "";
             if (this.state.compressionDataChange == true && this.state.compressionChillerData.length != 0) {
+                var bodyContent = "Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
+                var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'compressionChiller', id: 'delete-modal' });
                 var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'ul',
                     { className: 'price-listt' },
@@ -56707,11 +56711,10 @@ var Tiles = function (_React$Component) {
                     )
                 );
                 var chillerData = this.state.compressionChillerData;
-                var bodyContent = "Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
+
                 var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, id: 'delete-modal' }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         { className: 'hover-list scrollbar-macosx' },
@@ -56762,8 +56765,8 @@ var Tiles = function (_React$Component) {
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'span',
                                                     { className: 'delete-optionn', 'data-id': i },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                            return _this2.deleteRecord(i);
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-modal', onClick: function onClick(elem) {
+                                                            return _this2.deleteRecord(i, elem);
                                                         } })
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -56870,10 +56873,10 @@ var Tiles = function (_React$Component) {
                     );
 
                     var bodyContent = "Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
+                    var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'heatSource', id: 'delete-heat-modal' });
                     var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleHeatDeleteEntry, bodyContent: bodyContent, id: 'delete-heat-modal' }),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'hover-list scrollbar-macosx' },
@@ -56923,8 +56926,8 @@ var Tiles = function (_React$Component) {
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'span',
                                                         { className: 'delete-optionn', 'data-id': h },
-                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                return _this2.deleteRecord(h);
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-heat-modal', onClick: function onClick(elem) {
+                                                                return _this2.deleteRecord(h, elem);
                                                             } })
                                                     ),
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -57496,7 +57499,8 @@ Tiles.defaultProps = {
     priceData: {},
     rightpriceList: 'no',
     rightpriceListeData: {},
-    multiple: false
+    multiple: false,
+    dataRecord: []
 
 };
 
@@ -57534,9 +57538,12 @@ var DeleteModal = function (_Component) {
     _createClass(DeleteModal, [{
         key: 'acceptChange',
         value: function acceptChange(eleM) {
+
+            var modalFor = eleM.target.getAttribute('data-modalfor');
             var result = {
                 state: true,
-                elementId: $("#delete-modal").find("#entry-id").attr('data-id')
+                elementId: eleM.target.getAttribute('data-id'),
+                modalFor: modalFor
             };
             this.props.onDeleteChillerSubmit(result);
             jQuery("#delete-modal").modal("hide");
@@ -57576,15 +57583,15 @@ var DeleteModal = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'modal-body' },
-                            this.props.content
+                            this.props.bodyContent
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'modal-footer' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'button',
-                                { type: 'submit', className: 'btn btn-default', title: 'Delete', 'data-id': '', id: 'entry-id', onClick: function onClick() {
-                                        return _this2.acceptChange(_this2);
+                                { type: 'submit', className: 'btn btn-default', title: 'Delete', 'data-id': '', 'data-modalfor': this.props.modalfor, id: 'entry-id', onClick: function onClick(elem) {
+                                        return _this2.acceptChange(elem);
                                     } },
                                 'Yes'
                             ),
@@ -57738,6 +57745,7 @@ var ChillerModal = function (_React$Component) {
             compressionChiller: compressionChiler,
             state: true
          };
+
          CHANGE_FORM = true;
          this.props.onChillerSubmit(result);
       }
@@ -58262,7 +58270,7 @@ var GeneralModal = function (_React$Component) {
       var _this = _possibleConstructorReturn(this, (GeneralModal.__proto__ || Object.getPrototypeOf(GeneralModal)).call(this, props));
 
       _this.state = { generalInformation: '', role: 'user' };
-      _this.handleSubmit = _this.handleSubmit.bind(_this);
+      _this.handleGeneralSubmit = _this.handleGeneralSubmit.bind(_this);
       _this.changeState = _this.changeState.bind(_this);
       return _this;
    }
@@ -58300,8 +58308,8 @@ var GeneralModal = function (_React$Component) {
          //Do stuff here
       }
    }, {
-      key: "handleSubmit",
-      value: function handleSubmit(event) {
+      key: "handleGeneralSubmit",
+      value: function handleGeneralSubmit(event) {
          event.preventDefault();
          var that = this;
 
@@ -58376,7 +58384,7 @@ var GeneralModal = function (_React$Component) {
                { className: "modal-dialog " },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   "form",
-                  { onSubmit: this.handleSubmit, className: "general-information-form" },
+                  { onSubmit: this.handleGeneralSubmit, className: "general-information-form" },
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                      "div",
                      { className: "modal-content" },
@@ -60850,7 +60858,7 @@ var HeatSourceModal = function (_React$Component) {
       var _this = _possibleConstructorReturn(this, (HeatSourceModal.__proto__ || Object.getPrototypeOf(HeatSourceModal)).call(this, props));
 
       _this.state = { heatSource: '', selectedSource: selectedSource };
-      _this.handleSubmit = _this.handleSubmit.bind(_this);
+      _this.handleHeatSubmit = _this.handleHeatSubmit.bind(_this);
       _this.changeField = _this.changeField.bind(_this);
       return _this;
    }
@@ -60900,12 +60908,13 @@ var HeatSourceModal = function (_React$Component) {
             heatSource: heatSource,
             state: true
          };
+
          CHANGE_FORM = true;
          this.props.onHeatSubmit(result);
       }
    }, {
-      key: 'handleSubmit',
-      value: function handleSubmit(e) {
+      key: 'handleHeatSubmit',
+      value: function handleHeatSubmit(e) {
          var that = this;
          e.preventDefault();
          var data = $('#heat-source-form').serialize();
@@ -61348,7 +61357,7 @@ var HeatSourceModal = function (_React$Component) {
             { className: 'modal modal_multi', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'heat-source' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'form',
-               { onSubmit: this.handleSubmit, id: 'heat-source-form' },
+               { onSubmit: this.handleHeatSubmit, id: 'heat-source-form' },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'div',
                   { className: 'modal-content' },

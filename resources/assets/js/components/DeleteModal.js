@@ -7,9 +7,12 @@ export class DeleteModal extends Component {
         this.acceptChange=this.acceptChange.bind(this);
       }
     acceptChange (eleM) {
+
+        var modalFor= eleM.target.getAttribute('data-modalfor');
         var result={
             state:true,
-            elementId:$("#delete-modal").find("#entry-id").attr('data-id')
+            elementId:eleM.target.getAttribute('data-id'),
+            modalFor:modalFor
         }
         this.props.onDeleteChillerSubmit(result);
         jQuery("#delete-modal").modal("hide");
@@ -25,11 +28,11 @@ export class DeleteModal extends Component {
 
                 </div>
                 <div className="modal-body">
-                        {this.props.content}
+                        {this.props.bodyContent}
                 </div>
                 <div className="modal-footer">
 
-                  <button type="submit" className="btn btn-default" title="Delete" data-id="" id="entry-id" onClick={()=>this.acceptChange(this)}>Yes</button>
+                  <button type="submit" className="btn btn-default" title="Delete" data-id="" data-modalfor={this.props.modalfor} id="entry-id" onClick={(elem)=>this.acceptChange(elem)}>Yes</button>
                   <button type="button" className="btn btn-primary" id="modal-btn-no"  data-dismiss="modal">No</button>
                 </div>
               </div>

@@ -7,7 +7,7 @@ export class HeatSourceModal extends React.Component {
     constructor(props){
         super(props);
         this.state = {heatSource: '',selectedSource:selectedSource};
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleHeatSubmit = this.handleHeatSubmit.bind(this);
         this.changeField = this.changeField.bind(this);
       }
 
@@ -31,24 +31,23 @@ export class HeatSourceModal extends React.Component {
         //         });
 
 
-         $('.close-modal-heatsource').on('click',function (e) {
+          $('.close-modal-heatsource').on('click', function (e) {
 
-          const obj = this;
-         // alert('Heat')
+              const obj = this;
+              // alert('Heat')
 
-               if ($('#heat-source-form').hasClass('form-edited')) {
-                   //alert('ccccccc')
-                 e.preventDefault();
+              if ($('#heat-source-form').hasClass('form-edited')) {
+                  //alert('ccccccc')
+                  e.preventDefault();
 
-                $('#compression-modal-confirm').modal('show');
+                  $('#compression-modal-confirm').modal('show');
 
 
-                }
-                else
-                {
+              }
+              else {
                   $("#heat-source").modal("hide");
-                 $("#heat-source-form")[0].reset()
-                }
+                  $("#heat-source-form")[0].reset()
+              }
 
 
 
@@ -62,10 +61,11 @@ export class HeatSourceModal extends React.Component {
             heatSource:heatSource,
             state:true
         }
+
         CHANGE_FORM=true;
         this.props.onHeatSubmit(result);
      }
-      handleSubmit(e){
+      handleHeatSubmit(e){
         const that = this;
         e.preventDefault();
         var data=$('#heat-source-form').serialize();
@@ -275,7 +275,7 @@ export class HeatSourceModal extends React.Component {
 
         return (
             <div className="modal modal_multi"  role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="heat-source">
-            <form  onSubmit={this.handleSubmit} id="heat-source-form">
+            <form  onSubmit={this.handleHeatSubmit} id="heat-source-form">
          <div className="modal-content">
             <div className="modal-heading">
                <div className="left-head"> Heat Source</div>

@@ -10,7 +10,7 @@ export class GeneralModal extends React.Component {
   constructor(props){
         super(props);
         this.state = {generalInformation: '',role:'user'};
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleGeneralSubmit = this.handleGeneralSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
       }
 
@@ -58,7 +58,7 @@ export class GeneralModal extends React.Component {
 
 
 
-handleSubmit(event) {
+handleGeneralSubmit(event) {
     event.preventDefault();
     const that = this;
 
@@ -129,7 +129,7 @@ handleSubmit(event) {
         return (
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-information">
             <div className="modal-dialog ">
-            <form  onSubmit={this.handleSubmit} className = "general-information-form">
+            <form  onSubmit={this.handleGeneralSubmit} className = "general-information-form">
 
            <div className="modal-content">
             <div className="modal-heading">

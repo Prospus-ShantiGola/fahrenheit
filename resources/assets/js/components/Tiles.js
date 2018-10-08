@@ -28,72 +28,52 @@ export class Tiles extends React.Component {
         this.arrayMove=this.arrayMove.bind(this);
     }
     componentWillReceiveProps(nextProps){
-       // console.log("componentWillReceiveProps",nextProps);
+
         switch (nextProps.title) {
             case CHILLER_TITLE:
             this.setState({
+                compressionChillerData: nextProps.dataRecord,
                 compressionDataChange: nextProps.dataChange
               });
+
                 break;
             case GENERAL_TILE:
                 this.setState({
                     generalDataChange:nextProps.dataChange
                   });
+                  if(nextProps.dataRecord.generalformMode=="add"){
+                    this.setState({
+                        generalData: this.state.generalData.concat(nextProps.dataRecord)
+                      })
+                    }else{
+
+                          this.state.generalData[0]= nextProps.dataRecord
+                          this.forceUpdate()
+                    }
+                    break;
             case ECONOMIC_TITLE:
             this.setState({
                 economicDataChange:nextProps.dataChange
             });
+            if(nextProps.dataRecord.economicformMode=="add"){
+                this.setState({
+                    economicData: this.state.generalData.concat(nextProps.dataRecord)
+                    })
+                }else{
+
+                        this.state.economicData[0]= nextProps.dataRecord
+                        this.forceUpdate()
+                }
+                break;
             case HEAT_SOURCE_TITLE:
-            this.setState({
-                heatSourceDataChange:nextProps.dataChange
-            });
+                this.setState({
+                    heatSourceData:nextProps.dataRecord,
+                    heatSourceDataChange:nextProps.dataChange
+                });
+                break
             default:
                 break;
         }
-
-        if(typeof nextProps.dataRecord!="undefined"){
-        if(nextProps.dataRecord.chillerformMode=="add"){
-        this.setState({
-            compressionChillerData: this.state.compressionChillerData.concat(nextProps.dataRecord)
-          })
-        }else{
-
-              this.state.compressionChillerData[nextProps.dataRecord.chillerformModeKey]= nextProps.dataRecord
-              this.forceUpdate()
-        }
-        if(nextProps.dataRecord.heatsourceformMode=="add"){
-            this.setState({
-                heatSourceData: this.state.heatSourceData.concat(nextProps.dataRecord)
-              })
-            }else{
-
-                  this.state.heatSourceData[nextProps.dataRecord.heatsourceformModeKey]= nextProps.dataRecord
-                  this.forceUpdate()
-            }
-        if(nextProps.dataRecord.generalformMode=="add"){
-            this.setState({
-                generalData: this.state.generalData.concat(nextProps.dataRecord)
-              })
-            }else{
-
-                  this.state.generalData[0]= nextProps.dataRecord
-                  this.forceUpdate()
-            }
-        if(nextProps.dataRecord.economicformMode=="add"){
-            this.setState({
-                economicData: this.state.generalData.concat(nextProps.dataRecord)
-                })
-            }else{
-
-                    this.state.economicData[0]= nextProps.dataRecord
-                    this.forceUpdate()
-            }
-
-
-
-        }
-
-
     }
     componentDidUpdate(){
 
@@ -229,15 +209,23 @@ export class Tiles extends React.Component {
         $(this.props.modalId).find('#heatsourceformModeKey').val(elemKey);
         //$(this.props.modalId).find
     }
-    deleteRecord(eleM){
-        $("#delete-modal").find("#entry-id").attr('data-id',eleM);
-        $("#delete-modal").modal("show");
+    deleteRecord(eleId,eleM){
+        var modalId=eleM.target.getAttribute('data-modal');
+        $("#"+modalId).find("#entry-id").attr('data-id',eleId);
+        $("#"+modalId).modal("show");
     }
     handleChillerDeleteEntry(result){
+        console.log(result);
+        if(result.modalFor =="compressionChiller"){
         var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
         clonedArrDelete.splice(result.elementId, 1);
         this.setState({compressionChillerData: clonedArrDelete});
-
+        }
+        else{
+        var clonedArrDelete = this.state.heatSourceData; // make a separate copy of the array
+        clonedArrDelete.splice(result.elementId, 1);
+        this.setState({heatSourceData: clonedArrDelete});
+        }
     }
 
     handleHeatSourceDeleteEntry(result){
@@ -258,20 +246,17 @@ export class Tiles extends React.Component {
     };
 
     render() {
-        //console.log(this.state.compressionChillerData);
+        console.log("render refresh",this.state.heatSourceData);
         const dragSet=false;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
             var requiredMsg=<h5 className="input-required">An input is required</h5>;
         }
-        if(this.props.multiple){
-            var deleteModal=<DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} id="delete-modal"/>
-        }
-        else{
-            var deleteModal=""
-        }
 
+        var deleteModal="";
         if(this.state.compressionDataChange==true && this.state.compressionChillerData.length!=0){
+            var bodyContent="Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
+            var deleteModal= <DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="compressionChiller" id="delete-modal"/>;
             var pricelist=(
                 <ul className="price-listt">
                                     <li>
@@ -289,11 +274,11 @@ export class Tiles extends React.Component {
                 </ul>
             );
             let chillerData=this.state.compressionChillerData;
-            var bodyContent="Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
+
             var priceFullList=(
 
                 <div>
-                <DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} id="delete-modal"/>
+
                 <div className="hover-list scrollbar-macosx">
                                        <div className="table-responsive">
                                           <table className="table">
@@ -310,7 +295,7 @@ export class Tiles extends React.Component {
             </ul>
          </th>
          <td><span className="edit-option" data-id={i}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editRecord(i)}></i></span>
-            <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" onClick={()=>this.deleteRecord(i)}></i></span>
+            <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-modal" onClick={(elem)=>this.deleteRecord(i,elem)}></i></span>
             <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
          </td>
       </tr>
@@ -383,9 +368,10 @@ export class Tiles extends React.Component {
             );
 
             var bodyContent="Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
+            var deleteModal=<DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="heatSource" id="delete-heat-modal"/>;
             var priceFullList=(
                 <div>
-                    <DeleteModal onDeleteChillerSubmit={this.handleHeatDeleteEntry} bodyContent={bodyContent} id="delete-heat-modal"/>
+
                 <div className="hover-list scrollbar-macosx">
                                        <div className="table-responsive">
                                           <table className="table">
@@ -401,7 +387,7 @@ export class Tiles extends React.Component {
                                                    </ul>
                                                 </th>
                                                 <td><span className="edit-option" data-id={h}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editHeatRecord(h)}></i></span>
-            <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" onClick={()=>this.deleteRecord(h)}></i></span>
+            <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem)=>this.deleteRecord(h,elem)}></i></span>
             <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
          </td>
                                              </tr>
@@ -664,6 +650,7 @@ Tiles.defaultProps = {
     rightpriceListeData:{
 
     },
-    multiple:false
+    multiple:false,
+    dataRecord:[]
 
   };

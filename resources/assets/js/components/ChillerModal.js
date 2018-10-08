@@ -60,6 +60,7 @@ export class ChillerModal extends React.Component {
             compressionChiller:compressionChiler,
             state:true
         }
+
         CHANGE_FORM=true;
         this.props.onChillerSubmit(result);
      }
