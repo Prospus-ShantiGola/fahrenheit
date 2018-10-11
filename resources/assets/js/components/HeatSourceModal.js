@@ -11,6 +11,24 @@ export class HeatSourceModal extends React.Component {
         this.changeField = this.changeField.bind(this);
       }
 
+    myCustomFunction(elem) {
+        if (typeof elem.currentTarget == "undefined") return false;
+        var customInputId = elem.currentTarget.getAttribute("data-id");
+
+        var customInput = document.getElementById(customInputId);
+        //console.log("input",customInput);
+        if (customInput.contentEditable == "true") {
+            customInput.contentEditable = "false";
+            elem.target.classList.add("fa-pencil-square-o");
+            elem.target.classList.remove("fa-check");
+            customInput.classList.remove("editable");
+        } else {
+            customInput.contentEditable = "true";
+            elem.target.classList.add("fa-check");
+            elem.target.classList.remove("fa-pencil-square-o");
+            customInput.classList.add("editable");
+        }
+    }
       componentDidMount(){
         jQuery(".help-toggle").unbind('click');
         jQuery(".help-toggle").click(function(){
@@ -56,6 +74,46 @@ export class HeatSourceModal extends React.Component {
 
 
       }
+      showAllHearSourceErrorMessages() {
+        var form = $("form.heat-source-form"),
+            errorList = $("ul.errorMessages", form),
+            errorFound = true;
+
+        errorList.removeClass("hide");
+        errorList.empty();
+        // Find all invalid fields within the form.
+        var invalidFields = form.find(":invalid").each(function(index, node) {
+            // Find the field's corresponding label
+            var label = $("#" + node.id)
+                    .parent("td")
+                    .prev(),
+                tabId = $("#" + node.id)
+                    .parents("div.tab-pane")
+                    .attr("id"),
+                // Opera incorrectly does not fill the validationMessage property.
+                message = node.validationMessage || "Invalid value.";
+            var tabTitle = $("a[data-target='#" + tabId + "']").text();
+
+            if (label.hasClass("input-help-label")) {
+                label = label.prev("td.input-label");
+            }
+            var fieldLabel = label.text();
+            fieldLabel = fieldLabel.replace(":", "");
+            var errorStr="";
+            errorStr= (message=="Please provide value" || message=="Please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
+            errorList
+                .show()
+                .append(
+                    "<li>"+errorStr+" in '" +
+                        fieldLabel +
+                        "' field of " +
+                        tabTitle +
+                        " tab</li>"
+                );
+            errorFound = false;
+        });
+        return errorFound;
+    }
       handleHeatSubmitChange (heatSource) {
         var result={
             heatSource:heatSource,
@@ -66,10 +124,13 @@ export class HeatSourceModal extends React.Component {
         this.props.onHeatSubmit(result);
      }
       handleHeatSubmit(e){
+        if (!this.showAllHearSourceErrorMessages()) {
+            return false;
+        }
         const that = this;
         e.preventDefault();
         var data=$('#heat-source-form').serialize();
-        console.log(data);
+        //console.log(data);
         fetch('adcalc/storeHeatSourceInformation', {
                 method: 'POST',
                 headers: {
@@ -111,7 +172,7 @@ export class HeatSourceModal extends React.Component {
     }
     changeField(elem){
         //var selectedSource= (this.state.selectedSource=='CHP')?'hide':'';
-        console.log(elem.target.value);
+        //console.log(elem.target.value);
         this.setState({
             selectedSource:elem.target.value
         });
@@ -144,18 +205,18 @@ export class HeatSourceModal extends React.Component {
                            <tr>
                                <td className="input-label">Drive temperature:</td>
                                <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
-                                   <img src="images/help-red.png" alt="" />
+                                   <img src="public/images/help-red.png" alt="" />
                                </button>
                                </td>
-                               <td className="input-fields withunit"><input type="text" required="required" placeholder="85" className="required-field" name="drive_temp" id="drive_temp" /><span>°C</span></td>
+                               <td className="input-fields withunit"><input type="text" required="required" placeholder="85" pattern="\d*" className="required-field onlynumeric" name="drive_temp" id="drive_temp" /><span>°C</span></td>
                            </tr>
                            <tr>
                                <td className="input-label">Heat capacity:</td>
                                <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Contact explanation/tip">
-                                   <img src="images/help-red.png" alt="" />
+                                   <img src="public/images/help-red.png" alt="" />
                                </button>
                                </td>
-                               <td className="input-fields withunit"><input type="text" required="required" placeholder="36" className="required-field" name="heat_capacity" id="heat_capacity" /><span>kw</span></td>
+                               <td className="input-fields withunit"><input type="text" required="required" placeholder="36" pattern="\d*" className="required-field onlynumeric" name="heat_capacity" id="heat_capacity" /><span>kw</span></td>
                            </tr>
                        </tbody>
                    </table>
@@ -174,7 +235,7 @@ export class HeatSourceModal extends React.Component {
                         <tr>
                                  <td className="input-label">Electric capacity: </td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields withunit"><input type="text" placeholder="18" name="electricity_capacity" id="electricity_capacity"/><span>kw</span></td>
@@ -182,7 +243,7 @@ export class HeatSourceModal extends React.Component {
                               <tr>
                                  <td className="input-label">Thermal efficiency:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields withunit"><input type="text" placeholder="54.8" name="thermal_efficienty" id="thermal_efficienty" /><span>%</span></td>
@@ -192,7 +253,7 @@ export class HeatSourceModal extends React.Component {
                                     Electric efficiency:
                                  </td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields withunit"><input type="text" placeholder="34.5" name="electricity_efficienty" id="electricity_efficienty"/><span>%</span></td>
@@ -214,7 +275,7 @@ export class HeatSourceModal extends React.Component {
                         <tr>
                                  <td className="input-label">Manufacturer:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields">
@@ -228,7 +289,7 @@ export class HeatSourceModal extends React.Component {
                               <tr>
                                  <td className="input-label">Type:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields">
@@ -259,7 +320,7 @@ export class HeatSourceModal extends React.Component {
                         <tr>
                                  <td className="input-label"> Operation hours:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Location explanation/tip" data-original-title="" title="">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields withunit"><input type="text" placeholder="4.000" name="operation_hours" id="operation_hours"/><span>h/a</span>
@@ -275,13 +336,13 @@ export class HeatSourceModal extends React.Component {
 
         return (
             <div className="modal modal_multi"  role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="heat-source">
-            <form  onSubmit={this.handleHeatSubmit} id="heat-source-form">
+            <form  className="heat-source-form" id="heat-source-form">
          <div className="modal-content">
             <div className="modal-heading">
                <div className="left-head"> Heat Source</div>
                <div className="right-head">
                   <ul className="list-inline">
-                     <li><input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" title="Save Changes"/></li>
+                     <li><input className="save-changes-btn" onClick={this.handleHeatSubmit} type="submit" alt="Submit" value="Save Changes" title="Save Changes"/></li>
                     <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-heatsource"  aria-label="Close"/></span></li>
                   </ul>
                </div>
@@ -297,7 +358,7 @@ export class HeatSourceModal extends React.Component {
                               <tr>
                                  <td className="input-label"> Name:	</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Project number explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields"><input type="text" name="heat_name" id="heat_name" placeholder="CHP in the basement" />
@@ -307,7 +368,7 @@ export class HeatSourceModal extends React.Component {
                               <tr>
                                  <td className="input-label">Type of heat source:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields">
@@ -328,7 +389,7 @@ export class HeatSourceModal extends React.Component {
                               <tr>
                                  <td className="input-label"> New installation:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Location explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields">
@@ -353,7 +414,7 @@ export class HeatSourceModal extends React.Component {
                               <tr>
                                  <td className="input-label">Investment costs:	</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Editor explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields"><input type="text" placeholder="€" name="heat_investment_cost" id="heat_investment_cost" /> </td>
@@ -361,7 +422,7 @@ export class HeatSourceModal extends React.Component {
                               <tr>
                                  <td className="input-label">Discount:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Company explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields"><input type="text" placeholder="%"  name="heat_investment_discount" id="heat_investment_discount"  /></td>
@@ -369,7 +430,7 @@ export class HeatSourceModal extends React.Component {
                               <tr>
                                  <td className="input-label"> Maintenance costs: </td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Address explanation/tip">
-                                    <img src="images/help-red.png" alt="" />
+                                    <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
                                  <td className="input-fields"><input type="text" placeholder="€/kWh" name="heat_maintenance_cost" id="heat_maintenance_cost" /> </td>
@@ -381,7 +442,11 @@ export class HeatSourceModal extends React.Component {
                   </div>
                </div>
             </div>
+            <ul className="errorMessages hide">
+                                    Error on this page
+                                </ul>
          </div>
+
          </form>
       </div>
 

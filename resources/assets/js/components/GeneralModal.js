@@ -29,29 +29,19 @@ export class GeneralModal extends React.Component {
                 }
             });
         });
-        $('.close-modal-general').on('click',function (e) {
-
-          const obj = this;
-
-
+           $('.close-modal-general').on('click', function (e) {
                if ($('.general-information-form').hasClass('form-edited')) {
-                  // alert('eeee')
-                 e.preventDefault();
-
-                $('#general-modal-confirm').modal('show');
-
-
-                }
-                else
-                {
-                 $('#general-information').modal('hide');
-                 $('.general-information-form')[0].reset()
-                }
-
-
-
-          })
+                   // alert('eeee')
+                   e.preventDefault();
+                   $('#general-modal-confirm').modal('show');
+               }
+               else {
+                   $('#general-information').modal('hide');
+                   $('.general-information-form')[0].reset()
+               }
+           })
                //Do stuff here
+
           }
 
 
@@ -94,6 +84,7 @@ handleGeneralSubmit(event) {
                                     generalInformation:data
                                 })
                                 that.changeState(that.state.generalInformation);
+                                GENERAL_FORM_STATUS=true;
                                 $("#general-information").modal("hide");
 
                             }
@@ -125,6 +116,8 @@ handleGeneralSubmit(event) {
 
 
     render() {
+        projectData['generalData']=this.state.generalInformation;
+
 
         return (
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-information">

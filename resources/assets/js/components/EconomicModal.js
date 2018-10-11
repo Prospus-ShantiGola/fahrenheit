@@ -407,6 +407,8 @@ export class EconomicModal extends React.Component {
 
     render() {
         //console.log(this.state.role);
+        projectData['economicData']=this.state.economicInformation;
+
         var expertFields = "";
         if (this.state.role == "expert") {
             var expertFields = (

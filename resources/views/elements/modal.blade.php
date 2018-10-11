@@ -46,7 +46,7 @@
                                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                                 $.ajax({
                                     type: "POST",
-                                    url: '/users/updatestatus',
+                                    url: "<?php echo $url = route('updateuser');?>",
                                     data: { _token: CSRF_TOKEN,id:userId,status:status },
                                     success: function( msg ) {
 

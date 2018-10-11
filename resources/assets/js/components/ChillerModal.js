@@ -1,6 +1,7 @@
-import React from 'react';
+import React,{Component} from 'react';
+import { connect } from "react-redux";
 
-export class ChillerModal extends React.Component {
+export class ChillerModal extends Component  {
 
 
     constructor(props){
@@ -116,6 +117,7 @@ export class ChillerModal extends React.Component {
     }
 
     render() {
+
         if(this.props.role=="expert"){
             var expertRoleHtml=(<ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
             <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
@@ -283,4 +285,6 @@ export class ChillerModal extends React.Component {
         );
     }
 }
+
+
 

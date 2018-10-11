@@ -60,7 +60,7 @@ Route::group(
     Route::delete('/user/{user}','UsersController@destroy')
          ->name('users.users.destroy')
          ->where('id', '[0-9]+')->middleware('auth');
-    Route::post('/updatestatus', 'UsersController@updatestatus');
+    Route::post('/updatestatus', array('as' => 'updateuser','uses' =>'UsersController@updatestatus'));
     Route::post('/loginUser', 'UsersController@loginUser');
 
 });
@@ -137,6 +137,7 @@ Route::group(
         Route::post('/storeGeneralInformation', 'AdcalcController@storeGeneralInformation');
         Route::post('/storeEconomicInformation', 'AdcalcController@storeEconomicInformation');
         Route::post('/storeHeatSourceInformation', 'AdcalcController@storeHeatSourceInformation');
+        Route::post('/storeProjectInformation', 'AdcalcController@storeProjectInformation');
 
 
     });

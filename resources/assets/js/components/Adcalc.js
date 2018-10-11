@@ -87,6 +87,10 @@ export default class Adcalc extends Component {
     }
 
     render() {
+        console.log("adcalc render");
+        projectData['chillerData'] = this.state.compressionChilerStateChange.chillerRecord;
+        projectData['heatSourceData'] = this.state.heatSourceStateChange.heatSourceRecord;
+
         const tiles={
             general:{
                 title: GENERAL_TILE,

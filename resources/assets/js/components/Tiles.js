@@ -2,6 +2,7 @@ import React from 'react';
 
 import {DeleteModal} from './DeleteModal';
 import {ErrorBoundary} from './ErrorBoundary';
+import {DataList} from './data-list';
 
 export class Tiles extends React.Component {
 
@@ -215,7 +216,7 @@ export class Tiles extends React.Component {
         $("#"+modalId).modal("show");
     }
     handleChillerDeleteEntry(result){
-        console.log(result);
+        //console.log(result);
         if(result.modalFor =="compressionChiller"){
         var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
         clonedArrDelete.splice(result.elementId, 1);
@@ -246,7 +247,9 @@ export class Tiles extends React.Component {
     };
 
     render() {
-        console.log("render refresh",this.state.heatSourceData);
+        //console.log("render refresh",this.state.heatSourceData);
+        projectData['generalData'] = this.state.generalData;
+        projectData['economicData'] = this.state.economicData;
         const dragSet=false;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
@@ -283,25 +286,7 @@ export class Tiles extends React.Component {
                                        <div className="table-responsive">
                                           <table className="table">
                                            <tbody className="compressionTableBody">
-                                           {chillerData.map((data,i) => (
-
-         <tr key={i} data-id={i}>
-         <th>
-         {data.chillername}
-            <ul className="list-inline" key={i}>
-               <li >120.30 kW
-               </li>
-               <li>	{(data.temperature!="")? data.temperature+'°C':"" } </li>
-            </ul>
-         </th>
-         <td><span className="edit-option" data-id={i}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editRecord(i)}></i></span>
-            <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-modal" onClick={(elem)=>this.deleteRecord(i,elem)}></i></span>
-            <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
-         </td>
-      </tr>
-        ))}
-
-
+                                                <DataList chillerData={chillerData}/>
                                              </tbody>
                                           </table>
                                        </div>

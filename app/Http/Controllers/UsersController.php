@@ -119,20 +119,30 @@ class UsersController extends Controller
                          ->withErrors(['unexpected_error' => trans('users.unexpected_error')]);
         }
     }
+
+    /**
+     *  Update user status active/deactivate
+     *
+     */
     public function updatestatus(Request $request)
     {
         try {
-            // echo $request['status'];
-            // die;
-          $status = ($request['status']==1) ? 1 : 0;
-
+            $status = ($request['status']==1) ? 1 : 0;
             $statusText = ($request['status']==1) ? "Disable" : "Enable";
-            User::where('id', $request['id'])->update(array('status' =>$status));
+            //udpate status in database.
+
+            $user= User::where('id', $request['id'])->update(array('status' =>$status));
+            $user =User::findOrFail($request['id']);
+            //Send email.
+            if($request['status']){
+
+                app('App\Http\Controllers\MailController')->sendActivationEmailUser($user);
+                $user= User::where('id', $request['id'])->update(array('new_user' =>1));
+            }
             return response()->json(['response' => 'This is success method','responsecode'=>1,'enable'=>$statusText]);
-            //return 'qwwq';
+            //return 'json response';
 
         } catch (Exception $exception) {
-            dd($exception);
             return response()->json(['response' => 'This is failure method']);
         }
     }
@@ -178,13 +188,7 @@ class UsersController extends Controller
             'user_type_id' => 'required|string|min:1|max:191'
 
         ];
-
-
         $data = $request->validate($rules);
-
-
-
-
         return $data;
     }
     protected function getDataCreate(Request $request)

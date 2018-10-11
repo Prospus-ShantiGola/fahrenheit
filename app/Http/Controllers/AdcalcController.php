@@ -10,6 +10,8 @@ use Auth;
 use Exception;
 use Gate;
 use Hash;
+use Mail;
+use PHPUnit\Framework\Error\Error;
 
 class AdcalcController extends Controller
 {
@@ -82,6 +84,38 @@ class AdcalcController extends Controller
       return response()->json(['success'=>'Record is successfully added']);
 
 }
+public function storeProjectInformation(Request $request)
+  {
+    $generalData = $request->input('generalData');
+
+    if(empty($generalData)){
+        return response()->json(['errors'=>'Please provide the mandatory field','key'=>'general']);
+    }
+    else{
+        $email_address=$generalData['email_address'];
+        $subject="New User Registration Confirmation";
+        try{
+            app('App\Http\Controllers\MailController')->sendProjectEmailAdmin($generalData);
+        }
+            catch(Error $e){
+                return response()->json(['errors'=>$e,'key'=>'general']);
+            }
+
+
+         if(!$mail_status){
+            return response()->json(['errors'=>'email sending failed','key'=>'general']);
+         }
+    }
+
+
+      if ($validator->fails())
+      {
+          return response()->json(['errors'=>$validator->errors()->keys()]);
+      }
+      return response()->json(['success'=>'Record is successfully added']);
+
+}
+
 
 
 
