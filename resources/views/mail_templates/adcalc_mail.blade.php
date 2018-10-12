@@ -2,7 +2,20 @@
  <?php //
  $siteUrl =  url('/').'/public/images/logo-banner.jpg';
 // die;
-
+//"project_number" => "test"
+"project_name" => "sfdsdf"
+"generalformMode" => "add"
+"location" => "test2"
+"customer" => "shanti gola"
+"contact" => "234234"
+"phone_number" => "9582222957"
+"email_address" => "shaan.gola@gmail.com"
+"editor" => "shanti gola"
+"company" => "Prospus Testing"
+"address" => "4/1 Bhogal Lane, Jangpura"
+"personal_phone_number" => "9582222957"
+"mobile_number" => "9582222957"
+"personal_email_address" => "shaan.gola@gmail.com"
 ?>
 
 <body>
@@ -29,11 +42,22 @@
                         </td>
                     </tr>
                     <tr>
-                        <td width='800'>Full Name:  <?php echo $editor; ?> <br/>
-                        Email: <?php echo $personal_email_address; ?>  <br/>
-                         Phone Number: <?php echo $personal_phone_number; ?>  <br/>
+                        <td width='800'>
+                            Full Name:  <?php echo $customer; ?> <br/>
+                            Email: <?php echo $email_address; ?>  <br/>
+                            Phone Number: <?php echo $contact; ?>  <br/>
+                            Location: <?php echo $location; ?><br/>
+                            Project Number: <?php echo $project_number; ?><br/>
+                            Project Name: <?php echo $project_name; ?><br/>
 
-                           Location: <?php echo $location; ?>
+                            Location: <?php echo $location; ?><br/>
+                            Location: <?php echo $location; ?><br/>
+                            Location: <?php echo $location; ?><br/>
+                            Location: <?php echo $location; ?><br/>
+                            Location: <?php echo $location; ?><br/>
+                            Location: <?php echo $location; ?><br/>
+                            Location: <?php echo $location; ?><br/>
+                            Location: <?php echo $location; ?><br/>
                             </td>
                     </tr>
                     <tr>

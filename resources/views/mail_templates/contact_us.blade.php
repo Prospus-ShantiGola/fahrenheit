@@ -36,13 +36,13 @@ if($type =='User')
                         <tr>
                             <td >{{ $contact_message }}</td>
                         </tr>
-                       
+
                         <tr>
-                              <td >Fahrenheit Team <br/> 
+                              <td >Fahrenheit Team <br/>
                              www.fahrenheit.cool</td>
                         </tr>
 
-                       
+
                         <tr>
                             <td><table  cellpadding='0' cellspacing='0' style='color:#b2b2b2; font-size:11px; font-family: Arial, Helvetica, sans-serif; line-height:13px'>
                         <tr>
@@ -53,14 +53,14 @@ if($type =='User')
 FAHRENHEIT GmbH is not liable for the proper and complete transmission of the information contained in this communication, nor for any delay in its receipt.
  </td><br/>
                         </tr>
-                        
+
                 </table></td>
                                                                                         </tr>
                                                                                 </table></td>
                                                                 </tr>
                                                         </table></td>
                                         </tr>
-                                      
+
                                                         </table></td>
                                         </tr>
                                 </table>
@@ -94,26 +94,26 @@ FAHRENHEIT GmbH is not liable for the proper and complete transmission of the in
                             </td>
                         </tr>
                         <tr>
-                            <td width='800'><b>Name:</b>  <?php echo $user_name; ?> <br/>   
-                            <b>Company:</b> <?php echo $company_type; ?>  <br/>   
-                             <b>Tel No.:</b> <?php echo $contact_number; ?>  <br/>   
-                               
+                            <td width='800'><b>Name:</b>  <?php echo $user_name; ?> <br/>
+                            <b>Company:</b> <?php echo $company_type; ?>  <br/>
+                             <b>Tel No.:</b> <?php echo $contact_number; ?>  <br/>
+
                                <b>Email:</b> <?php echo $email_address; ?>
                                 </td>   </tr>
-                    
+
 
 
                         <tr>
                             <td ><b>Message:</b> <?php echo $contact_message; ?>  </td>
                         </tr>
-                       
-                   
 
-                        
+
+
+
                 </table></td></tr>
                 </table></td></tr>
                 </table></td></tr>
-                 </table>                 
-                           
+                 </table>
+
         </body>
 <?php }?>

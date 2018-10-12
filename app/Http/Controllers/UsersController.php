@@ -132,17 +132,25 @@ class UsersController extends Controller
             //udpate status in database.
 
             $user= User::where('id', $request['id'])->update(array('status' =>$status));
-            $user =User::findOrFail($request['id']);
+            $user =User::findOrFail($request['id'])->toArray();
+            // print_r($user);
+            // die;
             //Send email.
             if($request['status']){
-
+                if(!$user['new_user'])  {
+                    $clean_password= str_random(40);
+                    $new_password=bcrypt($clean_password);
+                    User::where('id', $request['id'])->update(array('password' =>$new_password));
+                    $user['password']=$clean_password;
+                }
                 app('App\Http\Controllers\MailController')->sendActivationEmailUser($user);
-                $user= User::where('id', $request['id'])->update(array('new_user' =>1));
+                if(!$user['new_user']) $user= User::where('id', $request['id'])->update(array('new_user' =>1));
             }
             return response()->json(['response' => 'This is success method','responsecode'=>1,'enable'=>$statusText]);
             //return 'json response';
 
         } catch (Exception $exception) {
+            dd($exception);
             return response()->json(['response' => 'This is failure method']);
         }
     }

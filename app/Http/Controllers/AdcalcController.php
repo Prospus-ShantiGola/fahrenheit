@@ -93,18 +93,12 @@ public function storeProjectInformation(Request $request)
     }
     else{
         $email_address=$generalData['email_address'];
-        $subject="New User Registration Confirmation";
         try{
             app('App\Http\Controllers\MailController')->sendProjectEmailAdmin($generalData);
         }
             catch(Error $e){
                 return response()->json(['errors'=>$e,'key'=>'general']);
             }
-
-
-         if(!$mail_status){
-            return response()->json(['errors'=>'email sending failed','key'=>'general']);
-         }
     }
 
 

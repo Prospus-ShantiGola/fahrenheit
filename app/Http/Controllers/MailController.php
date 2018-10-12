@@ -113,27 +113,30 @@ class MailController extends Controller
     }
     public function sendProjectEmailAdmin($contact_form)
     {
-        $subject = 'Enquiry via Contact Us Form';
+        $subject="New User Registration Confirmation";
         $email_address = $contact_form['email_address'];
+        dd($contact_form);
         Mail::send('mail_templates.adcalc_mail', $contact_form, function ($message) use ($email_address, $subject) {
             $message->to('prospus.shantigola@gmail.com', $name = null);
             $message->subject($subject);
             $message->from('support@prospus.com', 'Fahrenheit');
         });
-
         return "success";
 
     }
+    /**
+     * Send User activation email
+     *
+     */
     public function sendActivationEmailUser($contact_form)
     {
-        $subject = 'Enquiry via Contact Us Form';
-        $email_address = $contact_form['email_address'];
+        $subject = 'Welcome to Fahrenheit';
+        $email_address = 'prospus.shantigola@gmail.com';
         Mail::send('mail_templates.activate_user', $contact_form, function ($message) use ($email_address, $subject) {
             $message->to('prospus.shantigola@gmail.com', $name = null);
             $message->subject($subject);
             $message->from('support@prospus.com', 'Fahrenheit');
         });
-
         return "success";
 
     }
