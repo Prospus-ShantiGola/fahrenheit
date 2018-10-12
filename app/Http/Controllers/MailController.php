@@ -115,7 +115,7 @@ class MailController extends Controller
     {
         $subject="New User Registration Confirmation";
         $email_address = $contact_form['email_address'];
-        dd($contact_form);
+        //dd($contact_form);
         Mail::send('mail_templates.adcalc_mail', $contact_form, function ($message) use ($email_address, $subject) {
             $message->to('prospus.shantigola@gmail.com', $name = null);
             $message->subject($subject);
@@ -131,7 +131,7 @@ class MailController extends Controller
     public function sendActivationEmailUser($contact_form)
     {
         $subject = 'Welcome to Fahrenheit';
-        $email_address = 'prospus.shantigola@gmail.com';
+        $email_address = $contact_form['personal_email_address'];
         Mail::send('mail_templates.activate_user', $contact_form, function ($message) use ($email_address, $subject) {
             $message->to('prospus.shantigola@gmail.com', $name = null);
             $message->subject($subject);

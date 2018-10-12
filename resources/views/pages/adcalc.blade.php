@@ -30,7 +30,7 @@
 
     // <script src="{{ asset('public/js/app.js') }}" defer></script> -->
 
-
+    <script src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyADkOuDbCZkoIvNvEw2BvLYcXOLjd-oAhQ"></script>
 
     <script src="{{ asset('public/js/app.js') }}" defer></script>
     <script src="{{ asset('public/js/script.js') }}" defer></script>

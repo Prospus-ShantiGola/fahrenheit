@@ -43,7 +43,32 @@ export class GeneralModal extends React.Component {
                //Do stuff here
 
           }
+          initializeAutocomplete(elem){
+            var input = document.getElementById(elem.target.id);
+            // var options = {
+            //   types: ['(regions)'],
+            //   componentRestrictions: {country: "IN"}
+            // };
+            var options = {}
 
+            var autocomplete = new google.maps.places.Autocomplete(input,options);
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                var place = autocomplete.getPlace();
+                var lat = place.geometry.location.lat();
+                var lng = place.geometry.location.lng();
+                var placeId = place.place_id;
+                // to set city name, using the locality param
+                var componentForm = {
+                    locality: 'short_name',
+                };
+
+                console.log(lat,lng);
+                // initialize(lat, lng);
+                // //Drawing map on the basis of latitude and longitude.
+                // getMapInfo(lat, lng,place)
+            });
+          }
 
 
 
@@ -171,7 +196,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="Halle/Saale" required  className="required-field" name = "location" id = "location" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
+                                 <td className="input-fields"><input type="text" placeholder="Halle/Saale" required  className="required-field" name = "location" id = "location" onFocus={(elem) => this.initializeAutocomplete(elem)} /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
 
                                  <span className="invalid-feedback" role="alert">
                                              <strong>Required field</strong>
@@ -208,7 +233,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email"  name = "email_address" id = "email_address" placeholder="inhaber@gmbh.de" /></td>
+                                 <td className="input-fields"><input type="email"  name = "email_address" id = "email_address" required  className="required-field" placeholder="inhaber@gmbh.de" /></td>
                               </tr>
                                       </tbody>
                            </table>
@@ -242,7 +267,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text"  name = "address" required   id = "address" placeholder="Halle/Saale" className="required-field" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
+                                 <td className="input-fields"><input type="text"  name = "address" required   id = "address" onFocus={(elem) => this.initializeAutocomplete(elem)} placeholder="Halle/Saale" className="required-field" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
                                  <span className="invalid-feedback" role="alert">
                                              <strong>Required field</strong>
                                        </span>
@@ -271,7 +296,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email"  name = "personal_email_address" id = "personal_email_address" placeholder="inhaber@gmbh.de" /></td>
+                                 <td className="input-fields"><input type="email"  required  className="required-field" name = "personal_email_address" id = "personal_email_address" placeholder="inhaber@gmbh.de" /></td>
                               </tr>
                                       </tbody>
                            </table>

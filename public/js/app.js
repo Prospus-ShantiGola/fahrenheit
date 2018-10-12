@@ -61198,6 +61198,34 @@ var GeneralModal = function (_React$Component) {
          //Do stuff here
       }
    }, {
+      key: "initializeAutocomplete",
+      value: function initializeAutocomplete(elem) {
+         var input = document.getElementById(elem.target.id);
+         // var options = {
+         //   types: ['(regions)'],
+         //   componentRestrictions: {country: "IN"}
+         // };
+         var options = {};
+
+         var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+         google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            var lat = place.geometry.location.lat();
+            var lng = place.geometry.location.lng();
+            var placeId = place.place_id;
+            // to set city name, using the locality param
+            var componentForm = {
+               locality: 'short_name'
+            };
+
+            console.log(lat, lng);
+            // initialize(lat, lng);
+            // //Drawing map on the basis of latitude and longitude.
+            // getMapInfo(lat, lng,place)
+         });
+      }
+   }, {
       key: "handleGeneralSubmit",
       value: function handleGeneralSubmit(event) {
          event.preventDefault();
@@ -61266,6 +61294,8 @@ var GeneralModal = function (_React$Component) {
    }, {
       key: "render",
       value: function render() {
+         var _this2 = this;
+
          projectData['generalData'] = this.state.generalInformation;
 
          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -61423,7 +61453,9 @@ var GeneralModal = function (_React$Component) {
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 "td",
                                                 { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", placeholder: "Halle/Saale", required: true, className: "required-field", name: "location", id: "location" }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", placeholder: "Halle/Saale", required: true, className: "required-field", name: "location", id: "location", onFocus: function onFocus(elem) {
+                                                      return _this2.initializeAutocomplete(elem);
+                                                   } }),
                                                 " ",
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-map-marker disabled", "aria-hidden": "true" }),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -61526,7 +61558,7 @@ var GeneralModal = function (_React$Component) {
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 "td",
                                                 { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "email", name: "email_address", id: "email_address", placeholder: "inhaber@gmbh.de" })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "email", name: "email_address", id: "email_address", required: true, className: "required-field", placeholder: "inhaber@gmbh.de" })
                                              )
                                           )
                                        )
@@ -61616,7 +61648,9 @@ var GeneralModal = function (_React$Component) {
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 "td",
                                                 { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "address", required: true, id: "address", placeholder: "Halle/Saale", className: "required-field" }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "address", required: true, id: "address", onFocus: function onFocus(elem) {
+                                                      return _this2.initializeAutocomplete(elem);
+                                                   }, placeholder: "Halle/Saale", className: "required-field" }),
                                                 " ",
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-map-marker disabled", "aria-hidden": "true" }),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -61696,7 +61730,7 @@ var GeneralModal = function (_React$Component) {
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 "td",
                                                 { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "email", name: "personal_email_address", id: "personal_email_address", placeholder: "inhaber@gmbh.de" })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "email", required: true, className: "required-field", name: "personal_email_address", id: "personal_email_address", placeholder: "inhaber@gmbh.de" })
                                              )
                                           )
                                        )

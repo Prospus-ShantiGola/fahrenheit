@@ -101,11 +101,6 @@ public function storeProjectInformation(Request $request)
             }
     }
 
-
-      if ($validator->fails())
-      {
-          return response()->json(['errors'=>$validator->errors()->keys()]);
-      }
       return response()->json(['success'=>'Record is successfully added']);
 
 }
