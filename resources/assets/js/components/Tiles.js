@@ -600,7 +600,7 @@ export class Tiles extends React.Component {
             <ErrorBoundary>
                 <div className={this.props.mainclass} >
                     <div className={this.props.tileCls}>
-                        <h1>{this.props.title}</h1>
+                        <h1>{this.props.header}</h1>
                         {requiredMsg}
                         {pricelist}
                         <div className={this.props.hoverCls}>

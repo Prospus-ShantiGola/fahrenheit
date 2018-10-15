@@ -1,9 +1,10 @@
 import React from 'react';
+import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 let selectedSource='Process heat';
 const CustomTable = {
     padding: "0px"
 };
-export class HeatSourceModal extends React.Component {
+class HeatSourceModal extends React.Component {
     constructor(props){
         super(props);
         this.state = {heatSource: '',selectedSource:selectedSource};
@@ -455,3 +456,4 @@ export class HeatSourceModal extends React.Component {
     }
 }
 
+export default translate(HeatSourceModal);

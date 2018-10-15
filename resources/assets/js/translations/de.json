@@ -1,0 +1,84 @@
+{
+    "General": {
+        "Title": "Allgemeine Informationen",
+        "Tab": {
+            "Project": {
+                "Title": "Projektdaten",
+                "ProjectNumber": {
+                    "Title":"Projektnummer",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "ProjectName":  {
+                    "Title":"Projektname",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "ProjectLocation": {
+                    "Title":"Standort",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "ProjectCustomer": {
+                    "Title":"Kunde",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "ProjectContact": {
+                    "Title":"Kontakt",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "ProjectPhone":  {
+                    "Title":"Tel. Nummer",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "ProjectEmail": {
+                    "Title":"E-Mail",
+                    "Placeholder":"",
+                    "InfoTool":""
+                }
+            },
+            "Personal": {
+                "Title": "Persönliche Daten",
+                "PersonalEditor":  {
+                    "Title":"Redakteur",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "PersonalCompany": {
+                    "Title":"Unternehmen",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "PersonalAddress": {
+                    "Title":"Adresse",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "PersonalPhone": {
+                    "Title":"Tel. Nummer",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "PersonalMobile": {
+                    "Title":"Mobil",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "PersonalEmail": {
+                    "Title":"E-Mail",
+                    "Placeholder":"",
+                    "InfoTool":""
+                }
+            }
+        }
+    },
+    "RequiredField": {
+        "Message": "Pflichtfeld",
+        "Note": "Hinweis: Bitte füllen Sie die erforderlichen Felder in beiden Tabs",
+        "ErrorMsg":"Bitte füllen Sie dieses Feld aus"
+    },
+    "SaveButton":"Änderungen speichern"
+}

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 const Header = {
     padding: "10px 20px",
     textAlign: "center",
     color: "red",
     fontSize: "14px"
   }
-export class GeneralModal extends React.Component {
+
+class GeneralModal extends Component {
 
   constructor(props){
         super(props);
@@ -19,6 +21,19 @@ export class GeneralModal extends React.Component {
         jQuery(".help-toggle").unbind('click');
         jQuery(".help-toggle").click(function(){
             jQuery(".input-help-label").toggle();
+        });
+        var that=this;
+        $('form.general-information-form input[required]').on('change invalid', function() {
+            var textfield = $(this).get(0);
+
+            // 'setCustomValidity not only sets the message, but also marks
+            // the field as invalid. In order to see whether the field really is
+            // invalid, we have to remove the message first
+            textfield.setCustomValidity('');
+
+            if (!textfield.validity.valid) {
+              textfield.setCustomValidity(that.props.t('RequiredField.ErrorMsg'));
+            }
         });
         jQuery('body').on('click', function (e) {
             jQuery('[data-toggle="popover"]').each(function () {
@@ -151,12 +166,12 @@ handleGeneralSubmit(event) {
 
            <div className="modal-content">
             <div className="modal-heading">
-               <div className="left-head"> General Information</div>
+               <div className="left-head"> {this.props.t('General.Title')}</div>
                <div className="right-head">
                   <ul className="list-inline">
 
                     {/* <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li> */}
-                     <li> <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" title="Save Changes"/></li>
+                     <li> <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
                       <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
 
                   </ul>
@@ -164,8 +179,8 @@ handleGeneralSubmit(event) {
             </div>
             <div className="modal-body-content">
                <ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
-                  <li className="nav-item"><a href="" data-target="#project-data" data-toggle="tab" className="nav-link small active">PROJECT DATA</a></li>
-                  <li className="nav-item"><a href="" data-target="#personal-data" data-toggle="tab" className="nav-link">PERSONAL DATA</a></li>
+                  <li className="nav-item"><a href="" data-target="#project-data" data-toggle="tab" className="nav-link small active">{this.props.t('General.Tab.Project.Title')}</a></li>
+                  <li className="nav-item"><a href="" data-target="#personal-data" data-toggle="tab" className="nav-link">{this.props.t('General.Tab.Personal.Title')}</a></li>
                </ul>
                <div id="tabsJustifiedContent" className="tab-content">
                   <div id="project-data" className="tab-pane fade  active show">
@@ -174,66 +189,66 @@ handleGeneralSubmit(event) {
                            <table className="table">
                                    <tbody>
                               <tr>
-                                 <td className="input-label"> Project number:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectNumber.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectNumber.InfoTool')}>
                                     <img src="public/images/help-red.png" alt=""  />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="New Project" name = "project_number" id = "project_number" /> </td>
+                                 <td className="input-fields"><input type="text" placeholder={this.props.t('General.Tab.Project.ProjectNumber.Placeholder')} name = "project_number" id = "project_number" /> </td>
                               </tr>
                               <tr>
-                                 <td className="input-label"> Project name: </td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
+                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectName.Title')}: </td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectName.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="Test Project" name = "project_name" id = "project_name" />
+                                 <td className="input-fields"><input type="text" placeholder={this.props.t('General.Tab.Project.ProjectName.Placeholder')} name = "project_name" id = "project_name" />
                                  <input type="hidden" placeholder="Chiller 1" id="generalformMode"   name="generalformMode" value="add" /></td>
                               </tr>
                               <tr>
-                                 <td className="input-label"> Location:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Location explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectLocation.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectLocation.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="Halle/Saale" required  className="required-field" name = "location" id = "location" onFocus={(elem) => this.initializeAutocomplete(elem)} /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
+                                 <td className="input-fields"><input type="text" title={this.props.t('RequiredField.ErrorMsg')} placeholder={this.props.t('General.Tab.Project.ProjectLocation.Placeholder')} required  className="required-field" name = "location" id = "location" onFocus={(elem) => this.initializeAutocomplete(elem)} /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
 
                                  <span className="invalid-feedback" role="alert">
-                                             <strong>Required field</strong>
+                                             <strong>{this.props.t('RequiredField.Message')}</strong>
                                        </span>
                                        </td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Customer:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectCustomer.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectCustomer.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" name = "customer" id = "customer" placeholder="HabWarmWillKalt Gmbh "/></td>
+                                 <td className="input-fields"><input type="text" name = "customer" id = "customer" placeholder={this.props.t('General.Tab.Project.ProjectCustomer.Placeholder')}/></td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Contact:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Contact explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectContact.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectContact.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" name = "contact" id = "contact" placeholder="Mr. Inhaber" /></td>
+                                 <td className="input-fields"><input type="text" name = "contact" id = "contact" placeholder={this.props.t('General.Tab.Project.ProjectContact.Placeholder')} /></td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Tel. Number:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectPhone.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectPhone.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text"  pattern="^\d{10}$"   name = "phone_number" id = "phone_number" placeholder="0123 456" /></td>
+                                 <td className="input-fields"><input type="text"  pattern="^\d{10}$"   name = "phone_number" id = "phone_number" placeholder={this.props.t('General.Tab.Project.ProjectPhone.Placeholder')} /></td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Email:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Email explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectEmail.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectEmail.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email"  name = "email_address" id = "email_address" required  className="required-field" placeholder="inhaber@gmbh.de" /></td>
+                                 <td className="input-fields"><input type="email" title={this.props.t('RequiredField.ErrorMsg')} name = "email_address" id = "email_address" required  className="required-field" placeholder={this.props.t('General.Tab.Project.ProjectEmail.Placeholder')} /></td>
                               </tr>
                                       </tbody>
                            </table>
@@ -246,57 +261,57 @@ handleGeneralSubmit(event) {
                            <table className="table">
                                    <tbody>
                               <tr>
-                                 <td className="input-label">Editor:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalEditor.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalEditor.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" name ="editor" id ="editor" placeholder="HabWarmWillKalt Gmbh" /> </td>
+                                 <td className="input-fields"><input type="text" name ="editor" id ="editor" placeholder={this.props.t('General.Tab.Personal.PersonalEditor.Placeholder')} /> </td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Company:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalCompany.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalCompany.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" name = "company" id = "company" placeholder="Gmbh" /></td>
+                                 <td className="input-fields"><input type="text" name = "company" id = "company" placeholder={this.props.t('General.Tab.Personal.PersonalCompany.Placeholder')}/></td>
                               </tr>
                               <tr>
-                                 <td className="input-label"> Address:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalAddress.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalAddress.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text"  name = "address" required   id = "address" onFocus={(elem) => this.initializeAutocomplete(elem)} placeholder="Halle/Saale" className="required-field" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
+                                 <td className="input-fields"><input type="text" title={this.props.t('RequiredField.ErrorMsg')} name = "address" required   id = "address" onFocus={(elem) => this.initializeAutocomplete(elem)} placeholder={this.props.t('General.Tab.Personal.PersonalAddress.Placeholder')} className="required-field" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
                                  <span className="invalid-feedback" role="alert">
-                                             <strong>Required field</strong>
+                                             <strong>{this.props.t('RequiredField.Message')}</strong>
                                        </span>
 
                                  </td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Tel. Number:</td>
-                                 <td className="input-help-label"><button type="button"    className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Tel. number explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalPhone.Title')}:</td>
+                                 <td className="input-help-label"><button type="button"    className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalPhone.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text"  pattern="^\d{10}$"   name = "personal_phone_number" id = "personal_phone_number" placeholder="0123 456" /></td>
+                                 <td className="input-fields"><input type="text"  pattern="^\d{10}$"   name = "personal_phone_number" id = "personal_phone_number" placeholder={this.props.t('General.Tab.Personal.PersonalPhone.Placeholder')} /></td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Mobile:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Mobile explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalMobile.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalMobile.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" pattern="^\d{10}$"  name = "mobile_number" id = "mobile_number" placeholder="Mr. Inhaber" /></td>
+                                 <td className="input-fields"><input type="text" pattern="^\d{10}$"  name = "mobile_number" id = "mobile_number" placeholder={this.props.t('General.Tab.Personal.PersonalMobile.Placeholder')} /></td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Email:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Email explanation/tip">
+                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalEmail.Title')}:</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalEmail.InfoTool')}>
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email"  required  className="required-field" name = "personal_email_address" id = "personal_email_address" placeholder="inhaber@gmbh.de" /></td>
+                                 <td className="input-fields"><input type="email"  required  className="required-field" name = "personal_email_address" id = "personal_email_address" placeholder={this.props.t('General.Tab.Personal.PersonalEmail.Placeholder')} /></td>
                               </tr>
                                       </tbody>
                            </table>
@@ -305,7 +320,7 @@ handleGeneralSubmit(event) {
                   </div>
                </div>
             </div>
-            <div style={Header}>Note : Please fill the required fields in both tabs</div>
+            <div style={Header}>{this.props.t('RequiredField.Note')}</div>
          </div>
 
             </form>
@@ -316,4 +331,4 @@ handleGeneralSubmit(event) {
     }
 }
 
-
+export default translate(GeneralModal);

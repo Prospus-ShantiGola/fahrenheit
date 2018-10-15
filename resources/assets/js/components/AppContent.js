@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Breadcrumb from './Breadcrumb';
 import Adcalc from './Adcalc';
+import { setDefaultTranslations, setDefaultLanguage } from 'react-multi-lang'
+import de from './../translations/de.json'
+import en from './../translations/en.json'
 import {Provider} from 'react-redux';
 import store from './../store/index'
 
+setDefaultTranslations({de, en})
+setDefaultLanguage('en')
 class AppContent extends Component {
     constructor(props) {
-        let role=LOGGED_IN_ROLE;
+        //let role=LOGGED_IN_ROLE;
+        let role="expert";
         super(props);
         this.state = {
             role:role,

@@ -1,0 +1,139 @@
+{
+    "Tiles":{
+        "General":{
+            "Title":"General Information",
+            "hoverText": "We need the location to get the specific weather data."
+
+        },
+        "Economic":{
+            "Title":"Economic Data",
+            "hoverText":"We need the location to get the specific weather data."
+        },
+        "Options":{
+            "Title":"Options",
+            "hoverText":"We need the location to get the specific weather data."
+
+        },
+        "HeatSource":{
+            "Title":"Heat Source",
+            "hoverText":"Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources."
+        },
+        "HeatingLoadProfile":{
+            "Title":"Heating Load Profile",
+            "hoverText":"Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources. Are you planning a new heat source? Then we can calculate the profitability of the whole system!"
+        },
+        "CompressionChiller":{
+            "Title":"Compression Chiller",
+            "hoverText":"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours."
+        },
+        "CoolingLoadProfile":{
+            "Title":"Cooling Load Profile",
+            "hoverText":"Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!"
+        },
+        "FahrenheitSystem":{
+            "Title":"Fahrenheit System",
+            "hoverText":"Please provide the required inputs so we can suggest a Fahrenheit system for you."
+        }
+
+    },
+    "General": {
+        "Title": "General Information",
+        "Tab": {
+            "Project": {
+                "Title":  "Project Data",
+                "ProjectNumber": {
+                    "Title":"Project number",
+                    "Placeholder":"New Project",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "ProjectName":  {
+                    "Title":"Project name",
+                    "Placeholder":"Test Project",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "ProjectLocation": {
+                    "Title":"Location",
+                    "Placeholder":"Halle/Saale",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "ProjectCustomer": {
+                    "Title":"Customer",
+                    "Placeholder":"HabWarmWillKalt Gmbh ",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "ProjectContact": {
+                    "Title":"Contact",
+                    "Placeholder":"Mr. Inhaber",
+                    "InfoTool":"Contact explanation/tip"
+                },
+                "ProjectPhone":  {
+                    "Title":"Tel. Number",
+                    "Placeholder":"0123 456",
+                    "InfoTool":"Tel. number explanation/tip"
+                },
+                "ProjectEmail": {
+                    "Title":"Email",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Email explanation/tip"
+                }
+            },
+            "Personal": {
+                "Title": "Personal Data",
+                "PersonalEditor":  {
+                    "Title":"Editor",
+                    "Placeholder":"HabWarmWillKalt Gmbh",
+                    "InfoTool":"Editor explanation/tip"
+                },
+                "PersonalCompany": {
+                    "Title":"Company",
+                    "Placeholder":"Gmbh" ,
+                    "InfoTool":"Company explanation/tip"
+                },
+                "PersonalAddress": {
+                    "Title": "Address",
+                    "Placeholder":"Halle/Saale",
+                    "InfoTool":"Address explanation/tip"
+                },
+                "PersonalPhone": {
+                    "Title":"Tel. Number",
+                    "Placeholder":"0123 456",
+                    "InfoTool":"Tel. number explanation/tip"
+                },
+                "PersonalMobile": {
+                    "Title":"Mobile",
+                    "Placeholder":"Mr. Inhaber",
+                    "InfoTool":"Mobile explanation/tip"
+                },
+                "PersonalEmail": {
+                    "Title":"Email",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Email explanation/tip"
+                }
+            }
+        }
+    },
+    "Economic":{
+        "General":{
+            "Title":""
+        },
+        "CHP":{
+            "Title":""
+        }
+
+    },
+    "HeatSource":{
+        "Technical":{
+            "Title":""
+        },
+        "CHP":{
+            "Title":""
+        }
+
+    },
+    "RequiredField":{
+        "Message":"Required field",
+        "Note":"Note : Please fill the required fields in both tabs",
+        "ErrorMsg":"please fill out this field"
+    },
+    "SaveButton":"save changes"
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 const CustomTable = {
     padding: "0px"
 };
@@ -7,7 +8,7 @@ let investmentCounter,
     chpCounter,
     generalCounter = 0;
 const customFieldLabel = "Enter field label";
-export class EconomicModal extends React.Component {
+class EconomicModal extends React.Component {
     constructor(props) {
         super(props);
         this.displayData = [];
@@ -1558,3 +1559,4 @@ export class EconomicModal extends React.Component {
         );
     }
 }
+export default translate(EconomicModal);

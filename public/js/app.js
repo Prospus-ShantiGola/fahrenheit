@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 27);
+/******/ 	return __webpack_require__(__webpack_require__.s = 29);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,7 +73,7 @@
 if (false) {
   module.exports = require('./cjs/react.production.min.js');
 } else {
-  module.exports = __webpack_require__(54);
+  module.exports = __webpack_require__(56);
 }
 
 
@@ -85,7 +85,7 @@ if (false) {
 
 
 var bind = __webpack_require__(10);
-var isBuffer = __webpack_require__(35);
+var isBuffer = __webpack_require__(37);
 
 /*global toString:true*/
 
@@ -422,7 +422,7 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(38);
+var normalizeHeaderName = __webpack_require__(40);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -516,7 +516,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(37)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ }),
 /* 4 */
@@ -13721,12 +13721,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(1);
-var settle = __webpack_require__(39);
-var buildURL = __webpack_require__(41);
-var parseHeaders = __webpack_require__(42);
-var isURLSameOrigin = __webpack_require__(43);
+var settle = __webpack_require__(41);
+var buildURL = __webpack_require__(43);
+var parseHeaders = __webpack_require__(44);
+var isURLSameOrigin = __webpack_require__(45);
 var createError = __webpack_require__(12);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(44);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(46);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13823,7 +13823,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(45);
+      var cookies = __webpack_require__(47);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13907,7 +13907,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(40);
+var enhanceError = __webpack_require__(42);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -14137,9 +14137,9 @@ module.exports = ReactPropTypesSecret;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(80);
 /* unused harmony reexport Provider */
 /* unused harmony reexport createProvider */
 /* unused harmony reexport connectAdvanced */
@@ -14176,7 +14176,7 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(75)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(77)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
@@ -14214,13 +14214,13 @@ var storeShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_Subscription__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_Subscription__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_PropTypes__ = __webpack_require__(21);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -14514,6 +14514,81 @@ selectorFactory) {
 
 /***/ }),
 /* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Copyright 2015, Yahoo! Inc.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+var REACT_STATICS = {
+    childContextTypes: true,
+    contextTypes: true,
+    defaultProps: true,
+    displayName: true,
+    getDefaultProps: true,
+    getDerivedStateFromProps: true,
+    mixins: true,
+    propTypes: true,
+    type: true
+};
+
+var KNOWN_STATICS = {
+    name: true,
+    length: true,
+    prototype: true,
+    caller: true,
+    callee: true,
+    arguments: true,
+    arity: true
+};
+
+var defineProperty = Object.defineProperty;
+var getOwnPropertyNames = Object.getOwnPropertyNames;
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+var getPrototypeOf = Object.getPrototypeOf;
+var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
+
+function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
+    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
+
+        if (objectPrototype) {
+            var inheritedComponent = getPrototypeOf(sourceComponent);
+            if (inheritedComponent && inheritedComponent !== objectPrototype) {
+                hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+            }
+        }
+
+        var keys = getOwnPropertyNames(sourceComponent);
+
+        if (getOwnPropertySymbols) {
+            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+        }
+
+        for (var i = 0; i < keys.length; ++i) {
+            var key = keys[i];
+            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
+                var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+                try { // Avoid failures from read-only properties
+                    defineProperty(targetComponent, key, descriptor);
+                } catch (e) {}
+            }
+        }
+
+        return targetComponent;
+    }
+
+    return targetComponent;
+}
+
+module.exports = hoistNonReactStatics;
+
+
+/***/ }),
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14523,7 +14598,7 @@ selectorFactory) {
 /* unused harmony export applyMiddleware */
 /* unused harmony export compose */
 /* unused harmony export __DO_NOT_USE__ActionTypes */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(83);
 
 
 /**
@@ -15115,14 +15190,14 @@ if ("development" !== 'production' && typeof isCrushed.name === 'string' && isCr
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = wrapMapToPropsConstant;
 /* unused harmony export getDependsOnOwnProps */
 /* harmony export (immutable) */ __webpack_exports__["b"] = wrapMapToPropsFunc;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(26);
 
 
 function wrapMapToPropsConstant(getConstant) {
@@ -15192,12 +15267,12 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 }
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(7);
 
 
@@ -15209,11 +15284,11 @@ function verifyPlainObject(value, displayName, methodName) {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(88);
 
 
 /** Built-in value references. */
@@ -15223,15 +15298,151 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export subscribe */
+/* unused harmony export unsubscribe */
+/* harmony export (immutable) */ __webpack_exports__["a"] = setDefaultLanguage;
+/* harmony export (immutable) */ __webpack_exports__["b"] = setDefaultTranslations;
+/* unused harmony export setTranslations */
+/* unused harmony export setLanguage */
+/* unused harmony export getLanguage */
+/* unused harmony export t */
+/* harmony export (immutable) */ __webpack_exports__["c"] = translate;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_hoist_non_react_statics__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_hoist_non_react_statics__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+// statics handler
+
+
+let language = 'pt';
+let id = 0;
+
+let subscribes = {};
+
+let translations = {};
+
+function subscribe(cb) {
+  const newId = id;
+  subscribes[newId] = cb;
+  id += 1;
+  return newId;
+}
+
+function unsubscribe(id) {
+  delete subscribes[id];
+}
+
+function triggerSubscriptions() {
+  Object.keys(subscribes).forEach(id => {
+    new Promise((resolve, reject) => {
+      subscribes[id]();
+      resolve();
+    }).then();
+  });
+}
+
+function setDefaultLanguage(lang) {
+  language = lang;
+}
+
+function setDefaultTranslations(userTranslations) {
+  if (Object.keys(translations).length !== 0) {
+    setTranslations(userTranslations);
+    return;
+  }
+  translations = userTranslations;
+}
+
+function setTranslations(userTranslations) {
+  translations = userTranslations;
+  triggerSubscriptions();
+}
+
+function setLanguage(lang) {
+  language = lang;
+  triggerSubscriptions();
+}
+
+function getLanguage() {
+  return language;
+}
+
+function t(path, args) {
+  const translationKeys = path.split('.');
+  let translation = '';
+  let translationObj = translations[language];
+
+  translationKeys.forEach(key => {
+    const temp = translationObj[key];
+    if (typeof translationObj[key] === 'object') {
+      translationObj = translationObj[key];
+    }
+    if (typeof temp === 'string') {
+      translation = temp;
+    }
+  });
+
+  if (translation) {
+    if (args) {
+      Object.keys(args).forEach(key => {
+        translation = translation.replace(`{${key}}`, args ? args[key] : '');
+      });
+    }
+  } else {
+    return path;
+  }
+
+  return translation;
+}
+
+function translate(Component) {
+  class TranslatedComponet extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+
+    componentDidMount() {
+      this.id = subscribe(() => this.forceUpdate());
+    }
+
+    componentWillUnmount() {
+      unsubscribe(this.id);
+    }
+
+    render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](Component, _extends({}, this.props, { t: t }));
+    }
+  }
+
+  return __WEBPACK_IMPORTED_MODULE_1_hoist_non_react_statics___default()(TranslatedComponet, Component);
+}
+
+/* unused harmony default export */ var _unused_webpack_default_export = ({
+  setDefaultLanguage,
+  setLanguage,
+  setDefaultTranslations,
+  setTranslations,
+  translate,
+  subscribe,
+  unsubscribe,
+  t
+});
+
+/***/ }),
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(28);
-module.exports = __webpack_require__(104);
+__webpack_require__(30);
+module.exports = __webpack_require__(107);
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -15241,7 +15452,7 @@ module.exports = __webpack_require__(104);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(29);
+__webpack_require__(31);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -15249,14 +15460,14 @@ __webpack_require__(29);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(53);
+__webpack_require__(55);
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(30);
+window._ = __webpack_require__(32);
 window.Popper = __webpack_require__(8).default;
 
 /**
@@ -15268,7 +15479,7 @@ window.Popper = __webpack_require__(8).default;
 try {
   window.$ = window.jQuery = __webpack_require__(9);
 
-  __webpack_require__(32);
+  __webpack_require__(34);
 } catch (e) {}
 
 /**
@@ -15277,7 +15488,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(33);
+window.axios = __webpack_require__(35);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -15313,7 +15524,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -32423,10 +32634,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(31)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(33)(module)))
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -32454,7 +32665,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -36404,13 +36615,13 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(34);
+module.exports = __webpack_require__(36);
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36418,7 +36629,7 @@ module.exports = __webpack_require__(34);
 
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(10);
-var Axios = __webpack_require__(36);
+var Axios = __webpack_require__(38);
 var defaults = __webpack_require__(3);
 
 /**
@@ -36453,14 +36664,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(14);
-axios.CancelToken = __webpack_require__(51);
+axios.CancelToken = __webpack_require__(53);
 axios.isCancel = __webpack_require__(13);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(52);
+axios.spread = __webpack_require__(54);
 
 module.exports = axios;
 
@@ -36469,7 +36680,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports) {
 
 /*!
@@ -36496,7 +36707,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36504,8 +36715,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(3);
 var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(46);
-var dispatchRequest = __webpack_require__(47);
+var InterceptorManager = __webpack_require__(48);
+var dispatchRequest = __webpack_require__(49);
 
 /**
  * Create a new instance of Axios
@@ -36582,7 +36793,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -36772,7 +36983,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36791,7 +37002,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36824,7 +37035,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36852,7 +37063,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36925,7 +37136,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36985,7 +37196,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37060,7 +37271,7 @@ module.exports = (
 
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37103,7 +37314,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37163,7 +37374,7 @@ module.exports = (
 
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37222,18 +37433,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var transformData = __webpack_require__(48);
+var transformData = __webpack_require__(50);
 var isCancel = __webpack_require__(13);
 var defaults = __webpack_require__(3);
-var isAbsoluteURL = __webpack_require__(49);
-var combineURLs = __webpack_require__(50);
+var isAbsoluteURL = __webpack_require__(51);
+var combineURLs = __webpack_require__(52);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -37315,7 +37526,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37342,7 +37553,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37363,7 +37574,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37384,7 +37595,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37448,7 +37659,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37482,19 +37693,24 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Breadcrumb__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Adcalc__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_redux__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_index__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Breadcrumb__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Adcalc__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_multi_lang__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__translations_de_json__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__translations_de_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__translations_de_json__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__translations_en_json__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__translations_en_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__translations_en_json__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_redux__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__store_index__ = __webpack_require__(104);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37510,13 +37726,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_4_react_multi_lang__["b" /* setDefaultTranslations */])({ de: __WEBPACK_IMPORTED_MODULE_5__translations_de_json___default.a, en: __WEBPACK_IMPORTED_MODULE_6__translations_en_json___default.a });
+Object(__WEBPACK_IMPORTED_MODULE_4_react_multi_lang__["a" /* setDefaultLanguage */])('en');
+
 var AppContent = function (_Component) {
     _inherits(AppContent, _Component);
 
     function AppContent(props) {
         _classCallCheck(this, AppContent);
 
-        var role = LOGGED_IN_ROLE;
+        //let role=LOGGED_IN_ROLE;
+        var role = "expert";
 
         var _this = _possibleConstructorReturn(this, (AppContent.__proto__ || Object.getPrototypeOf(AppContent)).call(this, props));
 
@@ -37764,7 +37987,7 @@ if (document.getElementById('content')) {
 }
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39257,7 +39480,7 @@ module.exports = react;
 
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39297,12 +39520,12 @@ if (false) {
   checkDCE();
   module.exports = require('./cjs/react-dom.production.min.js');
 } else {
-  module.exports = __webpack_require__(56);
+  module.exports = __webpack_require__(58);
 }
 
 
 /***/ }),
-/* 56 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39326,16 +39549,16 @@ if (true) {
 var invariant = __webpack_require__(15);
 var React = __webpack_require__(0);
 var warning = __webpack_require__(17);
-var ExecutionEnvironment = __webpack_require__(57);
+var ExecutionEnvironment = __webpack_require__(59);
 var _assign = __webpack_require__(4);
 var emptyFunction = __webpack_require__(5);
 var checkPropTypes = __webpack_require__(6);
-var getActiveElement = __webpack_require__(58);
-var shallowEqual = __webpack_require__(59);
-var containsNode = __webpack_require__(60);
+var getActiveElement = __webpack_require__(60);
+var shallowEqual = __webpack_require__(61);
+var containsNode = __webpack_require__(62);
 var emptyObject = __webpack_require__(16);
-var hyphenateStyleName = __webpack_require__(63);
-var camelizeStyleName = __webpack_require__(65);
+var hyphenateStyleName = __webpack_require__(65);
+var camelizeStyleName = __webpack_require__(67);
 
 // Relying on the `invariant()` implementation lets us
 // have preserve the format and params in the www builds.
@@ -56740,7 +56963,7 @@ module.exports = reactDom;
 
 
 /***/ }),
-/* 57 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56779,7 +57002,7 @@ var ExecutionEnvironment = {
 module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56821,7 +57044,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 module.exports = getActiveElement;
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56892,7 +57115,7 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56907,7 +57130,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(61);
+var isTextNode = __webpack_require__(63);
 
 /*eslint-disable no-bitwise */
 
@@ -56935,7 +57158,7 @@ function containsNode(outerNode, innerNode) {
 module.exports = containsNode;
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56950,7 +57173,7 @@ module.exports = containsNode;
  * @typechecks
  */
 
-var isNode = __webpack_require__(62);
+var isNode = __webpack_require__(64);
 
 /**
  * @param {*} object The object to check.
@@ -56963,7 +57186,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56991,7 +57214,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57006,7 +57229,7 @@ module.exports = isNode;
 
 
 
-var hyphenate = __webpack_require__(64);
+var hyphenate = __webpack_require__(66);
 
 var msPattern = /^ms-/;
 
@@ -57033,7 +57256,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57069,7 +57292,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57084,7 +57307,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(66);
+var camelize = __webpack_require__(68);
 
 var msPattern = /^-ms-/;
 
@@ -57112,7 +57335,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57147,7 +57370,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57205,17 +57428,18 @@ var Breadcrumb = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Breadcrumb);
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Tiles__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ChillerModal__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__GeneralModal__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__EconomicModal__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__HeatSourceModal__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Tiles__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ChillerModal__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__GeneralModal__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__EconomicModal__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__HeatSourceModal__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_multi_lang__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -57225,6 +57449,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -57330,20 +57555,20 @@ var Adcalc = function (_Component) {
         value: function render() {
             var _React$createElement, _React$createElement2, _React$createElement3, _React$createElement4, _React$createElement5, _React$createElement6, _React$createElement7, _React$createElement8;
 
-            console.log("adcalc render");
             projectData['chillerData'] = this.state.compressionChilerStateChange.chillerRecord;
             projectData['heatSourceData'] = this.state.heatSourceStateChange.heatSourceRecord;
 
             var tiles = {
                 general: {
                     title: GENERAL_TILE,
+                    header: this.props.t('Tiles.General.Title'),
                     tileCls: 'general-information data-box',
                     required: "yes",
                     edit: 'yes',
                     editCls: 'edit-icon myBtn_multi',
                     editIcon: 'public/images/edit-icon.png',
                     add: 'no',
-                    hoverText: 'We need the location to get the specific weather data.',
+                    hoverText: this.props.t('Tiles.General.hoverText'),
                     mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
                     hoverCls: 'main-hover-box general-info-hover',
                     priceLst: 'no',
@@ -57354,13 +57579,14 @@ var Adcalc = function (_Component) {
                 },
                 Economic: {
                     title: ECONOMIC_TITLE,
+                    header: this.props.t('Tiles.Economic.Title'),
                     tileCls: 'economic-data data-box',
                     required: "no",
                     edit: 'yes',
                     editCls: 'edit-icon myBtn_multi',
                     editIcon: 'public/images/edit-icon.png',
                     add: 'no',
-                    hoverText: 'We need the location to get the specific weather data.',
+                    hoverText: this.props.t('Tiles.Economic.hoverText'),
                     mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
                     hoverCls: 'main-hover-box economic-hover',
                     priceLst: 'no',
@@ -57371,13 +57597,14 @@ var Adcalc = function (_Component) {
                 },
                 Options: {
                     title: 'Options',
+                    header: this.props.t('Tiles.Options.Title'),
                     tileCls: 'options data-box',
                     required: "no",
                     edit: 'yes',
                     editCls: 'edit-icon myBtn_multi',
                     editIcon: 'public/images/edit-icon.png',
                     add: 'no',
-                    hoverText: 'We need the location to get the specific weather data.',
+                    hoverText: this.props.t('Tiles.Options.hoverText'),
                     mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 disableCard',
                     hoverCls: 'main-hover-box options-hover',
                     priceLst: 'no',
@@ -57388,13 +57615,14 @@ var Adcalc = function (_Component) {
                 },
                 HeatSource: {
                     title: HEAT_SOURCE_TITLE,
+                    header: this.props.t('Tiles.HeatSource.Title'),
                     tileCls: 'heat-sources data-box',
                     required: "no",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
                     editIcon: 'public/images/add-icon.png',
                     add: 'no',
-                    hoverText: 'Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.',
+                    hoverText: this.props.t('Tiles.HeatSource.hoverText'),
                     mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
                     hoverCls: 'main-hover-box heat-sources-hover',
                     priceLst: 'no',
@@ -57406,13 +57634,14 @@ var Adcalc = function (_Component) {
                 },
                 HeatingLoadProfile: {
                     title: 'Heating Load Profile',
+                    header: this.props.t('Tiles.HeatingLoadProfile.Title'),
                     tileCls: 'heating-load-profiles data-box',
                     required: "no",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
                     editIcon: 'public/images/add-icon.png',
                     add: 'no',
-                    hoverText: 'Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources.<br />Are you planning a new heat source? Then we can calculate the profitability of the whole system!',
+                    hoverText: this.props.t('Tiles.HeatingLoadProfile.hoverText'),
                     mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
                     hoverCls: 'main-hover-box heating-load-hover',
                     priceLst: 'no',
@@ -57423,13 +57652,14 @@ var Adcalc = function (_Component) {
                 },
                 CompressionChiller: {
                     title: CHILLER_TITLE,
+                    header: this.props.t('Tiles.CompressionChiller.Title'),
                     tileCls: 'compression-chillers data-box',
                     required: "no",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
                     editIcon: 'public/images/add-icon.png',
                     add: 'no',
-                    hoverText: 'Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.',
+                    hoverText: this.props.t('Tiles.CompressionChiller.hoverText'),
                     mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
                     hoverCls: 'main-hover-box compression-chillers-hover',
                     priceLst: 'no',
@@ -57441,13 +57671,14 @@ var Adcalc = function (_Component) {
                 },
                 CoolingLoadProfile: {
                     title: 'Cooling Load Profile',
+                    header: this.props.t('Tiles.CoolingLoadProfile.Title'),
                     tileCls: 'cooling-load-profiles data-box',
                     required: "yes",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
                     editIcon: 'public/images/add-icon.png',
                     add: 'no',
-                    hoverText: 'Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!',
+                    hoverText: this.props.t('Tiles.CoolingLoadProfile.hoverText'),
                     mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
                     hoverCls: 'main-hover-box cooling-load-hover',
                     priceLst: 'no',
@@ -57458,13 +57689,14 @@ var Adcalc = function (_Component) {
                 },
                 FahrenheitSystem: {
                     title: 'Fahrenheit System',
+                    header: this.props.t('Tiles.FahrenheitSystem.Title'),
                     tileCls: 'fahrenheit-system-box data-box',
                     required: "no",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
                     editIcon: 'public/images/add-icon.png',
                     add: 'no',
-                    hoverText: 'Please provide the required inputs so we can suggest a Fahrenheit system for you.',
+                    hoverText: this.props.t('Tiles.FahrenheitSystem.hoverText'),
                     mainClass: 'col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4 disableCard',
                     hoverCls: 'main-hover-box fahrenheit-system-hover',
                     priceLst: 'no',
@@ -57484,6 +57716,7 @@ var Adcalc = function (_Component) {
                     { className: 'row' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement = {
                         title: tiles.general.title,
+                        header: tiles.general.header,
                         required: tiles.general.required,
                         edit: tiles.edit,
                         mainclass: tiles.general.mainClass,
@@ -57491,12 +57724,14 @@ var Adcalc = function (_Component) {
                     }, _defineProperty(_React$createElement, 'required', tiles.general.required), _defineProperty(_React$createElement, 'edit', tiles.general.edit), _defineProperty(_React$createElement, 'editCls', tiles.general.editCls), _defineProperty(_React$createElement, 'editIcon', tiles.general.editIcon), _defineProperty(_React$createElement, 'add', tiles.general.add), _defineProperty(_React$createElement, 'hoverText', tiles.general.hoverText), _defineProperty(_React$createElement, 'hoverCls', tiles.general.hoverCls), _defineProperty(_React$createElement, 'priceLst', tiles.general.priceLst), _defineProperty(_React$createElement, 'priceData', tiles.general.priceData), _defineProperty(_React$createElement, 'rightpriceList', tiles.general.rightpriceList), _defineProperty(_React$createElement, 'rightpriceListeData', tiles.general.rightpriceListeData), _defineProperty(_React$createElement, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement, 'dataChange', this.state.generalStateChange.stateChange), _defineProperty(_React$createElement, 'dataRecord', this.state.generalStateChange.generalRecord), _React$createElement)),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement2 = {
                         title: tiles.Economic.title,
+                        header: tiles.Economic.header,
                         required: tiles.Economic.required,
                         edit: tiles.Economic.edit,
                         mainclass: tiles.Economic.mainClass,
                         tileCls: tiles.Economic.tileCls }, _defineProperty(_React$createElement2, 'required', tiles.Economic.required), _defineProperty(_React$createElement2, 'edit', tiles.Economic.edit), _defineProperty(_React$createElement2, 'editCls', tiles.Economic.editCls), _defineProperty(_React$createElement2, 'editIcon', tiles.Economic.editIcon), _defineProperty(_React$createElement2, 'add', tiles.Economic.add), _defineProperty(_React$createElement2, 'hoverText', tiles.Economic.hoverText), _defineProperty(_React$createElement2, 'hoverCls', tiles.Economic.hoverCls), _defineProperty(_React$createElement2, 'priceLst', tiles.Economic.priceLst), _defineProperty(_React$createElement2, 'priceData', tiles.Economic.priceData), _defineProperty(_React$createElement2, 'rightpriceList', tiles.Economic.rightpriceList), _defineProperty(_React$createElement2, 'rightpriceListeData', tiles.Economic.rightpriceListeData), _defineProperty(_React$createElement2, 'modalId', tiles.Economic.modalId), _defineProperty(_React$createElement2, 'dataChange', this.state.economicStateChange.stateChange), _defineProperty(_React$createElement2, 'dataRecord', this.state.economicStateChange.economicRecord), _React$createElement2)),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement3 = {
                         title: tiles.Options.title,
+                        header: tiles.Options.header,
                         required: tiles.Options.required,
                         edit: tiles.Options.edit,
                         mainclass: tiles.Options.mainClass,
@@ -57512,11 +57747,13 @@ var Adcalc = function (_Component) {
                             'div',
                             { className: 'row' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement4 = { title: tiles.HeatSource.title,
+                                header: tiles.HeatSource.header,
                                 required: tiles.HeatSource.required,
                                 edit: tiles.HeatSource.edit,
                                 mainclass: tiles.HeatSource.mainClass,
                                 tileCls: tiles.HeatSource.tileCls }, _defineProperty(_React$createElement4, 'required', tiles.HeatSource.required), _defineProperty(_React$createElement4, 'edit', tiles.HeatSource.edit), _defineProperty(_React$createElement4, 'editCls', tiles.HeatSource.editCls), _defineProperty(_React$createElement4, 'editIcon', tiles.HeatSource.editIcon), _defineProperty(_React$createElement4, 'add', tiles.HeatSource.add), _defineProperty(_React$createElement4, 'hoverText', tiles.HeatSource.hoverText), _defineProperty(_React$createElement4, 'hoverCls', tiles.HeatSource.hoverCls), _defineProperty(_React$createElement4, 'priceLst', tiles.HeatSource.priceLst), _defineProperty(_React$createElement4, 'priceData', tiles.HeatSource.priceData), _defineProperty(_React$createElement4, 'rightpriceList', tiles.HeatSource.rightpriceList), _defineProperty(_React$createElement4, 'rightpriceListeData', tiles.HeatSource.rightpriceListeData), _defineProperty(_React$createElement4, 'modalId', tiles.HeatSource.modalId), _defineProperty(_React$createElement4, 'dataChange', this.state.heatSourceStateChange.stateChange), _defineProperty(_React$createElement4, 'dataRecord', this.state.heatSourceStateChange.heatSourceRecord), _defineProperty(_React$createElement4, 'multiple', tiles.HeatSource.multiple), _React$createElement4)),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement5 = { title: tiles.HeatingLoadProfile.title,
+                                header: tiles.HeatingLoadProfile.header,
                                 required: tiles.HeatingLoadProfile.required,
                                 edit: tiles.HeatingLoadProfile.edit,
                                 mainclass: tiles.HeatingLoadProfile.mainClass,
@@ -57526,11 +57763,13 @@ var Adcalc = function (_Component) {
                             'div',
                             { className: 'row' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement6 = { title: tiles.CompressionChiller.title,
+                                header: tiles.CompressionChiller.header,
                                 required: tiles.CompressionChiller.required,
                                 edit: tiles.CompressionChiller.edit,
                                 mainclass: tiles.CompressionChiller.mainClass,
                                 tileCls: tiles.CompressionChiller.tileCls }, _defineProperty(_React$createElement6, 'required', tiles.CompressionChiller.required), _defineProperty(_React$createElement6, 'edit', tiles.CompressionChiller.edit), _defineProperty(_React$createElement6, 'editCls', tiles.CompressionChiller.editCls), _defineProperty(_React$createElement6, 'editIcon', tiles.CompressionChiller.editIcon), _defineProperty(_React$createElement6, 'add', tiles.CompressionChiller.add), _defineProperty(_React$createElement6, 'hoverText', tiles.CompressionChiller.hoverText), _defineProperty(_React$createElement6, 'hoverCls', tiles.CompressionChiller.hoverCls), _defineProperty(_React$createElement6, 'priceLst', tiles.CompressionChiller.priceLst), _defineProperty(_React$createElement6, 'priceData', tiles.CompressionChiller.priceData), _defineProperty(_React$createElement6, 'rightpriceList', tiles.CompressionChiller.rightpriceList), _defineProperty(_React$createElement6, 'rightpriceListeData', tiles.CompressionChiller.rightpriceListeData), _defineProperty(_React$createElement6, 'modalId', tiles.CompressionChiller.modalId), _defineProperty(_React$createElement6, 'dataChange', this.state.compressionChilerStateChange.stateChange), _defineProperty(_React$createElement6, 'dataRecord', this.state.compressionChilerStateChange.chillerRecord), _defineProperty(_React$createElement6, 'multiple', tiles.CompressionChiller.multiple), _React$createElement6)),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement7 = { title: tiles.CoolingLoadProfile.title,
+                                header: tiles.CoolingLoadProfile.header,
                                 required: tiles.CoolingLoadProfile.required,
                                 edit: tiles.CoolingLoadProfile.edit,
                                 mainclass: tiles.CoolingLoadProfile.mainClass,
@@ -57538,15 +57777,16 @@ var Adcalc = function (_Component) {
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Tiles__["a" /* Tiles */], (_React$createElement8 = { title: tiles.FahrenheitSystem.title,
+                        header: tiles.FahrenheitSystem.header,
                         required: tiles.FahrenheitSystem.required,
                         edit: tiles.FahrenheitSystem.edit,
                         mainclass: tiles.FahrenheitSystem.mainClass,
                         tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.HeatSourceStateChange), _React$createElement8))
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__ChillerModal__["a" /* ChillerModal */], { role: this.props.role, onChillerSubmit: this.handleChillerForm }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__GeneralModal__["a" /* GeneralModal */], { role: this.props.role, onGeneralSubmit: this.handleGeneralForm }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__EconomicModal__["a" /* EconomicModal */], { role: this.props.role, onEconomicSubmit: this.handleEconomicForm }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__HeatSourceModal__["a" /* HeatSourceModal */], { role: this.props.role, onHeatSubmit: this.handleHeatForm })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__GeneralModal__["a" /* default */], { role: this.props.role, onGeneralSubmit: this.handleGeneralForm }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__EconomicModal__["a" /* default */], { role: this.props.role, onEconomicSubmit: this.handleEconomicForm }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__HeatSourceModal__["a" /* default */], { role: this.props.role, onHeatSubmit: this.handleHeatForm })
             );
         }
     }]);
@@ -57554,19 +57794,19 @@ var Adcalc = function (_Component) {
     return Adcalc;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (Adcalc);
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_6_react_multi_lang__["c" /* translate */])(Adcalc));
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Tiles; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DeleteModal__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ErrorBoundary__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_list__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DeleteModal__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ErrorBoundary__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_list__ = __webpack_require__(74);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58606,7 +58846,7 @@ var Tiles = function (_React$Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h1',
                             null,
-                            this.props.title
+                            this.props.header
                         ),
                         requiredMsg,
                         pricelist,
@@ -58656,7 +58896,7 @@ Tiles.defaultProps = {
 };
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58762,7 +59002,7 @@ var DeleteModal = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58819,7 +59059,7 @@ var ErrorBoundary = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58907,7 +59147,7 @@ var DataList = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59480,7 +59720,7 @@ var ChillerModal = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59565,7 +59805,7 @@ function createProvider() {
 /* unused harmony default export */ var _unused_webpack_default_export = (createProvider());
 
 /***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60127,82 +60367,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 /***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright 2015, Yahoo! Inc.
- * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- */
-var REACT_STATICS = {
-    childContextTypes: true,
-    contextTypes: true,
-    defaultProps: true,
-    displayName: true,
-    getDefaultProps: true,
-    getDerivedStateFromProps: true,
-    mixins: true,
-    propTypes: true,
-    type: true
-};
-
-var KNOWN_STATICS = {
-    name: true,
-    length: true,
-    prototype: true,
-    caller: true,
-    callee: true,
-    arguments: true,
-    arity: true
-};
-
-var defineProperty = Object.defineProperty;
-var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var getPrototypeOf = Object.getPrototypeOf;
-var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
-
-function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-
-        if (objectPrototype) {
-            var inheritedComponent = getPrototypeOf(sourceComponent);
-            if (inheritedComponent && inheritedComponent !== objectPrototype) {
-                hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-            }
-        }
-
-        var keys = getOwnPropertyNames(sourceComponent);
-
-        if (getOwnPropertySymbols) {
-            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-        }
-
-        for (var i = 0; i < keys.length; ++i) {
-            var key = keys[i];
-            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
-                var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-                try { // Avoid failures from read-only properties
-                    defineProperty(targetComponent, key, descriptor);
-                } catch (e) {}
-            }
-        }
-
-        return targetComponent;
-    }
-
-    return targetComponent;
-}
-
-module.exports = hoistNonReactStatics;
-
-
-/***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60258,7 +60423,7 @@ module.exports = invariant;
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60357,17 +60522,17 @@ var Subscription = function () {
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export createConnect */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_connectAdvanced__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_shallowEqual__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mapDispatchToProps__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mapStateToProps__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mergeProps__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__selectorFactory__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_shallowEqual__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mapDispatchToProps__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mapStateToProps__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mergeProps__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__selectorFactory__ = __webpack_require__(97);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -60473,7 +60638,7 @@ function createConnect() {
 /* unused harmony default export */ var _unused_webpack_default_export = (createConnect());
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60510,15 +60675,15 @@ function shallowEqual(objA, objB) {
 }
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(25);
 
 
 
@@ -60541,11 +60706,11 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject]);
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(84);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(85);
 /* global window */
 
 
@@ -60566,10 +60731,10 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2), __webpack_require__(83)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2), __webpack_require__(84)(module)))
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -60599,7 +60764,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60624,13 +60789,13 @@ function symbolObservablePonyfill(root) {
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(94);
 
 
 
@@ -60696,13 +60861,13 @@ function isPlainObject(value) {
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(91);
 
 
 
@@ -60734,11 +60899,11 @@ function baseGetTag(value) {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__ = __webpack_require__(89);
 
 
 /** Detect free variable `self`. */
@@ -60751,7 +60916,7 @@ var root = __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__["a" /* default */] || fr
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60763,11 +60928,11 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(27);
 
 
 /** Used for built-in method references. */
@@ -60817,7 +60982,7 @@ function getRawTag(value) {
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60846,11 +61011,11 @@ function objectToString(value) {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__overArg_js__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__overArg_js__ = __webpack_require__(93);
 
 
 /** Built-in value references. */
@@ -60860,7 +61025,7 @@ var getPrototype = Object(__WEBPACK_IMPORTED_MODULE_0__overArg_js__["a" /* defau
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60882,7 +61047,7 @@ function overArg(func, transform) {
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60918,13 +61083,13 @@ function isObjectLike(value) {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapStateToPropsIsFunction */
 /* unused harmony export whenMapStateToPropsIsMissing */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(25);
 
 
 function whenMapStateToPropsIsFunction(mapStateToProps) {
@@ -60940,7 +61105,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing]);
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60948,7 +61113,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* unused harmony export wrapMergePropsFunc */
 /* unused harmony export whenMergePropsIsFunction */
 /* unused harmony export whenMergePropsIsOmitted */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(26);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -60996,14 +61161,14 @@ function whenMergePropsIsOmitted(mergeProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMergePropsIsFunction, whenMergePropsIsOmitted]);
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export impureFinalPropsSelectorFactory */
 /* unused harmony export pureFinalPropsSelectorFactory */
 /* harmony export (immutable) */ __webpack_exports__["a"] = finalPropsSelectorFactory;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__verifySubselectors__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__verifySubselectors__ = __webpack_require__(98);
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 
@@ -61108,7 +61273,7 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 }
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61133,13 +61298,13 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 }
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GeneralModal; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_multi_lang__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61149,14 +61314,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 
+
 var Header = {
    padding: "10px 20px",
    textAlign: "center",
    color: "red",
    fontSize: "14px"
 };
-var GeneralModal = function (_React$Component) {
-   _inherits(GeneralModal, _React$Component);
+
+var GeneralModal = function (_Component) {
+   _inherits(GeneralModal, _Component);
 
    function GeneralModal(props) {
       _classCallCheck(this, GeneralModal);
@@ -61170,11 +61337,24 @@ var GeneralModal = function (_React$Component) {
    }
 
    _createClass(GeneralModal, [{
-      key: "componentDidMount",
+      key: 'componentDidMount',
       value: function componentDidMount() {
          jQuery(".help-toggle").unbind('click');
          jQuery(".help-toggle").click(function () {
             jQuery(".input-help-label").toggle();
+         });
+         var that = this;
+         $('form.general-information-form input[required]').on('change invalid', function () {
+            var textfield = $(this).get(0);
+
+            // 'setCustomValidity not only sets the message, but also marks
+            // the field as invalid. In order to see whether the field really is
+            // invalid, we have to remove the message first
+            textfield.setCustomValidity('');
+
+            if (!textfield.validity.valid) {
+               textfield.setCustomValidity(that.props.t('RequiredField.ErrorMsg'));
+            }
          });
          jQuery('body').on('click', function (e) {
             jQuery('[data-toggle="popover"]').each(function () {
@@ -61198,7 +61378,7 @@ var GeneralModal = function (_React$Component) {
          //Do stuff here
       }
    }, {
-      key: "initializeAutocomplete",
+      key: 'initializeAutocomplete',
       value: function initializeAutocomplete(elem) {
          var input = document.getElementById(elem.target.id);
          // var options = {
@@ -61226,7 +61406,7 @@ var GeneralModal = function (_React$Component) {
          });
       }
    }, {
-      key: "handleGeneralSubmit",
+      key: 'handleGeneralSubmit',
       value: function handleGeneralSubmit(event) {
          event.preventDefault();
          var that = this;
@@ -61270,7 +61450,7 @@ var GeneralModal = function (_React$Component) {
          });
       }
    }, {
-      key: "changeState",
+      key: 'changeState',
       value: function changeState(generalInformation) {
          var result = {
             generalInformation: generalInformation,
@@ -61280,7 +61460,7 @@ var GeneralModal = function (_React$Component) {
          this.props.onGeneralSubmit(result);
       }
    }, {
-      key: "getFormData",
+      key: 'getFormData',
       value: function getFormData($form) {
          var unindexed_array = $form.serializeArray();
          var indexed_array = {};
@@ -61292,273 +61472,281 @@ var GeneralModal = function (_React$Component) {
          return indexed_array;
       }
    }, {
-      key: "render",
+      key: 'render',
       value: function render() {
          var _this2 = this;
 
          projectData['generalData'] = this.state.generalInformation;
 
          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { className: "modal ", role: "dialog", "aria-labelledby": "mySmallModalLabel", "aria-hidden": "true", id: "general-information" },
+            'div',
+            { className: 'modal ', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'general-information' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-               "div",
-               { className: "modal-dialog " },
+               'div',
+               { className: 'modal-dialog ' },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "form",
-                  { onSubmit: this.handleGeneralSubmit, className: "general-information-form" },
+                  'form',
+                  { onSubmit: this.handleGeneralSubmit, className: 'general-information-form' },
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                     "div",
-                     { className: "modal-content" },
+                     'div',
+                     { className: 'modal-content' },
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: "modal-heading" },
+                        'div',
+                        { className: 'modal-heading' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           "div",
-                           { className: "left-head" },
-                           " General Information"
+                           'div',
+                           { className: 'left-head' },
+                           ' ',
+                           this.props.t('General.Title')
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           "div",
-                           { className: "right-head" },
+                           'div',
+                           { className: 'right-head' },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              "ul",
-                              { className: "list-inline" },
+                              'ul',
+                              { className: 'list-inline' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "li",
+                                 'li',
                                  null,
-                                 " ",
-                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { className: "save-changes-btn", type: "submit", alt: "Submit", value: "Save Changes", title: "Save Changes" })
+                                 ' ',
+                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'save-changes-btn', type: 'submit', alt: 'Submit', value: this.props.t('SaveButton'), title: this.props.t('SaveButton') })
                               ),
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "li",
+                                 'li',
                                  null,
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "span",
-                                    { className: "close close_multi" },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/cancle-icon.png", alt: "", className: "close-modal-general", "aria-label": "Close" })
+                                    'span',
+                                    { className: 'close close_multi' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/cancle-icon.png', alt: '', className: 'close-modal-general', 'aria-label': 'Close' })
                                  )
                               )
                            )
                         )
                      ),
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: "modal-body-content" },
+                        'div',
+                        { className: 'modal-body-content' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           "ul",
-                           { id: "tabsJustifieddouble", className: "nav nav-tabs double-tab" },
+                           'ul',
+                           { id: 'tabsJustifieddouble', className: 'nav nav-tabs double-tab' },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              "li",
-                              { className: "nav-item" },
+                              'li',
+                              { className: 'nav-item' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "a",
-                                 { href: "", "data-target": "#project-data", "data-toggle": "tab", className: "nav-link small active" },
-                                 "PROJECT DATA"
+                                 'a',
+                                 { href: '', 'data-target': '#project-data', 'data-toggle': 'tab', className: 'nav-link small active' },
+                                 this.props.t('General.Tab.Project.Title')
                               )
                            ),
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              "li",
-                              { className: "nav-item" },
+                              'li',
+                              { className: 'nav-item' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "a",
-                                 { href: "", "data-target": "#personal-data", "data-toggle": "tab", className: "nav-link" },
-                                 "PERSONAL DATA"
+                                 'a',
+                                 { href: '', 'data-target': '#personal-data', 'data-toggle': 'tab', className: 'nav-link' },
+                                 this.props.t('General.Tab.Personal.Title')
                               )
                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                           "div",
-                           { id: "tabsJustifiedContent", className: "tab-content" },
+                           'div',
+                           { id: 'tabsJustifiedContent', className: 'tab-content' },
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              "div",
-                              { id: "project-data", className: "tab-pane fade  active show" },
+                              'div',
+                              { id: 'project-data', className: 'tab-pane fade  active show' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "div",
-                                 { className: "project-data-div" },
+                                 'div',
+                                 { className: 'project-data-div' },
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "div",
-                                    { className: "table-responsive" },
+                                    'div',
+                                    { className: 'table-responsive' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       "table",
-                                       { className: "table" },
+                                       'table',
+                                       { className: 'table' },
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          "tbody",
+                                          'tbody',
                                           null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                " Project number:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Project.ProjectNumber.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Project number explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Project.ProjectNumber.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", placeholder: "New Project", name: "project_number", id: "project_number" }),
-                                                " "
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: this.props.t('General.Tab.Project.ProjectNumber.Placeholder'), name: 'project_number', id: 'project_number' }),
+                                                ' '
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                " Project name: "
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Project.ProjectName.Title'),
+                                                ': '
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Project.ProjectName.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", placeholder: "Test Project", name: "project_name", id: "project_name" }),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "hidden", placeholder: "Chiller 1", id: "generalformMode", name: "generalformMode", value: "add" })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: this.props.t('General.Tab.Project.ProjectName.Placeholder'), name: 'project_name', id: 'project_name' }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'generalformMode', name: 'generalformMode', value: 'add' })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                " Location:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Project.ProjectLocation.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Location explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Project.ProjectLocation.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", placeholder: "Halle/Saale", required: true, className: "required-field", name: "location", id: "location", onFocus: function onFocus(elem) {
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', title: this.props.t('RequiredField.ErrorMsg'), placeholder: this.props.t('General.Tab.Project.ProjectLocation.Placeholder'), required: true, className: 'required-field', name: 'location', id: 'location', onFocus: function onFocus(elem) {
                                                       return _this2.initializeAutocomplete(elem);
                                                    } }),
-                                                " ",
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-map-marker disabled", "aria-hidden": "true" }),
+                                                ' ',
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker disabled', 'aria-hidden': 'true' }),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "span",
-                                                   { className: "invalid-feedback", role: "alert" },
+                                                   'span',
+                                                   { className: 'invalid-feedback', role: 'alert' },
                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                      "strong",
+                                                      'strong',
                                                       null,
-                                                      "Required field"
+                                                      this.props.t('RequiredField.Message')
                                                    )
                                                 )
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Customer:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Project.ProjectCustomer.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Customer explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Project.ProjectCustomer.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "customer", id: "customer", placeholder: "HabWarmWillKalt Gmbh " })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'customer', id: 'customer', placeholder: this.props.t('General.Tab.Project.ProjectCustomer.Placeholder') })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Contact:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Project.ProjectContact.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Contact explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Project.ProjectContact.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "contact", id: "contact", placeholder: "Mr. Inhaber" })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'contact', id: 'contact', placeholder: this.props.t('General.Tab.Project.ProjectContact.Placeholder') })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Tel. Number:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Project.ProjectPhone.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Tel. number explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Project.ProjectPhone.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", pattern: "^\\d{10}$", name: "phone_number", id: "phone_number", placeholder: "0123 456" })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '^\\d{10}$', name: 'phone_number', id: 'phone_number', placeholder: this.props.t('General.Tab.Project.ProjectPhone.Placeholder') })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Email:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Project.ProjectEmail.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Email explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Project.ProjectEmail.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "email", name: "email_address", id: "email_address", required: true, className: "required-field", placeholder: "inhaber@gmbh.de" })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'email', title: this.props.t('RequiredField.ErrorMsg'), name: 'email_address', id: 'email_address', required: true, className: 'required-field', placeholder: this.props.t('General.Tab.Project.ProjectEmail.Placeholder') })
                                              )
                                           )
                                        )
@@ -61567,170 +61755,176 @@ var GeneralModal = function (_React$Component) {
                               )
                            ),
                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              "div",
-                              { id: "personal-data", className: "tab-pane fade" },
+                              'div',
+                              { id: 'personal-data', className: 'tab-pane fade' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                 "div",
-                                 { className: "personal-data-div" },
+                                 'div',
+                                 { className: 'personal-data-div' },
                                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "div",
-                                    { className: "table-responsive" },
+                                    'div',
+                                    { className: 'table-responsive' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                       "table",
-                                       { className: "table" },
+                                       'table',
+                                       { className: 'table' },
                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                          "tbody",
+                                          'tbody',
                                           null,
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Editor:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Personal.PersonalEditor.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Editor explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Personal.PersonalEditor.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "editor", id: "editor", placeholder: "HabWarmWillKalt Gmbh" }),
-                                                " "
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'editor', id: 'editor', placeholder: this.props.t('General.Tab.Personal.PersonalEditor.Placeholder') }),
+                                                ' '
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Company:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Personal.PersonalCompany.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Company explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Personal.PersonalCompany.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "company", id: "company", placeholder: "Gmbh" })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'company', id: 'company', placeholder: this.props.t('General.Tab.Personal.PersonalCompany.Placeholder') })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                " Address:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Personal.PersonalAddress.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Address explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Personal.PersonalAddress.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", name: "address", required: true, id: "address", onFocus: function onFocus(elem) {
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', title: this.props.t('RequiredField.ErrorMsg'), name: 'address', required: true, id: 'address', onFocus: function onFocus(elem) {
                                                       return _this2.initializeAutocomplete(elem);
-                                                   }, placeholder: "Halle/Saale", className: "required-field" }),
-                                                " ",
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-map-marker disabled", "aria-hidden": "true" }),
+                                                   }, placeholder: this.props.t('General.Tab.Personal.PersonalAddress.Placeholder'), className: 'required-field' }),
+                                                ' ',
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker disabled', 'aria-hidden': 'true' }),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "span",
-                                                   { className: "invalid-feedback", role: "alert" },
+                                                   'span',
+                                                   { className: 'invalid-feedback', role: 'alert' },
                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                      "strong",
+                                                      'strong',
                                                       null,
-                                                      "Required field"
+                                                      this.props.t('RequiredField.Message')
                                                    )
                                                 )
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Tel. Number:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Personal.PersonalPhone.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Tel. number explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Personal.PersonalPhone.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", pattern: "^\\d{10}$", name: "personal_phone_number", id: "personal_phone_number", placeholder: "0123 456" })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '^\\d{10}$', name: 'personal_phone_number', id: 'personal_phone_number', placeholder: this.props.t('General.Tab.Personal.PersonalPhone.Placeholder') })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Mobile:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Personal.PersonalMobile.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Mobile explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Personal.PersonalMobile.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", pattern: "^\\d{10}$", name: "mobile_number", id: "mobile_number", placeholder: "Mr. Inhaber" })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', pattern: '^\\d{10}$', name: 'mobile_number', id: 'mobile_number', placeholder: this.props.t('General.Tab.Personal.PersonalMobile.Placeholder') })
                                              )
                                           ),
                                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                             "tr",
+                                             'tr',
                                              null,
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-label" },
-                                                "Email:"
+                                                'td',
+                                                { className: 'input-label' },
+                                                this.props.t('General.Tab.Personal.PersonalEmail.Title'),
+                                                ':'
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-help-label" },
+                                                'td',
+                                                { className: 'input-help-label' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                   "button",
-                                                   { type: "button", className: "", "data-container": "body", "data-trigger": "hover", "data-toggle": "popover", "data-placement": "bottom", "data-content": "Email explanation/tip" },
-                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "public/images/help-red.png", alt: "" })
+                                                   'button',
+                                                   { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': this.props.t('General.Tab.Personal.PersonalEmail.InfoTool') },
+                                                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                 )
                                              ),
                                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                "td",
-                                                { className: "input-fields" },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "email", required: true, className: "required-field", name: "personal_email_address", id: "personal_email_address", placeholder: "inhaber@gmbh.de" })
+                                                'td',
+                                                { className: 'input-fields' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'email', required: true, className: 'required-field', name: 'personal_email_address', id: 'personal_email_address', placeholder: this.props.t('General.Tab.Personal.PersonalEmail.Placeholder') })
                                              )
                                           )
                                        )
@@ -61741,9 +61935,9 @@ var GeneralModal = function (_React$Component) {
                         )
                      ),
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
+                        'div',
                         { style: Header },
-                        "Note : Please fill the required fields in both tabs"
+                        this.props.t('RequiredField.Note')
                      )
                   )
                )
@@ -61753,16 +61947,18 @@ var GeneralModal = function (_React$Component) {
    }]);
 
    return GeneralModal;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_multi_lang__["c" /* translate */])(GeneralModal));
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EconomicModal; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_multi_lang__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61770,6 +61966,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 var CustomTable = {
@@ -61780,6 +61977,7 @@ var investmentCounter = void 0,
     chpCounter = void 0,
     generalCounter = 0;
 var customFieldLabel = "Enter field label";
+
 var EconomicModal = function (_React$Component) {
     _inherits(EconomicModal, _React$Component);
 
@@ -63756,14 +63954,16 @@ var EconomicModal = function (_React$Component) {
     return EconomicModal;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_multi_lang__["c" /* translate */])(EconomicModal));
+
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeatSourceModal; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_multi_lang__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63773,10 +63973,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 
+
 var selectedSource = 'Process heat';
 var CustomTable = {
     padding: "0px"
 };
+
 var HeatSourceModal = function (_React$Component) {
     _inherits(HeatSourceModal, _React$Component);
 
@@ -64637,25 +64839,39 @@ var HeatSourceModal = function (_React$Component) {
     return HeatSourceModal;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_multi_lang__["c" /* translate */])(HeatSourceModal));
+
 /***/ }),
-/* 101 */
+/* 102 */
+/***/ (function(module, exports) {
+
+module.exports = {"General":{"Title":"Allgemeine Informationen","Tab":{"Project":{"Title":"Projektdaten","ProjectNumber":{"Title":"Projektnummer","Placeholder":"","InfoTool":""},"ProjectName":{"Title":"Projektname","Placeholder":"","InfoTool":""},"ProjectLocation":{"Title":"Standort","Placeholder":"","InfoTool":""},"ProjectCustomer":{"Title":"Kunde","Placeholder":"","InfoTool":""},"ProjectContact":{"Title":"Kontakt","Placeholder":"","InfoTool":""},"ProjectPhone":{"Title":"Tel. Nummer","Placeholder":"","InfoTool":""},"ProjectEmail":{"Title":"E-Mail","Placeholder":"","InfoTool":""}},"Personal":{"Title":"Persönliche Daten","PersonalEditor":{"Title":"Redakteur","Placeholder":"","InfoTool":""},"PersonalCompany":{"Title":"Unternehmen","Placeholder":"","InfoTool":""},"PersonalAddress":{"Title":"Adresse","Placeholder":"","InfoTool":""},"PersonalPhone":{"Title":"Tel. Nummer","Placeholder":"","InfoTool":""},"PersonalMobile":{"Title":"Mobil","Placeholder":"","InfoTool":""},"PersonalEmail":{"Title":"E-Mail","Placeholder":"","InfoTool":""}}}},"RequiredField":{"Message":"Pflichtfeld","Note":"Hinweis: Bitte füllen Sie die erforderlichen Felder in beiden Tabs","ErrorMsg":"Bitte füllen Sie dieses Feld aus"},"SaveButton":"Änderungen speichern"}
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports) {
+
+module.exports = {"Tiles":{"General":{"Title":"General Information","hoverText":"We need the location to get the specific weather data."},"Economic":{"Title":"Economic Data","hoverText":"We need the location to get the specific weather data."},"Options":{"Title":"Options","hoverText":"We need the location to get the specific weather data."},"HeatSource":{"Title":"Heat Source","hoverText":"Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources."},"HeatingLoadProfile":{"Title":"Heating Load Profile","hoverText":"Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources. Are you planning a new heat source? Then we can calculate the profitability of the whole system!"},"CompressionChiller":{"Title":"Compression Chiller","hoverText":"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours."},"CoolingLoadProfile":{"Title":"Cooling Load Profile","hoverText":"Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!"},"FahrenheitSystem":{"Title":"Fahrenheit System","hoverText":"Please provide the required inputs so we can suggest a Fahrenheit system for you."}},"General":{"Title":"General Information","Tab":{"Project":{"Title":"Project Data","ProjectNumber":{"Title":"Project number","Placeholder":"New Project","InfoTool":"Project number explanation/tip"},"ProjectName":{"Title":"Project name","Placeholder":"Test Project","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProjectLocation":{"Title":"Location","Placeholder":"Halle/Saale","InfoTool":"Location explanation/tip"},"ProjectCustomer":{"Title":"Customer","Placeholder":"HabWarmWillKalt Gmbh ","InfoTool":"Customer explanation/tip"},"ProjectContact":{"Title":"Contact","Placeholder":"Mr. Inhaber","InfoTool":"Contact explanation/tip"},"ProjectPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"ProjectEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}},"Personal":{"Title":"Personal Data","PersonalEditor":{"Title":"Editor","Placeholder":"HabWarmWillKalt Gmbh","InfoTool":"Editor explanation/tip"},"PersonalCompany":{"Title":"Company","Placeholder":"Gmbh","InfoTool":"Company explanation/tip"},"PersonalAddress":{"Title":"Address","Placeholder":"Halle/Saale","InfoTool":"Address explanation/tip"},"PersonalPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"PersonalMobile":{"Title":"Mobile","Placeholder":"Mr. Inhaber","InfoTool":"Mobile explanation/tip"},"PersonalEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}}}},"Economic":{"General":{"Title":""},"CHP":{"Title":""}},"HeatSource":{"Technical":{"Title":""},"CHP":{"Title":""}},"RequiredField":{"Message":"Required field","Note":"Note : Please fill the required fields in both tabs","ErrorMsg":"please fill out this field"},"SaveButton":"save changes"}
+
+/***/ }),
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__reducers_index__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__reducers_index__ = __webpack_require__(105);
 
 
 var store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["b" /* createStore */])(__WEBPACK_IMPORTED_MODULE_1__reducers_index__["a" /* rootReducer */]);
 /* unused harmony default export */ var _unused_webpack_default_export = (store);
 
 /***/ }),
-/* 102 */
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return rootReducer; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_action_types__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_action_types__ = __webpack_require__(106);
 
 var initialState = {
   chillers: [],
@@ -64676,7 +64892,7 @@ var rootReducer = function rootReducer() {
 /* unused harmony default export */ var _unused_webpack_default_export = (rootReducer);
 
 /***/ }),
-/* 103 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64684,7 +64900,7 @@ var rootReducer = function rootReducer() {
 var ADD_CHILLERS = "ADD_CHILLER";
 
 /***/ }),
-/* 104 */
+/* 107 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

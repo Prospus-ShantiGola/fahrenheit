@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {Tiles} from './Tiles';
 import {ChillerModal} from './ChillerModal';
-import {GeneralModal} from './GeneralModal';
-import {EconomicModal} from './EconomicModal';
-import {HeatSourceModal} from './HeatSourceModal';
+import GeneralModal from './GeneralModal';
+import EconomicModal from './EconomicModal';
+import HeatSourceModal from './HeatSourceModal';
+import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 
-export default class Adcalc extends Component {
+class Adcalc extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -87,20 +88,20 @@ export default class Adcalc extends Component {
     }
 
     render() {
-        console.log("adcalc render");
         projectData['chillerData'] = this.state.compressionChilerStateChange.chillerRecord;
         projectData['heatSourceData'] = this.state.heatSourceStateChange.heatSourceRecord;
 
         const tiles={
             general:{
                 title: GENERAL_TILE,
+                header:this.props.t('Tiles.General.Title'),
                 tileCls:'general-information data-box',
                 required:"yes",
                 edit:'yes',
                 editCls:'edit-icon myBtn_multi',
                 editIcon:'public/images/edit-icon.png',
                 add:'no',
-                hoverText:'We need the location to get the specific weather data.',
+                hoverText:this.props.t('Tiles.General.hoverText'),
                 mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
                 hoverCls:'main-hover-box general-info-hover',
                 priceLst:'no',
@@ -115,13 +116,14 @@ export default class Adcalc extends Component {
             },
             Economic:{
                 title:ECONOMIC_TITLE,
+                header:this.props.t('Tiles.Economic.Title'),
                 tileCls:'economic-data data-box',
                 required:"no",
                 edit:'yes',
                 editCls:'edit-icon myBtn_multi',
                 editIcon:'public/images/edit-icon.png',
                 add:'no',
-                hoverText:'We need the location to get the specific weather data.',
+                hoverText:this.props.t('Tiles.Economic.hoverText'),
                 mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
                 hoverCls:'main-hover-box economic-hover',
                 priceLst:'no',
@@ -136,13 +138,14 @@ export default class Adcalc extends Component {
             },
             Options:{
                 title:'Options',
+                header:this.props.t('Tiles.Options.Title'),
                 tileCls:'options data-box',
                 required:"no",
                 edit:'yes',
                 editCls:'edit-icon myBtn_multi',
                 editIcon:'public/images/edit-icon.png',
                 add:'no',
-                hoverText:'We need the location to get the specific weather data.',
+                hoverText:this.props.t('Tiles.Options.hoverText'),
                 mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 disableCard',
                 hoverCls:'main-hover-box options-hover',
                 priceLst:'no',
@@ -157,13 +160,14 @@ export default class Adcalc extends Component {
             },
             HeatSource:{
                 title:HEAT_SOURCE_TITLE,
+                header:this.props.t('Tiles.HeatSource.Title'),
                 tileCls:'heat-sources data-box',
                 required:"no",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
                 editIcon:'public/images/add-icon.png',
                 add:'no',
-                hoverText:'Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.',
+                hoverText:this.props.t('Tiles.HeatSource.hoverText'),
                 mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
                 hoverCls:'main-hover-box heat-sources-hover',
                 priceLst:'no',
@@ -179,13 +183,14 @@ export default class Adcalc extends Component {
             },
             HeatingLoadProfile:{
                 title:'Heating Load Profile',
+                header:this.props.t('Tiles.HeatingLoadProfile.Title'),
                 tileCls:'heating-load-profiles data-box',
                 required:"no",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
                 editIcon:'public/images/add-icon.png',
                 add:'no',
-                hoverText:'Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources.<br />Are you planning a new heat source? Then we can calculate the profitability of the whole system!',
+                hoverText:this.props.t('Tiles.HeatingLoadProfile.hoverText'),
                 mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
                 hoverCls:'main-hover-box heating-load-hover',
                 priceLst:'no',
@@ -200,13 +205,14 @@ export default class Adcalc extends Component {
             },
             CompressionChiller:{
                 title:CHILLER_TITLE,
+                header:this.props.t('Tiles.CompressionChiller.Title'),
                 tileCls:'compression-chillers data-box',
                 required:"no",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
                 editIcon:'public/images/add-icon.png',
                 add:'no',
-                hoverText:'Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.',
+                hoverText:this.props.t('Tiles.CompressionChiller.hoverText'),
                 mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
                 hoverCls:'main-hover-box compression-chillers-hover',
                 priceLst:'no',
@@ -222,13 +228,14 @@ export default class Adcalc extends Component {
             },
             CoolingLoadProfile:{
                 title:'Cooling Load Profile',
+                header:this.props.t('Tiles.CoolingLoadProfile.Title'),
                 tileCls:'cooling-load-profiles data-box',
                 required:"yes",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
                 editIcon:'public/images/add-icon.png',
                 add:'no',
-                hoverText:'Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!',
+                hoverText:this.props.t('Tiles.CoolingLoadProfile.hoverText'),
                 mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
                 hoverCls:'main-hover-box cooling-load-hover',
                 priceLst:'no',
@@ -243,13 +250,14 @@ export default class Adcalc extends Component {
             },
             FahrenheitSystem:{
                 title:'Fahrenheit System',
+                header:this.props.t('Tiles.FahrenheitSystem.Title'),
                 tileCls:'fahrenheit-system-box data-box',
                 required:"no",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
                 editIcon:'public/images/add-icon.png',
                 add:'no',
-                hoverText:'Please provide the required inputs so we can suggest a Fahrenheit system for you.',
+                hoverText:this.props.t('Tiles.FahrenheitSystem.hoverText'),
                 mainClass:'col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4 disableCard',
                 hoverCls:'main-hover-box fahrenheit-system-hover',
                 priceLst:'no',
@@ -272,6 +280,7 @@ export default class Adcalc extends Component {
 
                 <Tiles
                 title={tiles.general.title}
+                header={tiles.general.header}
                 required={tiles.general.required}
                 edit={tiles.edit}
                 mainclass={tiles.general.mainClass}
@@ -292,6 +301,7 @@ export default class Adcalc extends Component {
                 dataRecord={this.state.generalStateChange.generalRecord}/>
                 <Tiles
                 title={tiles.Economic.title}
+                header={tiles.Economic.header}
                 required={tiles.Economic.required}
                 edit={tiles.Economic.edit}
                 mainclass={tiles.Economic.mainClass}
@@ -311,6 +321,7 @@ export default class Adcalc extends Component {
                 dataRecord={this.state.economicStateChange.economicRecord} />
                 <Tiles
                 title={tiles.Options.title}
+                header={tiles.Options.header}
                 required={tiles.Options.required}
                 edit={tiles.Options.edit}
                 mainclass={tiles.Options.mainClass}
@@ -332,6 +343,7 @@ export default class Adcalc extends Component {
                     <div className="col-md-12 col-sm-12 col-12 col-lg-8 col-xl-8">
                        <div className="row">
                         <Tiles  title={tiles.HeatSource.title}
+                        header={tiles.HeatSource.header}
                         required={tiles.HeatSource.required}
                         edit={tiles.HeatSource.edit}
                         mainclass={tiles.HeatSource.mainClass}
@@ -352,6 +364,7 @@ export default class Adcalc extends Component {
                         multiple={tiles.HeatSource.multiple}/>
 
                         <Tiles  title={tiles.HeatingLoadProfile.title}
+                        header={tiles.HeatingLoadProfile.header}
                         required={tiles.HeatingLoadProfile.required}
                         edit={tiles.HeatingLoadProfile.edit}
                         mainclass={tiles.HeatingLoadProfile.mainClass}
@@ -370,6 +383,7 @@ export default class Adcalc extends Component {
                        </div>
                        <div className="row">
                         <Tiles  title={tiles.CompressionChiller.title}
+                        header={tiles.CompressionChiller.header}
                         required={tiles.CompressionChiller.required}
                         edit={tiles.CompressionChiller.edit}
                         mainclass={tiles.CompressionChiller.mainClass}
@@ -390,6 +404,7 @@ export default class Adcalc extends Component {
                         multiple={tiles.CompressionChiller.multiple} />
 
                         <Tiles  title={tiles.CoolingLoadProfile.title}
+                        header={tiles.CoolingLoadProfile.header}
                         required={tiles.CoolingLoadProfile.required}
                         edit={tiles.CoolingLoadProfile.edit}
                         mainclass={tiles.CoolingLoadProfile.mainClass}
@@ -409,6 +424,7 @@ export default class Adcalc extends Component {
                        </div>
                     </div>
                     <Tiles  title={tiles.FahrenheitSystem.title}
+                    header={tiles.FahrenheitSystem.header}
                 required={tiles.FahrenheitSystem.required}
                 edit={tiles.FahrenheitSystem.edit}
                 mainclass={tiles.FahrenheitSystem.mainClass}
@@ -436,3 +452,4 @@ export default class Adcalc extends Component {
         );
     }
 }
+export default translate(Adcalc);
