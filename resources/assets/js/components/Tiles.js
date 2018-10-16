@@ -3,8 +3,9 @@ import React from 'react';
 import {DeleteModal} from './DeleteModal';
 import {ErrorBoundary} from './ErrorBoundary';
 import {DataList} from './data-list';
+import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 
-export class Tiles extends React.Component {
+class Tiles extends React.Component {
 
     constructor(props) {
         let sort;
@@ -253,7 +254,7 @@ export class Tiles extends React.Component {
         const dragSet=false;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
-            var requiredMsg=<h5 className="input-required">An input is required</h5>;
+            var requiredMsg=<h5 className="input-required">{this.props.t('InputRequired')}</h5>;
         }
 
         var deleteModal="";
@@ -286,7 +287,22 @@ export class Tiles extends React.Component {
                                        <div className="table-responsive">
                                           <table className="table">
                                            <tbody className="compressionTableBody">
-                                                <DataList chillerData={chillerData}/>
+                                           {chillerData.map((data,i) => (
+
+<tr key={i} data-id={i}>
+<th>
+{data.chillername}
+   <ul className="list-inline" key={i}>
+      <li >120.30 kW
+      </li>
+      <li>	{(data.temperature!="")? data.temperature+'°C':"" } </li>
+   </ul>
+</th>
+<td><span className="edit-option" data-id={i}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editRecord(i)}></i></span>
+   <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-modal" onClick={(elem)=>this.deleteRecord(i,elem)}></i></span>
+   <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+</td>
+</tr>))}
                                              </tbody>
                                           </table>
                                        </div>
@@ -368,7 +384,7 @@ export class Tiles extends React.Component {
                                                    <ul className="list-inline">
                                                       <li>{data.heat_capacity} kW
                                                       </li>
-                                                      <li>	85°C </li>
+                                                      <li>85°C </li>
                                                    </ul>
                                                 </th>
                                                 <td><span className="edit-option" data-id={h}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editHeatRecord(h)}></i></span>
@@ -428,15 +444,15 @@ export class Tiles extends React.Component {
             var pricelist=(
                 <ul className="price-listt">
                  <li>
-                                 <p>Project Name</p>
+                                 <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
                                  <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
                               </li>
                               <li>
-                                 <p>Editor</p>
+                                 <p>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}</p>
                                  <h3 className="textUpper">{this.state.generalData[0].editor}</h3>
                               </li>
                               <li>
-                                 <p>Location</p>
+                                 <p>{this.props.t('General.Tab.Project.ProjectLocation.Title')}</p>
                                  <h3 className="textUpper">{this.state.generalData[0].location}</h3>
                               </li>
                            </ul>
@@ -448,31 +464,31 @@ export class Tiles extends React.Component {
                                     <table className="table">
                                     <tbody>
                                        <tr>
-                                          <th>Project name:</th>
+                                          <th>{this.props.t('General.Tab.Project.ProjectName.Title')}:</th>
                                           <td>{this.state.generalData[0].project_name}</td>
                                        </tr>
                                        <tr>
-                                          <th>Project number:</th>
+                                          <th>{this.props.t('General.Tab.Project.ProjectNumber.Title')}:</th>
                                           <td>{this.state.generalData[0].project_number}</td>
                                        </tr>
                                        <tr>
-                                          <th>Editor: </th>
+                                          <th>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}: </th>
                                           <td>{this.state.generalData[0].editor}</td>
                                        </tr>
                                        <tr>
-                                          <th>Location:</th>
+                                          <th>{this.props.t('General.Tab.Project.ProjectLocation.Title')}:</th>
                                           <td>{this.state.generalData[0].location}</td>
                                        </tr>
                                        <tr>
-                                          <th>Contact person: </th>
+                                          <th>{this.props.t('General.Tab.Project.ProjectContact.Title')}: </th>
                                           <td>{this.state.generalData[0].customer}</td>
                                        </tr>
                                        <tr>
-                                          <th>Tel. Number:</th>
+                                          <th>{this.props.t('General.Tab.Project.ProjectPhone.Title')}:</th>
                                           <td>{this.state.generalData[0].phone_number}</td>
                                        </tr>
                                        <tr>
-                                          <th>Email:</th>
+                                          <th>{this.props.t('General.Tab.Project.ProjectEmail.Title')}:</th>
                                           <td>{this.state.generalData[0].email_address}</td>
                                        </tr>
                                        </tbody>
@@ -615,27 +631,29 @@ export class Tiles extends React.Component {
         );
     }
 }
+export default translate(Tiles);
 
-Tiles.defaultProps = {
-    title:'General Information',
-    tileCls:'general-information data-box',
-    required:"no",
-    edit:'yes',
-    editCls:'edit-icon myBtn_multi',
-    editIcon:'images/edit-icon.png',
-    add:'no',
-    hoverText:'We need the location to get the specific weather data.',
-    mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
-    hoverCls:'main-hover-box general-info-hover',
-    priceLst:'no',
-    priceData:{
+// Tiles.defaultProps = translate({
+//     title:GENERAL_TILE,
+//     header:t('Tiles.General.Title'),
+//     tileCls:'general-information data-box',
+//     required:"no",
+//     edit:'yes',
+//     editCls:'edit-icon myBtn_multi',
+//     editIcon:'images/edit-icon.png',
+//     add:'no',
+//     hoverText:this.props.t('Tiles.General.hoverText'),
+//     mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+//     hoverCls:'main-hover-box general-info-hover',
+//     priceLst:'no',
+//     priceData:{
 
-    },
-    rightpriceList:'no',
-    rightpriceListeData:{
+//     },
+//     rightpriceList:'no',
+//     rightpriceListeData:{
 
-    },
-    multiple:false,
-    dataRecord:[]
+//     },
+//     multiple:false,
+//     dataRecord:[]
 
-  };
+//   });

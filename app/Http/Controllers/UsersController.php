@@ -6,11 +6,13 @@ use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Auth;
 use Exception;
 use Gate;
 use Hash;
-
+use App;
+use Config;
 
 class UsersController extends Controller
 {
@@ -255,6 +257,13 @@ class UsersController extends Controller
         }
 		// Attempt Login for members
 
+    }
+   public function changeLanguage($lang)
+    {
+        if (array_key_exists($lang, Config::get('languages'))) {
+            Session::put('applocale', $lang);
+        }
+        return redirect()->back();
     }
 
 }

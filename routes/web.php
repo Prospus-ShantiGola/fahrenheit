@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', 'AdcalcController@index')->name('home');
 
 Auth::routes();
@@ -38,6 +37,7 @@ Route::group(
 
     Route::get('/', 'UsersController@index')
          ->name('users.users.index')->middleware('auth');
+    Route::get('/lang/{lang?}', 'UsersController@changeLanguage')->name('changelang');
 
     Route::get('/create','UsersController@create')
          ->name('users.users.create')->middleware('auth');
@@ -141,3 +141,7 @@ Route::group(
 
 
     });
+Route::get('/locale/{lang?}',function($lang){
+App:setLocale($lang);
+return false;
+});

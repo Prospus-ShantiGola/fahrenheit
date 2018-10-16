@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserReport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Exception;
 use Auth;
 
@@ -19,6 +20,7 @@ class UserReportsController extends Controller
      */
     public function index()
     {
+
         $userReports = UserReport::where('user_id', '=', Auth::id())->with('user')->paginate(5);
 
         return view('user_reports.index', compact('userReports'));

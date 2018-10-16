@@ -2,14 +2,14 @@
 
 return [
     'id' => 'Id',
-    'id__placeholder' => 'Enter id here...',
+    'id__placeholder' => 'Gib hier deine ID ein ...',
     'user_id' => 'User',
     'user_id__placeholder' => 'Select user',
     'title' => 'Title',
     'title__placeholder' => 'Enter title here...',
     'status' => 'Status',
     'status__placeholder' => 'Enter status here...',
-    'timestamp' => 'Timestamp',
+    'timestamp' => 'Zeitstempel',
     'timestamp__placeholder' => 'Enter timestamp here...',
     'create' => 'Create New User Report',
     'delete' => 'Delete User Report',

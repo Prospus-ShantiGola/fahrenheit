@@ -182,14 +182,14 @@ class HeatSourceModal extends React.Component {
     render() {
         if(this.props.role=="expert"){
             var expertRoleHtml=(<ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
-                  <li className="nav-item"><a href="" data-target="#technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
-                  <li className="nav-item"><a href="" data-target="#calculation-data" data-toggle="tab" className="nav-link">CALCULATION DATA</a></li>
+                  <li className="nav-item"><a href="" data-target="#technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('HeatSource.Tab.TechnicalData.Title')}</a></li>
+                  <li className="nav-item"><a href="" data-target="#calculation-data" data-toggle="tab" className="nav-link">{this.props.t('HeatSource.Tab.CalculationData.Title')}</a></li>
          </ul>);
         }
         else{
             var expertRoleHtml=(
                 <ul id="tabsJustifiedsingle" className="nav nav-tabs single-tab singletabbox">
-                     <li className="nav-item"><a href="" data-target="#technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
+                     <li className="nav-item"><a href="" data-target="#technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('HeatSource.Tab.TechnicalData.Title')}</a></li>
                      {expertRoleHtml}
                   </ul>
             );
@@ -204,7 +204,7 @@ class HeatSourceModal extends React.Component {
                    <table className="table">
                        <tbody>
                            <tr>
-                               <td className="input-label">Drive temperature:</td>
+                               <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.DriveTemperature.Title')}:</td>
                                <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
                                    <img src="public/images/help-red.png" alt="" />
                                </button>
@@ -212,7 +212,7 @@ class HeatSourceModal extends React.Component {
                                <td className="input-fields withunit"><input type="text" required="required" placeholder="85" pattern="\d*" className="required-field onlynumeric" name="drive_temp" id="drive_temp" /><span>°C</span></td>
                            </tr>
                            <tr>
-                               <td className="input-label">Heat capacity:</td>
+                               <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.HeatCapacity.Title')}:</td>
                                <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Contact explanation/tip">
                                    <img src="public/images/help-red.png" alt="" />
                                </button>
@@ -234,7 +234,7 @@ class HeatSourceModal extends React.Component {
                     <table className="table">
                         <tbody>
                         <tr>
-                                 <td className="input-label">Electric capacity: </td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.ElectricCapacity.Title')}: </td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -242,7 +242,7 @@ class HeatSourceModal extends React.Component {
                                  <td className="input-fields withunit"><input type="text" placeholder="18" name="electricity_capacity" id="electricity_capacity"/><span>kw</span></td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Thermal efficiency:</td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.ThermalEfficiency.Title')}:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -251,7 +251,7 @@ class HeatSourceModal extends React.Component {
                               </tr>
                               <tr>
                                  <td className="input-label">
-                                    Electric efficiency:
+                                 {this.props.t('HeatSource.Tab.TechnicalData.ElectricEfficiency.Title')}:
                                  </td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
@@ -274,7 +274,7 @@ class HeatSourceModal extends React.Component {
                     <table className="table">
                         <tbody>
                         <tr>
-                                 <td className="input-label">Manufacturer:</td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.ManufacturerText.Title')}:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -288,7 +288,7 @@ class HeatSourceModal extends React.Component {
                                  </td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Type:</td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.TypeText.Title')}:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -308,7 +308,7 @@ class HeatSourceModal extends React.Component {
             );
          }
          if(this.state.selectedSource=="CHP plant" || this.state.selectedSource=="District heat"){
-            var additionalOption=(<p className="additional-options">Additional options for economic calculations are available!</p>);
+            var additionalOption=(<p className="additional-options">{this.props.t('AdditionalMessage')}</p>);
          }
          if(this.state.selectedSource=="Air compressor"){
             var conditionalAirField=(
@@ -319,7 +319,7 @@ class HeatSourceModal extends React.Component {
                     <table className="table">
                         <tbody>
                         <tr>
-                                 <td className="input-label"> Operation hours:</td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.OperationHours.Title')}:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Location explanation/tip" data-original-title="" title="">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -340,10 +340,10 @@ class HeatSourceModal extends React.Component {
             <form  className="heat-source-form" id="heat-source-form">
          <div className="modal-content">
             <div className="modal-heading">
-               <div className="left-head"> Heat Source</div>
+               <div className="left-head"> {this.props.t('HeatSource.Title')}</div>
                <div className="right-head">
                   <ul className="list-inline">
-                     <li><input className="save-changes-btn" onClick={this.handleHeatSubmit} type="submit" alt="Submit" value="Save Changes" title="Save Changes"/></li>
+                     <li><input className="save-changes-btn" onClick={this.handleHeatSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
                     <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-heatsource"  aria-label="Close"/></span></li>
                   </ul>
                </div>
@@ -357,8 +357,8 @@ class HeatSourceModal extends React.Component {
                            <table className="table">
                            <tbody>
                               <tr>
-                                 <td className="input-label"> Name:	</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Project number explanation/tip">
+                                 <td className="input-label"> {this.props.t('HeatSource.Tab.TechnicalData.Name.Title')}:	</td>
+                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('HeatSource.Tab.TechnicalData.Name.Placeholder')} >
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
@@ -367,7 +367,7 @@ class HeatSourceModal extends React.Component {
                                     <input type="hidden" placeholder="Chiller 1" id="heatsourceformModeKey"   name="heatsourceformModeKey" value="" /></td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Type of heat source:</td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.TypeOfHeatSource.Title')}:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -388,7 +388,7 @@ class HeatSourceModal extends React.Component {
                               {conditionalCHPAddField}
                               {conditionalAirField}
                               <tr>
-                                 <td className="input-label"> New installation:</td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.TechnicalData.NewInstallation.Title')}:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Location explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -413,7 +413,7 @@ class HeatSourceModal extends React.Component {
                            <table className="table">
                            <tbody>
                               <tr>
-                                 <td className="input-label">Investment costs:	</td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.CalculationData.InvestmentCosts.Title')}:	</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Editor explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -421,7 +421,7 @@ class HeatSourceModal extends React.Component {
                                  <td className="input-fields"><input type="text" placeholder="€" name="heat_investment_cost" id="heat_investment_cost" /> </td>
                               </tr>
                               <tr>
-                                 <td className="input-label">Discount:</td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.CalculationData.Discount.Title')}:</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Company explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -429,7 +429,7 @@ class HeatSourceModal extends React.Component {
                                  <td className="input-fields"><input type="text" placeholder="%"  name="heat_investment_discount" id="heat_investment_discount"  /></td>
                               </tr>
                               <tr>
-                                 <td className="input-label"> Maintenance costs: </td>
+                                 <td className="input-label">{this.props.t('HeatSource.Tab.CalculationData.MaintenanceCosts.Title')}: </td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Address explanation/tip">
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
@@ -444,7 +444,7 @@ class HeatSourceModal extends React.Component {
                </div>
             </div>
             <ul className="errorMessages hide">
-                                    Error on this page
+            {this.props.t('ErrorMessage')}
                                 </ul>
          </div>
 

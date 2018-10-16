@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 const CustomTable = {
     padding: "0px"
@@ -8,7 +8,7 @@ let investmentCounter,
     chpCounter,
     generalCounter = 0;
 const customFieldLabel = "Enter field label";
-class EconomicModal extends React.Component {
+class EconomicModal extends Component {
     constructor(props) {
         super(props);
         this.displayData = [];
@@ -423,7 +423,7 @@ class EconomicModal extends React.Component {
                             <tbody>
                                 <tr>
                                     <td className="input-label">
-                                       Heat price:
+                                    {this.props.t('Economic.Tab.General.HeatPrice.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -433,7 +433,7 @@ class EconomicModal extends React.Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content="Heat Price"
+                                            data-content={this.props.t('Economic.Tab.General.HeatPrice.InfoTool')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
@@ -455,7 +455,7 @@ class EconomicModal extends React.Component {
                                 </tr>
                                 <tr>
                                     <td className="input-label">
-                                        Electricity price increase:
+                                    {this.props.t('Economic.Tab.General.ElectricityPriceIncrease.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -465,7 +465,7 @@ class EconomicModal extends React.Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content="Location explanation/tip"
+                                            data-content= {this.props.t('Economic.Tab.General.ElectricityPriceIncrease.Infotool')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
@@ -487,7 +487,7 @@ class EconomicModal extends React.Component {
                                 </tr>
                                 <tr>
                                     <td className="input-label">
-                                        Calculated interest rate:
+                                    {this.props.t('Economic.Tab.General.ElectricityPriceIncrease.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -497,7 +497,7 @@ class EconomicModal extends React.Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content="Calculated interest rate explanation/tip"
+                                            data-content={this.props.t('Economic.Tab.General.ElectricityPriceIncrease.InfoTool')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
@@ -519,7 +519,7 @@ class EconomicModal extends React.Component {
                                 </tr>
                                 <tr>
                                     <td className="input-label">
-                                        Inflation rate:
+                                    {this.props.t('Economic.Tab.General.InflationRate.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -529,7 +529,7 @@ class EconomicModal extends React.Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content="Inflation rate explanation/tip"
+                                            data-content={this.props.t('Economic.Tab.General.InflationRate.Title')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
@@ -563,7 +563,7 @@ class EconomicModal extends React.Component {
                             data-toggle="tab"
                             className="nav-link small active"
                         >
-                            GENERAL
+                            {this.props.t('Economic.Tab.General.Title')}
                         </a>
                     </li>
                     <li className="nav-item">
@@ -573,7 +573,7 @@ class EconomicModal extends React.Component {
                             data-toggle="tab"
                             className="nav-link"
                         >
-                            CHP
+                           {this.props.t('Economic.Tab.CHP.Title')}
                         </a>
                     </li>
                     <li className="nav-item">
@@ -583,7 +583,7 @@ class EconomicModal extends React.Component {
                             data-toggle="tab"
                             className="nav-link"
                         >
-                            INVESTMENTS
+                            {this.props.t('Economic.Tab.Investments.Title')}
                         </a>
                     </li>
                     <li className="nav-item">
@@ -593,7 +593,7 @@ class EconomicModal extends React.Component {
                             data-toggle="tab"
                             className="nav-link"
                         >
-                            MAINTENANCE
+                            {this.props.t('Economic.Tab.Maintenence.Title')}
                         </a>
                     </li>
                 </ul>
@@ -644,13 +644,13 @@ class EconomicModal extends React.Component {
                                 <tr className="expertsbox">
                                     <td colSpan="3">
                                         <h3 className="inner-table-heading">
-                                            FOR EXPERTS
+                                        {this.props.t('Economic.Tab.CHP.FOREXPERTS.Title')}
                                         </h3>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="input-label">
-                                        Electricity sales price:
+                                    {this.props.t('Economic.Tab.CHP.ElectricitySalesPrice.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -660,7 +660,7 @@ class EconomicModal extends React.Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content="Electricity sales price explanation/tip"
+                                            data-content= {this.props.t('Economic.Tab.CHP.ElectricitySalesPrice.InfoTool')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
@@ -682,7 +682,7 @@ class EconomicModal extends React.Component {
                                 </tr>
                                 <tr>
                                     <td className="input-label">
-                                        Energy tax refund:
+                                    {this.props.t('Economic.Tab.CHP.EnergyTaxRefund.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -692,7 +692,7 @@ class EconomicModal extends React.Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content="Inflation rate explanation/tip"
+                                            data-content={this.props.t('Economic.Tab.CHP.EnergyTaxRefund.InfoTool')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
@@ -714,7 +714,7 @@ class EconomicModal extends React.Component {
                                 </tr>
                                 <tr>
                                     <td className="input-label">
-                                        EEG allocation portion:
+                                    {this.props.t('Economic.Tab.CHP.EEGAllocationPortion.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -724,7 +724,7 @@ class EconomicModal extends React.Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content="EEG-Umlage-Anteil explanation/tip"
+                                            data-content= {this.props.t('Economic.Tab.CHP.EEGAllocationPortion.InfoTool')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
@@ -746,7 +746,7 @@ class EconomicModal extends React.Component {
                                 </tr>
                                 <tr>
                                     <td className="input-label">
-                                        EEG apportionment costs:
+                                    {this.props.t('Economic.Tab.CHP.EEGApportionmentCosts.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -756,7 +756,7 @@ class EconomicModal extends React.Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content="Inflation rate explanation/tip"
+                                            data-content={this.props.t('Economic.Tab.CHP.EEGApportionmentCosts.InfoTool')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
@@ -794,7 +794,7 @@ class EconomicModal extends React.Component {
                             data-toggle="tab"
                             className="nav-link small active"
                         >
-                            GENERAL
+                            {this.props.t('Economic.Tab.General')}
                         </a>
                     </li>
                     <li className="nav-item">
@@ -804,35 +804,13 @@ class EconomicModal extends React.Component {
                             data-toggle="tab"
                             className="nav-link"
                         >
-                            CHP
+                            {this.props.t('Economic.Tab.CHP')}
                         </a>
                     </li>
                 </ul>
             );
         }
         let rows = [];
-        // console.log("this.state.investmentCounter",this.state.investmentCounter);
-        // if(this.state.investmentCounter>0){
-
-        //     let rows=[];
-        //     for(let i=0;i<this.state.investmentCounter;i++){
-        //         rows.push(
-        //             <tr  id="custom_{i}" className="multiple">
-        //                          <td className="input-label">
-        //                             <span id="custominput_{i}" contentEditable="false">{customFieldLabel}</span>:
-        //                             <div className="edit-divv"><i className="fa fa-pencil-square-o" aria-hidden="true" data-id="custominput_{i}"></i></div>
-        //                             <div className="delete-divv"> <i className="fa fa-trash-o" aria-hidden="true" data-id="custom_{i}" ></i></div>
-        //                          </td>
-        //                          <td className="input-fields withunit"><input type="text" placeholder="3,000 €"  pattern="\d*" className="onlynumeric" name="planning[]" id="planning_{i}" />
-        //                          </td>
-        //                          <td className="input-label">Discount:</td>
-        //                          <td className="input-fields chp-base withunit"><input type="text" placeholder="2%"  pattern="\d*" className="onlynumeric" name="planning_discount[]" id="planning_discount_{i}" /> </td>
-        //                       </tr>
-
-        //         )
-        //     }
-
-        // }
         return (
             <div
                 className="modal "
@@ -844,18 +822,17 @@ class EconomicModal extends React.Component {
                 <form className="economic-information-form">
                     <div className="modal-content">
                         <div className="modal-heading">
-                            <div className="left-head"> Economic Data</div>
+                            <div className="left-head">{this.props.t('Economic.Title')}</div>
                             <div className="right-head">
                                 <ul className="list-inline">
                                     <li>
-                                        {" "}
                                         <input
                                             className="save-changes-btn"
                                             type="button"
                                             alt="Submit"
                                             onClick={this.handleSubmit}
-                                            value="Save Changes"
-                                            title="Save Changes"
+                                            value={this.props.t('SaveButton')}
+                                            title={this.props.t('SaveButton')}
                                         />
                                     </li>
                                     <li>
@@ -890,8 +867,7 @@ class EconomicModal extends React.Component {
                                                 <tbody>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            Electricity price:
+                                                            {this.props.t('Economic.Tab.General.ElectricityPrice.Title')}:
                                                         </td>
                                                         <td className="input-help-label">
                                                             <button
@@ -901,7 +877,7 @@ class EconomicModal extends React.Component {
                                                                 data-toggle="popover"
                                                                 data-placement="bottom"
                                                                 data-trigger="hover"
-                                                                data-content="Electricity price explanation/tip"
+                                                                data-content={this.props.t('Economic.Tab.General.ElectricityPrice.InfoTool')}
                                                             >
                                                                 <img
                                                                     src="public/images/help-red.png"
@@ -947,9 +923,7 @@ class EconomicModal extends React.Component {
                                                 <tbody>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            Own usage of
-                                                            electricity:
+                                                        {this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}:
                                                         </td>
                                                         <td className="input-help-label">
                                                             <button
@@ -959,7 +933,7 @@ class EconomicModal extends React.Component {
                                                                 data-toggle="popover"
                                                                 data-placement="bottom"
                                                                 data-trigger="hover"
-                                                                data-content="Electricity price explanation/tip"
+                                                                data-content= {this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.InfoTool')}
                                                             >
                                                                 <img
                                                                     src="public/images/help-red.png"
@@ -980,8 +954,7 @@ class EconomicModal extends React.Component {
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label">
-                                                            KWK-subsidy for
-                                                            electricity:
+                                                        {this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}:
                                                         </td>
                                                         <td className="input-help-label">
                                                             <button
@@ -991,8 +964,7 @@ class EconomicModal extends React.Component {
                                                                 data-toggle="popover"
                                                                 data-placement="bottom"
                                                                 data-trigger="hover"
-                                                                data-content="KWK-subsidy for
-                                    electricity"
+                                                                data-content= {this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.InfoTool')}
                                                             >
                                                                 <img
                                                                     src="public/images/help-red.png"
@@ -1013,7 +985,7 @@ class EconomicModal extends React.Component {
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label">
-                                                            Gas price:
+                                                        {this.props.t('Economic.Tab.CHP.GasPrice.Title')}:
                                                         </td>
                                                         <td className="input-help-label">
                                                             <button
@@ -1023,7 +995,7 @@ class EconomicModal extends React.Component {
                                                                 data-toggle="popover"
                                                                 data-placement="bottom"
                                                                 data-trigger="hover"
-                                                                data-content="Location explanation/tip"
+                                                                data-content= {this.props.t('Economic.Tab.CHP.GasPrice.InfoTool')}
                                                             >
                                                                 <img
                                                                     src="public/images/help-red.png"
@@ -1064,8 +1036,7 @@ class EconomicModal extends React.Component {
                                                 <tbody>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            CHP in the basement:
+                                                        {this.props.t('Economic.Tab.Investments.CHPInTheBasement.Title')}:
                                                         </td>
                                                         <td className="input-fields symbmain">
                                                             <input
@@ -1085,7 +1056,7 @@ class EconomicModal extends React.Component {
                                                             />
                                                         </td>
                                                         <td className="input-label">
-                                                            Discount:
+                                                            {this.props.t('DiscountText')}:
                                                         </td>
                                                         <td className="input-fields chp-base withunit">
                                                             <input
@@ -1096,13 +1067,13 @@ class EconomicModal extends React.Component {
                                                                 name="discount_chp_basement"
                                                                 id="discount_chp_basement"
                                                             />
-                                                            <span>%</span>{" "}
+                                                            <span>%</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            Chiller 1:
+
+                                                            {this.props.t('Economic.Tab.Investments.Chiller1.Title')}:
                                                         </td>
                                                         <td className="input-fields symbmain">
                                                             <input
@@ -1122,7 +1093,7 @@ class EconomicModal extends React.Component {
                                                             />
                                                         </td>
                                                         <td className="input-label">
-                                                            Discount:
+                                                            {this.props.t('DiscountText')}:
                                                         </td>
                                                         <td className="input-fields chp-base withunit">
                                                             <input
@@ -1138,9 +1109,7 @@ class EconomicModal extends React.Component {
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            Radiant cooling
-                                                            office:
+                                                             {this.props.t('Economic.Tab.Investments.RadiantCoolingOffice.Title')}:
                                                         </td>
                                                         <td className="input-fields symbmain">
                                                             <input
@@ -1156,7 +1125,7 @@ class EconomicModal extends React.Component {
                                                             </span>
                                                         </td>
                                                         <td className="input-label">
-                                                            Discount:
+                                                            {this.props.t('DiscountText')}:
                                                         </td>
                                                         <td className="input-fields chp-base withunit">
                                                             <input
@@ -1172,8 +1141,7 @@ class EconomicModal extends React.Component {
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            eCoo 10X:
+                                                        {this.props.t('Economic.Tab.Investments.eCoo10X.Title')}:
                                                         </td>
                                                         <td className="input-fields symbmain">
                                                             <input
@@ -1189,7 +1157,7 @@ class EconomicModal extends React.Component {
                                                             </span>
                                                         </td>
                                                         <td className="input-label">
-                                                            Discount:
+                                                            {this.props.t('DiscountText')}:
                                                         </td>
                                                         <td className="input-fields chp-base withunit">
                                                             <input
@@ -1232,7 +1200,7 @@ class EconomicModal extends React.Component {
                                                                         />
                                                                     </div>
                                                                     <div className="delete-divv">
-                                                                        {" "}
+
                                                                         <i
                                                                             className="fa fa-trash-o"
                                                                             aria-hidden="true"
@@ -1256,7 +1224,7 @@ class EconomicModal extends React.Component {
                                                             </span>
                                                         </td>
                                                         <td className="input-label">
-                                                            Discount:
+                                                            {this.props.t('DiscountText')}:
                                                         </td>
                                                         <td className="input-fields chp-base withunit">
                                                             <input
@@ -1299,7 +1267,7 @@ class EconomicModal extends React.Component {
                                                                         />
                                                                     </div>
                                                                     <div className="delete-divv">
-                                                                        {" "}
+
                                                                         <i
                                                                             className="fa fa-trash-o"
                                                                             aria-hidden="true"
@@ -1323,7 +1291,7 @@ class EconomicModal extends React.Component {
                                                             </span>
                                                         </td>
                                                         <td className="input-label">
-                                                            Discount:
+                                                            {this.props.t('DiscountText')}:
                                                         </td>
                                                         <td className="input-fields chp-base withunit">
                                                             <input
@@ -1334,7 +1302,7 @@ class EconomicModal extends React.Component {
                                                                 name="planning_discount[]"
                                                                 id="planning_discount_x"
                                                             />
-                                                            <span>%</span>{" "}
+                                                            <span>%</span>
                                                         </td>
                                                     </tr>
                                                     {rows}
@@ -1360,8 +1328,8 @@ class EconomicModal extends React.Component {
                                                 <tbody>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            CHP in the basement:
+
+                                                            {this.props.t('Economic.Tab.Maintenence.CHPInTheBasement.Title')}:
                                                         </td>
                                                         <td className="input-fields withunit">
                                                             <input
@@ -1381,8 +1349,7 @@ class EconomicModal extends React.Component {
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            Chiller 1:
+                                                        {this.props.t('Economic.Tab.Maintenence.Chiller1.Title')}:
                                                         </td>
                                                         <td className="input-fields withunit">
                                                             <input
@@ -1402,9 +1369,7 @@ class EconomicModal extends React.Component {
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            Radiant cooling
-                                                            office:
+                                                        {this.props.t('Economic.Tab.Maintenence.RadiantCoolingOffice.Title')}:
                                                         </td>
                                                         <td className="input-fields withunit">
                                                             <input
@@ -1420,8 +1385,7 @@ class EconomicModal extends React.Component {
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label">
-                                                            {" "}
-                                                            eCoo 10X:
+                                                        {this.props.t('Economic.Tab.Maintenence.eCoo10X.Title')}:
                                                         </td>
                                                         <td className="input-fields withunit">
                                                             <input
@@ -1464,7 +1428,7 @@ class EconomicModal extends React.Component {
                                                                         />
                                                                     </div>
                                                                     <div className="delete-divv">
-                                                                        {" "}
+
                                                                         <i
                                                                             className="fa fa-trash-o"
                                                                             aria-hidden="true"
@@ -1516,7 +1480,7 @@ class EconomicModal extends React.Component {
                                                                         />
                                                                     </div>
                                                                     <div className="delete-divv">
-                                                                        {" "}
+
                                                                         <i
                                                                             className="fa fa-trash-o"
                                                                             aria-hidden="true"
@@ -1549,7 +1513,7 @@ class EconomicModal extends React.Component {
                                     </div>
                                 </div>
                                 <ul className="errorMessages hide">
-                                    Error on this page
+                                {this.props.t('ErrorMessage')}
                                 </ul>
                             </div>
                         </div>

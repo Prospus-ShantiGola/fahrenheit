@@ -113,27 +113,275 @@
         }
     },
     "Economic":{
-        "General":{
-            "Title":""
-        },
-        "CHP":{
-            "Title":""
-        }
+        "Title":"Economic Data",
+        "Tab":{
+            "General":{
+                "Title":  "General",
+                "ElectricityPrice": {
+                    "Title":"Electricity price",
+                    "Placeholder":"0.180",
+                    "InfoTool":"Electricity price explanation/tip"
+                },
+                "HeatPrice": {
+                    "Title":"Heat price",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Heat Price"
+                },
+                "ElectricityPriceIncrease": {
+                    "Title":"Electricity price increase",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Location explanation/tip"
+                }
+                ,
+                "CalculatedInterestRate": {
+                    "Title":"Calculated interest rate",
+                    "Placeholder":"0.700",
+                    "InfoTool":"Calculated interest rate explanation/tip"
+                }
+                ,
+                "InflationRate": {
+                    "Title":"Inflation rate",
+                    "Placeholder":"1.600",
+                    "InfoTool":"Inflation rate explanation/tip"
+                }
 
+            },
+            "CHP":{
+                "Title":"CHP",
+                "OwnUsageOfElectricity": {
+                    "Title":"Own usage of electricity",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Electricity price explanation/tip"
+                },
+                "KWKEubsidyForElectricity": {
+                    "Title":"KWK-subsidy for electricity",
+                    "Placeholder":"0.000",
+                    "InfoTool":"KWK-subsidy for electricity"
+                },
+                "GasPrice": {
+                    "Title":"Gas price",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "FOREXPERTS": {
+                    "Title":"FOR EXPERTS",
+                    "Placeholder":"",
+                    "InfoTool":""
+                },
+                "ElectricitySalesPrice": {
+                    "Title":"Electricity sales price",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Electricity sales price explanation/tip"
+                },
+                "EnergyTaxRefund": {
+                    "Title":"Energy tax refund",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Inflation rate explanation/tip"
+                },
+                "EEGAllocationPortion": {
+                    "Title":"EEG allocation portion",
+                    "Placeholder":"0.000",
+                    "InfoTool":"EEG-Umlage-Anteil explanation/tip"
+                },
+                "EEGApportionmentCosts": {
+                    "Title":"EEG apportionment costs",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Inflation rate explanation/tip"
+                }
+            },
+            "Investments":{
+                "Title":"INVESTMENTS",
+                "CHPInTheBasement": {
+                    "Title":"CHP in the basement",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "Chiller1": {
+                    "Title":"Chiller 1",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "RadiantCoolingOffice": {
+                    "Title":"Radiant cooling office",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "eCoo10X": {
+                    "Title":"eCoo 10X",
+                    "Placeholder":"",
+                    "InfoTool":""
+                }
+            },
+            "Maintenence":{
+                "Title":"Maintenence",
+                "CHPInTheBasement": {
+                    "Title":"CHP in the basement",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "Chiller1": {
+                    "Title":"Chiller 1",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "RadiantCoolingOffice": {
+                    "Title":"Radiant cooling office",
+                    "Placeholder":"0.000",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "eCoo10X": {
+                    "Title":"eCoo 10X",
+                    "Placeholder":"",
+                    "InfoTool":""
+                }
+            }
+
+        }
     },
     "HeatSource":{
-        "Technical":{
-            "Title":""
-        },
-        "CHP":{
-            "Title":""
+        "Title":"Heat Source",
+        "Tab": {
+            "TechnicalData": {
+                "Title":"TECHNICAL DATA",
+                "Name": {
+                    "Title":"Name",
+                    "Placeholder":"CHP in the basement",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "TypeOfHeatSource": {
+                    "Title":"Type of heat source",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "DriveTemperature": {
+                    "Title":"Drive temperature",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "HeatCapacity": {
+                    "Title":"Heat capacity",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Contact explanation/tip"
+                },
+                "ElectricCapacity": {
+                    "Title":"Electric capacity",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "ThermalEfficiency": {
+                    "Title":"Thermal efficiency",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "ElectricEfficiency": {
+                    "Title":"Electric efficiency",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "ManufacturerText": {
+                    "Title":"Manufacturer",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "TypeText": {
+                    "Title":"Type",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "OperationHours": {
+                    "Title":"Operation hours",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Location explanation/tip"
+                },
+                "NewInstallation": {
+                    "Title":"New installation",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Location explanation/tip"
+                }
+
+            },
+            "CalculationData": {
+                "Title":"CALCULATION DATA",
+                "InvestmentCosts": {
+                    "Title":"Investment costs",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editor explanation/tip"
+                },
+                "Discount": {
+                    "Title":"Email",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Company explanation/tip"
+                },
+                "MaintenanceCosts": {
+                    "Title":"Maintenance costs",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Address explanation/tip"
+                }
+            }
         }
 
+
     },
+    "Compression":{
+        "Title":"Compression Chillers",
+        "Tab": {
+            "TechnicalData": {
+                "Title":"TECHNICAL DATA",
+                "Name": {
+                    "Title":"Name",
+                    "Placeholder":"Chiller 1",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "Refrigerant": {
+                    "Title":"Refrigerant",
+                    "Placeholder":"Chiller 1",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "Manufacturer": {
+                    "Title":"Manufacturer",
+                    "Placeholder":"Chiller 1",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "CompressorType": {
+                    "Title":"Compressor type",
+                    "Placeholder":"Chiller 1",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "ChilledWaterTemperature": {
+                    "Title":"Chilled water temperature",
+                    "Placeholder":"Chiller 1",
+                    "InfoTool":"Customer explanation/tip"
+                }
+            },
+            "CalculationData": {
+                "Title":"CALCULATION DATA",
+                "InvestmentCosts": {
+                    "Title":"Investment costs",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editor explanation/tip"
+                },
+                "Discount": {
+                    "Title":"Discount",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Company explanation/tip"
+                },
+                "MaintenanceCosts": {
+                    "Title":"Maintenance costs",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Address explanation/tip"
+                }
+            }
+        }
+    },
+
     "RequiredField":{
         "Message":"Required field",
         "Note":"Note : Please fill the required fields in both tabs",
         "ErrorMsg":"please fill out this field"
     },
-    "SaveButton":"save changes"
+    "SaveButton":"save changes",
+    "InputRequired":"An input is required",
+    "DiscountText":"Discount",
+    "ErrorMessage":"Error on this page",
+    "AdditionalMessage":"Additional options for economic calculations are available!"
 }

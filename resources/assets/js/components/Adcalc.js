@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Tiles} from './Tiles';
-import {ChillerModal} from './ChillerModal';
+import Tiles from './Tiles';
+import ChillerModal from './ChillerModal';
 import GeneralModal from './GeneralModal';
 import EconomicModal from './EconomicModal';
 import HeatSourceModal from './HeatSourceModal';

@@ -29,7 +29,7 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>Timestamp</th>
+                            <th>{{ __('user_reports.timestamp')}}</th>
                             <th>Project</th>
                             @can('isAdmin')
                             <th>User</th>

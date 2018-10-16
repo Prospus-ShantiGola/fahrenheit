@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import { connect } from "react-redux";
+import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 
-export class ChillerModal extends Component  {
+class ChillerModal extends Component  {
 
 
     constructor(props){
@@ -120,14 +121,14 @@ export class ChillerModal extends Component  {
 
         if(this.props.role=="expert"){
             var expertRoleHtml=(<ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
-            <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
-            <li className="nav-item"><a href="" data-target="#compression-calculation-data" data-toggle="tab" className="nav-link">CALCULATION DATA</a></li>
+            <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('Compression.Tab.TechnicalData.Title')}</a></li>
+            <li className="nav-item"><a href="" data-target="#compression-calculation-data" data-toggle="tab" className="nav-link">{this.props.t('Compression.Tab.CalculationData.Title')}</a></li>
          </ul>);
         }
         else{
             var expertRoleHtml=(
                 <ul id="tabsJustifiedsingle" className="nav nav-tabs single-tab singletabbox">
-                     <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL DATA</a></li>
+                     <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('Compression.Tab.TechnicalData.Title')}</a></li>
                      {expertRoleHtml}
                   </ul>
             );
@@ -140,12 +141,12 @@ export class ChillerModal extends Component  {
             <div className="modal-dialog ">
             <div className="modal-content">
                <div className="modal-heading">
-                  <div className="left-head">Compression Chillers</div>
+                  <div className="left-head">{this.props.t('Compression.Title')}</div>
                   <div className="right-head">
                      <ul className="list-inline">
                         <li >
 
-                        <input className="save-changes-btn" type="submit" alt="Submit" value="Save Changes" title="Save Changes"/></li>
+                        <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
                         <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-compression "  aria-label="Close"/></span></li>
 
                      </ul>
@@ -160,18 +161,18 @@ export class ChillerModal extends Component  {
                               <table className="table">
                               <tbody>
                                  <tr>
-                                    <td className="input-label"> Name:  </td>
-                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Project number explanation/tip" data-trigger="hover">
+                                    <td className="input-label"> {this.props.t('Compression.Tab.TechnicalData.Name.Title')}:  </td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content={this.props.t('Compression.Tab.TechnicalData.Name.InfoTool')} data-trigger="hover">
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="Chiller 1" id="chillername"   name="chillername"  />
+                                    <td className="input-fields"><input type="text" placeholder={this.props.t('Compression.Tab.TechnicalData.Name.Placeholder')} id="chillername"   name="chillername"  />
                                     <input type="hidden" placeholder="Chiller 1" id="chillerformMode"   name="chillerformMode" value="add" />
                                     <input type="hidden" placeholder="Chiller 1" id="chillerformModeKey"   name="chillerformModeKey" value="" />
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td className="input-label">Refrigerant:</td>
+                                    <td className="input-label">{this.props.t('Compression.Tab.TechnicalData.Refrigerant.Title')}:</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-trigger="hover">
                                        <img src="public/images/help-red.png" alt=""  />
                                        </button>
@@ -189,7 +190,7 @@ export class ChillerModal extends Component  {
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td className="input-label">Manufacturer:</td>
+                                    <td className="input-label">{this.props.t('Compression.Tab.TechnicalData.Manufacturer.Title')}:</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-trigger="hover">
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
@@ -207,7 +208,7 @@ export class ChillerModal extends Component  {
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td className="input-label">Compressor type:</td>
+                                    <td className="input-label">{this.props.t('Compression.Tab.TechnicalData.CompressorType.Title')}:</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project." data-trigger="hover">
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
@@ -225,8 +226,7 @@ export class ChillerModal extends Component  {
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td className="input-label">Chilled water
-                                       temperature:
+                                    <td className="input-label">{this.props.t('Compression.Tab.TechnicalData.ChilledWaterTemperature.Title')}:
                                     </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Customer explanation/tip" data-trigger="hover">
                                        <img src="public/images/help-red.png" alt="" />
@@ -247,7 +247,7 @@ export class ChillerModal extends Component  {
                               <table className="table">
                               <tbody>
                                  <tr>
-                                    <td className="input-label">Investment costs: </td>
+                                    <td className="input-label">{this.props.t('Compression.Tab.CalculationData.InvestmentCosts.Title')}: </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Editor explanation/tip" data-trigger="hover">
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
@@ -255,7 +255,7 @@ export class ChillerModal extends Component  {
                                     <td className="input-fields"><input type="text" placeholder="€" name="investment_cost" id="investment_cost"/> </td>
                                  </tr>
                                  <tr>
-                                    <td className="input-label">Discount:</td>
+                                    <td className="input-label">{this.props.t('Compression.Tab.CalculationData.Discount.Title')}:</td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Company explanation/tip" data-trigger="hover">
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
@@ -263,7 +263,7 @@ export class ChillerModal extends Component  {
                                     <td className="input-fields"><input type="text" placeholder="%"  name="discount" id="discount" /></td>
                                  </tr>
                                  <tr>
-                                    <td className="input-label"> Maintenance costs: </td>
+                                    <td className="input-label">{this.props.t('Compression.Tab.CalculationData.MaintenanceCosts.Title')}: </td>
                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Address explanation/tip" data-trigger="hover">
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
@@ -286,5 +286,5 @@ export class ChillerModal extends Component  {
     }
 }
 
-
+export default translate(ChillerModal);
 
