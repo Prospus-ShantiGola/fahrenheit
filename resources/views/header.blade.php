@@ -18,7 +18,7 @@
                     @endif
 
                 <div class="language-change-div">
-                        <a href="{{ route('changelang','de')}}">DE</a>
+                        <a href="{{ route('changelang','de')}}" >DE</a>
                         <a href="{{ route('changelang','en')}}">EN</a>
                 </div>
             </div>

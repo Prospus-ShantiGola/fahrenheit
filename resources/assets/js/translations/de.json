@@ -1,84 +1,377 @@
 {
-    "General": {
-        "Title": "Allgemeine Informationen",
-        "Tab": {
+      "Tiles": {
+         "General": {
+            "Title": "Allgemeine Information",
+            "hoverText": "Wir benötigen den Standort, um die spezifischen Wetterdaten zu erhalten."
+         },
+         "Economic": {
+            "Title": "Wirtschaftsdaten",
+            "hoverText": "Wir benötigen den Standort, um die spezifischen Wetterdaten zu erhalten."
+         },
+         "Options": {
+            "Title": "Optionen",
+            "hoverText": "Wir benötigen den Standort, um die spezifischen Wetterdaten zu erhalten."
+         },
+         "HeatSource": {
+            "Title": "Hitzequelle",
+            "hoverText": "Definieren Sie die verfügbaren oder geplanten Wärmequellen, damit das vorgeschlagene Fahrenheit-System für diese Quellen geeignet ist."
+         },
+         "HeatingLoadProfile": {
+            "Title": "Heizlastprofil",
+            "hoverText": "Wählen Sie ein oder mehrere vordefinierte Heizlastprofile und wir wissen, wie viel Wärme von Ihren Wärmequellen zur Verfügung steht. Planen Sie eine neue Wärmequelle? Dann können wir die Rentabilität des gesamten Systems berechnen!"
+         },
+         "CompressionChiller": {
+            "Title": "Kompressionskühler",
+            "hoverText": "Haben Sie bereits eine Kompressionskältemaschine oder planen Sie eine neue zu installieren? Definieren Sie Ihre Kältemaschinen und wir werden unser System mit Ihnen vergleichen."
+         },
+         "CoolingLoadProfile": {
+            "Title": "Kühllastprofil",
+            "hoverText": "Definieren Sie Ihr Kühllastprofil und benötigen Sie Kühlkapazität, damit wir Ihnen ein System vorschlagen können!"
+         },
+         "FahrenheitSystem": {
+            "Title": "Fahrenheit System",
+            "hoverText": "Bitte geben Sie die erforderlichen Eingaben an, damit wir Ihnen ein Fahrenheit-System vorschlagen können."
+         }
+      },
+      "General": {
+         "Title": "Allgemeine Information",
+         "Tab": {
             "Project": {
-                "Title": "Projektdaten",
-                "ProjectNumber": {
-                    "Title":"Projektnummer",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "ProjectName":  {
-                    "Title":"Projektname",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "ProjectLocation": {
-                    "Title":"Standort",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "ProjectCustomer": {
-                    "Title":"Kunde",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "ProjectContact": {
-                    "Title":"Kontakt",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "ProjectPhone":  {
-                    "Title":"Tel. Nummer",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "ProjectEmail": {
-                    "Title":"E-Mail",
-                    "Placeholder":"",
-                    "InfoTool":""
-                }
+               "Title": "Projektdaten",
+               "ProjectNumber": {
+                  "Title": "Projektnummer",
+                  "Placeholder": "Neues Projekt",
+                  "InfoTool": "Projektnummer Erklärung / Tipp"
+               },
+               "ProjectName": {
+                  "Title": "Projektname",
+                  "Placeholder": "Testprojekt",
+                  "InfoTool": "Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."
+               },
+               "ProjectLocation": {
+                  "Title": "Ort",
+                  "Placeholder": "Halle/Saale",
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "ProjectCustomer": {
+                  "Title": "Kunde",
+                  "Placeholder": "HabWarmWillKalt Gmbh",
+                  "InfoTool": "Kundenerklärung / Trinkgeld"
+               },
+               "ProjectContact": {
+                  "Title": "Kontakt",
+                  "Placeholder": "Mr. Inhaber",
+                  "InfoTool": "Kontakt Erklärung / Tipp"
+               },
+               "ProjectPhone": {
+                  "Title": "Tel. Nummer",
+                  "Placeholder": "0123 456",
+                  "InfoTool": "Tel. Nummer Erklärung / Tipp"
+               },
+               "ProjectEmail": {
+                  "Title": "Email",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "E-Mail Erklärung / Trinkgeld"
+               }
             },
             "Personal": {
-                "Title": "Persönliche Daten",
-                "PersonalEditor":  {
-                    "Title":"Redakteur",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "PersonalCompany": {
-                    "Title":"Unternehmen",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "PersonalAddress": {
-                    "Title":"Adresse",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "PersonalPhone": {
-                    "Title":"Tel. Nummer",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "PersonalMobile": {
-                    "Title":"Mobil",
-                    "Placeholder":"",
-                    "InfoTool":""
-                },
-                "PersonalEmail": {
-                    "Title":"E-Mail",
-                    "Placeholder":"",
-                    "InfoTool":""
-                }
+               "Title": "Persönliche Daten",
+               "PersonalEditor": {
+                  "Title": "Editor",
+                  "Placeholder": "HabWarmWillKalt Gmbh",
+                  "InfoTool": "Editor Erklärung / Tipp"
+               },
+               "PersonalCompany": {
+                  "Title": "Unternehmen",
+                  "Placeholder": "Gmbh",
+                  "InfoTool": "Firmenerklärung / Trinkgeld"
+               },
+               "PersonalAddress": {
+                  "Title": "Adresse",
+                  "Placeholder": "Halle/Saale",
+                  "InfoTool": "Adresse Erklärung / Tipp"
+               },
+               "PersonalPhone": {
+                  "Title": "Tel. Nummer",
+                  "Placeholder": "0123 456",
+                  "InfoTool": "Tel. Nummer Erklärung / Tipp"
+               },
+               "PersonalMobile": {
+                  "Title": "Handy, Mobiltelefon",
+                  "Placeholder": "Mr. Inhaber",
+                  "InfoTool": "Mobile Erklärung / Tipp"
+               },
+               "PersonalEmail": {
+                  "Title": "Email",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "E-Mail Erklärung / Trinkgeld"
+               }
             }
-        }
-    },
-    "RequiredField": {
-        "Message": "Pflichtfeld",
-        "Note": "Hinweis: Bitte füllen Sie die erforderlichen Felder in beiden Tabs",
-        "ErrorMsg":"Bitte füllen Sie dieses Feld aus"
-    },
-    "SaveButton":"Änderungen speichern"
-}
+         }
+      },
+      "Economic": {
+         "Title": "Wirtschaftsdaten",
+         "Tab": {
+            "General": {
+               "Title": "Allgemeines",
+               "ElectricityPrice": {
+                  "Title": "Elektrizitätspreis",
+                  "Placeholder": 0.18,
+                  "InfoTool": "Strompreis-Erklärung / Trinkgeld"
+               },
+               "HeatPrice": {
+                  "Title": "Wärmepreis",
+                  "Placeholder": 0,
+                  "InfoTool": "Wärme Preis"
+               },
+               "ElectricityPriceIncrease": {
+                  "Title": "Strompreisanstieg",
+                  "Placeholder": 0,
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "CalculatedInterestRate": {
+                  "Title": "Berechneter Zinssatz",
+                  "Placeholder": 0.7,
+                  "InfoTool": "Berechnete Zinssatzerklärung / Tipp"
+               },
+               "InflationRate": {
+                  "Title": "Inflationsrate",
+                  "Placeholder": 1.6,
+                  "InfoTool": "Inflationsrate Erklärung / Tipp"
+               }
+            },
+            "CHP": {
+               "Title": "CHP",
+               "OwnUsageOfElectricity": {
+                  "Title": "Eigenverbrauch von Strom",
+                  "Placeholder": 0,
+                  "InfoTool": "Strompreis-Erklärung / Trinkgeld"
+               },
+               "KWKEubsidyForElectricity": {
+                  "Title": "KWK-Zuschuss für Strom",
+                  "Placeholder": 0,
+                  "InfoTool": "KWK-Zuschuss für Strom"
+               },
+               "GasPrice": {
+                  "Title": "Gaspreis",
+                  "Placeholder": 0,
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "FOREXPERTS": {
+                  "Title": "FÜR EXPERTEN",
+                  "Placeholder": "",
+                  "InfoTool": ""
+               },
+               "ElectricitySalesPrice": {
+                  "Title": "Stromverkaufspreis",
+                  "Placeholder": 0,
+                  "InfoTool": "Verkaufspreis-Erklärung / Trinkgeld"
+               },
+               "EnergyTaxRefund": {
+                  "Title": "Erstattung der Energiesteuer",
+                  "Placeholder": 0,
+                  "InfoTool": "Inflationsrate Erklärung / Tipp"
+               },
+               "EEGAllocationPortion": {
+                  "Title": "EEG-Zuteilungsanteil",
+                  "Placeholder": 0,
+                  "InfoTool": "EEG-Umlage-Anteil explanation/tip"
+               },
+               "EEGApportionmentCosts": {
+                  "Title": "EEG-Umlegungskosten",
+                  "Placeholder": 0,
+                  "InfoTool": "Inflationsrate Erklärung / Tipp"
+               }
+            },
+            "Investments": {
+               "Title": "Investitionen",
+               "CHPInTheBasement": {
+                  "Title": "BHKW im Keller",
+                  "Placeholder": 0,
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "Chiller1": {
+                  "Title": "Kühler 1",
+                  "Placeholder": 0,
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "RadiantCoolingOffice": {
+                  "Title": "Strahlendes kühlendes Büro",
+                  "Placeholder": 0,
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "eCoo10X": {
+                  "Title": "eCoo 10X",
+                  "Placeholder": "",
+                  "InfoTool": ""
+               }
+            },
+            "Maintenence": {
+               "Title": "Wartung",
+               "CHPInTheBasement": {
+                  "Title": "BHKW im Keller",
+                  "Placeholder": 0,
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "Chiller1": {
+                  "Title": "Kühler 1",
+                  "Placeholder": 0,
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "RadiantCoolingOffice": {
+                  "Title": "Strahlendes kühlendes Büro",
+                  "Placeholder": 0,
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "eCoo10X": {
+                  "Title": "eCoo 10X",
+                  "Placeholder": "",
+                  "InfoTool": ""
+               }
+            }
+         }
+      },
+      "HeatSource": {
+         "Title": "Hitzequelle",
+         "Tab": {
+            "TechnicalData": {
+               "Title": "TECHNISCHE DATEN",
+               "Name": {
+                  "Title": "Name",
+                  "Placeholder": "BHKW im Keller",
+                  "InfoTool": "Projektnummer Erklärung / Tipp"
+               },
+               "TypeOfHeatSource": {
+                  "Title": "Art der Wärmequelle",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."
+               },
+               "DriveTemperature": {
+                  "Title": "Antriebstemperatur",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Kundenerklärung / Trinkgeld"
+               },
+               "HeatCapacity": {
+                  "Title": "Wärmekapazität",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Kontakt Erklärung / Tipp"
+               },
+               "ElectricCapacity": {
+                  "Title": "Elektrische Kapazität",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Kundenerklärung / Trinkgeld"
+               },
+               "ThermalEfficiency": {
+                  "Title": "Thermischen Wirkungsgrad",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Kundenerklärung / Trinkgeld"
+               },
+               "ElectricEfficiency": {
+                  "Title": "Elektrische Effizienz",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Kundenerklärung / Trinkgeld"
+               },
+               "ManufacturerText": {
+                  "Title": "Hersteller",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Kundenerklärung / Trinkgeld"
+               },
+               "TypeText": {
+                  "Title": "Art",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Kundenerklärung / Trinkgeld"
+               },
+               "OperationHours": {
+                  "Title": "Öffnungszeiten",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Standorterläuterung / Tipp"
+               },
+               "NewInstallation": {
+                  "Title": "Neue Installation",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Standorterläuterung / Tipp"
+               }
+            },
+            "CalculationData": {
+               "Title": "Berechnungsdaten",
+               "InvestmentCosts": {
+                  "Title": "Investitionskosten",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Editor Erklärung / Tipp"
+               },
+               "Discount": {
+                  "Title": "Email",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Firmenerklärung / Trinkgeld"
+               },
+               "MaintenanceCosts": {
+                  "Title": "Instandhaltungskosten",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Adresse Erklärung / Tipp"
+               }
+            }
+         }
+      },
+      "Compression": {
+         "Title": "Kompressionskältemaschinen",
+         "Tab": {
+            "TechnicalData": {
+               "Title": "TECHNISCHE DATEN",
+               "Name": {
+                  "Title": "Name",
+                  "Placeholder": "Kühler 1",
+                  "InfoTool": "Projektnummer Erklärung / Tipp"
+               },
+               "Refrigerant": {
+                  "Title": "Kältemittel",
+                  "Placeholder": "Kühler 1",
+                  "InfoTool": "Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."
+               },
+               "Manufacturer": {
+                  "Title": "Hersteller",
+                  "Placeholder": "Kühler 1",
+                  "InfoTool": "Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."
+               },
+               "CompressorType": {
+                  "Title": "Kompressortyp",
+                  "Placeholder": "Kühler 1",
+                  "InfoTool": "Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."
+               },
+               "ChilledWaterTemperature": {
+                  "Title": "Kaltwassertemperatur",
+                  "Placeholder": "Kühler 1",
+                  "InfoTool": "Kundenerklärung / Trinkgeld"
+               }
+            },
+            "CalculationData": {
+               "Title": "Berechnungsdaten",
+               "InvestmentCosts": {
+                  "Title": "Investitionskosten",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Editor Erklärung / Tipp"
+               },
+               "Discount": {
+                  "Title": "Rabatt",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Firmenerklärung / Trinkgeld"
+               },
+               "MaintenanceCosts": {
+                  "Title": "Instandhaltungskosten",
+                  "Placeholder": "inhaber@gmbh.de",
+                  "InfoTool": "Adresse Erklärung / Tipp"
+               }
+            }
+         }
+      },
+      "RequiredField": {
+         "Message": "Pflichtfeld",
+         "Note": "Hinweis: Bitte füllen Sie die erforderlichen Felder in beiden Registerkarten aus",
+         "ErrorMsg": "Bitte füllen Sie dieses Feld aus"
+      },
+      "SaveButton": "Änderungen speichern",
+      "InputRequired": "Eine Eingabe ist erforderlich",
+      "DiscountText": "Rabatt",
+      "ErrorMessage": "Fehler auf dieser Seite",
+      "AdditionalMessage": "Zusätzliche Möglichkeiten für wirtschaftliche Berechnungen stehen zur Verfügung!"
+   }
+

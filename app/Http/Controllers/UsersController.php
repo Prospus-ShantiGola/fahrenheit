@@ -260,9 +260,7 @@ class UsersController extends Controller
     }
    public function changeLanguage($lang)
     {
-        if (array_key_exists($lang, Config::get('languages'))) {
-            Session::put('applocale', $lang);
-        }
+        Session::put('applocale', $lang);
         return redirect()->back();
     }
 

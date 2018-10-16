@@ -249,8 +249,8 @@ class Tiles extends React.Component {
 
     render() {
         //console.log("render refresh",this.state.heatSourceData);
-        projectData['generalData'] = this.state.generalData;
-        projectData['economicData'] = this.state.economicData;
+        projectData['generalData'] = this.state.generalData;   //use to store the object to save the data
+        projectData['economicData'] = this.state.economicData; //use to store the object to save the data
         const dragSet=false;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
@@ -620,7 +620,7 @@ class Tiles extends React.Component {
                         {requiredMsg}
                         {pricelist}
                         <div className={this.props.hoverCls}>
-                            <h1>{this.props.title}</h1>
+                            <h1>{this.props.header}</h1>
                             <div className={this.props.editCls}><img src={this.props.editIcon} alt="" data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} /></div>
                             {priceFullList}
                         </div>

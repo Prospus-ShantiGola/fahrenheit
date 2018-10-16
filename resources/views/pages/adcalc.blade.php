@@ -70,6 +70,7 @@
        NO_CUSTOM_FIELD=0;
        NO_CUSTOM_FIELD_MAINTENENCE=0;
        projectData={};
+       LOCALE="{{(App::getLocale())}}"
     </script>
     </head>
     <body>

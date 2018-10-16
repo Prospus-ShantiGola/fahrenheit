@@ -9,7 +9,7 @@ import {Provider} from 'react-redux';
 import store from './../store/index'
 
 setDefaultTranslations({de, en})
-setDefaultLanguage('en')
+setDefaultLanguage(LOCALE)
 class AppContent extends Component {
     constructor(props) {
         //let role=LOGGED_IN_ROLE;
