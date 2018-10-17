@@ -264,15 +264,15 @@ class Tiles extends React.Component {
             var pricelist=(
                 <ul className="price-listt">
                                     <li>
-                                       <p>Cooling Capacity</p>
+                                       <p>{this.props.t('Tiles.CompressionChiller.HoverCoolingTitle')}</p>
                                        <h3>100.0 kW</h3>
                                     </li>
                                     <li>
-                                       <p>Number of Compressors</p>
+                                       <p>{this.props.t('Tiles.CompressionChiller.NumberofCompressor')}</p>
                                        <h3>3</h3>
                                     </li>
                                     <li>
-                                       <p>Temperature</p>
+                                       <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
                                        <h3><img src='public/images/degree-icon.png' alt='' /> {(this.state.compressionChillerData[0].temperature!="") ? this.state.compressionChillerData[0].temperature+"°C": ""}</h3>
                                     </li>
                 </ul>
@@ -354,7 +354,7 @@ class Tiles extends React.Component {
             var pricelist=(
                 <ul className="price-listt scrollbar-macosx">
                                     <li>
-                                       <p>Heat Capacity</p>
+                                       <p>{this.props.t('Tiles.HeatSource.HeatCapacity')}</p>
                                        <h3>{heatSourceData[0].heat_capacity} kW</h3>
                                     </li>
                                     <li>

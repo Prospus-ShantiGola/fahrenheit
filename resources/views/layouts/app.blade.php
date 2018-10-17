@@ -12,6 +12,7 @@
     <title>{{ config('app.name', 'Fahrenehit') }}</title>
 
     <!-- Scripts -->
+    <script src="{{ asset('public/js/app.js') }}" defer></script>
     <script src="{{ asset('public/js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery-simple-validator.min.js') }}"></script>
 
@@ -26,7 +27,9 @@
     <link href="{{ asset('public/css/frontstyle.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
+<script type="text/javascript">
+    LOCALE="{{(App::getLocale())}}"
+</script>
 </head>
 <body>
     <div id="app">
