@@ -34,6 +34,7 @@ table.table.table-striped {
     pointer-events: none;
 }
 a:active{
+
     text-decoration: underline;
 }
 
@@ -64,10 +65,7 @@ div.error-field {
 
 }
 /* css changes */
-a.active {
-    text-decoration: underline !important;
 
-}
 a:hover{
     text-decoration: none !important;
 }
@@ -90,4 +88,7 @@ padding:0px !important;
 }
 .useredit{
     padding:0px !important;
+}
+a.active{
+    color:#f8283c;
 }

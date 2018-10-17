@@ -12,7 +12,6 @@
     <title>{{ config('app.name', 'Fahrenehit') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('public/js/app.js') }}" defer></script>
     <script src="{{ asset('public/js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery-simple-validator.min.js') }}"></script>
 
@@ -58,8 +57,8 @@
 
                                 <div class="language-change-div">
 
-                                 <a href="{{ route('changelang','de')}}">DE</a>
-                                  <a href="{{ route('changelang','en')}}">EN</a>
+                                 <a href="{{ route('changelang','de')}}" class={{(App::getLocale()=="de") ? "active":""}}>DE</a>
+                                  <a href="{{ route('changelang','en')}}" class={{(App::getLocale()=="en") ? "active":""}}>EN</a>
 
                                 </div>
                             </div>

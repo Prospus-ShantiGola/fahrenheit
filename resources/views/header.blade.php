@@ -18,8 +18,8 @@
                     @endif
 
                 <div class="language-change-div">
-                        <a href="{{ route('changelang','de')}}" >DE</a>
-                        <a href="{{ route('changelang','en')}}">EN</a>
+                        <a href="{{ route('changelang','de')}}" class={{(App::getLocale()=="de") ? "active":""}}>DE</a>
+                        <a href="{{ route('changelang','en')}}" class={{(App::getLocale()=="en") ? "active":""}}>EN</a>
                 </div>
             </div>
             <div class="col-6 col-md-6 col-sm-6 col-lg-6 col-xl-6">

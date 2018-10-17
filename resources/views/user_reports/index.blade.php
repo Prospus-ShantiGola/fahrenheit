@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('user_reports.timestamp')}}</th>
-                            <th>Project</th>
+                            <th>{{ __('user_reports.project')}}</th>
                             @can('isAdmin')
                             <th>User</th>
                             <th>Company Name</th>

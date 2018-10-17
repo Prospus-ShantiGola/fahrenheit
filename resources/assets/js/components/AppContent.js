@@ -25,7 +25,7 @@ class AppContent extends Component {
         this.submitForm=this.submitForm.bind(this);
     }
     submitForm(e){
-        console.log('%c Project Result : ', 'background: #222; color: #bada55',projectData);
+        //console.log('%c Project Result : ', 'background: #222; color: #bada55',projectData);
         if(!GENERAL_FORM_STATUS){
             $("#message-popup-modal").modal('show');
             return false;

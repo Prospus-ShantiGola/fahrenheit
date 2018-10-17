@@ -37757,7 +37757,7 @@ var AppContent = function (_Component) {
     _createClass(AppContent, [{
         key: 'submitForm',
         value: function submitForm(e) {
-            console.log('%c Project Result : ', 'background: #222; color: #bada55', projectData);
+            //console.log('%c Project Result : ', 'background: #222; color: #bada55',projectData);
             if (!GENERAL_FORM_STATUS) {
                 $("#message-popup-modal").modal('show');
                 return false;

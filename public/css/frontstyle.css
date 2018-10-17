@@ -2503,3 +2503,7 @@ div.col-auto i.fa {
     vertical-align: middle;
     padding: 0 3px;
 }
+a:hover {
+    color: #1d68a7;
+    text-decoration: none !important;
+}

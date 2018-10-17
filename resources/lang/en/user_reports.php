@@ -6,6 +6,7 @@ return [
     'user_id' => 'User',
     'user_id__placeholder' => 'Select user',
     'title' => 'Title',
+    'project' => 'Project',
     'title__placeholder' => 'Enter title here...',
     'status' => 'Status',
     'status__placeholder' => 'Enter status here...',
