@@ -11,13 +11,17 @@
         },
         "Options":{
             "Title":"Options",
-            "hoverText":"We need the location to get the specific weather data."
+            "hoverText":"We need the location to get the specific weather data.",
+            "Language":"Language",
+            "ReCoolingType":"Re-cooling Type"
 
         },
         "HeatSource":{
             "Title":"Heat Source",
             "hoverText":"Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.",
-            "HeatCapacity":"Heat Capacity"
+            "HeatCapacity":"Heat Capacity",
+            "AvailableHeat":"Available Heat",
+            "Temperature":"Temperature"
         },
         "HeatingLoadProfile":{
             "Title":"Heating Load Profile",

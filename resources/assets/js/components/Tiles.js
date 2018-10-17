@@ -358,11 +358,11 @@ class Tiles extends React.Component {
                                        <h3>{heatSourceData[0].heat_capacity} kW</h3>
                                     </li>
                                     <li>
-                                       <p>Available Heat</p>
+                                       <p>{this.props.t('Tiles.HeatSource.AvailableHeat')}</p>
                                        <h3>1,767,768 kWh/a</h3>
                                     </li>
                                     <li>
-                                       <p>Temperature</p>
+                                       <p>{this.props.t('Tiles.HeatSource.Temperature')}</p>
                                        <h3><img src="images/degree-icon.png" alt="" /> 84°C</h3>
                                     </li>
                                  </ul>
@@ -501,15 +501,15 @@ class Tiles extends React.Component {
             var pricelist=(
                 <ul className="price-listt">
                                     <li>
-                                       <p>Cooling Capacity</p>
+                                       <p>{this.props.t('Tiles.CompressionChiller.HoverCoolingTitle')}</p>
                                        <h3>100.0 kW</h3>
                                     </li>
                                     <li>
-                                       <p>Number of Compressors</p>
+                                       <p>{this.props.t('Tiles.CompressionChiller.NumberofCompressor')}</p>
                                        <h3>3</h3>
                                     </li>
                                     <li>
-                                       <p>Temperature</p>
+                                       <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
                                        <h3><img src="public/images/degree-icon.png" alt="" /> 6°C</h3>
                                     </li>
                 </ul>
@@ -517,7 +517,7 @@ class Tiles extends React.Component {
             var priceFullList=(
                 <ul className="price-listt">
          <li>
-            <p>Language</p>
+            <p>{this.props.t('Tiles.Options.Language')}</p>
             <h3>English</h3>
          </li>
          <li>
@@ -525,7 +525,7 @@ class Tiles extends React.Component {
             <h3>Calculate</h3>
          </li>
          <li>
-            <p>Re-cooling Type</p>
+            <p>{this.props.t('Tiles.Options.ReCoolingType')}</p>
             <h3>Dry</h3>
          </li>
       </ul>
@@ -539,7 +539,7 @@ class Tiles extends React.Component {
 
                 <ul className="price-listt">
                               <li>
-                                 <p>Electricity Price</p>
+                                 <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
                                  <h3>0.1800 €/kWh</h3>
                               </li>
                            </ul>
@@ -547,11 +547,11 @@ class Tiles extends React.Component {
                         );
             var priceFullList=(<ul className="price-listt">
             <li>
-               <p>Electricity Price</p>
+               <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
                <h3>0.1800 €/kWh</h3>
             </li>
             <li>
-               <p>Gas Price</p>
+               <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
                <h3>0.035 €/kWh</h3>
             </li>
          </ul>);
@@ -561,22 +561,22 @@ class Tiles extends React.Component {
 
                                <ul className="price-listt plnewblock">
                                <li className="pdtnam">
-                                  <p>Electricity Price</p>
+                                  <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
                                   <h3>{this.state.economicData[0].electric_price}<br/>
                                   €/kWh</h3>
                                </li>
                                <li className="pdtnum">
-                               <p>own usage of Electricity</p>
+                               <p>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}</p>
                                   <h3>{this.state.economicData[0].own_usage_of_electricity}%</h3>
                                </li>
                                <div className="clrs"></div>
                                 <li className="pdtnam">
-                                  <p>Gas Price</p>
+                                  <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
                                   <h3>{this.state.economicData[0].gas_price}<br/>
                                   €/kWh</h3>
                                </li>
                                 <li className="pdtnum">
-                               <p>KWK-Subsidy for <br/>electricity</p>
+                               <p>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</p>
                                   <h3>{this.state.economicData[0].subsidy_for_electricity}</h3>
                                </li>
                             </ul>
@@ -588,19 +588,19 @@ class Tiles extends React.Component {
                                         <table className="table">
                                         <tbody>
                                         <tr>
-                                          <th>Electricity price:</th>
+                                          <th>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}:</th>
                                           <td>{this.state.economicData[0].electric_price} €/kWh</td>
                                        </tr>
                                        <tr>
-                                          <th>Gas price:</th>
+                                          <th>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}:</th>
                                           <td>{this.state.economicData[0].gas_price} €/kWh</td>
                                        </tr>
                                        <tr>
-                                          <th>Own usage of electricity: </th>
+                                          <th>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}: </th>
                                           <td>{this.state.economicData[0].own_usage_of_electricity}%</td>
                                        </tr>
                                        <tr>
-                                          <th>KWK-subsidy for electricity </th>
+                                          <th>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</th>
                                           <td>{this.state.economicData[0].subsidy_for_electricity}</td>
                                        </tr>
                                            </tbody>
