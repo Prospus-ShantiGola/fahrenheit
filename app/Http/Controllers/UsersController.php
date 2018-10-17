@@ -107,10 +107,15 @@ class UsersController extends Controller
     public function update($id, Request $request)
     {
         try {
-            $request['password']= bcrypt($request['password']);
-            $data = $this->getData($request);
+            $input = collect(request()->all())->filter()->all();
+            if(isset($input['password'])){
+                $input['password']= bcrypt($request['password']);
+            }
+
+           // $data = $this->getData($input);
+           // dd($data);
             $user = User::findOrFail($id);
-            $user->update($data);
+            $user->update($input);
             return redirect()->route('users.users.index')
                              ->with('success_message', trans('users.user_was_updated'));
 
@@ -215,10 +220,6 @@ class UsersController extends Controller
 
 
         $data = $request->validate($rules);
-
-
-
-
         return $data;
     }
     public function loginUser(Request $request)
