@@ -185,9 +185,9 @@
                                         {{ __('Login') }}
                                     </button>
 
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                   <!--  <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
-                                    </a>
+                                    </a> -->
                                 </div>
                             </div>
                         </form>
@@ -467,7 +467,7 @@ $(".fahrenheit-contact")[0].reset();
 
 
       $('.login-modal').on('click',function(e){
-        alert
+       
          if (loggedIn)
          {
            window.location = "user_reports"
