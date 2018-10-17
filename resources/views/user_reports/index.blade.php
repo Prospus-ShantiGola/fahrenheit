@@ -20,7 +20,7 @@
 
         @if(count($userReports) == 0)
             <div class="panel-body text-center">
-                <h4>No User Reports Available!</h4>
+                <h4>{{ __('user_reports.none_report_available')}}</h4>
             </div>
         @else
         <div class="panel-body panel-body-with-table">
@@ -29,13 +29,13 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>{{ __('user_reports.timestamp')}}</th>
-                            <th>{{ __('user_reports.project')}}</th>
+                            <th>{{ __('user_reports.table_timestamp')}}</th>
+                            <th>{{ __('user_reports.table_project')}}</th>
                             @can('isAdmin')
-                            <th>User</th>
-                            <th>Company Name</th>
+                            <th>{{ __('user_reports.table_user')}}</th>
+                            <th>{{ __('user_reports.table_company_name')}}</th>
                             @endcan
-                            <th>Actions</th>
+                            <th>{{ __('user_reports.table_actions')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +63,7 @@
                                             <i class="fas fa-file-pdf fa-lg disabled">
                                             </i>
                                         </a>
-                                        <a href="#"   title="Delete User Report" data-toggle="modal" data-backdrop="false" data-target="#delete-modal">
+                                        <a href="#"   title="{{ __('user_reports.table_disable_user_report')}}" data-toggle="modal" data-backdrop="false" data-target="#delete-modal">
                                                 <i class="fas fa-trash-alt fa-lg">
                                                     </i>
                                         </a>
@@ -98,15 +98,15 @@
 
                 </div>
                 <div class="modal-body">
-                        Are you sure you want to delete the report? Please confirm by clicking Yes.
+                        {{ __('user_reports.delete_popup_msg')}}
                 </div>
                 <div class="modal-footer">
                         <form method="POST" action="{!! route('user_reports.user_report.destroy', $userReport->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
-                  <button type="submit" class="btn btn-default" title="Delete User Report">Yes</button>
+                  <button type="submit" class="btn btn-default" title="Delete User Report">  {{ __('user_reports.delete_popup_yes')}}</button>
                 </form>
-                  <button type="button" class="btn btn-primary" id="modal-btn-no"  data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-primary" id="modal-btn-no"  data-dismiss="modal">  {{ __('user_reports.delete_popup_no')}}</button>
                 </div>
               </div>
             </div>

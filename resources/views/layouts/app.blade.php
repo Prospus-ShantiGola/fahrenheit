@@ -126,25 +126,25 @@
             <div class="container">
                     <div class="row justify-content-center">
                             <div class="card">
-                                    <div class="card-header dashboard">Dashboard</div>
+                                    <div class="card-header dashboard">{{ __('user_reports.left_menu_dashboard')}}</div>
 
                                     <div class="card-body">
                                             <div class="row">
                                                     <div class="col-3 left-menu">
                                                         <div class="container-fluid left-panel menu">
                                                             <div>
-                                                                    <a href="{{ route('user_reports.user_report.index') }}" title="Reports"> Projects </a>
+                                                                    <a href="{{ route('user_reports.user_report.index') }}" title="Reports"> {{ __('user_reports.left_menu_projects')}}</a>
                                                             </div>
                                                             @can('isAdmin')
                                                             <div>
-                                                                <a href="{{ route('users.users.index') }}" title="Users"> User Settings </a>
+                                                                <a href="{{ route('users.users.index') }}" title="Users"> {{ __('user_reports.left_menu_user_settings')}}</a>
                                                         </div>
                                                         <div>
-                                                            <a href="#"  class="disabled" title="Management Settings">Management Settings</a>
+                                                            <a href="#"  class="disabled" title="Management Settings">{{ __('user_reports.left_menu_management')}}</a>
                                                         </div>
                                                             @endcan
                                                             <div>
-                                                                    <a href="{{ route('users.users.edit', Auth::id() ) }}"   title="My Profile">My Profile</a>
+                                                                    <a href="{{ route('users.users.edit', Auth::id() ) }}"   title="My Profile">{{ __('user_reports.left_menu_my_profile')}}</a>
                                                                 </div>
 
                                                           </div></div>

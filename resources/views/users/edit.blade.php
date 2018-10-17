@@ -18,8 +18,8 @@
             </div> -->
             <div class="btn-group btn-group-sm pull-right" role="group">
 
-                <a href="#" onclick="javascript:window.history.go(-1);" class="btn btn-primary" title="Show All Users">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back</span>
+                <a href="#" onclick="javascript:window.history.go(-1);" class="btn btn-primary" title="{{ __('users.show_all_user')}}">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">{{ __('users.back_button')}}</span>
                 </a>
               <!--   @can('isAdmin')
                 <a href="{{ route('users.users.create') }}" class="btn btn-success" title="Create New Users">
@@ -50,7 +50,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Update">
+                        <input class="btn btn-primary" type="submit" value="{{ __('users.update_button')}}">
                     </div>
                 </div>
             </form>
