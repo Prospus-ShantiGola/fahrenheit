@@ -27,11 +27,10 @@
 
         </div>
         <div class="modal-body">
-               There is some issue while submitting you request.
-
+              {{ __('users.unexpected_error')}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal">Ok</button>
+          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal">  {{ __('users.ok_word')}}</button>
 
         </div>
       </div>

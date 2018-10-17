@@ -59,7 +59,7 @@ class UsersController extends Controller
             User::create($data);
 
             return redirect()->route('users.users.index')
-                             ->with('success_message', trans('users.model_was_added'));
+                             ->with('success_message', trans('users.user_was_added'));
 
         } catch (Exception $exception) {
             dd($exception);
@@ -112,7 +112,7 @@ class UsersController extends Controller
             $user = User::findOrFail($id);
             $user->update($data);
             return redirect()->route('users.users.index')
-                             ->with('success_message', trans('users.model_was_updated'));
+                             ->with('success_message', trans('users.user_was_updated'));
 
         } catch (Exception $exception) {
             dd($exception);
@@ -171,7 +171,7 @@ class UsersController extends Controller
             $user->delete();
 
             return redirect()->route('users.user.index')
-                             ->with('success_message', trans('users.model_was_deleted'));
+                             ->with('success_message', trans('users.user_was_deleted'));
 
         } catch (Exception $exception) {
 
