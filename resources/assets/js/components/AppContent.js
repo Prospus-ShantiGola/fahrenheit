@@ -111,8 +111,10 @@ class AppContent extends Component {
                         </div>
                     </div>
 
+                        <Provider store={store}>
+                        <Adcalc store={store} role={this.state.role} onFormChange={this.handleForm}/>
+                        </Provider>
 
-                        <Adcalc role={this.state.role} onFormChange={this.handleForm}/>
 
                 </div>
                 </div>

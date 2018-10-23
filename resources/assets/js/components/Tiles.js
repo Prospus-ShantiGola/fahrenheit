@@ -19,6 +19,8 @@ class Tiles extends React.Component {
             economicDataChange:false,
             heatSourceData:[],
             heatSourceDataChange:false,
+            heatingProfileData:[],
+            heatingProfileDataChange:false,
                };
         this.editRecord=this.editRecord.bind(this);
         this.editHeatRecord=this.editHeatRecord.bind(this);
@@ -68,11 +70,17 @@ class Tiles extends React.Component {
                 }
                 break;
             case HEAT_SOURCE_TITLE:
+            this.setState({
+                heatSourceData:nextProps.dataRecord,
+                heatSourceDataChange:nextProps.dataChange
+            });
+            break;
+            case HEAT_LOAD_PROFILE_TITLE:
                 this.setState({
-                    heatSourceData:nextProps.dataRecord,
-                    heatSourceDataChange:nextProps.dataChange
+                    heatingProfileData:nextProps.dataRecord,
+                    heatingProfileDataChange:nextProps.dataChange
                 });
-                break
+                break;
             default:
                 break;
         }
@@ -100,6 +108,15 @@ class Tiles extends React.Component {
         {
           this.setState({
               heatSourceDataChange: false
+            });
+        }
+        else{
+            jQuery(".scrollbar-macosx").scrollbar();
+        }
+        if(this.state.heatingProfileData.length==0)
+        {
+          this.setState({
+            heatingProfileDataChange: false
             });
         }
         else{
@@ -199,7 +216,7 @@ class Tiles extends React.Component {
         $(this.props.modalId).find('#chillerformModeKey').val(elemKey);
         //$(this.props.modalId).find
     }
-    editHeatRecord(elemKey){
+    editHeatRecord(elemKey,modalID){
         let dataObj=this.state.heatSourceData[elemKey];
         for (var key in dataObj) {
             if (dataObj.hasOwnProperty(key)) {
@@ -207,8 +224,8 @@ class Tiles extends React.Component {
                 $(this.props.modalId).find('#'+key).val(dataObj[key]);
             }
         }
-        $(this.props.modalId).find('#heatsourceformMode').val("edit");
-        $(this.props.modalId).find('#heatsourceformModeKey').val(elemKey);
+        $(this.props.modalId).find('#'+modalID.hiddenmode).val("edit");
+        $(this.props.modalId).find('#'+modalID.hiddenmodekey).val(elemKey);
         //$(this.props.modalId).find
     }
     deleteRecord(eleId,eleM){
@@ -248,7 +265,8 @@ class Tiles extends React.Component {
     };
 
     render() {
-        //console.log("render refresh",this.state.heatSourceData);
+        console.log("render refresh",this.state.heatSourceData);
+        //this.props.store.dispatch("ADD_GENERAL")
         projectData['generalData'] = this.state.generalData;   //use to store the object to save the data
         projectData['economicData'] = this.state.economicData; //use to store the object to save the data
         const dragSet=false;
@@ -387,7 +405,7 @@ class Tiles extends React.Component {
                                                       <li>85°C </li>
                                                    </ul>
                                                 </th>
-                                                <td><span className="edit-option" data-id={h}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editHeatRecord(h)}></i></span>
+                                                <td><span className="edit-option" data-id={h}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editHeatRecord(h,{hiddenmode:"heatsourceformMode",hiddenmodekey:"heatsourceformModeKey"})}></i></span>
             <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem)=>this.deleteRecord(h,elem)}></i></span>
             <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
          </td>
@@ -440,19 +458,113 @@ class Tiles extends React.Component {
         }
     }
 
+    if(this.props.title==HEAT_LOAD_PROFILE_TITLE){
+        if(this.state.heatingProfileDataChange==true && this.state.heatingProfileData.length!=0){
+            let heatingProfileData=this.state.heatingProfileData;
+            var pricelist=(
+                <ul className="price-listt scrollbar-macosx">
+                                   <li>
+                                       <p>{this.props.t('HeatingProfile.HeatingDemand.Title')}</p>
+                                       <h3>464,068 kWh/a</h3>
+                                    </li>
+                                    <li>
+                                       <p>{this.props.t('HeatingProfile.UnusedHeat.Title')}</p>
+                                       <h3>1,303,700 kWh/a</h3>
+                                    </li>
+                                 </ul>
+            );
+
+            var bodyContent="Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
+            var deleteModal=<DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="heatSource" id="delete-heat-modal"/>;
+            var priceFullList=(
+                <div>
+
+                    <div className="hover-list scrollbar-macosx">
+                        <div className="table-responsive">
+                            <table className="table">
+                                <tbody className="heatingloadprofileTableBody">
+                                    {heatingProfileData.map((data, h) => (
+                                        <tr key={h} data-id={h}>
+                                            <th>
+                                            {data.profile_name}
+                                                   <ul className="list-inline">
+                                                    <li> {data.profile_type}
+                                                      </li>
+                                                    <li>41.5 kW</li>
+                                                </ul>
+                                            </th>
+                                            <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h,{hiddenmode:"heatingprofileformMode",hiddenmodekey:"heatingprofileformModeKey"})}></i></span>
+                                                <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span>
+                                                <span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            var that=this;
+            if(typeof $('.heatingloadprofileTableBody')[0] !="undefined"){
+                jQuery(".heating-load-hover .scrollbar-macosx").scrollbar();
+
+                if(that.props.title==HEAT_LOAD_PROFILE_TITLE){
+
+                    this.sort=Sortable.create(
+                        $('.heatingloadprofileTableBody')[0],
+                        {
+                        animation: 150,
+                        scroll: true,
+                        sort: true,
+                        dataIdAttr: 'data-id',
+                        handle: '.drag-handler',
+                        onEnd:function (/**Event*/evt) {
+                            evt.oldIndex;  // element's old index within old parent
+                            evt.newIndex;  // element's new index within new parent
+                        },
+                        onUpdate: function (/**Event*/evt) {
+                            // same properties as onEnd
+                            evt.oldIndex;  // element's old index within old parent
+                            evt.newIndex;  // element's new index within new parent
+
+                            var clonedArr=that.state.heatingProfileData;
+                            clonedArr=that.arrayMove(clonedArr,evt.oldIndex,evt.newIndex);
+                            that.updateHeatSourceList(clonedArr);
+                        }
+                        }
+                        );
+                       var order = this.sort.toArray();
+                       this.sort.sort(order.sort());
+
+                    }
+        }
+        }
+        else{
+            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+        }
+    }
+
         if(this.state.generalDataChange){
             var pricelist=(
-                <ul className="price-listt">
-                 <li>
-                                 <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
+
+                <ul className="price-listt plnewblock">
+						      <li className="pdtnam">
+                              <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
                                  <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
                               </li>
-                              <li>
+							  <li className="pdtnum">
+                              <p>{this.props.t('General.Tab.Project.ProjectNumber.Title')}</p>
+                                 <h3 className="textUpper">{this.state.generalData[0].project_number}</h3>
+                              </li>
+							  <div className="clrs"></div>
+							     <li>
                                  <p>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}</p>
                                  <h3 className="textUpper">{this.state.generalData[0].editor}</h3>
                               </li>
                               <li>
-                                 <p>{this.props.t('General.Tab.Project.ProjectLocation.Title')}</p>
+                              <p>{this.props.t('General.Tab.Project.ProjectLocation.Title')}</p>
                                  <h3 className="textUpper">{this.state.generalData[0].location}</h3>
                               </li>
                            </ul>

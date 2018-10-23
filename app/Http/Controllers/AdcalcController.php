@@ -84,6 +84,19 @@ class AdcalcController extends Controller
       return response()->json(['success'=>'Record is successfully added']);
 
 }
+public function storeHeatingProfileInformation(Request $request)
+  {
+      $validator = \Validator::make($request->all(), [
+
+      ]);
+
+      if ($validator->fails())
+      {
+          return response()->json(['errors'=>$validator->errors()->keys()]);
+      }
+      return response()->json(['success'=>'Record is successfully added']);
+
+}
 public function storeProjectInformation(Request $request)
   {
     $generalData = $request->input('generalData');

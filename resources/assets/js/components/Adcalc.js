@@ -4,6 +4,7 @@ import ChillerModal from './ChillerModal';
 import GeneralModal from './GeneralModal';
 import EconomicModal from './EconomicModal';
 import HeatSourceModal from './HeatSourceModal';
+import HeatingProfileModal from './HeatingProfileModal';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 
 class Adcalc extends Component {
@@ -21,8 +22,9 @@ class Adcalc extends Component {
                 stateChange:false,
                 heatSourceRecord:[]
             },
-            HeatingLoadProfileStateChange: {
-                stateChange:false
+            heatingProfileStateChange: {
+                stateChange:false,
+                heatingProfileRecord:[]
             },
             generalStateChange: {
                 stateChange:false,
@@ -40,6 +42,7 @@ class Adcalc extends Component {
         this.handleGeneralForm = this.handleGeneralForm.bind(this);
         this.handleEconomicForm = this.handleEconomicForm.bind(this);
         this.handleHeatForm = this.handleHeatForm.bind(this);
+        this.handleHeatProfileForm = this.handleHeatProfileForm.bind(this);
 
     }
     handleChillerForm (result)  {
@@ -72,6 +75,20 @@ class Adcalc extends Component {
 
 
     }
+    handleHeatProfileForm (result)  {
+        if(result.HeatingProfile.heatingprofileformMode=="add"){
+            this.setState({heatingProfileStateChange:{
+                stateChange:result.state,
+                heatingProfileRecord:this.state.heatingProfileStateChange.heatingProfileRecord.concat(result.HeatingProfile)
+                }
+});
+        }else{
+            this.state.heatingProfileStateChange.heatingProfileRecord[result.HeatingProfile.heatingprofileformModeKey]= result.HeatingProfile
+            this.forceUpdate()
+        }
+
+
+    }
     handleGeneralForm (result)  {
         this.setState({generalStateChange:{
                                             generalRecord:result.generalInformation,
@@ -90,7 +107,7 @@ class Adcalc extends Component {
     render() {
         projectData['chillerData'] = this.state.compressionChilerStateChange.chillerRecord;
         projectData['heatSourceData'] = this.state.heatSourceStateChange.heatSourceRecord;
-
+        let store= this.props.store;
         const tiles={
             general:{
                 title: GENERAL_TILE,
@@ -182,7 +199,7 @@ class Adcalc extends Component {
                 multiple:true
             },
             HeatingLoadProfile:{
-                title:'Heating Load Profile',
+                title:HEAT_LOAD_PROFILE_TITLE,
                 header:this.props.t('Tiles.HeatingLoadProfile.Title'),
                 tileCls:'heating-load-profiles data-box',
                 required:"no",
@@ -191,7 +208,7 @@ class Adcalc extends Component {
                 editIcon:'public/images/add-icon.png',
                 add:'no',
                 hoverText:this.props.t('Tiles.HeatingLoadProfile.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
+                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
                 hoverCls:'main-hover-box heating-load-hover',
                 priceLst:'no',
                 priceData:{
@@ -201,7 +218,7 @@ class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#compression-chiller'
+                modalId:'#heating-profile'
             },
             CompressionChiller:{
                 title:CHILLER_TITLE,
@@ -298,7 +315,8 @@ class Adcalc extends Component {
                 rightpriceListeData={tiles.general.rightpriceListeData}
                 modalId={tiles.general.modalId}
                 dataChange={this.state.generalStateChange.stateChange}
-                dataRecord={this.state.generalStateChange.generalRecord}/>
+                dataRecord={this.state.generalStateChange.generalRecord}
+                store={store}/>
                 <Tiles
                 title={tiles.Economic.title}
                 header={tiles.Economic.header}
@@ -318,7 +336,8 @@ class Adcalc extends Component {
                 rightpriceListeData={tiles.Economic.rightpriceListeData}
                 modalId={tiles.Economic.modalId}
                 dataChange={this.state.economicStateChange.stateChange}
-                dataRecord={this.state.economicStateChange.economicRecord} />
+                dataRecord={this.state.economicStateChange.economicRecord}
+                store={store}/>
                 <Tiles
                 title={tiles.Options.title}
                 header={tiles.Options.header}
@@ -337,7 +356,8 @@ class Adcalc extends Component {
                 rightpriceList={tiles.Options.rightpriceList}
                 rightpriceListeData={tiles.Options.rightpriceListeData}
                 modalId={tiles.general.modalId}
-                dataChange={this.state.HeatSourceStateChange}/>
+                dataChange={this.state.HeatSourceStateChange}
+                store={store}/>
                  </div>
                  <div className="row">
                     <div className="col-md-12 col-sm-12 col-12 col-lg-8 col-xl-8">
@@ -361,7 +381,8 @@ class Adcalc extends Component {
                         modalId={tiles.HeatSource.modalId}
                         dataChange={this.state.heatSourceStateChange.stateChange}
                         dataRecord={this.state.heatSourceStateChange.heatSourceRecord}
-                        multiple={tiles.HeatSource.multiple}/>
+                        multiple={tiles.HeatSource.multiple}
+                        store={store}/>
 
                         <Tiles  title={tiles.HeatingLoadProfile.title}
                         header={tiles.HeatingLoadProfile.header}
@@ -379,7 +400,11 @@ class Adcalc extends Component {
                         priceData={tiles.HeatingLoadProfile.priceData}
                         rightpriceList={tiles.HeatingLoadProfile.rightpriceList}
                         rightpriceListeData={tiles.HeatingLoadProfile.rightpriceListeData}
-                        modalId={tiles.general.modalId} />
+                        modalId={tiles.HeatingLoadProfile.modalId}
+                        dataChange={this.state.heatingProfileStateChange.stateChange}
+                        dataRecord={this.state.heatingProfileStateChange.heatingProfileRecord}
+                        multiple={tiles.HeatSource.multiple}
+                        store={store}/>
                        </div>
                        <div className="row">
                         <Tiles  title={tiles.CompressionChiller.title}
@@ -401,7 +426,8 @@ class Adcalc extends Component {
                         modalId={tiles.CompressionChiller.modalId}
                         dataChange={this.state.compressionChilerStateChange.stateChange}
                         dataRecord={this.state.compressionChilerStateChange.chillerRecord}
-                        multiple={tiles.CompressionChiller.multiple} />
+                        multiple={tiles.CompressionChiller.multiple}
+                        store={store}/>
 
                         <Tiles  title={tiles.CoolingLoadProfile.title}
                         header={tiles.CoolingLoadProfile.header}
@@ -420,7 +446,8 @@ class Adcalc extends Component {
                         rightpriceList={tiles.CoolingLoadProfile.rightpriceList}
                         rightpriceListeData={tiles.CoolingLoadProfile.rightpriceListeData}
                         modalId={tiles.general.modalId}
-                        dataChange={this.state.HeatSourceStateChange}/>
+                        dataChange={this.state.HeatSourceStateChange}
+                        store={store}/>
                        </div>
                     </div>
                     <Tiles  title={tiles.FahrenheitSystem.title}
@@ -440,12 +467,14 @@ class Adcalc extends Component {
                 rightpriceList={tiles.FahrenheitSystem.rightpriceList}
                 rightpriceListeData={tiles.FahrenheitSystem.rightpriceListeData}
                 modalId={tiles.general.modalId}
-                dataChange={this.state.HeatSourceStateChange}/>
+                dataChange={this.state.HeatSourceStateChange}
+                store={store}/>
                  </div>
-                 <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} />
+                 <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} store={store}/>
                  <GeneralModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
-                 <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} />
-                 <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} />
+                 <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} store={store}/>
+                 <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/>
+                 <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
 
 
               </div>

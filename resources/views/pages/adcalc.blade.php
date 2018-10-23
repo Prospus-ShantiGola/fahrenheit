@@ -59,10 +59,11 @@
             <?php
         }
 ?>
-        GENERAL_TILE= "General Information";
+       GENERAL_TILE= "General Information";
        CHILLER_TITLE= "Compression Chiller";
        ECONOMIC_TITLE= "Economic Data";
        HEAT_SOURCE_TITLE= "Heat Source";
+       HEAT_LOAD_PROFILE_TITLE= "Heating Load Profile";
        CHANGE_FORM=false;
        GENERAL_FORM_STATUS=false;
        NO_CUSTOM_FIELD_GENERAL=0;
