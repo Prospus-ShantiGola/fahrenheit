@@ -6,6 +6,7 @@ import EconomicModal from './EconomicModal';
 import HeatSourceModal from './HeatSourceModal';
 import HeatingProfileModal from './HeatingProfileModal';
 import CoolingProfileModal from './CoolingProfileModal';
+import OptionsModal from './OptionsModal';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 
 class Adcalc extends Component {
@@ -193,7 +194,7 @@ class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#compression-chiller'
+                modalId:'#profile-information'
             },
             HeatSource:{
                 title:HEAT_SOURCE_TITLE,
@@ -375,7 +376,7 @@ class Adcalc extends Component {
                 priceData={tiles.Options.priceData}
                 rightpriceList={tiles.Options.rightpriceList}
                 rightpriceListeData={tiles.Options.rightpriceListeData}
-                modalId={tiles.general.modalId}
+                modalId={tiles.Options.modalId}
                 dataChange={this.state.HeatSourceStateChange}
                 store={store}/>
                  </div>
@@ -498,6 +499,8 @@ class Adcalc extends Component {
                  <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/>
                  <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
                  <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store}/>
+                 <OptionsModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
+
 
 
               </div>

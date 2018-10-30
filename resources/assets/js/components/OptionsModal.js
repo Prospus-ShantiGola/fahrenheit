@@ -160,172 +160,242 @@ handleGeneralSubmit(event) {
 
 
         return (
-            <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-information">
-            <div className="modal-dialog ">
-            <form  onSubmit={this.handleGeneralSubmit} className = "general-information-form">
-
-           <div className="modal-content">
-            <div className="modal-heading">
-               <div className="left-head"> {this.props.t('General.Title')}</div>
-               <div className="right-head">
+            <div className="modal modal_multi"  role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="profile-information">
+            <div className="modal-content">
+              <div className="modal-heading">
+                <div className="left-head"> Options</div>
+                <div className="right-head">
                   <ul className="list-inline">
-
-                    {/* <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li> */}
-                     <li> <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
-                      <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
-
+                    <li className="help-toggle"><img src="public/images/help-icon.png" alt="" /></li>
+                    <li><img src="public/images/verifie-icon.png" alt="" /></li>
+                    <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" /></span></li>
                   </ul>
-               </div>
-            </div>
-            <div className="modal-body-content">
-               <ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
-                  <li className="nav-item"><a href="" data-target="#project-data" data-toggle="tab" className="nav-link small active">{this.props.t('General.Tab.Project.Title')}</a></li>
-                  <li className="nav-item"><a href="" data-target="#personal-data" data-toggle="tab" className="nav-link">{this.props.t('General.Tab.Personal.Title')}</a></li>
-               </ul>
-               <div id="tabsJustifiedContent" className="tab-content">
-                  <div id="project-data" className="tab-pane fade  active show">
-                     <div className="project-data-div">
-                        <div className="table-responsive">
-                           <table className="table">
-                                   <tbody>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectNumber.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectNumber.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt=""  />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" placeholder={this.props.t('General.Tab.Project.ProjectNumber.Placeholder')} name = "project_number" id = "project_number" /> </td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectName.Title')}: </td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectName.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" placeholder={this.props.t('General.Tab.Project.ProjectName.Placeholder')} name = "project_name" id = "project_name" />
-                                 <input type="hidden" placeholder="Chiller 1" id="generalformMode"   name="generalformMode" value="add" /></td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectLocation.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectLocation.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" title={this.props.t('RequiredField.ErrorMsg')} placeholder={this.props.t('General.Tab.Project.ProjectLocation.Placeholder')} required  className="required-field" name = "location" id = "location" onFocus={(elem) => this.initializeAutocomplete(elem)} /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
-
-                                 <span className="invalid-feedback" role="alert">
-                                             <strong>{this.props.t('RequiredField.Message')}</strong>
-                                       </span>
-                                       </td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectCustomer.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectCustomer.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" name = "customer" id = "customer" placeholder={this.props.t('General.Tab.Project.ProjectCustomer.Placeholder')}/></td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectContact.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectContact.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" name = "contact" id = "contact" placeholder={this.props.t('General.Tab.Project.ProjectContact.Placeholder')} /></td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectPhone.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectPhone.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text"  pattern="^\d{10}$"   name = "phone_number" id = "phone_number" placeholder={this.props.t('General.Tab.Project.ProjectPhone.Placeholder')} /></td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Project.ProjectEmail.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Project.ProjectEmail.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="email" title={this.props.t('RequiredField.ErrorMsg')} name = "email_address" id = "email_address" required  className="required-field" placeholder={this.props.t('General.Tab.Project.ProjectEmail.Placeholder')} /></td>
-                              </tr>
-                                      </tbody>
-                           </table>
-                        </div>
-                     </div>
+                </div>
+              </div>
+              <div className="modal-body-content">
+                <ul id="tabsJustified2" className="nav nav-tabs project-specifications">
+                  <li className="nav-item"><a href="" data-target="#option-general" data-toggle="tab" className="nav-link small active">GENERAL</a></li>
+                  <li className="nav-item"><a href="" data-target="#project-specification" data-toggle="tab" className="nav-link">PROJECT
+                      SPECIFICATIONS</a></li>
+                </ul>
+                <div id="tabsJustifiedContent2" className="tab-content">
+                  <div id="option-general" className="tab-pane fade  active show">
+                    <div className="option-general-div">
+                      <div className="table-responsive">
+                        <table className="table">
+                          <tr>
+                            <td className="input-label"> Language:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Project number explanation/tip" >
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <ul className="list-inline">
+                                <li><img src="public/images/germany-flag.png" alt="" /></li>
+                                <li><img src="public/images/united-kingdom.png" alt="" /></li>
+                                <li><img src="public/images/poland-flag.png" alt="" /></li>
+                                <li><img src="public/images/italy.png" alt="" /></li>
+                                <li><img src="public/images/greece-flag.png" alt="" /></li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">BAFA 2018:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>Calculate</option>
+                                <option>option1</option>
+                                <option>option2</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Re-cooling Method:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Customer explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>Dry</option>
+                                <option>dry1</option>
+                                <option>dry2</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Re-cooling Temperature:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Contact explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields"><input type="text" placeholder="25 °C" /></td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Free Cooling:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Customer explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>Yes (chilled water temperature)</option>
+                                <option>option1</option>
+                                <option>option2</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Heat Sources:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Customer explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>Utilize also for heating load profile</option>
+                                <option>option1</option>
+                                <option>option2</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Heat Supply:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Customer explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>Priority for heating load profile</option>
+                                <option>option1</option>
+                                <option>option2</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label"> Conventional heat source:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Location explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields"><input type="text" placeholder="Boiler, 2x 100 kW"/></td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Calculation method:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Customer explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>Chilled water inlet temperature </option>
+                                <option>option1</option>
+                                <option>option2</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Ambient temperature step:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Customer explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>constant</option>
+                                <option>option1</option>
+                                <option>option2</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Heating load profile:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Customer explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>1.0 K</option>
+                                <option>option1</option>
+                                <option>option2</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Cooling load profile:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Customer explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields">
+                              <select>
+                                <option>Capacity [kW]</option>
+                                <option>option1</option>
+                                <option>option2</option>
+                              </select>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
                   </div>
-                  <div id="personal-data" className="tab-pane fade">
-                     <div className="personal-data-div">
-                        <div className="table-responsive">
-                           <table className="table">
-                                   <tbody>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalEditor.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalEditor.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" name ="editor" id ="editor" placeholder={this.props.t('General.Tab.Personal.PersonalEditor.Placeholder')} /> </td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalCompany.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalCompany.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" name = "company" id = "company" placeholder={this.props.t('General.Tab.Personal.PersonalCompany.Placeholder')}/></td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalAddress.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalAddress.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" title={this.props.t('RequiredField.ErrorMsg')} name = "address" required   id = "address" onFocus={(elem) => this.initializeAutocomplete(elem)} placeholder={this.props.t('General.Tab.Personal.PersonalAddress.Placeholder')} className="required-field" /> <i className="fa fa-map-marker disabled" aria-hidden="true"></i>
-                                 <span className="invalid-feedback" role="alert">
-                                             <strong>{this.props.t('RequiredField.Message')}</strong>
-                                       </span>
-
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalPhone.Title')}:</td>
-                                 <td className="input-help-label"><button type="button"    className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalPhone.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text"  pattern="^\d{10}$"   name = "personal_phone_number" id = "personal_phone_number" placeholder={this.props.t('General.Tab.Personal.PersonalPhone.Placeholder')} /></td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalMobile.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalMobile.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="text" pattern="^\d{10}$"  name = "mobile_number" id = "mobile_number" placeholder={this.props.t('General.Tab.Personal.PersonalMobile.Placeholder')} /></td>
-                              </tr>
-                              <tr>
-                                 <td className="input-label">{this.props.t('General.Tab.Personal.PersonalEmail.Title')}:</td>
-                                 <td className="input-help-label"><button type="button" className="" data-container="body"data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content={this.props.t('General.Tab.Personal.PersonalEmail.InfoTool')}>
-                                    <img src="public/images/help-red.png" alt="" />
-                                    </button>
-                                 </td>
-                                 <td className="input-fields"><input type="email"  required  className="required-field" name = "personal_email_address" id = "personal_email_address" placeholder={this.props.t('General.Tab.Personal.PersonalEmail.Placeholder')} /></td>
-                              </tr>
-                                      </tbody>
-                           </table>
-                        </div>
-                     </div>
+                  <div id="project-specification" className="tab-pane fade">
+                    <div className="personal-data-div">
+                      <div className="table-responsive">
+                        <table className="table">
+                          <tr>
+                            <td className="input-label">Bus system: </td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Editor explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields"><input type="text" placeholder=""/> </td>
+                          </tr>
+                          <tr>
+                            <td className="input-label">Controller:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Company explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields"><input type="text" placeholder=""/></td>
+                          </tr>
+                          <tr>
+                            <td className="input-label"> Pressure drop in the piping:</td>
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                                data-placement="bottom" data-content="Address explanation/tip">
+                                <img src="public/images/help-red.png" alt="" />
+                              </button>
+                            </td>
+                            <td className="input-fields"><input type="text" placeholder=""/> </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
                   </div>
-               </div>
+                </div>
+              </div>
             </div>
-            <div style={Header}>{this.props.t('RequiredField.Note')}</div>
-         </div>
-
-            </form>
-            </div>
-         </div>
+          </div>
 
         );
     }

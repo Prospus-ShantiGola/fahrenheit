@@ -57445,7 +57445,8 @@ var Breadcrumb = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__HeatSourceModal__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__HeatingProfileModal__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__CoolingProfileModal__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react_multi_lang__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__OptionsModal__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_react_multi_lang__ = __webpack_require__(2);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -57455,6 +57456,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -57654,7 +57656,7 @@ var Adcalc = function (_Component) {
                     priceData: {},
                     rightpriceList: 'no',
                     rightpriceListeData: {},
-                    modalId: '#compression-chiller'
+                    modalId: '#profile-information'
                 },
                 HeatSource: {
                     title: HEAT_SOURCE_TITLE,
@@ -57778,7 +57780,7 @@ var Adcalc = function (_Component) {
                         required: tiles.Options.required,
                         edit: tiles.Options.edit,
                         mainclass: tiles.Options.mainClass,
-                        tileCls: tiles.Options.tileCls }, _defineProperty(_React$createElement3, 'required', tiles.Options.required), _defineProperty(_React$createElement3, 'edit', tiles.Options.edit), _defineProperty(_React$createElement3, 'editCls', tiles.Options.editCls), _defineProperty(_React$createElement3, 'editIcon', tiles.Options.editIcon), _defineProperty(_React$createElement3, 'add', tiles.Options.add), _defineProperty(_React$createElement3, 'hoverText', tiles.Options.hoverText), _defineProperty(_React$createElement3, 'hoverCls', tiles.Options.hoverCls), _defineProperty(_React$createElement3, 'priceLst', tiles.Options.priceLst), _defineProperty(_React$createElement3, 'priceData', tiles.Options.priceData), _defineProperty(_React$createElement3, 'rightpriceList', tiles.Options.rightpriceList), _defineProperty(_React$createElement3, 'rightpriceListeData', tiles.Options.rightpriceListeData), _defineProperty(_React$createElement3, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement3, 'dataChange', this.state.HeatSourceStateChange), _defineProperty(_React$createElement3, 'store', store), _React$createElement3))
+                        tileCls: tiles.Options.tileCls }, _defineProperty(_React$createElement3, 'required', tiles.Options.required), _defineProperty(_React$createElement3, 'edit', tiles.Options.edit), _defineProperty(_React$createElement3, 'editCls', tiles.Options.editCls), _defineProperty(_React$createElement3, 'editIcon', tiles.Options.editIcon), _defineProperty(_React$createElement3, 'add', tiles.Options.add), _defineProperty(_React$createElement3, 'hoverText', tiles.Options.hoverText), _defineProperty(_React$createElement3, 'hoverCls', tiles.Options.hoverCls), _defineProperty(_React$createElement3, 'priceLst', tiles.Options.priceLst), _defineProperty(_React$createElement3, 'priceData', tiles.Options.priceData), _defineProperty(_React$createElement3, 'rightpriceList', tiles.Options.rightpriceList), _defineProperty(_React$createElement3, 'rightpriceListeData', tiles.Options.rightpriceListeData), _defineProperty(_React$createElement3, 'modalId', tiles.Options.modalId), _defineProperty(_React$createElement3, 'dataChange', this.state.HeatSourceStateChange), _defineProperty(_React$createElement3, 'store', store), _React$createElement3))
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
@@ -57831,7 +57833,8 @@ var Adcalc = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__EconomicModal__["a" /* default */], { role: this.props.role, onEconomicSubmit: this.handleEconomicForm, store: store }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__HeatSourceModal__["a" /* default */], { role: this.props.role, onHeatSubmit: this.handleHeatForm, store: store }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__HeatingProfileModal__["a" /* default */], { role: this.props.role, onHeatProfileSubmit: this.handleHeatProfileForm, store: store }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__CoolingProfileModal__["a" /* default */], { role: this.props.role, onCoolingProfileSubmit: this.handleCoolingProfileForm, store: store })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__CoolingProfileModal__["a" /* default */], { role: this.props.role, onCoolingProfileSubmit: this.handleCoolingProfileForm, store: store }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__OptionsModal__["a" /* default */], { role: this.props.role, onGeneralSubmit: this.handleGeneralForm })
             );
         }
     }]);
@@ -57839,7 +57842,7 @@ var Adcalc = function (_Component) {
     return Adcalc;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_8_react_multi_lang__["c" /* translate */])(Adcalc));
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_9_react_multi_lang__["c" /* translate */])(Adcalc));
 
 /***/ }),
 /* 71 */
@@ -66774,6 +66777,855 @@ var ADD_GENERAL = "ADD_GENERAL";
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_multi_lang__ = __webpack_require__(2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Header = {
+  padding: "10px 20px",
+  textAlign: "center",
+  color: "red",
+  fontSize: "14px"
+};
+
+var OptionsModal = function (_Component) {
+  _inherits(OptionsModal, _Component);
+
+  function OptionsModal(props) {
+    _classCallCheck(this, OptionsModal);
+
+    var _this = _possibleConstructorReturn(this, (OptionsModal.__proto__ || Object.getPrototypeOf(OptionsModal)).call(this, props));
+
+    _this.state = { generalInformation: '', role: 'user' };
+    _this.handleGeneralSubmit = _this.handleGeneralSubmit.bind(_this);
+    _this.changeState = _this.changeState.bind(_this);
+    return _this;
+  }
+
+  _createClass(OptionsModal, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      jQuery(".help-toggle").unbind('click');
+      jQuery(".help-toggle").click(function () {
+        jQuery(".input-help-label").toggle();
+      });
+      var that = this;
+      $('form.general-information-form input[required]').on('change invalid', function () {
+        var textfield = $(this).get(0);
+
+        // 'setCustomValidity not only sets the message, but also marks
+        // the field as invalid. In order to see whether the field really is
+        // invalid, we have to remove the message first
+        textfield.setCustomValidity('');
+
+        if (!textfield.validity.valid) {
+          textfield.setCustomValidity(that.props.t('RequiredField.ErrorMsg'));
+        }
+      });
+      jQuery('body').on('click', function (e) {
+        jQuery('[data-toggle="popover"]').each(function () {
+          //the 'is' for buttons that trigger popups
+          //the 'has' for icons within a button that triggers a popup
+          if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            jQuery(this).popover('hide');
+          }
+        });
+      });
+      $('.close-modal-general').on('click', function (e) {
+        if ($('.general-information-form').hasClass('form-edited')) {
+          // alert('eeee')
+          e.preventDefault();
+          $('#general-modal-confirm').modal('show');
+        } else {
+          $('#general-information').modal('hide');
+          $('.general-information-form')[0].reset();
+        }
+      });
+      //Do stuff here
+    }
+  }, {
+    key: 'initializeAutocomplete',
+    value: function initializeAutocomplete(elem) {
+      var input = document.getElementById(elem.target.id);
+      // var options = {
+      //   types: ['(regions)'],
+      //   componentRestrictions: {country: "IN"}
+      // };
+      var options = {};
+
+      var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+        var placeId = place.place_id;
+        // to set city name, using the locality param
+        var componentForm = {
+          locality: 'short_name'
+        };
+
+        console.log(lat, lng);
+        // initialize(lat, lng);
+        // //Drawing map on the basis of latitude and longitude.
+        // getMapInfo(lat, lng,place)
+      });
+    }
+  }, {
+    key: 'handleGeneralSubmit',
+    value: function handleGeneralSubmit(event) {
+      event.preventDefault();
+      var that = this;
+
+      var location = $(".general-information-form").find("input[name=location]").val();
+      var address = $(".general-information-form").find("input[name=address]").val();
+
+      fetch('adcalc/storeGeneralInformation', {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          location: location,
+          address: address
+
+        })
+      }).then(function (a) {
+        return a.json();
+      }).then(function (data) {
+        $(".general-information-form").find('.invalid-feedback').hide();
+        jQuery.each(data.errors, function (key, value) {
+          $(".general-information-form").find('#' + value).siblings('.invalid-feedback').show();
+        });
+
+        if (typeof data.errors == "undefined") {
+          var $form = $(".general-information-form");
+          var data = that.getFormData($form);
+          //console.log(data);
+          that.setState({
+            generalInformation: data
+          });
+          that.changeState(that.state.generalInformation);
+          GENERAL_FORM_STATUS = true;
+          $("#general-information").modal("hide");
+        }
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: 'changeState',
+    value: function changeState(generalInformation) {
+      var result = {
+        generalInformation: generalInformation,
+        state: true
+      };
+      CHANGE_FORM = true;
+      this.props.onGeneralSubmit(result);
+    }
+  }, {
+    key: 'getFormData',
+    value: function getFormData($form) {
+      var unindexed_array = $form.serializeArray();
+      var indexed_array = {};
+
+      $.map(unindexed_array, function (n, i) {
+        indexed_array[n['name']] = n['value'];
+      });
+
+      return indexed_array;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      projectData['generalData'] = this.state.generalInformation;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'modal modal_multi', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'profile-information' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'modal-content' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'modal-heading' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'left-head' },
+              ' Options'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'right-head' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'ul',
+                { className: 'list-inline' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'li',
+                  { className: 'help-toggle' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-icon.png', alt: '' })
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'li',
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/verifie-icon.png', alt: '' })
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'li',
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'span',
+                    { className: 'close close_multi' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/cancle-icon.png', alt: '' })
+                  )
+                )
+              )
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'modal-body-content' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'ul',
+              { id: 'tabsJustified2', className: 'nav nav-tabs project-specifications' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'li',
+                { className: 'nav-item' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'a',
+                  { href: '', 'data-target': '#option-general', 'data-toggle': 'tab', className: 'nav-link small active' },
+                  'GENERAL'
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'li',
+                { className: 'nav-item' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'a',
+                  { href: '', 'data-target': '#project-specification', 'data-toggle': 'tab', className: 'nav-link' },
+                  'PROJECT SPECIFICATIONS'
+                )
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { id: 'tabsJustifiedContent2', className: 'tab-content' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { id: 'option-general', className: 'tab-pane fade  active show' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'div',
+                  { className: 'option-general-div' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'table-responsive' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'table',
+                      { className: 'table' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          ' Language:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Project number explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'ul',
+                            { className: 'list-inline' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'li',
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/germany-flag.png', alt: '' })
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'li',
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/united-kingdom.png', alt: '' })
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'li',
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/poland-flag.png', alt: '' })
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'li',
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/italy.png', alt: '' })
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'li',
+                              null,
+                              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/greece-flag.png', alt: '' })
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'BAFA 2018:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'Calculate'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option2'
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Re-cooling Method:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'Dry'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'dry1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'dry2'
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Re-cooling Temperature:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Contact explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '25 \xB0C' })
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Free Cooling:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'Yes (chilled water temperature)'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option2'
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Heat Sources:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'Utilize also for heating load profile'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option2'
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Heat Supply:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'Priority for heating load profile'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option2'
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          ' Conventional heat source:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Location explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Boiler, 2x 100 kW' })
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Calculation method:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'Chilled water inlet temperature '
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option2'
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Ambient temperature step:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'constant'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option2'
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Heating load profile:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              '1.0 K'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option2'
+                            )
+                          )
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Cooling load profile:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'Capacity [kW]'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option1'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              null,
+                              'option2'
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { id: 'project-specification', className: 'tab-pane fade' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'div',
+                  { className: 'personal-data-div' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'table-responsive' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'table',
+                      { className: 'table' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Bus system: '
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Editor explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '' }),
+                          ' '
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          'Controller:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Company explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '' })
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-label' },
+                          ' Pressure drop in the piping:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-help-label' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                              'data-placement': 'bottom', 'data-content': 'Address explanation/tip' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                          )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'td',
+                          { className: 'input-fields' },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '' }),
+                          ' '
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return OptionsModal;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_multi_lang__["c" /* translate */])(OptionsModal));
 
 /***/ })
 /******/ ]);
