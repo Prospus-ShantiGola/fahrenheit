@@ -455,7 +455,7 @@
                     "InfoTool":"Adresse Erklärung / Tipp"
                 },
                 "MaxCoolingLoad": {
-                    "Title":"Max. cooling load:",
+                    "Title":"Max. Kühllast",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Kundenerklärung / Trinkgeld"
                 },
@@ -470,7 +470,7 @@
                     "InfoTool":"Kundenerklärung / Trinkgeld"
                 }, 
                 "CoolingHour": {
-                    "Title":"Cooling hours",
+                    "Title":"Kühlstunden",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Kundenerklärung / Trinkgeld"
                 },

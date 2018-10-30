@@ -194,7 +194,7 @@ class CoolingProfileModal extends React.Component {
                                     <td className="input-fields">
                                        <ul className="list-inline">
                                           <li><input type="text" placeholder="10.0 kW" required pattern="\d*" className="required-field onlynumeric" name="cooling_base_load_to" id="cooling_base_load_to" /></li>
-                                          <li>from </li>
+                                          <li>{this.props.t('CoolingProfile.Tab.TechnicalData.From.Title')} </li>
                                           <li><input type="text" placeholder="10°C"  required pattern="\d*" className="icon-field required-field onlynumeric" name="cooling_base_load_from" id="cooling_base_load_from" /></li>
                                        </ul>
                                     </td>
@@ -209,7 +209,7 @@ class CoolingProfileModal extends React.Component {
                                        <ul className="list-inline">
                                           <li><input type="text" placeholder="0.0 kW"  name="cooling_zero_load_from" id="cooling_zero_load_from"  />
                                           </li>
-                                          <li>from</li>
+                                          <li>{this.props.t('CoolingProfile.Tab.TechnicalData.From.Title')}</li>
                                           <li> <input type="text" placeholder="10 °C" className="icon-field " name="cooling_zero_load_to" id="cooling_zero_load_to" /><i className="fa fa-calculator dropdown-calci" aria-hidden="true"></i></li>
                                        </ul>
                                     </td>
@@ -289,7 +289,7 @@ class CoolingProfileModal extends React.Component {
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
-                                                    <td className="input-fields"><input type="text" placeholder="Radiant cooling office" name="cooling_radiant_cooling_office" id="cooling_radiant_cooling_office" />
+                                                    <td className="input-fields"><input type="text" placeholder={this.props.t('CoolingProfile.Tab.TechnicalData.Name.Placeholder')} name="cooling_radiant_cooling_office" id="cooling_radiant_cooling_office" />
                                                         <input type="hidden" placeholder="Chiller 1" id="coolingprofileformMode" name="coolingprofileformMode" value="add" />
                                                         <input type="hidden" placeholder="Chiller 1" id="coolingprofileformModeKey" name="coolingprofileformModeKey" value="" /></td>
                                                 </tr>
@@ -319,7 +319,7 @@ class CoolingProfileModal extends React.Component {
                                                         <td className="input-fields">
                                                             <ul className="list-inline">
                                                                 <li><input type="text" required placeholder="50.0 kW" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" /></li>
-                                                                <li> at </li>
+                                                                <li> {this.props.t('CoolingProfile.Tab.TechnicalData.At.Title')} </li>
                                                                 <li><input type="text" placeholder="34°C" className="icon-field" name="cooling_max_cooling_load_at" id="cooling_max_cooling_load_at" /><i className="fa fa-calculator dropdown-calci" aria-hidden="true"></i>
                                                                 </li>
                                                             </ul>
