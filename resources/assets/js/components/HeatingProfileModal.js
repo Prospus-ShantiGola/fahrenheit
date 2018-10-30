@@ -275,7 +275,7 @@ class HeatingProfileModal extends React.Component {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="Office South"  name="profile_name" id="profile_name"/>
+                                 <td className="input-fields"><input type="text" placeholder={this.props.t('HeatingProfile.Tab.TechnicalData.Name.Placeholder')}  name="profile_name" id="profile_name"/>
                                  <input type="hidden" placeholder="Chiller 1" id="heatingprofileformMode"   name="heatingprofileformMode" value="add" />
                                  <input type="hidden" placeholder="Chiller 1" id="heatingprofileformModeKey"   name="heatingprofileformModeKey" value="" /></td>
                               </tr>
