@@ -130,6 +130,19 @@ public function storeProjectInformation(Request $request)
       return response()->json(['success'=>'Record is successfully added']);
 
 }
+public function storeProfileInformation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->keys()]);
+        }
+        return response()->json(['success'=>'Record is successfully added']);
+
+  }
 
 
 

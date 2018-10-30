@@ -23,7 +23,7 @@ class OptionsModal extends Component {
             jQuery(".input-help-label").toggle();
         });
         var that=this;
-        $('form.general-information-form input[required]').on('change invalid', function() {
+        $('form.option-information-form input[required]').on('change invalid', function() {
             var textfield = $(this).get(0);
 
             // 'setCustomValidity not only sets the message, but also marks
@@ -36,7 +36,7 @@ class OptionsModal extends Component {
             }
         });
         jQuery('body').on('click', function (e) {
-            jQuery('[data-toggle="popover"]').each(function () {
+            jQuery('[data-toggle="popover"').each(function () {
                 //the 'is' for buttons that trigger popups
                 //the 'has' for icons within a button that triggers a popup
                 if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
@@ -45,14 +45,14 @@ class OptionsModal extends Component {
             });
         });
            $('.close-modal-general').on('click', function (e) {
-               if ($('.general-information-form').hasClass('form-edited')) {
+               if ($('.option-information-form').hasClass('form-edited')) {
                    // alert('eeee')
                    e.preventDefault();
                    $('#general-modal-confirm').modal('show');
                }
                else {
-                   $('#general-information').modal('hide');
-                   $('.general-information-form')[0].reset()
+                   $('#option-information').modal('hide');
+                   $('.option-information-form')[0].reset()
                }
            })
                //Do stuff here
@@ -92,11 +92,11 @@ handleGeneralSubmit(event) {
     event.preventDefault();
     const that = this;
 
-       var location    = $(".general-information-form").find("input[name=location]").val();
-       var address    = $(".general-information-form").find("input[name=address]").val();
+       var location    = $(".option-information-form").find("input[name=location]").val();
+       var address    = $(".option-information-form").find("input[name=address]").val();
 
 
-        fetch('adcalc/storeGeneralInformation', {
+        fetch('adcalc/storeProfileInformation', {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -111,13 +111,13 @@ handleGeneralSubmit(event) {
         })
          .then((a) => {return a.json();})
         .then(function (data) {
-                            $(".general-information-form").find('.invalid-feedback').hide();
+                            $(".option-information-form").find('.invalid-feedback').hide();
                             jQuery.each(data.errors, function(key, value){
-                                $(".general-information-form").find('#'+value).siblings('.invalid-feedback').show();
+                                $(".option-information-form").find('#'+value).siblings('.invalid-feedback').show();
                             });
 
                             if(typeof data.errors=="undefined"){
-                                var $form = $(".general-information-form");
+                                var $form = $(".option-information-form");
                                 var data = that.getFormData($form);
                                 //console.log(data);
                                 that.setState({
@@ -125,7 +125,7 @@ handleGeneralSubmit(event) {
                                 })
                                 that.changeState(that.state.generalInformation);
                                 GENERAL_FORM_STATUS=true;
-                                $("#general-information").modal("hide");
+                                $("#option-information").modal("hide");
 
                             }
         })
@@ -166,9 +166,8 @@ handleGeneralSubmit(event) {
                 <div className="left-head"> Options</div>
                 <div className="right-head">
                   <ul className="list-inline">
-                    <li className="help-toggle"><img src="public/images/help-icon.png" alt="" /></li>
-                    <li><img src="public/images/verifie-icon.png" alt="" /></li>
-                    <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" /></span></li>
+                  <li> <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
+                   <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
                   </ul>
                 </div>
               </div>
@@ -185,7 +184,7 @@ handleGeneralSubmit(event) {
                         <table className="table">
                           <tr>
                             <td className="input-label"> Language:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Project number explanation/tip" >
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
@@ -202,37 +201,39 @@ handleGeneralSubmit(event) {
                           </tr>
                           <tr>
                             <td className="input-label">BAFA 2018:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>Calculate</option>
-                                <option>option1</option>
-                                <option>option2</option>
+                                <option value="calculate">Calculate</option>
+                                <option value="Do not calculate">Do not calculate</option>
                               </select>
                             </td>
                           </tr>
                           <tr>
                             <td className="input-label">Re-cooling Method:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Customer explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>Dry</option>
-                                <option>dry1</option>
-                                <option>dry2</option>
+                                <option value="Dry">Dry</option>
+                                <option value="With spray tool">With spray tool</option>
+                                <option value="Adiabatic">Adiabatic</option>
+                                <option value="Hybrid">Hybrid</option>
+                                <option value="Wet cooling tower">Wet cooling tower</option>
+                                <option value="Other">Other </option>
                               </select>
                             </td>
                           </tr>
                           <tr>
                             <td className="input-label">Re-cooling Temperature:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Contact explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
@@ -241,52 +242,51 @@ handleGeneralSubmit(event) {
                           </tr>
                           <tr>
                             <td className="input-label">Free Cooling:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Customer explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>Yes (chilled water temperature)</option>
-                                <option>option1</option>
+                              <option value="No">No</option>
+                                <option value="Yes (chilled water temperature)">Yes (chilled water temperature)</option>
+                                <option value="Yes (cooling capacity)">Yes (cooling capacity)</option>
                                 <option>option2</option>
                               </select>
                             </td>
                           </tr>
                           <tr>
                             <td className="input-label">Heat Sources:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Customer explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>Utilize also for heating load profile</option>
-                                <option>option1</option>
-                                <option>option2</option>
+                                <option value="Utilize also for heating load profile">Utilize also for heating load profile</option>
+                                <option value="Ignore heating load profile">Ignore heating load profile</option>
                               </select>
                             </td>
                           </tr>
                           <tr>
                             <td className="input-label">Heat Supply:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Customer explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>Priority for heating load profile</option>
-                                <option>option1</option>
-                                <option>option2</option>
+                                <option value="Priority for heating load profile">Priority for heating load profile</option>
+                                <option value="Priority for cooling load profile">Priority for cooling load profile</option>
                               </select>
                             </td>
                           </tr>
                           <tr>
                             <td className="input-label"> Conventional heat source:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Location explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
@@ -295,61 +295,58 @@ handleGeneralSubmit(event) {
                           </tr>
                           <tr>
                             <td className="input-label">Calculation method:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Customer explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>Chilled water inlet temperature </option>
-                                <option>option1</option>
-                                <option>option2</option>
+                                <option value="Chilled water inlet temperature constant">Chilled water inlet temperature constant</option>
+                                <option value="Chilled water outlet temperature constant">Chilled water outlet temperature constant</option>
                               </select>
                             </td>
                           </tr>
                           <tr>
                             <td className="input-label">Ambient temperature step:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Customer explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>constant</option>
-                                <option>option1</option>
-                                <option>option2</option>
+                                <option value="0.5">0.5 K</option>
+                                <option value="1.0">1.0 k</option>
+                                <option value="2.0">2.0 k</option>
                               </select>
                             </td>
                           </tr>
                           <tr>
                             <td className="input-label">Heating load profile:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Customer explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>1.0 K</option>
-                                <option>option1</option>
-                                <option>option2</option>
+                              <option value="Capacity [kW]">Capacity [kW]</option>
+                                <option value="Energy [kWh]">Energy [kWh]</option>
                               </select>
                             </td>
                           </tr>
                           <tr>
                             <td className="input-label">Cooling load profile:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Customer explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields">
                               <select>
-                                <option>Capacity [kW]</option>
-                                <option>option1</option>
-                                <option>option2</option>
+                                <option value="Capacity [kW]">Capacity [kW]</option>
+                                <option value="Energy [kWh]">Energy [kWh]</option>
                               </select>
                             </td>
                           </tr>
@@ -363,7 +360,7 @@ handleGeneralSubmit(event) {
                         <table className="table">
                           <tr>
                             <td className="input-label">Bus system: </td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Editor explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
@@ -372,7 +369,7 @@ handleGeneralSubmit(event) {
                           </tr>
                           <tr>
                             <td className="input-label">Controller:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Company explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
@@ -381,7 +378,7 @@ handleGeneralSubmit(event) {
                           </tr>
                           <tr>
                             <td className="input-label"> Pressure drop in the piping:</td>
-                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"
+                            <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
                                 data-placement="bottom" data-content="Address explanation/tip">
                                 <img src="public/images/help-red.png" alt="" />
                               </button>

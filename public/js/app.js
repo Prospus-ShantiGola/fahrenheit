@@ -66829,7 +66829,7 @@ var OptionsModal = function (_Component) {
         jQuery(".input-help-label").toggle();
       });
       var that = this;
-      $('form.general-information-form input[required]').on('change invalid', function () {
+      $('form.option-information-form input[required]').on('change invalid', function () {
         var textfield = $(this).get(0);
 
         // 'setCustomValidity not only sets the message, but also marks
@@ -66842,7 +66842,7 @@ var OptionsModal = function (_Component) {
         }
       });
       jQuery('body').on('click', function (e) {
-        jQuery('[data-toggle="popover"]').each(function () {
+        jQuery('[data-toggle="popover"').each(function () {
           //the 'is' for buttons that trigger popups
           //the 'has' for icons within a button that triggers a popup
           if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
@@ -66851,13 +66851,13 @@ var OptionsModal = function (_Component) {
         });
       });
       $('.close-modal-general').on('click', function (e) {
-        if ($('.general-information-form').hasClass('form-edited')) {
+        if ($('.option-information-form').hasClass('form-edited')) {
           // alert('eeee')
           e.preventDefault();
           $('#general-modal-confirm').modal('show');
         } else {
-          $('#general-information').modal('hide');
-          $('.general-information-form')[0].reset();
+          $('#option-information').modal('hide');
+          $('.option-information-form')[0].reset();
         }
       });
       //Do stuff here
@@ -66896,10 +66896,10 @@ var OptionsModal = function (_Component) {
       event.preventDefault();
       var that = this;
 
-      var location = $(".general-information-form").find("input[name=location]").val();
-      var address = $(".general-information-form").find("input[name=address]").val();
+      var location = $(".option-information-form").find("input[name=location]").val();
+      var address = $(".option-information-form").find("input[name=address]").val();
 
-      fetch('adcalc/storeGeneralInformation', {
+      fetch('adcalc/storeProfileInformation', {
         method: 'POST',
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -66914,13 +66914,13 @@ var OptionsModal = function (_Component) {
       }).then(function (a) {
         return a.json();
       }).then(function (data) {
-        $(".general-information-form").find('.invalid-feedback').hide();
+        $(".option-information-form").find('.invalid-feedback').hide();
         jQuery.each(data.errors, function (key, value) {
-          $(".general-information-form").find('#' + value).siblings('.invalid-feedback').show();
+          $(".option-information-form").find('#' + value).siblings('.invalid-feedback').show();
         });
 
         if (typeof data.errors == "undefined") {
-          var $form = $(".general-information-form");
+          var $form = $(".option-information-form");
           var data = that.getFormData($form);
           //console.log(data);
           that.setState({
@@ -66928,7 +66928,7 @@ var OptionsModal = function (_Component) {
           });
           that.changeState(that.state.generalInformation);
           GENERAL_FORM_STATUS = true;
-          $("#general-information").modal("hide");
+          $("#option-information").modal("hide");
         }
       }).catch(function (err) {
         console.log(err);
@@ -66983,13 +66983,9 @@ var OptionsModal = function (_Component) {
                 { className: 'list-inline' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'li',
-                  { className: 'help-toggle' },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-icon.png', alt: '' })
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'li',
                   null,
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/verifie-icon.png', alt: '' })
+                  ' ',
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'save-changes-btn', type: 'submit', alt: 'Submit', value: this.props.t('SaveButton'), title: this.props.t('SaveButton') })
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'li',
@@ -66997,7 +66993,7 @@ var OptionsModal = function (_Component) {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'span',
                     { className: 'close close_multi' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/cancle-icon.png', alt: '' })
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/cancle-icon.png', alt: '', className: 'close-modal-general', 'aria-label': 'Close' })
                   )
                 )
               )
@@ -67056,7 +67052,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Project number explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67108,7 +67104,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67121,18 +67117,13 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
+                              { value: 'calculate' },
                               'Calculate'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option1'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'option',
-                              null,
-                              'option2'
+                              { value: 'Do not calculate' },
+                              'Do not calculate'
                             )
                           )
                         )
@@ -67150,7 +67141,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67163,18 +67154,33 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
+                              { value: 'Dry' },
                               'Dry'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'dry1'
+                              { value: 'With spray tool' },
+                              'With spray tool'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'dry2'
+                              { value: 'Adiabatic' },
+                              'Adiabatic'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              { value: 'Hybrid' },
+                              'Hybrid'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              { value: 'Wet cooling tower' },
+                              'Wet cooling tower'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              { value: 'Other' },
+                              'Other '
                             )
                           )
                         )
@@ -67192,7 +67198,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Contact explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67216,7 +67222,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67229,13 +67235,18 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
+                              { value: 'No' },
+                              'No'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'option',
+                              { value: 'Yes (chilled water temperature)' },
                               'Yes (chilled water temperature)'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option1'
+                              { value: 'Yes (cooling capacity)' },
+                              'Yes (cooling capacity)'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
@@ -67258,7 +67269,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67271,18 +67282,13 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
+                              { value: 'Utilize also for heating load profile' },
                               'Utilize also for heating load profile'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option1'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'option',
-                              null,
-                              'option2'
+                              { value: 'Ignore heating load profile' },
+                              'Ignore heating load profile'
                             )
                           )
                         )
@@ -67300,7 +67306,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67313,18 +67319,13 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
+                              { value: 'Priority for heating load profile' },
                               'Priority for heating load profile'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option1'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'option',
-                              null,
-                              'option2'
+                              { value: 'Priority for cooling load profile' },
+                              'Priority for cooling load profile'
                             )
                           )
                         )
@@ -67342,7 +67343,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Location explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67366,7 +67367,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67379,18 +67380,13 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'Chilled water inlet temperature '
+                              { value: 'Chilled water inlet temperature constant' },
+                              'Chilled water inlet temperature constant'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option1'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'option',
-                              null,
-                              'option2'
+                              { value: 'Chilled water outlet temperature constant' },
+                              'Chilled water outlet temperature constant'
                             )
                           )
                         )
@@ -67408,7 +67404,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67421,18 +67417,18 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'constant'
+                              { value: '0.5' },
+                              '0.5 K'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option1'
+                              { value: '1.0' },
+                              '1.0 k'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option2'
+                              { value: '2.0' },
+                              '2.0 k'
                             )
                           )
                         )
@@ -67450,7 +67446,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67463,18 +67459,13 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              '1.0 K'
+                              { value: 'Capacity [kW]' },
+                              'Capacity [kW]'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option1'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'option',
-                              null,
-                              'option2'
+                              { value: 'Energy [kWh]' },
+                              'Energy [kWh]'
                             )
                           )
                         )
@@ -67492,7 +67483,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Customer explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67505,18 +67496,13 @@ var OptionsModal = function (_Component) {
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
+                              { value: 'Capacity [kW]' },
                               'Capacity [kW]'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
-                              null,
-                              'option1'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                              'option',
-                              null,
-                              'option2'
+                              { value: 'Energy [kWh]' },
+                              'Energy [kWh]'
                             )
                           )
                         )
@@ -67550,7 +67536,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Editor explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67575,7 +67561,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Company explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
@@ -67599,7 +67585,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-help-label' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
-                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover',
+                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover',
                               'data-placement': 'bottom', 'data-content': 'Address explanation/tip' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                           )
