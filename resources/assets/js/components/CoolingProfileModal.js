@@ -186,8 +186,8 @@ class CoolingProfileModal extends React.Component {
                      style={CustomTable}>
                 <table className="table">
                     <tbody><tr>
-                                    <td className="input-label">Base load:</td>
-                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
+                                    <td className="input-label">{this.props.t('CoolingProfile.Tab.TechnicalData.BaseLoad.Title')}:</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.TechnicalData.BaseLoad.InfoTool')}>
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
@@ -200,8 +200,8 @@ class CoolingProfileModal extends React.Component {
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td className="input-label">Zero load:</td>
-                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
+                                    <td className="input-label">{this.props.t('CoolingProfile.Tab.TechnicalData.ZeroLoad.Title')}:</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.TechnicalData.ZeroLoad.InfoTool')}>
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
@@ -215,8 +215,8 @@ class CoolingProfileModal extends React.Component {
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td className="input-label">Cooling hours:</td>
-                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
+                                    <td className="input-label">{this.props.t('CoolingProfile.Tab.TechnicalData.CoolingHour.Title')}:</td>
+                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.TechnicalData.CoolingHour.InfoTool')}>
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
@@ -230,10 +230,9 @@ class CoolingProfileModal extends React.Component {
                 </tr>);
                 var expertOption=(<option value='other'>Other</option>);
                 var expertadditionalHtml=( <tr>
-                    <td className="input-label"> Chilled water inlet
-                       temperature:
+                    <td className="input-label"> {this.props.t('CoolingProfile.Tab.TechnicalData.InletTemperature.Title')}:
                     </td>
-                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Address explanation/tip">
+                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.TechnicalData.InletTemperature.InfoTool')}>
                        <img src="public/images/help-red.png" alt="" />
                        </button>
                     </td>
@@ -244,7 +243,7 @@ class CoolingProfileModal extends React.Component {
         else{
             var expertRoleHtml=(
                 <ul id="tabsJustifiedsingle" className="nav nav-tabs single-tab singletabbox">
-                     <li className="nav-item"><a href="" data-target="#cooling-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('CoolingProfile.Tab.TechnicalData.Title')}</a></li>
+                     <li className="nav-item"><a href="" data-target="#cooling-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('CoolingProfile.Tab.TechnicalData.InletTemperature.InfoTool')}</a></li>
                      {expertRoleHtml}
                   </ul>
             );
@@ -269,7 +268,7 @@ class CoolingProfileModal extends React.Component {
             <form  className="cooling-profile-form" id="cooling-profile-form">
             <div className="modal-content">
                <div className="modal-heading">
-                  <div className="left-head"> Cooling Load Profile</div>
+                  <div className="left-head"> {this.props.t('CoolingProfile.Title')}</div>
                   <div className="right-head">
                   <ul className="list-inline">
                      <li><input className="save-changes-btn" onClick={this.handleCoolingSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
@@ -285,8 +284,8 @@ class CoolingProfileModal extends React.Component {
                            <div className="table-responsive">
                                             <table className="table">
                                                 <tbody><tr>
-                                                    <td className="input-label"> Name:	</td>
-                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Project number explanation/tip">
+                                                    <td className="input-label">{this.props.t('CoolingProfile.Tab.TechnicalData.Name.Title')}:	</td>
+                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.TechnicalData.Name.InfoTool')}>
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
@@ -295,8 +294,8 @@ class CoolingProfileModal extends React.Component {
                                                         <input type="hidden" placeholder="Chiller 1" id="coolingprofileformModeKey" name="coolingprofileformModeKey" value="" /></td>
                                                 </tr>
                                                     <tr>
-                                                        <td className="input-label">Profile Type:</td>
-                                                        <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
+                                                        <td className="input-label">{this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.Title')}:</td>
+                                                        <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.InfoTool')}>
                                                             <img src="public/images/help-red.png" alt="" />
                                                         </button>
                                                         </td>
@@ -312,8 +311,8 @@ class CoolingProfileModal extends React.Component {
                                                     {conditionalHtml}
                                                     {expertadditionalHtml}
                                                     <tr>
-                                                        <td className="input-label">Max. cooling load:</td>
-                                                        <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Customer explanation/tip">
+                                                        <td className="input-label">{this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.Title')}:</td>
+                                                        <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.InfoTool')}>
                                                             <img src="public/images/help-red.png" alt="" />
                                                         </button>
                                                         </td>
@@ -340,24 +339,24 @@ class CoolingProfileModal extends React.Component {
                            <div className="table-responsive">
                                             <table className="table">
                                                 <tbody><tr>
-                                                    <td className="input-label">Investment costs:	</td>
-                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Editor explanation/tip">
+                                                    <td className="input-label">{this.props.t('CoolingProfile.Tab.CalculationData.InvestmentCosts.Title')}:	</td>
+                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.CalculationData.InvestmentCosts.InfoTool')}>
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
                                                     <td className="input-fields"><input type="text" placeholder="€" name="cooling_investment_cost" id="cooling_investment_cost" /> </td>
                                                 </tr>
                                                     <tr>
-                                                        <td className="input-label">Discount:</td>
-                                                        <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Company explanation/tip">
+                                                        <td className="input-label">{this.props.t('CoolingProfile.Tab.CalculationData.Discount.Title')}:</td>
+                                                        <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.CalculationData.Discount.InfoTool')}  >
                                                             <img src="public/images/help-red.png" alt="" />
                                                         </button>
                                                         </td>
                                                         <td className="input-fields"><input type="text" placeholder="%" name="cooling_investment_discount" id="cooling_investment_discount" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="input-label"> Maintenance costs: </td>
-                                                        <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Address explanation/tip">
+                                                        <td className="input-label"> {this.props.t('CoolingProfile.Tab.CalculationData.MaintenanceCosts.Title')}: </td>
+                                                        <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content={this.props.t('CoolingProfile.Tab.CalculationData.MaintenanceCosts.InfoTool')}>
                                                             <img src="public/images/help-red.png" alt="" />
                                                         </button>
                                                         </td>

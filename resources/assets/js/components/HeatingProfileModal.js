@@ -75,6 +75,15 @@ class HeatingProfileModal extends React.Component {
 
 
       }
+       handleLangChange (HeatingProfile) {
+        var result={
+            HeatingLoadProfile:HeatingProfile,
+            state:true
+        }
+
+        CHANGE_FORM=true;
+        this.props.onChillerSubmit(result);
+     }
       showAllHearSourceErrorMessages() {
         var form = $("form.heating-profile-form"),
             errorList = $("ul.errorMessages", form),
