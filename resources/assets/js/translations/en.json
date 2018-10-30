@@ -452,6 +452,77 @@
 
 
     },
+    "CoolingProfile":{
+        "Title":"Heating Load Profile",
+        "Tab": {
+            "TechnicalData": {
+                "Title":"TECHNICAL DATA",
+                "Name": {
+                    "Title":"Name",
+                    "Placeholder":"CHP in the basement",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "ProfileType": {
+                    "Title":"Profile Type",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "MaxHeatingLoad": {
+                    "Title":"Max. heating load",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "BaseLoad": {
+                    "Title":"Base load",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Contact explanation/tip"
+                },
+                "ZeroLoad": {
+                    "Title":"Zero load",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "From": {
+                    "Title":"from",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Address explanation/tip"
+                }
+                ,
+                "At": {
+                    "Title":"at",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Address explanation/tip"
+                }
+
+            },
+            "CalculationData": {
+                "Title":"CALCULATION DATA",
+                "InvestmentCosts": {
+                    "Title":"Investment costs",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editor explanation/tip"
+                },
+                "Discount": {
+                    "Title":"Email",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Company explanation/tip"
+                },
+                "MaintenanceCosts": {
+                    "Title":"Maintenance costs",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Address explanation/tip"
+                }
+            }
+        },
+        "HeatingDemand":{
+            "Title":"Heating Demand"
+        },
+        "UnusedHeat":{
+            "Title":"Unused Heat"
+        }
+
+
+    },
 
     "RequiredField":{
         "Message":"Required field",

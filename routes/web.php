@@ -139,6 +139,8 @@ Route::group(
         Route::post('/storeHeatSourceInformation', 'AdcalcController@storeHeatSourceInformation');
         Route::post('/storeProjectInformation', 'AdcalcController@storeProjectInformation');
         Route::post('/storeHeatingProfileInformation', 'AdcalcController@storeHeatingProfileInformation');
+        Route::post('/storeCoolingProfileInformation', 'AdcalcController@storeCoolingProfileInformation');
+
 
 
     });

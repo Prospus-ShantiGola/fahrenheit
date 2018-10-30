@@ -794,7 +794,7 @@ class EconomicModal extends Component {
                             data-toggle="tab"
                             className="nav-link small active"
                         >
-                            {this.props.t('Economic.Tab.General')}
+                            {this.props.t('Economic.Tab.General.Title')}
                         </a>
                     </li>
                     <li className="nav-item">
@@ -804,7 +804,7 @@ class EconomicModal extends Component {
                             data-toggle="tab"
                             className="nav-link"
                         >
-                            {this.props.t('Economic.Tab.CHP')}
+                            {this.props.t('Economic.Tab.CHP.Title')}
                         </a>
                     </li>
                 </ul>

@@ -12,8 +12,8 @@ setDefaultTranslations({de, en})
 setDefaultLanguage(LOCALE)
 class AppContent extends Component {
     constructor(props) {
-        //let role=LOGGED_IN_ROLE;
-        let role="expert";
+        let role=LOGGED_IN_ROLE;
+        //let role="expert";
         super(props);
         this.state = {
             role:role,

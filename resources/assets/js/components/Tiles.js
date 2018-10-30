@@ -21,6 +21,8 @@ class Tiles extends React.Component {
             heatSourceDataChange:false,
             heatingProfileData:[],
             heatingProfileDataChange:false,
+            coolingProfileData:[],
+            coolingProfileDataChange:false,
                };
         this.editRecord=this.editRecord.bind(this);
         this.editHeatRecord=this.editHeatRecord.bind(this);
@@ -81,6 +83,12 @@ class Tiles extends React.Component {
                     heatingProfileDataChange:nextProps.dataChange
                 });
                 break;
+                case COOLING_LOAD_PROFILE_TITLE:
+                this.setState({
+                    coolingProfileData:nextProps.dataRecord,
+                    coolingProfileDataChange:nextProps.dataChange
+                });
+                break;
             default:
                 break;
         }
@@ -117,6 +125,15 @@ class Tiles extends React.Component {
         {
           this.setState({
             heatingProfileDataChange: false
+            });
+        }
+        else{
+            jQuery(".scrollbar-macosx").scrollbar();
+        }
+        if(this.state.coolingProfileData.length==0)
+        {
+          this.setState({
+            coolingProfileDataChange: false
             });
         }
         else{
@@ -217,7 +234,24 @@ class Tiles extends React.Component {
         //$(this.props.modalId).find
     }
     editHeatRecord(elemKey,modalID){
-        let dataObj=this.state.heatSourceData[elemKey];
+        let dataObj="";
+        switch (elemKey) {
+            case 'heatsourceformModeKey':
+                   dataObj=this.state.heatSourceData[elemKey];
+                break;
+                case 'heatingprofileformModeKey':
+                dataObj=this.state.heatingProfileData[elemKey];
+                break;
+                case 'coolingprofileformModeKey':
+                dataObj=this.state.coolingProfileData[elemKey];
+                break;
+
+            default:
+               dataObj=this.state.heatSourceData[elemKey];
+                break;
+        }
+
+
         for (var key in dataObj) {
             if (dataObj.hasOwnProperty(key)) {
                 //console.log($(this.props.modalId).find(key),this.props.modalId,key);
@@ -265,7 +299,7 @@ class Tiles extends React.Component {
     };
 
     render() {
-        console.log("render refresh",this.state.heatSourceData);
+        //console.log("render refresh",this.state.heatSourceData);
         //this.props.store.dispatch("ADD_GENERAL")
         projectData['generalData'] = this.state.generalData;   //use to store the object to save the data
         projectData['economicData'] = this.state.economicData; //use to store the object to save the data
@@ -545,7 +579,99 @@ class Tiles extends React.Component {
             var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
         }
     }
+    if(this.props.title==COOLING_LOAD_PROFILE_TITLE){
+        if(this.state.coolingProfileDataChange==true && this.state.coolingProfileData.length!=0){
+            let coolingProfileData=this.state.coolingProfileData;
+            var pricelist=(
+                <ul className="price-listt scrollbar-macosx">
+                <li>
+                   <p>Cooling Demand</p>
+                   <h3>468,168 kWa/a</h3>
+                </li>
+                <li>
+                   <p>Comoression Electricity Cost</p>
+                   <h3>33,708 €/a</h3>
+                </li>
+                <li>
+                   <p>Temperature</p>
+                   <h3><img src="images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_to}°C</h3>
+                </li>
+             </ul>
+            );
 
+            var bodyContent="Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
+            var deleteModal=<DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="heatSource" id="delete-heat-modal"/>;
+            var priceFullList=(
+                <div>
+
+                    <div className="hover-list scrollbar-macosx">
+                        <div className="table-responsive">
+                            <table className="table">
+                                <tbody className="coolingloadprofileTableBody">
+                                    {coolingProfileData.map((data, h) => (
+                                        <tr key={h} data-id={h}>
+                                            <th>
+                                            {data.cooling_radiant_cooling_office}
+                                                   <ul className="list-inline">
+                                                      <li>{data.cooling_cooling_other}°C
+                                                      </li>
+                                                      <li>	{data.cooling_cooling_hours} h</li>
+                                                      <li>{data.cooling_base_load_to} kW</li>
+                                                   </ul>
+                                                </th>
+                                            <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h,{hiddenmode:"coolingprofileformMode",hiddenmodekey:"coolingprofileformModeKey"})}></i></span>
+                                                <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span>
+                                                <span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            );
+            var requiredMsg="";
+
+            var that=this;
+            if(typeof $('.coolingloadprofileTableBody')[0] !="undefined"){
+                jQuery(".cooling-load-hover .scrollbar-macosx").scrollbar();
+
+                if(that.props.title==COOLING_LOAD_PROFILE_TITLE){
+
+                    this.sort=Sortable.create(
+                        $('.coolingloadprofileTableBody')[0],
+                        {
+                        animation: 150,
+                        scroll: true,
+                        sort: true,
+                        dataIdAttr: 'data-id',
+                        handle: '.drag-handler',
+                        onEnd:function (/**Event*/evt) {
+                            evt.oldIndex;  // element's old index within old parent
+                            evt.newIndex;  // element's new index within new parent
+                        },
+                        onUpdate: function (/**Event*/evt) {
+                            // same properties as onEnd
+                            evt.oldIndex;  // element's old index within old parent
+                            evt.newIndex;  // element's new index within new parent
+
+                            var clonedArr=that.state.coolingProfileData;
+                            clonedArr=that.arrayMove(clonedArr,evt.oldIndex,evt.newIndex);
+                            that.updateHeatSourceList(clonedArr);
+                        }
+                        }
+                        );
+                       var order = this.sort.toArray();
+                       this.sort.sort(order.sort());
+
+                    }
+        }
+        }
+        else{
+            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+        }
+    }
         if(this.state.generalDataChange){
             var pricelist=(
 

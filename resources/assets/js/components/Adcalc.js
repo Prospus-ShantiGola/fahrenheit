@@ -5,6 +5,7 @@ import GeneralModal from './GeneralModal';
 import EconomicModal from './EconomicModal';
 import HeatSourceModal from './HeatSourceModal';
 import HeatingProfileModal from './HeatingProfileModal';
+import CoolingProfileModal from './CoolingProfileModal';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 
 class Adcalc extends Component {
@@ -26,6 +27,10 @@ class Adcalc extends Component {
                 stateChange:false,
                 heatingProfileRecord:[]
             },
+            coolingProfileStateChange: {
+                stateChange:false,
+                coolingProfileRecord:[]
+            },
             generalStateChange: {
                 stateChange:false,
                 generalRecord:[]
@@ -43,6 +48,7 @@ class Adcalc extends Component {
         this.handleEconomicForm = this.handleEconomicForm.bind(this);
         this.handleHeatForm = this.handleHeatForm.bind(this);
         this.handleHeatProfileForm = this.handleHeatProfileForm.bind(this);
+        this.handleCoolingProfileForm = this.handleCoolingProfileForm.bind(this);
 
     }
     handleChillerForm (result)  {
@@ -84,6 +90,20 @@ class Adcalc extends Component {
 });
         }else{
             this.state.heatingProfileStateChange.heatingProfileRecord[result.HeatingProfile.heatingprofileformModeKey]= result.HeatingProfile
+            this.forceUpdate()
+        }
+
+
+    }
+    handleCoolingProfileForm (result)  {
+        if(result.CoolingProfile.coolingprofileformMode=="add"){
+            this.setState({coolingProfileStateChange:{
+                stateChange:result.state,
+                coolingProfileRecord:this.state.coolingProfileStateChange.coolingProfileRecord.concat(result.CoolingProfile)
+                }
+});
+        }else{
+            this.state.coolingProfileStateChange.coolingProfileRecord[result.CoolingProfile.coolingprofileformModeKey]= result.CoolingProfile
             this.forceUpdate()
         }
 
@@ -163,7 +183,7 @@ class Adcalc extends Component {
                 editIcon:'public/images/edit-icon.png',
                 add:'no',
                 hoverText:this.props.t('Tiles.Options.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 disableCard',
+                mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
                 hoverCls:'main-hover-box options-hover',
                 priceLst:'no',
                 priceData:{
@@ -244,7 +264,7 @@ class Adcalc extends Component {
                 multiple:true
             },
             CoolingLoadProfile:{
-                title:'Cooling Load Profile',
+                title:COOLING_LOAD_PROFILE_TITLE,
                 header:this.props.t('Tiles.CoolingLoadProfile.Title'),
                 tileCls:'cooling-load-profiles data-box',
                 required:"yes",
@@ -253,7 +273,7 @@ class Adcalc extends Component {
                 editIcon:'public/images/add-icon.png',
                 add:'no',
                 hoverText:this.props.t('Tiles.CoolingLoadProfile.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 disableCard',
+                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
                 hoverCls:'main-hover-box cooling-load-hover',
                 priceLst:'no',
                 priceData:{
@@ -263,7 +283,7 @@ class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#compression-chiller'
+                modalId:'#cooling-profile'
             },
             FahrenheitSystem:{
                 title:'Fahrenheit System',
@@ -445,8 +465,10 @@ class Adcalc extends Component {
                         priceData={tiles.CoolingLoadProfile.priceData}
                         rightpriceList={tiles.CoolingLoadProfile.rightpriceList}
                         rightpriceListeData={tiles.CoolingLoadProfile.rightpriceListeData}
-                        modalId={tiles.general.modalId}
-                        dataChange={this.state.HeatSourceStateChange}
+                        modalId={tiles.CoolingLoadProfile.modalId}
+                        dataChange={this.state.coolingProfileStateChange.stateChange}
+                        dataRecord={this.state.coolingProfileStateChange.coolingProfileRecord}
+                        multiple={tiles.CoolingLoadProfile.multiple}
                         store={store}/>
                        </div>
                     </div>
@@ -475,6 +497,7 @@ class Adcalc extends Component {
                  <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} store={store}/>
                  <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/>
                  <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
+                 <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store}/>
 
 
               </div>

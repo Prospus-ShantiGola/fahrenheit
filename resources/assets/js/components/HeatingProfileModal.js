@@ -259,6 +259,7 @@ class HeatingProfileModal extends React.Component {
                      <div className="heating-load-general-div">
                         <div className="table-responsive">
                            <table className="table">
+                           <tbody>
                               <tr>
                                  <td className="input-label"> {this.props.t('HeatingProfile.Tab.TechnicalData.Name.Title')}:	</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover" data-placement="bottom" data-content="Project number explanation/tip">
@@ -299,6 +300,7 @@ class HeatingProfileModal extends React.Component {
                                  </td>
                               </tr>
                               {expertHtml}
+                              </tbody>
                            </table>
                         </div>
                      </div>
@@ -310,6 +312,7 @@ class HeatingProfileModal extends React.Component {
                      <div className="personal-data-div">
                         <div className="table-responsive">
                            <table className="table">
+                           <tbody>
                               <tr>
                                  <td className="input-label">{this.props.t('HeatingProfile.Tab.CalculationData.InvestmentCosts.Title')}:	</td>
                                  <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover" data-placement="bottom" data-content={this.props.t('HeatingProfile.Tab.CalculationData.InvestmentCosts.InfoTool')}>
@@ -334,6 +337,7 @@ class HeatingProfileModal extends React.Component {
                                  </td>
                                  <td className="input-fields"><input type="text" placeholder="€/a" name="maintenance_cost" id="maintenance_cost" /> </td>
                               </tr>
+                              </tbody>
                            </table>
                         </div>
                      </div>

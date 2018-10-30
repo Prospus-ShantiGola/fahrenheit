@@ -58,12 +58,18 @@
                 LOGGED_IN_ROLE= "user";
             <?php
         }
+        if($_SERVER['HTTP_HOST']=="localhost"){
+            ?>
+            LOGGED_IN_ROLE = "expert";
+            <?php
+        }
 ?>
        GENERAL_TILE= "General Information";
        CHILLER_TITLE= "Compression Chiller";
        ECONOMIC_TITLE= "Economic Data";
        HEAT_SOURCE_TITLE= "Heat Source";
        HEAT_LOAD_PROFILE_TITLE= "Heating Load Profile";
+       COOLING_LOAD_PROFILE_TITLE= "Cooling Load Profile";
        CHANGE_FORM=false;
        GENERAL_FORM_STATUS=false;
        NO_CUSTOM_FIELD_GENERAL=0;
