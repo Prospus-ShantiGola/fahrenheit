@@ -388,7 +388,7 @@
                 "Title":"TECHNICAL DATA",
                 "Name": {
                     "Title":"Name",
-                    "Placeholder":"CHP in the basement",
+                    "Placeholder":"Office South",
                     "InfoTool":"Project number explanation/tip"
                 },
                 "ProfileType": {
@@ -453,13 +453,13 @@
 
     },
     "CoolingProfile":{
-        "Title":"Heating Load Profile",
+        "Title":"Cooling Load Profile",
         "Tab": {
             "TechnicalData": {
                 "Title":"TECHNICAL DATA",
                 "Name": {
                     "Title":"Name",
-                    "Placeholder":"CHP in the basement",
+                    "Placeholder":"Radiant cooling office",
                     "InfoTool":"Project number explanation/tip"
                 },
                 "ProfileType": {
@@ -467,8 +467,13 @@
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
                 },
-                "MaxHeatingLoad": {
-                    "Title":"Max. heating load",
+                "InletTemperature": {
+                    "Title":"Chilled water inlet temperature",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Address explanation/tip"
+                },
+                "MaxCoolingLoad": {
+                    "Title":"Max. cooling load:",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
                 },
@@ -481,17 +486,22 @@
                     "Title":"Zero load",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
+                }, 
+                "CoolingHour": {
+                    "Title":"Cooling hours",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
                 },
                 "From": {
                     "Title":"from",
-                    "Placeholder":"inhaber@gmbh.de",
-                    "InfoTool":"Address explanation/tip"
+                    "Placeholder":"",
+                    "InfoTool":""
                 }
                 ,
                 "At": {
                     "Title":"at",
-                    "Placeholder":"inhaber@gmbh.de",
-                    "InfoTool":"Address explanation/tip"
+                    "Placeholder":"",
+                    "InfoTool":""
                 }
 
             },

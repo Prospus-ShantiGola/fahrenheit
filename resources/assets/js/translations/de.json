@@ -363,6 +363,158 @@
             }
          }
       },
+    "HeatingProfile":{
+        "Title":"Heizlastprofil",
+        "Tab": {
+            "TechnicalData": {
+                "Title":"TECHNISCHE DATEN",
+                "Name": {
+                    "Title":"Name",
+                    "Placeholder":"Büro Süd",
+                    "InfoTool":"Projektnummer Erklärung / Tipp"
+                },
+                "ProfileType": {
+                    "Title":"Profiltyp",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."
+                },
+                "MaxHeatingLoad": {
+                    "Title":"Max. Heizlast",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Trinkgeld"
+                },
+                "BaseLoad": {
+                    "Title":"Grundlast",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kontakt Erklärung / Tipp"
+                },
+                "ZeroLoad": {
+                    "Title":"Nulllast",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Trinkgeld"
+                },
+                "From": {
+                    "Title":"von",
+                    "Placeholder":"",
+                    "InfoTool":""
+                }
+                ,
+                "At": {
+                    "Title":"beim",
+                    "Placeholder":"",
+                    "InfoTool":""
+                }
+
+            },
+            "CalculationData": {
+                "Title":"Berechnungsdaten",
+                "InvestmentCosts": {
+                    "Title":"Investitionskosten",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editor Erklärung / Tipp"
+                },
+                "Discount": {
+                    "Title":"Email",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Firmenerklärung / Trinkgeld"
+                },
+                "MaintenanceCosts": {
+                    "Title":"Instandhaltungskosten",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Adresse Erklärung / Tipp"
+                }
+            }
+        },
+        "HeatingDemand":{
+            "Title":"Heating Demand"
+        },
+        "UnusedHeat":{
+            "Title":"Unused Heat"
+        }
+
+
+    },
+    "CoolingProfile":{
+        "Title":"Kühllastprofil",
+        "Tab": {
+            "TechnicalData": {
+                "Title":"TECHNISCHE DATEN",
+                "Name": {
+                    "Title":"Name",
+                    "Placeholder":"Strahlendes kühlendes Büro",
+                    "InfoTool":"Projektnummer Erklärung / Tipp"
+                },
+                "ProfileType": {
+                    "Title":"Profiltyp",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."
+                },
+                "InletTemperature": {
+                    "Title":"Eintrittstemperatur des gekühlten Wassers",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Adresse Erklärung / Tipp"
+                },
+                "MaxCoolingLoad": {
+                    "Title":"Max. cooling load:",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Trinkgeld"
+                },
+                "BaseLoad": {
+                    "Title":"Grundlast",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kontakt Erklärung / Tipp"
+                },
+                "ZeroLoad": {
+                    "Title":"Nulllast",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Trinkgeld"
+                }, 
+                "CoolingHour": {
+                    "Title":"Cooling hours",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Trinkgeld"
+                },
+                "From": {
+                    "Title":"von",
+                    "Placeholder":"",
+                    "InfoTool":""
+                }
+                ,
+                "At": {
+                    "Title":"beim",
+                    "Placeholder":"",
+                    "InfoTool":""
+                }
+
+            },
+            "CalculationData": {
+                "Title":"Berechnungsdaten",
+                "InvestmentCosts": {
+                    "Title":"Investitionskosten",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editor Erklärung / Tipp"
+                },
+                "Discount": {
+                    "Title":"Rabatt",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Firmenerklärung / Trinkgeld"
+                },
+                "MaintenanceCosts": {
+                    "Title":"Instandhaltungskosten",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Adresse Erklärung / Tipp"
+                }
+            }
+        },
+        "HeatingDemand":{
+            "Title":"Heating Demand"
+        },
+        "UnusedHeat":{
+            "Title":"Unused Heat"
+        }
+
+
+    },
       "RequiredField": {
          "Message": "Pflichtfeld",
          "Note": "Hinweis: Bitte füllen Sie die erforderlichen Felder in beiden Registerkarten aus",
