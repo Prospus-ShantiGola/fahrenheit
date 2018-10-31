@@ -514,6 +514,101 @@
         }
 
 
+    },"Options":{
+        "Title":"Optionen",
+        "Tab": {
+            "GENERAL": {
+                "Title":"ALLGEMEINES",
+                "Language": {
+                    "Title":"Sprache",
+                    "Placeholder":"",
+                    "InfoTool":"Projektnummer Erklärung / Tipp"
+                },
+                "Bafa": {
+                    "Title":"BAFA 2018",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann, und wir können Sie kontaktieren, wenn wir Fragen zu Ihrem Projekt haben."
+                },
+                "RecoolingMethod": {
+                    "Title":"Rückkühlmethode",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Tipp"
+                },
+                "RecoolingTemperature": {
+                    "Title":"Rückkühltemperatur",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kontakterklärung / Tipp"
+                },
+                "FreeCooling": {
+                    "Title":"Gratis Erfrischung",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Tipp"
+                },
+                "HeatSources": {
+                    "Title":"Wärmequellen",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Tipp"
+                }, 
+                "HeatSupply": {
+                    "Title":"Wärmeversorgung",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Tipp"
+                }, 
+                "HeatSource": {
+                    "Title":"Konventionelle Wärmequelle",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Standorterklärung / Tipp"
+                },
+                 "CalculationMethod": {
+                    "Title":"Rechenmethode",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Tipp"
+                },
+                "AmbientTemperature": {
+                    "Title":"Umgebungstemperaturstufe",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Tipp"
+                },
+                "HeatingLoadProfile": {
+                    "Title":"Heizlastprofil",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Kundenerklärung / Tipp"
+                },
+                "CoolingLoadProfile": {
+                    "Title":"Kühllastprofil",
+                    "Placeholder":"",
+                    "InfoTool":"Kundenerklärung / Tipp"
+                }
+               
+
+            }, 
+            "ProjectSpecification": {
+                "Title":"PROJEKT-SPEZIFIKATIONEN",
+                "BusSystem": {
+                    "Title":"Bussystem",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editorerklärung / Tipp"
+                },
+                "Controller": {
+                    "Title":"Regler",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Unternehmenserklärung / Tipp"
+                },
+                "PressureDrop": {
+                    "Title":"Druckabfall in den Rohrleitungen",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Adresserklärung / Tipp"
+                }
+            }
+        },
+        "HeatingDemand":{
+            "Title":"Heating Demand"
+        },
+        "UnusedHeat":{
+            "Title":"Unused Heat"
+        }
+
+
     },
       "RequiredField": {
          "Message": "Pflichtfeld",
