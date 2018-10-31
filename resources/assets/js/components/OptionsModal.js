@@ -163,7 +163,7 @@ handleGeneralSubmit(event) {
             <div className="modal modal_multi"  role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="profile-information">
             <div className="modal-content">
               <div className="modal-heading">
-                <div className="left-head"> Options</div>
+                <div className="left-head"> {this.props.t('Options.Title')}</div>
                 <div className="right-head">
                   <ul className="list-inline">
                   <li> <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
@@ -173,9 +173,8 @@ handleGeneralSubmit(event) {
               </div>
               <div className="modal-body-content">
                 <ul id="tabsJustified2" className="nav nav-tabs project-specifications">
-                  <li className="nav-item"><a href="" data-target="#option-general" data-toggle="tab" className="nav-link small active">GENERAL</a></li>
-                  <li className="nav-item disabled"><a href="" data-target="#project-specification" data-toggle="tab" className="nav-link">PROJECT
-                      SPECIFICATIONS</a></li>
+                  <li className="nav-item"><a href="" data-target="#option-general" data-toggle="tab" className="nav-link small active">{this.props.t('Options.Tab.GENERAL.Title')}</a></li>
+                  <li className="nav-item"><a href="" data-target="#project-specification" data-toggle="tab" className="nav-link">{this.props.t('Options.Tab.ProjectSpecification.Title')}</a></li>
                 </ul>
                 <div id="tabsJustifiedContent2" className="tab-content">
                   <div id="option-general" className="tab-pane fade  active show">
@@ -183,9 +182,9 @@ handleGeneralSubmit(event) {
                       <div className="table-responsive">
                         <table className="table">
                           <tr>
-                            <td className="input-label"> Language:</td>
+                            <td className="input-label"> {this.props.t('Options.Tab.GENERAL.Language.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Project number explanation/tip" >
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.Language.InfoTool')} >
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -200,9 +199,9 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label">BAFA 2018:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.Bafa.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.Bafa.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -214,9 +213,9 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label">Re-cooling Method:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.RecoolingMethod.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Customer explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.RecoolingMethod.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -232,18 +231,18 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label">Re-cooling Temperature:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.RecoolingTemperature.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Contact explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.RecoolingTemperature.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields"><input type="text" placeholder="25 °C" name="profile_recooling_temp" id="profile_recooling_temp" /></td>
                           </tr>
                           <tr>
-                            <td className="input-label">Free Cooling:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.FreeCooling.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Customer explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.FreeCooling.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -257,9 +256,9 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label">Heat Sources:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.HeatSources.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Customer explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.HeatSources.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -271,9 +270,9 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label">Heat Supply:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.HeatSupply.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Customer explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.HeatSupply.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -285,18 +284,18 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label"> Conventional heat source:</td>
+                            <td className="input-label"> {this.props.t('Options.Tab.GENERAL.HeatSource.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Location explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.HeatSource.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields"><input type="text" placeholder="Boiler, 2x 100 kW"/></td>
                           </tr>
                           <tr>
-                            <td className="input-label">Calculation method:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.CalculationMethod.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Customer explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.CalculationMethod.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -308,9 +307,9 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label">Ambient temperature step:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.AmbientTemperature.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Customer explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.AmbientTemperature.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -323,9 +322,9 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label">Heating load profile:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.HeatingLoadProfile.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Customer explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.HeatingLoadProfile.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -337,9 +336,9 @@ handleGeneralSubmit(event) {
                             </td>
                           </tr>
                           <tr>
-                            <td className="input-label">Cooling load profile:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.GENERAL.CoolingLoadProfile.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Customer explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.GENERAL.CoolingLoadProfile.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
@@ -359,27 +358,27 @@ handleGeneralSubmit(event) {
                       <div className="table-responsive">
                         <table className="table">
                           <tr>
-                            <td className="input-label">Bus system: </td>
+                            <td className="input-label">{this.props.t('Options.Tab.ProjectSpecification.BusSystem.Title')}: </td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Editor explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.ProjectSpecification.BusSystem.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields"><input type="text" placeholder=""/> </td>
                           </tr>
                           <tr>
-                            <td className="input-label">Controller:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.ProjectSpecification.Controller.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Company explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.ProjectSpecification.Controller.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
                             <td className="input-fields"><input type="text" placeholder=""/></td>
                           </tr>
                           <tr>
-                            <td className="input-label"> Pressure drop in the piping:</td>
+                            <td className="input-label">{this.props.t('Options.Tab.ProjectSpecification.PressureDrop.Title')}:</td>
                             <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover"
-                                data-placement="bottom" data-content="Address explanation/tip">
+                                data-placement="bottom" data-content={this.props.t('Options.Tab.ProjectSpecification.PressureDrop.InfoTool')}>
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
