@@ -46,7 +46,7 @@
       <!-- Modal Header -->
 
         <div class="modal-heading">
-               <div class="left-head">Contact Fahrenheit</div>
+               <div class="left-head">{{ __('home.Contact_title')}}</div>
                <div class="right-head">
 
 
@@ -66,10 +66,10 @@
                                  <meta name="csrf-token" content="{{ csrf_token() }}"/>
                                     <tbody>
                                       <tr>
-                                       <td class="input-label"> Name:</td>
+                                       <td class="input-label"> {{ __('home.Contact_name')}}:</td>
 
 
-                                       <td class="input-fields "><input type="text" name = "full_name"  id = "full_name" placeholder="Enter your name"   minlength="1" maxlength="25" required ="true"  class="required-field full_name" ></input>
+                                       <td class="input-fields "><input type="text" name = "full_name"  id = "full_name" placeholder="{{ __('home.Contact_name_placeholder')}}"  minlength="1" maxlength="25" required ="true"  class="required-field full_name" ></input>
 
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
@@ -77,23 +77,23 @@
                                        </td>
                                     </tr>
                                     <tr>
-                                       <td class="input-label"> Company:   </td>
+                                       <td class="input-label"> {{ __('home.Contact_company')}}:   </td>
 
-                                       <td class="input-fields"><input type="text" name= "company_type" placeholder="Enter your company name" minlength="1" maxlength="25"  class="company_type" ></input></td>
+                                       <td class="input-fields"><input type="text" name= "company_type" placeholder="{{ __('home.Contact_company_placeholder')}}" minlength="1" maxlength="25"  class="company_type" ></input></td>
                                     </tr>
                                     <tr>
-                                       <td class="input-label"> Tel. Number:</td>
+                                       <td class="input-label"> {{ __('home.Contact_tel_number')}}:</td>
 
-                                       <td class="input-fields"><input type="text" pattern="^\d{10}$"    name= "contact_number" id = "contact_number" placeholder="Enter your contact number" required ="true"    class="required-field contact_number"></input>
+                                       <td class="input-fields"><input type="text" pattern="^\d{10}$"    name= "contact_number" id = "contact_number" placeholder="{{ __('home.Contact_tel_placeholder')}}" required ="true"    class="required-field contact_number"></input>
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
                                         </span>
                                        </td>
                                     </tr>
                                     <tr>
-                                       <td class="input-label">Email:</td>
+                                       <td class="input-label">{{ __('home.Contact_email')}}:</td>
 
-                                       <td class="input-fields"><input type="email" name= "emailaddress" id = "emailaddress" placeholder="Enter your email address"  required ="true" minlength="1" maxlength="50"   class="required-field email_address"></input>
+                                       <td class="input-fields"><input type="email" name= "emailaddress" id = "emailaddress" placeholder="{{ __('home.Contact_email_placeholder')}}" required ="true" minlength="1" maxlength="50"   class="required-field email_address"></input>
                                          <span class="invalid-feedback " role="alert">
                                             <strong>dfsdf</strong>
                                         </span>
@@ -105,12 +105,12 @@
                                     </tr>
 
                                     <tr>
-                                       <td class="input-label text-area-label">Message:</td>
+                                       <td class="input-label text-area-label">{{ __('home.Contact_message')}}:</td>
 
                                        <td class="input-fields textarea-place"><textarea name= "message" class = "message"></textarea></td>
                                     </tr>
                                     <tr>
-                                     <td colspan="2" class="form-submitbtn"><button type="submit" class="submit-contact-form">Submit</button></td>
+                                     <td colspan="2" class="form-submitbtn"><button type="submit" class="submit-contact-form">{{ __('home.Contact_submit')}}</button></td>
                                     </tr>
                                  </tbody>
 
@@ -130,7 +130,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Login</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{ __('home.Login')}}</h4>
                         <span class="close close_multi"><img src="public/images/cancle-icon.png" alt=""  data-dismiss="modal" aria-label="Close"></span>
 
                     </div>
@@ -141,7 +141,7 @@
 
                             <div class="form-group row">
 
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('home.LoginEmail')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
@@ -154,7 +154,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('home.LoginPassword')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
@@ -182,7 +182,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Login') }}
+                                        {{ __('home.Login')}}
                                     </button>
 
                                    <!--  <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -247,14 +247,14 @@
         <div class="modal-body ">
 
 
-            Your enquiry message for AdCalc has been sent to the Fahrenheit team. We will be in touch in the next 48 hours.
+          {{ __('home.Contact_confirm')}}
 
 
 
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal">Ok</button>
+          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal">{{ __('home.Contact_ok')}}</button>
 
         </div>
       </div>
@@ -355,12 +355,12 @@
 
         </div>
         <div class="modal-body ">
-           <p> Are you sure want to cancel? </p>
+           <p> {{ __('home.Contact_sure_msg')}}</p>
 
         </div>
         <div class="modal-footer">
-           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" onclick="confirmClose()"  >Yes</button>
-          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >No</button>
+           <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" onclick="confirmClose()"  >{{ __('home.Contact_sure_yes')}}</button>
+          <button type="button" class="btn btn-default" id="modal-btn-si" data-dismiss="modal" >{{ __('home.Contact_sure_no')}}</button>
 
         </div>
       </div>
