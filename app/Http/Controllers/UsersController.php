@@ -235,26 +235,26 @@ class UsersController extends Controller
                 if(!Auth::user()->status){
                     $msg = array(
                         'status'  => 'error',
-                        'message' => 'Your account has been disabled'
+                        'message' =>  trans('home.Loginaccountdisable_msg') //'Your account has been disabled'
                     );
                     return response()->json($msg);
                 }
                 $msg = array(
                     'status'  => 'success',
-                    'message' => 'Login Successful'
+                    'message' => trans('home.Login_success')  //'Login Successful'
                 );
                 return response()->json($msg);
             } else {
                 $msg = array(
                     'status'  => 'error',
-                    'message' => 'These credentials do not match our records.'
+                    'message' => trans('home.Logincredential_msg') //'These credentials do not match our records.'
                 );
                 return response()->json($msg);
             }
 
         } catch (Exception $exception) {
             //dd($exception);
-            return response()->json(['response' => 'Please check the credentials !!']);
+            return response()->json(['response' =>trans('home.Login_check') ]);
         }
 		// Attempt Login for members
 
