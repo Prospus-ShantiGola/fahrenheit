@@ -487,7 +487,7 @@ class EconomicModal extends Component {
                                 </tr>
                                 <tr>
                                     <td className="input-label">
-                                    {this.props.t('Economic.Tab.General.ElectricityPriceIncrease.Title')}:
+                                    {this.props.t('Economic.Tab.General.CalculatedInterestRate.Title')}:
                                     </td>
                                     <td className="input-help-label">
                                         <button
@@ -497,7 +497,7 @@ class EconomicModal extends Component {
                                             data-toggle="popover"
                                             data-placement="bottom"
                                             data-trigger="hover"
-                                            data-content={this.props.t('Economic.Tab.General.ElectricityPriceIncrease.InfoTool')}
+                                            data-content={this.props.t('Economic.Tab.General.CalculatedInterestRate.InfoTool')}
                                         >
                                             <img
                                                 src="public/images/help-red.png"
