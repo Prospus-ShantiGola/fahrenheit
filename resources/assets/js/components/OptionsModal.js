@@ -174,7 +174,7 @@ handleGeneralSubmit(event) {
               <div className="modal-body-content">
                 <ul id="tabsJustified2" className="nav nav-tabs project-specifications">
                   <li className="nav-item"><a href="" data-target="#option-general" data-toggle="tab" className="nav-link small active">GENERAL</a></li>
-                  <li className="nav-item"><a href="" data-target="#project-specification" data-toggle="tab" className="nav-link">PROJECT
+                  <li className="nav-item disabled"><a href="" data-target="#project-specification" data-toggle="tab" className="nav-link">PROJECT
                       SPECIFICATIONS</a></li>
                 </ul>
                 <div id="tabsJustifiedContent2" className="tab-content">
@@ -207,7 +207,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select name="profile_bafa" id="profile_bafa">
                                 <option value="calculate">Calculate</option>
                                 <option value="Do not calculate">Do not calculate</option>
                               </select>
@@ -221,7 +221,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select onChange={(elem) => this.changeField(elem)} name="profile_recooling" id="profile_recooling">
                                 <option value="Dry">Dry</option>
                                 <option value="With spray tool">With spray tool</option>
                                 <option value="Adiabatic">Adiabatic</option>
@@ -238,7 +238,7 @@ handleGeneralSubmit(event) {
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
-                            <td className="input-fields"><input type="text" placeholder="25 °C" /></td>
+                            <td className="input-fields"><input type="text" placeholder="25 °C" name="profile_recooling_temp" id="profile_recooling_temp" /></td>
                           </tr>
                           <tr>
                             <td className="input-label">Free Cooling:</td>

@@ -66959,6 +66959,8 @@ var OptionsModal = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       projectData['generalData'] = this.state.generalInformation;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -67016,7 +67018,7 @@ var OptionsModal = function (_Component) {
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'li',
-                { className: 'nav-item' },
+                { className: 'nav-item disabled' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'a',
                   { href: '', 'data-target': '#project-specification', 'data-toggle': 'tab', className: 'nav-link' },
@@ -67114,7 +67116,7 @@ var OptionsModal = function (_Component) {
                           { className: 'input-fields' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'select',
-                            null,
+                            { name: 'profile_bafa', id: 'profile_bafa' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
                               { value: 'calculate' },
@@ -67151,7 +67153,9 @@ var OptionsModal = function (_Component) {
                           { className: 'input-fields' },
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'select',
-                            null,
+                            { onChange: function onChange(elem) {
+                                return _this2.changeField(elem);
+                              }, name: 'profile_recooling', id: 'profile_recooling' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                               'option',
                               { value: 'Dry' },
@@ -67206,7 +67210,7 @@ var OptionsModal = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                           'td',
                           { className: 'input-fields' },
-                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '25 \xB0C' })
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: '25 \xB0C', name: 'profile_recooling_temp', id: 'profile_recooling_temp' })
                         )
                       ),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
