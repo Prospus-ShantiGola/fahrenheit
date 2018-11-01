@@ -15,6 +15,8 @@ class Tiles extends React.Component {
             compressionDataChange:false,
             generalData:[],
             generalDataChange:false,
+            optionData:[],
+            optionDataChange:false,
             economicData:[],
             economicDataChange:false,
             heatSourceData:[],
@@ -37,56 +39,70 @@ class Tiles extends React.Component {
 
         switch (nextProps.title) {
             case CHILLER_TITLE:
-            this.setState({
-                compressionChillerData: nextProps.dataRecord,
-                compressionDataChange: nextProps.dataChange
-              });
+                this.setState({
+                    compressionChillerData: nextProps.dataRecord,
+                    compressionDataChange: nextProps.dataChange
+                });
 
                 break;
             case GENERAL_TILE:
                 this.setState({
-                    generalDataChange:nextProps.dataChange
-                  });
-                  if(nextProps.dataRecord.generalformMode=="add"){
+                    generalDataChange: nextProps.dataChange
+                });
+                if (nextProps.dataRecord.generalformMode == "add") {
                     this.setState({
                         generalData: this.state.generalData.concat(nextProps.dataRecord)
-                      })
-                    }else{
-
-                          this.state.generalData[0]= nextProps.dataRecord
-                          this.forceUpdate()
-                    }
-                    break;
-            case ECONOMIC_TITLE:
-            this.setState({
-                economicDataChange:nextProps.dataChange
-            });
-            if(nextProps.dataRecord.economicformMode=="add"){
-                this.setState({
-                    economicData: this.state.generalData.concat(nextProps.dataRecord)
                     })
-                }else{
+                } else {
 
-                        this.state.economicData[0]= nextProps.dataRecord
-                        this.forceUpdate()
+                    this.state.generalData[0] = nextProps.dataRecord
+                    this.forceUpdate()
+                }
+                break;
+            case OPTION_TILE:
+                this.setState({
+                    optionDataChange: nextProps.dataChange
+                });
+                if (nextProps.dataRecord.optionformMode == "add") {
+                    this.setState({
+                        optionData: this.state.optionData.concat(nextProps.dataRecord)
+                    })
+                } else {
+
+                    this.state.optionData[0] = nextProps.dataRecord
+                    this.forceUpdate()
+                }
+                break;
+            case ECONOMIC_TITLE:
+                this.setState({
+                    economicDataChange: nextProps.dataChange
+                });
+                if (nextProps.dataRecord.economicformMode == "add") {
+                    this.setState({
+                        economicData: this.state.generalData.concat(nextProps.dataRecord)
+                    })
+                } else {
+
+                    this.state.economicData[0] = nextProps.dataRecord
+                    this.forceUpdate()
                 }
                 break;
             case HEAT_SOURCE_TITLE:
-            this.setState({
-                heatSourceData:nextProps.dataRecord,
-                heatSourceDataChange:nextProps.dataChange
-            });
-            break;
-            case HEAT_LOAD_PROFILE_TITLE:
                 this.setState({
-                    heatingProfileData:nextProps.dataRecord,
-                    heatingProfileDataChange:nextProps.dataChange
+                    heatSourceData: nextProps.dataRecord,
+                    heatSourceDataChange: nextProps.dataChange
                 });
                 break;
-                case COOLING_LOAD_PROFILE_TITLE:
+            case HEAT_LOAD_PROFILE_TITLE:
                 this.setState({
-                    coolingProfileData:nextProps.dataRecord,
-                    coolingProfileDataChange:nextProps.dataChange
+                    heatingProfileData: nextProps.dataRecord,
+                    heatingProfileDataChange: nextProps.dataChange
+                });
+                break;
+            case COOLING_LOAD_PROFILE_TITLE:
+                this.setState({
+                    coolingProfileData: nextProps.dataRecord,
+                    coolingProfileDataChange: nextProps.dataChange
                 });
                 break;
             default:

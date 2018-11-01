@@ -70,6 +70,7 @@
        HEAT_SOURCE_TITLE= "Heat Source";
        HEAT_LOAD_PROFILE_TITLE= "Heating Load Profile";
        COOLING_LOAD_PROFILE_TITLE= "Cooling Load Profile";
+       OPTION_TILE= "Options";
        CHANGE_FORM=false;
        GENERAL_FORM_STATUS=false;
        NO_CUSTOM_FIELD_GENERAL=0;

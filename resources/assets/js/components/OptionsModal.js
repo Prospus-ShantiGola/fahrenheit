@@ -11,8 +11,8 @@ class OptionsModal extends Component {
 
   constructor(props){
         super(props);
-        this.state = {generalInformation: '',role:'user'};
-        this.handleGeneralSubmit = this.handleGeneralSubmit.bind(this);
+        this.state = {optionInformation: '',role:'user'};
+        this.handleOptionSubmit = this.handleOptionSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
       }
 
@@ -44,14 +44,14 @@ class OptionsModal extends Component {
                 }
             });
         });
-           $('.close-modal-general').on('click', function (e) {
+           $('.close-modal-options').on('click', function (e) {
                if ($('.option-information-form').hasClass('form-edited')) {
                    // alert('eeee')
                    e.preventDefault();
                    $('#general-modal-confirm').modal('show');
                }
                else {
-                   $('#option-information').modal('hide');
+                   $('#profile-information').modal('hide');
                    $('.option-information-form')[0].reset()
                }
            })
@@ -88,7 +88,7 @@ class OptionsModal extends Component {
 
 
 
-handleGeneralSubmit(event) {
+          handleOptionSubmit(event) {
     event.preventDefault();
     const that = this;
 
@@ -121,11 +121,11 @@ handleGeneralSubmit(event) {
                                 var data = that.getFormData($form);
                                 //console.log(data);
                                 that.setState({
-                                    generalInformation:data
+                                    optionInformation:data
                                 })
                                 that.changeState(that.state.generalInformation);
                                 GENERAL_FORM_STATUS=true;
-                                $("#option-information").modal("hide");
+                                $("#profile-information").modal("hide");
 
                             }
         })
@@ -134,13 +134,13 @@ handleGeneralSubmit(event) {
 
 
   }
-  changeState(generalInformation){
+  changeState(optionInformation){
     var result={
-        generalInformation:generalInformation,
+        optionInformation:optionInformation,
         state:true
     }
     CHANGE_FORM=true;
-    this.props.onGeneralSubmit(result);
+    this.props.onOptionSubmit(result);
   }
 
   getFormData($form){
@@ -156,18 +156,20 @@ handleGeneralSubmit(event) {
 
 
     render() {
-        projectData['generalData']=this.state.generalInformation;
+        projectData['optionData']=this.state.optionInformation;
 
 
         return (
             <div className="modal modal_multi"  role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="profile-information">
+            <div className="modal-dialog ">
+            <form  onSubmit={this.handleOptionSubmit} className = "option-information-form">
             <div className="modal-content">
               <div className="modal-heading">
                 <div className="left-head"> {this.props.t('Options.Title')}</div>
                 <div className="right-head">
                   <ul className="list-inline">
                   <li> <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
-                   <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
+                   <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-options"  aria-label="Close"/></span></li>
                   </ul>
                 </div>
               </div>
@@ -390,6 +392,8 @@ handleGeneralSubmit(event) {
                   </div>
                 </div>
               </div>
+            </div>
+            </form>
             </div>
           </div>
 

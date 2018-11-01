@@ -17,8 +17,9 @@ class Adcalc extends Component {
                 stateChange:false,
                 economicRecord:[]
             },
-            OptionsStateChange: {
-                stateChange:false
+            optionStateChange: {
+                stateChange:false,
+                optionsRecord:[]
             },
             heatSourceStateChange: {
                 stateChange:false,
@@ -46,6 +47,7 @@ class Adcalc extends Component {
         };
         this.handleChillerForm = this.handleChillerForm.bind(this);
         this.handleGeneralForm = this.handleGeneralForm.bind(this);
+        this.handleOptionForm = this.handleOptionForm.bind(this);
         this.handleEconomicForm = this.handleEconomicForm.bind(this);
         this.handleHeatForm = this.handleHeatForm.bind(this);
         this.handleHeatProfileForm = this.handleHeatProfileForm.bind(this);
@@ -117,6 +119,13 @@ class Adcalc extends Component {
                                           }
         });
     }
+    handleOptionForm (result)  {
+        this.setState({optionStateChange:{
+                                            optionRecord:result.optionInformation,
+                                            stateChange:result.state
+                                          }
+        });
+    }
     handleEconomicForm (result)  {
         this.setState({economicStateChange:{
                                             economicRecord:result.economicInformation,
@@ -175,7 +184,7 @@ class Adcalc extends Component {
                 modalId:'#economic-information'
             },
             Options:{
-                title:'Options',
+                title:OPTION_TILE,
                 header:this.props.t('Tiles.Options.Title'),
                 tileCls:'options data-box',
                 required:"no",
@@ -377,7 +386,8 @@ class Adcalc extends Component {
                 rightpriceList={tiles.Options.rightpriceList}
                 rightpriceListeData={tiles.Options.rightpriceListeData}
                 modalId={tiles.Options.modalId}
-                dataChange={this.state.HeatSourceStateChange}
+                dataChange={this.state.optionStateChange.stateChange}
+                dataRecord={this.state.optionStateChange.optionRecord}
                 store={store}/>
                  </div>
                  <div className="row">
@@ -499,7 +509,7 @@ class Adcalc extends Component {
                  <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/>
                  <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
                  <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store}/>
-                 <OptionsModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
+                 <OptionsModal role={this.props.role} onOptionSubmit={this.handleOptionForm} />
 
 
 
