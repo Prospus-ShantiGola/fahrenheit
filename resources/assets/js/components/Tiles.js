@@ -5,6 +5,7 @@ import {ErrorBoundary} from './ErrorBoundary';
 import {DataList} from './data-list';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 
+const log = console.log.bind(console)
 class Tiles extends React.Component {
 
     constructor(props) {
@@ -116,8 +117,17 @@ class Tiles extends React.Component {
        // console.log("component unmount")
     }
     componentDidMount(){
+
+
+
         var that=this;
 
+        if(that.props.title==HEAT_SOURCE_TITLE){
+      //  log(`isClamped: ${this.linesEllipsis.isClamped()} when page didMount`)
+    //    console.log("Lineellipses",this.linesEllipsis.state.clamped);
+    //    console.log("Lineellipses state",this.linesEllipsis);
+
+        }
 
         if(this.state.compressionChillerData.length==0)
         {
@@ -130,6 +140,7 @@ class Tiles extends React.Component {
         }
         if(this.state.heatSourceData.length==0)
         {
+
           this.setState({
               heatSourceDataChange: false
             });
@@ -312,7 +323,7 @@ class Tiles extends React.Component {
         }
         arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
         return arr; // for testing
-    };
+    }
 
     render() {
         //console.log("render refresh",this.state.heatSourceData);
@@ -504,7 +515,8 @@ class Tiles extends React.Component {
         }
         }
         else{
-            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+            var priceFullList= <p>
+           {this.props.hoverText}</p>;
         }
     }
 

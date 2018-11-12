@@ -7,6 +7,7 @@ import HeatSourceModal from './HeatSourceModal';
 import HeatingProfileModal from './HeatingProfileModal';
 import CoolingProfileModal from './CoolingProfileModal';
 import OptionsModal from './OptionsModal';
+import FahrenheitSystemModal from './FahrenheitSystemModal';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 
 class Adcalc extends Component {
@@ -41,8 +42,11 @@ class Adcalc extends Component {
                 stateChange:false,
                 content:"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
                 chillerRecord:[]
-            }
-            ,
+            },
+            fahrenheitSystemStateChange: {
+                stateChange:false,
+                fahrenheitSystemRecord:[]
+            },
             logged_in_role:LOGGED_IN_ROLE
         };
         this.handleChillerForm = this.handleChillerForm.bind(this);
@@ -296,7 +300,7 @@ class Adcalc extends Component {
                 modalId:'#cooling-profile'
             },
             FahrenheitSystem:{
-                title:'Fahrenheit System',
+                title:FAHRENHEIT_SYSTEM,
                 header:this.props.t('Tiles.FahrenheitSystem.Title'),
                 tileCls:'fahrenheit-system-box data-box',
                 required:"no",
@@ -305,7 +309,7 @@ class Adcalc extends Component {
                 editIcon:'public/images/add-icon.png',
                 add:'no',
                 hoverText:this.props.t('Tiles.FahrenheitSystem.hoverText'),
-                mainClass:'col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4 disableCard',
+                mainClass:'col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4',
                 hoverCls:'main-hover-box fahrenheit-system-hover',
                 priceLst:'no',
                 priceData:{
@@ -315,7 +319,7 @@ class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#compression-chiller'
+                modalId:'#fahrenheit-system'
             }
 
         }
@@ -499,7 +503,7 @@ class Adcalc extends Component {
                 priceData={tiles.FahrenheitSystem.priceData}
                 rightpriceList={tiles.FahrenheitSystem.rightpriceList}
                 rightpriceListeData={tiles.FahrenheitSystem.rightpriceListeData}
-                modalId={tiles.general.modalId}
+                modalId={tiles.FahrenheitSystem.modalId}
                 dataChange={this.state.HeatSourceStateChange}
                 store={store}/>
                  </div>
@@ -510,6 +514,7 @@ class Adcalc extends Component {
                  <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
                  <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store}/>
                  <OptionsModal role={this.props.role} onOptionSubmit={this.handleOptionForm} />
+                 <FahrenheitSystemModal role={this.props.role} onOptionSubmit={this.handleOptionForm} />
 
 
 
