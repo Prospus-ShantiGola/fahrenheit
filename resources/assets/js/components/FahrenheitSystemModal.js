@@ -2,10 +2,13 @@ import React from 'react';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
 import AddChillerModal from './AddChillerModal';
 import AddRecoolerModal from './AddRecoolerModal';
+import axios from 'axios';
 let selectedSource='Process heat';
 const CustomTable = {
-    padding: "0px"
+    padding: "0px",
+    width:'100%'
 };
+
 class FahrenheitSystemModal extends React.Component {
     constructor(props){
         super(props);
@@ -14,11 +17,20 @@ class FahrenheitSystemModal extends React.Component {
                 chillerRecord:[],
                 stateChange:false
             },
+            recoolerStateChange:{
+                recoolerRecord:[],
+                stateChange:false
+            },
             HeatingProfile: '',
-            selectedSource:selectedSource};
-        this.handleHeatSubmit = this.handleHeatSubmit.bind(this);
+            selectedSource:selectedSource,
+            persons: []};
+        this.handleFahrenheitSubmit = this.handleFahrenheitSubmit.bind(this);
+        this.handleHeatSubmitChange = this.handleHeatSubmitChange.bind(this);
+
         this.changeField = this.changeField.bind(this);
         this.handleChillerForm = this.handleChillerForm.bind(this);
+        this.handleRecoolerForm = this.handleRecoolerForm.bind(this);
+        this.callApi = this.callApi.bind(this);
       }
 
     myCustomFunction(elem) {
@@ -39,19 +51,58 @@ class FahrenheitSystemModal extends React.Component {
             customInput.classList.add("editable");
         }
     }
-    handleChillerForm (result)  {
-
-
-        if(result.chillerInformation.addchillerformMode=="add"){
-            this.setState({chillerStateChange:{
-                stateChange:result.state,
-                chillerRecord:this.state.chillerStateChange.chillerRecord.concat(result.chillerInformation)
+    handleRecoolerForm(result) {
+        if (result.recoolerInformation.addrecoolerformMode == "add") {
+            this.setState({
+                recoolerStateChange: {
+                    stateChange: result.state,
+                    recoolerRecord: this.state.recoolerStateChange.recoolerRecord.concat(result.recoolerInformation)
                 }
-});
-        }else{
-            this.state.chillerStateChange.chillerRecord[result.chillerInformation.addchillerformModeKey]= result.chillerInformation
+            });
+
+        } else {
+            this.state.recoolerStateChange.recoolerRecord[result.recoolerInformation.addrecoolerformModeKey] = result.recoolerInformation
             this.forceUpdate()
         }
+    }
+    handleChillerForm(result) {
+        if (result.chillerInformation.addchillerformMode == "add") {
+            this.setState({
+                chillerStateChange: {
+                    stateChange: result.state,
+                    chillerRecord: this.state.chillerStateChange.chillerRecord.concat(result.chillerInformation)
+                }
+            });
+            store.dispatch( addChiller(result.chillerInformation) )
+        } else {
+            this.state.chillerStateChange.chillerRecord[result.chillerInformation.addchillerformModeKey] = result.chillerInformation
+            this.forceUpdate()
+        }
+    }
+    editHeatRecord(elemKey,modalID){
+        let dataObj="";
+        switch (modalID.hiddenmodekey) {
+                case 'addchillerformModeKey':
+                   dataObj=this.state.chillerStateChange.chillerRecord[elemKey];
+                break;
+                case 'addrecoolerformModeKey':
+                dataObj=this.state.recoolerStateChange.recoolerRecord[elemKey];
+                break;
+            default:
+               dataObj=this.state.chillerStateChange.chillerRecord[elemKey];
+                break;
+        }
+
+
+        for (var key in dataObj) {
+            if (dataObj.hasOwnProperty(key)) {
+                //console.log($('#'+modalID.modalID).find('#'+key),dataObj,key);
+                $('#'+modalID.modalId).find('#'+key).val(dataObj[key]);
+            }
+        }
+        $('#'+modalID.modalId).find('#'+modalID.hiddenmode).val("edit");
+        $('#'+modalID.modalId).find('#'+modalID.hiddenmodekey).val(elemKey);
+        //$(this.props.modalId).find
     }
       componentDidMount(){
         jQuery(".help-toggle").unbind('click');
@@ -67,13 +118,7 @@ class FahrenheitSystemModal extends React.Component {
                 }
             });
         });
-        // $(document).on('hide.bs.modal','#compression-Heat', function () {
-        //         $("#compression-Heat-form")[0].reset()
-        //             //Do stuff here
-        //         });
-
-
-          $(".fahrenheit-system").on("click", function(e) {
+          $(".close-modal-fahrenheit").on("click", function(e) {
               const obj = this;
               // alert('Heat')
 
@@ -91,15 +136,7 @@ class FahrenheitSystemModal extends React.Component {
 
 
       }
-       handleLangChange (HeatingProfile) {
-        var result={
-            HeatingLoadProfile:HeatingProfile,
-            state:true
-        }
 
-        CHANGE_FORM=true;
-        this.props.onChillerSubmit(result);
-     }
       showAllHearSourceErrorMessages() {
         var form = $("form.fahrenheit-system-form"),
             errorList = $("ul.errorMessages", form),
@@ -147,9 +184,9 @@ class FahrenheitSystemModal extends React.Component {
         }
 
         CHANGE_FORM=true;
-        this.props.onHeatProfileSubmit(result);
+        this.props.onfinalSubmit(result);
      }
-      handleHeatSubmit(e){
+     handleFahrenheitSubmit(e){
         if (!this.showAllHearSourceErrorMessages()) {
             return false;
         }
@@ -204,7 +241,25 @@ class FahrenheitSystemModal extends React.Component {
         });
 
     }
+    groupBy(xs, key) {
+        if(xs.length==0) return [];
+        return xs.reduce(function(rv, x) {
+          (rv[x[key]] = rv[x[key]] || []).push(x);
+          return rv;
+        }, {});
+    }
+    callApi(){
+        axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+        console.log(persons)
+      })
+
+
+    }
     render() {
+        var that=this;
         if(this.props.role=="expert"){
             var expertRoleHtml=(<ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
                   <li className="nav-item"><a href="" data-target="#heating-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('HeatingProfile.Tab.TechnicalData.Title')}</a></li>
@@ -269,20 +324,27 @@ class FahrenheitSystemModal extends React.Component {
         let compressionArray = this.state.chillerStateChange.chillerRecord.filter(function (el) {
             return el.chiller_chiller_type == "Compression"
         });
+        let recoolerArray=[];
+        recoolerArray.push(this.groupBy(this.state.recoolerStateChange.recoolerRecord,'recooler_product'));
+
 
 
 
         return (
             <div>
+
             <div className="modal modal_multi" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="fahrenheit-system">
             <form  className="fahrenheit-system-form" id="fahrenheit-system-form">
     <div className="modal-content">
+    <ul>
+        { this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
+      </ul>
       <div className="modal-heading">
         <div className="left-head"> Fahrenheit System </div>
         <div className="right-head">
         <ul className="list-inline">
-                     <li><input className="save-changes-btn" onClick={this.handleCoolingSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
-                    <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-CoolingProfile"  aria-label="Close"/></span></li>
+                     <li><input className="save-changes-btn" onClick={this.handleFahrenheitSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
+                    <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-fahrenheit"  aria-label="Close"/></span></li>
                   </ul>
         </div>
       </div>
@@ -291,160 +353,179 @@ class FahrenheitSystemModal extends React.Component {
           <li className="nav-item"><img src="public/images/plus-icon.png" className="myBtn_multi modal-openn" alt="" data-toggle="modal" data-backdrop="false" data-target="#add-chiller"/> <a href=""
               data-target="#chillar" data-toggle="tab" className="nav-link small active"> Chiller</a></li>
           <li className="nav-item">
-            <img src="public/images/plus-icon.png" className="myBtn_multi modal-openn" alt="" data-toggle="modal" data-backdrop="false" data-target="#add-recooler" /> <a href="JavaScript:Void(0)"
-              data-target="#recooling-system" data-toggle="tab" className="nav-link"> <span className="center-text">Re-cooling
-                System</span> <img src="public/images/cacli-icon.png" className="dropdown-calci disabled" alt="caculator" /></a>
+            <img src="public/images/plus-icon.png" className="myBtn_multi modal-openn" alt="" data-toggle="modal" data-backdrop="false" data-target="#add-recooler" />
+            <a href="JavaScript:Void(0)" data-target="#chillar" data-toggle="tab" className="nav-link" > <span className="center-text">Re-cooling
+                System</span> <img src="public/images/cacli-icon.png" alt="caculator" onClick={this.callApi} /></a>
             <div className="caculator-divv">
-              <div className="calci-div"></div>
+              <div className="calci-div" ></div>
             </div>
           </li>
         </ul>
-        <div id="tabsJustifiedContentlast" className="tab-content">
-          <div id="chillar" className="tab-pane fade  active show">
-            <div className="chiller-div">
-              <div className="table-responsive">
-                <table className="table">
-                  <tr>
-                    <td>
-                      <p>Adsorption chillers product group</p>
-                      <p>eCoo 20 ST </p>
-                      <p>eCoo 20 ST</p>
-                    </td>
-                    <td>
-                      <p>2.20</p>
-                      <p>2.20</p>
-                      <p>2.20</p>
-                    </td>
-                    <td>
-                      <ul className="list-inline">
-                        <li><img src="public/images/edit-ico.png" alt="" /></li>
-                        <li><img src="public/images/del-icon.png" alt="" /></li>
-                        <li><img src="public/images/bar-icon.png" alt="" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Compression chiller product group</p>
-                      <p> eWac 30 </p>
-                    </td>
-                    <td></td>
-                    <td>
-                      <ul className="list-inline">
-                        <li><img src="public/images/edit-ico.png" alt="" /></li>
-                        <li><img src="public/images/del-icon.png" alt="" /></li>
-                        <li><img src="public/images/bar-icon.png" alt="" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Re-cooler product group</p>
-                      <p>eRec 20 | 58 </p>
-                    </td>
-                    <td></td>
-                    <td>
-                      <ul className="list-inline">
-                        <li><img src="public/images/edit-ico.png" alt="" /></li>
-                        <li><img src="public/images/del-icon.png" alt="" /></li>
-                        <li><img src="public/images/bar-icon.png" alt="" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Re-cooler product group</p>
-                      <p>eRec 20 | 80</p>
-                    </td>
-                    <td></td>
-                    <td>
-                      <ul className="list-inline">
-                        <li><img src="public/images/edit-ico.png" alt="" /></li>
-                        <li><img src="public/images/del-icon.png" alt="" /></li>
-                        <li><img src="public/images/bar-icon.png" alt="" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div id="recooling-system" className="tab-pane fade">
-            <div className="recooling-system-data-div">
-              <div className="table-responsive">
-                <table className="table">
-                  <tr>
-                    <td>
-                      <p>Adsorption chillers product group</p>
-                      <p>eCoo 20 ST </p>
-                      <p>eCoo 20 ST</p>
-                    </td>
-                    <td>
-                      <p>2.20</p>
-                      <p>2.20</p>
-                      <p>2.20</p>
-                    </td>
-                    <td>
-                      <ul className="list-inline">
-                        <li><img src="public/images/edit-ico.png" alt="" /></li>
-                        <li><img src="public/images/del-icon.png" alt="" /></li>
-                        <li><img src="public/images/bar-icon.png" alt="" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Compression chiller product group</p>
-                      <p> eWac 30 </p>
-                    </td>
-                    <td></td>
-                    <td>
-                      <ul className="list-inline">
-                        <li><img src="public/images/edit-ico.png" alt="" /></li>
-                        <li><img src="public/images/del-icon.png" alt="" /></li>
-                        <li><img src="public/images/bar-icon.png" alt="" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Re-cooler product group</p>
-                      <p>eRec 20 | 58 </p>
-                    </td>
-                    <td></td>
-                    <td>
-                      <ul className="list-inline">
-                        <li><img src="public/images/edit-ico.png" alt="" /></li>
-                        <li><img src="public/images/del-icon.png" alt="" /></li>
-                        <li><img src="public/images/bar-icon.png" alt="" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Re-cooler product group</p>
-                      <p>eRec 20 | 80</p>
-                    </td>
-                    <td></td>
-                    <td>
-                      <ul className="list-inline">
-                        <li><img src="public/images/edit-ico.png" alt="" /></li>
-                        <li><img src="public/images/del-icon.png" alt="" /></li>
-                        <li><img src="public/images/bar-icon.png" alt="" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
+                                <div id="tabsJustifiedContentlast" className="tab-content">
+                                    <div id="chillar" className="tab-pane fade  active show">
+                                        <div className="chiller-div">
+                                            <div className="table-responsive">
+                                                <table className="table">
+                                                        <tbody></tbody>
+                                                    {(() => {
+                                                                if(addSorptionArray.length>0){
+                                                                    return (
+                                                                        <tr>
+                                                                        <td>
+                                                                            <p>Adsorption chillers product group</p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p>2.20</p>
+                                                                        </td>
+                                                                        <td>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    )
+                                                                }
+                                                            })()}
+                                                    {addSorptionArray.map((data, h) => (
+                                                        <tr key={h} data-id={h}>
+
+                                                            <td>
+                                                                <p>{data.chiller_product}</p>
+                                                            </td>
+                                                            <td>
+                                                                <p>{data.chiller_product_inter}</p>
+                                                            </td>
+                                                            <td>
+                                                                <ul className="list-inline">
+                                                                    <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-chiller" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey",modalId:"add-chiller" })}></i></span></li>
+                                                                    <li> <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span></li>
+                                                                    <li><span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                         {(() => {
+                                                                if(compressionArray.length>0){
+                                                                    return (
+                                                                        <tr>
+                                                                            <td>
+
+                                                                                <p>Compression chiller product group</p>
+
+                                                                            </td>
+                                                                            <td></td>
+                                                                            <td>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    )
+                                                                }
+                                                            })()}
+
+                                                    {compressionArray.map((data, h) => (
+                                                        <tr key={h} data-id={h}>
+
+                                                            <td>
+                                                                <p>{data.chiller_product}</p>
+                                                            </td>
+                                                            <td>
+                                                                <p>{data.chiller_product_inter}</p>
+                                                            </td>
+                                                            <td>
+                                                                <ul className="list-inline">
+                                                                    <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-chiller" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey",modalId:"add-chiller"  })}></i></span></li>
+                                                                    <li> <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span></li>
+                                                                    <li><span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                    {recoolerArray.map((data, h) => (
+                                                        Object.keys(data).map(function (template_name,innerdatakey,innerdata) {
+                                                            return (
+                                                                <tr key={template_name.id}>
+                                                                    <td colSpan="3">
+
+                                                              <table  style={CustomTable}>
+                                                              <tbody></tbody>
+                                                                <tr>
+                                                                  <td>
+                                                                  <p>Re-cooler product group</p>
+                                                                  </td>
+                                                                  <td></td>
+                                                        <td>
+
+                                                        </td>
+                                                                </tr>
+                                                                    {
+
+                                                                        data[template_name].map(function (item,h) {
+
+                                                                        return (
+
+                                                                            <tr key={item.id}>
+                                                                            <td>
+
+                                                                                <p>{item.recooler_product}</p>
+                                                                            </td>
+                                                                            <td></td>
+                                                                            <td>
+                                                                                    <ul className="list-inline">
+                                                                                        <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-recooler" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => that.editHeatRecord(h, { hiddenmode: "addrecoolerformMode", hiddenmodekey: "addrecoolerformModeKey",modalId:"add-recooler"  })}></i></span></li>
+                                                                                        <li> <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span></li>
+                                                                                        <li><span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span></li>
+                                                                                    </ul>
+                                                                            </td>
+                                                                        </tr>
+                                                                        );
+                                                                    })}
+                                                              </table>
+                                                              </td>
+                                                                </tr>
+                                                            );
+                                                          })
+
+                                                    ))
+                                                    }
+                                                    {/* <tr>
+                                                        <td>
+                                                            <p>Re-cooler product group</p>
+                                                            <p>eRec 20 | 58 </p>
+                                                        </td>
+                                                        <td></td>
+                                                        <td>
+                                                            <ul className="list-inline">
+                                                                <li><img src="public/images/edit-ico.png" alt="" /></li>
+                                                                <li><img src="public/images/del-icon.png" alt="" /></li>
+                                                                <li><img src="public/images/bar-icon.png" alt="" /></li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p>Re-cooler product group</p>
+                                                            <p>eRec 20 | 80</p>
+                                                        </td>
+                                                        <td></td>
+                                                        <td>
+                                                            <ul className="list-inline">
+                                                                <li><img src="public/images/edit-ico.png" alt="" /></li>
+                                                                <li><img src="public/images/del-icon.png" alt="" /></li>
+                                                                <li><img src="public/images/bar-icon.png" alt="" /></li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr> */}
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
         </div>
       </div>
     </div>
 </form>
       </div>
+
             <AddChillerModal  onChillerSubmit={this.handleChillerForm}/>
-            <AddRecoolerModal />
+            <AddRecoolerModal onRecoolerSubmit={this.handleRecoolerForm}/>
      </div>
         );
     }

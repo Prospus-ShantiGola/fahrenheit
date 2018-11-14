@@ -59,6 +59,40 @@ class AddChiller extends Component {
                //Do stuff here
 
           }
+          showAllHeatSourceErrorMessages() {
+            var form = $("form.add-chiller-form"),
+                errorList = $("ul.errorMessages", form),
+                errorFound = true;
+
+            errorList.removeClass("hide");
+            errorList.empty();
+            // Find all invalid fields within the form.
+            var invalidFields = form.find(":invalid").each(function(index, node) {
+                // Find the field's corresponding label
+                var fieldLabel = $("#" + node.id).parents('td.input-fields').siblings('td.input-label').text(),
+                    tabId = $("#" + node.id)
+                        .parents("div.tab-pane")
+                        .attr("id"),
+                    // Opera incorrectly does not fill the validationMessage property.
+                    message = node.validationMessage || "Invalid value.";
+                var tabTitle = $("a[data-target='#" + tabId + "']").text();
+
+                fieldLabel = fieldLabel.replace(":", "");
+                var errorStr="";
+                errorStr= (message=="Please provide value" || message=="Please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
+                errorList
+                    .show()
+                    .append(
+                        "<li>"+errorStr+" in '" +
+                            fieldLabel +
+                            "' field of " +
+                            tabTitle +
+                            " tab</li>"
+                    );
+                errorFound = false;
+            });
+            return errorFound;
+        }
           initializeAutocomplete(elem){
             var input = document.getElementById(elem.target.id);
             // var options = {
@@ -90,10 +124,13 @@ class AddChiller extends Component {
 
 
     handleAddChillerSubmit(event) {
+        if (!this.showAllHeatSourceErrorMessages()) {
+            return false;
+        }
     event.preventDefault();
     const that = this;
 
-    var data=$('#heating-profile-form').serialize();
+    var data=$('#add-chiller-form').serialize();
 
 
         fetch('adcalc/storeChillerInformation', {
@@ -160,17 +197,74 @@ class AddChiller extends Component {
 
     render() {
         projectData['chillerInfo']=this.state.chillerInformation;
+        var adsorbentHtml,productHtml="";
+        if(this.state.selectedSource=="Adsorption"){
+            adsorbentHtml=( <tr>
+                <td className="input-label">Adsorbent:</td>
+                <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
+                    data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                    data-original-title="" title="">
+                    <img src="public/images/help-red.png" alt="" />
+                </button>
+                </td>
+                <td className="input-fields">
+                    <select className="required-field" id="chiller_adsorbent" name="chiller_adsorbent">
+                        <option>Silica gel</option>
+                        <option>option1</option>
+                        <option>option2</option>
+                    </select>
+                </td>
+            </tr>);
+            productHtml=(
+                <tr>
+                    <td className="input-label">Product
+                      interconnection:
+                          </td>
+                    <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
+                        data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        data-original-title="" title="">
+                        <img src="public/images/help-red.png" alt="" />
+                    </button>
+                    </td>
+                    <td className="input-fields">
+                        <select className="required-field" id="chiller_product_inter" name="chiller_product_inter">
+                            <option>2.00</option>
+                            <option>option1</option>
+                            <option>option2</option>
+                        </select>
+                    </td>
+                </tr>
 
+            );
+        }
+        let functionHtml="";
+         if(this.state.selectedSource=="Compression"){
+            functionHtml=(<tr>
+                <td className="input-label">Function:</td>
+                <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
+                    data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                    data-original-title="" title="">
+                    <img src="public/images/help-red.png" alt="" />
+                </button>
+                </td>
+                <td className="input-fields">
+                    <select className="required-field"  id="chiller_function" name="chiller_function">
+                        <option value="Peak load cover">Peak load cover</option>
+                        <option value="Back up">Back up</option>
+                    </select>
+                </td>
+            </tr>);
+         }
 
         return (
             <div className="modal modal_multi" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="add-chiller">
-            <form onSubmit={this.handleAddChillerSubmit} className="add-chiller-form" id="add-chiller-form">
+            <form  className="add-chiller-form" id="add-chiller-form">
                 <div className="modal-content">
                     <div className="modal-heading">
                         <div className="left-head"> Add a Chiller</div>
                         <div className="right-head">
                             <ul className="list-inline">
-                                <li><input className="save-changes-btn" onClick={this.handleCoolingSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')} /></li>
+                                <li><input className="save-changes-btn" onClick={this.handleAddChillerSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')} /></li>
                                 <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-CoolingProfile" aria-label="Close" /></span></li>
                             </ul>
                         </div>
@@ -205,22 +299,7 @@ class AddChiller extends Component {
                                                         <input type="hidden" placeholder="Chiller 1" id="addchillerformModeKey" name="addchillerformModeKey" value="" />
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td className="input-label">Adsorbent:</td>
-                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
-                                                        data-original-title="" title="">
-                                                        <img src="public/images/help-red.png" alt="" />
-                                                    </button>
-                                                    </td>
-                                                    <td className="input-fields">
-                                                        <select className="required-field" id="chiller_adsorbent" name="chiller_adsorbent">
-                                                            <option>Silica gel</option>
-                                                            <option>option1</option>
-                                                            <option>option2</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                               {adsorbentHtml}
                                                 <tr>
                                                     <td className="input-label">Product:</td>
                                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
@@ -246,27 +325,10 @@ class AddChiller extends Component {
                                                     </button>
                                                     </td>
                                                     <td className="input-fields">
-                                                        <input type="text"  id="chiller_no_chiller" name="chiller_no_chiller" placeholder="1 piece" className="required-field"/>
+                                                        <input type="text"  id="chiller_no_chiller" required  pattern="\d*" name="chiller_no_chiller" placeholder="1 piece" className="required-field onlynumeric"/>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td className="input-label">Product
-                                                      interconnection:
-                          </td>
-                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
-                                                        data-original-title="" title="">
-                                                        <img src="public/images/help-red.png" alt="" />
-                                                    </button>
-                                                    </td>
-                                                    <td className="input-fields">
-                                                        <select className="required-field"  id="chiller_product_inter" name="chiller_product_inter">
-                                                            <option>2.00</option>
-                                                            <option>option1</option>
-                                                            <option>option2</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                                {productHtml}
                                                 <tr>
                                                     <td className="input-label">Group interconnection:</td>
                                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
@@ -283,21 +345,7 @@ class AddChiller extends Component {
                                                         </select>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td className="input-label">Function:</td>
-                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
-                                                        data-original-title="" title="">
-                                                        <img src="public/images/help-red.png" alt="" />
-                                                    </button>
-                                                    </td>
-                                                    <td className="input-fields">
-                                                        <select className="required-field"  id="chiller_function" name="chiller_function">
-                                                            <option value="Peak load cover">Peak load cover</option>
-                                                            <option value="Back up">Back up</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                                {functionHtml}
                                             </tbody>
                                         </table>
                                     </div>
@@ -342,6 +390,9 @@ class AddChiller extends Component {
                             </div>
                         </div>
                     </div>
+                    <ul className="errorMessages hide">
+            {this.props.t('ErrorMessage')}
+                                </ul>
                 </div>
                 </form>
             </div>

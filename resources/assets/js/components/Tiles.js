@@ -2,14 +2,14 @@ import React from 'react';
 
 import {DeleteModal} from './DeleteModal';
 import {ErrorBoundary} from './ErrorBoundary';
-import {DataList} from './data-list';
-import { translate, setLanguage, getLanguage } from 'react-multi-lang';
+import { translate } from 'react-multi-lang';
 
-const log = console.log.bind(console)
+const hideEle={
+    visibility:"hidden"
+}
 class Tiles extends React.Component {
 
     constructor(props) {
-        let sort;
         super(props);
         this.state = {
             compressionChillerData:[],
@@ -26,6 +26,8 @@ class Tiles extends React.Component {
             heatingProfileDataChange:false,
             coolingProfileData:[],
             coolingProfileDataChange:false,
+            fahrenheitData:[],
+            fahrenheitDataChange:this.props.datachanged,
                };
         this.editRecord=this.editRecord.bind(this);
         this.editHeatRecord=this.editHeatRecord.bind(this);
@@ -106,6 +108,12 @@ class Tiles extends React.Component {
                     coolingProfileDataChange: nextProps.dataChange
                 });
                 break;
+            case FAHRENHEIT_SYSTEM:
+            this.setState({
+                fahrenheitData: nextProps.dataRecord,
+                fahrenheitDataChange: nextProps.dataChange
+            });
+            break;
             default:
                 break;
         }
@@ -330,7 +338,6 @@ class Tiles extends React.Component {
         //this.props.store.dispatch("ADD_GENERAL")
         projectData['generalData'] = this.state.generalData;   //use to store the object to save the data
         projectData['economicData'] = this.state.economicData; //use to store the object to save the data
-        const dragSet=false;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
             var requiredMsg=<h5 className="input-required">{this.props.t('InputRequired')}</h5>;
@@ -442,7 +449,7 @@ class Tiles extends React.Component {
                                     </li>
                                     <li>
                                        <p>{this.props.t('Tiles.HeatSource.Temperature')}</p>
-                                       <h3><img src="images/degree-icon.png" alt="" /> 84°C</h3>
+                                       <h3><img src="public/images/degree-icon.png" alt="" /> 84°C</h3>
                                     </li>
                                  </ul>
             );
@@ -622,7 +629,7 @@ class Tiles extends React.Component {
                 </li>
                 <li>
                    <p>Temperature</p>
-                   <h3><img src="images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_to}°C</h3>
+                   <h3><img src="public/images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_to}°C</h3>
                 </li>
              </ul>
             );
@@ -873,6 +880,174 @@ class Tiles extends React.Component {
                                         </table>
                                      </div>
                                   </div>);
+            var requiredMsg="";
+            }
+        }
+        if(this.props.title==FAHRENHEIT_SYSTEM){
+
+            if(this.state.fahrenheitDataChange){
+
+                var pricelist=(
+
+                    <ul className="price-listt">
+                        <li>
+                            <p>Recommended System</p>
+                            <h3>eCoo 20</h3>
+                        </li>
+                        <li>
+                            <p>Cooling demand coverage</p>
+                            <h3>83%</h3>
+                        </li>
+                        <li>
+                            <p>Adsorption electricity costs</p>
+                            <h3>8,252 €/a</h3>
+                        </li>
+                        <li className="paybkprd">
+                            <p>Payback period</p>
+                            <h3>2.8 a</h3>
+                        </li>
+
+                        <li>
+                            <p>Payback after 10 a</p>
+                            <h3>16,536 €</h3>
+                        </li>
+                        <li style={hideEle}>
+                    <p>Payback period</p>
+                    <h3>2.8 a</h3>
+                  </li>
+                  <li style={hideEle}>
+                    <p>Payback period</p>
+                    <h3>2.8 a</h3>
+                  </li>
+                  <li style={hideEle}>
+                    <p>Payback period</p>
+                    <h3>2.8 a</h3>
+                  </li>
+
+                    </ul>
+
+                );
+                var priceFullList=(<div className="hover-list">
+                <div className="recommendedsystem">
+                  <h3>Recommended system</h3>
+                  <table className="table">
+                    <tr>
+                      <td className="radio-input-select"><label className="radio-container">
+                          <input type="radio" checked="checked" name="radio"/>
+                          <span className="checkmark"></span>
+                        </label>
+                      </td>
+                      <td>eCoo 20</td>
+                      <td>2.80 a</td>
+                      <td>16,536 €</td>
+                      <td className="edit-optionss"><span className="copy-option new-system"><img src="public/images/option1.png"
+                            alt="" /></span>
+                        <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                        <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div className="other-suggested-system">
+                  <h3>Other suggested systems</h3>
+                  <table className="table">
+                    <tr>
+                      <td className="radio-input-select"><label className="radio-container">
+                          <input type="radio" checked="" name="radio"/>
+                          <span className="checkmark"></span>
+                        </label>
+                      </td>
+                      <td>eCoo 10 ST* </td>
+                      <td>2.40 a</td>
+                      <td>10,153 €</td>
+                      <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                        <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                        <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="radio-input-select"><label className="radio-container">
+                          <input type="radio" checked="" name="radio"/>
+                          <span className="checkmark"></span>
+                        </label>
+                      </td>
+                      <td>eCoo 10X*</td>
+                      <td>2.30 a</td>
+                      <td>11,335 €</td>
+                      <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                        <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                        <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="radio-input-select"><label className="radio-container">
+                          <input type="radio" checked="" name="radio"/>
+                          <span className="checkmark"></span>
+                        </label>
+                      </td>
+                      <td>eCoo 20*</td>
+                      <td>2.23 a</td>
+                      <td>12,583 €</td>
+                      <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                        <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                        <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="radio-input-select"><label className="radio-container">
+                          <input type="radio" checked="" name="radio"/>
+                          <span className="checkmark"></span>
+                        </label>
+                      </td>
+                      <td>eCoo 20 ST*</td>
+                      <td>2.76 a</td>
+                      <td>15,985 €</td>
+                      <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                        <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                        <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div className="manual-sysytemm">
+                  <h3>Manual System</h3>
+                  <table className="table">
+                    <tr>
+                      <td className="radio-input-select"><label className="radio-container">
+                          <input type="radio" checked="" name="radio"/>
+                          <span className="checkmark"></span>
+                        </label>
+                      </td>
+                      <td>eCoo 10 ST* </td>
+                      <td>2.40 a</td>
+                      <td>10,153 €</td>
+                      <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                        <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                        <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                      </td>
+                    </tr>
+                    <tr className="clone-system">
+                      <td className="radio-input-select"><label className="radio-container">
+                          <input type="radio" checked="" name="radio"/>
+                          <span className="checkmark"></span>
+                        </label>
+                      </td>
+                      <td>eCoo 10 ST* </td>
+                      <td>2.40 a</td>
+                      <td>10,153 €</td>
+                      <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                        <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                        <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <h6 className="note-textt">* Values are estimated. For a detailed calculation, click on the calculator.</h6>
+                <div className="caculator-divv">
+                  <div className="calci-div"></div>
+                </div>
+
+              </div>);
             var requiredMsg="";
             }
         }

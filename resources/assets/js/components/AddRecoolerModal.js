@@ -6,13 +6,14 @@ const Header = {
     color: "red",
     fontSize: "14px"
   }
+  let selectedSource='Re-cooler';
 
-class AddChiller extends Component {
+class AddRecooler extends Component {
 
   constructor(props){
         super(props);
-        this.state = {generalInformation: '',role:'user'};
-        this.handleGeneralSubmit = this.handleGeneralSubmit.bind(this);
+        this.state = {recoolerInformation: '',role:'user',selectedSource:selectedSource};
+        this.handleAddRecoolerSubmit = this.handleAddRecoolerSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
       }
 
@@ -58,89 +59,59 @@ class AddChiller extends Component {
                //Do stuff here
 
           }
-          initializeAutocomplete(elem){
-            var input = document.getElementById(elem.target.id);
-            // var options = {
-            //   types: ['(regions)'],
-            //   componentRestrictions: {country: "IN"}
-            // };
-            var options = {}
-
-            var autocomplete = new google.maps.places.Autocomplete(input,options);
-
-            google.maps.event.addListener(autocomplete, 'place_changed', function() {
-                var place = autocomplete.getPlace();
-                var lat = place.geometry.location.lat();
-                var lng = place.geometry.location.lng();
-                var placeId = place.place_id;
-                // to set city name, using the locality param
-                var componentForm = {
-                    locality: 'short_name',
-                };
-
-                console.log(lat,lng);
-                // initialize(lat, lng);
-                // //Drawing map on the basis of latitude and longitude.
-                // getMapInfo(lat, lng,place)
-            });
-          }
 
 
 
 
-handleGeneralSubmit(event) {
-    event.preventDefault();
-    const that = this;
+    handleAddRecoolerSubmit(event) {
+        if (!this.showAllHeatSourceErrorMessages()) {
+            return false;
+        }
+        event.preventDefault();
+        const that = this;
 
-       var location    = $(".general-information-form").find("input[name=location]").val();
-       var address    = $(".general-information-form").find("input[name=address]").val();
-
-
-        fetch('adcalc/storeGeneralInformation', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                     location: location,
-                     address: address
-
-                })
+        var data = $('#add-chiller-form').serialize();
+        fetch('adcalc/storeRecoolerInformation', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: data
         })
-         .then((a) => {return a.json();})
-        .then(function (data) {
-                            $(".general-information-form").find('.invalid-feedback').hide();
-                            jQuery.each(data.errors, function(key, value){
-                                $(".general-information-form").find('#'+value).siblings('.invalid-feedback').show();
-                            });
+            .then((a) => { return a.json(); })
+            .then(function (data) {
+                $(".general-information-form").find('.invalid-feedback').hide();
+                jQuery.each(data.errors, function (key, value) {
+                    $(".general-information-form").find('#' + value).siblings('.invalid-feedback').show();
+                });
 
-                            if(typeof data.errors=="undefined"){
-                                var $form = $(".general-information-form");
-                                var data = that.getFormData($form);
-                                //console.log(data);
-                                that.setState({
-                                    generalInformation:data
-                                })
-                                that.changeState(that.state.generalInformation);
-                                GENERAL_FORM_STATUS=true;
-                                $("#add-recooler").modal("hide");
+                if (typeof data.errors == "undefined") {
+                    var $form = $(".add-recooler-form");
+                    var data = that.getFormData($form);
+                    //console.log(data);
+                    that.setState({
+                        recoolerInformation: data
+                    })
+                    that.changeState(that.state.recoolerInformation);
+                    GENERAL_FORM_STATUS = true;
+                    $("#add-recooler").modal("hide");
 
-                            }
-        })
-        .catch((err) => {console.log(err)})
+                }
+            })
+            .catch((err) => { console.log(err) })
 
 
 
-  }
-  changeState(generalInformation){
+    }
+  changeState(recoolerInformation){
     var result={
-        generalInformation:generalInformation,
+        recoolerInformation:recoolerInformation,
         state:true
     }
     CHANGE_FORM=true;
-    this.props.onGeneralSubmit(result);
+    this.props.onRecoolerSubmit(result);
   }
 
   getFormData($form){
@@ -153,21 +124,94 @@ handleGeneralSubmit(event) {
 
         return indexed_array;
     }
+    showAllHeatSourceErrorMessages() {
+        var form = $("form.add-recooler-form"),
+            errorList = $("ul.errorMessages", form),
+            errorFound = true;
+
+        errorList.removeClass("hide");
+        errorList.empty();
+        // Find all invalid fields within the form.
+        var invalidFields = form.find(":invalid").each(function(index, node) {
+            // Find the field's corresponding label
+            var fieldLabel = $("#" + node.id).parents('td.input-fields').siblings('td.input-label').text(),
+                tabId = $("#" + node.id)
+                    .parents("div.tab-pane")
+                    .attr("id"),
+                // Opera incorrectly does not fill the validationMessage property.
+                message = node.validationMessage || "Invalid value.";
+            var tabTitle = $("a[data-target='#" + tabId + "']").text();
+
+            fieldLabel = fieldLabel.replace(":", "");
+            var errorStr="";
+            errorStr= (message=="Please provide value" || message=="Please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
+            errorList
+                .show()
+                .append(
+                    "<li>"+errorStr+" in '" +
+                        fieldLabel +
+                        "' field of " +
+                        tabTitle +
+                        " tab</li>"
+                );
+            errorFound = false;
+        });
+        return errorFound;
+    }
+    changeField(elem){
+        //var selectedSource= (this.state.selectedSource=='CHP')?'hide':'';
+        //console.log(elem.target.value);
+        this.setState({
+            selectedSource:elem.target.value
+        });
+
+    }
 
 
     render() {
         projectData['generalData']=this.state.generalInformation;
-
+        let recoolingHtml,primaryHtml="";
+        if(this.state.selectedSource=="Re-cooler"){
+           recoolingHtml=(<tr>
+            <td className="input-label">Re-cooling method:</td>
+            <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
+                data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                data-original-title="" title="">
+                <img src="public/images/help-red.png" alt=""/>
+              </button>
+            </td>
+            <td className="input-fields">
+              <select className="required-field" name="recooler_method" id="recooler_method">
+                <option value="Dry">Dry</option>
+                <option value="With spray tool">With spray tool</option>
+              </select>
+            </td>
+          </tr>);
+        }
+        if(this.state.selectedSource=="Circuit separation"){
+            primaryHtml=(<tr>
+                <td className="input-label"> Primary volume
+                  flow rate:
+                </td>
+                <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
+                    data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
+                    title="">
+                    <img src="public/images/help-red.png" alt=""/>
+                  </button>
+                </td>
+                <td className="input-fields"><input type="text" placeholder="" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_prim_volume" id="recooler_prim_volume"/></td>
+              </tr>);
+         }
 
         return (
             <div className="modal modal_multi" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="add-recooler">
-
+<form className="add-recooler-form" id="add-recooler-form">
         <div className="modal-content">
           <div className="modal-heading">
             <div className="left-head">Add a Re-cooling System</div>
             <div className="right-head">
                             <ul className="list-inline">
-                                <li><input className="save-changes-btn" onClick={this.handleCoolingSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')} /></li>
+                                <li><input className="save-changes-btn" onClick={this.handleAddRecoolerSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')} /></li>
                                 <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-ReCoolingProfile" aria-label="Close" /></span></li>
                             </ul>
             </div>
@@ -194,29 +238,15 @@ handleGeneralSubmit(event) {
                             </button>
                           </td>
                           <td className="input-fields">
-                            <select className="required-field">
-                              <option>Re-cooler</option>
-                              <option>option1</option>
-                              <option>option2</option>
+                            <select className="required-field" name="recooler_component" id="recooler_component"  onChange={(elem) => this.changeField(elem)}>
+                              <option value="Re-cooler">Re-cooler</option>
+                              <option value="Circuit separation">Circuit separation</option>
                             </select>
+                            <input type="hidden" placeholder="Chiller 1" id="addrecoolerformMode" name="addrecoolerformMode" value="add" />
+                            <input type="hidden" placeholder="Chiller 1" id="addrecoolerformModeKey" name="addrecoolerformModeKey" value="" />
                           </td>
                         </tr>
-                        <tr>
-                          <td className="input-label">Re-cooling method:</td>
-                          <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
-                              data-original-title="" title="">
-                              <img src="public/images/help-red.png" alt=""/>
-                            </button>
-                          </td>
-                          <td className="input-fields">
-                            <select className="required-field">
-                              <option>Dry</option>
-                              <option>option1</option>
-                              <option>option2</option>
-                            </select>
-                          </td>
-                        </tr>
+                        {recoolingHtml}
                         <tr>
                           <td className="input-label">Product:</td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
@@ -226,10 +256,9 @@ handleGeneralSubmit(event) {
                             </button>
                           </td>
                           <td className="input-fields">
-                            <select className="required-field">
-                              <option>eRec 20 | 58</option>
-                              <option>option1</option>
-                              <option>option2</option>
+                            <select className="required-field"  name="recooler_product" id="recooler_product">
+                              <option value="eRec 20 | 58">eRec 20 | 58</option>
+                              <option value="eRec 20 | 50">eRec 20 | 50</option>
                             </select>
                           </td>
                         </tr>
@@ -241,7 +270,7 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="1 piece" className="required-field"/></td>
+                          <td className="input-fields"><input type="text" placeholder="1 piece" required  pattern="\d*" className="required-field onlynumeric" name="recooler_units" id="recooler_units"/></td>
                         </tr>
 
                         <tr>
@@ -252,7 +281,7 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder=""/></td>
+                          <td className="input-fields"><input type="text" placeholder="" name="recooler_name" id="recooler_name"/></td>
                         </tr>
 
                         <tr>
@@ -263,7 +292,7 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="58 kW" className="required-field"/></td>
+                          <td className="input-fields"><input type="text" placeholder="58 kW" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_capacity" id="recooler_capacity"/></td>
                         </tr>
 
                         <tr>
@@ -274,21 +303,10 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="2 K" className="required-field"/></td>
+                          <td className="input-fields"><input type="text" placeholder="2 K" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_temp_diff" id="recooler_temp_diff"/></td>
                         </tr>
 
-                        <tr>
-                          <td className="input-label"> Primary volume
-                            flow rate:
-                          </td>
-                          <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
-                              title="">
-                              <img src="public/images/help-red.png" alt=""/>
-                            </button>
-                          </td>
-                          <td className="input-fields"><input type="text" placeholder="" className="required-field"/></td>
-                        </tr>
+                        {primaryHtml}
 
                         <tr>
                           <td className="input-label"> Secondary volume
@@ -300,7 +318,7 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="" className="required-field"/></td>
+                          <td className="input-fields"><input type="text" placeholder="" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_sec_volume" id="recooler_sec_volume"/></td>
                         </tr>
 
                         <tr>
@@ -313,7 +331,7 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="" className="required-field"/></td>
+                          <td className="input-fields"><input type="text" placeholder="" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_elec_consumption" id="recooler_elec_consumption"/></td>
                         </tr>
                         <tr>
                           <td className="input-label">Available/provided
@@ -326,10 +344,9 @@ handleGeneralSubmit(event) {
                             </button>
                           </td>
                           <td className="input-fields">
-                            <select className="required-field">
-                              <option>No</option>
-                              <option>option1</option>
-                              <option>option2</option>
+                            <select className="required-field" name="recooler_available" id="recooler_available">
+                              <option value="No">No</option>
+                              <option  value="Yes">Yes</option>
                             </select>
                           </td>
                         </tr>
@@ -350,7 +367,7 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder=""/> </td>
+                          <td className="input-fields"><input type="text"  placeholder="€"  name="recooler_inv_cost" id="recooler_inv_cost"/> </td>
                         </tr>
                         <tr>
                           <td className="input-label">Discount:</td>
@@ -359,7 +376,7 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder=""/></td>
+                          <td className="input-fields"><input type="text" placeholder="%"  name="recooler_discount" id="recooler_discount"/></td>
                         </tr>
                         <tr>
                           <td className="input-label"> Maintenance costs: </td>
@@ -368,7 +385,7 @@ handleGeneralSubmit(event) {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder=""/> </td>
+                          <td className="input-fields"><input type="text"  placeholder="€/a"   name="recooler_maint_cost" id="recooler_maint_cost"/> </td>
                         </tr>
                       </tbody>
                     </table>
@@ -377,7 +394,11 @@ handleGeneralSubmit(event) {
               </div>
             </div>
           </div>
+          <ul className="errorMessages hide">
+            {this.props.t('ErrorMessage')}
+                                </ul>
         </div>
+        </form>
       </div>
 
 
@@ -386,4 +407,4 @@ handleGeneralSubmit(event) {
     }
 }
 
-export default translate(AddChiller);
+export default translate(AddRecooler);

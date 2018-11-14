@@ -56,7 +56,7 @@ class Adcalc extends Component {
         this.handleHeatForm = this.handleHeatForm.bind(this);
         this.handleHeatProfileForm = this.handleHeatProfileForm.bind(this);
         this.handleCoolingProfileForm = this.handleCoolingProfileForm.bind(this);
-
+        this.handleFahrenheitForm = this.handleFahrenheitForm.bind(this);
     }
     handleChillerForm (result)  {
 
@@ -133,6 +133,13 @@ class Adcalc extends Component {
     handleEconomicForm (result)  {
         this.setState({economicStateChange:{
                                             economicRecord:result.economicInformation,
+                                            stateChange:result.state
+                                          }
+        });
+    }
+    handleFahrenheitForm (result)  {
+        this.setState({fahrenheitSystemStateChange:{
+                                            fahrenheitSystemRecord:result.economicInformation,
                                             stateChange:result.state
                                           }
         });
@@ -319,7 +326,8 @@ class Adcalc extends Component {
                 rightpriceListeData:{
 
                 },
-                modalId:'#fahrenheit-system'
+                modalId:'#fahrenheit-system',
+                dataChange:false
             }
 
         }
@@ -504,7 +512,9 @@ class Adcalc extends Component {
                 rightpriceList={tiles.FahrenheitSystem.rightpriceList}
                 rightpriceListeData={tiles.FahrenheitSystem.rightpriceListeData}
                 modalId={tiles.FahrenheitSystem.modalId}
-                dataChange={this.state.HeatSourceStateChange}
+                dataChange={this.state.fahrenheitSystemStateChange.stateChange}
+                dataRecord={this.state.fahrenheitSystemStateChange.fahrenheitSystemRecord}
+                multiple={tiles.CoolingLoadProfile.multiple}
                 store={store}/>
                  </div>
                  <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} store={store}/>
@@ -514,7 +524,7 @@ class Adcalc extends Component {
                  <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
                  <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store}/>
                  <OptionsModal role={this.props.role} onOptionSubmit={this.handleOptionForm} />
-                 <FahrenheitSystemModal role={this.props.role} onOptionSubmit={this.handleOptionForm} />
+                 <FahrenheitSystemModal role={this.props.role} onfinalSubmit={this.handleFahrenheitForm} />
 
 
 

@@ -6,7 +6,10 @@ import { setDefaultTranslations, setDefaultLanguage } from 'react-multi-lang'
 import de from './../translations/de.json'
 import en from './../translations/en.json'
 import {Provider} from 'react-redux';
-import store from './../store/index'
+import store from './../store/index';
+import {addChiller} from './../actions/index';
+window.store = store;
+window.addChiller = addChiller;
 
 setDefaultTranslations({de, en})
 setDefaultLanguage(LOCALE)
