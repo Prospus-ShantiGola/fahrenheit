@@ -125,7 +125,7 @@ class Adcalc extends Component {
     }
     handleOptionForm (result)  {
         this.setState({optionStateChange:{
-                                            optionRecord:result.optionInformation,
+                                            optionsRecord:result.optionInformation,
                                             stateChange:result.state
                                           }
         });
@@ -399,7 +399,7 @@ class Adcalc extends Component {
                 rightpriceListeData={tiles.Options.rightpriceListeData}
                 modalId={tiles.Options.modalId}
                 dataChange={this.state.optionStateChange.stateChange}
-                dataRecord={this.state.optionStateChange.optionRecord}
+                dataRecord={this.state.optionStateChange.optionsRecord}
                 store={store}/>
                  </div>
                  <div className="row">

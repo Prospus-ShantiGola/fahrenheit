@@ -26,7 +26,6 @@ class FahrenheitSystemModal extends React.Component {
             persons: []};
         this.handleFahrenheitSubmit = this.handleFahrenheitSubmit.bind(this);
         this.handleHeatSubmitChange = this.handleHeatSubmitChange.bind(this);
-
         this.changeField = this.changeField.bind(this);
         this.handleChillerForm = this.handleChillerForm.bind(this);
         this.handleRecoolerForm = this.handleRecoolerForm.bind(this);
