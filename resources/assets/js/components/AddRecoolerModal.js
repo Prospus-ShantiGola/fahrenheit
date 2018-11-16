@@ -169,7 +169,7 @@ class AddRecooler extends Component {
 
 
     render() {
-        projectData['generalData']=this.state.generalInformation;
+        projectData['recooling']=this.state.recoolerInformation;
         let recoolingHtml,primaryHtml="";
         if(this.state.selectedSource=="Re-cooler"){
            recoolingHtml=(<tr>

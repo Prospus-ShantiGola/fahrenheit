@@ -29,7 +29,7 @@ class AppContent extends Component {
     }
     submitForm(e){
         //console.log('%c Project Result : ', 'background: #222; color: #bada55',projectData);
-        if(!GENERAL_FORM_STATUS){
+        if(!GENERAL_FORM_STATUS || !COOLING_FORM_STATUS){
             $("#message-popup-modal").modal('show');
             return false;
         }
@@ -83,7 +83,7 @@ class AppContent extends Component {
             disableClass="disableCard";
         }
         if(!GENERAL_FORM_STATUS){
-            var generalError=(<li>General Information</li>);
+            var generalError=(<ul><li>General Information</li><li>Cooling load profile</li></ul>);
         }
         return (
             <div>

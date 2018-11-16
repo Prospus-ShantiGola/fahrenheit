@@ -118,7 +118,7 @@ class ChillerModal extends Component  {
     }
 
     render() {
-
+        projectData['chillerdata']=this.state.chillerdata;
         if(this.props.role=="expert"){
             var expertRoleHtml=(<ul id="tabsJustifieddouble" className="nav nav-tabs double-tab">
             <li className="nav-item"><a href="" data-target="#compression-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('Compression.Tab.TechnicalData.Title')}</a></li>

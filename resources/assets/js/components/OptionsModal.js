@@ -156,7 +156,7 @@ class OptionsModal extends Component {
 
 
     render() {
-        projectData['optionData']=this.state.optionInformation;
+        //projectData['optionData']=this.state.optionInformation;
 
 
         return (

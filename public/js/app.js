@@ -37772,7 +37772,7 @@ var AppContent = function (_Component) {
         key: 'submitForm',
         value: function submitForm(e) {
             //console.log('%c Project Result : ', 'background: #222; color: #bada55',projectData);
-            if (!GENERAL_FORM_STATUS) {
+            if (!GENERAL_FORM_STATUS || !COOLING_FORM_STATUS) {
                 $("#message-popup-modal").modal('show');
                 return false;
             }
@@ -37832,9 +37832,18 @@ var AppContent = function (_Component) {
             }
             if (!GENERAL_FORM_STATUS) {
                 var generalError = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'li',
+                    'ul',
                     null,
-                    'General Information'
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'li',
+                        null,
+                        'General Information'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'li',
+                        null,
+                        'Cooling load profile'
+                    )
                 );
             }
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -57966,15 +57975,9 @@ var Tiles = function (_React$Component) {
                     this.setState({
                         generalDataChange: nextProps.dataChange
                     });
-                    if (nextProps.dataRecord.generalformMode == "add") {
-                        this.setState({
-                            generalData: this.state.generalData.concat(nextProps.dataRecord)
-                        });
-                    } else {
+                    this.state.generalData[0] = nextProps.dataRecord;
+                    this.forceUpdate();
 
-                        this.state.generalData[0] = nextProps.dataRecord;
-                        this.forceUpdate();
-                    }
                     break;
                 case OPTION_TILE:
                     this.setState({
@@ -58216,6 +58219,14 @@ var Tiles = function (_React$Component) {
                 var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
                 clonedArrDelete.splice(result.elementId, 1);
                 this.setState({ compressionChillerData: clonedArrDelete });
+            } else if (result.modalFor == "coolingloadprofile") {
+                var clonedArrDelete = this.state.coolingProfileData; // make a separate copy of the array
+                clonedArrDelete.splice(result.elementId, 1);
+                this.setState({ coolingProfileData: clonedArrDelete });
+            } else if (result.modalFor == "heatingprofile") {
+                var clonedArrDelete = this.state.heatingProfileData; // make a separate copy of the array
+                clonedArrDelete.splice(result.elementId, 1);
+                this.setState({ heatingProfileData: clonedArrDelete });
             } else {
                 var clonedArrDelete = this.state.heatSourceData; // make a separate copy of the array
                 clonedArrDelete.splice(result.elementId, 1);
@@ -58248,8 +58259,15 @@ var Tiles = function (_React$Component) {
 
             //console.log("render refresh",this.state.heatSourceData);
             //this.props.store.dispatch("ADD_GENERAL")
-            projectData['generalData'] = this.state.generalData; //use to store the object to save the data
-            projectData['economicData'] = this.state.economicData; //use to store the object to save the data
+
+            //projectData['generalData'] = this.state.generalData;   //use to store the object to save the data
+            //projectData['economicData'] = this.state.economicData; //use to store the object to save the data
+            //projectData['option']=this.state.optionData;
+            //projectData['heatsource']=this.state.heatSourceData;
+            //projectData['heatingprofile']=this.state.heatingProfileData;
+            //projectData['chiller']=this.state.coolingProfileData;
+            //projectData['coompressionchiller']=this.state.compressionChillerData;
+            projectData['fahrenheit'] = this.state.fahrenheitData;
             var priceFullList,
                 pricelist,
                 requiredMsg = "";
@@ -58262,169 +58280,173 @@ var Tiles = function (_React$Component) {
             }
 
             var deleteModal = "";
-            if (this.state.compressionDataChange == true && this.state.compressionChillerData.length != 0) {
-                var bodyContent = "Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
-                var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'compressionChiller', id: 'delete-modal' });
-                var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'ul',
-                    { className: 'price-listt' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'li',
-                        null,
+            if (this.props.title == CHILLER_TITLE) {
+                if (this.state.compressionDataChange == true && this.state.compressionChillerData.length != 0) {
+                    var bodyContent = "Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
+                    var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'compressionChiller', id: 'delete-modal' });
+                    var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'ul',
+                        { className: 'price-listt' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'p',
+                            'li',
                             null,
-                            this.props.t('Tiles.CompressionChiller.HoverCoolingTitle')
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                this.props.t('Tiles.CompressionChiller.HoverCoolingTitle')
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'h3',
+                                null,
+                                '100.0 kW'
+                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'h3',
+                            'li',
                             null,
-                            '100.0 kW'
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'li',
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'p',
-                            null,
-                            this.props.t('Tiles.CompressionChiller.NumberofCompressor')
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                this.props.t('Tiles.CompressionChiller.NumberofCompressor')
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'h3',
+                                null,
+                                '3'
+                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'h3',
+                            'li',
                             null,
-                            '3'
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                this.props.t('Tiles.CompressionChiller.Temperature')
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'h3',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/degree-icon.png', alt: '' }),
+                                ' ',
+                                this.state.compressionChillerData[0].temperature != "" ? this.state.compressionChillerData[0].temperature + "°C" : ""
+                            )
                         )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'li',
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'p',
-                            null,
-                            this.props.t('Tiles.CompressionChiller.Temperature')
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'h3',
-                            null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'public/images/degree-icon.png', alt: '' }),
-                            ' ',
-                            this.state.compressionChillerData[0].temperature != "" ? this.state.compressionChillerData[0].temperature + "°C" : ""
-                        )
-                    )
-                );
-                var chillerData = this.state.compressionChillerData;
+                    );
+                    var chillerData = this.state.compressionChillerData;
+                    projectData['coompressionchiller'] = this.state.compressionChillerData;
 
-                var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: 'hover-list scrollbar-macosx' },
+                        null,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
-                            { className: 'table-responsive' },
+                            { className: 'hover-list scrollbar-macosx' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'table',
-                                { className: 'table' },
+                                'div',
+                                { className: 'table-responsive' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'tbody',
-                                    { className: 'compressionTableBody' },
-                                    chillerData.map(function (data, i) {
-                                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'tr',
-                                            { key: i, 'data-id': i },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'th',
-                                                null,
-                                                data.chillername,
+                                    'table',
+                                    { className: 'table' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'tbody',
+                                        { className: 'compressionTableBody' },
+                                        chillerData.map(function (data, i) {
+                                            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'tr',
+                                                { key: i, 'data-id': i },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'ul',
-                                                    { className: 'list-inline', key: i },
+                                                    'th',
+                                                    null,
+                                                    data.chillername,
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'li',
-                                                        null,
-                                                        '120.30 kW'
+                                                        'ul',
+                                                        { className: 'list-inline', key: i },
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                            'li',
+                                                            null,
+                                                            '120.30 kW'
+                                                        ),
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                            'li',
+                                                            null,
+                                                            ' ',
+                                                            data.temperature != "" ? data.temperature + '°C' : "",
+                                                            ' '
+                                                        )
+                                                    )
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'td',
+                                                    null,
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'span',
+                                                        { className: 'edit-option', 'data-id': i, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this2.props.modalId },
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
+                                                                return _this2.editRecord(i);
+                                                            } })
                                                     ),
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'li',
-                                                        null,
-                                                        ' ',
-                                                        data.temperature != "" ? data.temperature + '°C' : "",
-                                                        ' '
+                                                        'span',
+                                                        { className: 'delete-optionn', 'data-id': i },
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-modal', onClick: function onClick(elem) {
+                                                                return _this2.deleteRecord(i, elem);
+                                                            } })
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'span',
+                                                        { className: 'menu-bar-option drag-handler' },
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bars', 'aria-hidden': 'true' })
                                                     )
                                                 )
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'td',
-                                                null,
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'span',
-                                                    { className: 'edit-option', 'data-id': i, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this2.props.modalId },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                            return _this2.editRecord(i);
-                                                        } })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'span',
-                                                    { className: 'delete-optionn', 'data-id': i },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-modal', onClick: function onClick(elem) {
-                                                            return _this2.deleteRecord(i, elem);
-                                                        } })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'span',
-                                                    { className: 'menu-bar-option drag-handler' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bars', 'aria-hidden': 'true' })
-                                                )
-                                            )
-                                        );
-                                    })
+                                            );
+                                        })
+                                    )
                                 )
                             )
                         )
-                    )
-                );
+                    );
 
-                var that = this;
-                if (typeof $('.compressionTableBody')[0] != "undefined") {
-                    jQuery(".compression-chillers-hover .scrollbar-macosx").scrollbar();
+                    var that = this;
+                    if (typeof $('.compressionTableBody')[0] != "undefined") {
+                        jQuery(".compression-chillers-hover .scrollbar-macosx").scrollbar();
 
-                    if (that.props.title == CHILLER_TITLE) {
+                        if (that.props.title == CHILLER_TITLE) {
 
-                        this.sort = Sortable.create($('.compressionTableBody')[0], {
-                            animation: 150,
-                            scroll: true,
-                            sort: true,
-                            dataIdAttr: 'data-id',
-                            handle: '.drag-handler',
-                            onEnd: function onEnd( /**Event*/evt) {
-                                evt.oldIndex; // element's old index within old parent
-                                evt.newIndex; // element's new index within new parent
-                            },
-                            onUpdate: function onUpdate( /**Event*/evt) {
-                                // same properties as onEnd
-                                evt.oldIndex; // element's old index within old parent
-                                evt.newIndex; // element's new index within new parent
+                            this.sort = Sortable.create($('.compressionTableBody')[0], {
+                                animation: 150,
+                                scroll: true,
+                                sort: true,
+                                dataIdAttr: 'data-id',
+                                handle: '.drag-handler',
+                                onEnd: function onEnd( /**Event*/evt) {
+                                    evt.oldIndex; // element's old index within old parent
+                                    evt.newIndex; // element's new index within new parent
+                                },
+                                onUpdate: function onUpdate( /**Event*/evt) {
+                                    // same properties as onEnd
+                                    evt.oldIndex; // element's old index within old parent
+                                    evt.newIndex; // element's new index within new parent
 
-                                var clonedArr = that.state.compressionChillerData;
-                                clonedArr = that.arrayMove(clonedArr, evt.oldIndex, evt.newIndex);
-                                that.updateCompressionList(clonedArr);
-                            }
-                        });
-                        var order = this.sort.toArray();
-                        this.sort.sort(order.sort());
+                                    var clonedArr = that.state.compressionChillerData;
+                                    clonedArr = that.arrayMove(clonedArr, evt.oldIndex, evt.newIndex);
+                                    that.updateCompressionList(clonedArr);
+                                }
+                            });
+                            var order = this.sort.toArray();
+                            this.sort.sort(order.sort());
+                        }
                     }
+                } else {
+                    var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'p',
+                        { className: 'scrollbar-macosx' },
+                        this.props.hoverText
+                    );
                 }
-            } else {
-                var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'p',
-                    { className: 'scrollbar-macosx' },
-                    this.props.hoverText
-                );
             }
             if (this.props.title == HEAT_SOURCE_TITLE) {
                 if (this.state.heatSourceDataChange == true && this.state.heatSourceData.length != 0) {
+                    projectData['heatsource'] = this.state.heatSourceData;
                     var heatSourceData = this.state.heatSourceData;
                     var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'ul',
@@ -58588,6 +58610,7 @@ var Tiles = function (_React$Component) {
 
             if (this.props.title == HEAT_LOAD_PROFILE_TITLE) {
                 if (this.state.heatingProfileDataChange == true && this.state.heatingProfileData.length != 0) {
+                    projectData['heatingprofile'] = this.state.heatingProfileData;
                     var heatingProfileData = this.state.heatingProfileData;
                     var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'ul',
@@ -58623,7 +58646,7 @@ var Tiles = function (_React$Component) {
                     );
 
                     var bodyContent = "Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
-                    var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'heatSource', id: 'delete-heat-modal' });
+                    var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'heatingprofile', id: 'delete-heat-modal' });
                     var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         null,
@@ -58733,7 +58756,9 @@ var Tiles = function (_React$Component) {
                 }
             }
             if (this.props.title == COOLING_LOAD_PROFILE_TITLE) {
+                COOLING_FORM_STATUS = this.state.coolingProfileData.length == 0 ? false : true; //use to validate the form.
                 if (this.state.coolingProfileDataChange == true && this.state.coolingProfileData.length != 0) {
+                    projectData['chiller'] = this.state.coolingProfileData;
                     var coolingProfileData = this.state.coolingProfileData;
                     var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'ul',
@@ -58786,7 +58811,7 @@ var Tiles = function (_React$Component) {
                     );
 
                     var bodyContent = "Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
-                    var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'heatSource', id: 'delete-heat-modal' });
+                    var deleteModal = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__DeleteModal__["a" /* DeleteModal */], { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'coolingloadprofile', id: 'delete-heat-modal' });
                     var priceFullList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         null,
@@ -58905,6 +58930,7 @@ var Tiles = function (_React$Component) {
                 }
             }
             if (this.props.title == GENERAL_TILE) {
+                projectData['generalData'] = this.state.generalData;
                 if (this.state.generalDataChange) {
                     var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'ul',
@@ -59093,6 +59119,7 @@ var Tiles = function (_React$Component) {
             }
             if (this.props.title == OPTION_TILE) {
                 if (this.state.optionDataChange) {
+                    projectData['option'] = this.state.optionData;
                     var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'ul',
                         { className: 'price-listt plnewblock' },
@@ -59376,7 +59403,7 @@ var Tiles = function (_React$Component) {
                     )
                 );
                 if (this.state.economicDataChange) {
-
+                    projectData['economicData'] = this.state.economicData;
                     var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'ul',
                         { className: 'price-listt plnewblock' },
@@ -59527,7 +59554,7 @@ var Tiles = function (_React$Component) {
             if (this.props.title == FAHRENHEIT_SYSTEM) {
 
                 if (this.state.fahrenheitDataChange) {
-
+                    projectData['fahrenheit'] = this.state.fahrenheitData;
                     var pricelist = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'ul',
                         { className: 'price-listt' },
@@ -60414,6 +60441,7 @@ var ChillerModal = function (_Component) {
          var _this2 = this,
              _React$createElement;
 
+         projectData['chillerdata'] = this.state.chillerdata;
          if (this.props.role == "expert") {
             var expertRoleHtml = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'ul',
@@ -67543,7 +67571,8 @@ var OptionsModal = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      projectData['optionData'] = this.state.optionInformation;
+      //projectData['optionData']=this.state.optionInformation;
+
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -69958,7 +69987,7 @@ var AddRecooler = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      projectData['generalData'] = this.state.generalInformation;
+      projectData['recooling'] = this.state.recoolerInformation;
       var recoolingHtml = void 0,
           primaryHtml = "";
       if (this.state.selectedSource == "Re-cooler") {
@@ -70535,8 +70564,13 @@ var initialState = {
   chillers: [],
   heatsources: [],
   generalData: [],
-  economicData: []
+  economicData: [],
+  option: [],
+  coompressionchillers: [],
+  heatingprofiles: [],
+  fahrenheit: []
 };
+
 var rootReducer = function rootReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
