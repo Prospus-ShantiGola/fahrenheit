@@ -1,5 +1,5 @@
 import React from 'react';
-import { translate, setLanguage, getLanguage } from 'react-multi-lang';
+import { translate } from 'react-multi-lang';
 import AddChillerModal from './AddChillerModal';
 import AddRecoolerModal from './AddRecoolerModal';
 import axios from 'axios';
@@ -29,7 +29,6 @@ class FahrenheitSystemModal extends React.Component {
         this.changeField = this.changeField.bind(this);
         this.handleChillerForm = this.handleChillerForm.bind(this);
         this.handleRecoolerForm = this.handleRecoolerForm.bind(this);
-        this.callApi = this.callApi.bind(this);
       }
 
     myCustomFunction(elem) {
@@ -118,7 +117,6 @@ class FahrenheitSystemModal extends React.Component {
             });
         });
           $(".close-modal-fahrenheit").on("click", function(e) {
-              const obj = this;
               // alert('Heat')
 
               if ($("#fahrenheit-system-form").hasClass("form-edited")) {
@@ -143,37 +141,6 @@ class FahrenheitSystemModal extends React.Component {
 
         errorList.removeClass("hide");
         errorList.empty();
-        // Find all invalid fields within the form.
-        var invalidFields = form.find(":invalid").each(function(index, node) {
-            // Find the field's corresponding label
-            var label = $("#" + node.id)
-                    .parent("td")
-                    .prev(),
-                tabId = $("#" + node.id)
-                    .parents("div.tab-pane")
-                    .attr("id"),
-                // Opera incorrectly does not fill the validationMessage property.
-                message = node.validationMessage || "Invalid value.";
-            var tabTitle = $("a[data-target='#" + tabId + "']").text();
-
-            if (label.hasClass("input-help-label")) {
-                label = label.prev("td.input-label");
-            }
-            var fieldLabel = label.text();
-            fieldLabel = fieldLabel.replace(":", "");
-            var errorStr="";
-            errorStr= (message=="Please provide value" || message=="Please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
-            errorList
-                .show()
-                .append(
-                    "<li>"+errorStr+" in '" +
-                        fieldLabel +
-                        "' field of " +
-                        tabTitle +
-                        " tab</li>"
-                );
-            errorFound = false;
-        });
         return errorFound;
     }
       handleHeatSubmitChange (HeatingProfile) {
@@ -226,7 +193,7 @@ class FahrenheitSystemModal extends React.Component {
         var unindexed_array = $form.serializeArray();
         var indexed_array = {};
 
-        $.map(unindexed_array, function(n, i){
+        $.map(unindexed_array, function(n){
             indexed_array[n['name']] = n['value'];
         });
 
@@ -247,15 +214,13 @@ class FahrenheitSystemModal extends React.Component {
           return rv;
         }, {});
     }
-    callApi(){
+    callApi=() => {
         axios.get(`https://jsonplaceholder.typicode.com/users`)
-      .then(res => {
-        const persons = res.data;
-        this.setState({ persons });
-        console.log(persons)
-      })
-
-
+            .then(res => {
+                const persons = res.data;
+                this.setState({ persons });
+                console.log(persons);
+            });
     }
     render() {
         var that=this;
@@ -264,46 +229,6 @@ class FahrenheitSystemModal extends React.Component {
                   <li className="nav-item"><a href="" data-target="#heating-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('HeatingProfile.Tab.TechnicalData.Title')}</a></li>
                   <li className="nav-item"><a href="" data-target="#heating-calculation-data" data-toggle="tab" className="nav-link">{this.props.t('HeatingProfile.Tab.CalculationData.Title')}</a></li>
          </ul>);
-            var expertHtml=(
-                <tr>
-                <td className="nested-table"
-                     colSpan="3"
-                     style={CustomTable}>
-                <table className="table">
-                    <tbody>
-            <tr>
-                <td className="input-label">{this.props.t('HeatingProfile.Tab.TechnicalData.BaseLoad.Title')}:</td>
-                <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover" data-placement="bottom" data-content={this.props.t('HeatingProfile.Tab.TechnicalData.BaseLoad.InfoTool')}>
-                   <img src="public/images/help-red.png" alt="" />
-                   </button>
-                </td>
-                <td className="input-fields">
-                   <ul className="list-inline">
-                      <li><input type="text" placeholder="8.0 kw" pattern="\d*"  required="required" className="required-field onlynumeric" name="base_load_power" id="base_load_power"  /></li>
-                      <li>{this.props.t('HeatingProfile.Tab.TechnicalData.From.Title')} </li>
-                      <li><input type="text" placeholder="°C" pattern="\d*"  required="required" className="icon-field required-field onlynumeric" name="base_load_temp" id="base_load_temp"  /></li>
-                   </ul>
-                </td>
-             </tr>
-             <tr>
-                <td className="input-label">{this.props.t('HeatingProfile.Tab.TechnicalData.ZeroLoad.Title')}:</td>
-                <td className="input-help-label"><button type="button" className="" data-container="body" data-toggle="popover"  data-trigger="hover" data-placement="bottom" data-content={this.props.t('HeatingProfile.Tab.TechnicalData.ZeroLoad.InfoTool')}>
-                   <img src="public/images/help-red.png" alt="" />
-                   </button>
-                </td>
-                <td className="input-fields">
-                   <ul className="list-inline">
-                      <li><input type="text" placeholder="0.0 kw" pattern="\d*"  required="required" className="required-field" name="zero_load_power" id="zero_load_power"  />
-                      </li>
-                      <li>{this.props.t('HeatingProfile.Tab.TechnicalData.From.Title')}</li>
-                      <li> <input type="text" placeholder="20 °C" pattern="\d*"  className="icon-field onlynumeric" name="zero_load_temp" id="zero_load_temp" /></li>
-                   </ul>
-                </td>
-             </tr>
-             </tbody>
-                    </table>
-                    </td>
-                </tr>);
 
         }
         else{
@@ -313,7 +238,6 @@ class FahrenheitSystemModal extends React.Component {
                      {expertRoleHtml}
                   </ul>
             );
-            var expertHtml="";
         }
 
 
@@ -350,7 +274,7 @@ class FahrenheitSystemModal extends React.Component {
       <div className="modal-body-content">
         <ul id="tabsJustifiedlast" className="nav nav-tabs">
           <li className="nav-item"><img src="public/images/plus-icon.png" className="myBtn_multi modal-openn" alt="" data-toggle="modal" data-backdrop="false" data-target="#add-chiller"/> <a href=""
-              data-target="#chillar" data-toggle="tab" className="nav-link small active"> Chiller</a></li>
+              data-target="#chillar" data-toggle="tab" className="nav-link small active">{this.props.t('Fahrenheit.Tab.Chiller.Title')} </a></li>
           <li className="nav-item">
             <img src="public/images/plus-icon.png" className="myBtn_multi modal-openn" alt="" data-toggle="modal" data-backdrop="false" data-target="#add-recooler" />
             <a href="JavaScript:Void(0)" data-target="#chillar" data-toggle="tab" className="nav-link" > <span className="center-text">{this.props.t('Fahrenheit.Tab.RECOOLING.Title')}</span> <img src="public/images/cacli-icon.png" alt="caculator" onClick={this.callApi} /></a>
@@ -370,7 +294,7 @@ class FahrenheitSystemModal extends React.Component {
                                                                     return (
                                                                         <tr>
                                                                         <td>
-                                                                            <p>Adsorption chillers product group</p>
+                                                                            <p>{this.props.t('Fahrenheit.Tab.Chiller.AdsorptionProductGroup.Title')}</p>
                                                                         </td>
                                                                         <td>
                                                                             <p>2.20</p>
@@ -406,7 +330,7 @@ class FahrenheitSystemModal extends React.Component {
                                                                         <tr>
                                                                             <td>
 
-                                                                                <p>Compression chiller product group</p>
+                                                                                <p>{this.props.t('Fahrenheit.Tab.Chiller.CompressionChillerProductGroup.Title')}</p>
 
                                                                             </td>
                                                                             <td></td>
@@ -436,8 +360,8 @@ class FahrenheitSystemModal extends React.Component {
                                                             </td>
                                                         </tr>
                                                     ))}
-                                                    {recoolerArray.map((data, h) => (
-                                                        Object.keys(data).map(function (template_name,innerdatakey,innerdata) {
+                                                    {recoolerArray.map((data) => (
+                                                        Object.keys(data).map(function (template_name) {
                                                             return (
                                                                 <tr key={template_name.id}>
                                                                     <td colSpan="3">
@@ -446,7 +370,7 @@ class FahrenheitSystemModal extends React.Component {
                                                               <tbody></tbody>
                                                                 <tr>
                                                                   <td>
-                                                                  <p>Re-cooler product group</p>
+                                                                  <p>{this.props.t('Fahrenheit.Tab.Chiller.RecoolerProductGroup.Title')}</p>
                                                                   </td>
                                                                   <td></td>
                                                         <td>

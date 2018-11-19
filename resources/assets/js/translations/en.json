@@ -634,6 +634,59 @@
     "Fahrenheit":{
         "Title":"Fahrenheit System",
         "Tab": {
+            "Chiller": {
+                "Title":"Chiller",
+                "AdsorptionProductGroup": {
+                    "Title":"Adsorption chillers product group",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editor explanation/tip"
+                },
+                "CompressionChillerGroup": {
+                    "Title":"Compression chiller product group"
+                },
+                "RecoolerProductGroup": {
+                    "Title":"Re-cooler product group"
+                },
+                "Adsorbent": {
+                    "Title":"Adsorbent",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "ProductInterconnection": {
+                    "Title":"Product interconnection",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "Function": {
+                    "Title":"Function",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "AddChiller": {
+                    "Title":"Add a Chiller",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "TAB":{
+                    "TechnicalData":{
+                        "Title":"TECHNICAL DATA",
+                        "AddChiller": {
+                            "Title":"Add a Chiller",
+                            "Placeholder":"inhaber@gmbh.de",
+                            "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        }
+                    },
+                    "CalculationData":{
+                        "Title":"CALCULATION DATA",
+                        "AddChiller": {
+                            "Title":"Add a Chiller",
+                            "Placeholder":"inhaber@gmbh.de",
+                            "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        }
+                    }
+
+                }
+            },
             "RECOOLING": {
                 "Title":"Re-cooling System",
                 "Language": {
@@ -698,25 +751,8 @@
                 }
 
 
-            },
-            "ProjectSpecification": {
-                "Title":"PROJECT SPECIFICATIONS",
-                "BusSystem": {
-                    "Title":"Bus system",
-                    "Placeholder":"inhaber@gmbh.de",
-                    "InfoTool":"Editor explanation/tip"
-                },
-                "Controller": {
-                    "Title":"Controller",
-                    "Placeholder":"inhaber@gmbh.de",
-                    "InfoTool":"Company explanation/tip"
-                },
-                "PressureDrop": {
-                    "Title":"Pressure drop in the piping",
-                    "Placeholder":"inhaber@gmbh.de",
-                    "InfoTool":"Address explanation/tip"
-                }
             }
+
         },
         "HeatingDemand":{
             "Title":"Heating Demand"

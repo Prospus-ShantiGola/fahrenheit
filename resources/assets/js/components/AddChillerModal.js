@@ -200,9 +200,9 @@ class AddChiller extends Component {
         var adsorbentHtml,productHtml="";
         if(this.state.selectedSource=="Adsorption"){
             adsorbentHtml=( <tr>
-                <td className="input-label">Adsorbent:</td>
+                <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.Adsorbent.Title')}:</td>
                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                    data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                    data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.Adsorbent.InfoTool')}
                     data-original-title="" title="">
                     <img src="public/images/help-red.png" alt="" />
                 </button>
@@ -217,11 +217,10 @@ class AddChiller extends Component {
             </tr>);
             productHtml=(
                 <tr>
-                    <td className="input-label">Product
-                      interconnection:
+                    <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.ProductInterconnection.Title')}:
                           </td>
                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                        data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.ProductInterconnection.InfoTool')}
                         data-original-title="" title="">
                         <img src="public/images/help-red.png" alt="" />
                     </button>
@@ -240,9 +239,9 @@ class AddChiller extends Component {
         let functionHtml="";
          if(this.state.selectedSource=="Compression"){
             functionHtml=(<tr>
-                <td className="input-label">Function:</td>
+                <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.Function.Title')}:</td>
                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                    data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                    data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.Function.InfoTool')}
                     data-original-title="" title="">
                     <img src="public/images/help-red.png" alt="" />
                 </button>
@@ -261,7 +260,7 @@ class AddChiller extends Component {
             <form  className="add-chiller-form" id="add-chiller-form">
                 <div className="modal-content">
                     <div className="modal-heading">
-                        <div className="left-head"> Add a Chiller</div>
+                        <div className="left-head"> {this.props.t('Fahrenheit.Tab.Chiller.AddChiller.Title')}</div>
                         <div className="right-head">
                             <ul className="list-inline">
                                 <li><input className="save-changes-btn" onClick={this.handleAddChillerSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')} /></li>
@@ -271,10 +270,8 @@ class AddChiller extends Component {
                     </div>
                     <div className="modal-body-content">
                         <ul id="tabsJustifiedd" className="nav nav-tabs">
-                            <li className="nav-item"><a href="" data-target="#addchillar-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL
-                  DATA</a></li>
-                            <li className="nav-item"><a href="" data-target="#addchillar-calculation-data" data-toggle="tab" className="nav-link">CALCULATION
-                  DATA</a></li>
+                            <li className="nav-item"><a href="" data-target="#addchillar-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Title')}</a></li>
+                            <li className="nav-item"><a href="" data-target="#addchillar-calculation-data" data-toggle="tab" className="nav-link">{this.props.t('Fahrenheit.Tab.Chiller.TAB.CalculationData.Title')}</a></li>
                         </ul>
                         <div id="tabsJustifiedContentt" className="tab-content">
                             <div id="addchillar-technical-data" className="tab-pane fade  active show">
