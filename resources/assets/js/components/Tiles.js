@@ -342,7 +342,7 @@ class Tiles extends React.Component {
         //projectData['heatingprofile']=this.state.heatingProfileData;
         //projectData['chiller']=this.state.coolingProfileData;
         //projectData['coompressionchiller']=this.state.compressionChillerData;
-        projectData['fahrenheit']=this.state.fahrenheitData;
+        //projectData['fahrenheit']=this.state.fahrenheitData;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
             var requiredMsg=<h5 className="input-required">{this.props.t('InputRequired')}</h5>;
@@ -720,8 +720,10 @@ class Tiles extends React.Component {
             }
         }
         if (this.props.title == GENERAL_TILE) {
-            projectData['generalData'] = this.state.generalData;
+
             if (this.state.generalDataChange) {
+                projectData['generalData'] = this.state.generalData;
+                store.dispatch("ADD_GENERAL",this.state.generalData);
                 var pricelist = (
 
                     <ul className="price-listt plnewblock">
