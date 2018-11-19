@@ -39,7 +39,7 @@
             "hoverText":"Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!"
         },
 
-        
+
         "FahrenheitSystem":{
             "Title":"Fahrenheit System",
             "hoverText":"Please provide the required inputs so we can suggest a Fahrenheit system for you."
@@ -488,7 +488,7 @@
                     "Title":"Zero load",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
-                }, 
+                },
                 "CoolingHour": {
                     "Title":"Cooling hours",
                     "Placeholder":"inhaber@gmbh.de",
@@ -569,12 +569,12 @@
                     "Title":"Heat Sources",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
-                }, 
+                },
                 "HeatSupply": {
                     "Title":"Heat Supply",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
-                }, 
+                },
                 "HeatSource": {
                     "Title":"Conventional heat source",
                     "Placeholder":"inhaber@gmbh.de",
@@ -600,9 +600,105 @@
                     "Placeholder":"",
                     "InfoTool":"Customer explanation/tip"
                 }
-               
 
-            }, 
+
+            },
+            "ProjectSpecification": {
+                "Title":"PROJECT SPECIFICATIONS",
+                "BusSystem": {
+                    "Title":"Bus system",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editor explanation/tip"
+                },
+                "Controller": {
+                    "Title":"Controller",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Company explanation/tip"
+                },
+                "PressureDrop": {
+                    "Title":"Pressure drop in the piping",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Address explanation/tip"
+                }
+            }
+        },
+        "HeatingDemand":{
+            "Title":"Heating Demand"
+        },
+        "UnusedHeat":{
+            "Title":"Unused Heat"
+        }
+
+
+    },
+    "Fahrenheit":{
+        "Title":"Fahrenheit System",
+        "Tab": {
+            "RECOOLING": {
+                "Title":"Re-cooling System",
+                "Language": {
+                    "Title":"Language",
+                    "Placeholder":"",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "Bafa": {
+                    "Title":"BAFA 2018",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "RecoolingMethod": {
+                    "Title":"Re-cooling Method",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "RecoolingTemperature": {
+                    "Title":"Re-cooling Temperature",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Contact explanation/tip"
+                },
+                "FreeCooling": {
+                    "Title":"Free Cooling",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "HeatSources": {
+                    "Title":"Heat Sources",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "HeatSupply": {
+                    "Title":"Heat Supply",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "HeatSource": {
+                    "Title":"Conventional heat source",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Location explanation/tip"
+                },
+                 "CalculationMethod": {
+                    "Title":"Calculation method",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "AmbientTemperature": {
+                    "Title":"Ambient temperature step",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "HeatingLoadProfile": {
+                    "Title":"Heating load profile",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "CoolingLoadProfile": {
+                    "Title":"Cooling load profile",
+                    "Placeholder":"",
+                    "InfoTool":"Customer explanation/tip"
+                }
+
+
+            },
             "ProjectSpecification": {
                 "Title":"PROJECT SPECIFICATIONS",
                 "BusSystem": {

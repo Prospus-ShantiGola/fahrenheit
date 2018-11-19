@@ -339,7 +339,7 @@ class FahrenheitSystemModal extends React.Component {
         { this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
       </ul>
       <div className="modal-heading">
-        <div className="left-head"> Fahrenheit System </div>
+        <div className="left-head"> {this.props.t('Fahrenheit.Title')} </div>
         <div className="right-head">
         <ul className="list-inline">
                      <li><input className="save-changes-btn" onClick={this.handleFahrenheitSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
@@ -353,8 +353,7 @@ class FahrenheitSystemModal extends React.Component {
               data-target="#chillar" data-toggle="tab" className="nav-link small active"> Chiller</a></li>
           <li className="nav-item">
             <img src="public/images/plus-icon.png" className="myBtn_multi modal-openn" alt="" data-toggle="modal" data-backdrop="false" data-target="#add-recooler" />
-            <a href="JavaScript:Void(0)" data-target="#chillar" data-toggle="tab" className="nav-link" > <span className="center-text">Re-cooling
-                System</span> <img src="public/images/cacli-icon.png" alt="caculator" onClick={this.callApi} /></a>
+            <a href="JavaScript:Void(0)" data-target="#chillar" data-toggle="tab" className="nav-link" > <span className="center-text">{this.props.t('Fahrenheit.Tab.RECOOLING.Title')}</span> <img src="public/images/cacli-icon.png" alt="caculator" onClick={this.callApi} /></a>
             <div className="caculator-divv">
               <div className="calci-div" ></div>
             </div>

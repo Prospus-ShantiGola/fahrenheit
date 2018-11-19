@@ -7,9 +7,9 @@ import de from './../translations/de.json'
 import en from './../translations/en.json'
 import {Provider} from 'react-redux';
 import store from './../store/index';
-import {addChiller} from './../actions/index';
+import {addGeneralData,} from './../actions/index';
 window.store = store;
-window.addChiller = addChiller;
+window.addGeneralData = addGeneralData;
 
 setDefaultTranslations({de, en})
 setDefaultLanguage(LOCALE)

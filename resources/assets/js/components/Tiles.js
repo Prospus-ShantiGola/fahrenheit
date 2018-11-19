@@ -723,7 +723,7 @@ class Tiles extends React.Component {
 
             if (this.state.generalDataChange) {
                 projectData['generalData'] = this.state.generalData;
-                store.dispatch("ADD_GENERAL",this.state.generalData);
+                store.dispatch( addGeneralData(this.state.generalData) )
                 var pricelist = (
 
                     <ul className="price-listt plnewblock">
