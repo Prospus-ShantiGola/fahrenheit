@@ -173,9 +173,9 @@ class AddRecooler extends Component {
         let recoolingHtml,primaryHtml="";
         if(this.state.selectedSource=="Re-cooler"){
            recoolingHtml=(<tr>
-            <td className="input-label">Re-cooling method:</td>
+            <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.RecoolingMethod.Title')}:</td>
             <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.RecoolingMethod.InfoTool')}
                 data-original-title="" title="">
                 <img src="public/images/help-red.png" alt=""/>
               </button>
@@ -190,16 +190,15 @@ class AddRecooler extends Component {
         }
         if(this.state.selectedSource=="Circuit separation"){
             primaryHtml=(<tr>
-                <td className="input-label"> Primary volume
-                  flow rate:
+                <td className="input-label"> {this.props.t('Fahrenheit.Tab.Recooling.PrimaryVolumeFlowRate.Title')}:
                 </td>
                 <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                    data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
+                    data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.PrimaryVolumeFlowRate.InfoTool')} data-original-title=""
                     title="">
                     <img src="public/images/help-red.png" alt=""/>
                   </button>
                 </td>
-                <td className="input-fields"><input type="text" placeholder="" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_prim_volume" id="recooler_prim_volume"/></td>
+                <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Recooling.PrimaryVolumeFlowRate.Placeholder')} required  pattern="\d*"  className="required-field onlynumeric" name="recooler_prim_volume" id="recooler_prim_volume"/></td>
               </tr>);
          }
 
@@ -208,7 +207,7 @@ class AddRecooler extends Component {
 <form className="add-recooler-form" id="add-recooler-form">
         <div className="modal-content">
           <div className="modal-heading">
-            <div className="left-head">Add a Re-cooling System</div>
+            <div className="left-head">{this.props.t('Fahrenheit.Tab.Recooling.AddReCoolingSystem.Title')}</div>
             <div className="right-head">
                             <ul className="list-inline">
                                 <li><input className="save-changes-btn" onClick={this.handleAddRecoolerSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')} /></li>
@@ -218,10 +217,8 @@ class AddRecooler extends Component {
           </div>
           <div className="modal-body-content">
             <ul id="tabsJustifieddd" className="nav nav-tabs">
-              <li className="nav-item"><a href="" data-target="#addrecooling-technical-data" data-toggle="tab" className="nav-link small active">TECHNICAL
-                  DATA</a></li>
-              <li className="nav-item"><a href="" data-target="#addrecooling-calculation-data" data-toggle="tab" className="nav-link">CALCULATION
-                  DATA</a></li>
+              <li className="nav-item"><a href="" data-target="#addrecooling-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Title')}</a></li>
+              <li className="nav-item"><a href="" data-target="#addrecooling-calculation-data" data-toggle="tab" className="nav-link">{this.props.t('Fahrenheit.Tab.Chiller.TAB.CalculationData.Title')}</a></li>
             </ul>
             <div id="tabsJustifiedContenttt" className="tab-content">
               <div id="addrecooling-technical-data" className="tab-pane fade  active show">
@@ -230,9 +227,9 @@ class AddRecooler extends Component {
                     <table className="table">
                       <tbody>
                         <tr>
-                          <td className="input-label">Components:</td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.Components.Title')}:</td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.Components.InfoTool')}
                               data-original-title="" title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
@@ -240,7 +237,7 @@ class AddRecooler extends Component {
                           <td className="input-fields">
                             <select className="required-field" name="recooler_component" id="recooler_component"  onChange={(elem) => this.changeField(elem)}>
                               <option value="Re-cooler">Re-cooler</option>
-                              <option value="Circuit separation">Circuit separation</option>
+                              <option value="Circuit separation">{this.props.t('Fahrenheit.Tab.Recooling.CircuitSeparation.Title')}</option>
                             </select>
                             <input type="hidden" placeholder="Chiller 1" id="addrecoolerformMode" name="addrecoolerformMode" value="add" />
                             <input type="hidden" placeholder="Chiller 1" id="addrecoolerformModeKey" name="addrecoolerformModeKey" value="" />
@@ -248,9 +245,9 @@ class AddRecooler extends Component {
                         </tr>
                         {recoolingHtml}
                         <tr>
-                          <td className="input-label">Product:</td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.Product.Title')}:</td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.Product.InfoTool')}
                               data-original-title="" title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
@@ -263,31 +260,31 @@ class AddRecooler extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td className="input-label"> Number of units: </td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.NumberOfUnits.Title')}: </td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.NumberOfUnits.InfoTool')} data-original-title=""
                               title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="1 piece" required  pattern="\d*" className="required-field onlynumeric" name="recooler_units" id="recooler_units"/></td>
+                          <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Recooling.NumberOfUnits.Placeholder')}  required  pattern="\d*" className="required-field onlynumeric" name="recooler_units" id="recooler_units"/></td>
                         </tr>
 
                         <tr>
-                          <td className="input-label"> Name: </td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.Name.Title')}: </td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.Name.InfoTool')} data-original-title=""
                               title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="" name="recooler_name" id="recooler_name"/></td>
+                          <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Recooling.Name.Placeholder')} name="recooler_name" id="recooler_name"/></td>
                         </tr>
 
                         <tr>
-                          <td className="input-label"> Re-cooling capacity:</td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.ReCoolingCapacity.Title')} :</td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.ReCoolingCapacity.InfoTool')} data-original-title=""
                               title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
@@ -296,9 +293,9 @@ class AddRecooler extends Component {
                         </tr>
 
                         <tr>
-                          <td className="input-label"> Temperature difference: </td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.TemperatureDifference.Title')} : </td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.TemperatureDifference.InfoTool')} data-original-title=""
                               title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
@@ -309,11 +306,10 @@ class AddRecooler extends Component {
                         {primaryHtml}
 
                         <tr>
-                          <td className="input-label"> Secondary volume
-                            flow rate:
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.SecondaryVolumeFlowRate.Title')}:
                           </td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.SecondaryVolumeFlowRate.InfoTool')} data-original-title=""
                               title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
@@ -322,11 +318,10 @@ class AddRecooler extends Component {
                         </tr>
 
                         <tr>
-                          <td className="input-label">Electrical power
-                            consumption:
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.ElectricalPowerConsumption.Title')}:
                           </td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Project number explanation/tip" data-original-title=""
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.ElectricalPowerConsumption.InfoTool')} data-original-title=""
                               title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
@@ -334,11 +329,10 @@ class AddRecooler extends Component {
                           <td className="input-fields"><input type="text" placeholder="" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_elec_consumption" id="recooler_elec_consumption"/></td>
                         </tr>
                         <tr>
-                          <td className="input-label">Available/provided
-                            by customer:
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.AvailableByCustomer.Title')}:
                           </td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.AvailableByCustomer.InfoTool')}
                               data-original-title="" title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
@@ -361,27 +355,27 @@ class AddRecooler extends Component {
                     <table className="table">
                       <tbody>
                         <tr>
-                          <td className="input-label">Investment costs: </td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.InvestmentCosts.Title')}: </td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Editor explanation/tip" data-original-title="" title="">
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.InvestmentCosts.InfoTool')} data-original-title="" title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
                           <td className="input-fields"><input type="text"  placeholder="€"  name="recooler_inv_cost" id="recooler_inv_cost"/> </td>
                         </tr>
                         <tr>
-                          <td className="input-label">Discount:</td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.Discount.Title')}:</td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Company explanation/tip" data-original-title="" title="">
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.Discount.InfoTool')} data-original-title="" title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
                           <td className="input-fields"><input type="text" placeholder="%"  name="recooler_discount" id="recooler_discount"/></td>
                         </tr>
                         <tr>
-                          <td className="input-label"> Maintenance costs: </td>
+                          <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.MaintenanceCosts.Title')} : </td>
                           <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                              data-placement="bottom" data-content="Address explanation/tip" data-original-title="" title="">
+                              data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Recooling.MaintenanceCosts.InfoTool')} data-original-title="" title="">
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>

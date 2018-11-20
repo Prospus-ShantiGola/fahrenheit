@@ -260,17 +260,16 @@ class Tiles extends React.Component {
         let dataObj="";
         switch (elemKey) {
             case 'heatsourceformModeKey':
-                   dataObj=this.state.heatSourceData[elemKey];
+                dataObj = this.state.heatSourceData[elemKey];
                 break;
-                case 'heatingprofileformModeKey':
-                dataObj=this.state.heatingProfileData[elemKey];
+            case 'heatingprofileformModeKey':
+                dataObj = this.state.heatingProfileData[elemKey];
                 break;
-                case 'coolingprofileformModeKey':
-                dataObj=this.state.coolingProfileData[elemKey];
+            case 'coolingprofileformModeKey':
+                dataObj = this.state.coolingProfileData[elemKey];
                 break;
-
             default:
-               dataObj=this.state.heatSourceData[elemKey];
+                dataObj = this.state.heatSourceData[elemKey];
                 break;
         }
 
@@ -791,8 +790,6 @@ class Tiles extends React.Component {
             if (this.state.optionDataChange) {
                 projectData['option'] = this.state.optionData;
                 var pricelist = (
-
-
                     <ul className="price-listt plnewblock">
                         <li className="pdtnam">
                             <p>Language</p>

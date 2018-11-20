@@ -280,9 +280,9 @@ class AddChiller extends Component {
                                         <table className="table">
                                             <tbody>
                                                 <tr>
-                                                    <td className="input-label">Chiller type:</td>
+                                                    <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.ChillerType.Title')}:</td>
                                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.ChillerType.InfoTool')}
                                                         data-original-title="" title="">
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
@@ -314,22 +314,22 @@ class AddChiller extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td className="input-label">Number of chillers:</td>
+                                                    <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.NumberOfChillers.Title')}:</td>
                                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.NumberOfChillers.InfoTool')}
                                                         data-original-title="" title="">
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
                                                     <td className="input-fields">
-                                                        <input type="text"  id="chiller_no_chiller" required  pattern="\d*" name="chiller_no_chiller" placeholder="1 piece" className="required-field onlynumeric"/>
+                                                        <input type="text"  id="chiller_no_chiller" required  pattern="\d*" name="chiller_no_chiller" placeholder={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.NumberOfChillers.Placeholder')} className="required-field onlynumeric"/>
                                                     </td>
                                                 </tr>
                                                 {productHtml}
                                                 <tr>
-                                                    <td className="input-label">Group interconnection:</td>
+                                                    <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.GroupInterconnection.Title')}:</td>
                                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.GroupInterconnection.InfoTool')}
                                                         data-original-title="" title="">
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
@@ -354,31 +354,31 @@ class AddChiller extends Component {
                                         <table className="table">
                                             <tbody>
                                                 <tr>
-                                                    <td className="input-label">Investment costs: </td>
+                                                    <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.InvestmentCosts.Title')}: </td>
                                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Editor explanation/tip" data-original-title="" title="">
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.InvestmentCosts.InfoTool')} data-original-title="" title="">
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
-                                                    <td className="input-fields"><input type="text" placeholder="€"   id="addchiller_investment_cost" name="addchiller_investment_cost"/> </td>
+                                                    <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.InvestmentCosts.Placeholder')}   id="addchiller_investment_cost" name="addchiller_investment_cost"/> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td className="input-label">Discount:</td>
+                                                    <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.Title')}:</td>
                                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Company explanation/tip" data-original-title="" title="">
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.InfoTool')} data-original-title="" title="">
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
-                                                    <td className="input-fields"><input type="text" placeholder="%" id="addchiller_discount" name="addchiller_discount"/></td>
+                                                    <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.Placeholder')} id="addchiller_discount" name="addchiller_discount"/></td>
                                                 </tr>
                                                 <tr>
-                                                    <td className="input-label"> Maintenance costs: </td>
+                                                    <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.Title')} : </td>
                                                     <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
-                                                        data-placement="bottom" data-content="Address explanation/tip" data-original-title="" title="">
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.InfoTool')} data-original-title="" title="">
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
-                                                    <td className="input-fields"><input type="text" placeholder="€/a" id="addchiller_maintenence" name="addchiller_maintenence"/> </td>
+                                                    <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.Placeholder')} id="addchiller_maintenence" name="addchiller_maintenence"/> </td>
                                                 </tr>
                                             </tbody>
                                         </table>

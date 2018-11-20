@@ -58258,7 +58258,6 @@ var Tiles = function (_React$Component) {
                 case 'coolingprofileformModeKey':
                     dataObj = this.state.coolingProfileData[elemKey];
                     break;
-
                 default:
                     dataObj = this.state.heatSourceData[elemKey];
                     break;
@@ -68824,7 +68823,7 @@ var FahrenheitSystemModal = function (_React$Component) {
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'center-text' },
-                                                this.props.t('Fahrenheit.Tab.RECOOLING.Title')
+                                                this.props.t('Fahrenheit.Tab.Recooling.Title')
                                             ),
                                             ' ',
                                             _react2.default.createElement('img', { src: 'public/images/cacli-icon.png', alt: 'caculator', onClick: this.callApi })
@@ -69585,7 +69584,8 @@ var AddChiller = function (_Component) {
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-label' },
-                                                            'Chiller type:'
+                                                            this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.ChillerType.Title'),
+                                                            ':'
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
@@ -69593,7 +69593,7 @@ var AddChiller = function (_Component) {
                                                             _react2.default.createElement(
                                                                 'button',
                                                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                                                    'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.',
+                                                                    'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.ChillerType.InfoTool'),
                                                                     'data-original-title': '', title: '' },
                                                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                             )
@@ -69671,7 +69671,8 @@ var AddChiller = function (_Component) {
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-label' },
-                                                            'Number of chillers:'
+                                                            this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.NumberOfChillers.Title'),
+                                                            ':'
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
@@ -69679,7 +69680,7 @@ var AddChiller = function (_Component) {
                                                             _react2.default.createElement(
                                                                 'button',
                                                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                                                    'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.',
+                                                                    'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.NumberOfChillers.InfoTool'),
                                                                     'data-original-title': '', title: '' },
                                                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                             )
@@ -69687,7 +69688,7 @@ var AddChiller = function (_Component) {
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-fields' },
-                                                            _react2.default.createElement('input', { type: 'text', id: 'chiller_no_chiller', required: true, pattern: '\\d*', name: 'chiller_no_chiller', placeholder: '1 piece', className: 'required-field onlynumeric' })
+                                                            _react2.default.createElement('input', { type: 'text', id: 'chiller_no_chiller', required: true, pattern: '\\d*', name: 'chiller_no_chiller', placeholder: this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.NumberOfChillers.Placeholder'), className: 'required-field onlynumeric' })
                                                         )
                                                     ),
                                                     productHtml,
@@ -69697,7 +69698,8 @@ var AddChiller = function (_Component) {
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-label' },
-                                                            'Group interconnection:'
+                                                            this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.GroupInterconnection.Title'),
+                                                            ':'
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
@@ -69705,7 +69707,7 @@ var AddChiller = function (_Component) {
                                                             _react2.default.createElement(
                                                                 'button',
                                                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                                                    'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.',
+                                                                    'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.GroupInterconnection.InfoTool'),
                                                                     'data-original-title': '', title: '' },
                                                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                             )
@@ -69761,7 +69763,8 @@ var AddChiller = function (_Component) {
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-label' },
-                                                            'Investment costs: '
+                                                            this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.InvestmentCosts.Title'),
+                                                            ': '
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
@@ -69769,14 +69772,14 @@ var AddChiller = function (_Component) {
                                                             _react2.default.createElement(
                                                                 'button',
                                                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                                                    'data-placement': 'bottom', 'data-content': 'Editor explanation/tip', 'data-original-title': '', title: '' },
+                                                                    'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.InvestmentCosts.InfoTool'), 'data-original-title': '', title: '' },
                                                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                             )
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-fields' },
-                                                            _react2.default.createElement('input', { type: 'text', placeholder: '\u20AC', id: 'addchiller_investment_cost', name: 'addchiller_investment_cost' }),
+                                                            _react2.default.createElement('input', { type: 'text', placeholder: this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.InvestmentCosts.Placeholder'), id: 'addchiller_investment_cost', name: 'addchiller_investment_cost' }),
                                                             ' '
                                                         )
                                                     ),
@@ -69786,7 +69789,8 @@ var AddChiller = function (_Component) {
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-label' },
-                                                            'Discount:'
+                                                            this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.Title'),
+                                                            ':'
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
@@ -69794,14 +69798,14 @@ var AddChiller = function (_Component) {
                                                             _react2.default.createElement(
                                                                 'button',
                                                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                                                    'data-placement': 'bottom', 'data-content': 'Company explanation/tip', 'data-original-title': '', title: '' },
+                                                                    'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.InfoTool'), 'data-original-title': '', title: '' },
                                                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                             )
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-fields' },
-                                                            _react2.default.createElement('input', { type: 'text', placeholder: '%', id: 'addchiller_discount', name: 'addchiller_discount' })
+                                                            _react2.default.createElement('input', { type: 'text', placeholder: this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.Placeholder'), id: 'addchiller_discount', name: 'addchiller_discount' })
                                                         )
                                                     ),
                                                     _react2.default.createElement(
@@ -69810,7 +69814,8 @@ var AddChiller = function (_Component) {
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-label' },
-                                                            ' Maintenance costs: '
+                                                            this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.Title'),
+                                                            ' : '
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
@@ -69818,14 +69823,14 @@ var AddChiller = function (_Component) {
                                                             _react2.default.createElement(
                                                                 'button',
                                                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                                                    'data-placement': 'bottom', 'data-content': 'Address explanation/tip', 'data-original-title': '', title: '' },
+                                                                    'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.InfoTool'), 'data-original-title': '', title: '' },
                                                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                                                             )
                                                         ),
                                                         _react2.default.createElement(
                                                             'td',
                                                             { className: 'input-fields' },
-                                                            _react2.default.createElement('input', { type: 'text', placeholder: '\u20AC/a', id: 'addchiller_maintenence', name: 'addchiller_maintenence' }),
+                                                            _react2.default.createElement('input', { type: 'text', placeholder: this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.Placeholder'), id: 'addchiller_maintenence', name: 'addchiller_maintenence' }),
                                                             ' '
                                                         )
                                                     )
@@ -70056,7 +70061,8 @@ var AddRecooler = function (_Component) {
           _react2.default.createElement(
             'td',
             { className: 'input-label' },
-            'Re-cooling method:'
+            this.props.t('Fahrenheit.Tab.Recooling.RecoolingMethod.Title'),
+            ':'
           ),
           _react2.default.createElement(
             'td',
@@ -70064,7 +70070,7 @@ var AddRecooler = function (_Component) {
             _react2.default.createElement(
               'button',
               { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.',
+                'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.RecoolingMethod.InfoTool'),
                 'data-original-title': '', title: '' },
               _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
             )
@@ -70096,7 +70102,9 @@ var AddRecooler = function (_Component) {
           _react2.default.createElement(
             'td',
             { className: 'input-label' },
-            ' Primary volume flow rate:'
+            ' ',
+            this.props.t('Fahrenheit.Tab.Recooling.PrimaryVolumeFlowRate.Title'),
+            ':'
           ),
           _react2.default.createElement(
             'td',
@@ -70104,7 +70112,7 @@ var AddRecooler = function (_Component) {
             _react2.default.createElement(
               'button',
               { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                'data-placement': 'bottom', 'data-content': 'Project number explanation/tip', 'data-original-title': '',
+                'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.PrimaryVolumeFlowRate.InfoTool'), 'data-original-title': '',
                 title: '' },
               _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
             )
@@ -70112,7 +70120,7 @@ var AddRecooler = function (_Component) {
           _react2.default.createElement(
             'td',
             { className: 'input-fields' },
-            _react2.default.createElement('input', { type: 'text', placeholder: '', required: true, pattern: '\\d*', className: 'required-field onlynumeric', name: 'recooler_prim_volume', id: 'recooler_prim_volume' })
+            _react2.default.createElement('input', { type: 'text', placeholder: this.props.t('Fahrenheit.Tab.Recooling.PrimaryVolumeFlowRate.Placeholder'), required: true, pattern: '\\d*', className: 'required-field onlynumeric', name: 'recooler_prim_volume', id: 'recooler_prim_volume' })
           )
         );
       }
@@ -70132,7 +70140,7 @@ var AddRecooler = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'left-head' },
-                'Add a Re-cooling System'
+                this.props.t('Fahrenheit.Tab.Recooling.AddReCoolingSystem.Title')
               ),
               _react2.default.createElement(
                 'div',
@@ -70169,7 +70177,7 @@ var AddRecooler = function (_Component) {
                   _react2.default.createElement(
                     'a',
                     { href: '', 'data-target': '#addrecooling-technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
-                    'TECHNICAL DATA'
+                    this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Title')
                   )
                 ),
                 _react2.default.createElement(
@@ -70178,7 +70186,7 @@ var AddRecooler = function (_Component) {
                   _react2.default.createElement(
                     'a',
                     { href: '', 'data-target': '#addrecooling-calculation-data', 'data-toggle': 'tab', className: 'nav-link' },
-                    'CALCULATION DATA'
+                    this.props.t('Fahrenheit.Tab.Chiller.TAB.CalculationData.Title')
                   )
                 )
               ),
@@ -70206,7 +70214,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              'Components:'
+                              this.props.t('Fahrenheit.Tab.Recooling.Components.Title'),
+                              ':'
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70214,7 +70223,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.Components.InfoTool'),
                                   'data-original-title': '', title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70235,7 +70244,7 @@ var AddRecooler = function (_Component) {
                                 _react2.default.createElement(
                                   'option',
                                   { value: 'Circuit separation' },
-                                  'Circuit separation'
+                                  this.props.t('Fahrenheit.Tab.Recooling.CircuitSeparation.Title')
                                 )
                               ),
                               _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'addrecoolerformMode', name: 'addrecoolerformMode', value: 'add' }),
@@ -70249,7 +70258,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              'Product:'
+                              this.props.t('Fahrenheit.Tab.Recooling.Product.Title'),
+                              ':'
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70257,7 +70267,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.Product.InfoTool'),
                                   'data-original-title': '', title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70287,7 +70297,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              ' Number of units: '
+                              this.props.t('Fahrenheit.Tab.Recooling.NumberOfUnits.Title'),
+                              ': '
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70295,7 +70306,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Project number explanation/tip', 'data-original-title': '',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.NumberOfUnits.InfoTool'), 'data-original-title': '',
                                   title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70303,7 +70314,7 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-fields' },
-                              _react2.default.createElement('input', { type: 'text', placeholder: '1 piece', required: true, pattern: '\\d*', className: 'required-field onlynumeric', name: 'recooler_units', id: 'recooler_units' })
+                              _react2.default.createElement('input', { type: 'text', placeholder: this.props.t('Fahrenheit.Tab.Recooling.NumberOfUnits.Placeholder'), required: true, pattern: '\\d*', className: 'required-field onlynumeric', name: 'recooler_units', id: 'recooler_units' })
                             )
                           ),
                           _react2.default.createElement(
@@ -70312,7 +70323,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              ' Name: '
+                              this.props.t('Fahrenheit.Tab.Recooling.Name.Title'),
+                              ': '
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70320,7 +70332,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Project number explanation/tip', 'data-original-title': '',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.Name.InfoTool'), 'data-original-title': '',
                                   title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70328,7 +70340,7 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-fields' },
-                              _react2.default.createElement('input', { type: 'text', placeholder: '', name: 'recooler_name', id: 'recooler_name' })
+                              _react2.default.createElement('input', { type: 'text', placeholder: this.props.t('Fahrenheit.Tab.Recooling.Name.Placeholder'), name: 'recooler_name', id: 'recooler_name' })
                             )
                           ),
                           _react2.default.createElement(
@@ -70337,7 +70349,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              ' Re-cooling capacity:'
+                              this.props.t('Fahrenheit.Tab.Recooling.ReCoolingCapacity.Title'),
+                              ' :'
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70345,7 +70358,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Project number explanation/tip', 'data-original-title': '',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.ReCoolingCapacity.InfoTool'), 'data-original-title': '',
                                   title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70362,7 +70375,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              ' Temperature difference: '
+                              this.props.t('Fahrenheit.Tab.Recooling.TemperatureDifference.Title'),
+                              ' : '
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70370,7 +70384,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Project number explanation/tip', 'data-original-title': '',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.TemperatureDifference.InfoTool'), 'data-original-title': '',
                                   title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70388,7 +70402,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              ' Secondary volume flow rate:'
+                              this.props.t('Fahrenheit.Tab.Recooling.SecondaryVolumeFlowRate.Title'),
+                              ':'
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70396,7 +70411,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Project number explanation/tip', 'data-original-title': '',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.SecondaryVolumeFlowRate.InfoTool'), 'data-original-title': '',
                                   title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70413,7 +70428,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              'Electrical power consumption:'
+                              this.props.t('Fahrenheit.Tab.Recooling.ElectricalPowerConsumption.Title'),
+                              ':'
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70421,7 +70437,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Project number explanation/tip', 'data-original-title': '',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.ElectricalPowerConsumption.InfoTool'), 'data-original-title': '',
                                   title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70438,7 +70454,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              'Available/provided by customer:'
+                              this.props.t('Fahrenheit.Tab.Recooling.AvailableByCustomer.Title'),
+                              ':'
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70446,7 +70463,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.',
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.AvailableByCustomer.InfoTool'),
                                   'data-original-title': '', title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
@@ -70496,7 +70513,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              'Investment costs: '
+                              this.props.t('Fahrenheit.Tab.Recooling.InvestmentCosts.Title'),
+                              ': '
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70504,7 +70522,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Editor explanation/tip', 'data-original-title': '', title: '' },
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.InvestmentCosts.InfoTool'), 'data-original-title': '', title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
                             ),
@@ -70521,7 +70539,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              'Discount:'
+                              this.props.t('Fahrenheit.Tab.Recooling.Discount.Title'),
+                              ':'
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70529,7 +70548,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Company explanation/tip', 'data-original-title': '', title: '' },
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.Discount.InfoTool'), 'data-original-title': '', title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
                             ),
@@ -70545,7 +70564,8 @@ var AddRecooler = function (_Component) {
                             _react2.default.createElement(
                               'td',
                               { className: 'input-label' },
-                              ' Maintenance costs: '
+                              this.props.t('Fahrenheit.Tab.Recooling.MaintenanceCosts.Title'),
+                              ' : '
                             ),
                             _react2.default.createElement(
                               'td',
@@ -70553,7 +70573,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'button',
                                 { type: 'button', className: '', 'data-container': 'body', 'data-trigger': 'hover', 'data-toggle': 'popover',
-                                  'data-placement': 'bottom', 'data-content': 'Address explanation/tip', 'data-original-title': '', title: '' },
+                                  'data-placement': 'bottom', 'data-content': this.props.t('Fahrenheit.Tab.Recooling.MaintenanceCosts.InfoTool'), 'data-original-title': '', title: '' },
                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
                               )
                             ),
@@ -70597,7 +70617,7 @@ module.exports = {"Tiles":{"General":{"Title":"Allgemeine Information","hoverTex
 /* 109 */
 /***/ (function(module, exports) {
 
-module.exports = {"Tiles":{"General":{"Title":"General Information","hoverText":"We need the location to get the specific weather data."},"Economic":{"Title":"Economic Data","hoverText":"We need the location to get the specific weather data."},"Options":{"Title":"Options","hoverText":"We need the location to get the specific weather data.","Language":"Language","ReCoolingType":"Re-cooling Type"},"HeatSource":{"Title":"Heat Source","hoverText":"Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.","HeatCapacity":"Heat Capacity","AvailableHeat":"Available Heat","Temperature":"Temperature"},"HeatingLoadProfile":{"Title":"Heating Load Profile","hoverText":"Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources. Are you planning a new heat source? Then we can calculate the profitability of the whole system!"},"CompressionChiller":{"Title":"Compression Chiller","hoverText":"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.","HoverCoolingTitle":"Cooling Capacity","NumberofCompressor":"Number of Compressors","Temperature":"Temperature"},"CoolingLoadProfile":{"Title":"Cooling Load Profile","hoverText":"Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!"},"FahrenheitSystem":{"Title":"Fahrenheit System","hoverText":"Please provide the required inputs so we can suggest a Fahrenheit system for you."}},"General":{"Title":"General Information","Tab":{"Project":{"Title":"Project Data","ProjectNumber":{"Title":"Project number","Placeholder":"New Project","InfoTool":"Project number explanation/tip"},"ProjectName":{"Title":"Project name","Placeholder":"Test Project","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProjectLocation":{"Title":"Location","Placeholder":"Halle/Saale","InfoTool":"Location explanation/tip"},"ProjectCustomer":{"Title":"Customer","Placeholder":"HabWarmWillKalt Gmbh ","InfoTool":"Customer explanation/tip"},"ProjectContact":{"Title":"Contact","Placeholder":"Mr. Inhaber","InfoTool":"Contact explanation/tip"},"ProjectPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"ProjectEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}},"Personal":{"Title":"Personal Data","PersonalEditor":{"Title":"Editor","Placeholder":"HabWarmWillKalt Gmbh","InfoTool":"Editor explanation/tip"},"PersonalCompany":{"Title":"Company","Placeholder":"Gmbh","InfoTool":"Company explanation/tip"},"PersonalAddress":{"Title":"Address","Placeholder":"Halle/Saale","InfoTool":"Address explanation/tip"},"PersonalPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"PersonalMobile":{"Title":"Mobile","Placeholder":"Mr. Inhaber","InfoTool":"Mobile explanation/tip"},"PersonalEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}}}},"Economic":{"Title":"Economic Data","Tab":{"General":{"Title":"General","ElectricityPrice":{"Title":"Electricity price","Placeholder":"0.180","InfoTool":"Electricity price explanation/tip"},"HeatPrice":{"Title":"Heat price","Placeholder":"0.000","InfoTool":"Heat Price"},"ElectricityPriceIncrease":{"Title":"Electricity price increase","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"CalculatedInterestRate":{"Title":"Calculated interest rate","Placeholder":"0.700","InfoTool":"Calculated interest rate explanation/tip"},"InflationRate":{"Title":"Inflation rate","Placeholder":"1.600","InfoTool":"Inflation rate explanation/tip"}},"CHP":{"Title":"CHP","OwnUsageOfElectricity":{"Title":"Own usage of electricity","Placeholder":"0.000","InfoTool":"Electricity price explanation/tip"},"KWKEubsidyForElectricity":{"Title":"KWK-subsidy for electricity","Placeholder":"0.000","InfoTool":"KWK-subsidy for electricity"},"GasPrice":{"Title":"Gas price","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"FOREXPERTS":{"Title":"FOR EXPERTS","Placeholder":"","InfoTool":""},"ElectricitySalesPrice":{"Title":"Electricity sales price","Placeholder":"0.000","InfoTool":"Electricity sales price explanation/tip"},"EnergyTaxRefund":{"Title":"Energy tax refund","Placeholder":"0.000","InfoTool":"Inflation rate explanation/tip"},"EEGAllocationPortion":{"Title":"EEG allocation portion","Placeholder":"0.000","InfoTool":"EEG-Umlage-Anteil explanation/tip"},"EEGApportionmentCosts":{"Title":"EEG apportionment costs","Placeholder":"0.000","InfoTool":"Inflation rate explanation/tip"}},"Investments":{"Title":"INVESTMENTS","CHPInTheBasement":{"Title":"CHP in the basement","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"Chiller1":{"Title":"Chiller 1","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"RadiantCoolingOffice":{"Title":"Radiant cooling office","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}},"Maintenence":{"Title":"Maintenence","CHPInTheBasement":{"Title":"CHP in the basement","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"Chiller1":{"Title":"Chiller 1","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"RadiantCoolingOffice":{"Title":"Radiant cooling office","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}}}},"HeatSource":{"Title":"Heat Source","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"CHP in the basement","InfoTool":"Project number explanation/tip"},"TypeOfHeatSource":{"Title":"Type of heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"DriveTemperature":{"Title":"Drive temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatCapacity":{"Title":"Heat capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ElectricCapacity":{"Title":"Electric capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ThermalEfficiency":{"Title":"Thermal efficiency","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ElectricEfficiency":{"Title":"Electric efficiency","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ManufacturerText":{"Title":"Manufacturer","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"TypeText":{"Title":"Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"OperationHours":{"Title":"Operation hours","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"NewInstallation":{"Title":"New installation","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}}},"Compression":{"Title":"Compression Chillers","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Chiller 1","InfoTool":"Project number explanation/tip"},"Refrigerant":{"Title":"Refrigerant","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"Manufacturer":{"Title":"Manufacturer","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"CompressorType":{"Title":"Compressor type","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ChilledWaterTemperature":{"Title":"Chilled water temperature","Placeholder":"Chiller 1","InfoTool":"Customer explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}}},"HeatingProfile":{"Title":"Heating Load Profile","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Office South","InfoTool":"Project number explanation/tip"},"ProfileType":{"Title":"Profile Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"MaxHeatingLoad":{"Title":"Max. heating load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"BaseLoad":{"Title":"Base load","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ZeroLoad":{"Title":"Zero load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"From":{"Title":"from","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"},"At":{"Title":"at","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"CoolingProfile":{"Title":"Cooling Load Profile","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Radiant cooling office","InfoTool":"Project number explanation/tip"},"ProfileType":{"Title":"Profile Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InletTemperature":{"Title":"Chilled water inlet temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"},"MaxCoolingLoad":{"Title":"Max. cooling load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"BaseLoad":{"Title":"Base load","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ZeroLoad":{"Title":"Zero load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingHour":{"Title":"Cooling hours","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"From":{"Title":"from","Placeholder":"","InfoTool":""},"At":{"Title":"at","Placeholder":"","InfoTool":""}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Options":{"Title":"Options","Tab":{"GENERAL":{"Title":"GENERAL","Language":{"Title":"Language","Placeholder":"","InfoTool":"Project number explanation/tip"},"Bafa":{"Title":"BAFA 2018","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"RecoolingMethod":{"Title":"Re-cooling Method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"RecoolingTemperature":{"Title":"Re-cooling Temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"FreeCooling":{"Title":"Free Cooling","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSources":{"Title":"Heat Sources","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSupply":{"Title":"Heat Supply","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSource":{"Title":"Conventional heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"CalculationMethod":{"Title":"Calculation method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"AmbientTemperature":{"Title":"Ambient temperature step","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatingLoadProfile":{"Title":"Heating load profile","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingLoadProfile":{"Title":"Cooling load profile","Placeholder":"","InfoTool":"Customer explanation/tip"}},"ProjectSpecification":{"Title":"PROJECT SPECIFICATIONS","BusSystem":{"Title":"Bus system","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Controller":{"Title":"Controller","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"PressureDrop":{"Title":"Pressure drop in the piping","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Fahrenheit":{"Title":"Fahrenheit System","Tab":{"Chiller":{"Title":"Chiller","AdsorptionProductGroup":{"Title":"Adsorption chillers product group","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"CompressionChillerGroup":{"Title":"Compression chiller product group"},"RecoolerProductGroup":{"Title":"Re-cooler product group"},"Adsorbent":{"Title":"Adsorbent","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProductInterconnection":{"Title":"Product interconnection","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"Function":{"Title":"Function","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"TAB":{"TechnicalData":{"Title":"TECHNICAL DATA","AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."}},"CalculationData":{"Title":"CALCULATION DATA","AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."}}}},"RECOOLING":{"Title":"Re-cooling System","Language":{"Title":"Language","Placeholder":"","InfoTool":"Project number explanation/tip"},"Bafa":{"Title":"BAFA 2018","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"RecoolingMethod":{"Title":"Re-cooling Method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"RecoolingTemperature":{"Title":"Re-cooling Temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"FreeCooling":{"Title":"Free Cooling","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSources":{"Title":"Heat Sources","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSupply":{"Title":"Heat Supply","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSource":{"Title":"Conventional heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"CalculationMethod":{"Title":"Calculation method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"AmbientTemperature":{"Title":"Ambient temperature step","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatingLoadProfile":{"Title":"Heating load profile","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingLoadProfile":{"Title":"Cooling load profile","Placeholder":"","InfoTool":"Customer explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"RequiredField":{"Message":"Required field","Note":"Note : Please fill the required fields in both tabs","ErrorMsg":"please fill out this field"},"SaveButton":"save changes","InputRequired":"An input is required","DiscountText":"Discount","ErrorMessage":"Error on this page","AdditionalMessage":"Additional options for economic calculations are available!"}
+module.exports = {"Tiles":{"General":{"Title":"General Information","hoverText":"We need the location to get the specific weather data."},"Economic":{"Title":"Economic Data","hoverText":"We need the location to get the specific weather data."},"Options":{"Title":"Options","hoverText":"We need the location to get the specific weather data.","Language":"Language","ReCoolingType":"Re-cooling Type"},"HeatSource":{"Title":"Heat Source","hoverText":"Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.","HeatCapacity":"Heat Capacity","AvailableHeat":"Available Heat","Temperature":"Temperature"},"HeatingLoadProfile":{"Title":"Heating Load Profile","hoverText":"Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources. Are you planning a new heat source? Then we can calculate the profitability of the whole system!"},"CompressionChiller":{"Title":"Compression Chiller","hoverText":"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.","HoverCoolingTitle":"Cooling Capacity","NumberofCompressor":"Number of Compressors","Temperature":"Temperature"},"CoolingLoadProfile":{"Title":"Cooling Load Profile","hoverText":"Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!"},"FahrenheitSystem":{"Title":"Fahrenheit System","hoverText":"Please provide the required inputs so we can suggest a Fahrenheit system for you."}},"General":{"Title":"General Information","Tab":{"Project":{"Title":"Project Data","ProjectNumber":{"Title":"Project number","Placeholder":"New Project","InfoTool":"Project number explanation/tip"},"ProjectName":{"Title":"Project name","Placeholder":"Test Project","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProjectLocation":{"Title":"Location","Placeholder":"Halle/Saale","InfoTool":"Location explanation/tip"},"ProjectCustomer":{"Title":"Customer","Placeholder":"HabWarmWillKalt Gmbh ","InfoTool":"Customer explanation/tip"},"ProjectContact":{"Title":"Contact","Placeholder":"Mr. Inhaber","InfoTool":"Contact explanation/tip"},"ProjectPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"ProjectEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}},"Personal":{"Title":"Personal Data","PersonalEditor":{"Title":"Editor","Placeholder":"HabWarmWillKalt Gmbh","InfoTool":"Editor explanation/tip"},"PersonalCompany":{"Title":"Company","Placeholder":"Gmbh","InfoTool":"Company explanation/tip"},"PersonalAddress":{"Title":"Address","Placeholder":"Halle/Saale","InfoTool":"Address explanation/tip"},"PersonalPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"PersonalMobile":{"Title":"Mobile","Placeholder":"Mr. Inhaber","InfoTool":"Mobile explanation/tip"},"PersonalEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}}}},"Economic":{"Title":"Economic Data","Tab":{"General":{"Title":"General","ElectricityPrice":{"Title":"Electricity price","Placeholder":"0.180","InfoTool":"Electricity price explanation/tip"},"HeatPrice":{"Title":"Heat price","Placeholder":"0.000","InfoTool":"Heat Price"},"ElectricityPriceIncrease":{"Title":"Electricity price increase","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"CalculatedInterestRate":{"Title":"Calculated interest rate","Placeholder":"0.700","InfoTool":"Calculated interest rate explanation/tip"},"InflationRate":{"Title":"Inflation rate","Placeholder":"1.600","InfoTool":"Inflation rate explanation/tip"}},"CHP":{"Title":"CHP","OwnUsageOfElectricity":{"Title":"Own usage of electricity","Placeholder":"0.000","InfoTool":"Electricity price explanation/tip"},"KWKEubsidyForElectricity":{"Title":"KWK-subsidy for electricity","Placeholder":"0.000","InfoTool":"KWK-subsidy for electricity"},"GasPrice":{"Title":"Gas price","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"FOREXPERTS":{"Title":"FOR EXPERTS","Placeholder":"","InfoTool":""},"ElectricitySalesPrice":{"Title":"Electricity sales price","Placeholder":"0.000","InfoTool":"Electricity sales price explanation/tip"},"EnergyTaxRefund":{"Title":"Energy tax refund","Placeholder":"0.000","InfoTool":"Inflation rate explanation/tip"},"EEGAllocationPortion":{"Title":"EEG allocation portion","Placeholder":"0.000","InfoTool":"EEG-Umlage-Anteil explanation/tip"},"EEGApportionmentCosts":{"Title":"EEG apportionment costs","Placeholder":"0.000","InfoTool":"Inflation rate explanation/tip"}},"Investments":{"Title":"INVESTMENTS","CHPInTheBasement":{"Title":"CHP in the basement","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"Chiller1":{"Title":"Chiller 1","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"RadiantCoolingOffice":{"Title":"Radiant cooling office","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}},"Maintenence":{"Title":"Maintenence","CHPInTheBasement":{"Title":"CHP in the basement","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"Chiller1":{"Title":"Chiller 1","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"RadiantCoolingOffice":{"Title":"Radiant cooling office","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}}}},"HeatSource":{"Title":"Heat Source","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"CHP in the basement","InfoTool":"Project number explanation/tip"},"TypeOfHeatSource":{"Title":"Type of heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"DriveTemperature":{"Title":"Drive temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatCapacity":{"Title":"Heat capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ElectricCapacity":{"Title":"Electric capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ThermalEfficiency":{"Title":"Thermal efficiency","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ElectricEfficiency":{"Title":"Electric efficiency","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ManufacturerText":{"Title":"Manufacturer","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"TypeText":{"Title":"Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"OperationHours":{"Title":"Operation hours","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"NewInstallation":{"Title":"New installation","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}}},"Compression":{"Title":"Compression Chillers","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Chiller 1","InfoTool":"Project number explanation/tip"},"Refrigerant":{"Title":"Refrigerant","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"Manufacturer":{"Title":"Manufacturer","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"CompressorType":{"Title":"Compressor type","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ChilledWaterTemperature":{"Title":"Chilled water temperature","Placeholder":"Chiller 1","InfoTool":"Customer explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}}},"HeatingProfile":{"Title":"Heating Load Profile","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Office South","InfoTool":"Project number explanation/tip"},"ProfileType":{"Title":"Profile Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"MaxHeatingLoad":{"Title":"Max. heating load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"BaseLoad":{"Title":"Base load","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ZeroLoad":{"Title":"Zero load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"From":{"Title":"from","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"},"At":{"Title":"at","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"CoolingProfile":{"Title":"Cooling Load Profile","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Radiant cooling office","InfoTool":"Project number explanation/tip"},"ProfileType":{"Title":"Profile Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InletTemperature":{"Title":"Chilled water inlet temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"},"MaxCoolingLoad":{"Title":"Max. cooling load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"BaseLoad":{"Title":"Base load","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ZeroLoad":{"Title":"Zero load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingHour":{"Title":"Cooling hours","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"From":{"Title":"from","Placeholder":"","InfoTool":""},"At":{"Title":"at","Placeholder":"","InfoTool":""}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Options":{"Title":"Options","Tab":{"GENERAL":{"Title":"GENERAL","Language":{"Title":"Language","Placeholder":"","InfoTool":"Project number explanation/tip"},"Bafa":{"Title":"BAFA 2018","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"RecoolingMethod":{"Title":"Re-cooling Method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"RecoolingTemperature":{"Title":"Re-cooling Temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"FreeCooling":{"Title":"Free Cooling","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSources":{"Title":"Heat Sources","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSupply":{"Title":"Heat Supply","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSource":{"Title":"Conventional heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"CalculationMethod":{"Title":"Calculation method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"AmbientTemperature":{"Title":"Ambient temperature step","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatingLoadProfile":{"Title":"Heating load profile","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingLoadProfile":{"Title":"Cooling load profile","Placeholder":"","InfoTool":"Customer explanation/tip"}},"ProjectSpecification":{"Title":"PROJECT SPECIFICATIONS","BusSystem":{"Title":"Bus system","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Controller":{"Title":"Controller","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"PressureDrop":{"Title":"Pressure drop in the piping","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Fahrenheit":{"Title":"Fahrenheit System","Tab":{"Chiller":{"Title":"Chiller","AdsorptionProductGroup":{"Title":"Adsorption chillers product group","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"CompressionChillerGroup":{"Title":"Compression chiller product group"},"RecoolerProductGroup":{"Title":"Re-cooler product group"},"Adsorbent":{"Title":"Adsorbent","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProductInterconnection":{"Title":"Product interconnection","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"Function":{"Title":"Function","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"TAB":{"TechnicalData":{"Title":"TECHNICAL DATA","AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ChillerType":{"Title":"Chiller type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"NumberOfChillers":{"Title":"Number of chillers","Placeholder":"1 piece","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"GroupInterconnection":{"Title":"Group interconnection","Placeholder":"1 piece","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InvestmentCosts":{"Title":"Investment costs","Placeholder":"€","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"%","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"€/a","InfoTool":"Address explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."}}}},"Recooling":{"Title":"Re-cooling System","RecoolingMethod":{"Title":"Re-cooling method","Placeholder":"","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"PrimaryVolumeFlowRate":{"Title":"Primary volume flow rate","Placeholder":"","InfoTool":"Project number explanation/tip"},"AddReCoolingSystem":{"Title":"Add a Re-cooling System","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"Components":{"Title":"Components","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"CircuitSeparation":{"Title":"Circuit separation","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"Product":{"Title":"Product","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"NumberOfUnits":{"Title":"Number of units","Placeholder":"1 piece","InfoTool":"Project number explanation/tip"},"Name":{"Title":"Name","Placeholder":"","InfoTool":"Project number explanation/tip"},"ReCoolingCapacity":{"Title":"Re-cooling capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"TemperatureDifference":{"Title":"Temperature difference","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"SecondaryVolumeFloRate":{"Title":"Secondary volume flow rate","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"ElectricalPowerConsumption":{"Title":"Electrical power consumption","Placeholder":"","InfoTool":"Project number explanation/tip"},"AvailableByCustomer":{"Title":"Available/provided by customer","Placeholder":"","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InvestmentCosts":{"Title":"Investment costs","Placeholder":"","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"RequiredField":{"Message":"Required field","Note":"Note : Please fill the required fields in both tabs","ErrorMsg":"please fill out this field"},"SaveButton":"save changes","InputRequired":"An input is required","DiscountText":"Discount","ErrorMessage":"Error on this page","AdditionalMessage":"Additional options for economic calculations are available!"}
 
 /***/ }),
 /* 110 */
