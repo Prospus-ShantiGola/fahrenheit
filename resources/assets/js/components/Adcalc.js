@@ -310,7 +310,7 @@ class Adcalc extends Component {
                 title:FAHRENHEIT_SYSTEM,
                 header:this.props.t('Tiles.FahrenheitSystem.Title'),
                 tileCls:'fahrenheit-system-box data-box',
-                required:"no",
+                required:"yes",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
                 editIcon:'public/images/add-icon.png',

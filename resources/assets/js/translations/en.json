@@ -806,12 +806,7 @@
             }
 
         },
-        "HeatingDemand":{
-            "Title":"Heating Demand"
-        },
-        "UnusedHeat":{
-            "Title":"Unused Heat"
-        }
+        "InputRequired":"More inputs are required to suggest a system"
 
 
     },

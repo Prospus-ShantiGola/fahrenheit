@@ -8,6 +8,7 @@ import en from './../translations/en.json'
 import {Provider} from 'react-redux';
 import store from './../store/index';
 import {addGeneralData,} from './../actions/index';
+import Success from './Success';
 window.store = store;
 window.addGeneralData = addGeneralData;
 
@@ -49,7 +50,7 @@ class AppContent extends Component {
         .then(function (data) {
             console.log(data);
                             if(typeof data.errors=="undefined"){
-
+                                $("#success-modal").modal('show');
                             }
                             else{
                                 $("#message-popup-modal").modal('show');
@@ -116,8 +117,9 @@ class AppContent extends Component {
 
                         <Provider store={store}>
                         <Adcalc store={store} role={this.state.role} onFormChange={this.handleForm}/>
-                        </Provider>
 
+                        </Provider>
+                        <Success />
 
                 </div>
                 </div>

@@ -345,6 +345,9 @@ class Tiles extends React.Component {
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
             var requiredMsg=<h5 className="input-required">{this.props.t('InputRequired')}</h5>;
+            if(this.props.title == FAHRENHEIT_SYSTEM){
+                var requiredMsg=<h5 className="input-required">{this.props.t('Fahrenheit.InputRequired')}</h5>;
+            }
         }
 
         var deleteModal="";
@@ -787,6 +790,39 @@ class Tiles extends React.Component {
             }
         }
         if (this.props.title == OPTION_TILE) {
+            var pricelist = (
+                <ul className="price-listt">
+                              <li>
+                                 <p>Re-cooling Type</p>
+                                 <h3>DRY</h3>
+                              </li>
+                              <li>
+                                 <p>Free cooling</p>
+                                 <h3>YES <span>(chilled water temperature)</span></h3>
+                              </li>
+                           </ul>
+
+            );
+            var priceFullList = (<div><ul className="price-listt">
+            <li>
+               <p>Language</p>
+               <h3>English</h3>
+            </li>
+            <li>
+               <p>BAFA 2018</p>
+               <h3>Calculate</h3>
+            </li>
+            <li>
+               <p>Re-cooling Type</p>
+               <h3>Dry</h3>
+            </li>
+         </ul>
+         <ul className="right-list-content">
+            <li>
+               <p>Free cooling</p>
+               <h3>Yes <span>(chilled water temperature)</span></h3>
+            </li>
+         </ul></div>);
             if (this.state.optionDataChange) {
                 projectData['option'] = this.state.optionData;
                 var pricelist = (
@@ -813,9 +849,9 @@ class Tiles extends React.Component {
                     </ul>
 
                 );
-                var priceFullList = (<div class="hover-list">
-                    <div class="table-responsive">
-                        <table class="table">
+                var priceFullList = (<div className="hover-list">
+                    <div className="table-responsive">
+                        <table className="table">
                             <tr>
                                 <th>Language: </th>
                                 <td>English</td>
@@ -958,7 +994,6 @@ class Tiles extends React.Component {
             if (this.state.fahrenheitDataChange) {
                 projectData['fahrenheit'] = this.state.fahrenheitData;
                 var pricelist = (
-
                     <ul className="price-listt">
                         <li>
                             <p>Recommended System</p>
@@ -1119,6 +1154,9 @@ class Tiles extends React.Component {
 
                 </div>);
                 var requiredMsg = "";
+            }
+            else {
+                var priceFullList = <p className="scrollbar-macosx">{this.props.hoverText}</p>;
             }
         }
 
