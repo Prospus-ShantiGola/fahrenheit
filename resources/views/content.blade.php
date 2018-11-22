@@ -369,6 +369,7 @@
 
 
         <script type="text/javascript">
+        var erro_msg =  "{{ __('home.Login_required_msg')}}";  
             function LoginUser()
             {
 
@@ -508,6 +509,22 @@ $('.add-new-adcalc').on('click',function(e){
         $('.fahrenheit-contact').addClass('form-edited');
 
     });
+
+    // $('form#login-form input[required]').on('change invalid', function() {
+            
+
+    //         var textfield = $(this).get(0);
+    //       //  alert(textfield)
+
+    //         // 'setCustomValidity not only sets the message, but also marks
+    //         // the field as invalid. In order to see whether the field really is
+    //         // invalid, we have to remove the message first
+    //         textfield.setCustomValidity('');
+
+    //         if (!textfield.validity.valid) {
+    //           textfield.setCustomValidity( "{{ __('home.Login_required_msg')}}" );
+    //         }
+    //     });
 });
 
 

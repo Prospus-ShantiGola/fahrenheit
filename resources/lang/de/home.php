@@ -9,6 +9,7 @@ return [
 	'Loginaccountdisable_msg'=>'Ihr Account wurde deaktiviert',
 	'Login_success'=>'Anmeldung erfolgreich',
 	'Login_check'=>'Bitte überprüfen Sie die Zugangsdaten !!',
+	'Login_required_msg'=>'Bitte füllen Sie dieses Feld aus',  
 
 	 'Contact_title'=>'Kontaktieren Sie Fahrenheit',
      'Contact_name'=>'Name',

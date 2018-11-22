@@ -17,6 +17,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/generate-pdf','PdfGenerateController@generatePDF');
+Route::get('/generate-html','PdfGenerateController@generateHtml');
+
 Route::group(
 [
     'prefix' => 'pages',
@@ -149,3 +152,4 @@ Route::get('/locale/{lang?}',function($lang){
 App:setLocale($lang);
 return false;
 });
+

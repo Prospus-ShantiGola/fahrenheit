@@ -59,9 +59,13 @@
                                             <i class="fas fa-eye fa-lg disabled">
                                                 </i>
                                         </a>
-                                        <a href="#"  class="disabled"  >
-                                            <i class="fas fa-file-pdf fa-lg disabled">
+                                       <!--  <a >Download PDF</a> -->
+                                        <a href="https://localhost/fahrenheit/generate-pdf">
+                                            <i class="fas fa-file-pdf fa-lg ">
                                             </i>
+                                        </a>
+                                        <a onclick= 'window.open("https://localhost/fahrenheit/generate-html", "_blank", "width=1000, height=700") ;'>
+                                           html
                                         </a>
                                         <a href="#"   title="{{ __('user_reports.table_disable_user_report')}}" data-toggle="modal" data-backdrop="false" data-target="#delete-modal">
                                                 <i class="fas fa-trash-alt fa-lg">
