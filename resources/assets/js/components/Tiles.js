@@ -2,19 +2,22 @@ import React from 'react';
 
 import {DeleteModal} from './DeleteModal';
 import {ErrorBoundary} from './ErrorBoundary';
-import {DataList} from './data-list';
-import { translate, setLanguage, getLanguage } from 'react-multi-lang';
+import { translate } from 'react-multi-lang';
 
+const hideEle={
+    visibility:"hidden"
+}
 class Tiles extends React.Component {
 
     constructor(props) {
-        let sort;
         super(props);
         this.state = {
             compressionChillerData:[],
             compressionDataChange:false,
             generalData:[],
             generalDataChange:false,
+            optionData:[],
+            optionDataChange:false,
             economicData:[],
             economicDataChange:false,
             heatSourceData:[],
@@ -23,6 +26,8 @@ class Tiles extends React.Component {
             heatingProfileDataChange:false,
             coolingProfileData:[],
             coolingProfileDataChange:false,
+            fahrenheitData:[],
+            fahrenheitDataChange:this.props.datachanged,
                };
         this.editRecord=this.editRecord.bind(this);
         this.editHeatRecord=this.editHeatRecord.bind(this);
@@ -37,58 +42,66 @@ class Tiles extends React.Component {
 
         switch (nextProps.title) {
             case CHILLER_TITLE:
-            this.setState({
-                compressionChillerData: nextProps.dataRecord,
-                compressionDataChange: nextProps.dataChange
-              });
+                this.setState({
+                    compressionChillerData: nextProps.dataRecord,
+                    compressionDataChange: nextProps.dataChange
+                });
 
                 break;
             case GENERAL_TILE:
                 this.setState({
-                    generalDataChange:nextProps.dataChange
-                  });
-                  if(nextProps.dataRecord.generalformMode=="add"){
-                    this.setState({
-                        generalData: this.state.generalData.concat(nextProps.dataRecord)
-                      })
-                    }else{
+                    generalDataChange: nextProps.dataChange
+                });
+                    this.state.generalData[0] = nextProps.dataRecord
+                    this.forceUpdate()
 
-                          this.state.generalData[0]= nextProps.dataRecord
-                          this.forceUpdate()
-                    }
-                    break;
-            case ECONOMIC_TITLE:
-            this.setState({
-                economicDataChange:nextProps.dataChange
-            });
-            if(nextProps.dataRecord.economicformMode=="add"){
+                break;
+            case OPTION_TILE:
                 this.setState({
-                    economicData: this.state.generalData.concat(nextProps.dataRecord)
-                    })
-                }else{
+                    optionDataChange: nextProps.dataChange
+                });
 
-                        this.state.economicData[0]= nextProps.dataRecord
-                        this.forceUpdate()
+                    this.state.optionData[0] = nextProps.dataRecord
+                    this.forceUpdate();
+                break;
+            case ECONOMIC_TITLE:
+                this.setState({
+                    economicDataChange: nextProps.dataChange
+                });
+                if (nextProps.dataRecord.economicformMode == "add") {
+                    this.setState({
+                        economicData: this.state.generalData.concat(nextProps.dataRecord)
+                    })
+                } else {
+
+                    this.state.economicData[0] = nextProps.dataRecord
+                    this.forceUpdate()
                 }
                 break;
             case HEAT_SOURCE_TITLE:
-            this.setState({
-                heatSourceData:nextProps.dataRecord,
-                heatSourceDataChange:nextProps.dataChange
-            });
-            break;
+                this.setState({
+                    heatSourceData: nextProps.dataRecord,
+                    heatSourceDataChange: nextProps.dataChange
+                });
+                break;
             case HEAT_LOAD_PROFILE_TITLE:
                 this.setState({
-                    heatingProfileData:nextProps.dataRecord,
-                    heatingProfileDataChange:nextProps.dataChange
+                    heatingProfileData: nextProps.dataRecord,
+                    heatingProfileDataChange: nextProps.dataChange
                 });
                 break;
-                case COOLING_LOAD_PROFILE_TITLE:
+            case COOLING_LOAD_PROFILE_TITLE:
                 this.setState({
-                    coolingProfileData:nextProps.dataRecord,
-                    coolingProfileDataChange:nextProps.dataChange
+                    coolingProfileData: nextProps.dataRecord,
+                    coolingProfileDataChange: nextProps.dataChange
                 });
                 break;
+            case FAHRENHEIT_SYSTEM:
+            this.setState({
+                fahrenheitData: nextProps.dataRecord,
+                fahrenheitDataChange: nextProps.dataChange
+            });
+            break;
             default:
                 break;
         }
@@ -100,8 +113,17 @@ class Tiles extends React.Component {
        // console.log("component unmount")
     }
     componentDidMount(){
+
+
+
         var that=this;
 
+        if(that.props.title==HEAT_SOURCE_TITLE){
+      //  log(`isClamped: ${this.linesEllipsis.isClamped()} when page didMount`)
+    //    console.log("Lineellipses",this.linesEllipsis.state.clamped);
+    //    console.log("Lineellipses state",this.linesEllipsis);
+
+        }
 
         if(this.state.compressionChillerData.length==0)
         {
@@ -114,6 +136,7 @@ class Tiles extends React.Component {
         }
         if(this.state.heatSourceData.length==0)
         {
+
           this.setState({
               heatSourceDataChange: false
             });
@@ -237,17 +260,16 @@ class Tiles extends React.Component {
         let dataObj="";
         switch (elemKey) {
             case 'heatsourceformModeKey':
-                   dataObj=this.state.heatSourceData[elemKey];
+                dataObj = this.state.heatSourceData[elemKey];
                 break;
-                case 'heatingprofileformModeKey':
-                dataObj=this.state.heatingProfileData[elemKey];
+            case 'heatingprofileformModeKey':
+                dataObj = this.state.heatingProfileData[elemKey];
                 break;
-                case 'coolingprofileformModeKey':
-                dataObj=this.state.coolingProfileData[elemKey];
+            case 'coolingprofileformModeKey':
+                dataObj = this.state.coolingProfileData[elemKey];
                 break;
-
             default:
-               dataObj=this.state.heatSourceData[elemKey];
+                dataObj = this.state.heatSourceData[elemKey];
                 break;
         }
 
@@ -269,15 +291,25 @@ class Tiles extends React.Component {
     }
     handleChillerDeleteEntry(result){
         //console.log(result);
-        if(result.modalFor =="compressionChiller"){
-        var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
-        clonedArrDelete.splice(result.elementId, 1);
-        this.setState({compressionChillerData: clonedArrDelete});
+        if (result.modalFor == "compressionChiller") {
+            var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
+            clonedArrDelete.splice(result.elementId, 1);
+            this.setState({ compressionChillerData: clonedArrDelete });
         }
-        else{
-        var clonedArrDelete = this.state.heatSourceData; // make a separate copy of the array
-        clonedArrDelete.splice(result.elementId, 1);
-        this.setState({heatSourceData: clonedArrDelete});
+        else if (result.modalFor == "coolingloadprofile") {
+            var clonedArrDelete = this.state.coolingProfileData; // make a separate copy of the array
+            clonedArrDelete.splice(result.elementId, 1);
+            this.setState({ coolingProfileData: clonedArrDelete });
+        }
+        else if (result.modalFor == "heatingprofile") {
+            var clonedArrDelete = this.state.heatingProfileData; // make a separate copy of the array
+            clonedArrDelete.splice(result.elementId, 1);
+            this.setState({ heatingProfileData: clonedArrDelete });
+        }
+        else {
+            var clonedArrDelete = this.state.heatSourceData; // make a separate copy of the array
+            clonedArrDelete.splice(result.elementId, 1);
+            this.setState({ heatSourceData: clonedArrDelete });
         }
     }
 
@@ -296,556 +328,835 @@ class Tiles extends React.Component {
         }
         arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
         return arr; // for testing
-    };
+    }
 
     render() {
         //console.log("render refresh",this.state.heatSourceData);
         //this.props.store.dispatch("ADD_GENERAL")
-        projectData['generalData'] = this.state.generalData;   //use to store the object to save the data
-        projectData['economicData'] = this.state.economicData; //use to store the object to save the data
-        const dragSet=false;
+
+        //projectData['generalData'] = this.state.generalData;   //use to store the object to save the data
+        //projectData['economicData'] = this.state.economicData; //use to store the object to save the data
+        //projectData['option']=this.state.optionData;
+        //projectData['heatsource']=this.state.heatSourceData;
+        //projectData['heatingprofile']=this.state.heatingProfileData;
+        //projectData['chiller']=this.state.coolingProfileData;
+        //projectData['coompressionchiller']=this.state.compressionChillerData;
+        //projectData['fahrenheit']=this.state.fahrenheitData;
         var priceFullList,pricelist,requiredMsg="";
         if(this.props.required=="yes"){
             var requiredMsg=<h5 className="input-required">{this.props.t('InputRequired')}</h5>;
+            if(this.props.title == FAHRENHEIT_SYSTEM){
+                var requiredMsg=<h5 className="input-required">{this.props.t('Fahrenheit.InputRequired')}</h5>;
+            }
         }
 
         var deleteModal="";
-        if(this.state.compressionDataChange==true && this.state.compressionChillerData.length!=0){
-            var bodyContent="Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
-            var deleteModal= <DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="compressionChiller" id="delete-modal"/>;
-            var pricelist=(
-                <ul className="price-listt">
-                                    <li>
-                                       <p>{this.props.t('Tiles.CompressionChiller.HoverCoolingTitle')}</p>
-                                       <h3>100.0 kW</h3>
-                                    </li>
-                                    <li>
-                                       <p>{this.props.t('Tiles.CompressionChiller.NumberofCompressor')}</p>
-                                       <h3>3</h3>
-                                    </li>
-                                    <li>
-                                       <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
-                                       <h3><img src='public/images/degree-icon.png' alt='' /> {(this.state.compressionChillerData[0].temperature!="") ? this.state.compressionChillerData[0].temperature+"°C": ""}</h3>
-                                    </li>
-                </ul>
-            );
-            let chillerData=this.state.compressionChillerData;
+        if (this.props.title == CHILLER_TITLE) {
+            if (this.state.compressionDataChange == true && this.state.compressionChillerData.length != 0) {
+                var bodyContent = "Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
+                var deleteModal = <DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="compressionChiller" id="delete-modal" />;
+                var pricelist = (
+                    <ul className="price-listt">
+                        <li>
+                            <p>{this.props.t('Tiles.CompressionChiller.HoverCoolingTitle')}</p>
+                            <h3>100.0 kW</h3>
+                        </li>
+                        <li>
+                            <p>{this.props.t('Tiles.CompressionChiller.NumberofCompressor')}</p>
+                            <h3>3</h3>
+                        </li>
+                        <li>
+                            <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
+                            <h3><img src='public/images/degree-icon.png' alt='' /> {(this.state.compressionChillerData[0].temperature != "") ? this.state.compressionChillerData[0].temperature + "°C" : ""}</h3>
+                        </li>
+                    </ul>
+                );
+                let chillerData = this.state.compressionChillerData;
+                projectData['coompressionchiller'] = this.state.compressionChillerData;
 
-            var priceFullList=(
+                var priceFullList = (
 
-                <div>
+                    <div>
 
-                <div className="hover-list scrollbar-macosx">
-                                       <div className="table-responsive">
-                                          <table className="table">
-                                           <tbody className="compressionTableBody">
-                                           {chillerData.map((data,i) => (
+                        <div className="hover-list scrollbar-macosx">
+                            <div className="table-responsive">
+                                <table className="table">
+                                    <tbody className="compressionTableBody">
+                                        {chillerData.map((data, i) => (
 
-<tr key={i} data-id={i}>
-<th>
-{data.chillername}
-   <ul className="list-inline" key={i}>
-      <li >120.30 kW
-      </li>
-      <li>	{(data.temperature!="")? data.temperature+'°C':"" } </li>
-   </ul>
-</th>
-<td><span className="edit-option" data-id={i}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editRecord(i)}></i></span>
-   <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-modal" onClick={(elem)=>this.deleteRecord(i,elem)}></i></span>
-   <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
-</td>
-</tr>))}
-                                             </tbody>
-                                          </table>
-                                       </div>
-            </div>
-            </div>
-            );
-
-            var that=this;
-            if(typeof $('.compressionTableBody')[0] !="undefined"){
-                jQuery(".compression-chillers-hover .scrollbar-macosx").scrollbar();
-
-                if(that.props.title==CHILLER_TITLE){
-
-                    this.sort=Sortable.create(
-                        $('.compressionTableBody')[0],
-                        {
-                        animation: 150,
-                        scroll: true,
-                        sort: true,
-                        dataIdAttr: 'data-id',
-                        handle: '.drag-handler',
-                        onEnd:function (/**Event*/evt) {
-                            evt.oldIndex;  // element's old index within old parent
-                            evt.newIndex;  // element's new index within new parent
-                        },
-                        onUpdate: function (/**Event*/evt) {
-                            // same properties as onEnd
-                            evt.oldIndex;  // element's old index within old parent
-                            evt.newIndex;  // element's new index within new parent
-
-                            var clonedArr=that.state.compressionChillerData;
-                            clonedArr=that.arrayMove(clonedArr,evt.oldIndex,evt.newIndex);
-                            that.updateCompressionList(clonedArr);
-                        }
-                        }
-                        );
-                       var order = this.sort.toArray();
-                       this.sort.sort(order.sort());
-
-                    }
-        }
-        }
-        else{
-            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
-        }
-        if(this.props.title==HEAT_SOURCE_TITLE){
-        if(this.state.heatSourceDataChange==true && this.state.heatSourceData.length!=0){
-            let heatSourceData=this.state.heatSourceData;
-            var pricelist=(
-                <ul className="price-listt scrollbar-macosx">
-                                    <li>
-                                       <p>{this.props.t('Tiles.HeatSource.HeatCapacity')}</p>
-                                       <h3>{heatSourceData[0].heat_capacity} kW</h3>
-                                    </li>
-                                    <li>
-                                       <p>{this.props.t('Tiles.HeatSource.AvailableHeat')}</p>
-                                       <h3>1,767,768 kWh/a</h3>
-                                    </li>
-                                    <li>
-                                       <p>{this.props.t('Tiles.HeatSource.Temperature')}</p>
-                                       <h3><img src="images/degree-icon.png" alt="" /> 84°C</h3>
-                                    </li>
-                                 </ul>
-            );
-
-            var bodyContent="Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
-            var deleteModal=<DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="heatSource" id="delete-heat-modal"/>;
-            var priceFullList=(
-                <div>
-
-                <div className="hover-list scrollbar-macosx">
-                                       <div className="table-responsive">
-                                          <table className="table">
-                                           <tbody className="heatsourcesTableBody">
-{heatSourceData.map((data,h) => (
-                                           <tr key={h} data-id={h}>
+                                            <tr key={i} data-id={i}>
                                                 <th>
-                                                   {data.heat_name}
-                                                   <ul className="list-inline">
-                                                      <li>{data.heat_capacity} kW
-                                                      </li>
-                                                      <li>85°C </li>
-                                                   </ul>
+                                                    {data.chillername}
+                                                    <ul className="list-inline" key={i}>
+                                                        <li >120.30 kW
+      </li>
+                                                        <li>	{(data.temperature != "") ? data.temperature + '°C' : ""} </li>
+                                                    </ul>
                                                 </th>
-                                                <td><span className="edit-option" data-id={h}  data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={()=>this.editHeatRecord(h,{hiddenmode:"heatsourceformMode",hiddenmodekey:"heatsourceformModeKey"})}></i></span>
-            <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem)=>this.deleteRecord(h,elem)}></i></span>
-            <span  className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
-         </td>
-                                             </tr>
- ))}
-                                             </tbody>
-                                          </table>
-                                       </div>
-                                    </div>
-            </div>
-            );
-
-            var that=this;
-            if(typeof $('.heatsourcesTableBody')[0] !="undefined"){
-                jQuery(".heat-sources-hover .scrollbar-macosx").scrollbar();
-
-                if(that.props.title==HEAT_SOURCE_TITLE){
-
-                    this.sort=Sortable.create(
-                        $('.heatsourcesTableBody')[0],
-                        {
-                        animation: 150,
-                        scroll: true,
-                        sort: true,
-                        dataIdAttr: 'data-id',
-                        handle: '.drag-handler',
-                        onEnd:function (/**Event*/evt) {
-                            evt.oldIndex;  // element's old index within old parent
-                            evt.newIndex;  // element's new index within new parent
-                        },
-                        onUpdate: function (/**Event*/evt) {
-                            // same properties as onEnd
-                            evt.oldIndex;  // element's old index within old parent
-                            evt.newIndex;  // element's new index within new parent
-
-                            var clonedArr=that.state.heatSourceData;
-                            clonedArr=that.arrayMove(clonedArr,evt.oldIndex,evt.newIndex);
-                            that.updateHeatSourceList(clonedArr);
-                        }
-                        }
-                        );
-                       var order = this.sort.toArray();
-                       this.sort.sort(order.sort());
-
-                    }
-        }
-        }
-        else{
-            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
-        }
-    }
-
-    if(this.props.title==HEAT_LOAD_PROFILE_TITLE){
-        if(this.state.heatingProfileDataChange==true && this.state.heatingProfileData.length!=0){
-            let heatingProfileData=this.state.heatingProfileData;
-            var pricelist=(
-                <ul className="price-listt scrollbar-macosx">
-                                   <li>
-                                       <p>{this.props.t('HeatingProfile.HeatingDemand.Title')}</p>
-                                       <h3>464,068 kWh/a</h3>
-                                    </li>
-                                    <li>
-                                       <p>{this.props.t('HeatingProfile.UnusedHeat.Title')}</p>
-                                       <h3>1,303,700 kWh/a</h3>
-                                    </li>
-                                 </ul>
-            );
-
-            var bodyContent="Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
-            var deleteModal=<DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="heatSource" id="delete-heat-modal"/>;
-            var priceFullList=(
-                <div>
-
-                    <div className="hover-list scrollbar-macosx">
-                        <div className="table-responsive">
-                            <table className="table">
-                                <tbody className="heatingloadprofileTableBody">
-                                    {heatingProfileData.map((data, h) => (
-                                        <tr key={h} data-id={h}>
-                                            <th>
-                                            {data.profile_name}
-                                                   <ul className="list-inline">
-                                                    <li> {data.profile_type}
-                                                      </li>
-                                                    <li>41.5 kW</li>
-                                                </ul>
-                                            </th>
-                                            <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h,{hiddenmode:"heatingprofileformMode",hiddenmodekey:"heatingprofileformModeKey"})}></i></span>
-                                                <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span>
-                                                <span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                                <td><span className="edit-option" data-id={i} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editRecord(i)}></i></span>
+                                                    <span className="delete-optionn" data-id={i} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-modal" onClick={(elem) => this.deleteRecord(i, elem)}></i></span>
+                                                    <span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+                                                </td>
+                                            </tr>))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-            );
+                );
 
-            var that=this;
-            if(typeof $('.heatingloadprofileTableBody')[0] !="undefined"){
-                jQuery(".heating-load-hover .scrollbar-macosx").scrollbar();
+                var that = this;
+                if (typeof $('.compressionTableBody')[0] != "undefined") {
+                    jQuery(".compression-chillers-hover .scrollbar-macosx").scrollbar();
 
-                if(that.props.title==HEAT_LOAD_PROFILE_TITLE){
+                    if (that.props.title == CHILLER_TITLE) {
 
-                    this.sort=Sortable.create(
-                        $('.heatingloadprofileTableBody')[0],
-                        {
-                        animation: 150,
-                        scroll: true,
-                        sort: true,
-                        dataIdAttr: 'data-id',
-                        handle: '.drag-handler',
-                        onEnd:function (/**Event*/evt) {
-                            evt.oldIndex;  // element's old index within old parent
-                            evt.newIndex;  // element's new index within new parent
-                        },
-                        onUpdate: function (/**Event*/evt) {
-                            // same properties as onEnd
-                            evt.oldIndex;  // element's old index within old parent
-                            evt.newIndex;  // element's new index within new parent
+                        this.sort = Sortable.create(
+                            $('.compressionTableBody')[0],
+                            {
+                                animation: 150,
+                                scroll: true,
+                                sort: true,
+                                dataIdAttr: 'data-id',
+                                handle: '.drag-handler',
+                                onEnd: function (/**Event*/evt) {
+                                    evt.oldIndex;  // element's old index within old parent
+                                    evt.newIndex;  // element's new index within new parent
+                                },
+                                onUpdate: function (/**Event*/evt) {
+                                    // same properties as onEnd
+                                    evt.oldIndex;  // element's old index within old parent
+                                    evt.newIndex;  // element's new index within new parent
 
-                            var clonedArr=that.state.heatingProfileData;
-                            clonedArr=that.arrayMove(clonedArr,evt.oldIndex,evt.newIndex);
-                            that.updateHeatSourceList(clonedArr);
-                        }
-                        }
+                                    var clonedArr = that.state.compressionChillerData;
+                                    clonedArr = that.arrayMove(clonedArr, evt.oldIndex, evt.newIndex);
+                                    that.updateCompressionList(clonedArr);
+                                }
+                            }
                         );
-                       var order = this.sort.toArray();
-                       this.sort.sort(order.sort());
+                        var order = this.sort.toArray();
+                        this.sort.sort(order.sort());
 
                     }
+                }
+            }
+            else {
+                var priceFullList = <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+            }
         }
-        }
-        else{
-            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
-        }
-    }
-    if(this.props.title==COOLING_LOAD_PROFILE_TITLE){
-        if(this.state.coolingProfileDataChange==true && this.state.coolingProfileData.length!=0){
-            let coolingProfileData=this.state.coolingProfileData;
-            var pricelist=(
-                <ul className="price-listt scrollbar-macosx">
-                <li>
-                   <p>Cooling Demand</p>
-                   <h3>468,168 kWa/a</h3>
-                </li>
-                <li>
-                   <p>Comoression Electricity Cost</p>
-                   <h3>33,708 €/a</h3>
-                </li>
-                <li>
-                   <p>Temperature</p>
-                   <h3><img src="images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_to}°C</h3>
-                </li>
-             </ul>
-            );
+        if (this.props.title == HEAT_SOURCE_TITLE) {
+            if (this.state.heatSourceDataChange == true && this.state.heatSourceData.length != 0) {
+                projectData['heatsource'] = this.state.heatSourceData;
+                let heatSourceData = this.state.heatSourceData;
+                var pricelist = (
+                    <ul className="price-listt scrollbar-macosx">
+                        <li>
+                            <p>{this.props.t('Tiles.HeatSource.HeatCapacity')}</p>
+                            <h3>{heatSourceData[0].heat_capacity} kW</h3>
+                        </li>
+                        <li>
+                            <p>{this.props.t('Tiles.HeatSource.AvailableHeat')}</p>
+                            <h3>1,767,768 kWh/a</h3>
+                        </li>
+                        <li>
+                            <p>{this.props.t('Tiles.HeatSource.Temperature')}</p>
+                            <h3><img src="public/images/degree-icon.png" alt="" /> 84°C</h3>
+                        </li>
+                    </ul>
+                );
 
-            var bodyContent="Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
-            var deleteModal=<DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="heatSource" id="delete-heat-modal"/>;
-            var priceFullList=(
-                <div>
+                var bodyContent = "Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
+                var deleteModal = <DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="heatSource" id="delete-heat-modal" />;
+                var priceFullList = (
+                    <div>
 
-                    <div className="hover-list scrollbar-macosx">
-                        <div className="table-responsive">
-                            <table className="table">
-                                <tbody className="coolingloadprofileTableBody">
-                                    {coolingProfileData.map((data, h) => (
-                                        <tr key={h} data-id={h}>
-                                            <th>
-                                            {data.cooling_radiant_cooling_office}
-                                                   <ul className="list-inline">
-                                                      <li>{data.cooling_cooling_other}°C
+                        <div className="hover-list scrollbar-macosx">
+                            <div className="table-responsive">
+                                <table className="table">
+                                    <tbody className="heatsourcesTableBody">
+                                        {heatSourceData.map((data, h) => (
+                                            <tr key={h} data-id={h}>
+                                                <th>
+                                                    {data.heat_name}
+                                                    <ul className="list-inline">
+                                                        <li>{data.heat_capacity} kW
                                                       </li>
-                                                      <li>	{data.cooling_cooling_hours} h</li>
-                                                      <li>{data.cooling_base_load_to} kW</li>
-                                                   </ul>
+                                                        <li>85°C </li>
+                                                    </ul>
                                                 </th>
-                                            <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h,{hiddenmode:"coolingprofileformMode",hiddenmodekey:"coolingprofileformModeKey"})}></i></span>
-                                                <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span>
-                                                <span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                                <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "heatsourceformMode", hiddenmodekey: "heatsourceformModeKey" })}></i></span>
+                                                    <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span>
+                                                    <span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-            );
-            var requiredMsg="";
+                );
 
-            var that=this;
-            if(typeof $('.coolingloadprofileTableBody')[0] !="undefined"){
-                jQuery(".cooling-load-hover .scrollbar-macosx").scrollbar();
+                var that = this;
+                if (typeof $('.heatsourcesTableBody')[0] != "undefined") {
+                    jQuery(".heat-sources-hover .scrollbar-macosx").scrollbar();
 
-                if(that.props.title==COOLING_LOAD_PROFILE_TITLE){
+                    if (that.props.title == HEAT_SOURCE_TITLE) {
 
-                    this.sort=Sortable.create(
-                        $('.coolingloadprofileTableBody')[0],
-                        {
-                        animation: 150,
-                        scroll: true,
-                        sort: true,
-                        dataIdAttr: 'data-id',
-                        handle: '.drag-handler',
-                        onEnd:function (/**Event*/evt) {
-                            evt.oldIndex;  // element's old index within old parent
-                            evt.newIndex;  // element's new index within new parent
-                        },
-                        onUpdate: function (/**Event*/evt) {
-                            // same properties as onEnd
-                            evt.oldIndex;  // element's old index within old parent
-                            evt.newIndex;  // element's new index within new parent
+                        this.sort = Sortable.create(
+                            $('.heatsourcesTableBody')[0],
+                            {
+                                animation: 150,
+                                scroll: true,
+                                sort: true,
+                                dataIdAttr: 'data-id',
+                                handle: '.drag-handler',
+                                onEnd: function (/**Event*/evt) {
+                                    evt.oldIndex;  // element's old index within old parent
+                                    evt.newIndex;  // element's new index within new parent
+                                },
+                                onUpdate: function (/**Event*/evt) {
+                                    // same properties as onEnd
+                                    evt.oldIndex;  // element's old index within old parent
+                                    evt.newIndex;  // element's new index within new parent
 
-                            var clonedArr=that.state.coolingProfileData;
-                            clonedArr=that.arrayMove(clonedArr,evt.oldIndex,evt.newIndex);
-                            that.updateHeatSourceList(clonedArr);
-                        }
-                        }
+                                    var clonedArr = that.state.heatSourceData;
+                                    clonedArr = that.arrayMove(clonedArr, evt.oldIndex, evt.newIndex);
+                                    that.updateHeatSourceList(clonedArr);
+                                }
+                            }
                         );
-                       var order = this.sort.toArray();
-                       this.sort.sort(order.sort());
+                        var order = this.sort.toArray();
+                        this.sort.sort(order.sort());
 
                     }
-        }
-        }
-        else{
-            var priceFullList= <p className="scrollbar-macosx">{this.props.hoverText}</p>;
-        }
-    }
-        if(this.state.generalDataChange){
-            var pricelist=(
-
-                <ul className="price-listt plnewblock">
-						      <li className="pdtnam">
-                              <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
-                                 <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
-                              </li>
-							  <li className="pdtnum">
-                              <p>{this.props.t('General.Tab.Project.ProjectNumber.Title')}</p>
-                                 <h3 className="textUpper">{this.state.generalData[0].project_number}</h3>
-                              </li>
-							  <div className="clrs"></div>
-							     <li>
-                                 <p>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}</p>
-                                 <h3 className="textUpper">{this.state.generalData[0].editor}</h3>
-                              </li>
-                              <li>
-                              <p>{this.props.t('General.Tab.Project.ProjectLocation.Title')}</p>
-                                 <h3 className="textUpper">{this.state.generalData[0].location}</h3>
-                              </li>
-                           </ul>
-
-            );
-            var priceFullList=(<div className="hover-list">
-                                 <div className="table-responsive">
-
-                                    <table className="table">
-                                    <tbody>
-                                       <tr>
-                                          <th>{this.props.t('General.Tab.Project.ProjectName.Title')}:</th>
-                                          <td>{this.state.generalData[0].project_name}</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('General.Tab.Project.ProjectNumber.Title')}:</th>
-                                          <td>{this.state.generalData[0].project_number}</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}: </th>
-                                          <td>{this.state.generalData[0].editor}</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('General.Tab.Project.ProjectLocation.Title')}:</th>
-                                          <td>{this.state.generalData[0].location}</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('General.Tab.Project.ProjectContact.Title')}: </th>
-                                          <td>{this.state.generalData[0].customer}</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('General.Tab.Project.ProjectPhone.Title')}:</th>
-                                          <td>{this.state.generalData[0].phone_number}</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('General.Tab.Project.ProjectEmail.Title')}:</th>
-                                          <td>{this.state.generalData[0].email_address}</td>
-                                       </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                              </div>);
-        var requiredMsg="";
-        }
-        if(this.props.priceList=="yes"){
-            var pricelist=(
-                <ul className="price-listt">
-                                    <li>
-                                       <p>{this.props.t('Tiles.CompressionChiller.HoverCoolingTitle')}</p>
-                                       <h3>100.0 kW</h3>
-                                    </li>
-                                    <li>
-                                       <p>{this.props.t('Tiles.CompressionChiller.NumberofCompressor')}</p>
-                                       <h3>3</h3>
-                                    </li>
-                                    <li>
-                                       <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
-                                       <h3><img src="public/images/degree-icon.png" alt="" /> 6°C</h3>
-                                    </li>
-                </ul>
-            );
-            var priceFullList=(
-                <ul className="price-listt">
-         <li>
-            <p>{this.props.t('Tiles.Options.Language')}</p>
-            <h3>English</h3>
-         </li>
-         <li>
-            <p>BAFA 2018</p>
-            <h3>Calculate</h3>
-         </li>
-         <li>
-            <p>{this.props.t('Tiles.Options.ReCoolingType')}</p>
-            <h3>Dry</h3>
-         </li>
-      </ul>
-            );
-
+                }
+            }
+            else {
+                var priceFullList = <p>
+                    {this.props.hoverText}</p>;
+            }
         }
 
-        if(this.props.title==ECONOMIC_TITLE){
+        if (this.props.title == HEAT_LOAD_PROFILE_TITLE) {
+            if (this.state.heatingProfileDataChange == true && this.state.heatingProfileData.length != 0) {
+                projectData['heatingprofile'] = this.state.heatingProfileData;
+                let heatingProfileData = this.state.heatingProfileData;
+                var pricelist = (
+                    <ul className="price-listt scrollbar-macosx">
+                        <li>
+                            <p>{this.props.t('HeatingProfile.HeatingDemand.Title')}</p>
+                            <h3>464,068 kWh/a</h3>
+                        </li>
+                        <li>
+                            <p>{this.props.t('HeatingProfile.UnusedHeat.Title')}</p>
+                            <h3>1,303,700 kWh/a</h3>
+                        </li>
+                    </ul>
+                );
 
-            var pricelist=(
+                var bodyContent = "Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
+                var deleteModal = <DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="heatingprofile" id="delete-heat-modal" />;
+                var priceFullList = (
+                    <div>
 
-                <ul className="price-listt">
-                              <li>
-                                 <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
-                                 <h3>0.1800 €/kWh</h3>
-                              </li>
-                           </ul>
+                        <div className="hover-list scrollbar-macosx">
+                            <div className="table-responsive">
+                                <table className="table">
+                                    <tbody className="heatingloadprofileTableBody">
+                                        {heatingProfileData.map((data, h) => (
+                                            <tr key={h} data-id={h}>
+                                                <th>
+                                                    {data.profile_name}
+                                                    <ul className="list-inline">
+                                                        <li> {data.profile_type}
+                                                        </li>
+                                                        <li>41.5 kW</li>
+                                                    </ul>
+                                                </th>
+                                                <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "heatingprofileformMode", hiddenmodekey: "heatingprofileformModeKey" })}></i></span>
+                                                    <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span>
+                                                    <span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                );
 
+                var that = this;
+                if (typeof $('.heatingloadprofileTableBody')[0] != "undefined") {
+                    jQuery(".heating-load-hover .scrollbar-macosx").scrollbar();
+
+                    if (that.props.title == HEAT_LOAD_PROFILE_TITLE) {
+
+                        this.sort = Sortable.create(
+                            $('.heatingloadprofileTableBody')[0],
+                            {
+                                animation: 150,
+                                scroll: true,
+                                sort: true,
+                                dataIdAttr: 'data-id',
+                                handle: '.drag-handler',
+                                onEnd: function (/**Event*/evt) {
+                                    evt.oldIndex;  // element's old index within old parent
+                                    evt.newIndex;  // element's new index within new parent
+                                },
+                                onUpdate: function (/**Event*/evt) {
+                                    // same properties as onEnd
+                                    evt.oldIndex;  // element's old index within old parent
+                                    evt.newIndex;  // element's new index within new parent
+
+                                    var clonedArr = that.state.heatingProfileData;
+                                    clonedArr = that.arrayMove(clonedArr, evt.oldIndex, evt.newIndex);
+                                    that.updateHeatSourceList(clonedArr);
+                                }
+                            }
                         );
-            var priceFullList=(<ul className="price-listt">
-            <li>
-               <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
-               <h3>0.1800 €/kWh</h3>
-            </li>
-            <li>
-               <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
-               <h3>0.035 €/kWh</h3>
-            </li>
-         </ul>);
-            if(this.state.economicDataChange){
+                        var order = this.sort.toArray();
+                        this.sort.sort(order.sort());
 
-                var pricelist=(
+                    }
+                }
+            }
+            else {
+                var priceFullList = <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+            }
+        }
+        if (this.props.title == COOLING_LOAD_PROFILE_TITLE) {
+            COOLING_FORM_STATUS = (this.state.coolingProfileData.length == 0) ? false : true; //use to validate the form.
+            if (this.state.coolingProfileDataChange == true && this.state.coolingProfileData.length != 0) {
+                projectData['chiller'] = this.state.coolingProfileData;
+                let coolingProfileData = this.state.coolingProfileData;
+                var pricelist = (
+                    <ul className="price-listt scrollbar-macosx">
+                        <li>
+                            <p>Cooling Demand</p>
+                            <h3>468,168 kWa/a</h3>
+                        </li>
+                        <li>
+                            <p>Comoression Electricity Cost</p>
+                            <h3>33,708 €/a</h3>
+                        </li>
+                        <li>
+                            <p>Temperature</p>
+                            <h3><img src="public/images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_to}°C</h3>
+                        </li>
+                    </ul>
+                );
 
-                               <ul className="price-listt plnewblock">
-                               <li className="pdtnam">
-                                  <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
-                                  <h3>{this.state.economicData[0].electric_price}<br/>
-                                  €/kWh</h3>
-                               </li>
-                               <li className="pdtnum">
-                               <p>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}</p>
-                                  <h3>{this.state.economicData[0].own_usage_of_electricity}%</h3>
-                               </li>
-                               <div className="clrs"></div>
-                                <li className="pdtnam">
-                                  <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
-                                  <h3>{this.state.economicData[0].gas_price}<br/>
-                                  €/kWh</h3>
-                               </li>
-                                <li className="pdtnum">
-                               <p>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</p>
-                                  <h3>{this.state.economicData[0].subsidy_for_electricity}</h3>
-                               </li>
-                            </ul>
+                var bodyContent = "Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
+                var deleteModal = <DeleteModal onDeleteChillerSubmit={this.handleChillerDeleteEntry} bodyContent={bodyContent} modalfor="coolingloadprofile" id="delete-heat-modal" />;
+                var priceFullList = (
+                    <div>
+
+                        <div className="hover-list scrollbar-macosx">
+                            <div className="table-responsive">
+                                <table className="table">
+                                    <tbody className="coolingloadprofileTableBody">
+                                        {coolingProfileData.map((data, h) => (
+                                            <tr key={h} data-id={h}>
+                                                <th>
+                                                    {data.cooling_radiant_cooling_office}
+                                                    <ul className="list-inline">
+                                                        <li>{data.cooling_cooling_other}°C
+                                                      </li>
+                                                        <li>	{data.cooling_cooling_hours} h</li>
+                                                        <li>{data.cooling_base_load_to} kW</li>
+                                                    </ul>
+                                                </th>
+                                                <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "coolingprofileformMode", hiddenmodekey: "coolingprofileformModeKey" })}></i></span>
+                                                    <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span>
+                                                    <span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                );
+                var requiredMsg = "";
+
+                var that = this;
+                if (typeof $('.coolingloadprofileTableBody')[0] != "undefined") {
+                    jQuery(".cooling-load-hover .scrollbar-macosx").scrollbar();
+
+                    if (that.props.title == COOLING_LOAD_PROFILE_TITLE) {
+
+                        this.sort = Sortable.create(
+                            $('.coolingloadprofileTableBody')[0],
+                            {
+                                animation: 150,
+                                scroll: true,
+                                sort: true,
+                                dataIdAttr: 'data-id',
+                                handle: '.drag-handler',
+                                onEnd: function (/**Event*/evt) {
+                                    evt.oldIndex;  // element's old index within old parent
+                                    evt.newIndex;  // element's new index within new parent
+                                },
+                                onUpdate: function (/**Event*/evt) {
+                                    // same properties as onEnd
+                                    evt.oldIndex;  // element's old index within old parent
+                                    evt.newIndex;  // element's new index within new parent
+
+                                    var clonedArr = that.state.coolingProfileData;
+                                    clonedArr = that.arrayMove(clonedArr, evt.oldIndex, evt.newIndex);
+                                    that.updateHeatSourceList(clonedArr);
+                                }
+                            }
+                        );
+                        var order = this.sort.toArray();
+                        this.sort.sort(order.sort());
+
+                    }
+                }
+            }
+            else {
+                var priceFullList = <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+            }
+        }
+        if (this.props.title == GENERAL_TILE) {
+
+            if (this.state.generalDataChange) {
+                projectData['generalData'] = this.state.generalData;
+                store.dispatch( addGeneralData(this.state.generalData) )
+                var pricelist = (
+
+                    <ul className="price-listt plnewblock">
+                        <li className="pdtnam">
+                            <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
+                            <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
+                        </li>
+                        <li className="pdtnum">
+                            <p>{this.props.t('General.Tab.Project.ProjectNumber.Title')}</p>
+                            <h3 className="textUpper">{this.state.generalData[0].project_number}</h3>
+                        </li>
+                        <div className="clrs"></div>
+                        <li>
+                            <p>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}</p>
+                            <h3 className="textUpper">{this.state.generalData[0].editor}</h3>
+                        </li>
+                        <li>
+                            <p>{this.props.t('General.Tab.Project.ProjectLocation.Title')}</p>
+                            <h3 className="textUpper">{this.state.generalData[0].location}</h3>
+                        </li>
+                    </ul>
 
                 );
-                var priceFullList=(<div className="hover-list">
-                                     <div className="table-responsive">
+                var priceFullList = (<div className="hover-list">
+                    <div className="table-responsive">
 
-                                        <table className="table">
-                                        <tbody>
-                                        <tr>
-                                          <th>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}:</th>
-                                          <td>{this.state.economicData[0].electric_price} €/kWh</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}:</th>
-                                          <td>{this.state.economicData[0].gas_price} €/kWh</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}: </th>
-                                          <td>{this.state.economicData[0].own_usage_of_electricity}%</td>
-                                       </tr>
-                                       <tr>
-                                          <th>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</th>
-                                          <td>{this.state.economicData[0].subsidy_for_electricity}</td>
-                                       </tr>
-                                           </tbody>
-                                        </table>
-                                     </div>
-                                  </div>);
-            var requiredMsg="";
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <th>{this.props.t('General.Tab.Project.ProjectName.Title')}:</th>
+                                    <td>{this.state.generalData[0].project_name}</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('General.Tab.Project.ProjectNumber.Title')}:</th>
+                                    <td>{this.state.generalData[0].project_number}</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}: </th>
+                                    <td>{this.state.generalData[0].editor}</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('General.Tab.Project.ProjectLocation.Title')}:</th>
+                                    <td>{this.state.generalData[0].location}</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('General.Tab.Project.ProjectContact.Title')}: </th>
+                                    <td>{this.state.generalData[0].customer}</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('General.Tab.Project.ProjectPhone.Title')}:</th>
+                                    <td>{this.state.generalData[0].phone_number}</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('General.Tab.Project.ProjectEmail.Title')}:</th>
+                                    <td>{this.state.generalData[0].email_address}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>);
+                var requiredMsg = "";
+            }
+        }
+        if (this.props.title == OPTION_TILE) {
+            var pricelist = (
+                <ul className="price-listt">
+                              <li>
+                                 <p>Re-cooling Type</p>
+                                 <h3>DRY</h3>
+                              </li>
+                              <li>
+                                 <p>Free cooling</p>
+                                 <h3>YES <span>(chilled water temperature)</span></h3>
+                              </li>
+                           </ul>
+
+            );
+            var priceFullList = (<div><ul className="price-listt">
+            <li>
+               <p>Language</p>
+               <h3>English</h3>
+            </li>
+            <li>
+               <p>BAFA 2018</p>
+               <h3>Calculate</h3>
+            </li>
+            <li>
+               <p>Re-cooling Type</p>
+               <h3>Dry</h3>
+            </li>
+         </ul>
+         <ul className="right-list-content">
+            <li>
+               <p>Free cooling</p>
+               <h3>Yes <span>(chilled water temperature)</span></h3>
+            </li>
+         </ul></div>);
+            if (this.state.optionDataChange) {
+                projectData['option'] = this.state.optionData;
+                var pricelist = (
+                    <ul className="price-listt plnewblock">
+                        <li className="pdtnam">
+                            <p>Language</p>
+                            <h3 className="textUpper">ENGLISH</h3>
+                        </li>
+
+                        <li className="pdtnum">
+                            <p>BAFA 2018</p>
+                            <h3 className="textUpper">{this.state.optionData[0].profile_bafa}</h3>
+                        </li>
+                        <div className="clrs"></div>
+                        <li>
+                            <p>Re-cooling Type</p>
+                            <h3 className="textUpper">{this.state.optionData[0].profile_recooling}</h3>
+                        </li>
+
+                        <li>
+                            <p>Free cooling</p>
+                            <h3 className="textUpper">{this.state.optionData[0].free_recooling}</h3>
+                        </li>
+                    </ul>
+
+                );
+                var priceFullList = (<div className="hover-list">
+                    <div className="table-responsive">
+                        <table className="table">
+                            <tr>
+                                <th>Language: </th>
+                                <td>English</td>
+                            </tr>
+                            <tr>
+                                <th>BAFA 2018: </th>
+                                <td>{this.state.optionData[0].profile_bafa}</td>
+                            </tr>
+                            <tr>
+                                <th>Re-cooling type: </th>
+                                <td>{this.state.optionData[0].profile_recooling}</td>
+                            </tr>
+                            <tr>
+                                <th>Free cooling: </th>
+                                <td>{this.state.optionData[0].free_recooling}
+                                    (chilled water temperature)
+                      </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>);
+                var requiredMsg = "";
+            }
+        }
+
+        if (this.props.priceList == "yes") {
+            var pricelist = (
+                <ul className="price-listt">
+                    <li>
+                        <p>{this.props.t('Tiles.CompressionChiller.HoverCoolingTitle')}</p>
+                        <h3>100.0 kW</h3>
+                    </li>
+                    <li>
+                        <p>{this.props.t('Tiles.CompressionChiller.NumberofCompressor')}</p>
+                        <h3>3</h3>
+                    </li>
+                    <li>
+                        <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
+                        <h3><img src="public/images/degree-icon.png" alt="" /> 6°C</h3>
+                    </li>
+                </ul>
+            );
+            var priceFullList = (
+                <ul className="price-listt">
+                    <li>
+                        <p>{this.props.t('Tiles.Options.Language')}</p>
+                        <h3>English</h3>
+                    </li>
+                    <li>
+                        <p>BAFA 2018</p>
+                        <h3>Calculate</h3>
+                    </li>
+                    <li>
+                        <p>{this.props.t('Tiles.Options.ReCoolingType')}</p>
+                        <h3>Dry</h3>
+                    </li>
+                </ul>
+            );
+        }
+
+        if (this.props.title == ECONOMIC_TITLE) {
+
+            var pricelist = (
+
+                <ul className="price-listt">
+                    <li>
+                        <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
+                        <h3>0.1800 €/kWh</h3>
+                    </li>
+                </ul>
+
+            );
+            var priceFullList = (<ul className="price-listt">
+                <li>
+                    <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
+                    <h3>0.1800 €/kWh</h3>
+                </li>
+                <li>
+                    <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
+                    <h3>0.035 €/kWh</h3>
+                </li>
+            </ul>);
+            if (this.state.economicDataChange) {
+                projectData['economicData'] = this.state.economicData;
+                var pricelist = (
+
+                    <ul className="price-listt plnewblock">
+                        <li className="pdtnam">
+                            <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
+                            <h3>{this.state.economicData[0].electric_price}<br />
+                                €/kWh</h3>
+                        </li>
+                        <li className="pdtnum">
+                            <p>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}</p>
+                            <h3>{this.state.economicData[0].own_usage_of_electricity}%</h3>
+                        </li>
+                        <div className="clrs"></div>
+                        <li className="pdtnam">
+                            <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
+                            <h3>{this.state.economicData[0].gas_price}<br />
+                                €/kWh</h3>
+                        </li>
+                        <li className="pdtnum">
+                            <p>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</p>
+                            <h3>{this.state.economicData[0].subsidy_for_electricity}</h3>
+                        </li>
+                    </ul>
+
+                );
+                var priceFullList = (<div className="hover-list">
+                    <div className="table-responsive">
+
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <th>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}:</th>
+                                    <td>{this.state.economicData[0].electric_price} €/kWh</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}:</th>
+                                    <td>{this.state.economicData[0].gas_price} €/kWh</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}: </th>
+                                    <td>{this.state.economicData[0].own_usage_of_electricity}%</td>
+                                </tr>
+                                <tr>
+                                    <th>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</th>
+                                    <td>{this.state.economicData[0].subsidy_for_electricity}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>);
+                var requiredMsg = "";
+            }
+        }
+        if (this.props.title == FAHRENHEIT_SYSTEM) {
+
+            if (this.state.fahrenheitDataChange) {
+                projectData['fahrenheit'] = this.state.fahrenheitData;
+                var pricelist = (
+                    <ul className="price-listt">
+                        <li>
+                            <p>Recommended System</p>
+                            <h3>eCoo 20</h3>
+                        </li>
+                        <li>
+                            <p>Cooling demand coverage</p>
+                            <h3>83%</h3>
+                        </li>
+                        <li>
+                            <p>Adsorption electricity costs</p>
+                            <h3>8,252 €/a</h3>
+                        </li>
+                        <li className="paybkprd">
+                            <p>Payback period</p>
+                            <h3>2.8 a</h3>
+                        </li>
+
+                        <li>
+                            <p>Payback after 10 a</p>
+                            <h3>16,536 €</h3>
+                        </li>
+                        <li style={hideEle}>
+                            <p>Payback period</p>
+                            <h3>2.8 a</h3>
+                        </li>
+                        <li style={hideEle}>
+                            <p>Payback period</p>
+                            <h3>2.8 a</h3>
+                        </li>
+                        <li style={hideEle}>
+                            <p>Payback period</p>
+                            <h3>2.8 a</h3>
+                        </li>
+
+                    </ul>
+
+                );
+                var priceFullList = (<div className="hover-list">
+                    <div className="recommendedsystem">
+                        <h3>Recommended system</h3>
+                        <table className="table">
+                            <tr>
+                                <td className="radio-input-select"><label className="radio-container">
+                                    <input type="radio" checked="checked" name="radio" />
+                                    <span className="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>eCoo 20</td>
+                                <td>2.80 a</td>
+                                <td>16,536 €</td>
+                                <td className="edit-optionss"><span className="copy-option new-system"><img src="public/images/option1.png"
+                                    alt="" /></span>
+                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div className="other-suggested-system">
+                        <h3>Other suggested systems</h3>
+                        <table className="table">
+                            <tr>
+                                <td className="radio-input-select"><label className="radio-container">
+                                    <input type="radio" checked="" name="radio" />
+                                    <span className="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>eCoo 10 ST* </td>
+                                <td>2.40 a</td>
+                                <td>10,153 €</td>
+                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="radio-input-select"><label className="radio-container">
+                                    <input type="radio" checked="" name="radio" />
+                                    <span className="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>eCoo 10X*</td>
+                                <td>2.30 a</td>
+                                <td>11,335 €</td>
+                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="radio-input-select"><label className="radio-container">
+                                    <input type="radio" checked="" name="radio" />
+                                    <span className="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>eCoo 20*</td>
+                                <td>2.23 a</td>
+                                <td>12,583 €</td>
+                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="radio-input-select"><label className="radio-container">
+                                    <input type="radio" checked="" name="radio" />
+                                    <span className="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>eCoo 20 ST*</td>
+                                <td>2.76 a</td>
+                                <td>15,985 €</td>
+                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div className="manual-sysytemm">
+                        <h3>Manual System</h3>
+                        <table className="table">
+                            <tr>
+                                <td className="radio-input-select"><label className="radio-container">
+                                    <input type="radio" checked="" name="radio" />
+                                    <span className="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>eCoo 10 ST* </td>
+                                <td>2.40 a</td>
+                                <td>10,153 €</td>
+                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                                </td>
+                            </tr>
+                            <tr className="clone-system">
+                                <td className="radio-input-select"><label className="radio-container">
+                                    <input type="radio" checked="" name="radio" />
+                                    <span className="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>eCoo 10 ST* </td>
+                                <td>2.40 a</td>
+                                <td>10,153 €</td>
+                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
+                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
+                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h6 className="note-textt">* Values are estimated. For a detailed calculation, click on the calculator.</h6>
+                    <div className="caculator-divv">
+                        <div className="calci-div"></div>
+                    </div>
+
+                </div>);
+                var requiredMsg = "";
+            }
+            else {
+                var priceFullList = <p className="scrollbar-macosx">{this.props.hoverText}</p>;
             }
         }
 

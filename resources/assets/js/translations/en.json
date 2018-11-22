@@ -39,7 +39,7 @@
             "hoverText":"Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!"
         },
 
-        
+
         "FahrenheitSystem":{
             "Title":"Fahrenheit System",
             "hoverText":"Please provide the required inputs so we can suggest a Fahrenheit system for you."
@@ -488,7 +488,7 @@
                     "Title":"Zero load",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
-                }, 
+                },
                 "CoolingHour": {
                     "Title":"Cooling hours",
                     "Placeholder":"inhaber@gmbh.de",
@@ -569,12 +569,12 @@
                     "Title":"Heat Sources",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
-                }, 
+                },
                 "HeatSupply": {
                     "Title":"Heat Supply",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
-                }, 
+                },
                 "HeatSource": {
                     "Title":"Conventional heat source",
                     "Placeholder":"inhaber@gmbh.de",
@@ -600,9 +600,9 @@
                     "Placeholder":"",
                     "InfoTool":"Customer explanation/tip"
                 }
-               
 
-            }, 
+
+            },
             "ProjectSpecification": {
                 "Title":"PROJECT SPECIFICATIONS",
                 "BusSystem": {
@@ -628,6 +628,185 @@
         "UnusedHeat":{
             "Title":"Unused Heat"
         }
+
+
+    },
+    "Fahrenheit":{
+        "Title":"Fahrenheit System",
+        "Tab": {
+            "Chiller": {
+                "Title":"Chiller",
+                "AdsorptionProductGroup": {
+                    "Title":"Adsorption chillers product group",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Editor explanation/tip"
+                },
+                "CompressionChillerGroup": {
+                    "Title":"Compression chiller product group"
+                },
+                "RecoolerProductGroup": {
+                    "Title":"Re-cooler product group"
+                },
+                "Adsorbent": {
+                    "Title":"Adsorbent",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "ProductInterconnection": {
+                    "Title":"Product interconnection",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "Function": {
+                    "Title":"Function",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "AddChiller": {
+                    "Title":"Add a Chiller",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "TAB":{
+                    "TechnicalData":{
+                        "Title":"TECHNICAL DATA",
+                        "AddChiller": {
+                            "Title":"Add a Chiller",
+                            "Placeholder":"inhaber@gmbh.de",
+                            "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        },
+                        "ChillerType": {
+                            "Title":"Chiller type",
+                            "Placeholder":"inhaber@gmbh.de",
+                            "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        },
+                        "NumberOfChillers": {
+                            "Title":"Number of chillers",
+                            "Placeholder":"1 piece",
+                            "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        },
+                        "GroupInterconnection": {
+                            "Title":"Group interconnection",
+                            "Placeholder":"1 piece",
+                            "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        },
+                        "InvestmentCosts": {
+                            "Title":"Investment costs",
+                            "Placeholder":"€",
+                            "InfoTool":"Editor explanation/tip"
+                        },
+                        "Discount": {
+                            "Title":"Discount",
+                            "Placeholder":"%",
+                            "InfoTool":"Company explanation/tip"
+                        },
+                        "MaintenanceCosts": {
+                            "Title":"Maintenance costs",
+                            "Placeholder":"€/a",
+                            "InfoTool":"Address explanation/tip"
+                        }
+                    },
+                    "CalculationData":{
+                        "Title":"CALCULATION DATA",
+                        "AddChiller": {
+                            "Title":"Add a Chiller",
+                            "Placeholder":"inhaber@gmbh.de",
+                            "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                        }
+                    }
+
+                }
+            },
+            "Recooling": {
+                "Title":"Re-cooling System",
+                "RecoolingMethod": {
+                    "Title":"Re-cooling method",
+                    "Placeholder":"",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "PrimaryVolumeFlowRate": {
+                    "Title":"Primary volume flow rate",
+                    "Placeholder":"",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "AddReCoolingSystem": {
+                    "Title":"Add a Re-cooling System",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "Components": {
+                    "Title":"Components",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "CircuitSeparation": {
+                    "Title":"Circuit separation",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "Product": {
+                    "Title":"Product",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "NumberOfUnits": {
+                    "Title":"Number of units",
+                    "Placeholder":"1 piece",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "Name": {
+                    "Title":"Name",
+                    "Placeholder":"",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                 "ReCoolingCapacity": {
+                    "Title":"Re-cooling capacity",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "TemperatureDifference": {
+                    "Title":"Temperature difference",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "SecondaryVolumeFloRate": {
+                    "Title":"Secondary volume flow rate",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "ElectricalPowerConsumption": {
+                    "Title":"Electrical power consumption",
+                    "Placeholder":"",
+                    "InfoTool":"Project number explanation/tip"
+                },
+                "AvailableByCustomer": {
+                    "Title":"Available/provided by customer",
+                    "Placeholder":"",
+                    "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
+                },
+                "InvestmentCosts": {
+                    "Title":"Investment costs",
+                    "Placeholder":"",
+                    "InfoTool":"Editor explanation/tip"
+                },
+                "Discount": {
+                    "Title":"Discount",
+                    "Placeholder":"",
+                    "InfoTool":"Company explanation/tip"
+                },
+                "MaintenanceCosts": {
+                    "Title":"Maintenance costs",
+                    "Placeholder":"",
+                    "InfoTool":"Address explanation/tip"
+                }
+
+
+
+
+            }
+
+        },
+        "InputRequired":"More inputs are required to suggest a system"
 
 
     },
