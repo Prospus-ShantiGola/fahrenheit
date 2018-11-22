@@ -2,13 +2,15 @@
 
 return [
 
-     'Login' => 'Login',
-     'LoginEmail'=>'E-Mail Address',
-     'LoginPassword'=>'Password',
-     'Logincredential_msg'=>'These credentials do not match our records.',
-      'Loginaccountdisable_msg'=>'Your account has been disabled',
+       'Login' => 'Login',
+       'LoginEmail'=>'E-Mail Address',
+       'LoginPassword'=>'Password',
+       'Logincredential_msg'=>'These credentials do not match our records.',
+       'Loginaccountdisable_msg'=>'Your account has been disabled',
        'Login_success'=>'Login Successful',
-        'Login_check'=>'Please check the credentials !!',
+       'Login_check'=>'Please check the credentials !!',
+       'Login_required_msg'=>'Please fill out this field',  
+
     
      'Contact_title'=>'Contact Fahrenheit',
      'Contact_name'=>'Name',
