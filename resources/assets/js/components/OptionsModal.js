@@ -11,8 +11,8 @@ class OptionsModal extends Component {
 
   constructor(props){
         super(props);
-        this.state = {generalInformation: '',role:'user'};
-        this.handleGeneralSubmit = this.handleGeneralSubmit.bind(this);
+        this.state = {optionInformation: '',role:'user'};
+        this.handleOptionSubmit = this.handleOptionSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
       }
 
@@ -44,14 +44,14 @@ class OptionsModal extends Component {
                 }
             });
         });
-           $('.close-modal-general').on('click', function (e) {
+           $('.close-modal-options').on('click', function (e) {
                if ($('.option-information-form').hasClass('form-edited')) {
                    // alert('eeee')
                    e.preventDefault();
                    $('#general-modal-confirm').modal('show');
                }
                else {
-                   $('#option-information').modal('hide');
+                   $('#profile-information').modal('hide');
                    $('.option-information-form')[0].reset()
                }
            })
@@ -88,7 +88,7 @@ class OptionsModal extends Component {
 
 
 
-handleGeneralSubmit(event) {
+          handleOptionSubmit(event) {
     event.preventDefault();
     const that = this;
 
@@ -121,11 +121,11 @@ handleGeneralSubmit(event) {
                                 var data = that.getFormData($form);
                                 //console.log(data);
                                 that.setState({
-                                    generalInformation:data
+                                    optionInformation:data
                                 })
-                                that.changeState(that.state.generalInformation);
+                                that.changeState(that.state.optionInformation);
                                 GENERAL_FORM_STATUS=true;
-                                $("#option-information").modal("hide");
+                                $("#profile-information").modal("hide");
 
                             }
         })
@@ -134,13 +134,13 @@ handleGeneralSubmit(event) {
 
 
   }
-  changeState(generalInformation){
+  changeState(optionInformation){
     var result={
-        generalInformation:generalInformation,
+        optionInformation:optionInformation,
         state:true
     }
     CHANGE_FORM=true;
-    this.props.onGeneralSubmit(result);
+    this.props.onOptionSubmit(result);
   }
 
   getFormData($form){
@@ -156,18 +156,20 @@ handleGeneralSubmit(event) {
 
 
     render() {
-        projectData['generalData']=this.state.generalInformation;
+        //projectData['optionData']=this.state.optionInformation;
 
 
         return (
             <div className="modal modal_multi"  role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="profile-information">
+            <div className="modal-dialog ">
+            <form  onSubmit={this.handleOptionSubmit} className = "option-information-form">
             <div className="modal-content">
               <div className="modal-heading">
                 <div className="left-head"> {this.props.t('Options.Title')}</div>
                 <div className="right-head">
                   <ul className="list-inline">
                   <li> <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
-                   <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
+                   <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-options"  aria-label="Close"/></span></li>
                   </ul>
                 </div>
               </div>
@@ -206,7 +208,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select name="profile_bafa" id="profile_bafa">
                                 <option value="calculate">Calculate</option>
                                 <option value="Do not calculate">Do not calculate</option>
                               </select>
@@ -220,7 +222,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select onChange={(elem) => this.changeField(elem)} name="profile_recooling" id="profile_recooling">
                                 <option value="Dry">Dry</option>
                                 <option value="With spray tool">With spray tool</option>
                                 <option value="Adiabatic">Adiabatic</option>
@@ -237,7 +239,7 @@ handleGeneralSubmit(event) {
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
-                            <td className="input-fields"><input type="text" placeholder="25 °C" /></td>
+                            <td className="input-fields"><input type="text" placeholder="25 °C" name="profile_recooling_temp" id="profile_recooling_temp" /></td>
                           </tr>
                           <tr>
                             <td className="input-label">{this.props.t('Options.Tab.GENERAL.FreeCooling.Title')}:</td>
@@ -247,7 +249,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select name="free_recooling" id="free_recooling">
                               <option value="No">No</option>
                                 <option value="Yes (chilled water temperature)">Yes (chilled water temperature)</option>
                                 <option value="Yes (cooling capacity)">Yes (cooling capacity)</option>
@@ -263,7 +265,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select name="profile_heat_source" id="profile_heat_source">
                                 <option value="Utilize also for heating load profile">Utilize also for heating load profile</option>
                                 <option value="Ignore heating load profile">Ignore heating load profile</option>
                               </select>
@@ -277,7 +279,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select name="profile_heat_supply" id="profile_heat_supply">
                                 <option value="Priority for heating load profile">Priority for heating load profile</option>
                                 <option value="Priority for cooling load profile">Priority for cooling load profile</option>
                               </select>
@@ -290,7 +292,7 @@ handleGeneralSubmit(event) {
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
-                            <td className="input-fields"><input type="text" placeholder="Boiler, 2x 100 kW"/></td>
+                            <td className="input-fields"><input type="text" placeholder="Boiler, 2x 100 kW" name="profile_conventional_heat" id="profile_conventional_heat"/></td>
                           </tr>
                           <tr>
                             <td className="input-label">{this.props.t('Options.Tab.GENERAL.CalculationMethod.Title')}:</td>
@@ -300,7 +302,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select name="profile_calculation_method" id="profile_calculation_method">
                                 <option value="Chilled water inlet temperature constant">Chilled water inlet temperature constant</option>
                                 <option value="Chilled water outlet temperature constant">Chilled water outlet temperature constant</option>
                               </select>
@@ -314,7 +316,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select name="profile_amb_tem" id="profile_amb_tem">
                                 <option value="0.5">0.5 K</option>
                                 <option value="1.0">1.0 k</option>
                                 <option value="2.0">2.0 k</option>
@@ -329,7 +331,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select  name="profile_heating_load" id="profile_heating_load">
                               <option value="Capacity [kW]">Capacity [kW]</option>
                                 <option value="Energy [kWh]">Energy [kWh]</option>
                               </select>
@@ -343,7 +345,7 @@ handleGeneralSubmit(event) {
                               </button>
                             </td>
                             <td className="input-fields">
-                              <select>
+                              <select  name="profile_cooling_load" id="profile_cooling_load">
                                 <option value="Capacity [kW]">Capacity [kW]</option>
                                 <option value="Energy [kWh]">Energy [kWh]</option>
                               </select>
@@ -364,7 +366,7 @@ handleGeneralSubmit(event) {
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
-                            <td className="input-fields"><input type="text" placeholder=""/> </td>
+                            <td className="input-fields"><input type="text" placeholder="" name="bus_system" id="bus_system"/> </td>
                           </tr>
                           <tr>
                             <td className="input-label">{this.props.t('Options.Tab.ProjectSpecification.Controller.Title')}:</td>
@@ -373,7 +375,7 @@ handleGeneralSubmit(event) {
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
-                            <td className="input-fields"><input type="text" placeholder=""/></td>
+                            <td className="input-fields"><input type="text" placeholder="" name="profile_controller" id="profile_controller"/></td>
                           </tr>
                           <tr>
                             <td className="input-label">{this.props.t('Options.Tab.ProjectSpecification.PressureDrop.Title')}:</td>
@@ -382,7 +384,7 @@ handleGeneralSubmit(event) {
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
-                            <td className="input-fields"><input type="text" placeholder=""/> </td>
+                            <td className="input-fields"><input type="text" placeholder="" name="pressure_drop" id="pressure_drop"/> </td>
                           </tr>
                         </table>
                       </div>
@@ -390,6 +392,8 @@ handleGeneralSubmit(event) {
                   </div>
                 </div>
               </div>
+            </div>
+            </form>
             </div>
           </div>
 

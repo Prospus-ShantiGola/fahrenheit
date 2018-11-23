@@ -3,8 +3,13 @@ const initialState = {
   chillers: [],
   heatsources:[],
   generalData:[],
-  economicData:[]
+  economicData:[],
+  option:[],
+  coompressionchillers:[],
+  heatingprofiles:[],
+  fahrenheit:[]
 };
+
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CHILLERS:
@@ -17,4 +22,3 @@ export const rootReducer = (state = initialState, action) => {
       return state;
   }
 };
-export default rootReducer;

@@ -6,7 +6,11 @@ import { setDefaultTranslations, setDefaultLanguage } from 'react-multi-lang'
 import de from './../translations/de.json'
 import en from './../translations/en.json'
 import {Provider} from 'react-redux';
-import store from './../store/index'
+import store from './../store/index';
+import {addGeneralData,} from './../actions/index';
+import Success from './Success';
+window.store = store;
+window.addGeneralData = addGeneralData;
 
 setDefaultTranslations({de, en})
 setDefaultLanguage(LOCALE)
@@ -26,7 +30,7 @@ class AppContent extends Component {
     }
     submitForm(e){
         //console.log('%c Project Result : ', 'background: #222; color: #bada55',projectData);
-        if(!GENERAL_FORM_STATUS){
+        if(!GENERAL_FORM_STATUS || !COOLING_FORM_STATUS){
             $("#message-popup-modal").modal('show');
             return false;
         }
@@ -46,7 +50,7 @@ class AppContent extends Component {
         .then(function (data) {
             console.log(data);
                             if(typeof data.errors=="undefined"){
-
+                                $("#success-modal").modal('show');
                             }
                             else{
                                 $("#message-popup-modal").modal('show');
@@ -80,7 +84,7 @@ class AppContent extends Component {
             disableClass="disableCard";
         }
         if(!GENERAL_FORM_STATUS){
-            var generalError=(<li>General Information</li>);
+            var generalError=(<ul><li>General Information</li><li>Cooling load profile</li></ul>);
         }
         return (
             <div>
@@ -113,8 +117,9 @@ class AppContent extends Component {
 
                         <Provider store={store}>
                         <Adcalc store={store} role={this.state.role} onFormChange={this.handleForm}/>
-                        </Provider>
 
+                        </Provider>
+                        <Success />
 
                 </div>
                 </div>
