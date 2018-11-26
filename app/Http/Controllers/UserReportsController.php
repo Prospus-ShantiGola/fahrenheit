@@ -21,7 +21,10 @@ class UserReportsController extends Controller
     public function index()
     {
 
-        $userReports = UserReport::where('user_id', '=', Auth::id())->with('user')->paginate(5);
+        $userReports = UserReport::paginate(5);
+        if(!Auth::user()->user_type_id){
+            $userReports = UserReport::where('user_id', '=', Auth::id())->with('user')->paginate(5);
+        }
 
         return view('user_reports.index', compact('userReports'));
     }

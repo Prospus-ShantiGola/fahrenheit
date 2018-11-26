@@ -71,7 +71,7 @@ class FahrenheitSystemModal extends React.Component {
                     chillerRecord: this.state.chillerStateChange.chillerRecord.concat(result.chillerInformation)
                 }
             });
-            store.dispatch( addChiller(result.chillerInformation) )
+            //store.dispatch( addChiller(result.chillerInformation) )
         } else {
             this.state.chillerStateChange.chillerRecord[result.chillerInformation.addchillerformModeKey] = result.chillerInformation
             this.forceUpdate()
@@ -250,8 +250,9 @@ class FahrenheitSystemModal extends React.Component {
         let recoolerArray=[];
         recoolerArray.push(this.groupBy(this.state.recoolerStateChange.recoolerRecord,'recooler_product'));
 
-
-
+        var that=this;
+        projectData['chillerInfo']=this.state.chillerStateChange.chillerRecord;
+        projectData['recooling']=this.state.recoolerStateChange.recoolerRecord;
 
         return (
             <div>
@@ -370,7 +371,7 @@ class FahrenheitSystemModal extends React.Component {
                                                               <tbody></tbody>
                                                                 <tr>
                                                                   <td>
-                                                                  <p>{this.props.t('Fahrenheit.Tab.Chiller.RecoolerProductGroup.Title')}</p>
+                                                                  <p>{that.props.t('Fahrenheit.Tab.Chiller.RecoolerProductGroup.Title')}</p>
                                                                   </td>
                                                                   <td></td>
                                                         <td>

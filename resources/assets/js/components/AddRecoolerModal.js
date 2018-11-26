@@ -169,7 +169,7 @@ class AddRecooler extends Component {
 
 
     render() {
-        projectData['recooling']=this.state.recoolerInformation;
+        //projectData['recooling']=this.state.recoolerInformation;
         let recoolingHtml,primaryHtml="";
         if(this.state.selectedSource=="Re-cooler"){
            recoolingHtml=(<tr>
@@ -289,6 +289,7 @@ class AddRecooler extends Component {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
+
                           <td className="input-fields"><input type="text" placeholder="58 kW" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_capacity" id="recooler_capacity"/></td>
                         </tr>
 
