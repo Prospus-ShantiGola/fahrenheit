@@ -3,7 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserReport;
 use App\Models\UserType;
+use App\Models\CoolingLoadProfile;
+use App\Models\GeneralInformation;
+use App\Models\Option;
+use App\Models\CompressionChiller;
+use App\Models\EconomicData;
+use App\Models\EconomicDataAdditionalInfo;
+use App\Models\HeatingLoadProfile;
+use App\Models\HeatSource;
+use App\Models\Chiller;
+use App\Models\RecoolingSystem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -11,6 +22,7 @@ use Exception;
 use Gate;
 use Hash;
 use Mail;
+use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Error\Error;
 
 class AdcalcController extends Controller
@@ -99,12 +111,148 @@ class AdcalcController extends Controller
     }
     public function storeProjectInformation(Request $request)
     {
-        $generalData = $request->input('generalData');
+        DB::enableQueryLog();
+        $generalData = $request->input('generalData') ;
+        $economicData = $request->input('economicData');
+        $chillers = $request->input('chiller') ??  array(); //coolingloadprofile
+        $chillerDatas = $request->input('chillerData') ??  array(); //compressionchiller
+        $heatSourceDatas = $request->input('heatSourceData') ??  array(); //heat source
+        $heatingprofiles = $request->input('heatingprofile') ??  array(); //heatingprofile
+        $chillerInfos = $request->input('chillerInfo') ??  array(); //fahrenheit chiller
+        $recoolings = $request->input('recooling') ??  array(); //fahrenheit recooling
+        $option = $request->input('option') ??  array(); //heatingprofile
+
+
 
         if (empty($generalData)) {
             return response()->json(['errors' => 'Please provide the mandatory field', 'key' => 'general']);
         } else {
-            $email_address = $generalData['email_address'];
+            $email_address = $generalData['personal_email_address'];  //user can be single but project can be multiple so assign multiple project user personal email (as user)
+            if ($user = Auth::user()) {
+                $user = Auth::user()->id;
+            } else {
+                //dd($email_address);
+                $user_exist = User::where('email', $email_address)->get();
+                //check if user exist if not logged in then assign all the entries by their id
+                if ($user_exist->count() > 0) {
+                    $user = $user_exist[0]->id;
+                    //dd($insertedId);
+                } else {
+                    $data['name'] = $generalData['editor'] ?? "new user";            //if user not provided the name, can later change
+                    $data['company'] = $generalData['company'] ?? "fahrenheit";      // if user not provided the company , can later change
+                    $data['phoneno'] = $generalData['phone_number'] ?? "0000000000";
+                    $data['email'] = $generalData['personal_email_address'];
+                    $data['password'] = bcrypt(rand(1, 15));
+                    $user = User::create($data)->id;
+                }
+
+            }
+
+            $project_name = $generalData['project_name'] ?? "ADCALC";
+            $project_number = $generalData['project_number'] ?? rand(1,1000);
+            $data['user_id'] = $user;
+            $data['title'] = strtoupper($project_name . "_" . $project_number);
+            try {
+                $insertedId = UserReport::create($data)->id;
+                if (count($chillers) > 0) {
+
+                        //economicData
+
+                        $economicData['unique_row_id'] = $insertedId;
+                        //dd($economicData);
+                        $economicId = EconomicData::create($economicData);
+                        //dd($economicId);
+                        $economicId = DB::getPdo()->lastInsertId();
+                        //dd($id);
+                        $input=array();
+                        $finalSubmitArr=array();
+                        foreach($economicData['eeg_apportion_costs[]'] as $eeg_apportion_cost ){
+                            $input['economic_data_id']=$economicId;
+                            $input['tab_name']='general';
+                            $input['additional_field_name']='eeg_apportion_cost';
+                            $input['additional_field_value']=$eeg_apportion_cost;
+                            $finalSubmitArr[]=$input;
+                        }
+                        foreach ($economicData['eeg_chp_apportion_costs[]']  as $eeg_chp_apportion_costs) {
+                            $input['economic_data_id']=$economicId;
+                            $input['tab_name']='chp';
+                            $input['additional_field_name']='eeg_chp_apportion_costs';
+                            $input['additional_field_value']=$eeg_chp_apportion_costs;
+                            $finalSubmitArr[]=$input;
+                        }
+                        foreach ($economicData['planning[]']  as $key => $planning) {
+                            $input['economic_data_id']=$economicId;
+                            $input['tab_name']='investment';
+                            $input['additional_field_name']='planning';
+                            $input['additional_field_value']=$planning;
+                            $input['additional_field_discount']=$economicData['planning_discount[]'][$key];
+                            $finalSubmitArr[]=$input;
+                        }
+                        foreach ($economicData['planning_maintenence[]']  as $planning_maintenence) {
+                            $input['economic_data_id']=$economicId;
+                            $input['tab_name']='maintenence';
+                            $input['additional_field_name']='maintenence';
+                            $input['additional_field_value']= $planning_maintenence;
+                            $input['additional_field_discount']=null;
+                            $finalSubmitArr[]=$input;
+                        }
+                        foreach($finalSubmitArr as $record){
+                            $result = EconomicDataAdditionalInfo::create($record);
+                        }
+
+
+                    //heatingprofiles
+                    foreach ($heatingprofiles as $heatingprofile) {
+                        # iterate over the list of chiller.
+                        $heatingprofile['unique_row_id'] = $insertedId;
+                        $result = HeatingLoadProfile::create($chiller);
+                        //dd($result);
+                    }
+
+                    //compressionchiller
+                    foreach ($chillerDatas as $chillerData) {
+                        # iterate over the list of chiller.
+                        $chillerData['unique_row_id'] = $insertedId;
+                        $result = CompressionChiller::create($chiller);
+                        //dd($result);
+                    }
+
+                    //heatSourceDatas
+                    foreach ($heatSourceDatas as $heatSourceData) {
+                        # iterate over the list of chiller.
+                        $heatSourceData['unique_row_id'] = $insertedId;
+                        $result = HeatSource::create($chiller);
+                        //dd($result);
+                    }
+
+                    //heatingprofiles
+                    foreach ($heatingprofiles as $heatingprofile) {
+                        # iterate over the list of chiller.
+                        $heatingprofile['unique_row_id'] = $insertedId;
+                        $result = HeatingLoadProfile::create($chiller);
+                        //dd($result);
+                    }
+
+                    //chillerInfos
+                    foreach ($chillerInfos as $chillerInfo) {
+                        # iterate over the list of chiller.
+                        $chillerInfo['unique_row_id'] = $insertedId;
+                        $result = Chiller::create($chiller);
+                            //dd($result);
+                    }
+
+                    //recoolings
+                    foreach ($recoolings as $recooling) {
+                        # iterate over the list of chiller.
+                        $recooling['unique_row_id'] = $insertedId;
+                        $result = RecoolingSystem::create($chiller);
+                            //dd($result);
+                    }
+                }
+            } catch (\Throwable $th) {
+                return $th;
+            }
+
             try {
                 app('App\Http\Controllers\MailController')->sendProjectEmailAdmin($generalData);
             } catch (Error $e) {

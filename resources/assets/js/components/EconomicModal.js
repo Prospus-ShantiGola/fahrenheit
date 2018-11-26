@@ -51,7 +51,7 @@ class EconomicModal extends Component {
         var customInput = document.getElementById(customTr);
         customInput.remove();
     }
-    cloneItem() {
+    cloneItem(fieldName1,fieldName2) {
         $("#investmentTable tbody").append(
             $("#investmentTable tbody tr.clone").clone()
         );
@@ -59,6 +59,8 @@ class EconomicModal extends Component {
             .not("clone")
             .removeClass("clone")
             .addClass("multiple");
+            $("#investmentTable tbody tr:last").not("clone").find('input[type="text"]:first').attr('name',fieldName1);
+            $("#investmentTable tbody tr:last").not("clone").find('input[type="text"]:last').attr('name',fieldName2);
         this.bindEvents();
     }
 
@@ -66,7 +68,7 @@ class EconomicModal extends Component {
         var trHtml =
             '<tr id="generalcustom_"> <td class="input-label"><div class="form-row align-items-center"><div class="col"><span id="customGeneral_1" contentEditable="false" suppressContentEditableWarning={true}>' +
             customFieldLabel +
-            '</span>:</div><div class="col-auto"><div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div></div></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs" id="eeg_apportion_costs"/></td></tr>';
+            '</span>:</div><div class="col-auto"><div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div></div></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs[]" id="eeg_apportion_costs"/></td></tr>';
         $("#generalTable tbody:eq(0)").append(trHtml);
         $("#generalTable tbody tr:last")
             .not("clone")
@@ -78,7 +80,7 @@ class EconomicModal extends Component {
         var trHtml =
             '<tr id="chpcustom_"> <td class="input-label"><div class="form-row align-items-center"><div class="col"><span id="customChp_1" contentEditable="false" suppressContentEditableWarning={true}>' +
             customFieldLabel +
-            '</span>:</div><div class="col-auto"><div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div></div></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs" id="eeg_apportion_costs"/></td></tr>';
+            '</span>:</div><div class="col-auto"><div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div></div></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_chp_apportion_costs[]" id="eeg_apportion_costs"/></td></tr>';
 
         $("#chpTable tbody:eq(0)").append(trHtml);
         $("#chpTable tbody tr:last")
@@ -87,7 +89,7 @@ class EconomicModal extends Component {
             .addClass("multiple");
         this.bindEvents();
     }
-    cloneMaintenenceItem() {
+    cloneMaintenenceItem(fieldName) {
         $("#maintenenceTable tbody").append(
             $("#maintenenceTable tbody tr.clone").clone()
         );
@@ -95,6 +97,7 @@ class EconomicModal extends Component {
             .not("clone")
             .removeClass("clone")
             .addClass("multiple");
+        $("#maintenenceTable tbody tr:last").not("clone").find('input[type="text"]').attr('name',fieldName);
         this.bindEvents();
     }
 
@@ -400,9 +403,16 @@ class EconomicModal extends Component {
         var indexed_array = {};
 
         $.map(unindexed_array, function(n, i) {
-            indexed_array[n["name"]] = n["value"];
+            if(n["name"].indexOf('[]')!='-1'){
+                if( indexed_array[n["name"]] === undefined ) {
+                    indexed_array[n["name"]]=Array();
+                }
+                indexed_array[n["name"]].push(n["value"]);
+            }else{
+                indexed_array[n["name"]] = n["value"];
+            }
         });
-
+       // console.log("index arrray",indexed_array);
         return indexed_array;
     }
 
@@ -618,7 +628,7 @@ class EconomicModal extends Component {
             var expertOptionInvestment = (
                 <div
                     className="new-row-addition"
-                    onClick={e => this.cloneItem()}
+                    onClick={e => this.cloneItem('planning[]','planning_discount[]')}
                 >
                     <img src="public/images/plus-icon.png" alt="" />
                 </div>
@@ -626,7 +636,7 @@ class EconomicModal extends Component {
             var expertOptionMaintenence = (
                 <div
                     className="new-row-addition"
-                    onClick={e => this.cloneMaintenenceItem()}
+                    onClick={e => this.cloneMaintenenceItem('planning_maintenence[]')}
                 >
                     <img src="public/images/plus-icon.png" alt="" />
                 </div>
@@ -1283,7 +1293,6 @@ class EconomicModal extends Component {
                                                                 placeholder="3,000"
                                                                 pattern="\d*"
                                                                 className="onlynumeric price"
-                                                                name="planning[]"
                                                                 id="planning_x"
                                                             />
                                                             <span className="pricesymbol">
@@ -1299,7 +1308,6 @@ class EconomicModal extends Component {
                                                                 placeholder="2"
                                                                 pattern="\d*"
                                                                 className="onlynumeric discount"
-                                                                name="planning_discount[]"
                                                                 id="planning_discount_x"
                                                             />
                                                             <span>%</span>
@@ -1496,7 +1504,6 @@ class EconomicModal extends Component {
                                                                 placeholder="3,000"
                                                                 pattern="\d*"
                                                                 className="onlynumeric"
-                                                                name="planning[]"
                                                                 id="planningMaint"
                                                             />
                                                             <span>€</span>

@@ -194,9 +194,9 @@ class OptionsModal extends Component {
                               <ul className="list-inline">
                                 <li><img src="public/images/germany-flag.png" alt="" /></li>
                                 <li><img src="public/images/united-kingdom.png" alt="" /></li>
-                                <li><img src="public/images/poland-flag.png" alt="" /></li>
-                                <li><img src="public/images/italy.png" alt="" /></li>
-                                <li><img src="public/images/greece-flag.png" alt="" /></li>
+                                <li className="disabled"><img src="public/images/poland-flag.png" alt="" /></li>
+                                <li className="disabled"><img src="public/images/italy.png" alt="" /></li>
+                                <li className="disabled"><img src="public/images/greece-flag.png" alt="" /></li>
                               </ul>
                             </td>
                           </tr>

@@ -8,5 +8,65 @@
         "model-name": "UserReport",
         "resource-file": "user_reports.json",
         "table-name": "user_reports"
+    },
+    {
+        "model-name": "GeneralInformation",
+        "resource-file": "general_informations.json",
+        "table-name": "general_informations"
+    },
+    {
+        "model-name": "CoolingLoadProfile",
+        "resource-file": "cooling_load_profiles.json",
+        "table-name": "cooling_load_profiles"
+    },
+    {
+        "model-name": "CompressionChiller",
+        "resource-file": "compression_chillers.json",
+        "table-name": "compression_chillers"
+    },
+    {
+        "model-name": "HeatingLoadProfile",
+        "resource-file": "heating_load_profiles.json",
+        "table-name": "heating_load_profiles"
+    },
+    {
+        "model-name": "HeatingSource",
+        "resource-file": "heating_sources.json",
+        "table-name": "heating_sources"
+    },
+    {
+        "model-name": "HeatSource",
+        "resource-file": "heat_sources.json",
+        "table-name": "heat_sources"
+    },
+    {
+        "model-name": "EconomicData",
+        "resource-file": "economic_datas.json",
+        "table-name": "economic_datas"
+    },
+    {
+        "model-name": "EconomicDataAdditionalInfo",
+        "resource-file": "economic_data_additional_infos.json",
+        "table-name": "economic_data_additional_infos"
+    },
+    {
+        "model-name": "Option",
+        "resource-file": "options.json",
+        "table-name": "options"
+    },
+    {
+        "model-name": "Fahrenheit",
+        "resource-file": "fahrenheits.json",
+        "table-name": "fahrenheits"
+    },
+    {
+        "model-name": "Chiller",
+        "resource-file": "chillers.json",
+        "table-name": "chillers"
+    },
+    {
+        "model-name": "RecoolingSystem",
+        "resource-file": "recooling_systems.json",
+        "table-name": "recooling_systems"
     }
 ]

@@ -2263,6 +2263,8 @@ footer {
 .disabled{
     color:grey !important;
     pointer-events: none;
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* msie */
 }
 
 .disableCard {

@@ -196,7 +196,7 @@ class AddChiller extends Component {
     }
 
     render() {
-        projectData['chillerInfo']=this.state.chillerInformation;
+        //projectData['chillerInfo']=this.state.chillerInformation;
         var adsorbentHtml,productHtml="";
         if(this.state.selectedSource=="Adsorption"){
             adsorbentHtml=( <tr>

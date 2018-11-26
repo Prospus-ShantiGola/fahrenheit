@@ -17,7 +17,7 @@
 
         },
         "HeatSource":{
-            "Title":"Heat Source",
+            "Title":"Heat Sources",
             "hoverText":"Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.",
             "HeatCapacity":"Heat Capacity",
             "AvailableHeat":"Available Heat",
@@ -28,7 +28,7 @@
             "hoverText":"Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources. Are you planning a new heat source? Then we can calculate the profitability of the whole system!"
         },
         "CompressionChiller":{
-            "Title":"Compression Chiller",
+            "Title":"Compression Chillers",
             "hoverText":"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.",
             "HoverCoolingTitle":"Cooling Capacity",
             "NumberofCompressor":"Number of Compressors",
