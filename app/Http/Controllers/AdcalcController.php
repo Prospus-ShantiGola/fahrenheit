@@ -109,6 +109,11 @@ class AdcalcController extends Controller
         return response()->json(['success' => 'Record is successfully added']);
 
     }
+
+    /**
+     * Store project information.
+     *
+     */
     public function storeProjectInformation(Request $request)
     {
         DB::enableQueryLog();
@@ -149,7 +154,7 @@ class AdcalcController extends Controller
             }
 
             $project_name = $generalData['project_name'] ?? "ADCALC";
-            $project_number = $generalData['project_number'] ?? rand(1,1000);
+            $project_number = $generalData['project_number'] ?? rand(500,1000);
             $data['user_id'] = $user;
             $data['title'] = strtoupper($project_name . "_" . $project_number);
             try {
@@ -292,6 +297,34 @@ class AdcalcController extends Controller
         }
         return response()->json(['success' => 'Record is successfully added']);
 
+    }
+
+
+    function coldWaterCircuit($tempIn,$Qlt,$vlt)
+    {
+        $_p=.999;
+        $_cp=4.18;
+        $tempOut= $tempIn-($Qlt*3600)/($_cp*$_p*$vlt);
+        return $tempOut;
+    }
+
+    function heatCapacity($COP,$Qlt)
+    {
+
+        $result= $Qlt/$COP;
+        return $result;
+    }
+
+    function calculateQLT($_a, $_b)
+    {
+        $Qlt= $_b * (float)log(MT) + $_a;
+        return number_format((float)$Qlt, 4, '.', '');
+    }
+
+    function calculateCOP($_a, $_b, $_c)
+    {
+        $COP= $_a+($_b*MT)+$_c*(pow(MT, 2));
+        return number_format((float)$COP, 4, '.', '');
     }
 
 

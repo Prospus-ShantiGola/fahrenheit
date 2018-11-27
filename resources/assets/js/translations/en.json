@@ -721,12 +721,12 @@
                 "Title":"Re-cooling System",
                 "RecoolingMethod": {
                     "Title":"Re-cooling method",
-                    "Placeholder":"",
+                    "Placeholder":" ",
                     "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
                 },
                 "PrimaryVolumeFlowRate": {
                     "Title":"Primary volume flow rate",
-                    "Placeholder":"",
+                    "Placeholder":" ",
                     "InfoTool":"Project number explanation/tip"
                 },
                 "AddReCoolingSystem": {
@@ -756,7 +756,7 @@
                 },
                 "Name": {
                     "Title":"Name",
-                    "Placeholder":"",
+                    "Placeholder":" ",
                     "InfoTool":"Project number explanation/tip"
                 },
                  "ReCoolingCapacity": {
