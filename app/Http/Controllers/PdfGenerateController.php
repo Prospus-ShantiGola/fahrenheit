@@ -48,11 +48,11 @@ class PdfGenerateController extends Controller {
 
    
                // options data
-              $options_datas = DB::table('options')->where('unique_row_id', $id)->first();
+            $options_datas = DB::table('options')->where('unique_row_id', $id)->first();
              
 
                //heat_sources data
-                $heat_sources = DB::table('heat_sources')->where('unique_row_id', $id)->get();
+            $heat_sources = DB::table('heat_sources')->where('unique_row_id', $id)->get();
 
            // heating_load_profiles data
             $heating_load_profiles = DB::table('heating_load_profiles')->where('unique_row_id', $id)->get();
