@@ -553,13 +553,13 @@ footer li:first-child {
      <h6>Project Data</h6>
      <ul class="project-data-list">
        <li>Project Name</li> 
-       <li>Propus</li>
+       <li> {{ optional($general_info)->project_name}}</li>
        <li>Project Number</li>
-       <li>Pro-11</li>
+       <li>>{{ optional($general_info)->project_number}}</li>
        <li>Project-address </li>
-       <li> Noida</li>
+       <li> {{ optional($general_info)->customer}}</li>
        <li>Contact Person</li>
-       <li> Santi</li>
+       <li>{{ optional($general_info)->contact}}</li>
      </ul>
    </div>
  </div>
@@ -567,7 +567,7 @@ footer li:first-child {
 <section class="contact-address">
  <div class="container">
    <h6>Contact us by:</h6>
-    <img src= "public/images/logo.png"     alt="" />
+    <img src= "public/images/logo.png" alt="" />
    <p> <b>FAHRENHEIT GmbH</b> <br>
 Siegfriedstraße 19 <br>
 80803 Munich <br>
@@ -580,8 +580,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li>{{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>1/11</li>
  </ul>
 </footer>
@@ -659,8 +659,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+
   <li>2/11</li>
  </ul>
 </footer>
@@ -728,11 +728,11 @@ Germany</p>
      </tr>
      <tr>
      <th>EEG-Umlage-Anteil</th>
-     <td>{{ optional($economic_datas)->inflation_rate}}</td>
+     <td>{{ optional($economic_datas)->eeg_allocation_portion}}</td>
      </tr>
      <tr>
      <th>EEG-Umlage-Kosten</th>
-     <td>{{ optional($economic_datas)->inflation_rate}}</td>
+     <td>{{ optional($economic_datas)->eeg_apportion_costs}}</td>
      </tr>
       
      
@@ -743,33 +743,33 @@ Germany</p>
    <table class="table tableed-three">
      <tr>
       <th>CHP in the basement</th>
-      <td>78,250€</td>
+      <td>{{ optional($economic_datas)->chp_basement}}€</td>
       <th>Discount</th>
-      <td>0%</td>
+      <td>{{ optional($economic_datas)->discount_chp_basement}}%</td>
      </tr>
      <tr>
       <th>Chiller 1</th>
-      <td>16,251€</td>
+      <td>{{ optional($economic_datas)->chiller}}€</td>
       <th>Discount</th>
-      <td>0%</td>
+      <td>{{ optional($economic_datas)->chiller_discount}}%</td>
      </tr>
      <tr>
       <th>Radiant cooling office</th>
-      <td>8,550€</td>
+      <td>{{ optional($economic_datas)->radiant_cooling_office}}€</td>
       <th>Discount</th>
-      <td>0%</td>
+      <td>{{ optional($economic_datas)->radiant_discount}}%</td>
      </tr>
      <tr>
       <th>eCoo 10X</th>
-      <td>19,950€</td>
+      <td>{{ optional($economic_datas)->ecoo}}€</td>
       <th>Discount</th>
-      <td>5%</td>
+      <td>{{ optional($economic_datas)->ecoo_discount}}%</td>
      </tr>
      <tr>
       <th>Project planning</th>
-      <td>3,000€</td>
+      <td>€</td>
       <th>Discount</th>
-      <td>2%</td>
+      <td>%</td>
      </tr>
       
      
@@ -780,23 +780,23 @@ Germany</p>
    <table class="table tableed-four">
      <tr>
       <th>CHP in the basement</th>
-      <td>78,250€</td>
+      <td>{{ optional($economic_datas)->chp_basement_maintenence}}€</td>
      </tr>
      <tr>
      <th>Chiller 1</th>
-     <td>16,251€</td>
+     <td>{{ optional($economic_datas)->chiller_maintenence}}€</td>
      </tr>
      <tr>
      <th>Radiant cooling office</th>
-     <td>8,550€</td>
+     <td>{{ optional($economic_datas)->radiant_maintenence}}€</td>
      </tr>
      <tr>
      <th>eCoo 10X</th>
-     <td>19,950€</td>
+     <td>{{ optional($economic_datas)->ecoo_maintenence}}€</td>
      </tr>
      <tr>
      <th>Project planning</th>
-     <td>3,000€</td>
+     <td>€</td>
      </tr>
      
       
@@ -807,8 +807,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>3/11</li>
  </ul>
 </footer>
@@ -898,8 +898,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>4/11</li>
  </ul>
 </footer>
@@ -988,8 +988,8 @@ Germany</p>
 
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>5/11</li>
  </ul>
 </footer>
@@ -1053,8 +1053,8 @@ Germany</p>
 
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>6/11</li>
  </ul>
 </footer>
@@ -1117,8 +1117,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>7/11</li>
  </ul>
 </footer>
@@ -1190,8 +1190,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>8/11</li>
  </ul>
 </footer>
@@ -1333,8 +1333,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>9/11</li>
  </ul>
 </footer>
