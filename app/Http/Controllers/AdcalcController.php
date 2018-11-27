@@ -24,6 +24,7 @@ use Hash;
 use Mail;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Error\Error;
+use App\Models\Fahrenheit;
 
 class AdcalcController extends Controller
 {
@@ -158,7 +159,11 @@ class AdcalcController extends Controller
             $data['user_id'] = $user;
             $data['title'] = strtoupper($project_name . "_" . $project_number);
             try {
+
                 $insertedId = UserReport::create($data)->id;
+                $generalData['unique_row_id'] = $insertedId;
+                $resultGen=GeneralInformation::create($generalData);
+
                 if (count($chillers) > 0) {
 
                         //economicData
@@ -171,6 +176,10 @@ class AdcalcController extends Controller
                         //dd($id);
                         $input=array();
                         $finalSubmitArr=array();
+                        $economicData['eeg_apportion_costs[]'] = $economicData['eeg_apportion_costs[]'] ?? array();
+                        $economicData['planning[]'] = $economicData['planning[]'] ?? array();
+                        $economicData['eeg_chp_apportion_costs[]'] = $economicData['eeg_chp_apportion_costs[]'] ?? array();
+                        $economicData['planning_maintenence[]'] = $economicData['planning_maintenence[]'] ?? array();
                         foreach($economicData['eeg_apportion_costs[]'] as $eeg_apportion_cost ){
                             $input['economic_data_id']=$economicId;
                             $input['tab_name']='general';
@@ -205,52 +214,60 @@ class AdcalcController extends Controller
                             $result = EconomicDataAdditionalInfo::create($record);
                         }
 
+                    //coolingloadprofile
+                    foreach ($chillers as $chiller) {
+                        # iterate over the list of chiller.
+                        $chiller['unique_row_id'] = $insertedId;
+                        $result = CoolingLoadProfile::create($chiller);
+                        //dd($result);
+                    }
 
                     //heatingprofiles
                     foreach ($heatingprofiles as $heatingprofile) {
-                        # iterate over the list of chiller.
+                        # iterate over the list of heatingprofiles.
                         $heatingprofile['unique_row_id'] = $insertedId;
-                        $result = HeatingLoadProfile::create($chiller);
+                        $result = HeatingLoadProfile::create($heatingprofile);
                         //dd($result);
                     }
 
                     //compressionchiller
                     foreach ($chillerDatas as $chillerData) {
-                        # iterate over the list of chiller.
+                        # iterate over the list of chillerDatas.
                         $chillerData['unique_row_id'] = $insertedId;
-                        $result = CompressionChiller::create($chiller);
+                        $result = CompressionChiller::create($chillerData);
                         //dd($result);
                     }
 
                     //heatSourceDatas
                     foreach ($heatSourceDatas as $heatSourceData) {
-                        # iterate over the list of chiller.
+                        # iterate over the list of heatSourceDatas.
                         $heatSourceData['unique_row_id'] = $insertedId;
-                        $result = HeatSource::create($chiller);
+                        $result = HeatSource::create($heatSourceData);
                         //dd($result);
                     }
 
                     //heatingprofiles
                     foreach ($heatingprofiles as $heatingprofile) {
-                        # iterate over the list of chiller.
+                        # iterate over the list of heatingprofiles.
                         $heatingprofile['unique_row_id'] = $insertedId;
-                        $result = HeatingLoadProfile::create($chiller);
+                        $result = HeatingLoadProfile::create($heatingprofile);
                         //dd($result);
                     }
-
+                    $fahrenheit['unique_row_id'] = $insertedId;
+                    $fahrenheit_id = Fahrenheit::create($fahrenheit)->fahrenheit_id;
                     //chillerInfos
                     foreach ($chillerInfos as $chillerInfo) {
-                        # iterate over the list of chiller.
-                        $chillerInfo['unique_row_id'] = $insertedId;
-                        $result = Chiller::create($chiller);
+                        # iterate over the list of chillerInfos.
+                        $chillerInfo['fahrenheit_id'] = $fahrenheit_id;
+                        $result = Chiller::create($chillerInfo);
                             //dd($result);
                     }
 
                     //recoolings
                     foreach ($recoolings as $recooling) {
-                        # iterate over the list of chiller.
-                        $recooling['unique_row_id'] = $insertedId;
-                        $result = RecoolingSystem::create($chiller);
+                        # iterate over the list of recoolings.
+                        $recooling['fahrenheit_id'] = $fahrenheit_id;
+                        $result = RecoolingSystem::create($recooling);
                             //dd($result);
                     }
                 }
