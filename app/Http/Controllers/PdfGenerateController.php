@@ -27,8 +27,19 @@ class PdfGenerateController extends Controller {
           $response = $this->emailData();
             $mpdf = new \Mpdf\Mpdf();//new \mPDF();
 
-            $userReports = DB::table('user_reports')->where('id', $id)->first();
-           
+           //  $userReports = DB::table('user_reports')->where('id', $id)->first();
+           //  $userDetails = DB::table('user_reports')->where('id', $id)->first();
+
+           // echo $userReports->user_id;
+           // die;
+
+
+            //  //  
+            $userReports = DB::table('users')
+            ->leftJoin('user_reports', 'users.id', '=', 'user_reports.user_id')
+            ->where('user_reports.id', $id)->first();
+           // echo "<pre>"; print_r($userReports);
+           // die;
             //get general information
             $general_info = DB::table('general_informations')->where('unique_row_id', $id)->first();
            
@@ -75,7 +86,7 @@ class PdfGenerateController extends Controller {
 
                $mpdf->WriteHTML($contents);
 
-     
+              
               //  $mpdf->WriteHTML(\View::make('report_pdf')->with('data', $userReports)->render());
                 $pdf_path = public_path() . '/report.pdf';
                 //$mpdf->Output($pdf_path);
@@ -101,7 +112,9 @@ class PdfGenerateController extends Controller {
      public function generateHtml($id)
     {
 
-          $userReports = DB::table('user_reports')->where('id', $id)->first();
+           $userReports = DB::table('users')
+            ->leftJoin('user_reports', 'users.id', '=', 'user_reports.user_id')
+            ->where('user_reports.id', $id)->first();
             // echo "<pre>"; 
               //  dd($userReports);
     
