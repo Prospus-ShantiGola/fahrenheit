@@ -17,8 +17,28 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/generate-pdf','PdfGenerateController@generatePDF');
-Route::get('/generate-html','PdfGenerateController@generateHtml');
+
+Route::group(
+[
+    'prefix' => 'pdf',
+], function () {
+
+
+Route::get('/{pdf}/generate-pdf','PdfGenerateController@generatePDF')
+   // Route::get('/{user}/edit','UsersController@edit')
+         ->name('pdf.generate-pdf')
+         ->where('id', '[0-9]+')->middleware('auth');
+
+
+         
+Route::get('/{pdf}/generate-html','PdfGenerateController@generateHtml')
+   // Route::get('/{user}/edit','UsersController@edit')
+         ->name('pdf.generate-html')
+         ->where('id', '[0-9]+')->middleware('auth');
+    });
+
+
+// Route::get('/generate-html','PdfGenerateController@generateHtml');
 
 Route::group(
 [

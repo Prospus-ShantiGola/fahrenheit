@@ -536,14 +536,15 @@ footer li:first-child {
 	</style>
 </head>
 <body>
+
 <!--page 1 start -->
 <section class="report">
   <div class="container">
-     <h1><img src= "images/flake.png"   alt="" /><span>Convert heat into cold.</span></h1>
+     <h1><img src= "public/images/flake.png"   alt="" /><span>Convert heat into cold.</span></h1>
      <div class="top-banner-img">
-       <img src="images/pdf-front-page.jpg"  alt="" />
+       <img src="public/images/pdf-front-page.jpg"  alt="" />
       </div>
-      <h2>Report</h2>
+      <h2></h2>
   </div>
 </section>
 <section class="project-data">
@@ -566,7 +567,7 @@ footer li:first-child {
 <section class="contact-address">
  <div class="container">
    <h6>Contact us by:</h6>
-    <img src= "images/logo.png"     alt="" />
+    <img src= "public/images/logo.png"     alt="" />
    <p> <b>FAHRENHEIT GmbH</b> <br>
 Siegfriedstraße 19 <br>
 80803 Munich <br>
@@ -595,31 +596,31 @@ Germany</p>
    <table class="table tablegi-one">
      <tr>
       <th>Project number</th>
-      <td>New Project</td>
+      <td>{{ optional($general_info)->project_number}}</td>
      </tr>
      <tr>
      <th>Project name</th>
-     <td>Test Project</td>
+     <td> {{ optional($general_info)->project_name}}</td>
      </tr>
      <tr>
      <th>Location</th>
-     <td>Halle/Saale</td>
+     <td> {{ optional($general_info)->location}}</td>
      </tr>
      <tr>
      <th>Customer</th> 
-     <td>HabWarmWillKalt Gmbh </td>
+     <td> {{ optional($general_info)->customer}} </td>
      </tr>
      <tr>
      <th>Contact</th>
-     <td>Mr. Inhaber</td>
+     <td> {{ optional($general_info)->contact}}</td>
      </tr>
       <tr>
      <th>Tel. Number</th>
-     <td>0123 456</td>
+     <td> {{ optional($general_info)->phone_number}}</td>
      </tr>
       <tr>
      <th>Email</th>
-     <td>inhaber@gmbh.de</td>
+     <td> {{ optional($general_info)->email_address}}</td>
      </tr>
      
    </table>
@@ -629,27 +630,27 @@ Germany</p>
    <table class="table tablegi-two">
      <tr>
       <th>Editor</th>
-      <td>HabWarmWillKalt Gmbh</td>
+      <td>{{ optional($general_info)->editor}}</td>
      </tr>
      <tr>
      <th>Company</th>
-     <td>Gmbh</td>
+     <td>{{ optional($general_info)->company}}</td>
      </tr>
      <tr>
      <th>Address</th>
-     <td>Halle/Saale</td>
+     <td>{{ optional($general_info)->address}}</td>
      </tr>
      <tr>
      <th>Tel. Number</th>
-     <td>0123 456</td>
+     <td>{{ optional($general_info)->personal_phone_number}}</td>
      </tr>
      <tr>
      <th>Mobile</th>
-     <td>Mr. Inhaber</td>
+     <td>{{ optional($general_info)->mobile_number}}</td>
      </tr>
       <tr>
      <th>Email</th>
-     <td>inhaber@gmbh.de</td>
+     <td>{{ optional($general_info)->personal_email_address}}</td>
      </tr>
       
    </table>
@@ -664,8 +665,8 @@ Germany</p>
  </ul>
 </footer>
 <hr>
-<!-- page 2 end -->
 
+<!-- page 2 end-->
 <!-- page 3 start -->
 
 <section class="required-cooling-capacity">
@@ -676,23 +677,23 @@ Germany</p>
    <table class="table tableed-one">
      <tr>
       <th>Electricity price</th>
-      <td>0.180€/kWh</td>
+      <td>{{ optional($economic_datas)->electric_price}}</td>
      </tr>
      <tr>
      <th>Heat price</th>
-     <td>0.000€/kWh</td>
+     <td>{{ optional($economic_datas)->heat_price}}</td>
      </tr>
      <tr>
      <th>Electricity price increase</th>
-     <td>2.000%/a</td>
+     <td>{{ optional($economic_datas)->electric_price_increased}} </td>
      </tr>
      <tr>
      <th>Calculated interest rate</th>
-     <td>0.700%/a</td>
+     <td> {{ optional($economic_datas)->calculated_interest_rate}}</td>
      </tr>
      <tr>
      <th>Inflation rate</th>
-     <td>1.600%/a</td>
+     <td>{{ optional($economic_datas)->inflation_rate}}</td>
      </tr>
       
      
@@ -703,34 +704,35 @@ Germany</p>
    <table class="table tableed-two">
      <tr>
       <th>Own usage of electricity</th>
-      <td>100%</td>
+      <td>{{ optional($economic_datas)->own_usage_of_electricity}}</td>
      </tr>
      <tr>
      <th>KWK-subsidy for electricity</th>
-     <td>2016</td>
+     <td>{{ optional($economic_datas)->subsidy_for_electricity}}</td>
      </tr>
      <tr>
      <th>Gas price</th>
-     <td>0.03500€/kWh</td>
+     <td>{{ optional($economic_datas)->gas_price}}</td>
      </tr>
      <tr>
       <th colspan="2" class="for-experts">For Experts</th>
+
      </tr>
      <tr>
      <th>Electricity sales price</th>
-     <td>0.03500€/kWh</td>
+     <td>{{ optional($economic_datas)->electricity_sales_price}}</td>
      </tr>
      <tr>
      <th>Energiesteuer Rückerstattung</th>
-     <td>0.00550€/kWh</td>
+     <td>{{ optional($economic_datas)->energy_tax_refund}}</td>
      </tr>
      <tr>
      <th>EEG-Umlage-Anteil</th>
-     <td>40%</td>
+     <td>{{ optional($economic_datas)->inflation_rate}}</td>
      </tr>
      <tr>
      <th>EEG-Umlage-Kosten</th>
-     <td>0.06792€/kWh</td>
+     <td>{{ optional($economic_datas)->inflation_rate}}</td>
      </tr>
       
      
@@ -823,51 +825,51 @@ Germany</p>
    <table class="table tableo-one">
      <tr>
       <th>Language</th>
-      <td><img src= "images/germany-flag.png" alt=""></td>
+      <td><img src= "public/images/germany-flag.png" alt=""></td>
      </tr>
      <tr>
      <th>BAFA 2018</th>
-     <td>calculate</td>
+     <td>{{ optional($options_datas)->profile_bafa}}</td>
      </tr>
      <tr>
      <th>Re-cooling Method</th>
-     <td>Dry</td>
+     <td>{{ optional($options_datas)->profile_recooling}}</td>
      </tr>
      <tr>
      <th>Re-cooling Temperature</th>
-     <td>25 °C</td>
+     <td>{{ optional($options_datas)->profile_recooling_temp}}</td>
      </tr>
      <tr>
      <th>Free Cooling</th>
-     <td>Yes (chilled water temperature)</td>
+     <td>{{ optional($options_datas)->free_recooling}}</td>
      </tr>
        <tr>
      <th>Heat Sources</th>
-     <td>Utilize also for heating load profile</td>
+     <td>{{ optional($options_datas)->profile_heat_source}}</td>
      </tr>
       <tr>
      <th>Heat Supply</th>
-     <td>Priority for heating load profile</td>
+     <td>{{ optional($options_datas)->profile_heat_supply}}</td>
      </tr>
       <tr>
      <th>Conventional heat source</th>
-     <td>Boiler, 2x 100 kW</td>
+     <td>{{ optional($options_datas)->profile_conventional_heat}}</td>
      </tr>
       <tr>
      <th>Calculation method</th>
-     <td>Chilled water inlet temperature </td>
+     <td>{{ optional($options_datas)->profile_calculation_method}} </td>
      </tr>
       <tr>
      <th>Ambient temperature step</th>
-     <td>constant</td>
+     <td>{{ optional($options_datas)->profile_amb_tem}}</td>
      </tr>
       <tr>
      <th>Heating load profile</th>
-     <td>1.0 K </td>
+     <td>{{ optional($options_datas)->profile_heating_load}}</td>
      </tr>
       <tr>
      <th>Cooling load profile</th>
-     <td>Capacity [kW]</td>
+     <td>{{ optional($options_datas)->profile_cooling_load}}</td>
      </tr>
      
    </table>
@@ -877,15 +879,15 @@ Germany</p>
    <table class="table tableo-two">
      <tr>
       <th>Bus system</th>
-      <td>-</td>
+      <td>{{ optional($options_datas)->bus_system}}</td>
      </tr>
      <tr>
      <th>Controller</th>
-     <td>-</td>
+     <td>{{ optional($options_datas)->profile_controller}}</td>
      </tr>
      <tr>
      <th>Pressure drop in the piping</th>
-     <td>-</td>
+     <td>{{ optional($options_datas)->pressure_drop}}</td>
      </tr>
     
     </table>
@@ -903,59 +905,62 @@ Germany</p>
 </footer>
 <hr>
 <!-- page 4 end-->
+
 <!-- page 5 start-->
 <section class="system-simulation-cooling">
  <div class="container">
 
 <h1>Heat Source</h1>
-
+ @foreach($heat_sources as $heat_sourcesary)
    
    <h6>Technical Data</h6>
+
     <div class=" table-responsive">
    <table class="table tablehs-one">
+    
      <tr>
       <th>Name</th>
-      <td>CHP in the basement</td>
+      <td>{{ optional($heat_sourcesary)->heat_name}}</td>
      </tr>
      <tr>
      <th>Type of heat source</th>
-     <td>CHP</td>
+     <td>{{ optional($heat_sourcesary)->heat_type}}</td>
      </tr>
      <tr>
      <th>Drive temperature</th>
-     <td>85°C</td>
+     <td>{{ optional($heat_sourcesary)->drive_temp}}</td>
      </tr>
      <tr>
      <th>Heat capacity</th>
-     <td>36 kw</td>
+     <td>{{ optional($heat_sourcesary)->heat_capacity}}</td>
      </tr>
      <tr>
      <th>Electric capacity</th>
-     <td>18 kw</td>
+     <td>{{ optional($heat_sourcesary)->electricity_capacity}}</td>
      </tr>
        <tr>
      <th>Thermal efficiency</th>
-     <td>54.8 %</td>
+     <td>{{ optional($heat_sourcesary)->thermal_efficienty}}</td>
      </tr>
       <tr>
      <th>Electric efficiency</th>
-     <td>34.5 %</td>
+     <td>{{ optional($heat_sourcesary)->electricity_efficienty}}</td>
      </tr>
       <tr>
      <th>Manufacturer</th>
-     <td>EC-Power</td>
+     <td>{{ optional($heat_sourcesary)->heat_type}}</td>
      </tr>
       <tr>
      <th>Type</th>
-     <td>XRGI 15</td>
+     <td>{{ optional($heat_sourcesary)->heat_type}}</td>
      </tr>
       <tr>
      <th>Operation hours</th>
-     <td>4.000 h/a</td>
+     <td>{{ optional($heat_sourcesary)->heat_type}}</td>
      </tr>
       <tr>
      <th>New installation</th>
-     <td>No</td>
+     <td>{{ optional($heat_sourcesary)->new_installation}}</td>
      </tr>
      
    </table>
@@ -965,18 +970,19 @@ Germany</p>
    <table class="table tablehs-two">
      <tr>
       <th>Investment costs</th>
-      <td>€</td>
+      <td>{{ optional($heat_sourcesary)-> heat_investment_cost}}</td>
      </tr>
      <tr>
      <th>Discount</th>
-     <td>%</td>
+     <td>{{ optional($heat_sourcesary)->heat_investment_discount}}</td>
      </tr>
      <tr>
      <th>Maintenance costs</th>
-     <td>€/kWh</td>
+     <td>{{ optional($heat_sourcesary)->heat_maintenance_cost}}</td>
      </tr>
      </table>
    </div>
+      @endforeach
 </div>
 </section>
 
@@ -995,28 +1001,30 @@ Germany</p>
 <section class="system-simulation-cooling">
  <div class="container">
 <h1>Heating Load Profile</h1>
+ @foreach($heating_load_profiles as $profile_ary)
+
 <h6>Technical Data</h6>
     <div class=" table-responsive">
    <table class="table tablehlp-one">
      <tr>
       <th>Name</th>
-      <td>Office South</td>
+      <td>{{ optional($profile_ary)->profile_name}}</td>
      </tr>
      <tr>
      <th>Profile Type</th>
-     <td>Office Space</td>
+     <td>{{ optional($profile_ary)->profile_type}}</td>
      </tr>
      <tr>
      <th>Max. heating load</th>
-     <td>52.2 kw at -15</td>
+     <td>{{ optional($profile_ary)->max_heat_load_power}} at {{ optional($profile_ary)->max_heat_load_temp}}</td>
      </tr>
      <tr>
      <th>Base load</th>
-     <td>8.0 kw from °C</td>
+     <td>{{ optional($profile_ary)->base_load_power}} from {{ optional($profile_ary)->base_load_temp}} </td>
      </tr>
      <tr>
      <th>Zero load</th>
-     <td>0.0 kw from 20 °C</td>
+     <td>{{ optional($profile_ary)->zero_load_power}} from {{ optional($profile_ary)->zero_load_temp}} </td>
      </tr>
       
      
@@ -1027,19 +1035,19 @@ Germany</p>
    <table class="table tablehs-two">
      <tr>
       <th>Investment costs</th>
-      <td>€</td>
+      <td>{{ optional($profile_ary)->hp_investment_cost}}</td>
      </tr>
      <tr>
      <th>Discount</th>
-     <td>%</td>
+     <td>{{ optional($profile_ary)->hp_discount}}</td>
      </tr>
      <tr>
      <th>Maintenance costs</th>
-     <td>€/a</td>
+     <td>{{ optional($profile_ary)->maintenance_cost}}</td>
      </tr>
      </table>
    </div>
-     
+      @endforeach
 </div>
 </section>
 
@@ -1052,32 +1060,35 @@ Germany</p>
 </footer>
 <hr>
 <!-- page 6 end-->
+
+
 <!-- page 7 start-->
 <section class="feasibility-calculation">
   <div class="container">
    <h1>Compression Chillers</h1>
+    @foreach($compression_chillers as $chiller_ary)
 <h6>Technical Data</h6>
     <div class=" table-responsive">
    <table class="table tablehcc-one">
      <tr>
       <th>Name</th>
-      <td>Chiller 1</td>
+      <td>{{ optional($profile_ary)->chillername}}</td>
      </tr>
      <tr>
      <th>Refrigerant</th>
-     <td>R134a</td>
+     <td>{{ optional($profile_ary)->refrigerant}}</td>
      </tr>
      <tr>
      <th>Manufacturer</th>
-     <td>unknown</td>
+     <td>{{ optional($profile_ary)->manufacturer}}</td>
      </tr>
      <tr>
      <th>Compressor type</th>
-     <td>unknown</td>
+     <td>{{ optional($profile_ary)->compressor}}</td>
      </tr>
      <tr>
      <th>Chilled water temperature</th>
-     <td>6 °C</td>
+     <td>{{ optional($profile_ary)->temperature}}</td>
      </tr>
       
      
@@ -1088,18 +1099,20 @@ Germany</p>
    <table class="table tablecc-two">
      <tr>
       <th>Investment costs</th>
-      <td>€</td>
+      <td>{{ optional($profile_ary)->investment_cost}}</td>
      </tr>
      <tr>
      <th>Discount</th>
-     <td>%</td>
+     <td>{{ optional($profile_ary)->discount}}</td>
      </tr>
      <tr>
      <th>Maintenance costs</th>
-     <td>€/a</td>
+     <td>{{ optional($profile_ary)->maintenence_costs}}</td>
      </tr>
      </table>
    </div>
+ @endforeach
+
   </div>
 </section>
 <footer>
@@ -1115,41 +1128,42 @@ Germany</p>
 <!-- page 8 start-->
 <section class="feasibility-calculation">
   <div class="container">
-    <h1>Cooling Load Profile</h1>
+    <h1>Cooling Load Profile</h1> 
+      @foreach($cooling_load_profiles as $cooling_ary)
 <h6>Technical Data</h6>
     <div class=" table-responsive">
    <table class="table tablehclp-one">
      <tr>
       <th>Name</th>
-      <td>Radiant cooling office</td>
+      <td>{{ optional($cooling_ary)->cooling_radiant_cooling_office}}</td>
      </tr>
      <tr>
      <th>Profile Type</th>
-     <td>Office Space</td>
+     <td>{{ optional($cooling_ary)->cooling_profile_type}}</td>
      </tr>
      <tr>
      <th>Chilled water temperature</th>
-     <td>16°C</td>
+     <td>{{ optional($cooling_ary)->cooling_radiant_cooling_office}}</td>
      </tr>
      <tr>
      <th>Chilled water inlet temperature</th>
-     <td>19°C</td>
+     <td>{{ optional($cooling_ary)->cooling_radiant_cooling_office}}</td>
      </tr>
      <tr>
      <th>Max. cooling load</th>
-     <td>50.0 kW at 34°C</td>
+     <td>{{ optional($cooling_ary)->cooling_max_cooling_load}} at   {{ optional($cooling_ary)->cooling_max_cooling_load_at}}  </td>
      </tr>
      <tr>
      <th>Base load</th>
-     <td>10.0 kW from 10°C</td>
+     <td>{{ optional($cooling_ary)->  cooling_base_load_to}} from   {{ optional($cooling_ary)-> cooling_base_load_from}} </td>
      </tr>
      <tr>
      <th>Zero load</th>
-     <td>0.0 kW at 10°C</td>
+     <td>{{ optional($cooling_ary)->  cooling_zero_load_from}} from   {{ optional($cooling_ary)-> cooling_zero_load_to}}</td>
      </tr>
       <tr>
      <th>Cooling hours</th>
-     <td>6,724 h</td>
+     <td>{{ optional($cooling_ary)->cooling_cooling_hours}} </td>
      </tr>
      
    </table>
@@ -1159,18 +1173,19 @@ Germany</p>
    <table class="table tablehs-two">
      <tr>
       <th>Investment costs</th>
-      <td>€</td>
+      <td>{{ optional($cooling_ary)->cooling_investment_cost}}</td>
      </tr>
      <tr>
      <th>Discount</th>
-     <td>%</td>
+     <td>{{ optional($cooling_ary)->cooling_investment_discount}}</td>
      </tr>
      <tr>
      <th>Maintenance costs</th>
-     <td>€/a</td>
+     <td>{{ optional($cooling_ary)->cooling_maintenance_cost}}</td>
      </tr>
      </table>
    </div>
+   @endforeach
   </div>
 </section>
 <footer>
@@ -1188,70 +1203,132 @@ Germany</p>
 <section class="feasibility-calculation">
   <div class="container">
     <h1>Fahrenheit System</h1>
-<h6> Chiller</h6>
+   @foreach($fahrenheit_chiller as $chiller) 
+    <h6> Chiller</h6>
+    <h6>Technical Data</h6>
     <div class=" table-responsive">
-   <table class="table tablehcfs-one">
+   <table class="table tableaac-one">
      <tr>
-      <th>Adsorption chillers product group<br>
-eCoo 20 ST<br>
-eCoo 20 ST</th>
-      <td>2.20<br> 2.20<br> 2.20</td>
+      <th>Chiller type</th>
+      <td>{{ optional($chiller)->chiller_chiller_type}}</td>
      </tr>
      <tr>
-     <th>Compression chiller product group
-<br>
-eWac 30</th>
+     <th>Adsorbent</th>
+     <td>{{ optional($chiller)->chiller_adsorbent}}</td>
+     </tr>
+     <tr>
+     <th>Product</th>
+     <td>{{ optional($chiller)->chiller_product}}</td>
+     </tr>
+     <tr>
+     <th>Number of chillers</th>
+     <td>{{ optional($chiller)->chiller_no_chiller}}</td>
+     </tr>
+     <tr>
+     <th>Product interconnection</th>
+     <td>{{ optional($chiller)->chiller_product_inter}}</td>
+     </tr>
+     <tr>
+     <th>Group interconnection</th>
+     <td>{{ optional($chiller)->chiller_group_inter}}</td>
+     </tr>
+     <tr>
+     <th>Function</th>
      <td></td>
      </tr>
-     <tr>
-     <th>Re-cooler product group
-<br>
-eRec 20 | 58</th>
-     <td></td>
-     </tr>
-     <tr>
-     <th>Re-cooler product group
-<br>
-eRec 20 | 80
-
-</th>
-     <td></td>
-     </tr>
+      
      
    </table>
    </div>
+      <h6>Calculation Data</h6>
+    <div class=" table-responsive">
+   <table class="table tableaac-two">
+     <tr>
+      <th>Investment costs</th>
+      <td>{{ optional($chiller)->addchiller_investment_cost}}</td>
+     </tr>
+     <tr>
+     <th>Discount</th>
+     <td>{{ optional($chiller)->addchiller_discount}}</td>
+     </tr>
+     <tr>
+     <th>Maintenance costs</th>
+     <td>{{ optional($chiller)->addchiller_maintenence}}</td>
+     </tr>
+     </table>
+   </div>
+ @endforeach
+
       <h6>Re-cooling System</h6>
+       @foreach($fahrenheit_recool as $recooling) 
+    <h6>Technical Data</h6>
     <div class=" table-responsive">
-    <table class="table tablehcfs-one">
+   <table class="table tableaac-one">
      <tr>
-      <th>Adsorption chillers product group<br>
-eCoo 20 ST<br>
-eCoo 20 ST</th>
-      <td>2.20<br> 2.20<br> 2.20</td>
+      <th>Components</th>
+      <td>{{ optional($recooling)->recooler_component}}</td>
      </tr>
      <tr>
-     <th>Compression chiller product group
-<br>
-eWac 30</th>
-     <td></td>
+     <th>Re-cooling method</th>
+     <td>{{ optional($recooling)->recooler_method}}</td>
      </tr>
      <tr>
-     <th>Re-cooler product group
-<br>
-eRec 20 | 58</th>
-     <td></td>
+     <th>Product</th>
+     <td>{{ optional($recooling)->recooler_product}}</td>
      </tr>
      <tr>
-     <th>Re-cooler product group
-<br>
-eRec 20 | 80
-
-</th>
+     <th>Number of units</th>
+     <td>{{ optional($recooling)->recooler_units}}</td>
+     </tr>
+     <tr>
+     <th>Name</th>
+     <td>{{ optional($recooling)->recooler_name}}</td>
+     </tr>
+     <tr>
+     <th>Re-cooling capacity</th>
+     <td>{{ optional($recooling)->recooler_capacity}}</td>
+     </tr>
+     <tr>
+     <th>Temperature difference</th>
+     <td>{{ optional($recooling)->recooler_temp_diff}}</td>
+     </tr>
+       <tr>
+     <th>Primary volume flow rate</th>
      <td></td>
+     </tr>
+      <tr>
+     <th>Secondary volume flow rate</th>
+     <td>{{ optional($recooling)->recooler_sec_volume}}</td>
+     </tr>
+      <tr>
+     <th>Electrical power consumption</th>
+     <td>{{ optional($recooling)->recooler_elec_consumption}}</td>
+     </tr>
+      <tr>
+     <th>Available/provided by customer</th>
+     <td>{{ optional($recooling)->recooler_available}}</td>
      </tr>
      
    </table>
    </div>
+      <h6>Calculation Data</h6>
+    <div class=" table-responsive">
+   <table class="table tableaac-two">
+     <tr>
+      <th>Investment costs</th>
+      <td>{{ optional($recooling)->recooler_inv_cost}}</td>
+     </tr>
+     <tr>
+     <th>Discount</th>
+     <td>{{ optional($recooling)->recooler_discount}}</td>
+     </tr>
+     <tr>
+     <th>Maintenance costs</th>
+     <td>{{ optional($recooling)->recooler_maint_cost}}</td>
+     </tr>
+     </table>
+   </div>
+    @endforeach
   </div>
 </section>
 <footer>
@@ -1263,155 +1340,5 @@ eRec 20 | 80
 </footer>
 <hr>
 <!--- page 9 end -->
-<!-- page 10 start-->
-<section class="feasibility-calculation">
-  <div class="container">
-    <h1>Add a Chiller</h1>
-<h6>Technical Data</h6>
-    <div class=" table-responsive">
-   <table class="table tableaac-one">
-     <tr>
-      <th>Chiller type</th>
-      <td>Adsorption</td>
-     </tr>
-     <tr>
-     <th>Adsorbent</th>
-     <td>Silica gel</td>
-     </tr>
-     <tr>
-     <th>Product</th>
-     <td>eCoo 20 ST</td>
-     </tr>
-     <tr>
-     <th>Number of chillers</th>
-     <td>2 pieces</td>
-     </tr>
-     <tr>
-     <th>Product interconnection</th>
-     <td>2.00</td>
-     </tr>
-     <tr>
-     <th>Group interconnection</th>
-     <td>2.20</td>
-     </tr>
-     <tr>
-     <th>Function</th>
-     <td>Peak load cover</td>
-     </tr>
-      
-     
-   </table>
-   </div>
-      <h6>Calculation Data</h6>
-    <div class=" table-responsive">
-   <table class="table tableaac-two">
-     <tr>
-      <th>Investment costs</th>
-      <td>€</td>
-     </tr>
-     <tr>
-     <th>Discount</th>
-     <td>%</td>
-     </tr>
-     <tr>
-     <th>Maintenance costs</th>
-     <td>€/a</td>
-     </tr>
-     </table>
-   </div>
-  </div>
-</section>
-<footer>
- <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
-  <li>10/11</li>
- </ul>
-</footer>
-<hr>
-<!--- page 10 end -->
-<!-- page 11 start-->
-<section class="feasibility-calculation">
-  <div class="container">
-    <h1>Add a Re-cooling System</h1>
-<h6>Technical Data</h6>
-    <div class=" table-responsive">
-   <table class="table tableaac-one">
-     <tr>
-      <th>Components</th>
-      <td>Re-cooler</td>
-     </tr>
-     <tr>
-     <th>Re-cooling method</th>
-     <td>Dry</td>
-     </tr>
-     <tr>
-     <th>Product</th>
-     <td>eRec 20 | 58</td>
-     </tr>
-     <tr>
-     <th>Number of units</th>
-     <td>1 piece</td>
-     </tr>
-     <tr>
-     <th>Name</th>
-     <td></td>
-     </tr>
-     <tr>
-     <th>Re-cooling capacity</th>
-     <td>58 kW</td>
-     </tr>
-     <tr>
-     <th>Temperature difference</th>
-     <td>2k</td>
-     </tr>
-       <tr>
-     <th>Primary volume flow rate</th>
-     <td></td>
-     </tr>
-      <tr>
-     <th>Secondary volume flow rate</th>
-     <td></td>
-     </tr>
-      <tr>
-     <th>Electrical power consumption</th>
-     <td></td>
-     </tr>
-      <tr>
-     <th>Available/provided by customer</th>
-     <td>No</td>
-     </tr>
-     
-   </table>
-   </div>
-      <h6>Calculation Data</h6>
-    <div class=" table-responsive">
-   <table class="table tableaac-two">
-     <tr>
-      <th>Investment costs</th>
-      <td></td>
-     </tr>
-     <tr>
-     <th>Discount</th>
-     <td></td>
-     </tr>
-     <tr>
-     <th>Maintenance costs</th>
-     <td></td>
-     </tr>
-     </table>
-   </div>
-  </div>
-</section>
-<footer>
- <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
-  <li>11/11</li>
- </ul>
-</footer>
-<hr>
-<!--- page 11 end -->
-
 </body>
 </html>
