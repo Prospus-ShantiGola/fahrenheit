@@ -169,9 +169,13 @@ class AdcalcController extends Controller
                         //economicData
 
                         $economicData['unique_row_id'] = $insertedId;
+                        $option[0]['unique_row_id'] = $insertedId;
                         //dd($economicData);
                         $economicId = EconomicData::create($economicData);
-                        //dd($economicId);
+
+                        $optionId = Option::create($option[0]);
+                        //dd(DB::getQueryLog());
+                       // dd($optionId);
                         $economicId = DB::getPdo()->lastInsertId();
                         //dd($id);
                         $input=array();
