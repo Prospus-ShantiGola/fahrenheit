@@ -553,13 +553,13 @@ footer li:first-child {
      <h6>Project Data</h6>
      <ul class="project-data-list">
        <li>Project Name</li> 
-       <li>Propus</li>
+       <li>{{ optional($userReports)->title}}</li>
        <li>Project Number</li>
        <li>Pro-11</li>
        <li>Project-address </li>
        <li> Noida</li>
        <li>Contact Person</li>
-       <li> Santi</li>
+       <li> {{ optional($userReports)->name}}</li>
      </ul>
    </div>
  </div>
@@ -567,7 +567,7 @@ footer li:first-child {
 <section class="contact-address">
  <div class="container">
    <h6>Contact us by:</h6>
-    <img src= "public/images/logo.png"     alt="" />
+    <img src= "public/images/logo.png" alt="" />
    <p> <b>FAHRENHEIT GmbH</b> <br>
 Siegfriedstraße 19 <br>
 80803 Munich <br>
@@ -580,8 +580,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li>{{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>1/11</li>
  </ul>
 </footer>
@@ -659,8 +659,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+
   <li>2/11</li>
  </ul>
 </footer>
@@ -807,8 +807,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>3/11</li>
  </ul>
 </footer>
@@ -898,8 +898,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>4/11</li>
  </ul>
 </footer>
@@ -988,8 +988,8 @@ Germany</p>
 
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>5/11</li>
  </ul>
 </footer>
@@ -1053,8 +1053,8 @@ Germany</p>
 
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>6/11</li>
  </ul>
 </footer>
@@ -1117,8 +1117,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>7/11</li>
  </ul>
 </footer>
@@ -1190,8 +1190,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>8/11</li>
  </ul>
 </footer>
@@ -1333,8 +1333,8 @@ Germany</p>
 </section>
 <footer>
  <ul class="list-inline">
-  <li>3/13/2018 | 11:39AM</li>
-  <li>Version 1.21.63</li>
+  <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
+ 
   <li>9/11</li>
  </ul>
 </footer>
