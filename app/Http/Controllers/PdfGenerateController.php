@@ -88,7 +88,8 @@ class PdfGenerateController extends Controller {
             //    // compression_chillers data
             $compression_chillers = DB::table('compression_chillers')->where('unique_row_id', $id)->get();
          
-
+  // echo "<pre>"; print_r($compression_chillers);
+  // die;
                 // cooling_load_profiles data
              $cooling_load_profiles = DB::table('cooling_load_profiles')->where('unique_row_id', $id)->get();
      
@@ -142,48 +143,63 @@ class PdfGenerateController extends Controller {
            $userReports = DB::table('users')
             ->leftJoin('user_reports', 'users.id', '=', 'user_reports.user_id')
             ->where('user_reports.id', $id)->first();
-            // echo "<pre>"; 
-              //  dd($userReports);
-    
-            //   view('user_reports.create', compact('users'));
-
+           // echo "<pre>"; print_r($userReports);
+           // die;
             //get general information
             $general_info = DB::table('general_informations')->where('unique_row_id', $id)->first();
-               //   echo "<pre>"; print_r($general_info);
-       // dd($general_info);
+           
                //economic data
             $economic_datas = DB::table('economic_datas')->where('unique_row_id', $id)->first();
 
-            // dd($economic_datas);
-            //  //  echo "<pre>"; print_r($economic_datas);
 
+ 
+            $economic_datas_value = DB::table('economic_data_additional_infos')->where('economic_data_id', $economic_datas->economic_datas_id)->get();
+
+
+
+        if(!($economic_datas_value->isEmpty()))
+            {
+            
+            $i= 0;
+            foreach ($economic_datas_value as  $value) {
+              $tab_name = $value->tab_name;
+              $ecc_additional_ary[$tab_name][$i]['tab_name'] =  $tab_name ;
+              $ecc_additional_ary[$tab_name][$i]['additional_field_name'] =  $value->additional_field_name ;
+              $ecc_additional_ary[$tab_name][$i]['additional_field_value'] =  $value->additional_field_value ;
+              $ecc_additional_ary[$tab_name][$i]['additional_field_discount'] =  $value->additional_field_discount ;
+
+              $i++;
+           
+
+            
+            }
+          }
+          else
+          {
+            $ecc_additional_ary = array();
+          }
+   // echo "<pre>"; print_r($ecc_additional_ary);
                // options data
-              $options_datas = DB::table('options')->where('unique_row_id', $id)->first();
-             // dd($options_datas);
+            $options_datas = DB::table('options')->where('unique_row_id', $id)->first();
+             
 
-// $users = DB::table('users')->select('name', 'email as user_email')->get();
                //heat_sources data
-                $heat_sources = DB::table('heat_sources')->where('unique_row_id', $id)->get();
+            $heat_sources = DB::table('heat_sources')->where('unique_row_id', $id)->get();
 
-                  //    // heating_load_profiles data
+           // heating_load_profiles data
             $heating_load_profiles = DB::table('heating_load_profiles')->where('unique_row_id', $id)->get();
-           // echo "<pre>"; print_r($heating_load_profiles);
-// echo "<pre>"; print_r($heat_sources);die;
-
+    
 
             //    // compression_chillers data
             $compression_chillers = DB::table('compression_chillers')->where('unique_row_id', $id)->get();
-         //  //  echo "<pre>"; print_r($compression_chillers);
-
+         
+  // echo "<pre>"; print_r($compression_chillers);
+  // die;
                 // cooling_load_profiles data
              $cooling_load_profiles = DB::table('cooling_load_profiles')->where('unique_row_id', $id)->get();
-         //  //  echo "<pre>"; print_r($cooling_load_profiles);
+     
 
-              $fahrenheits = DB::table('fahrenheits')->where('unique_row_id', $id)->get();
-
-
-
-              $fahrenheit_chiller = DB::table('fahrenheits')
+             $fahrenheit_chiller = DB::table('fahrenheits')
             ->leftJoin('chillers', 'fahrenheits.fahrenheit_id', '=', 'chillers.fahrenheit_id')
             ->where('unique_row_id', $id)->get();
             
@@ -194,8 +210,8 @@ class PdfGenerateController extends Controller {
 
               // echo "<pre>"; print_r($fahrenheit_chiller);
               // die;
-
-             return  $view = view('report_pdf', compact('userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool'));
+//,'ecc_additional_ary'
+             return $view = view('report_pdf', compact('userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
 
              
 
