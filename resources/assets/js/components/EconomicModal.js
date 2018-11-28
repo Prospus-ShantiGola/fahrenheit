@@ -407,12 +407,21 @@ class EconomicModal extends Component {
                 if( indexed_array[n["name"]] === undefined ) {
                     indexed_array[n["name"]]=Array();
                 }
-                indexed_array[n["name"]].push(n["value"]);
+                let arrayVal=Array();
+                $("input[name='"+n["name"]+"']").parents('tr').each(function(){
+
+                    arrayVal.push($(this).find('span:first').text());
+                })
+               let newObj={
+                    'fieldname':arrayVal,
+                    'value':n["value"]
+                }
+                indexed_array[n["name"]].push(newObj);
             }else{
                 indexed_array[n["name"]] = n["value"];
             }
         });
-       // console.log("index arrray",indexed_array);
+        console.log("index arrray",indexed_array);
         return indexed_array;
     }
 

@@ -184,38 +184,49 @@ class AdcalcController extends Controller
                         $economicData['planning[]'] = $economicData['planning[]'] ?? array();
                         $economicData['eeg_chp_apportion_costs[]'] = $economicData['eeg_chp_apportion_costs[]'] ?? array();
                         $economicData['planning_maintenence[]'] = $economicData['planning_maintenence[]'] ?? array();
-                        foreach($economicData['eeg_apportion_costs[]'] as $eeg_apportion_cost ){
+                        foreach($economicData['eeg_apportion_costs[]'] as  $key =>$eeg_apportion_cost ){
                             $input['economic_data_id']=$economicId;
                             $input['tab_name']='general';
-                            $input['additional_field_name']='eeg_apportion_cost';
-                            $input['additional_field_value']=$eeg_apportion_cost;
+                            $economicData['eeg_apportion_costs[]'][$key]['fieldname']=array_reverse($economicData['eeg_apportion_costs[]'][$key]['fieldname']);
+                            //dd($economicData['eeg_apportion_costs[]'][$key]['fieldname']);
+                            $input['additional_field_name']=$economicData['eeg_apportion_costs[]'][$key]['fieldname'][$key];
+
+                            $input['additional_field_value']=$eeg_apportion_cost['value'];
                             $finalSubmitArr[]=$input;
                         }
-                        foreach ($economicData['eeg_chp_apportion_costs[]']  as $eeg_chp_apportion_costs) {
+
+                        foreach ($economicData['eeg_chp_apportion_costs[]']  as  $key => $eeg_chp_apportion_costs) {
                             $input['economic_data_id']=$economicId;
                             $input['tab_name']='chp';
-                            $input['additional_field_name']='eeg_chp_apportion_costs';
-                            $input['additional_field_value']=$eeg_chp_apportion_costs;
+                            $economicData['eeg_chp_apportion_costs[]'][$key]['fieldname']=array_reverse($economicData['eeg_chp_apportion_costs[]'][$key]['fieldname']);
+                            $input['additional_field_name']=$economicData['eeg_chp_apportion_costs[]'][$key]['fieldname'][$key];
+                            $input['additional_field_value']=$eeg_chp_apportion_costs['value'];
                             $finalSubmitArr[]=$input;
                         }
+
                         foreach ($economicData['planning[]']  as $key => $planning) {
                             $input['economic_data_id']=$economicId;
                             $input['tab_name']='investment';
-                            $input['additional_field_name']='planning';
-                            $input['additional_field_value']=$planning;
-                            $input['additional_field_discount']=$economicData['planning_discount[]'][$key];
+                            $economicData['planning[]'][$key]['fieldname']=array_reverse($economicData['planning[]'][$key]['fieldname']);
+                            $input['additional_field_name']=$economicData['planning[]'][$key]['fieldname'][$key];
+                            $input['additional_field_value']=$planning['value'];
+                            $input['additional_field_discount']=$economicData['planning_discount[]'][$key]['value'];
                             $finalSubmitArr[]=$input;
                         }
-                        foreach ($economicData['planning_maintenence[]']  as $planning_maintenence) {
+                        //dd($finalSubmitArr);
+                        foreach ($economicData['planning_maintenence[]']  as $key => $planning_maintenence) {
                             $input['economic_data_id']=$economicId;
                             $input['tab_name']='maintenence';
-                            $input['additional_field_name']='maintenence';
-                            $input['additional_field_value']= $planning_maintenence;
+                            $economicData['planning_maintenence[]'][$key]['fieldname']=array_reverse($economicData['planning_maintenence[]'][$key]['fieldname']);
+                            $input['additional_field_name']=$economicData['planning_maintenence[]'][$key]['fieldname'][$key];
+                            $input['additional_field_value']= $planning_maintenence['value'];
                             $input['additional_field_discount']=null;
                             $finalSubmitArr[]=$input;
                         }
+                        //dd($finalSubmitArr);
                         foreach($finalSubmitArr as $record){
                             $result = EconomicDataAdditionalInfo::create($record);
+                          //  dd(DB::getQueryLog());
                         }
 
                     //coolingloadprofile
