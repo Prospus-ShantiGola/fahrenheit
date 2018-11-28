@@ -555,9 +555,9 @@ footer li:first-child {
        <li>Project Name</li> 
        <li> {{ optional($general_info)->project_name}}</li>
        <li>Project Number</li>
-       <li>>{{ optional($general_info)->project_number}}</li>
+       <li>{{ optional($general_info)->project_number}}</li>
        <li>Project-address </li>
-       <li> {{ optional($general_info)->customer}}</li>
+       <li> {{ optional($general_info)->location}}</li>
        <li>Contact Person</li>
        <li>{{ optional($general_info)->contact}}</li>
      </ul>
@@ -695,8 +695,14 @@ Germany</p>
      <th>Inflation rate</th>
      <td>{{ optional($economic_datas)->inflation_rate}}</td>
      </tr>
-      
-     
+      @if(!empty($ecc_additional_ary['general'])){
+       @foreach($ecc_additional_ary['general'] as $general_ecc)
+          <tr>
+     <th>{{ $general_ecc['additional_field_name'] }}</th>
+     <td>{{$general_ecc['additional_field_value'] }}</td>
+     </tr>
+      @endforeach
+       @endif
    </table>
    </div>
    <h6>CHP</h6>
@@ -734,6 +740,15 @@ Germany</p>
      <th>EEG-Umlage-Kosten</th>
      <td>{{ optional($economic_datas)->eeg_apportion_costs}}</td>
      </tr>
+
+      @if(!empty($ecc_additional_ary['chp'])){
+       @foreach($ecc_additional_ary['chp'] as $general_ecc)
+          <tr>
+     <th>{{ $general_ecc['additional_field_name'] }}</th>
+     <td>{{$general_ecc['additional_field_value'] }}</td>
+     </tr>
+      @endforeach
+       @endif
       
      
    </table>
@@ -765,13 +780,17 @@ Germany</p>
       <th>Discount</th>
       <td>{{ optional($economic_datas)->ecoo_discount}}%</td>
      </tr>
-     <tr>
-      <th>Project planning</th>
-      <td>€</td>
+     
+       @if(!empty($ecc_additional_ary['investment'])){
+       @foreach($ecc_additional_ary['investment'] as $general_ecc)
+          <tr>
+     <th>{{ $general_ecc['additional_field_name'] }}</th>
+     <td>{{$general_ecc['additional_field_value'] }}</td>
       <th>Discount</th>
-      <td>%</td>
+        <td>{{$general_ecc['additional_field_discount'] }}%</td>
      </tr>
-      
+      @endforeach
+       @endif
      
    </table>
    </div>
@@ -798,6 +817,15 @@ Germany</p>
      <th>Project planning</th>
      <td>€</td>
      </tr>
+     @if(!empty($ecc_additional_ary['maintenence'])){
+       @foreach($ecc_additional_ary['maintenence'] as $general_ecc)
+          <tr>
+     <th>{{ $general_ecc['additional_field_name'] }}</th>
+     <td>{{$general_ecc['additional_field_value'] }}</td>
+     
+     </tr>
+      @endforeach
+       @endif
      
       
      

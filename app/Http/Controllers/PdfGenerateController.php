@@ -46,7 +46,34 @@ class PdfGenerateController extends Controller {
                //economic data
             $economic_datas = DB::table('economic_datas')->where('unique_row_id', $id)->first();
 
-   
+
+ 
+            $economic_datas_value = DB::table('economic_data_additional_infos')->where('economic_data_id', $economic_datas->economic_datas_id)->get();
+
+
+
+        if(!($economic_datas_value->isEmpty()))
+            {
+            
+            $i= 0;
+            foreach ($economic_datas_value as  $value) {
+              $tab_name = $value->tab_name;
+              $ecc_additional_ary[$tab_name][$i]['tab_name'] =  $tab_name ;
+              $ecc_additional_ary[$tab_name][$i]['additional_field_name'] =  $value->additional_field_name ;
+              $ecc_additional_ary[$tab_name][$i]['additional_field_value'] =  $value->additional_field_value ;
+              $ecc_additional_ary[$tab_name][$i]['additional_field_discount'] =  $value->additional_field_discount ;
+
+              $i++;
+           
+
+            
+            }
+          }
+          else
+          {
+            $ecc_additional_ary = array();
+          }
+   // echo "<pre>"; print_r($ecc_additional_ary);
                // options data
             $options_datas = DB::table('options')->where('unique_row_id', $id)->first();
              
@@ -77,8 +104,8 @@ class PdfGenerateController extends Controller {
 
               // echo "<pre>"; print_r($fahrenheit_chiller);
               // die;
-
-              $view = view('report_pdf', compact('userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool'));
+//,'ecc_additional_ary'
+              $view = view('report_pdf', compact('userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
 
               
                $contents = $view->render();
