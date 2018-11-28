@@ -1100,23 +1100,23 @@ Germany</p>
    <table class="table tablehcc-one">
      <tr>
       <th>Name</th>
-      <td>{{ optional($profile_ary)->chillername}}</td>
+      <td>{{ optional($chiller_ary)->chillername}}</td>
      </tr>
      <tr>
      <th>Refrigerant</th>
-     <td>{{ optional($profile_ary)->refrigerant}}</td>
+     <td>{{ optional($chiller_ary)->refrigerant}}</td>
      </tr>
      <tr>
      <th>Manufacturer</th>
-     <td>{{ optional($profile_ary)->manufacturer}}</td>
+     <td>{{ optional($chiller_ary)->manufacturer}}</td>
      </tr>
      <tr>
      <th>Compressor type</th>
-     <td>{{ optional($profile_ary)->compressor}}</td>
+     <td>{{ optional($chiller_ary)->compressor}}</td>
      </tr>
      <tr>
      <th>Chilled water temperature</th>
-     <td>{{ optional($profile_ary)->temperature}}</td>
+     <td>{{ optional($chiller_ary)->temperature}}</td>
      </tr>
       
      
@@ -1127,15 +1127,15 @@ Germany</p>
    <table class="table tablecc-two">
      <tr>
       <th>Investment costs</th>
-      <td>{{ optional($profile_ary)->investment_cost}}</td>
+      <td>{{ optional($chiller_ary)->investment_cost}}</td>
      </tr>
      <tr>
      <th>Discount</th>
-     <td>{{ optional($profile_ary)->discount}}</td>
+     <td>{{ optional($chiller_ary)->discount}}</td>
      </tr>
      <tr>
      <th>Maintenance costs</th>
-     <td>{{ optional($profile_ary)->maintenence_costs}}</td>
+     <td>{{ optional($chiller_ary)->maintenence_costs}}</td>
      </tr>
      </table>
    </div>
