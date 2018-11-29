@@ -360,7 +360,7 @@ class AddChiller extends Component {
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
-                                                    <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.InvestmentCosts.Placeholder')}   id="addchiller_investment_cost" name="addchiller_investment_cost"/> </td>
+                                                    <td className="input-fields withunit"><input type="text" placeholder="0"  id="addchiller_investment_cost" name="addchiller_investment_cost"/><span>{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.InvestmentCosts.Placeholder')} </span> </td>
                                                 </tr>
                                                 <tr>
                                                     <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.Title')}:</td>
@@ -369,7 +369,7 @@ class AddChiller extends Component {
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
-                                                    <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.Placeholder')} id="addchiller_discount" name="addchiller_discount"/></td>
+                                                    <td className="input-fields withunit"><input type="text" placeholder="0" id="addchiller_discount" name="addchiller_discount"/><span>{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.Discount.Placeholder')}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.Title')} : </td>
@@ -378,7 +378,7 @@ class AddChiller extends Component {
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
-                                                    <td className="input-fields"><input type="text" placeholder={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.Placeholder')} id="addchiller_maintenence" name="addchiller_maintenence"/> </td>
+                                                    <td className="input-fields withunit"><input type="text" placeholder="0" id="addchiller_maintenence" name="addchiller_maintenence"/><span>{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.MaintenanceCosts.Placeholder')}</span> </td>
                                                 </tr>
                                             </tbody>
                                         </table>

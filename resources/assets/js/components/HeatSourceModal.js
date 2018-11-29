@@ -418,7 +418,7 @@ class HeatSourceModal extends React.Component {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="€" name="heat_investment_cost" id="heat_investment_cost" /> </td>
+                                 <td className="input-fields withunit"><input type="text" placeholder="0"   name="heat_investment_cost" id="heat_investment_cost" /><span>€</span> </td>
                               </tr>
                               <tr>
                                  <td className="input-label">{this.props.t('HeatSource.Tab.CalculationData.Discount.Title')}:</td>
@@ -426,7 +426,7 @@ class HeatSourceModal extends React.Component {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="%"  name="heat_investment_discount" id="heat_investment_discount"  /></td>
+                                 <td className="input-fields withunit"><input type="text" placeholder="0"  name="heat_investment_discount" id="heat_investment_discount"  /><span>%</span></td>
                               </tr>
                               <tr>
                                  <td className="input-label">{this.props.t('HeatSource.Tab.CalculationData.MaintenanceCosts.Title')}: </td>
@@ -434,7 +434,7 @@ class HeatSourceModal extends React.Component {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="€/kWh" name="heat_maintenance_cost" id="heat_maintenance_cost" /> </td>
+                                 <td className="input-fields withunit"><input type="text" placeholder="0" name="heat_maintenance_cost" id="heat_maintenance_cost" /><span>€/kWh</span> </td>
                               </tr>
                               </tbody>
                            </table>

@@ -65,10 +65,11 @@ class EconomicModal extends Component {
     }
 
     cloneGeneralItem() {
+
         var trHtml =
             '<tr id="generalcustom_"> <td class="input-label"><div class="form-row align-items-center"><div class="col"><span id="customGeneral_1" contentEditable="false" suppressContentEditableWarning={true}>' +
             customFieldLabel +
-            '</span>:</div><div class="col-auto"><div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div></div></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_apportion_costs[]" id="eeg_apportion_costs"/></td></tr>';
+            '</span>:</div><div class="col-auto"><div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div></div></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields withunit"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792" name="eeg_apportion_costs[]" id="eeg_apportion_costs"/><span>€/kWh</span></td></tr>';
         $("#generalTable tbody:eq(0)").append(trHtml);
         $("#generalTable tbody tr:last")
             .not("clone")
@@ -80,7 +81,7 @@ class EconomicModal extends Component {
         var trHtml =
             '<tr id="chpcustom_"> <td class="input-label"><div class="form-row align-items-center"><div class="col"><span id="customChp_1" contentEditable="false" suppressContentEditableWarning={true}>' +
             customFieldLabel +
-            '</span>:</div><div class="col-auto"><div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div></div></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792 €/kWh" name="eeg_chp_apportion_costs[]" id="eeg_apportion_costs"/></td></tr>';
+            '</span>:</div><div class="col-auto"><div class="edit-divv"><i class="fa fa-pencil-square-o" aria-hidden="true" data-id="custom"></i></div><div class="delete-divv"> <i class="fa fa-trash-o" aria-hidden="true" data-id="custom" ></i></div></div></div> </td><td class="input-help-label"><button type="button" class="" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Inflation rate explanation/tip"><img src="public/images/help-red.png" alt="" /></button></td><td class="input-fields withunit"><input type="text" pattern="\\d*" class="onlynumeric" placeholder="0.06792" name="eeg_chp_apportion_costs[]" id="eeg_apportion_costs"/><span>€/kWh</span></td></tr>';
 
         $("#chpTable tbody:eq(0)").append(trHtml);
         $("#chpTable tbody tr:last")
