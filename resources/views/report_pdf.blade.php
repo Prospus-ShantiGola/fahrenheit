@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/pdf-css.css"> -->
 
-	<!-- <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('public/css/pdf-css.css') }}" rel="stylesheet"> -->
-
+  <!-- <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('public/css/pdf-css.css') }}" rel="stylesheet"> -->
 
 
 
@@ -195,7 +194,12 @@ footer li {
     font-weight: 500;
     color: #00618c;
     font-size: 35px;
-    background: url(./public/images/flake.png);
+    
+
+    @if($print_type =='html')
+    background: url({{ asset('public/images/flake.png') }} );
+       @else
+        background: url(./public/images/flake.png)    @endif;
     background-repeat: no-repeat;
     background-position: top left;
     padding-left: 41px;
@@ -527,22 +531,35 @@ footer li:first-child {
 
 </style>
     <style>
-	hr {
+  hr {
     border: 0;
     border-top: 1px solid #00618C;
     width: 90%;
     margin: 0 auto 4em;
 }
-	</style>
+  </style>
 </head>
 <body>
 
 <!--page 1 start -->
 <section class="report">
   <div class="container">
-     <h1><img src= "public/images/flake.png"   alt="" /><span>Convert heat into cold.</span></h1>
+     <h1>@if($print_type =='html')
+
+      <img src="{{ asset('public/images/flake.png') }}"    alt="" />
+     @else
+    <img src="public/images/flake.png"    alt="" /> 
+    @endif<span>Convert heat into cold.</span></h1>
      <div class="top-banner-img">
-       <img src="public/images/pdf-front-page.jpg"  alt="" />
+
+      @if($print_type =='html')
+
+      <img src="{{ asset('public/images/pdf-front-page.jpg') }}"    alt="" />
+     @else
+    <img src="public/images/pdf-front-page.jpg"    alt="" /> 
+    @endif
+
+       
       </div>
       <h2></h2>
   </div>
@@ -567,7 +584,13 @@ footer li:first-child {
 <section class="contact-address">
  <div class="container">
    <h6>Contact us by:</h6>
-    <img src= "public/images/logo.png" alt="" />
+    @if($print_type =='html')
+
+      <img src="{{ asset('public/images/logo.png') }}"    alt="" />
+     @else
+    <img src="public/images/logo.png"    alt="" /> 
+    @endif
+  
    <p> <b>FAHRENHEIT GmbH</b> <br>
 Siegfriedstraße 19 <br>
 80803 Munich <br>
@@ -582,7 +605,7 @@ Germany</p>
  <ul class="list-inline">
   <li>{{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
  
-  <li>1/11</li>
+  <!-- <li>1/11</li> -->
  </ul>
 </footer>
 <hr>
@@ -661,14 +684,14 @@ Germany</p>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
 
-  <li>2/11</li>
+ <!--  <li>2/11</li> -->
  </ul>
 </footer>
 <hr>
 
 <!-- page 2 end-->
 <!-- page 3 start -->
-
+ @if($economic_datas!=null)
 <section class="required-cooling-capacity">
   <div class="container">
     <h1>Economic Data</h1>
@@ -695,7 +718,7 @@ Germany</p>
      <th>Inflation rate</th>
      <td>{{ optional($economic_datas)->inflation_rate}}</td>
      </tr>
-      @if(!empty($ecc_additional_ary['general'])){
+      @if(!empty($ecc_additional_ary['general']))
        @foreach($ecc_additional_ary['general'] as $general_ecc)
           <tr>
      <th>{{ $general_ecc['additional_field_name'] }}</th>
@@ -741,7 +764,7 @@ Germany</p>
      <td>{{ optional($economic_datas)->eeg_apportion_costs}}</td>
      </tr>
 
-      @if(!empty($ecc_additional_ary['chp'])){
+      @if(!empty($ecc_additional_ary['chp']))
        @foreach($ecc_additional_ary['chp'] as $general_ecc)
           <tr>
      <th>{{ $general_ecc['additional_field_name'] }}</th>
@@ -781,7 +804,7 @@ Germany</p>
       <td>{{ optional($economic_datas)->ecoo_discount}}%</td>
      </tr>
      
-       @if(!empty($ecc_additional_ary['investment'])){
+       @if(!empty($ecc_additional_ary['investment']))
        @foreach($ecc_additional_ary['investment'] as $general_ecc)
           <tr>
      <th>{{ $general_ecc['additional_field_name'] }}</th>
@@ -817,7 +840,7 @@ Germany</p>
      <th>Project planning</th>
      <td>€</td>
      </tr>
-     @if(!empty($ecc_additional_ary['maintenence'])){
+     @if(!empty($ecc_additional_ary['maintenence']))
        @foreach($ecc_additional_ary['maintenence'] as $general_ecc)
           <tr>
      <th>{{ $general_ecc['additional_field_name'] }}</th>
@@ -837,13 +860,14 @@ Germany</p>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
  
-  <li>3/11</li>
+<!--   <li>3/11</li> -->
  </ul>
 </footer>
 <hr>
+@endif
 
 <!-- page 3 end -->
-
+ @if($options_datas!=null)
 <!--- page 4 start-->
 <section class="system-design">
  <div class="container">
@@ -853,7 +877,15 @@ Germany</p>
    <table class="table tableo-one">
      <tr>
       <th>Language</th>
-      <td><img src= "public/images/germany-flag.png" alt=""></td>
+      <td>
+           @if($print_type =='html')
+
+      <img src="{{ asset('public/images/germany-flag.png') }}"    alt="" />
+     @else
+    <img src="public/images/germany-flag.png"    alt="" /> 
+    @endif
+
+  </td>
      </tr>
      <tr>
      <th>BAFA 2018</th>
@@ -928,12 +960,14 @@ Germany</p>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
  
-  <li>4/11</li>
+  <!-- <li>4/11</li> -->
  </ul>
 </footer>
 <hr>
+@endif
 <!-- page 4 end-->
 
+ @if(!($heat_sources->isEmpty()))
 <!-- page 5 start-->
 <section class="system-simulation-cooling">
  <div class="container">
@@ -1018,13 +1052,14 @@ Germany</p>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
  
-  <li>5/11</li>
+ <!--  <li>5/11</li> -->
  </ul>
 </footer>
 <hr>
-
+@endif
 <!-- page 5 end-->
 <!-- page 6 start-->
+ @if(!($heating_load_profiles->isEmpty()))
 
 <section class="system-simulation-cooling">
  <div class="container">
@@ -1083,12 +1118,13 @@ Germany</p>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
  
-  <li>6/11</li>
+ <!--  <li>6/11</li> -->
  </ul>
 </footer>
 <hr>
 <!-- page 6 end-->
-
+@endif
+ @if(!($compression_chillers->isEmpty()))
 
 <!-- page 7 start-->
 <section class="feasibility-calculation">
@@ -1147,11 +1183,13 @@ Germany</p>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
  
-  <li>7/11</li>
+  <!-- <li>7/11</li> -->
  </ul>
 </footer>
 <hr>
+@endif
 <!--- page 7 end -->
+ @if(!($cooling_load_profiles->isEmpty()))
 
 <!-- page 8 start-->
 <section class="feasibility-calculation">
@@ -1220,13 +1258,15 @@ Germany</p>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
  
-  <li>8/11</li>
+ <!--  <li>8/11</li> -->
  </ul>
 </footer>
 <hr>
 <!--- page 8 end -->
+@endif
 
 
+  @if(!($fahrenheit_chiller->isEmpty()))
 <!-- page 9 start-->
 <section class="feasibility-calculation">
   <div class="container">
@@ -1363,10 +1403,11 @@ Germany</p>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
  
-  <li>9/11</li>
+ <!--  <li>9/11</li> -->
  </ul>
 </footer>
 <hr>
+@endif
 <!--- page 9 end -->
 </body>
 </html>
