@@ -25,7 +25,11 @@ class PdfGenerateController extends Controller {
     
          try {
           $response = $this->emailData();
+          //phpinfo();
+         // dd($response);
+          
             $mpdf = new \Mpdf\Mpdf();//new \mPDF();
+            
 
            //  $userReports = DB::table('user_reports')->where('id', $id)->first();
            //  $userDetails = DB::table('user_reports')->where('id', $id)->first();
@@ -42,37 +46,45 @@ class PdfGenerateController extends Controller {
            // die;
             //get general information
             $general_info = DB::table('general_informations')->where('unique_row_id', $id)->first();
-           
+           //  echo "<pre>"; print_r($general_info);
+           // die;
                //economic data
             $economic_datas = DB::table('economic_datas')->where('unique_row_id', $id)->first();
+                  //echo "<pre>"; dd($economic_datas);
+// //echo $economic_datas->economic_datas_id;
+// die('fd');
 
-
- 
-            $economic_datas_value = DB::table('economic_data_additional_infos')->where('economic_data_id', $economic_datas->economic_datas_id)->get();
-
-
-
-        if(!($economic_datas_value->isEmpty()))
+            if($economic_datas!=null)
             {
-            
-            $i= 0;
-            foreach ($economic_datas_value as  $value) {
-              $tab_name = $value->tab_name;
-              $ecc_additional_ary[$tab_name][$i]['tab_name'] =  $tab_name ;
-              $ecc_additional_ary[$tab_name][$i]['additional_field_name'] =  $value->additional_field_name ;
-              $ecc_additional_ary[$tab_name][$i]['additional_field_value'] =  $value->additional_field_value ;
-              $ecc_additional_ary[$tab_name][$i]['additional_field_discount'] =  $value->additional_field_discount ;
 
-              $i++;
-           
 
-            
-            }
-          }
-          else
-          {
-            $ecc_additional_ary = array();
-          }
+                $economic_datas_value = DB::table('economic_data_additional_infos')->where('economic_data_id', $economic_datas->economic_datas_id)->get();
+
+
+
+               if(!($economic_datas_value->isEmpty()))
+                {
+                
+                $i= 0;
+                foreach ($economic_datas_value as  $value) {
+                  $tab_name = $value->tab_name;
+                  $ecc_additional_ary[$tab_name][$i]['tab_name'] =  $tab_name ;
+                  $ecc_additional_ary[$tab_name][$i]['additional_field_name'] =  $value->additional_field_name ;
+                  $ecc_additional_ary[$tab_name][$i]['additional_field_value'] =  $value->additional_field_value ;
+                  $ecc_additional_ary[$tab_name][$i]['additional_field_discount'] =  $value->additional_field_discount ;
+
+                  $i++;
+               
+
+                
+                }
+              }
+              else
+              {
+                $ecc_additional_ary = array();
+              }
+
+           }
    // echo "<pre>"; print_r($ecc_additional_ary);
                // options data
             $options_datas = DB::table('options')->where('unique_row_id', $id)->first();
@@ -103,12 +115,14 @@ class PdfGenerateController extends Controller {
             ->leftJoin('recooling_systems', 'fahrenheits.fahrenheit_id', '=', 'recooling_systems.fahrenheit_id')
             ->where('unique_row_id', $id)->get();
 
+
+              $print_type= 'pdf';
               // echo "<pre>"; print_r($fahrenheit_chiller);
               // die;
-//,'ecc_additional_ary'
-              $view = view('report_pdf', compact('userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
+             //,'ecc_additional_ary'
+              $view = view('report_pdf', compact('print_type','userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
 
-              
+            // $view = view('report_pdf', compact('userReports','general_info'));
                $contents = $view->render();
                   
 
@@ -116,7 +130,9 @@ class PdfGenerateController extends Controller {
 
               
               //  $mpdf->WriteHTML(\View::make('report_pdf')->with('data', $userReports)->render());
-                $pdf_path = public_path() . '/report.pdf';
+                //$pdf_path = public_path() . '/report.pdf';
+
+               $pdf_path = 'report.pdf';
                 //$mpdf->Output($pdf_path);
                   $mpdf->Output($pdf_path, 'D');
  
@@ -143,41 +159,44 @@ class PdfGenerateController extends Controller {
            $userReports = DB::table('users')
             ->leftJoin('user_reports', 'users.id', '=', 'user_reports.user_id')
             ->where('user_reports.id', $id)->first();
-           // echo "<pre>"; print_r($userReports);
-           // die;
+          
             //get general information
             $general_info = DB::table('general_informations')->where('unique_row_id', $id)->first();
-           
+          
                //economic data
             $economic_datas = DB::table('economic_datas')->where('unique_row_id', $id)->first();
 
-
- 
-            $economic_datas_value = DB::table('economic_data_additional_infos')->where('economic_data_id', $economic_datas->economic_datas_id)->get();
-
-
-
-        if(!($economic_datas_value->isEmpty()))
+            if($economic_datas!=null)
             {
-            
-            $i= 0;
-            foreach ($economic_datas_value as  $value) {
-              $tab_name = $value->tab_name;
-              $ecc_additional_ary[$tab_name][$i]['tab_name'] =  $tab_name ;
-              $ecc_additional_ary[$tab_name][$i]['additional_field_name'] =  $value->additional_field_name ;
-              $ecc_additional_ary[$tab_name][$i]['additional_field_value'] =  $value->additional_field_value ;
-              $ecc_additional_ary[$tab_name][$i]['additional_field_discount'] =  $value->additional_field_discount ;
 
-              $i++;
-           
 
-            
-            }
-          }
-          else
-          {
-            $ecc_additional_ary = array();
-          }
+                $economic_datas_value = DB::table('economic_data_additional_infos')->where('economic_data_id', $economic_datas->economic_datas_id)->get();
+
+
+
+               if(!($economic_datas_value->isEmpty()))
+                {
+                
+                $i= 0;
+                foreach ($economic_datas_value as  $value) {
+                  $tab_name = $value->tab_name;
+                  $ecc_additional_ary[$tab_name][$i]['tab_name'] =  $tab_name ;
+                  $ecc_additional_ary[$tab_name][$i]['additional_field_name'] =  $value->additional_field_name ;
+                  $ecc_additional_ary[$tab_name][$i]['additional_field_value'] =  $value->additional_field_value ;
+                  $ecc_additional_ary[$tab_name][$i]['additional_field_discount'] =  $value->additional_field_discount ;
+
+                  $i++;
+               
+
+                
+                }
+              }
+              else
+              {
+                $ecc_additional_ary = array();
+              }
+
+           }
    // echo "<pre>"; print_r($ecc_additional_ary);
                // options data
             $options_datas = DB::table('options')->where('unique_row_id', $id)->first();
@@ -207,11 +226,12 @@ class PdfGenerateController extends Controller {
              $fahrenheit_recool = DB::table('fahrenheits')
             ->leftJoin('recooling_systems', 'fahrenheits.fahrenheit_id', '=', 'recooling_systems.fahrenheit_id')
             ->where('unique_row_id', $id)->get();
+          $print_type= 'html';
 
               // echo "<pre>"; print_r($fahrenheit_chiller);
               // die;
 //,'ecc_additional_ary'
-             return $view = view('report_pdf', compact('userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
+             return $view = view('report_pdf', compact('print_type','userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
 
              
 

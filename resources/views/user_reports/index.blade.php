@@ -55,8 +55,8 @@
                                 {{ csrf_field() }}
 
                                     <div class="action-button" role="group">
-                                        <a href="#" class="disabled"  >
-                                            <i class="fas fa-eye fa-lg disabled">
+                                   <a onclick= 'window.open("{{ route('pdf.generate-html', $userReport->id ) }}", "_blank", "width=1000, height=700") ;'>
+                                            <i class="fas fa-eye fa-lg ">
                                                 </i>
                                         </a>
                                        <!--  <a >Download PDF</a>  http://localhost/fahrenheit/generate-pdf/1 -->
@@ -64,9 +64,10 @@
                                             <i class="fas fa-file-pdf fa-lg ">
                                             </i>
                                         </a>  
-                                        <a onclick= 'window.open("{{ route('pdf.generate-html', $userReport->id ) }}", "_blank", "width=1000, height=700") ;'>
-                                           html
-                                        </a>
+                                      <!--   <a onclick= 'window.open("{{ route('pdf.generate-html', $userReport->id ) }}", "_blank", "width=1000, height=700") ;'>
+                                         
+                                                    </i>  
+                                        </a> -->
                                         <a href="#"   title="{{ __('user_reports.table_disable_user_report')}}" data-toggle="modal" data-backdrop="false" data-target="#delete-modal">
                                                 <i class="fas fa-trash-alt fa-lg">
                                                     </i>
