@@ -25,7 +25,11 @@ class PdfGenerateController extends Controller {
     
          try {
           $response = $this->emailData();
+          //phpinfo();
+         // dd($response);
+          
             $mpdf = new \Mpdf\Mpdf();//new \mPDF();
+            
 
            //  $userReports = DB::table('user_reports')->where('id', $id)->first();
            //  $userDetails = DB::table('user_reports')->where('id', $id)->first();
@@ -111,10 +115,12 @@ class PdfGenerateController extends Controller {
             ->leftJoin('recooling_systems', 'fahrenheits.fahrenheit_id', '=', 'recooling_systems.fahrenheit_id')
             ->where('unique_row_id', $id)->get();
 
+
+              $print_type= 'pdf';
               // echo "<pre>"; print_r($fahrenheit_chiller);
               // die;
              //,'ecc_additional_ary'
-              $view = view('report_pdf', compact('userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
+              $view = view('report_pdf', compact('print_type','userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
 
             // $view = view('report_pdf', compact('userReports','general_info'));
                $contents = $view->render();
@@ -124,7 +130,9 @@ class PdfGenerateController extends Controller {
 
               
               //  $mpdf->WriteHTML(\View::make('report_pdf')->with('data', $userReports)->render());
-                $pdf_path = public_path() . '/report.pdf';
+                //$pdf_path = public_path() . '/report.pdf';
+
+               $pdf_path = 'report.pdf';
                 //$mpdf->Output($pdf_path);
                   $mpdf->Output($pdf_path, 'D');
  
@@ -151,11 +159,10 @@ class PdfGenerateController extends Controller {
            $userReports = DB::table('users')
             ->leftJoin('user_reports', 'users.id', '=', 'user_reports.user_id')
             ->where('user_reports.id', $id)->first();
-           // echo "<pre>"; print_r($userReports);
-           // die;
+          
             //get general information
             $general_info = DB::table('general_informations')->where('unique_row_id', $id)->first();
-           
+          
                //economic data
             $economic_datas = DB::table('economic_datas')->where('unique_row_id', $id)->first();
 
@@ -219,11 +226,12 @@ class PdfGenerateController extends Controller {
              $fahrenheit_recool = DB::table('fahrenheits')
             ->leftJoin('recooling_systems', 'fahrenheits.fahrenheit_id', '=', 'recooling_systems.fahrenheit_id')
             ->where('unique_row_id', $id)->get();
+          $print_type= 'html';
 
               // echo "<pre>"; print_r($fahrenheit_chiller);
               // die;
 //,'ecc_additional_ary'
-             return $view = view('report_pdf', compact('userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
+             return $view = view('report_pdf', compact('print_type','userReports','general_info','economic_datas','options_datas','heat_sources','heating_load_profiles','compression_chillers','cooling_load_profiles','fahrenheit_chiller','fahrenheit_recool','ecc_additional_ary'));
 
              
 
