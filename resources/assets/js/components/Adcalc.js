@@ -519,7 +519,7 @@ class Adcalc extends Component {
                  </div>
                  <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} store={store}/>
                  <GeneralModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
-                 <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} store={store}/>
+                 <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} store={store} heatSourceData={this.state.heatSourceStateChange.heatSourceStateChange}/>
                  <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/>
                  <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
                  <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store}/>

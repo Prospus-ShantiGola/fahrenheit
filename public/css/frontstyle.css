@@ -1243,13 +1243,14 @@ td.input-label.text-area-label {
 .heating-load-general-div .input-fields ul li:last-child {
     width: 43%;
 }
-.additional-options {
-    color: #e73c37;
-    font-size: 12px;
-    font-weight: 500;
+.additional-options, .errorMessages {
+    color: #e73c37 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;;
     margin: 0;
     text-align: center;
     padding-top: 10px;
+    list-style: none;
 }
 
 select.required-field {

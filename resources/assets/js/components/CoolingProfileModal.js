@@ -244,7 +244,7 @@ class CoolingProfileModal extends React.Component {
         else{
             var expertRoleHtml=(
                 <ul id="tabsJustifiedsingle" className="nav nav-tabs single-tab singletabbox">
-                     <li className="nav-item"><a href="" data-target="#cooling-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('CoolingProfile.Tab.TechnicalData.InletTemperature.InfoTool')}</a></li>
+                    <li className="nav-item"><a href="" data-target="#cooling-technical-data" data-toggle="tab" className="nav-link small active">{this.props.t('CoolingProfile.Tab.TechnicalData.Title')}</a></li>
                      {expertRoleHtml}
                   </ul>
             );
