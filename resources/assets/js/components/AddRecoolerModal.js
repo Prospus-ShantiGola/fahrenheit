@@ -351,6 +351,7 @@ class AddRecooler extends Component {
                 </div>
               </div>
               <div id="addrecooling-calculation-data" className="tab-pane fade">
+			  <div class="loading"></div>
                 <div className="addecooling-calcu-div">
                   <div className="table-responsive">
                     <table className="table">
