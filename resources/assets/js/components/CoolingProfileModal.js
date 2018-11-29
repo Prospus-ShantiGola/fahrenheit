@@ -194,9 +194,9 @@ class CoolingProfileModal extends React.Component {
                                     </td>
                                     <td className="input-fields">
                                        <ul className="list-inline">
-                                          <li><input type="text" placeholder="10.0 kW" required pattern="\d*" className="required-field onlynumeric" name="cooling_base_load_to" id="cooling_base_load_to" /></li>
+                                          <li className="withunit"><input type="text" placeholder="10.0 kW" required pattern="\d*" className="required-field onlynumeric" name="cooling_base_load_to" id="cooling_base_load_to" /></li>
                                           <li>{this.props.t('CoolingProfile.Tab.TechnicalData.From.Title')} </li>
-                                          <li><input type="text" placeholder="10°C"  required pattern="\d*" className="icon-field required-field onlynumeric" name="cooling_base_load_from" id="cooling_base_load_from" /></li>
+                                          <li className="withunit"><input type="text" placeholder="10"  required pattern="\d*" className="icon-field required-field onlynumeric" name="cooling_base_load_from" id="cooling_base_load_from" /><span>°C</span></li>
                                        </ul>
                                     </td>
                                  </tr>
@@ -208,10 +208,10 @@ class CoolingProfileModal extends React.Component {
                                     </td>
                                     <td className="input-fields">
                                        <ul className="list-inline">
-                                          <li><input type="text" placeholder="0.0 kW"  name="cooling_zero_load_from" id="cooling_zero_load_from"  />
+                                          <li className="withunit"><input type="text" placeholder="0.0"  name="cooling_zero_load_from" id="cooling_zero_load_from"  /><span>kW</span>
                                           </li>
                                           <li>{this.props.t('CoolingProfile.Tab.TechnicalData.From.Title')}</li>
-                                          <li> <input type="text" placeholder="10 °C" className="icon-field " name="cooling_zero_load_to" id="cooling_zero_load_to" /><i className="fa fa-calculator dropdown-calci" aria-hidden="true"></i></li>
+                                          <li className="withunit"> <input type="text" placeholder="10" className="icon-field " name="cooling_zero_load_to" id="cooling_zero_load_to" /><span>°C</span></li>
                                        </ul>
                                     </td>
                                  </tr>
@@ -221,8 +221,8 @@ class CoolingProfileModal extends React.Component {
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields">
-                                       <input type="text" placeholder="6,724 h" className="icon-field "  name="cooling_cooling_hours" id="cooling_cooling_hours"  /><i className="fa fa-calculator myBtn_multi" aria-hidden="true"></i>
+                                    <td className="input-fields withunit">
+                                       <input type="text" placeholder="6,724" className="icon-field "  name="cooling_cooling_hours" id="cooling_cooling_hours"  /><span>h</span>
                                     </td>
                                  </tr>
              </tbody>
@@ -237,7 +237,7 @@ class CoolingProfileModal extends React.Component {
                        <img src="public/images/help-red.png" alt="" />
                        </button>
                     </td>
-                    <td className="input-fields"><input type="text" placeholder="19°C"  name="cooling_cooling_other" id="cooling_cooling_other"/> </td>
+                    <td className="input-fields withunit "><input type="text" placeholder="19"  name="cooling_cooling_other" id="cooling_cooling_other"/> <span>°C</span></td>
                  </tr>);
 
         }
@@ -319,9 +319,9 @@ class CoolingProfileModal extends React.Component {
                                                         </td>
                                                         <td className="input-fields">
                                                             <ul className="list-inline">
-                                                                <li><input type="text" required placeholder="50.0 kW" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" /></li>
+                                                                <li className="withunit"><input type="text" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" /><span>kW</span></li>
                                                                 <li> {this.props.t('CoolingProfile.Tab.TechnicalData.At.Title')} </li>
-                                                                <li><input type="text" placeholder="34°C" className="icon-field" name="cooling_max_cooling_load_at" id="cooling_max_cooling_load_at" /><i className="fa fa-calculator dropdown-calci" aria-hidden="true"></i>
+                                                                <li className="withunit" ><input type="text" placeholder="34" className="icon-field" name="cooling_max_cooling_load_at" id="cooling_max_cooling_load_at" /><span>°C</span>
                                                                 </li>
                                                             </ul>
                                                         </td>
@@ -345,7 +345,7 @@ class CoolingProfileModal extends React.Component {
                                                         <img src="public/images/help-red.png" alt="" />
                                                     </button>
                                                     </td>
-                                                    <td className="input-fields"><input type="text" placeholder="€" name="cooling_investment_cost" id="cooling_investment_cost" /> </td>
+                                                    <td className="input-fields withunit"><input type="text" placeholder="0" name="cooling_investment_cost" id="cooling_investment_cost" /><span>€</span> </td>
                                                 </tr>
                                                     <tr>
                                                         <td className="input-label">{this.props.t('CoolingProfile.Tab.CalculationData.Discount.Title')}:</td>
@@ -353,7 +353,7 @@ class CoolingProfileModal extends React.Component {
                                                             <img src="public/images/help-red.png" alt="" />
                                                         </button>
                                                         </td>
-                                                        <td className="input-fields"><input type="text" placeholder="%" name="cooling_investment_discount" id="cooling_investment_discount" /></td>
+                                                        <td className="input-fields withunit"><input type="text" placeholder="0" name="cooling_investment_discount" id="cooling_investment_discount" /><span>%</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td className="input-label"> {this.props.t('CoolingProfile.Tab.CalculationData.MaintenanceCosts.Title')}: </td>
@@ -361,7 +361,7 @@ class CoolingProfileModal extends React.Component {
                                                             <img src="public/images/help-red.png" alt="" />
                                                         </button>
                                                         </td>
-                                                        <td className="input-fields"><input type="text" placeholder="€/a" name="cooling_maintenance_cost" id="cooling_maintenance_cost" /> </td>
+                                                        <td className="input-fields withunit"><input type="text" placeholder="0" name="cooling_maintenance_cost" id="cooling_maintenance_cost" /><span>€/a</span> </td>
                                                     </tr>
                                                 </tbody>
                                             </table>

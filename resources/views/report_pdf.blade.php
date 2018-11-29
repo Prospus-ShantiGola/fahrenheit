@@ -878,12 +878,20 @@ Germany</p>
      <tr>
       <th>Language</th>
       <td>
+          
+           @if(optional($options_datas)->option_language =='de')
+            @if($print_type =='html')
+           <img src="{{ asset('public/images/germany-flag.png') }}"    alt="" />
+          @else
+           <img src="public/images/germany-flag.png"    alt="" /> 
+          @endif
+          @elseif(optional($options_datas)->option_language =='en')
            @if($print_type =='html')
-
-      <img src="{{ asset('public/images/germany-flag.png') }}"    alt="" />
-     @else
-    <img src="public/images/germany-flag.png"    alt="" /> 
-    @endif
+           <img src="{{ asset('public/images/united-kingdom.png') }}"    alt="" />
+          @else
+           <img src="public/images/united-kingdom.png"    alt="" /> 
+          @endif
+          @endif
 
   </td>
      </tr>
