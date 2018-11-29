@@ -360,6 +360,31 @@ class AdcalcController extends Controller
     }
 
 
+    function calculateCWUCost(){
+        $Fcwu= 4732.2487*pow(QN_CWU, -0.7382)+109.3;
+        $kcwuinvestment= QN_CWU*$Fcwu;
+        $kcwumaintainence= QN_CWUmax*$Fcwu;
+        return Response::json(array('investment'=>$kcwuinvestment,'maintenence'=>$$kcwuinvestment));
+
+    }
+
+    function calculateCHPCost($electricCapacity)
+    {
+        //The costs of module are calculated by:
+        $Km= a.pow($Pel,b)*$Pel;
+        //The costs of transport are calculated by:
+        $Kt= $Km*0.06;
+        //The costs of installation  are calculated by:
+        $ki=$km*0.39;
+        $chpCost=$km+$kt+$ki;
+        return Response::json(array('cost'=>$chpCost));
+
+
+    }
+
+
+
+
 
 
 
