@@ -128,7 +128,7 @@ section.report {
 }
 .report h1 {
     margin: 0 0 3px;
-    font-size: 33px; background-image:none; padding-left:0; 
+    font-size: 33px; background-image:none; padding-left:0;
 }
 .report h2 {
     text-align: right;
@@ -194,7 +194,7 @@ footer li {
     font-weight: 500;
     color: #00618c;
     font-size: 35px;
-    
+
 
     @if($print_type =='html')
     background: url({{ asset('public/images/flake.png') }} );
@@ -237,8 +237,8 @@ h6 {
     font-weight: 500;     white-space: nowrap;
 }
 
-.table th span { color:#e52c2a; } 
-.table td span { color:#e52c2a; } 
+.table th span { color:#e52c2a; }
+.table td span { color:#e52c2a; }
 .notice-area textarea {
     width: 100%;
     border: 1px solid #066899;
@@ -401,7 +401,7 @@ h6 {
   }
 
 .table-eleven tr:first-child td:last-child {
-   background:#fff; 
+   background:#fff;
 }
 
 .table-eleven tr:nth-child(2) td:last-child {
@@ -470,7 +470,7 @@ h6 {
 .graph-table4 tr:last-child td {
     color: #b0b0b0;
 }
- 
+
 .table-fourteen tr td:nth-child(2) { background:#f1f1f1;}
 
 .table-fourteen tr td:last-child { background:#f1f1f1;}
@@ -498,29 +498,29 @@ footer li:first-child {
 footer li:first-child {
     text-align: center;
     padding-left: 0px;
-} 
+}
 .project-data-list li:nth-child(2n) {
     width: 60%;
-} 
+}
   .table {
     table-layout: auto;
 }
-  
+
   h1 {
     font-size: 28px;}
-  
-  
+
+
   .table th {
     white-space: nowrap;
 }
-  
+
   .table td {
     white-space: nowrap;
-} 
+}
   .only-absorption {
     width: 100%;}
-  
-  
+
+
   .left-graph-div {
     width: 100%;
 }
@@ -548,7 +548,7 @@ footer li:first-child {
 
       <img src="{{ asset('public/images/flake.png') }}"    alt="" />
      @else
-    <img src="public/images/flake.png"    alt="" /> 
+    <img src="public/images/flake.png"    alt="" />
     @endif<span>Convert heat into cold.</span></h1>
      <div class="top-banner-img">
 
@@ -556,10 +556,10 @@ footer li:first-child {
 
       <img src="{{ asset('public/images/pdf-front-page.jpg') }}"    alt="" />
      @else
-    <img src="public/images/pdf-front-page.jpg"    alt="" /> 
+    <img src="public/images/pdf-front-page.jpg"    alt="" />
     @endif
 
-       
+
       </div>
       <h2></h2>
   </div>
@@ -569,8 +569,8 @@ footer li:first-child {
    <div class="project-data-edtails">
      <h6>Project Data</h6>
      <ul class="project-data-list">
-       <li>Project Name</li> 
-       <li> {{ optional($general_info)->project_name}}</li>
+       <li>Project Name</li>
+       <li > {{ optional($general_info)->project_name}}</li>
        <li>Project Number</li>
        <li>{{ optional($general_info)->project_number}}</li>
        <li>Project-address </li>
@@ -588,9 +588,9 @@ footer li:first-child {
 
       <img src="{{ asset('public/images/logo.png') }}"    alt="" />
      @else
-    <img src="public/images/logo.png"    alt="" /> 
+    <img src="public/images/logo.png"    alt="" />
     @endif
-  
+
    <p> <b>FAHRENHEIT GmbH</b> <br>
 Siegfriedstraße 19 <br>
 80803 Munich <br>
@@ -604,7 +604,7 @@ Germany</p>
 <footer>
  <ul class="list-inline">
   <li>{{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
- 
+
   <!-- <li>1/11</li> -->
  </ul>
 </footer>
@@ -616,66 +616,66 @@ Germany</p>
    <h1>General Information</h1>
    <h6>Project Data</h6>
       <div class="table-responsive">
-   <table class="table tablegi-one">
+   <table class="table tablegi-one" >
      <tr>
-      <th>Project number</th>
-      <td>{{ optional($general_info)->project_number}}</td>
+      <th  align="left">Project number</th>
+      <td >{{ optional($general_info)->project_number}}</td>
      </tr>
      <tr>
-     <th>Project name</th>
+     <th  align="left">Project name</th>
      <td> {{ optional($general_info)->project_name}}</td>
      </tr>
      <tr>
-     <th>Location</th>
+     <th  align="left">Location</th>
      <td> {{ optional($general_info)->location}}</td>
      </tr>
      <tr>
-     <th>Customer</th> 
+     <th  align="left">Customer</th>
      <td> {{ optional($general_info)->customer}} </td>
      </tr>
      <tr>
-     <th>Contact</th>
+     <th  align="left">Contact</th>
      <td> {{ optional($general_info)->contact}}</td>
      </tr>
       <tr>
-     <th>Tel. Number</th>
+     <th  align="left">Tel. Number</th>
      <td> {{ optional($general_info)->phone_number}}</td>
      </tr>
       <tr>
-     <th>Email</th>
+     <th align="left">Email</th>
      <td> {{ optional($general_info)->email_address}}</td>
      </tr>
-     
+
    </table>
    </div>
        <h6>Personal Data</h6>
           <div class=" table-responsive">
    <table class="table tablegi-two">
      <tr>
-      <th>Editor</th>
+      <th  align="left">Editor</th>
       <td>{{ optional($general_info)->editor}}</td>
      </tr>
      <tr>
-     <th>Company</th>
+     <th  align="left">Company</th>
      <td>{{ optional($general_info)->company}}</td>
      </tr>
      <tr>
-     <th>Address</th>
+     <th  align="left">Address</th>
      <td>{{ optional($general_info)->address}}</td>
      </tr>
      <tr>
-     <th>Tel. Number</th>
+     <th  align="left">Tel. Number</th>
      <td>{{ optional($general_info)->personal_phone_number}}</td>
      </tr>
      <tr>
-     <th>Mobile</th>
+     <th  align="left">Mobile</th>
      <td>{{ optional($general_info)->mobile_number}}</td>
      </tr>
       <tr>
-     <th>Email</th>
+     <th  align="left">Email</th>
      <td>{{ optional($general_info)->personal_email_address}}</td>
      </tr>
-      
+
    </table>
    </div>
       </div>
@@ -699,29 +699,29 @@ Germany</p>
       <div class=" table-responsive">
    <table class="table tableed-one">
      <tr>
-      <th>Electricity price</th>
+      <th  align="left">Electricity price</th>
       <td>{{ optional($economic_datas)->electric_price}}</td>
      </tr>
      <tr>
-     <th>Heat price</th>
+     <th  align="left">Heat price</th>
      <td>{{ optional($economic_datas)->heat_price}}</td>
      </tr>
      <tr>
-     <th>Electricity price increase</th>
+     <th  align="left">Electricity price increase</th>
      <td>{{ optional($economic_datas)->electric_price_increased}} </td>
      </tr>
      <tr>
-     <th>Calculated interest rate</th>
+     <th  align="left">Calculated interest rate</th>
      <td> {{ optional($economic_datas)->calculated_interest_rate}}</td>
      </tr>
      <tr>
-     <th>Inflation rate</th>
+     <th  align="left">Inflation rate</th>
      <td>{{ optional($economic_datas)->inflation_rate}}</td>
      </tr>
       @if(!empty($ecc_additional_ary['general']))
        @foreach($ecc_additional_ary['general'] as $general_ecc)
           <tr>
-     <th>{{ $general_ecc['additional_field_name'] }}</th>
+     <th  align="left">{{ $general_ecc['additional_field_name'] }}</th>
      <td>{{$general_ecc['additional_field_value'] }}</td>
      </tr>
       @endforeach
@@ -732,15 +732,15 @@ Germany</p>
       <div class=" table-responsive">
    <table class="table tableed-two">
      <tr>
-      <th>Own usage of electricity</th>
+      <th  align="left">Own usage of electricity</th>
       <td>{{ optional($economic_datas)->own_usage_of_electricity}}</td>
      </tr>
      <tr>
-     <th>KWK-subsidy for electricity</th>
+     <th  align="left">KWK-subsidy for electricity</th>
      <td>{{ optional($economic_datas)->subsidy_for_electricity}}</td>
      </tr>
      <tr>
-     <th>Gas price</th>
+     <th  align="left">Gas price</th>
      <td>{{ optional($economic_datas)->gas_price}}</td>
      </tr>
      <tr>
@@ -748,110 +748,110 @@ Germany</p>
 
      </tr>
      <tr>
-     <th>Electricity sales price</th>
+     <th  align="left">Electricity sales price</th>
      <td>{{ optional($economic_datas)->electricity_sales_price}}</td>
      </tr>
      <tr>
-     <th>Energiesteuer Rückerstattung</th>
+     <th  align="left">Energiesteuer Rückerstattung</th>
      <td>{{ optional($economic_datas)->energy_tax_refund}}</td>
      </tr>
      <tr>
-     <th>EEG-Umlage-Anteil</th>
+     <th  align="left">EEG-Umlage-Anteil</th>
      <td>{{ optional($economic_datas)->eeg_allocation_portion}}</td>
      </tr>
      <tr>
-     <th>EEG-Umlage-Kosten</th>
+     <th  align="left">EEG-Umlage-Kosten</th>
      <td>{{ optional($economic_datas)->eeg_apportion_costs}}</td>
      </tr>
 
       @if(!empty($ecc_additional_ary['chp']))
        @foreach($ecc_additional_ary['chp'] as $general_ecc)
           <tr>
-     <th>{{ $general_ecc['additional_field_name'] }}</th>
+     <th  align="left">{{ $general_ecc['additional_field_name'] }}</th>
      <td>{{$general_ecc['additional_field_value'] }}</td>
      </tr>
       @endforeach
        @endif
-      
-     
+
+
    </table>
    </div>
     <h6>Investment</h6>
       <div class=" table-responsive">
    <table class="table tableed-three">
      <tr>
-      <th>CHP in the basement</th>
+      <th  align="left">CHP in the basement</th>
       <td>{{ optional($economic_datas)->chp_basement}}€</td>
-      <th>Discount</th>
+      <th  align="left">Discount</th>
       <td>{{ optional($economic_datas)->discount_chp_basement}}%</td>
      </tr>
      <tr>
-      <th>Chiller 1</th>
+      <th  align="left">Chiller 1</th>
       <td>{{ optional($economic_datas)->chiller}}€</td>
-      <th>Discount</th>
+      <th  align="left">Discount</th>
       <td>{{ optional($economic_datas)->chiller_discount}}%</td>
      </tr>
      <tr>
-      <th>Radiant cooling office</th>
+      <th  align="left">Radiant cooling office</th>
       <td>{{ optional($economic_datas)->radiant_cooling_office}}€</td>
-      <th>Discount</th>
+      <th  align="left">Discount</th>
       <td>{{ optional($economic_datas)->radiant_discount}}%</td>
      </tr>
      <tr>
-      <th>eCoo 10X</th>
+      <th  align="left">eCoo 10X</th>
       <td>{{ optional($economic_datas)->ecoo}}€</td>
-      <th>Discount</th>
+      <th  align="left">Discount</th>
       <td>{{ optional($economic_datas)->ecoo_discount}}%</td>
      </tr>
-     
+
        @if(!empty($ecc_additional_ary['investment']))
        @foreach($ecc_additional_ary['investment'] as $general_ecc)
           <tr>
-     <th>{{ $general_ecc['additional_field_name'] }}</th>
+     <th  align="left">{{ $general_ecc['additional_field_name'] }}</th>
      <td>{{$general_ecc['additional_field_value'] }}</td>
-      <th>Discount</th>
+      <th  align="left">Discount</th>
         <td>{{$general_ecc['additional_field_discount'] }}%</td>
      </tr>
       @endforeach
        @endif
-     
+
    </table>
    </div>
     <h6>Maintenance</h6>
       <div class=" table-responsive">
    <table class="table tableed-four">
      <tr>
-      <th>CHP in the basement</th>
+      <th  align="left">CHP in the basement</th>
       <td>{{ optional($economic_datas)->chp_basement_maintenence}}€</td>
      </tr>
      <tr>
-     <th>Chiller 1</th>
+     <th  align="left">Chiller 1</th>
      <td>{{ optional($economic_datas)->chiller_maintenence}}€</td>
      </tr>
      <tr>
-     <th>Radiant cooling office</th>
+     <th  align="left">Radiant cooling office</th>
      <td>{{ optional($economic_datas)->radiant_maintenence}}€</td>
      </tr>
      <tr>
-     <th>eCoo 10X</th>
+     <th  align="left">eCoo 10X</th>
      <td>{{ optional($economic_datas)->ecoo_maintenence}}€</td>
      </tr>
      <tr>
-     <th>Project planning</th>
+     <th  align="left">Project planning</th>
      <td>€</td>
      </tr>
      @if(!empty($ecc_additional_ary['maintenence']))
        @foreach($ecc_additional_ary['maintenence'] as $general_ecc)
           <tr>
-     <th>{{ $general_ecc['additional_field_name'] }}</th>
+     <th  align="left">{{ $general_ecc['additional_field_name'] }}</th>
      <td>{{$general_ecc['additional_field_value'] }}</td>
-     
+
      </tr>
       @endforeach
        @endif
-     
-      
-     
+
+
+
    </table>
    </div>
   </div>
@@ -859,7 +859,7 @@ Germany</p>
 <footer>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
- 
+
 <!--   <li>3/11</li> -->
  </ul>
 </footer>
@@ -876,90 +876,90 @@ Germany</p>
     <div class=" table-responsive">
    <table class="table tableo-one">
      <tr>
-      <th>Language</th>
+      <th  align="left">Language</th>
       <td>
            @if($print_type =='html')
 
       <img src="{{ asset('public/images/germany-flag.png') }}"    alt="" />
      @else
-    <img src="public/images/germany-flag.png"    alt="" /> 
+    <img src="public/images/germany-flag.png"    alt="" />
     @endif
 
   </td>
      </tr>
      <tr>
-     <th>BAFA 2018</th>
+     <th  align="left">BAFA 2018</th>
      <td>{{ optional($options_datas)->profile_bafa}}</td>
      </tr>
      <tr>
-     <th>Re-cooling Method</th>
+     <th  align="left">Re-cooling Method</th>
      <td>{{ optional($options_datas)->profile_recooling}}</td>
      </tr>
      <tr>
-     <th>Re-cooling Temperature</th>
+     <th  align="left">Re-cooling Temperature</th>
      <td>{{ optional($options_datas)->profile_recooling_temp}}</td>
      </tr>
      <tr>
-     <th>Free Cooling</th>
+     <th  align="left">Free Cooling</th>
      <td>{{ optional($options_datas)->free_recooling}}</td>
      </tr>
        <tr>
-     <th>Heat Sources</th>
+     <th  align="left">Heat Sources</th>
      <td>{{ optional($options_datas)->profile_heat_source}}</td>
      </tr>
       <tr>
-     <th>Heat Supply</th>
+     <th  align="left">Heat Supply</th>
      <td>{{ optional($options_datas)->profile_heat_supply}}</td>
      </tr>
       <tr>
-     <th>Conventional heat source</th>
+     <th  align="left">Conventional heat source</th>
      <td>{{ optional($options_datas)->profile_conventional_heat}}</td>
      </tr>
       <tr>
-     <th>Calculation method</th>
+     <th  align="left">Calculation method</th>
      <td>{{ optional($options_datas)->profile_calculation_method}} </td>
      </tr>
       <tr>
-     <th>Ambient temperature step</th>
+     <th  align="left">Ambient temperature step</th>
      <td>{{ optional($options_datas)->profile_amb_tem}}</td>
      </tr>
       <tr>
-     <th>Heating load profile</th>
+     <th  align="left">Heating load profile</th>
      <td>{{ optional($options_datas)->profile_heating_load}}</td>
      </tr>
       <tr>
-     <th>Cooling load profile</th>
+     <th  align="left">Cooling load profile</th>
      <td>{{ optional($options_datas)->profile_cooling_load}}</td>
      </tr>
-     
+
    </table>
    </div>
      <h6>Project Specifiations</h6>
     <div class=" table-responsive">
    <table class="table tableo-two">
      <tr>
-      <th>Bus system</th>
+      <th  align="left">Bus system</th>
       <td>{{ optional($options_datas)->bus_system}}</td>
      </tr>
      <tr>
-     <th>Controller</th>
+     <th  align="left">Controller</th>
      <td>{{ optional($options_datas)->profile_controller}}</td>
      </tr>
      <tr>
-     <th>Pressure drop in the piping</th>
+     <th  align="left">Pressure drop in the piping</th>
      <td>{{ optional($options_datas)->pressure_drop}}</td>
      </tr>
-    
+
     </table>
    </div>
 
-     
+
  </div>
 </section>
 <footer>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
- 
+
   <!-- <li>4/11</li> -->
  </ul>
 </footer>
@@ -974,72 +974,72 @@ Germany</p>
 
 <h1>Heat Source</h1>
  @foreach($heat_sources as $heat_sourcesary)
-   
+
    <h6>Technical Data</h6>
 
     <div class=" table-responsive">
    <table class="table tablehs-one">
-    
+
      <tr>
-      <th>Name</th>
+      <th  align="left">Name</th>
       <td>{{ optional($heat_sourcesary)->heat_name}}</td>
      </tr>
      <tr>
-     <th>Type of heat source</th>
+     <th  align="left">Type of heat source</th>
      <td>{{ optional($heat_sourcesary)->heat_type}}</td>
      </tr>
      <tr>
-     <th>Drive temperature</th>
+     <th  align="left">Drive temperature</th>
      <td>{{ optional($heat_sourcesary)->drive_temp}}</td>
      </tr>
      <tr>
-     <th>Heat capacity</th>
+     <th  align="left">Heat capacity</th>
      <td>{{ optional($heat_sourcesary)->heat_capacity}}</td>
      </tr>
      <tr>
-     <th>Electric capacity</th>
+     <th  align="left">Electric capacity</th>
      <td>{{ optional($heat_sourcesary)->electricity_capacity}}</td>
      </tr>
        <tr>
-     <th>Thermal efficiency</th>
+     <th  align="left">Thermal efficiency</th>
      <td>{{ optional($heat_sourcesary)->thermal_efficienty}}</td>
      </tr>
       <tr>
-     <th>Electric efficiency</th>
+     <th  align="left">Electric efficiency</th>
      <td>{{ optional($heat_sourcesary)->electricity_efficienty}}</td>
      </tr>
       <tr>
-     <th>Manufacturer</th>
+     <th  align="left">Manufacturer</th>
      <td>{{ optional($heat_sourcesary)->heat_type}}</td>
      </tr>
       <tr>
-     <th>Type</th>
+     <th  align="left">Type</th>
      <td>{{ optional($heat_sourcesary)->heat_type}}</td>
      </tr>
       <tr>
-     <th>Operation hours</th>
+     <th  align="left">Operation hours</th>
      <td>{{ optional($heat_sourcesary)->heat_type}}</td>
      </tr>
       <tr>
-     <th>New installation</th>
+     <th  align="left">New installation</th>
      <td>{{ optional($heat_sourcesary)->new_installation}}</td>
      </tr>
-     
+
    </table>
    </div>
       <h6>Calculation Data</h6>
     <div class=" table-responsive">
    <table class="table tablehs-two">
      <tr>
-      <th>Investment costs</th>
+      <th  align="left">Investment costs</th>
       <td>{{ optional($heat_sourcesary)-> heat_investment_cost}}</td>
      </tr>
      <tr>
-     <th>Discount</th>
+     <th  align="left">Discount</th>
      <td>{{ optional($heat_sourcesary)->heat_investment_discount}}</td>
      </tr>
      <tr>
-     <th>Maintenance costs</th>
+     <th  align="left">Maintenance costs</th>
      <td>{{ optional($heat_sourcesary)->heat_maintenance_cost}}</td>
      </tr>
      </table>
@@ -1051,7 +1051,7 @@ Germany</p>
 <footer>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
- 
+
  <!--  <li>5/11</li> -->
  </ul>
 </footer>
@@ -1070,42 +1070,42 @@ Germany</p>
     <div class=" table-responsive">
    <table class="table tablehlp-one">
      <tr>
-      <th>Name</th>
+      <th  align="left">Name</th>
       <td>{{ optional($profile_ary)->profile_name}}</td>
      </tr>
      <tr>
-     <th>Profile Type</th>
+     <th  align="left">Profile Type</th>
      <td>{{ optional($profile_ary)->profile_type}}</td>
      </tr>
      <tr>
-     <th>Max. heating load</th>
+     <th  align="left">Max. heating load</th>
      <td>{{ optional($profile_ary)->max_heat_load_power}} at {{ optional($profile_ary)->max_heat_load_temp}}</td>
      </tr>
      <tr>
-     <th>Base load</th>
+     <th  align="left">Base load</th>
      <td>{{ optional($profile_ary)->base_load_power}} from {{ optional($profile_ary)->base_load_temp}} </td>
      </tr>
      <tr>
-     <th>Zero load</th>
+     <th  align="left">Zero load</th>
      <td>{{ optional($profile_ary)->zero_load_power}} from {{ optional($profile_ary)->zero_load_temp}} </td>
      </tr>
-      
-     
+
+
    </table>
    </div>
       <h6>Calculation Data</h6>
     <div class=" table-responsive">
    <table class="table tablehs-two">
      <tr>
-      <th>Investment costs</th>
+      <th  align="left">Investment costs</th>
       <td>{{ optional($profile_ary)->hp_investment_cost}}</td>
      </tr>
      <tr>
-     <th>Discount</th>
+     <th  align="left">Discount</th>
      <td>{{ optional($profile_ary)->hp_discount}}</td>
      </tr>
      <tr>
-     <th>Maintenance costs</th>
+     <th  align="left">Maintenance costs</th>
      <td>{{ optional($profile_ary)->maintenance_cost}}</td>
      </tr>
      </table>
@@ -1117,7 +1117,7 @@ Germany</p>
 <footer>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
- 
+
  <!--  <li>6/11</li> -->
  </ul>
 </footer>
@@ -1135,42 +1135,42 @@ Germany</p>
     <div class=" table-responsive">
    <table class="table tablehcc-one">
      <tr>
-      <th>Name</th>
+      <th  align="left">Name</th>
       <td>{{ optional($chiller_ary)->chillername}}</td>
      </tr>
      <tr>
-     <th>Refrigerant</th>
+     <th  align="left">Refrigerant</th>
      <td>{{ optional($chiller_ary)->refrigerant}}</td>
      </tr>
      <tr>
-     <th>Manufacturer</th>
+     <th  align="left">Manufacturer</th>
      <td>{{ optional($chiller_ary)->manufacturer}}</td>
      </tr>
      <tr>
-     <th>Compressor type</th>
+     <th  align="left">Compressor type</th>
      <td>{{ optional($chiller_ary)->compressor}}</td>
      </tr>
      <tr>
-     <th>Chilled water temperature</th>
+     <th  align="left">Chilled water temperature</th>
      <td>{{ optional($chiller_ary)->temperature}}</td>
      </tr>
-      
-     
+
+
    </table>
    </div>
       <h6>Calculation Data</h6>
     <div class=" table-responsive">
    <table class="table tablecc-two">
      <tr>
-      <th>Investment costs</th>
+      <th  align="left">Investment costs</th>
       <td>{{ optional($chiller_ary)->investment_cost}}</td>
      </tr>
      <tr>
-     <th>Discount</th>
+     <th  align="left">Discount</th>
      <td>{{ optional($chiller_ary)->discount}}</td>
      </tr>
      <tr>
-     <th>Maintenance costs</th>
+     <th  align="left">Maintenance costs</th>
      <td>{{ optional($chiller_ary)->maintenence_costs}}</td>
      </tr>
      </table>
@@ -1182,7 +1182,7 @@ Germany</p>
 <footer>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
- 
+
   <!-- <li>7/11</li> -->
  </ul>
 </footer>
@@ -1194,59 +1194,59 @@ Germany</p>
 <!-- page 8 start-->
 <section class="feasibility-calculation">
   <div class="container">
-    <h1>Cooling Load Profile</h1> 
+    <h1>Cooling Load Profile</h1>
       @foreach($cooling_load_profiles as $cooling_ary)
 <h6>Technical Data</h6>
     <div class=" table-responsive">
    <table class="table tablehclp-one">
      <tr>
-      <th>Name</th>
+      <th  align="left">Name</th>
       <td>{{ optional($cooling_ary)->cooling_radiant_cooling_office}}</td>
      </tr>
      <tr>
-     <th>Profile Type</th>
+     <th  align="left">Profile Type</th>
      <td>{{ optional($cooling_ary)->cooling_profile_type}}</td>
      </tr>
      <tr>
-     <th>Chilled water temperature</th>
+     <th  align="left">Chilled water temperature</th>
      <td>{{ optional($cooling_ary)->cooling_radiant_cooling_office}}</td>
      </tr>
      <tr>
-     <th>Chilled water inlet temperature</th>
+     <th  align="left">Chilled water inlet temperature</th>
      <td>{{ optional($cooling_ary)->cooling_radiant_cooling_office}}</td>
      </tr>
      <tr>
-     <th>Max. cooling load</th>
+     <th  align="left">Max. cooling load</th>
      <td>{{ optional($cooling_ary)->cooling_max_cooling_load}} at   {{ optional($cooling_ary)->cooling_max_cooling_load_at}}  </td>
      </tr>
      <tr>
-     <th>Base load</th>
+     <th  align="left">Base load</th>
      <td>{{ optional($cooling_ary)->  cooling_base_load_to}} from   {{ optional($cooling_ary)-> cooling_base_load_from}} </td>
      </tr>
      <tr>
-     <th>Zero load</th>
+     <th  align="left">Zero load</th>
      <td>{{ optional($cooling_ary)->  cooling_zero_load_from}} from   {{ optional($cooling_ary)-> cooling_zero_load_to}}</td>
      </tr>
       <tr>
-     <th>Cooling hours</th>
+     <th  align="left">Cooling hours</th>
      <td>{{ optional($cooling_ary)->cooling_cooling_hours}} </td>
      </tr>
-     
+
    </table>
    </div>
       <h6>Calculation Data</h6>
     <div class=" table-responsive">
    <table class="table tablehs-two">
      <tr>
-      <th>Investment costs</th>
+      <th  align="left">Investment costs</th>
       <td>{{ optional($cooling_ary)->cooling_investment_cost}}</td>
      </tr>
      <tr>
-     <th>Discount</th>
+     <th  align="left">Discount</th>
      <td>{{ optional($cooling_ary)->cooling_investment_discount}}</td>
      </tr>
      <tr>
-     <th>Maintenance costs</th>
+     <th  align="left">Maintenance costs</th>
      <td>{{ optional($cooling_ary)->cooling_maintenance_cost}}</td>
      </tr>
      </table>
@@ -1257,7 +1257,7 @@ Germany</p>
 <footer>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
- 
+
  <!--  <li>8/11</li> -->
  </ul>
 </footer>
@@ -1271,56 +1271,56 @@ Germany</p>
 <section class="feasibility-calculation">
   <div class="container">
     <h1>Fahrenheit System</h1>
-   @foreach($fahrenheit_chiller as $chiller) 
+   @foreach($fahrenheit_chiller as $chiller)
     <h6> Chiller</h6>
     <h6>Technical Data</h6>
     <div class=" table-responsive">
    <table class="table tableaac-one">
      <tr>
-      <th>Chiller type</th>
+      <th  align="left">Chiller type</th>
       <td>{{ optional($chiller)->chiller_chiller_type}}</td>
      </tr>
      <tr>
-     <th>Adsorbent</th>
+     <th  align="left">Adsorbent</th>
      <td>{{ optional($chiller)->chiller_adsorbent}}</td>
      </tr>
      <tr>
-     <th>Product</th>
+     <th  align="left">Product</th>
      <td>{{ optional($chiller)->chiller_product}}</td>
      </tr>
      <tr>
-     <th>Number of chillers</th>
+     <th  align="left">Number of chillers</th>
      <td>{{ optional($chiller)->chiller_no_chiller}}</td>
      </tr>
      <tr>
-     <th>Product interconnection</th>
+     <th  align="left">Product interconnection</th>
      <td>{{ optional($chiller)->chiller_product_inter}}</td>
      </tr>
      <tr>
-     <th>Group interconnection</th>
+     <th  align="left">Group interconnection</th>
      <td>{{ optional($chiller)->chiller_group_inter}}</td>
      </tr>
      <tr>
-     <th>Function</th>
+     <th  align="left">Function</th>
      <td></td>
      </tr>
-      
-     
+
+
    </table>
    </div>
       <h6>Calculation Data</h6>
     <div class=" table-responsive">
    <table class="table tableaac-two">
      <tr>
-      <th>Investment costs</th>
+      <th  align="left">Investment costs</th>
       <td>{{ optional($chiller)->addchiller_investment_cost}}</td>
      </tr>
      <tr>
-     <th>Discount</th>
+     <th  align="left">Discount</th>
      <td>{{ optional($chiller)->addchiller_discount}}</td>
      </tr>
      <tr>
-     <th>Maintenance costs</th>
+     <th  align="left">Maintenance costs</th>
      <td>{{ optional($chiller)->addchiller_maintenence}}</td>
      </tr>
      </table>
@@ -1328,70 +1328,70 @@ Germany</p>
  @endforeach
 
       <h6>Re-cooling System</h6>
-       @foreach($fahrenheit_recool as $recooling) 
+       @foreach($fahrenheit_recool as $recooling)
     <h6>Technical Data</h6>
     <div class=" table-responsive">
    <table class="table tableaac-one">
      <tr>
-      <th>Components</th>
+      <th  align="left">Components</th>
       <td>{{ optional($recooling)->recooler_component}}</td>
      </tr>
      <tr>
-     <th>Re-cooling method</th>
+     <th  align="left">Re-cooling method</th>
      <td>{{ optional($recooling)->recooler_method}}</td>
      </tr>
      <tr>
-     <th>Product</th>
+     <th  align="left">Product</th>
      <td>{{ optional($recooling)->recooler_product}}</td>
      </tr>
      <tr>
-     <th>Number of units</th>
+     <th  align="left">Number of units</th>
      <td>{{ optional($recooling)->recooler_units}}</td>
      </tr>
      <tr>
-     <th>Name</th>
+     <th  align="left">Name</th>
      <td>{{ optional($recooling)->recooler_name}}</td>
      </tr>
      <tr>
-     <th>Re-cooling capacity</th>
+     <th  align="left">Re-cooling capacity</th>
      <td>{{ optional($recooling)->recooler_capacity}}</td>
      </tr>
      <tr>
-     <th>Temperature difference</th>
+     <th  align="left">Temperature difference</th>
      <td>{{ optional($recooling)->recooler_temp_diff}}</td>
      </tr>
        <tr>
-     <th>Primary volume flow rate</th>
+     <th  align="left">Primary volume flow rate</th>
      <td></td>
      </tr>
       <tr>
-     <th>Secondary volume flow rate</th>
+     <th  align="left">Secondary volume flow rate</th>
      <td>{{ optional($recooling)->recooler_sec_volume}}</td>
      </tr>
       <tr>
-     <th>Electrical power consumption</th>
+     <th  align="left">Electrical power consumption</th>
      <td>{{ optional($recooling)->recooler_elec_consumption}}</td>
      </tr>
       <tr>
-     <th>Available/provided by customer</th>
+     <th  align="left">Available/provided by customer</th>
      <td>{{ optional($recooling)->recooler_available}}</td>
      </tr>
-     
+
    </table>
    </div>
       <h6>Calculation Data</h6>
     <div class=" table-responsive">
    <table class="table tableaac-two">
      <tr>
-      <th>Investment costs</th>
+      <th  align="left">Investment costs</th>
       <td>{{ optional($recooling)->recooler_inv_cost}}</td>
      </tr>
      <tr>
-     <th>Discount</th>
+     <th  align="left">Discount</th>
      <td>{{ optional($recooling)->recooler_discount}}</td>
      </tr>
      <tr>
-     <th>Maintenance costs</th>
+     <th  align="left">Maintenance costs</th>
      <td>{{ optional($recooling)->recooler_maint_cost}}</td>
      </tr>
      </table>
@@ -1402,7 +1402,7 @@ Germany</p>
 <footer>
  <ul class="list-inline">
   <li> {{ @date('m/d/Y') }} | {{ @date('h:i A') }}</li>
- 
+
  <!--  <li>9/11</li> -->
  </ul>
 </footer>
