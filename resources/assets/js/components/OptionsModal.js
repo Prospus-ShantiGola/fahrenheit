@@ -14,6 +14,7 @@ class OptionsModal extends Component {
         this.state = {optionInformation: '',role:'user'};
         this.handleOptionSubmit = this.handleOptionSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
+         //this.selectOptionLanguage = this.selectOptionLanguage.bind(this);
       }
 
 
@@ -43,6 +44,12 @@ class OptionsModal extends Component {
                     jQuery(this).popover('hide');
                 }
             });
+        });
+
+        jQuery('.choose-language').on('click', function (e) {
+           var language_select = $(this).data('language');
+            $(this).closest('ul').siblings('#option_language').val(language_select);
+
         });
            $('.close-modal-options').on('click', function (e) {
                if ($('.option-information-form').hasClass('form-edited')) {
@@ -84,6 +91,14 @@ class OptionsModal extends Component {
                 // getMapInfo(lat, lng,place)
             });
           }
+
+        //  selectOptionLanguage() {
+        //  var fe = $(this).attr('id');
+        //  alert(fe+'__')
+        //  console.log(jQuery(this))
+
+        
+        // }
 
 
 
@@ -192,12 +207,13 @@ class OptionsModal extends Component {
                             </td>
                             <td className="input-fields">
                               <ul className="list-inline">
-                                <li><img src="public/images/germany-flag.png" alt="" /></li>
-                                <li><img src="public/images/united-kingdom.png" alt="" /></li>
+                                <li data-language  = "de"  className  = "choose-language" ><img src="public/images/germany-flag.png" alt="" /></li>
+                                <li  data-language = "en" className ="choose-language"><img src="public/images/united-kingdom.png" alt="" /></li>
                                 <li className="disabled"><img src="public/images/poland-flag.png" alt="" /></li>
                                 <li className="disabled"><img src="public/images/italy.png" alt="" /></li>
                                 <li className="disabled"><img src="public/images/greece-flag.png" alt="" /></li>
                               </ul>
+                              <input type = "hidden" value = "" name="option_language" id="option_language" />
                             </td>
                           </tr>
                           <tr>
@@ -239,7 +255,7 @@ class OptionsModal extends Component {
                                 <img src="public/images/help-red.png" alt="" />
                               </button>
                             </td>
-                            <td className="input-fields"><input type="text" placeholder="25 °C" name="profile_recooling_temp" id="profile_recooling_temp" /></td>
+                            <td className="input-fields withunit"><input type="text" placeholder="25" name="profile_recooling_temp" id="profile_recooling_temp" /><span>°C</span></td>
                           </tr>
                           <tr>
                             <td className="input-label">{this.props.t('Options.Tab.GENERAL.FreeCooling.Title')}:</td>

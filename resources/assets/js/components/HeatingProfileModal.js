@@ -210,9 +210,9 @@ class HeatingProfileModal extends React.Component {
                 </td>
                 <td className="input-fields">
                    <ul className="list-inline">
-                      <li><input type="text" placeholder="8.0 kw" pattern="\d*"  required="required" className="required-field onlynumeric" name="base_load_power" id="base_load_power"  /></li>
+                      <li className="withunit"><input type="text" placeholder="8.0" pattern="\d*"  required="required" className="required-field onlynumeric" name="base_load_power" id="base_load_power" /><span>kw</span></li>
                       <li>{this.props.t('HeatingProfile.Tab.TechnicalData.From.Title')} </li>
-                      <li><input type="text" placeholder="°C" pattern="\d*"  required="required" className="icon-field required-field onlynumeric" name="base_load_temp" id="base_load_temp"  /></li>
+                      <li className="withunit" ><input type="text" placeholder="0" pattern="\d*"  required="required" className="icon-field required-field onlynumeric" name="base_load_temp" id="base_load_temp"  /><span>°C</span></li>
                    </ul>
                 </td>
              </tr>
@@ -224,10 +224,10 @@ class HeatingProfileModal extends React.Component {
                 </td>
                 <td className="input-fields">
                    <ul className="list-inline">
-                      <li><input type="text" placeholder="0.0 kw" pattern="\d*"  required="required" className="required-field" name="zero_load_power" id="zero_load_power"  />
-                      </li>
+                      <li className="withunit"><input type="text" placeholder="0.0" pattern="\d*"  required="required" className="required-field" name="zero_load_power" id="zero_load_power"  />
+                      <span>kw</span></li>
                       <li>{this.props.t('HeatingProfile.Tab.TechnicalData.From.Title')}</li>
-                      <li> <input type="text" placeholder="20 °C" pattern="\d*"  className="icon-field onlynumeric" name="zero_load_temp" id="zero_load_temp" /></li>
+                      <li className="withunit"> <input type="text" placeholder="20" pattern="\d*"  className="icon-field onlynumeric" name="zero_load_temp" id="zero_load_temp" /><span>°C</span></li>
                    </ul>
                 </td>
              </tr>
@@ -300,9 +300,9 @@ class HeatingProfileModal extends React.Component {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields">
+                                 <td className="input-fields ">
                                     <ul className="list-inline">
-                                       <li><input type="text" placeholder="52.2 kw" pattern="\d*" className="required-field onlynumeric" required="required" name="max_heat_load_power" id="max_heat_load_power" /></li>
+                                       <li className="withunit"><input type="text" placeholder="52.2 " pattern="\d*" className="required-field onlynumeric" required="required" name="max_heat_load_power" id="max_heat_load_power" /><span>kw</span></li>
                                        <li> {this.props.t('HeatingProfile.Tab.TechnicalData.At.Title')} </li>
                                        <li><input type="text" placeholder="-15"  pattern="\d*" className="icon-field onlynumeric"  name="max_heat_load_temp" id="max_heat_load_temp"  />
                                        </li>
@@ -329,7 +329,7 @@ class HeatingProfileModal extends React.Component {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="€"  name="hp_investment_cost" id="hp_investment_cost" /> </td>
+                                 <td className="input-fields withunit"><input type="text" placeholder="0"  name="hp_investment_cost" id="hp_investment_cost" /> <span>€</span></td>
                               </tr>
                               <tr>
                                  <td className="input-label">{this.props.t('HeatingProfile.Tab.CalculationData.Discount.Title')}:</td>
@@ -337,7 +337,7 @@ class HeatingProfileModal extends React.Component {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="%" name="hp_discount" id="hp_discount" /></td>
+                                 <td className="input-fields withunit"><input type="text" placeholder="0" name="hp_discount" id="hp_discount" /><span>%</span></td>
                               </tr>
                               <tr>
                                  <td className="input-label">{this.props.t('HeatingProfile.Tab.CalculationData.MaintenanceCosts.Title')}: </td>
@@ -345,7 +345,7 @@ class HeatingProfileModal extends React.Component {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="text" placeholder="€/a" name="maintenance_cost" id="maintenance_cost" /> </td>
+                                 <td className="input-fields withunit"><input type="text" placeholder="0" name="maintenance_cost" id="maintenance_cost" /> <span>€/a</span></td>
                               </tr>
                               </tbody>
                            </table>

@@ -232,8 +232,8 @@ class ChillerModal extends Component  {
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text"  pattern="\d*" onInvalid="this.setCustomValidity('Witinnovation')"
-       onInvalid={()=>this.setCustomValidity('')}  id="temperature" placeholder="6 °C" name="temperature"/></td>
+                                    <td className="input-fields withunit"><input type="text"  pattern="\d*" onInvalid="this.setCustomValidity('Witinnovation')"
+       onInvalid={()=>this.setCustomValidity('')}  id="temperature" placeholder="6" name="temperature"/> <span>°C</span></td>
                                  </tr>
                                  </tbody>
                               </table>
@@ -252,7 +252,7 @@ class ChillerModal extends Component  {
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="€" name="investment_cost" id="investment_cost"/> </td>
+                                    <td className="input-fields withunit"><input type="text" placeholder="0" name="investment_cost" id="investment_cost"/><span>€</span> </td>
                                  </tr>
                                  <tr>
                                     <td className="input-label">{this.props.t('Compression.Tab.CalculationData.Discount.Title')}:</td>
@@ -260,7 +260,7 @@ class ChillerModal extends Component  {
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="%"  name="discount" id="discount" /></td>
+                                    <td className="input-fields withunit"><input type="text" placeholder="0"  name="discount" id="discount" /><span>%</span></td>
                                  </tr>
                                  <tr>
                                     <td className="input-label">{this.props.t('Compression.Tab.CalculationData.MaintenanceCosts.Title')}: </td>
@@ -268,7 +268,7 @@ class ChillerModal extends Component  {
                                        <img src="public/images/help-red.png" alt="" />
                                        </button>
                                     </td>
-                                    <td className="input-fields"><input type="text" placeholder="€/a"  name="maintenence_costs" id="maintenence_costs" /> </td>
+                                    <td className="input-fields withunit"><input type="text" placeholder="0"  name="maintenence_costs" id="maintenence_costs" /> <span>€/a</span></td>
                                  </tr>
                                  </tbody>
                               </table>

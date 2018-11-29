@@ -290,7 +290,7 @@ class AddRecooler extends Component {
                             </button>
                           </td>
 
-                          <td className="input-fields"><input type="text" placeholder="58 kW" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_capacity" id="recooler_capacity"/></td>
+                          <td className="input-fields withunit"><input type="text" placeholder="58" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_capacity" id="recooler_capacity"/> <span>kW</span></td>
                         </tr>
 
                         <tr>
@@ -301,7 +301,7 @@ class AddRecooler extends Component {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="2 K" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_temp_diff" id="recooler_temp_diff"/></td>
+                          <td className="input-fields withunit"><input type="text" placeholder="2" required  pattern="\d*"  className="required-field onlynumeric" name="recooler_temp_diff" id="recooler_temp_diff"/><span>K</span></td>
                         </tr>
 
                         {primaryHtml}
@@ -362,7 +362,7 @@ class AddRecooler extends Component {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text"  placeholder="€"  name="recooler_inv_cost" id="recooler_inv_cost"/> </td>
+                          <td className="input-fields withunit"><input type="text"  placeholder="0"  name="recooler_inv_cost" id="recooler_inv_cost"/><span>€</span> </td>
                         </tr>
                         <tr>
                           <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.Discount.Title')}:</td>
@@ -371,7 +371,7 @@ class AddRecooler extends Component {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text" placeholder="%"  name="recooler_discount" id="recooler_discount"/></td>
+                          <td className="input-fields withunit"><input type="text" placeholder="0"  name="recooler_discount" id="recooler_discount"/><span>%</span></td>
                         </tr>
                         <tr>
                           <td className="input-label">{this.props.t('Fahrenheit.Tab.Recooling.MaintenanceCosts.Title')} : </td>
@@ -380,7 +380,7 @@ class AddRecooler extends Component {
                               <img src="public/images/help-red.png" alt=""/>
                             </button>
                           </td>
-                          <td className="input-fields"><input type="text"  placeholder="€/a"   name="recooler_maint_cost" id="recooler_maint_cost"/> </td>
+                          <td className="input-fields withunit"><input type="text"  placeholder="0"   name="recooler_maint_cost" id="recooler_maint_cost"/><span>€/a</span> </td>
                         </tr>
                       </tbody>
                     </table>
