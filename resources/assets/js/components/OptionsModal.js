@@ -47,7 +47,9 @@ class OptionsModal extends Component {
         });
 
         jQuery('.choose-language').on('click', function (e) {
+          $('.choose-language').removeClass('selected-flag')
            var language_select = $(this).data('language');
+           $(this).addClass('selected-flag');
             $(this).closest('ul').siblings('#option_language').val(language_select);
 
         });
@@ -207,7 +209,7 @@ class OptionsModal extends Component {
                             </td>
                             <td className="input-fields">
                               <ul className="list-inline">
-                                <li data-language  = "de"  className  = "choose-language selected-flag" ><img src="public/images/germany-flag.png" alt="" /></li>
+                                <li data-language  = "de"  className  = "choose-language " ><img src="public/images/germany-flag.png" alt="" /></li>
                                 <li  data-language = "en" className ="choose-language"><img src="public/images/united-kingdom.png" alt="" /></li>
                                 <li className="disabled"><img src="public/images/poland-flag.png" alt="" /></li>
                                 <li className="disabled"><img src="public/images/italy.png" alt="" /></li>

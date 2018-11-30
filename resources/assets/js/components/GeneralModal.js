@@ -126,7 +126,10 @@ handleGeneralSubmit(event) {
                                 that.changeState(that.state.generalInformation);
                                 GENERAL_FORM_STATUS=true;
                                 $("#general-information").modal("hide");
-
+                               // alert('fd')
+                                 //jQuery(".general-information .hover-list.scrollbar-macosx").scrollbar();
+                                 jQuery(".general-information .scrollbar-macosx").scrollbar();
+                             
                             }
         })
         .catch((err) => {console.log(err)})
