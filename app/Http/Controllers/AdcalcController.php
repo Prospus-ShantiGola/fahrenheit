@@ -400,8 +400,7 @@ class AdcalcController extends Controller
                 $dT_RkMin = $dT_NomRk;
                 $Qth_MtRk1 = 0;
                 $Set_MtIn = 0;
-
-
+                $Tn_MtIn = $Tn_AirIn + $dT_St + $dT_RkMin;
         }
 
     }

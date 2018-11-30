@@ -278,7 +278,7 @@ class FahrenheitSystemModal extends React.Component {
               data-target="#chillar" data-toggle="tab" className="nav-link small active">{this.props.t('Fahrenheit.Tab.Chiller.Title')} </a></li>
           <li className="nav-item">
             <img src="public/images/plus-icon.png" className="myBtn_multi modal-openn" alt="" data-toggle="modal" data-backdrop="false" data-target="#add-recooler" />
-            <a href="JavaScript:Void(0)" data-target="#chillar" data-toggle="tab" className="nav-link" > <span className="center-text">{this.props.t('Fahrenheit.Tab.Recooling.Title')}</span> <img src="public/images/cacli-icon.png" alt="caculator" onClick={this.callApi} /></a>
+            <a href="JavaScript:Void(0)" data-target="#chillar" data-toggle="tab" className="nav-link" > <span className="center-text">{this.props.t('Fahrenheit.Tab.Recooling.Title')}</span> <img src="public/images/cacli-icon.png" alt="caculator"  /></a>
             <div className="caculator-divv">
               <div className="calci-div" ></div>
             </div>
