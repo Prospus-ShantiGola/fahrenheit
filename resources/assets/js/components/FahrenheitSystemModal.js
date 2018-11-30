@@ -247,6 +247,8 @@ class FahrenheitSystemModal extends React.Component {
         let compressionArray = this.state.chillerStateChange.chillerRecord.filter(function (el) {
             return el.chiller_chiller_type == "Compression"
         });
+        console.log(this.state.chillerStateChange.chillerRecord);
+        console.log(addSorptionArray,compressionArray);
         let recoolerArray=[];
         recoolerArray.push(this.groupBy(this.state.recoolerStateChange.recoolerRecord,'recooler_product'));
 

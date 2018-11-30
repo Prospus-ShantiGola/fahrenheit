@@ -59393,20 +59393,42 @@ var Tiles = function (_React$Component) {
                     var pricelist = _react2.default.createElement(
                         'ul',
                         { className: 'price-listt plnewblock' },
-                        _react2.default.createElement(
-                            'li',
-                            { className: 'pdtnam' },
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'Language'
-                            ),
-                            _react2.default.createElement(
-                                'h3',
-                                { className: 'textUpper' },
-                                'ENGLISH'
-                            )
-                        ),
+                        function () {
+                            if (_this2.state.optionData[0].option_language != "") {
+
+                                if (_this2.state.optionData[0].option_language == "en") {
+                                    return _react2.default.createElement(
+                                        'li',
+                                        { className: 'pdtnam' },
+                                        _react2.default.createElement(
+                                            'p',
+                                            null,
+                                            'Language'
+                                        ),
+                                        _react2.default.createElement(
+                                            'h3',
+                                            { className: 'textUpper' },
+                                            'ENGLISH'
+                                        )
+                                    );
+                                } else {
+                                    return _react2.default.createElement(
+                                        'li',
+                                        { className: 'pdtnam' },
+                                        _react2.default.createElement(
+                                            'p',
+                                            null,
+                                            'Language'
+                                        ),
+                                        _react2.default.createElement(
+                                            'h3',
+                                            { className: 'textUpper' },
+                                            'ENGLISH'
+                                        )
+                                    );
+                                }
+                            }
+                        }(),
                         _react2.default.createElement(
                             'li',
                             { className: 'pdtnum' },
@@ -59460,34 +59482,60 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'table',
                                 { className: 'table' },
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'th',
-                                        null,
-                                        'Language: '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'English'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'th',
-                                        null,
-                                        'BAFA 2018: '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        this.state.optionData[0].profile_bafa
-                                    )
-                                ),
+                                function () {
+                                    if (_this2.state.optionData[0].option_language != "") {
+
+                                        if (_this2.state.optionData[0].option_language == "en") {
+                                            return _react2.default.createElement(
+                                                'tr',
+                                                null,
+                                                _react2.default.createElement(
+                                                    'th',
+                                                    null,
+                                                    'Language: '
+                                                ),
+                                                _react2.default.createElement(
+                                                    'td',
+                                                    null,
+                                                    'English'
+                                                )
+                                            );
+                                        } else {
+                                            return _react2.default.createElement(
+                                                'tr',
+                                                null,
+                                                _react2.default.createElement(
+                                                    'th',
+                                                    null,
+                                                    'Language: '
+                                                ),
+                                                _react2.default.createElement(
+                                                    'td',
+                                                    null,
+                                                    'German'
+                                                )
+                                            );
+                                        }
+                                    }
+                                }(),
+                                function () {
+                                    if (_this2.state.optionData[0].profile_bafa != "") {
+                                        return _react2.default.createElement(
+                                            'tr',
+                                            null,
+                                            _react2.default.createElement(
+                                                'th',
+                                                null,
+                                                'BAFA 2018: '
+                                            ),
+                                            _react2.default.createElement(
+                                                'td',
+                                                null,
+                                                _this2.state.optionData[0].profile_bafa
+                                            )
+                                        );
+                                    }
+                                }(),
                                 _react2.default.createElement(
                                     'tr',
                                     null,
@@ -59513,8 +59561,7 @@ var Tiles = function (_React$Component) {
                                     _react2.default.createElement(
                                         'td',
                                         null,
-                                        this.state.optionData[0].free_recooling,
-                                        '(chilled water temperature)'
+                                        this.state.optionData[0].free_recooling
                                     )
                                 )
                             )
@@ -62958,7 +63005,7 @@ var GeneralModal = function (_Component) {
             var fieldLabel = label.text();
             fieldLabel = fieldLabel.replace(":", "");
             var errorStr = "";
-            if (node.type != "email") {
+            if (node.className != "required-field emailfield") {
                errorStr = message == "Please provide value" || message == "Please fill out this field." ? "Please provide value" : "Please enter only numeric value";
             } else {
                if ($.trim(node.value) == "") {
@@ -63320,7 +63367,7 @@ var GeneralModal = function (_Component) {
                                              _react2.default.createElement(
                                                 'td',
                                                 { className: 'input-fields' },
-                                                _react2.default.createElement('input', { type: 'email', title: this.props.t('RequiredField.ErrorMsg'), name: 'email_address', id: 'email_address', pattern: '/^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$/', required: true, className: 'required-field', placeholder: this.props.t('General.Tab.Project.ProjectEmail.Placeholder') })
+                                                _react2.default.createElement('input', { type: 'email', title: this.props.t('RequiredField.ErrorMsg'), name: 'email_address', id: 'email_address', pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$', required: true, className: 'required-field emailfield', placeholder: this.props.t('General.Tab.Project.ProjectEmail.Placeholder') })
                                              )
                                           )
                                        )
@@ -63498,7 +63545,7 @@ var GeneralModal = function (_Component) {
                                              _react2.default.createElement(
                                                 'td',
                                                 { className: 'input-fields' },
-                                                _react2.default.createElement('input', { type: 'email', required: true, className: 'required-field', name: 'personal_email_address', id: 'personal_email_address', placeholder: this.props.t('General.Tab.Personal.PersonalEmail.Placeholder') })
+                                                _react2.default.createElement('input', { type: 'email', required: true, className: 'required-field', name: 'personal_email_address', id: 'personal_email_address', pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$', placeholder: this.props.t('General.Tab.Personal.PersonalEmail.Placeholder') })
                                              )
                                           )
                                        )
@@ -68267,7 +68314,7 @@ var OptionsModal = function (_Component) {
                     { className: 'nav-item' },
                     _react2.default.createElement(
                       'a',
-                      { href: '', 'data-target': '#project-specification', 'data-toggle': 'tab', className: 'nav-link' },
+                      { href: '', 'data-target': '#project-specification', 'data-toggle': 'tab', className: 'nav-link disabled' },
                       this.props.t('Options.Tab.ProjectSpecification.Title')
                     )
                   )
@@ -69219,6 +69266,8 @@ var FahrenheitSystemModal = function (_React$Component) {
             var compressionArray = this.state.chillerStateChange.chillerRecord.filter(function (el) {
                 return el.chiller_chiller_type == "Compression";
             });
+            console.log(this.state.chillerStateChange.chillerRecord);
+            console.log(addSorptionArray, compressionArray);
             var recoolerArray = [];
             recoolerArray.push(this.groupBy(this.state.recoolerStateChange.recoolerRecord, 'recooler_product'));
 

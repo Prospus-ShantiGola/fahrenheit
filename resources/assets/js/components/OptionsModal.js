@@ -99,7 +99,7 @@ class OptionsModal extends Component {
         //  alert(fe+'__')
         //  console.log(jQuery(this))
 
-        
+
         // }
 
 
@@ -193,7 +193,7 @@ class OptionsModal extends Component {
               <div className="modal-body-content">
                 <ul id="tabsJustified2" className="nav nav-tabs project-specifications">
                   <li className="nav-item"><a href="" data-target="#option-general" data-toggle="tab" className="nav-link small active">{this.props.t('Options.Tab.GENERAL.Title')}</a></li>
-                  <li className="nav-item"><a href="" data-target="#project-specification" data-toggle="tab" className="nav-link">{this.props.t('Options.Tab.ProjectSpecification.Title')}</a></li>
+                  <li className="nav-item"><a href="" data-target="#project-specification" data-toggle="tab" className="nav-link disabled">{this.props.t('Options.Tab.ProjectSpecification.Title')}</a></li>
                 </ul>
                 <div id="tabsJustifiedContent2" className="tab-content">
                   <div id="option-general" className="tab-pane fade  active show">

@@ -113,7 +113,7 @@ class GeneralModal extends Component {
         var fieldLabel = label.text();
         fieldLabel = fieldLabel.replace(":", "");
         var errorStr="";
-        if(node.type!="email"){
+        if(node.className!="required-field emailfield"){
         errorStr= (message=="Please provide value" || message=="Please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
         }
         else{
@@ -303,7 +303,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email" title={this.props.t('RequiredField.ErrorMsg')} name = "email_address" id = "email_address" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required   className="required-field" placeholder={this.props.t('General.Tab.Project.ProjectEmail.Placeholder')} /></td>
+                                 <td className="input-fields"><input type="email" title={this.props.t('RequiredField.ErrorMsg')} name = "email_address" id = "email_address"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required   className="required-field emailfield" placeholder={this.props.t('General.Tab.Project.ProjectEmail.Placeholder')} /></td>
                               </tr>
                                       </tbody>
                            </table>
@@ -366,7 +366,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email"  required  className="required-field" name = "personal_email_address" id = "personal_email_address" placeholder={this.props.t('General.Tab.Personal.PersonalEmail.Placeholder')} /></td>
+                                 <td className="input-fields"><input type="email"  required  className="required-field" name = "personal_email_address" id = "personal_email_address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder={this.props.t('General.Tab.Personal.PersonalEmail.Placeholder')} /></td>
                               </tr>
                                       </tbody>
                            </table>
