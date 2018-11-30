@@ -261,7 +261,7 @@ class HeatingProfileModal extends React.Component {
                <div className="left-head"> {this.props.t('HeatingProfile.Title')} </div>
                <div className="right-head">
                <ul className="list-inline">
-                     <li><input className="save-changes-btn" onClick={this.handleHeatSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
+                     <li><input className="save-changes-btn" onClick={this.handleHeatSubmit}  ref={btn => { this.btn = btn; }} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
                     <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-HeatingProfile"  aria-label="Close"/></span></li>
                   </ul>
                </div>

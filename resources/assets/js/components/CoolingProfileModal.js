@@ -275,7 +275,7 @@ class CoolingProfileModal extends React.Component {
                   <div className="left-head"> {this.props.t('CoolingProfile.Title')}</div>
                   <div className="right-head">
                   <ul className="list-inline">
-                     <li><input className="save-changes-btn" onClick={this.handleCoolingSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
+                     <li><input className="save-changes-btn"  ref={btn => { this.btn = btn; }} onClick={this.handleCoolingSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
                     <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-CoolingProfile"  aria-label="Close"/></span></li>
                   </ul>
                   </div>

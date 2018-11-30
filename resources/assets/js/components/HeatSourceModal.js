@@ -7,7 +7,7 @@ const CustomTable = {
 class HeatSourceModal extends React.Component {
     constructor(props){
         super(props);
-        this.state = {heatSource: '',selectedSource:selectedSource};
+        this.state = {heatSource: '',selectedSource:selectedSource,lengthisButtonDisabled: false};
         this.handleHeatSubmit = this.handleHeatSubmit.bind(this);
         this.changeField = this.changeField.bind(this);
       }
@@ -129,6 +129,7 @@ class HeatSourceModal extends React.Component {
             return false;
         }
         const that = this;
+        this.btn.setAttribute("disabled", "disabled");
         e.preventDefault();
         var data=$('#heat-source-form').serialize();
         //console.log(data);
@@ -159,7 +160,7 @@ class HeatSourceModal extends React.Component {
                                     $("#heat-source-form")[0].reset();
                                 }
                                 $("#heat-source").modal("hide");
-
+                                that.btn.removeAttribute("disabled");
                             }
         })
         .catch((err) => {console.log(err)})
@@ -346,7 +347,7 @@ class HeatSourceModal extends React.Component {
                <div className="left-head"> {this.props.t('HeatSource.Title')}</div>
                <div className="right-head">
                   <ul className="list-inline">
-                     <li><input className="save-changes-btn" onClick={this.handleHeatSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
+                     <li><input className="save-changes-btn" ref={btn => { this.btn = btn; }} onClick={this.handleHeatSubmit} type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
                     <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-heatsource"  aria-label="Close"/></span></li>
                   </ul>
                </div>

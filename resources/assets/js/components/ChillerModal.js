@@ -146,7 +146,7 @@ class ChillerModal extends Component  {
                      <ul className="list-inline">
                         <li >
 
-                        <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
+                        <input className="save-changes-btn" type="submit"  ref={btn => { this.btn = btn; }} alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
                         <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close close-modal-compression "  aria-label="Close"/></span></li>
 
                      </ul>

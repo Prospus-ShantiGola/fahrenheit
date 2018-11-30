@@ -260,9 +260,7 @@ class FahrenheitSystemModal extends React.Component {
             <div className="modal modal_multi" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="fahrenheit-system">
             <form  className="fahrenheit-system-form" id="fahrenheit-system-form">
     <div className="modal-content">
-    <ul>
-        { this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
-      </ul>
+
       <div className="modal-heading">
         <div className="left-head"> {this.props.t('Fahrenheit.Title')} </div>
         <div className="right-head">
