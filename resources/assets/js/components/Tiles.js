@@ -988,7 +988,7 @@ class Tiles extends React.Component {
                                 return (
                                                           <li className="pdtnam">
                             <p>Language</p>
-                            <h3 className="textUpper">ENGLISH</h3>
+                            <h3 className="textUpper">GERMAN</h3>
                         </li>
 
                                 )
