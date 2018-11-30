@@ -59275,6 +59275,12 @@ var Tiles = function (_React$Component) {
                     );
                     //     jQuery(".general-information .scrollbar-macosx").scrollbar();
                     var requiredMsg = "";
+                } else {
+                    var priceFullList = _react2.default.createElement(
+                        'p',
+                        { className: 'scrollbar-macosx' },
+                        this.props.hoverText
+                    );
                 }
             }
             if (this.props.title == OPTION_TILE) {

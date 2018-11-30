@@ -392,7 +392,7 @@ class Tiles extends React.Component {
                         })()}
 
 
-                      
+
                     </ul>
                 );
                 let chillerData = this.state.compressionChillerData;
@@ -487,7 +487,7 @@ class Tiles extends React.Component {
                         })()}
 
 
-                        
+
                         <li>
                             <p>{this.props.t('Tiles.HeatSource.AvailableHeat')}</p>
                             <h3>1,767,768 kWh/a</h3>
@@ -522,7 +522,7 @@ class Tiles extends React.Component {
                                 )
                             }
                         })()}
-                                                      
+
                                                         <li>85°C </li>
                                                     </ul>
                                                 </th>
@@ -696,7 +696,7 @@ class Tiles extends React.Component {
                         })()}
 
 
-                     
+
                     </ul>
                 );
 
@@ -714,7 +714,7 @@ class Tiles extends React.Component {
                                                 <th>
 
                                                 {(data.cooling_radiant_cooling_office != "") ? data.cooling_radiant_cooling_office : ""}
-                                                  
+
                                                     <ul className="list-inline">
                                                         <li>
 
@@ -904,7 +904,7 @@ class Tiles extends React.Component {
                                 )
                             }
                         })()}
-                               
+
                               {(() => {
                             if (this.state.generalData[0].email_address != "") {
                                 return (
@@ -914,17 +914,20 @@ class Tiles extends React.Component {
                                 </tr>
                                 )
                             }
-                            })()} 
-                                
-                                
-                                
-                                
+                            })()}
+
+
+
+
                             </tbody>
                         </table>
                     </div>
                 </div>  );
            //     jQuery(".general-information .scrollbar-macosx").scrollbar();
                 var requiredMsg = "";
+            }
+            else{
+                var priceFullList = <p className="scrollbar-macosx">{this.props.hoverText}</p>;
             }
 
         }
@@ -966,19 +969,19 @@ class Tiles extends React.Component {
                 projectData['option'] = this.state.optionData;
                 var pricelist = (
                     <ul className="price-listt plnewblock">
-                       
+
 
 
                          {(() => {
                             if (this.state.optionData[0].option_language != "") {
-                               
+
                             if(this.state.optionData[0].option_language =="en" ){
                                   return (
                                           <li className="pdtnam">
                             <p>Language</p>
                             <h3 className="textUpper">ENGLISH</h3>
                         </li>
-                                
+
                                 )
                             }
                             else{
@@ -987,7 +990,7 @@ class Tiles extends React.Component {
                             <p>Language</p>
                             <h3 className="textUpper">ENGLISH</h3>
                         </li>
-                                                             
+
                                 )
 
                             }
@@ -1016,18 +1019,18 @@ class Tiles extends React.Component {
                 var priceFullList = (<div className="hover-list">
                     <div className="table-responsive">
                         <table className="table">
-                         
+
 
 
                              {(() => {
                             if (this.state.optionData[0].option_language != "") {
-                               
+
                             if(this.state.optionData[0].option_language =="en" ){
                                   return (
                                           <tr>
                                     <th>Language: </th>
                                    <td>English</td></tr>
-                                
+
                                 )
                             }
                             else{
@@ -1035,7 +1038,7 @@ class Tiles extends React.Component {
                                           <tr>
                                     <th>Language: </th>
                                    <td>German</td></tr>
-                                
+
                                 )
 
                             }
@@ -1056,7 +1059,7 @@ class Tiles extends React.Component {
 
 
 
-                            
+
                             <tr>
                                 <th>Re-cooling type: </th>
                                 <td>{this.state.optionData[0].profile_recooling}</td>
@@ -1064,7 +1067,7 @@ class Tiles extends React.Component {
                             <tr>
                                 <th>Free cooling: </th>
                                 <td>{this.state.optionData[0].free_recooling}
-                                  
+
                       </td>
                             </tr>
                         </table>
@@ -1164,7 +1167,7 @@ class Tiles extends React.Component {
                             }
                         })()}
 
-                                 
+
                         <div className="clrs"></div>
 
                          {(() => {
@@ -1193,8 +1196,8 @@ class Tiles extends React.Component {
                         })()}
 
 
-                       
-                        
+
+
                     </ul>
 
                 );
@@ -1247,10 +1250,10 @@ class Tiles extends React.Component {
                                 )
                             }
                         })()}
-                               
-                                
-                               
-                              
+
+
+
+
                             </tbody>
                         </table>
                     </div>
