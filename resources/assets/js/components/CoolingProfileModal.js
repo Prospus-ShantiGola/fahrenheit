@@ -123,6 +123,7 @@ class CoolingProfileModal extends React.Component {
             return false;
         }
         const that = this;
+        this.btn.setAttribute("disabled", "disabled");
         e.preventDefault();
         var data=$('#cooling-profile-form').serialize();
         //console.log(data);
@@ -153,6 +154,7 @@ class CoolingProfileModal extends React.Component {
                                     $("#cooling-profile-form")[0].reset();
                                 }
                                 $("#cooling-profile").modal("hide");
+                                that.btn.removeAttribute("disabled");
 
                             }
         })

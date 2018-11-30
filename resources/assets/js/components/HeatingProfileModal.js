@@ -138,6 +138,7 @@ class HeatingProfileModal extends React.Component {
             return false;
         }
         const that = this;
+        this.btn.setAttribute("disabled", "disabled");
         e.preventDefault();
         var data=$('#heating-profile-form').serialize();
         //console.log(data);
@@ -169,6 +170,7 @@ class HeatingProfileModal extends React.Component {
                                 that.handleHeatSubmitChange(that.state.HeatingProfile);
 
                                 $("#heating-profile").modal("hide");
+                                that.btn.removeAttribute("disabled");
 
                             }
         })

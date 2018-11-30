@@ -68,6 +68,7 @@ class ChillerModal extends Component  {
      }
       handleSubmit(e){
         const that = this;
+        this.btn.setAttribute("disabled", "disabled");
         e.preventDefault();
         var refrigerant    = $("#compression-chiller-form").find("select[name=refrigerant]").val();
         var manufacturer    = $("#compression-chiller-form").find("select[name=manufacturer]").val();
@@ -101,6 +102,7 @@ class ChillerModal extends Component  {
                                 })
                                 that.handleLangChange(that.state.compressionChiler);
                                 $("#compression-chiller").modal("hide");
+                                that.btn.removeAttribute("disabled");
 
                             }
         })

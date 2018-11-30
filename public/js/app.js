@@ -60717,6 +60717,7 @@ var ChillerModal = function (_Component) {
       key: 'handleSubmit',
       value: function handleSubmit(e) {
          var that = this;
+         this.btn.setAttribute("disabled", "disabled");
          e.preventDefault();
          var refrigerant = $("#compression-chiller-form").find("select[name=refrigerant]").val();
          var manufacturer = $("#compression-chiller-form").find("select[name=manufacturer]").val();
@@ -60750,6 +60751,7 @@ var ChillerModal = function (_Component) {
                });
                that.handleLangChange(that.state.compressionChiler);
                $("#compression-chiller").modal("hide");
+               that.btn.removeAttribute("disabled");
             }
          }).catch(function (err) {
             console.log(err);
@@ -66596,6 +66598,7 @@ var HeatingProfileModal = function (_React$Component) {
             return false;
          }
          var that = this;
+         this.btn.setAttribute("disabled", "disabled");
          e.preventDefault();
          var data = $('#heating-profile-form').serialize();
          //console.log(data);
@@ -66627,6 +66630,7 @@ var HeatingProfileModal = function (_React$Component) {
                that.handleHeatSubmitChange(that.state.HeatingProfile);
 
                $("#heating-profile").modal("hide");
+               that.btn.removeAttribute("disabled");
             }
          }).catch(function (err) {
             console.log(err);
@@ -67289,6 +67293,7 @@ var CoolingProfileModal = function (_React$Component) {
                 return false;
             }
             var that = this;
+            this.btn.setAttribute("disabled", "disabled");
             e.preventDefault();
             var data = $('#cooling-profile-form').serialize();
             //console.log(data);
@@ -67319,6 +67324,7 @@ var CoolingProfileModal = function (_React$Component) {
                         $("#cooling-profile-form")[0].reset();
                     }
                     $("#cooling-profile").modal("hide");
+                    that.btn.removeAttribute("disabled");
                 }
             }).catch(function (err) {
                 console.log(err);
