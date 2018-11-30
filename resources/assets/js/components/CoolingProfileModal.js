@@ -194,7 +194,7 @@ class CoolingProfileModal extends React.Component {
                                     </td>
                                     <td className="input-fields">
                                        <ul className="list-inline">
-                                          <li className="withunit"><input type="text" placeholder="10.0 kW" required pattern="\d*" className="required-field onlynumeric" name="cooling_base_load_to" id="cooling_base_load_to" /></li>
+                                          <li className="withunit"><input type="text" placeholder="10.0" required pattern="\d*" className="required-field onlynumeric" name="cooling_base_load_to" id="cooling_base_load_to" /><span>kW</span></li>
                                           <li>{this.props.t('CoolingProfile.Tab.TechnicalData.From.Title')} </li>
                                           <li className="withunit"><input type="text" placeholder="10"  required pattern="\d*" className="icon-field required-field onlynumeric" name="cooling_base_load_from" id="cooling_base_load_from" /><span>°C</span></li>
                                        </ul>
@@ -260,7 +260,7 @@ class CoolingProfileModal extends React.Component {
                    <img src="public/images/help-red.png" alt="" />
                    </button>
                 </td>
-                <td className="input-fields"><input type="text" placeholder="16°C" name="cooling_chilled_water" id="cooling_chilled_water"/> </td>
+                <td className="input-fields withunit"><input type="text" placeholder="16" name="cooling_chilled_water" id="cooling_chilled_water"/><span>°C</span> </td>
              </tr>);
         }
 

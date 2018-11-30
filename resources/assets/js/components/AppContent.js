@@ -37,6 +37,7 @@ class AppContent extends Component {
         const that = this;
         e.preventDefault();
         //console.log(data);
+        $('.loading').show();
         fetch('adcalc/storeProjectInformation', {
                 method: 'POST',
                 headers: {
@@ -49,7 +50,9 @@ class AppContent extends Component {
         .then((a) => {return a.json();})
         .then(function (data) {
             console.log(data);
+              $('.loading').hide();
                             if(typeof data.errors=="undefined"){
+
                                 $("#success-modal").modal('show');
                             }
                             else{

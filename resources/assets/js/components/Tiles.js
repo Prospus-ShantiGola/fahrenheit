@@ -162,6 +162,19 @@ class Tiles extends React.Component {
         else{
             jQuery(".scrollbar-macosx").scrollbar();
         }
+
+
+        // if(this.state.generalData.length==0)
+        // {
+          
+        //   this.setState({
+        //       generalDataChange: false
+        //     });
+        // }
+        // else{
+        //     // alert('AAAA')
+        //     jQuery(".scrollbar-macosx").scrollbar();
+        // }
         $(document).on('show.bs.modal','#general-information', function () {
             if(that.props.title==GENERAL_TILE){
                 var dataObj=that.state.generalData[0];
@@ -728,7 +741,7 @@ class Tiles extends React.Component {
                 store.dispatch( addGeneralData(this.state.generalData) )
                 var pricelist = (
 
-                    <ul className="price-listt plnewblock">
+                    <ul className="price-listt plnewblock scrollbar-macosx">
                         <li className="pdtnam">
                             <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
                             <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
@@ -749,7 +762,10 @@ class Tiles extends React.Component {
                     </ul>
 
                 );
-                var priceFullList = (<div className="hover-list">
+               
+                var priceFullList = (
+    
+                    <div className="hover-list scrollbar-macosx">
                     <div className="table-responsive">
 
                         <table className="table">
@@ -785,9 +801,11 @@ class Tiles extends React.Component {
                             </tbody>
                         </table>
                     </div>
-                </div>);
+                </div>  );
+           //     jQuery(".general-information .scrollbar-macosx").scrollbar();
                 var requiredMsg = "";
             }
+           
         }
         if (this.props.title == OPTION_TILE) {
             var pricelist = (
