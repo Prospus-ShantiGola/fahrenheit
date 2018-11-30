@@ -109,7 +109,7 @@ handleGeneralSubmit(event) {
 
                 })
         })
-         .then((a) => {return a.json();})
+        .then((a) => {return a.json();})
         .then(function (data) {
                             $(".general-information-form").find('.invalid-feedback').hide();
                             jQuery.each(data.errors, function(key, value){
@@ -129,7 +129,7 @@ handleGeneralSubmit(event) {
                                // alert('fd')
                                  //jQuery(".general-information .hover-list.scrollbar-macosx").scrollbar();
                                  jQuery(".general-information .scrollbar-macosx").scrollbar();
-                             
+
                             }
         })
         .catch((err) => {console.log(err)})

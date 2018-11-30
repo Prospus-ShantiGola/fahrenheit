@@ -66545,10 +66545,11 @@ var HeatingProfileModal = function (_React$Component) {
                that.setState({
                   HeatingProfile: data
                });
-               that.handleHeatSubmitChange(that.state.HeatingProfile);
                if ($("#heating-profile-form #heatingprofileformMode").val() == "add") {
                   $("#heating-profile-form")[0].reset();
                }
+               that.handleHeatSubmitChange(that.state.HeatingProfile);
+
                $("#heating-profile").modal("hide");
             }
          }).catch(function (err) {
