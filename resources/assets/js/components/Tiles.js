@@ -966,10 +966,35 @@ class Tiles extends React.Component {
                 projectData['option'] = this.state.optionData;
                 var pricelist = (
                     <ul className="price-listt plnewblock">
-                        <li className="pdtnam">
+                       
+
+
+                         {(() => {
+                            if (this.state.optionData[0].option_language != "") {
+                               
+                            if(this.state.optionData[0].option_language =="en" ){
+                                  return (
+                                          <li className="pdtnam">
                             <p>Language</p>
                             <h3 className="textUpper">ENGLISH</h3>
                         </li>
+                                
+                                )
+                            }
+                            else{
+                                return (
+                                                          <li className="pdtnam">
+                            <p>Language</p>
+                            <h3 className="textUpper">ENGLISH</h3>
+                        </li>
+                                                             
+                                )
+
+                            }
+
+                            }
+                        })()}
+
 
                         <li className="pdtnum">
                             <p>BAFA 2018</p>
@@ -991,14 +1016,47 @@ class Tiles extends React.Component {
                 var priceFullList = (<div className="hover-list">
                     <div className="table-responsive">
                         <table className="table">
-                            <tr>
-                                <th>Language: </th>
-                                <td>English</td>
-                            </tr>
-                            <tr>
+                         
+
+
+                             {(() => {
+                            if (this.state.optionData[0].option_language != "") {
+                               
+                            if(this.state.optionData[0].option_language =="en" ){
+                                  return (
+                                          <tr>
+                                    <th>Language: </th>
+                                   <td>English</td></tr>
+                                
+                                )
+                            }
+                            else{
+                                return (
+                                          <tr>
+                                    <th>Language: </th>
+                                   <td>German</td></tr>
+                                
+                                )
+
+                            }
+
+                            }
+                        })()}
+
+                             {(() => {
+                            if (this.state.optionData[0].profile_bafa != "") {
+                                return (
+                                    <tr>
                                 <th>BAFA 2018: </th>
                                 <td>{this.state.optionData[0].profile_bafa}</td>
                             </tr>
+                                )
+                            }
+                        })()}
+
+
+
+                            
                             <tr>
                                 <th>Re-cooling type: </th>
                                 <td>{this.state.optionData[0].profile_recooling}</td>
@@ -1006,7 +1064,7 @@ class Tiles extends React.Component {
                             <tr>
                                 <th>Free cooling: </th>
                                 <td>{this.state.optionData[0].free_recooling}
-                                    (chilled water temperature)
+                                  
                       </td>
                             </tr>
                         </table>
