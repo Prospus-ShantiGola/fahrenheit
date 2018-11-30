@@ -128,8 +128,8 @@ handleGeneralSubmit(event) {
                                 $("#general-information").modal("hide");
                                // alert('fd')
                                  //jQuery(".general-information .hover-list.scrollbar-macosx").scrollbar();
-                                 jQuery(".general-information .scrollbar-macosx").scrollbar();
-
+                                 jQuery(".general-information .hover-list.scrollbar-macosx").scrollbar();
+                                // jQuery(".scrollbar-macosx").scrollbar();
                             }
         })
         .catch((err) => {console.log(err)})

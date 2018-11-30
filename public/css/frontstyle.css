@@ -29,9 +29,16 @@ img {max-width:100%;}
     height: 37px;
     border-left: 1px solid #00618c;
     padding: 9px 5px;
-	width: 52px;
+    width: 52px;
     text-align: center;
+    top: 5px;
 }
+li.withunit span:not(.invalid-feedback) {
+    top: 0px;
+}
+
+
+
 #eco-investment .withunit span {
     width: auto;
 }
@@ -65,13 +72,17 @@ li.pdtnum {
     font-weight: 700;
 }
 .clrs {
-    width: 100%;
-    float: left;
+   clear:both; 
 }
 .single-tab.singletabbox a.nav-link.small.active {
-    background: url(../images/active-tab-122.png) no-repeat !important;
-    text-align: left;
-	    padding-left: 92px;
+    /* background: url(../images/active-tab-122.png) no-repeat !important; */
+    padding-left: 0;
+    width: 260px; 
+    text-align: center;
+    padding-right: 0!important;
+}
+.chiller-div td {
+    width: 33%;
 }
 .single-tab.singletabbox li {
     width: 100% !important;
@@ -735,13 +746,24 @@ h5.input-required {
 .economic-data {
     background: url(../images/gb2.jpg);
 }
-ul.price-listt {
+ ul.price-listt {
     position: absolute;
-    bottom: 8px;
+    bottom: 10px;
     margin: 0;
-    padding: 0;
+    padding: 0; max-height: 170px;
     list-style: none;
 }
+.options .price-listt .clrs {
+    clear: inherit;
+}
+.options .price-listt h3 {
+    height: 27px;
+    overflow: hidden;
+}
+.chiller-div td:first-child {
+    width: 40%;
+}
+
 /*==========================19/9/2018======================*/
 .save-changes-btn a {
     border: 1px solid #005971;
@@ -785,7 +807,7 @@ li.save-changes-btn {
     font-size: 22px;
     font-weight: 500;
     font-family: Roboto;
-    text-transform: capitalize;
+    text-transform: capitalize;     word-wrap: break-word;
 }
 .price-listt h3 span {
     font-weight: 400;
@@ -822,7 +844,7 @@ li.save-changes-btn {
 .data-box:hover .input-required {
    opacity:0;
 }
-.options-hover p {padding-top: 60px;}
+.options-hover p {padding-top: 0px;}
 .data-box:hover .main-hover-box {display:block;}
 .add-icon {
     position: absolute;
@@ -1162,7 +1184,11 @@ h3.inner-table-heading {
     z-index: 9999!important;
 	  background-color: transparent;
 }
-
+.singletabbox li.nav-item {
+    background: url(../images/active-tab-122.png) no-repeat !important;
+    height: 40px;
+    /* padding: 10px; */
+}
 .input-fields textarea {
     color: #00618c;
     font-weight: 400;
@@ -1203,8 +1229,125 @@ td.input-label.text-area-label {
     padding: 0 3px;
 }
 
+/* Absolute Center Spinner */
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 
+/* Transparent Overlay */
+.loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+}
 
+/* :not(:required) hides these rules from IE9 and below */
+.loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.loading:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 1500ms infinite linear;
+  -moz-animation: spinner 1500ms infinite linear;
+  -ms-animation: spinner 1500ms infinite linear;
+  -o-animation: spinner 1500ms infinite linear;
+  animation: spinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 .input-fields ul li {
     float: left;
     padding: 0 3px;
@@ -1213,7 +1356,7 @@ td.input-label.text-area-label {
     color: #00618c;
     font-weight: 400;
     font-size: 14px;
-    padding: 5px 10px;
+    padding: 5px 20px 5px 10px;
     height: 37px;
     outline: none;
     width: 100%;
@@ -1223,7 +1366,7 @@ td.input-label.text-area-label {
     background: url(../images/select-arrow.png);
     background-repeat: no-repeat;
     -webkit-appearance: none; -moz-appearance: none;
-    background-position: 96% 50%;
+    background-position: 98% 50%;
 }
 
 .heating-load-general-div .input-fields ul li:first-child {
@@ -1239,18 +1382,19 @@ td.input-label.text-area-label {
     vertical-align: middle;
     padding-top: 7px;
 }
-
+li.selected-flag img {
+    box-shadow: 0 0 0px 2px #00618C;
+    border-radius: 50%;}
 .heating-load-general-div .input-fields ul li:last-child {
     width: 43%;
 }
-.additional-options, .errorMessages {
-    color: #e73c37 !important;
-    font-size: 12px !important;
-    font-weight: 500 !important;;
+.additional-options {
+    color: #e73c37;
+    font-size: 12px;
+    font-weight: 500;
     margin: 0;
     text-align: center;
     padding-top: 10px;
-    list-style: none;
 }
 
 select.required-field {
@@ -1270,7 +1414,10 @@ select.required-field {
     text-align: center;
     font-weight: 500;
 
-    width: 78%;
+    width: 100%;
+}
+.chiller-div .table table tr td {
+    padding: 0;
 }
 .chiller-div li {
     display: inline-block;
@@ -1395,9 +1542,9 @@ select.required-field {
     padding: 1px 0;
     vertical-align: top;
     border-top: none;
-    color: #fff;
+    color: #fff; width:60%;
     font-size: 14px;     letter-spacing: 0.5px;
-    font-weight: 400; text-align:right;
+    font-weight: 400; text-align:right; word-break: break-all;
 }
 
 .hover-list .table th {
@@ -1411,7 +1558,7 @@ select.required-field {
 
 .hover-list {
     padding-top: 3px;
-    clear: both; height: 137px;
+    clear: both; height: 132px;
 }
 .hover-list table td span {
     font-size: 20px;
@@ -1510,10 +1657,22 @@ select.required-field {
     font-size: 12.5px;
     letter-spacing: 0.5px;
     font-weight: 400;
-    text-align: left;
+    text-align: left;     width: auto;
 }
-
-
+.fahrenheit-system-box ul.price-listt {
+    height: auto;
+    position: inherit;
+    margin-top: 15px;
+}
+.fahrenheit-system-box .hover-list td.edit-optionss {
+    text-align: right!important;
+}
+.fahrenheit-system-hover .hover-list .table td:nth-child(2) {
+    width: 29%;
+}
+.fahrenheit-system-hover .hover-list .table td:nth-child(3) {
+    width: 16%;
+}
 .manual-sysytemm {
     background: #5ca5c5;
     padding: 10px 20px;
@@ -1810,7 +1969,7 @@ span.navbar-toggler-icon::after {
     padding: 5px 5px;}
 
 	.input-fields select {
-    padding: 5px 5px;}
+    padding: 5px 20px 5px 5px;}
 
 	#tabsJustifiedlast li.nav-item img.modal-openn {
     left: 4px;}
@@ -1843,10 +2002,17 @@ ul.navbar-nav.mr-auto {
 }
 
 @media (max-width:576px) {
+	
+.input-fields select {
+    background-position: 95% 50%;
+}	
 .modal-content .nav-tabs.double-tab li:first-child .nav-link.active, .modal-content .nav-tabs.double-tab li:last-child .nav-link.active {
 
     background-size: 100% 85%;
     height: 40px;
+}
+.chiller-div td {
+    width: auto;
 }
 .modal-content .nav-tabs.double-tab li:last-child .nav-link, .modal-content .nav-tabs.double-tab li:first-child .nav-link {
     background: url(../images/inactive-tab-2.jpg) no-repeat;
