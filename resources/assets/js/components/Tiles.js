@@ -379,10 +379,20 @@ class Tiles extends React.Component {
                             <p>{this.props.t('Tiles.CompressionChiller.NumberofCompressor')}</p>
                             <h3>3</h3>
                         </li>
-                        <li>
+
+                          {(() => {
+                            if (this.state.compressionChillerData[0].temperature != "") {
+                                return (
+                                      <li>
                             <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
                             <h3><img src='public/images/degree-icon.png' alt='' /> {(this.state.compressionChillerData[0].temperature != "") ? this.state.compressionChillerData[0].temperature + "°C" : ""}</h3>
                         </li>
+                                )
+                            }
+                        })()}
+
+
+                      
                     </ul>
                 );
                 let chillerData = this.state.compressionChillerData;
@@ -464,10 +474,20 @@ class Tiles extends React.Component {
                 let heatSourceData = this.state.heatSourceData;
                 var pricelist = (
                     <ul className="price-listt scrollbar-macosx">
-                        <li>
-                            <p>{this.props.t('Tiles.HeatSource.HeatCapacity')}</p>
-                            <h3>{heatSourceData[0].heat_capacity} kW</h3>
-                        </li>
+
+                         {(() => {
+                            if (heatSourceData[0].heat_capacity != "") {
+                                return (
+                                    <li>
+                                        <p>{this.props.t('Tiles.HeatSource.HeatCapacity')}</p>
+                                        <h3>{heatSourceData[0].heat_capacity} kW</h3>
+                                    </li>
+                                )
+                            }
+                        })()}
+
+
+                        
                         <li>
                             <p>{this.props.t('Tiles.HeatSource.AvailableHeat')}</p>
                             <h3>1,767,768 kWh/a</h3>
@@ -493,8 +513,16 @@ class Tiles extends React.Component {
                                                 <th>
                                                     {data.heat_name}
                                                     <ul className="list-inline">
-                                                        <li>{data.heat_capacity} kW
+
+                                                      {(() => {
+                            if (data.heat_capacity != "") {
+                                return (
+                                     <li>{data.heat_capacity} kW
                                                       </li>
+                                )
+                            }
+                        })()}
+                                                      
                                                         <li>85°C </li>
                                                     </ul>
                                                 </th>
@@ -655,10 +683,20 @@ class Tiles extends React.Component {
                             <p>Comoression Electricity Cost</p>
                             <h3>33,708 €/a</h3>
                         </li>
-                        <li>
+
+                          {(() => {
+                            if (coolingProfileData[0].cooling_base_load_from != "") {
+                                return (
+                                     <li>
                             <p>Temperature</p>
-                            <h3><img src="public/images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_to}°C</h3>
+                            <h3><img src="public/images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_from}°C</h3>
                         </li>
+                                )
+                            }
+                        })()}
+
+
+                     
                     </ul>
                 );
 
@@ -674,12 +712,17 @@ class Tiles extends React.Component {
                                         {coolingProfileData.map((data, h) => (
                                             <tr key={h} data-id={h}>
                                                 <th>
-                                                    {data.cooling_radiant_cooling_office}
+
+                                                {(data.cooling_radiant_cooling_office != "") ? data.cooling_radiant_cooling_office : ""}
+                                                  
                                                     <ul className="list-inline">
-                                                        <li>{data.cooling_cooling_other}°C
+                                                        <li>
+
+                                                            {(data.cooling_cooling_other != "") ? data.cooling_cooling_other + "°C" : ""}
+
                                                       </li>
-                                                        <li>	{data.cooling_cooling_hours} h</li>
-                                                        <li>{data.cooling_base_load_to} kW</li>
+                                                        <li>  {(data.cooling_cooling_hours != "") ? data.cooling_cooling_hours + "h" : ""}	</li>
+                                                        <li> {(data.cooling_base_load_to != "") ? data.cooling_base_load_to + "kW" : ""} </li>
                                                     </ul>
                                                 </th>
                                                 <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "coolingprofileformMode", hiddenmodekey: "coolingprofileformModeKey" })}></i></span>
@@ -1035,25 +1078,65 @@ class Tiles extends React.Component {
                 var pricelist = (
 
                     <ul className="price-listt plnewblock">
-                        <li className="pdtnam">
+
+
+                     {(() => {
+                            if (this.state.economicData[0].electric_price != "") {
+                                return (
+                                      <li className="pdtnam">
                             <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
                             <h3>{this.state.economicData[0].electric_price}<br />
                                 €/kWh</h3>
                         </li>
-                        <li className="pdtnum">
+
+                                )
+                            }
+                        })()}
+
+
+                         {(() => {
+                            if (this.state.economicData[0].own_usage_of_electricity != "") {
+                                return (
+                                                  <li className="pdtnum">
                             <p>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}</p>
                             <h3>{this.state.economicData[0].own_usage_of_electricity}%</h3>
                         </li>
+
+                                )
+                            }
+                        })()}
+
+                                 
                         <div className="clrs"></div>
-                        <li className="pdtnam">
+
+                         {(() => {
+                            if (this.state.economicData[0].gas_price != "") {
+                                return (
+                           <li className="pdtnam">
                             <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
                             <h3>{this.state.economicData[0].gas_price}<br />
                                 €/kWh</h3>
                         </li>
-                        <li className="pdtnum">
+
+                                )
+                            }
+                        })()}
+
+                         {(() => {
+                            if (this.state.economicData[0].subsidy_for_electricity != "") {
+                                return (
+                           <li className="pdtnum">
                             <p>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</p>
                             <h3>{this.state.economicData[0].subsidy_for_electricity}</h3>
                         </li>
+
+                                )
+                            }
+                        })()}
+
+
+                       
+                        
                     </ul>
 
                 );
@@ -1062,22 +1145,54 @@ class Tiles extends React.Component {
 
                         <table className="table">
                             <tbody>
-                                <tr>
+
+                             {(() => {
+                            if (this.state.economicData[0].electric_price != "") {
+                                return (
+                                   <tr>
                                     <th>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}:</th>
                                     <td>{this.state.economicData[0].electric_price} €/kWh</td>
                                 </tr>
-                                <tr>
+                                )
+                            }
+                        })()}
+
+                               {(() => {
+                            if (this.state.economicData[0].gas_price != "") {
+                                return (
+                                  <tr>
                                     <th>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}:</th>
                                     <td>{this.state.economicData[0].gas_price} €/kWh</td>
                                 </tr>
-                                <tr>
+                                )
+                            }
+                        })()}
+
+                           {(() => {
+                            if (this.state.economicData[0].own_usage_of_electricity != "") {
+                                return (
+                                 <tr>
                                     <th>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}: </th>
                                     <td>{this.state.economicData[0].own_usage_of_electricity}%</td>
                                 </tr>
-                                <tr>
+                                )
+                            }
+                        })()}
+
+                             {(() => {
+                            if (this.state.economicData[0].subsidy_for_electricity != "") {
+                                return (
+                                  <tr>
                                     <th>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</th>
                                     <td>{this.state.economicData[0].subsidy_for_electricity}</td>
                                 </tr>
+                                )
+                            }
+                        })()}
+                               
+                                
+                               
+                              
                             </tbody>
                         </table>
                     </div>
