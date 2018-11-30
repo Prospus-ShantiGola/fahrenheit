@@ -87,8 +87,60 @@ class GeneralModal extends Component {
 
 
 
+          showAllGenSourceErrorMessages() {
+    var form = $("form.general-information-form"),
+        errorList = $("ul.errorMessages", form),
+        errorFound = true;
 
+    errorList.removeClass("hide");
+    errorList.empty();
+    // Find all invalid fields within the form.
+    var invalidFields = form.find(":invalid").each(function(index, node) {
+        // Find the field's corresponding label
+        var label = $("#" + node.id)
+                .parent("td")
+                .prev(),
+            tabId = $("#" + node.id)
+                .parents("div.tab-pane")
+                .attr("id"),
+            // Opera incorrectly does not fill the validationMessage property.
+            message = node.validationMessage || "Invalid value.";
+        var tabTitle = $("a[data-target='#" + tabId + "']").text();
+
+        if (label.hasClass("input-help-label")) {
+            label = label.prev("td.input-label");
+        }
+        var fieldLabel = label.text();
+        fieldLabel = fieldLabel.replace(":", "");
+        var errorStr="";
+        if(node.type!="email"){
+        errorStr= (message=="Please provide value" || message=="Please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
+        }
+        else{
+            if($.trim(node.value)==""){
+            errorStr="Please provide value"
+            }
+            else{
+                errorStr="Please provide valid email address."
+            }
+        }
+        errorList
+            .show()
+            .append(
+                "<li>"+errorStr+" in '" +
+                    fieldLabel +
+                    "' field of " +
+                    tabTitle +
+                    " tab</li>"
+            );
+        errorFound = false;
+    });
+    return errorFound;
+}
 handleGeneralSubmit(event) {
+    if (!this.showAllGenSourceErrorMessages()) {
+        return false;
+    }
     event.preventDefault();
     const that = this;
 
@@ -165,7 +217,7 @@ handleGeneralSubmit(event) {
         return (
             <div className="modal " role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="general-information">
             <div className="modal-dialog ">
-            <form  onSubmit={this.handleGeneralSubmit} className = "general-information-form">
+            <form  className = "general-information-form">
 
            <div className="modal-content">
             <div className="modal-heading">
@@ -174,7 +226,7 @@ handleGeneralSubmit(event) {
                   <ul className="list-inline">
 
                     {/* <li className="help-toggle"><img src="public/images/help-icon.png" alt="no-image" /></li> */}
-                     <li> <input className="save-changes-btn" type="submit" alt="Submit" value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
+                     <li> <input className="save-changes-btn" type="submit" alt="Submit" onClick={this.handleGeneralSubmit} value={this.props.t('SaveButton')} title={this.props.t('SaveButton')}/></li>
                       <li><span className="close close_multi"><img src="public/images/cancle-icon.png" alt="" className="close-modal-general"  aria-label="Close"/></span></li>
 
                   </ul>
@@ -251,7 +303,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email" title={this.props.t('RequiredField.ErrorMsg')} name = "email_address" id = "email_address" required  className="required-field" placeholder={this.props.t('General.Tab.Project.ProjectEmail.Placeholder')} /></td>
+                                 <td className="input-fields"><input type="email" title={this.props.t('RequiredField.ErrorMsg')} name = "email_address" id = "email_address" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required   className="required-field" placeholder={this.props.t('General.Tab.Project.ProjectEmail.Placeholder')} /></td>
                               </tr>
                                       </tbody>
                            </table>
@@ -323,7 +375,10 @@ handleGeneralSubmit(event) {
                   </div>
                </div>
             </div>
-            <div style={Header}>{this.props.t('RequiredField.Note')}</div>
+
+            <ul className="errorMessages hide">
+            {this.props.t('ErrorMessage')}
+                                </ul>
          </div>
 
             </form>
