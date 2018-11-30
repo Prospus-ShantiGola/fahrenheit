@@ -359,15 +359,22 @@ class AdcalcController extends Controller
         return number_format((float)$COP, 4, '.', '');
     }
 
-
+    /**
+     * Calculation for CWU cost
+     *
+     */
     function calculateCWUCost(){
         $Fcwu= 4732.2487*pow(QN_CWU, -0.7382)+109.3;
+        //Investment costs
         $kcwuinvestment= QN_CWU*$Fcwu;
+        //Maintenance costs
         $kcwumaintainence= QN_CWUmax*$Fcwu;
         return Response::json(array('investment'=>$kcwuinvestment,'maintenence'=>$$kcwuinvestment));
-
     }
-
+    /***
+     * Calculation for CHP cos.
+     *
+     */
     function calculateCHPCost($electricCapacity)
     {
         //The costs of module are calculated by:
@@ -378,7 +385,24 @@ class AdcalcController extends Controller
         $ki=$km*0.39;
         $chpCost=$km+$kt+$ki;
         return Response::json(array('cost'=>$chpCost));
+    }
 
+    function calculateAdsorptionSystem($Tn_AirIn, $Tn_AirInMin, $Tn_MtInMin,$Qth_NomSt, $dT_NomSt, $n_St,$Qth_NomRk, $dT_NomRk, $n_Rk){
+
+        if($Tn_AirIn < $Tn_AirInMin ){
+            $Set_MtIn = 1;
+            $Tn_MtIn =  $Tn_MtInMin;
+            $Qth_MtRk1 = 0;
+        }
+        else{
+
+                $dT_St = $dT_NomSt;
+                $dT_RkMin = $dT_NomRk;
+                $Qth_MtRk1 = 0;
+                $Set_MtIn = 0;
+
+
+        }
 
     }
 
