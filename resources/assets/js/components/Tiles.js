@@ -803,6 +803,7 @@ class Tiles extends React.Component {
                                 )
                             }
                         })()}
+
                         {(() => {
                             if (this.state.generalData[0].project_number != "") {
                                 return (
@@ -814,26 +815,66 @@ class Tiles extends React.Component {
                             }
                         })()}
 
-                                <tr>
+
+                         {(() => {
+                            if (this.state.generalData[0].editor != "") {
+                                return (
+                                    <tr>
                                     <th>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}: </th>
                                     <td>{this.state.generalData[0].editor}</td>
                                 </tr>
-                                <tr>
+                                )
+                            }
+                        })()}
+
+
+                         {(() => {
+                            if (this.state.generalData[0].location != "") {
+                                return (
+                                   <tr>
                                     <th>{this.props.t('General.Tab.Project.ProjectLocation.Title')}:</th>
                                     <td>{this.state.generalData[0].location}</td>
                                 </tr>
-                                <tr>
+                                )
+                            }
+                        })()}
+
+                        {(() => {
+                            if (this.state.generalData[0].customer != "") {
+                                return (
+                                  <tr>
                                     <th>{this.props.t('General.Tab.Project.ProjectContact.Title')}: </th>
                                     <td>{this.state.generalData[0].customer}</td>
                                 </tr>
-                                <tr>
+                                )
+                            }
+                        })()}
+
+                         {(() => {
+                            if (this.state.generalData[0].phone_number != "") {
+                                return (
+                                 <tr>
                                     <th>{this.props.t('General.Tab.Project.ProjectPhone.Title')}:</th>
                                     <td>{this.state.generalData[0].phone_number}</td>
                                 </tr>
+                                )
+                            }
+                        })()}
+                               
+                              {(() => {
+                            if (this.state.generalData[0].email_address != "") {
+                                return (
                                 <tr>
                                     <th>{this.props.t('General.Tab.Project.ProjectEmail.Title')}:</th>
                                     <td>{this.state.generalData[0].email_address}</td>
                                 </tr>
+                                )
+                            }
+                            })()} 
+                                
+                                
+                                
+                                
                             </tbody>
                         </table>
                     </div>
