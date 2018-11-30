@@ -771,7 +771,7 @@ class Tiles extends React.Component {
                     </ul>
 
                 );
-             //   jQuery(".general-information .price-listt.scrollbar-macosx").scrollbar();
+
                 var priceFullList = (
 
                     <div className="hover-list scrollbar-macosx">

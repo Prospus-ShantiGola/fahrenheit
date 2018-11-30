@@ -908,12 +908,12 @@ class EconomicModal extends Component {
                                                         <td className="input-fields withunit">
                                                             <input
                                                                 type="text"
-                                                                pattern="\d*"
+                                                                pattern="\d+(\.\d{0,5})?"
                                                                 className="onlynumeric"
                                                                 placeholder="0.180"
                                                                 name="electric_price"
                                                                 id="electric_price"
-                                                                value="0.1800"
+                                                                defaultValue="0.1800"
                                                             />
                                                             <span>€/kWh</span>
                                                             <input
@@ -1026,12 +1026,12 @@ class EconomicModal extends Component {
                                                         <td className="input-fields withunit">
                                                             <input
                                                                 type="text"
-                                                                pattern="\d*"
+                                                                pattern="\d+(\.\d{0,5})?"
                                                                 className="onlynumeric"
                                                                 placeholder="0.03500"
                                                                 name="gas_price"
                                                                 id="gas_price"
-                                                                value="0.035"
+                                                                defaultValue="0.035"
                                                             />
                                                             <span>€/kWh</span>
                                                         </td>

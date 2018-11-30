@@ -390,12 +390,9 @@ class AdcalcController extends Controller
     function calculateAdsorptionSystem($Tn_AirIn, $Tn_AirInMin, $Tn_MtInMin,$Qth_NomSt, $dT_NomSt, $n_St,$Qth_NomRk, $dT_NomRk, $n_Rk){
 
         if($Tn_AirIn < $Tn_AirInMin ){
-            $Set_MtIn = 1;
-            $Tn_MtIn =  $Tn_MtInMin;
-            $Qth_MtRk1 = 0;
+           $valueSetArr= setValueOnTrue($Tn_MtInMin);
         }
         else{
-
                 $dT_St = $dT_NomSt;
                 $dT_RkMin = $dT_NomRk;
                 $Qth_MtRk1 = 0;
@@ -403,6 +400,13 @@ class AdcalcController extends Controller
                 $Tn_MtIn = $Tn_AirIn + $dT_St + $dT_RkMin;
         }
 
+    }
+
+    function setValueOnTrue(){
+            $Set_MtIn = 1;
+            $Tn_MtIn =  $Tn_MtInMin;
+            $Qth_MtRk1 = 0;
+            return array('Set_MtIn'=>$Set_MtIn,'Tn_MtIn'=>$Tn_MtIn,'Qth_MtRk1'=>$Qth_MtRk1);
     }
 
 

@@ -37857,6 +37857,7 @@ var AppContent = function (_Component) {
             var that = this;
             e.preventDefault();
             //console.log(data);
+            $('.loading').show();
             fetch('adcalc/storeProjectInformation', {
                 method: 'POST',
                 headers: {
@@ -37869,7 +37870,9 @@ var AppContent = function (_Component) {
                 return a.json();
             }).then(function (data) {
                 console.log(data);
+                $('.loading').hide();
                 if (typeof data.errors == "undefined") {
+
                     $("#success-modal").modal('show');
                 } else {
                     $("#message-popup-modal").modal('show');
@@ -57487,7 +57490,8 @@ var Breadcrumb = function (_Component) {
                                 "Adcalc"
                             )
                         )
-                    )
+                    ),
+                    _react2.default.createElement("div", { className: "loading hide" })
                 )
             );
         }
@@ -58156,6 +58160,18 @@ var Tiles = function (_React$Component) {
             } else {
                 jQuery(".scrollbar-macosx").scrollbar();
             }
+
+            // if(this.state.generalData.length==0)
+            // {
+
+            //   this.setState({
+            //       generalDataChange: false
+            //     });
+            // }
+            // else{
+            //     // alert('AAAA')
+            //     jQuery(".scrollbar-macosx").scrollbar();
+            // }
             $(document).on('show.bs.modal', '#general-information', function () {
                 if (that.props.title == GENERAL_TILE) {
                     var dataObj = that.state.generalData[0];
@@ -59016,24 +59032,28 @@ var Tiles = function (_React$Component) {
 
                 if (this.state.generalDataChange) {
                     projectData['generalData'] = this.state.generalData;
-                    //store.dispatch( addGeneralData(this.state.generalData) )
+                    store.dispatch(addGeneralData(this.state.generalData));
                     var pricelist = _react2.default.createElement(
                         'ul',
                         { className: 'price-listt plnewblock scrollbar-macosx' },
-                        _react2.default.createElement(
-                            'li',
-                            { className: 'pdtnam' },
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                this.props.t('General.Tab.Project.ProjectName.Title')
-                            ),
-                            _react2.default.createElement(
-                                'h3',
-                                { className: 'textUpper' },
-                                this.state.generalData[0].project_name
-                            )
-                        ),
+                        function () {
+                            if (_this2.state.generalData[0].project_name != "") {
+                                return _react2.default.createElement(
+                                    'li',
+                                    { className: 'pdtnam' },
+                                    _react2.default.createElement(
+                                        'p',
+                                        null,
+                                        _this2.props.t('General.Tab.Project.ProjectName.Title')
+                                    ),
+                                    _react2.default.createElement(
+                                        'h3',
+                                        { className: 'textUpper' },
+                                        _this2.state.generalData[0].project_name
+                                    )
+                                );
+                            }
+                        }(),
                         _react2.default.createElement(
                             'li',
                             { className: 'pdtnum' },
@@ -59078,6 +59098,7 @@ var Tiles = function (_React$Component) {
                             )
                         )
                     );
+
                     var priceFullList = _react2.default.createElement(
                         'div',
                         { className: 'hover-list scrollbar-macosx' },
@@ -59090,21 +59111,25 @@ var Tiles = function (_React$Component) {
                                 _react2.default.createElement(
                                     'tbody',
                                     null,
-                                    _react2.default.createElement(
-                                        'tr',
-                                        null,
-                                        _react2.default.createElement(
-                                            'th',
-                                            null,
-                                            this.props.t('General.Tab.Project.ProjectName.Title'),
-                                            ':'
-                                        ),
-                                        _react2.default.createElement(
-                                            'td',
-                                            null,
-                                            this.state.generalData[0].project_name
-                                        )
-                                    ),
+                                    function () {
+                                        if (_this2.state.generalData[0].project_name != "") {
+                                            return _react2.default.createElement(
+                                                'tr',
+                                                null,
+                                                _react2.default.createElement(
+                                                    'th',
+                                                    null,
+                                                    _this2.props.t('General.Tab.Project.ProjectName.Title'),
+                                                    ':'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'td',
+                                                    null,
+                                                    _this2.state.generalData[0].project_name
+                                                )
+                                            );
+                                        }
+                                    }(),
                                     _react2.default.createElement(
                                         'tr',
                                         null,
@@ -59199,6 +59224,7 @@ var Tiles = function (_React$Component) {
                             )
                         )
                     );
+                    //     jQuery(".general-information .scrollbar-macosx").scrollbar();
                     var requiredMsg = "";
                 }
             }
@@ -62861,6 +62887,9 @@ var GeneralModal = function (_Component) {
                that.changeState(that.state.generalInformation);
                GENERAL_FORM_STATUS = true;
                $("#general-information").modal("hide");
+               // alert('fd')
+               //jQuery(".general-information .hover-list.scrollbar-macosx").scrollbar();
+               jQuery(".general-information .scrollbar-macosx").scrollbar();
             }
          }).catch(function (err) {
             console.log(err);
@@ -64475,12 +64504,12 @@ var EconomicModal = function (_Component) {
                                                             { className: 'input-fields withunit' },
                                                             _react2.default.createElement('input', {
                                                                 type: 'text',
-                                                                pattern: '\\d*',
+                                                                pattern: '\\d+(\\.\\d{0,5})?',
                                                                 className: 'onlynumeric',
                                                                 placeholder: '0.180',
                                                                 name: 'electric_price',
                                                                 id: 'electric_price',
-                                                                title: 'Username should only contain lowercase letters. e.g. john'
+                                                                defaultValue: '0.1800'
                                                             }),
                                                             _react2.default.createElement(
                                                                 'span',
@@ -64643,11 +64672,12 @@ var EconomicModal = function (_Component) {
                                                             { className: 'input-fields withunit' },
                                                             _react2.default.createElement('input', {
                                                                 type: 'text',
-                                                                pattern: '\\d*',
+                                                                pattern: '\\d+(\\.\\d{0,5})?',
                                                                 className: 'onlynumeric',
                                                                 placeholder: '0.03500',
                                                                 name: 'gas_price',
-                                                                id: 'gas_price'
+                                                                id: 'gas_price',
+                                                                defaultValue: '0.035'
                                                             }),
                                                             _react2.default.createElement(
                                                                 'span',
@@ -67283,7 +67313,12 @@ var CoolingProfileModal = function (_React$Component) {
                                             _react2.default.createElement(
                                                 'li',
                                                 { className: 'withunit' },
-                                                _react2.default.createElement('input', { type: 'text', placeholder: '10.0 kW', required: true, pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_base_load_to', id: 'cooling_base_load_to' })
+                                                _react2.default.createElement('input', { type: 'text', placeholder: '10.0', required: true, pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_base_load_to', id: 'cooling_base_load_to' }),
+                                                _react2.default.createElement(
+                                                    'span',
+                                                    null,
+                                                    'kW'
+                                                )
                                             ),
                                             _react2.default.createElement(
                                                 'li',
@@ -67466,8 +67501,13 @@ var CoolingProfileModal = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         'td',
-                        { className: 'input-fields' },
-                        _react2.default.createElement('input', { type: 'text', placeholder: '16\xB0C', name: 'cooling_chilled_water', id: 'cooling_chilled_water' }),
+                        { className: 'input-fields withunit' },
+                        _react2.default.createElement('input', { type: 'text', placeholder: '16', name: 'cooling_chilled_water', id: 'cooling_chilled_water' }),
+                        _react2.default.createElement(
+                            'span',
+                            null,
+                            '\xB0C'
+                        ),
                         ' '
                     )
                 );
@@ -67882,7 +67922,9 @@ var OptionsModal = function (_Component) {
       });
 
       jQuery('.choose-language').on('click', function (e) {
+        $('.choose-language').removeClass('selected-flag');
         var language_select = $(this).data('language');
+        $(this).addClass('selected-flag');
         $(this).closest('ul').siblings('#option_language').val(language_select);
       });
       $('.close-modal-options').on('click', function (e) {
@@ -68122,7 +68164,7 @@ var OptionsModal = function (_Component) {
                                 { className: 'list-inline' },
                                 _react2.default.createElement(
                                   'li',
-                                  { 'data-language': 'de', className: 'choose-language' },
+                                  { 'data-language': 'de', className: 'choose-language ' },
                                   _react2.default.createElement('img', { src: 'public/images/germany-flag.png', alt: '' })
                                 ),
                                 _react2.default.createElement(
@@ -69122,7 +69164,7 @@ var FahrenheitSystemModal = function (_React$Component) {
                                                 this.props.t('Fahrenheit.Tab.Recooling.Title')
                                             ),
                                             ' ',
-                                            _react2.default.createElement('img', { src: 'public/images/cacli-icon.png', alt: 'caculator', onClick: this.callApi })
+                                            _react2.default.createElement('img', { src: 'public/images/cacli-icon.png', alt: 'caculator' })
                                         ),
                                         _react2.default.createElement(
                                             'div',
@@ -69249,7 +69291,7 @@ var FahrenheitSystemModal = function (_React$Component) {
                                                                     _react2.default.createElement(
                                                                         'p',
                                                                         null,
-                                                                        _this2.props.t('Fahrenheit.Tab.Chiller.CompressionChillerProductGroup.Title')
+                                                                        _this2.props.t('Fahrenheit.Tab.Chiller.CompressionChillerGroup.Title')
                                                                     )
                                                                 ),
                                                                 _react2.default.createElement('td', null),
