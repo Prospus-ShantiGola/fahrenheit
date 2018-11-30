@@ -754,16 +754,29 @@ class Tiles extends React.Component {
                         })()}
 
 
-
-                        <li className="pdtnum">
+                        {(() => {
+                            if (this.state.generalData[0].project_number != "") {
+                                return (
+                                    <li className="pdtnum">
                             <p>{this.props.t('General.Tab.Project.ProjectNumber.Title')}</p>
                             <h3 className="textUpper">{this.state.generalData[0].project_number}</h3>
                         </li>
+                                )
+                            }
+                        })()}
+
                         <div className="clrs"></div>
-                        <li>
-                            <p>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}</p>
-                            <h3 className="textUpper">{this.state.generalData[0].editor}</h3>
-                        </li>
+                        {(() => {
+                            if (this.state.generalData[0].editor != "") {
+                                return (
+                                    <li>
+                                    <p>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}</p>
+                                    <h3 className="textUpper">{this.state.generalData[0].editor}</h3>
+                                </li>
+                                )
+                            }
+                        })()}
+
                         <li>
                             <p>{this.props.t('General.Tab.Project.ProjectLocation.Title')}</p>
                             <h3 className="textUpper">{this.state.generalData[0].location}</h3>
@@ -790,10 +803,17 @@ class Tiles extends React.Component {
                                 )
                             }
                         })()}
-                                <tr>
+                        {(() => {
+                            if (this.state.generalData[0].project_number != "") {
+                                return (
+                                    <tr>
                                     <th>{this.props.t('General.Tab.Project.ProjectNumber.Title')}:</th>
                                     <td>{this.state.generalData[0].project_number}</td>
                                 </tr>
+                                )
+                            }
+                        })()}
+
                                 <tr>
                                     <th>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}: </th>
                                     <td>{this.state.generalData[0].editor}</td>

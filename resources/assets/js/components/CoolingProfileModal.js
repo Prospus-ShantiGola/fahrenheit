@@ -149,6 +149,9 @@ class CoolingProfileModal extends React.Component {
                                     CoolingProfile:data
                                 })
                                 that.handleCoolingSubmitChange(that.state.CoolingProfile);
+                                if ($("#cooling-profile-form #coolingprofileformMode").val() =="add") {
+                                    $("#cooling-profile-form")[0].reset();
+                                }
                                 $("#cooling-profile").modal("hide");
 
                             }

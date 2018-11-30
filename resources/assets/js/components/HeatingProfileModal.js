@@ -164,6 +164,9 @@ class HeatingProfileModal extends React.Component {
                                     HeatingProfile:data
                                 })
                                 that.handleHeatSubmitChange(that.state.HeatingProfile);
+                                if ($("#heating-profile-form #heatingprofileformMode").val() =="add") {
+                                    $("#heating-profile-form")[0].reset();
+                                }
                                 $("#heating-profile").modal("hide");
 
                             }

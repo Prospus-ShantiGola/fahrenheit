@@ -155,6 +155,9 @@ class HeatSourceModal extends React.Component {
                                     heatSource:data
                                 })
                                 that.handleHeatSubmitChange(that.state.heatSource);
+                                if ($("#heat-source-form #heatsourceformMode").val() =="add") {
+                                    $("#heat-source-form")[0].reset();
+                                }
                                 $("#heat-source").modal("hide");
 
                             }
