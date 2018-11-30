@@ -331,7 +331,7 @@ class FahrenheitSystemModal extends React.Component {
                                                                         <tr>
                                                                             <td>
 
-                                                                                <p>{this.props.t('Fahrenheit.Tab.Chiller.CompressionChillerProductGroup.Title')}</p>
+                                                                                <p>{this.props.t('Fahrenheit.Tab.Chiller.CompressionChillerGroup.Title')}</p>
 
                                                                             </td>
                                                                             <td></td>
