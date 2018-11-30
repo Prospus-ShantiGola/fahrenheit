@@ -63551,7 +63551,7 @@ var GeneralModal = function (_Component) {
                                              _react2.default.createElement(
                                                 'td',
                                                 { className: 'input-fields' },
-                                                _react2.default.createElement('input', { type: 'email', required: true, className: 'required-field', name: 'personal_email_address', id: 'personal_email_address', pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$', placeholder: this.props.t('General.Tab.Personal.PersonalEmail.Placeholder') })
+                                                _react2.default.createElement('input', { type: 'email', required: true, className: 'required-field emailfield', name: 'personal_email_address', id: 'personal_email_address', pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$', placeholder: this.props.t('General.Tab.Personal.PersonalEmail.Placeholder') })
                                              )
                                           )
                                        )
@@ -69013,7 +69013,9 @@ var FahrenheitSystemModal = function (_React$Component) {
             },
             HeatingProfile: '',
             selectedSource: selectedSource,
-            persons: [] };
+            compressionArr: [],
+            recoolerArr: []
+        };
         _this.handleFahrenheitSubmit = _this.handleFahrenheitSubmit.bind(_this);
         _this.handleHeatSubmitChange = _this.handleHeatSubmitChange.bind(_this);
         _this.changeField = _this.changeField.bind(_this);
@@ -69277,10 +69279,10 @@ var FahrenheitSystemModal = function (_React$Component) {
             var recoolerArray = [];
             recoolerArray.push(this.groupBy(this.state.recoolerStateChange.recoolerRecord, 'recooler_product'));
 
-            var that = this;
             projectData['chillerInfo'] = this.state.chillerStateChange.chillerRecord;
             projectData['recooling'] = this.state.recoolerStateChange.recoolerRecord;
-
+            var counter = addSorptionArray.length;
+            var that = this;
             return _react2.default.createElement(
                 'div',
                 null,
@@ -69529,7 +69531,7 @@ var FahrenheitSystemModal = function (_React$Component) {
                                                                             'span',
                                                                             { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': '#add-chiller' },
                                                                             _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                                    return _this2.editHeatRecord(h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey", modalId: "add-chiller" });
+                                                                                    return _this2.editHeatRecord(that.counter + h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey", modalId: "add-chiller" });
                                                                                 } })
                                                                         )
                                                                     ),

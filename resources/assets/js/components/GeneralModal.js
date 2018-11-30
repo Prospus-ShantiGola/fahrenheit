@@ -366,7 +366,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email"  required  className="required-field" name = "personal_email_address" id = "personal_email_address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder={this.props.t('General.Tab.Personal.PersonalEmail.Placeholder')} /></td>
+                                 <td className="input-fields"><input type="email"  required  className="required-field emailfield" name = "personal_email_address" id = "personal_email_address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder={this.props.t('General.Tab.Personal.PersonalEmail.Placeholder')} /></td>
                               </tr>
                                       </tbody>
                            </table>

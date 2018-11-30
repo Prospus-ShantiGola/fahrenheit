@@ -23,7 +23,9 @@ class FahrenheitSystemModal extends React.Component {
             },
             HeatingProfile: '',
             selectedSource:selectedSource,
-            persons: []};
+        compressionArr:[],
+        recoolerArr:[]
+        };
         this.handleFahrenheitSubmit = this.handleFahrenheitSubmit.bind(this);
         this.handleHeatSubmitChange = this.handleHeatSubmitChange.bind(this);
         this.changeField = this.changeField.bind(this);
@@ -252,10 +254,11 @@ class FahrenheitSystemModal extends React.Component {
         let recoolerArray=[];
         recoolerArray.push(this.groupBy(this.state.recoolerStateChange.recoolerRecord,'recooler_product'));
 
-        var that=this;
+
         projectData['chillerInfo']=this.state.chillerStateChange.chillerRecord;
         projectData['recooling']=this.state.recoolerStateChange.recoolerRecord;
-
+        var counter=addSorptionArray.length;
+        var that=this;
         return (
             <div>
 
@@ -343,7 +346,9 @@ class FahrenheitSystemModal extends React.Component {
                                                                 }
                                                             })()}
 
-                                                    {compressionArray.map((data, h) => (
+                                                    {
+
+                                                        compressionArray.map((data, h) => (
                                                         <tr key={h} data-id={h}>
 
                                                             <td>
@@ -354,7 +359,7 @@ class FahrenheitSystemModal extends React.Component {
                                                             </td>
                                                             <td>
                                                                 <ul className="list-inline">
-                                                                    <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-chiller" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey",modalId:"add-chiller"  })}></i></span></li>
+                                                                    <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-chiller" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord((that.counter + h), { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey",modalId:"add-chiller"  })}></i></span></li>
                                                                     <li> <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span></li>
                                                                     <li><span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span></li>
                                                                 </ul>
