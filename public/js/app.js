@@ -65762,7 +65762,7 @@ var HeatSourceModal = function (_React$Component) {
                     )
                 );
             }
-            if (this.state.selectedSource == "CHP plant" || this.props.role == "expert") {
+            if (this.state.selectedSource == "CHP plant" && this.props.role == "expert") {
                 var conditionalCHPField = _react2.default.createElement(
                     'tr',
                     null,

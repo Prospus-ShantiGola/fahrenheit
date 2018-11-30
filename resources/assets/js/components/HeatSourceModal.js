@@ -228,7 +228,7 @@ class HeatSourceModal extends React.Component {
                </tr>
            );
         }
-        if(this.state.selectedSource=="CHP plant" || this.props.role=="expert"){
+        if(this.state.selectedSource=="CHP plant" && this.props.role=="expert"){
             var conditionalCHPField=(
                 <tr>
                     <td className="nested-table"
