@@ -166,7 +166,7 @@ class Tiles extends React.Component {
 
         // if(this.state.generalData.length==0)
         // {
-          
+
         //   this.setState({
         //       generalDataChange: false
         //     });
@@ -742,10 +742,19 @@ class Tiles extends React.Component {
                 var pricelist = (
 
                     <ul className="price-listt plnewblock scrollbar-macosx">
-                        <li className="pdtnam">
-                            <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
-                            <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
-                        </li>
+                        {(() => {
+                            if (this.state.generalData[0].project_name != "") {
+                                return (
+                                    <li className="pdtnam">
+                                        <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
+                                        <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
+                                    </li>
+                                )
+                            }
+                        })()}
+
+
+
                         <li className="pdtnum">
                             <p>{this.props.t('General.Tab.Project.ProjectNumber.Title')}</p>
                             <h3 className="textUpper">{this.state.generalData[0].project_number}</h3>
@@ -762,18 +771,25 @@ class Tiles extends React.Component {
                     </ul>
 
                 );
-               
+
                 var priceFullList = (
-    
+
                     <div className="hover-list scrollbar-macosx">
                     <div className="table-responsive">
 
                         <table className="table">
                             <tbody>
-                                <tr>
+
+                            {(() => {
+                            if (this.state.generalData[0].project_name != "") {
+                                return (
+                                    <tr>
                                     <th>{this.props.t('General.Tab.Project.ProjectName.Title')}:</th>
                                     <td>{this.state.generalData[0].project_name}</td>
                                 </tr>
+                                )
+                            }
+                        })()}
                                 <tr>
                                     <th>{this.props.t('General.Tab.Project.ProjectNumber.Title')}:</th>
                                     <td>{this.state.generalData[0].project_number}</td>
@@ -805,7 +821,7 @@ class Tiles extends React.Component {
            //     jQuery(".general-information .scrollbar-macosx").scrollbar();
                 var requiredMsg = "";
             }
-           
+
         }
         if (this.props.title == OPTION_TILE) {
             var pricelist = (

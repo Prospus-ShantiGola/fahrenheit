@@ -59036,20 +59036,24 @@ var Tiles = function (_React$Component) {
                     var pricelist = _react2.default.createElement(
                         'ul',
                         { className: 'price-listt plnewblock scrollbar-macosx' },
-                        _react2.default.createElement(
-                            'li',
-                            { className: 'pdtnam' },
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                this.props.t('General.Tab.Project.ProjectName.Title')
-                            ),
-                            _react2.default.createElement(
-                                'h3',
-                                { className: 'textUpper' },
-                                this.state.generalData[0].project_name
-                            )
-                        ),
+                        function () {
+                            if (_this2.state.generalData[0].project_name != "") {
+                                return _react2.default.createElement(
+                                    'li',
+                                    { className: 'pdtnam' },
+                                    _react2.default.createElement(
+                                        'p',
+                                        null,
+                                        _this2.props.t('General.Tab.Project.ProjectName.Title')
+                                    ),
+                                    _react2.default.createElement(
+                                        'h3',
+                                        { className: 'textUpper' },
+                                        _this2.state.generalData[0].project_name
+                                    )
+                                );
+                            }
+                        }(),
                         _react2.default.createElement(
                             'li',
                             { className: 'pdtnum' },
@@ -59107,21 +59111,25 @@ var Tiles = function (_React$Component) {
                                 _react2.default.createElement(
                                     'tbody',
                                     null,
-                                    _react2.default.createElement(
-                                        'tr',
-                                        null,
-                                        _react2.default.createElement(
-                                            'th',
-                                            null,
-                                            this.props.t('General.Tab.Project.ProjectName.Title'),
-                                            ':'
-                                        ),
-                                        _react2.default.createElement(
-                                            'td',
-                                            null,
-                                            this.state.generalData[0].project_name
-                                        )
-                                    ),
+                                    function () {
+                                        if (_this2.state.generalData[0].project_name != "") {
+                                            return _react2.default.createElement(
+                                                'tr',
+                                                null,
+                                                _react2.default.createElement(
+                                                    'th',
+                                                    null,
+                                                    _this2.props.t('General.Tab.Project.ProjectName.Title'),
+                                                    ':'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'td',
+                                                    null,
+                                                    _this2.state.generalData[0].project_name
+                                                )
+                                            );
+                                        }
+                                    }(),
                                     _react2.default.createElement(
                                         'tr',
                                         null,
