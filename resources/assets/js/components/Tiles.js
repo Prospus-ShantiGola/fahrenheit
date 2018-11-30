@@ -271,7 +271,8 @@ class Tiles extends React.Component {
     }
     editHeatRecord(elemKey,modalID){
         let dataObj="";
-        switch (elemKey) {
+        let elemModal=modalID.hiddenmodekey;
+        switch (elemModal) {
             case 'heatsourceformModeKey':
                 dataObj = this.state.heatSourceData[elemKey];
                 break;

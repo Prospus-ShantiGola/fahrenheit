@@ -58271,7 +58271,8 @@ var Tiles = function (_React$Component) {
         key: 'editHeatRecord',
         value: function editHeatRecord(elemKey, modalID) {
             var dataObj = "";
-            switch (elemKey) {
+            var elemModal = modalID.hiddenmodekey;
+            switch (elemModal) {
                 case 'heatsourceformModeKey':
                     dataObj = this.state.heatSourceData[elemKey];
                     break;
@@ -62901,7 +62902,8 @@ var GeneralModal = function (_Component) {
                $("#general-information").modal("hide");
                // alert('fd')
                //jQuery(".general-information .hover-list.scrollbar-macosx").scrollbar();
-               jQuery(".general-information .scrollbar-macosx").scrollbar();
+               jQuery(".general-information .hover-list.scrollbar-macosx").scrollbar();
+               // jQuery(".scrollbar-macosx").scrollbar();
             }
          }).catch(function (err) {
             console.log(err);
