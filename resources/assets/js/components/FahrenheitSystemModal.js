@@ -79,7 +79,7 @@ class FahrenheitSystemModal extends React.Component {
             this.forceUpdate()
         }
     }
-    editHeatRecord(elemKey,modalID){
+    editHeatRecord(elemKey,modalID,data){
         let dataObj="";
         switch (modalID.hiddenmodekey) {
                 case 'addchillerformModeKey':
@@ -93,12 +93,12 @@ class FahrenheitSystemModal extends React.Component {
                 break;
         }
 
+        dataObj=Array(data);
+        for (var key in data) {
 
-        for (var key in dataObj) {
-            if (dataObj.hasOwnProperty(key)) {
                 //console.log($('#'+modalID.modalID).find('#'+key),dataObj,key);
-                $('#'+modalID.modalId).find('#'+key).val(dataObj[key]);
-            }
+                $('#'+modalID.modalId).find('#'+key).val(data[key]);
+
         }
         $('#'+modalID.modalId).find('#'+modalID.hiddenmode).val("edit");
         $('#'+modalID.modalId).find('#'+modalID.hiddenmodekey).val(elemKey);
@@ -243,10 +243,10 @@ class FahrenheitSystemModal extends React.Component {
         }
 
 
-        let addSorptionArray = this.state.chillerStateChange.chillerRecord.filter(function (el) {
+        let addSorptionArray = this.state.chillerStateChange.chillerRecord.filter(function (el,index) {
             return el.chiller_chiller_type == "Adsorption"
         });
-        let compressionArray = this.state.chillerStateChange.chillerRecord.filter(function (el) {
+        let compressionArray = this.state.chillerStateChange.chillerRecord.filter(function (el,index) {
             return el.chiller_chiller_type == "Compression"
         });
         console.log(this.state.chillerStateChange.chillerRecord);
@@ -311,7 +311,7 @@ class FahrenheitSystemModal extends React.Component {
                                                                 }
                                                             })()}
                                                     {addSorptionArray.map((data, h) => (
-                                                        <tr key={h} data-id={h}>
+                                                        <tr key={h} data-id={h} data-edit='chillers'>
 
                                                             <td>
                                                                 <p>{data.chiller_product}</p>
@@ -321,7 +321,7 @@ class FahrenheitSystemModal extends React.Component {
                                                             </td>
                                                             <td>
                                                                 <ul className="list-inline">
-                                                                    <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-chiller" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey",modalId:"add-chiller" })}></i></span></li>
+                                                                    <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-chiller" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey",modalId:"add-chiller" },data)}></i></span></li>
                                                                     <li> <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span></li>
                                                                     <li><span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span></li>
                                                                 </ul>
@@ -346,10 +346,12 @@ class FahrenheitSystemModal extends React.Component {
                                                                 }
                                                             })()}
 
+
                                                     {
 
                                                         compressionArray.map((data, h) => (
-                                                        <tr key={h} data-id={h}>
+
+                                                        <tr key={h} data-id={h+1} data-edit='chillers'>
 
                                                             <td>
                                                                 <p>{data.chiller_product}</p>
@@ -359,7 +361,7 @@ class FahrenheitSystemModal extends React.Component {
                                                             </td>
                                                             <td>
                                                                 <ul className="list-inline">
-                                                                    <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-chiller" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord((that.counter + h), { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey",modalId:"add-chiller"  })}></i></span></li>
+                                                                    <li><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target="#add-chiller" ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h+1, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey",modalId:"add-chiller"  },data)}></i></span></li>
                                                                     <li> <span className="delete-optionn" data-id={h} ><i className="fa fa-trash-o" aria-hidden="true" data-modal="delete-heat-modal" onClick={(elem) => this.deleteRecord(h, elem)}></i></span></li>
                                                                     <li><span className="menu-bar-option drag-handler"><i className="fa fa-bars" aria-hidden="true"></i></span></li>
                                                                 </ul>

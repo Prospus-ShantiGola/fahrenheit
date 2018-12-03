@@ -7,12 +7,14 @@ const Header = {
     fontSize: "14px"
   }
 let selectedSource='Adsorption';
+let formmode="add";
+let formkey=0;
 
 class AddChiller extends Component {
 
   constructor(props){
         super(props);
-        this.state = {chillerInformation: '',role:'user',selectedSource:selectedSource};
+        this.state = {chillerInformation: '',role:'user',selectedSource:selectedSource,formMode:formmode,formKey:formkey};
         this.handleAddChillerSubmit = this.handleAddChillerSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
       }
@@ -190,7 +192,9 @@ class AddChiller extends Component {
         //var selectedSource= (this.state.selectedSource=='CHP')?'hide':'';
         //console.log(elem.target.value);
         this.setState({
-            selectedSource:elem.target.value
+            selectedSource:elem.target.value,
+            formMode:this.addchillerformMode.value,
+            formKey: this.addchillerformModeKey.value
         });
 
     }
@@ -292,8 +296,8 @@ class AddChiller extends Component {
                                                             <option value="Adsorption">Adsorption</option>
                                                             <option value="Compression">Compression</option>
                                                         </select>
-                                                        <input type="hidden" placeholder="Chiller 1" id="addchillerformMode" name="addchillerformMode" value="add" />
-                                                        <input type="hidden" placeholder="Chiller 1" id="addchillerformModeKey" name="addchillerformModeKey" value="" />
+                                                        <input type="hidden" placeholder="Chiller 1" ref={addchillerformMode => { this.addchillerformMode = addchillerformMode; }} id="addchillerformMode" name="addchillerformMode" value={this.state.formMode}/>
+                                                        <input type="hidden" placeholder="Chiller 1"  ref={addchillerformModeKey => { this.addchillerformModeKey = addchillerformModeKey; }} id="addchillerformModeKey" name="addchillerformModeKey" value={this.state.formKey} />
                                                     </td>
                                                 </tr>
                                                {adsorbentHtml}

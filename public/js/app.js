@@ -59429,7 +59429,7 @@ var Tiles = function (_React$Component) {
                                         _react2.default.createElement(
                                             'h3',
                                             { className: 'textUpper' },
-                                            'ENGLISH'
+                                            'GERMAN'
                                         )
                                     );
                                 }
@@ -63014,9 +63014,13 @@ var GeneralModal = function (_Component) {
             if (node.className != "required-field emailfield") {
                errorStr = message == "Please provide value" || message == "Please fill out this field." ? "Please provide value" : "Please enter only numeric value";
             } else {
-               if ($.trim(node.value) == "") {
+
+               if (node.validity.valueMissing) {
+
+                  node.target.setCustomValidity("Please provide value");
                   errorStr = "Please provide value";
-               } else {
+               } else if (!node.validity.valid) {
+                  node.target.setCustomValidity("Please provide valid email address.");
                   errorStr = "Please provide valid email address.";
                }
             }
@@ -69077,7 +69081,7 @@ var FahrenheitSystemModal = function (_React$Component) {
         }
     }, {
         key: 'editHeatRecord',
-        value: function editHeatRecord(elemKey, modalID) {
+        value: function editHeatRecord(elemKey, modalID, data) {
             var dataObj = "";
             switch (modalID.hiddenmodekey) {
                 case 'addchillerformModeKey':
@@ -69091,11 +69095,11 @@ var FahrenheitSystemModal = function (_React$Component) {
                     break;
             }
 
-            for (var key in dataObj) {
-                if (dataObj.hasOwnProperty(key)) {
-                    //console.log($('#'+modalID.modalID).find('#'+key),dataObj,key);
-                    $('#' + modalID.modalId).find('#' + key).val(dataObj[key]);
-                }
+            dataObj = Array(data);
+            for (var key in data) {
+
+                //console.log($('#'+modalID.modalID).find('#'+key),dataObj,key);
+                $('#' + modalID.modalId).find('#' + key).val(data[key]);
             }
             $('#' + modalID.modalId).find('#' + modalID.hiddenmode).val("edit");
             $('#' + modalID.modalId).find('#' + modalID.hiddenmodekey).val(elemKey);
@@ -69268,10 +69272,10 @@ var FahrenheitSystemModal = function (_React$Component) {
                 );
             }
 
-            var addSorptionArray = this.state.chillerStateChange.chillerRecord.filter(function (el) {
+            var addSorptionArray = this.state.chillerStateChange.chillerRecord.filter(function (el, index) {
                 return el.chiller_chiller_type == "Adsorption";
             });
-            var compressionArray = this.state.chillerStateChange.chillerRecord.filter(function (el) {
+            var compressionArray = this.state.chillerStateChange.chillerRecord.filter(function (el, index) {
                 return el.chiller_chiller_type == "Compression";
             });
             console.log(this.state.chillerStateChange.chillerRecord);
@@ -69416,7 +69420,7 @@ var FahrenheitSystemModal = function (_React$Component) {
                                                     addSorptionArray.map(function (data, h) {
                                                         return _react2.default.createElement(
                                                             'tr',
-                                                            { key: h, 'data-id': h },
+                                                            { key: h, 'data-id': h, 'data-edit': 'chillers' },
                                                             _react2.default.createElement(
                                                                 'td',
                                                                 null,
@@ -69448,7 +69452,7 @@ var FahrenheitSystemModal = function (_React$Component) {
                                                                             'span',
                                                                             { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': '#add-chiller' },
                                                                             _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                                    return _this2.editHeatRecord(h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey", modalId: "add-chiller" });
+                                                                                    return _this2.editHeatRecord(h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey", modalId: "add-chiller" }, data);
                                                                                 } })
                                                                         )
                                                                     ),
@@ -69499,7 +69503,7 @@ var FahrenheitSystemModal = function (_React$Component) {
                                                     compressionArray.map(function (data, h) {
                                                         return _react2.default.createElement(
                                                             'tr',
-                                                            { key: h, 'data-id': h },
+                                                            { key: h, 'data-id': h + 1, 'data-edit': 'chillers' },
                                                             _react2.default.createElement(
                                                                 'td',
                                                                 null,
@@ -69531,7 +69535,7 @@ var FahrenheitSystemModal = function (_React$Component) {
                                                                             'span',
                                                                             { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': '#add-chiller' },
                                                                             _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                                    return _this2.editHeatRecord(that.counter + h, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey", modalId: "add-chiller" });
+                                                                                    return _this2.editHeatRecord(h + 1, { hiddenmode: "addchillerformMode", hiddenmodekey: "addchillerformModeKey", modalId: "add-chiller" }, data);
                                                                                 } })
                                                                         )
                                                                     ),
@@ -69704,6 +69708,8 @@ var Header = {
     fontSize: "14px"
 };
 var selectedSource = 'Adsorption';
+var formmode = "add";
+var formkey = 0;
 
 var AddChiller = function (_Component) {
     _inherits(AddChiller, _Component);
@@ -69713,7 +69719,7 @@ var AddChiller = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (AddChiller.__proto__ || Object.getPrototypeOf(AddChiller)).call(this, props));
 
-        _this.state = { chillerInformation: '', role: 'user', selectedSource: selectedSource };
+        _this.state = { chillerInformation: '', role: 'user', selectedSource: selectedSource, formMode: formmode, formKey: formkey };
         _this.handleAddChillerSubmit = _this.handleAddChillerSubmit.bind(_this);
         _this.changeState = _this.changeState.bind(_this);
         return _this;
@@ -69885,7 +69891,9 @@ var AddChiller = function (_Component) {
             //var selectedSource= (this.state.selectedSource=='CHP')?'hide':'';
             //console.log(elem.target.value);
             this.setState({
-                selectedSource: elem.target.value
+                selectedSource: elem.target.value,
+                formMode: this.addchillerformMode.value,
+                formKey: this.addchillerformModeKey.value
             });
         }
     }, {
@@ -70152,8 +70160,12 @@ var AddChiller = function (_Component) {
                                                                     'Compression'
                                                                 )
                                                             ),
-                                                            _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'addchillerformMode', name: 'addchillerformMode', value: 'add' }),
-                                                            _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'addchillerformModeKey', name: 'addchillerformModeKey', value: '' })
+                                                            _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', ref: function ref(addchillerformMode) {
+                                                                    _this2.addchillerformMode = addchillerformMode;
+                                                                }, id: 'addchillerformMode', name: 'addchillerformMode', value: this.state.formMode }),
+                                                            _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', ref: function ref(addchillerformModeKey) {
+                                                                    _this2.addchillerformModeKey = addchillerformModeKey;
+                                                                }, id: 'addchillerformModeKey', name: 'addchillerformModeKey', value: this.state.formKey })
                                                         )
                                                     ),
                                                     adsorbentHtml,

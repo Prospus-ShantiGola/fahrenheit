@@ -117,10 +117,14 @@ class GeneralModal extends Component {
         errorStr= (message=="Please provide value" || message=="Please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
         }
         else{
-            if($.trim(node.value)==""){
-            errorStr="Please provide value"
-            }
-            else{
+
+
+            if (node.validity.valueMissing) {
+
+                node.target.setCustomValidity("Please provide value");
+                errorStr="Please provide value";
+            } else if(!node.validity.valid) {
+                node.target.setCustomValidity("Please provide valid email address.");
                 errorStr="Please provide valid email address."
             }
         }
