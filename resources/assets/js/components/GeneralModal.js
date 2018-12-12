@@ -114,17 +114,17 @@ class GeneralModal extends Component {
         fieldLabel = fieldLabel.replace(":", "");
         var errorStr="";
         if(node.className!="required-field emailfield"){
-        errorStr= (message=="Please provide value" || message=="Please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
+        errorStr= (message.toLowerCase()=="please provide value" || message.toLowerCase()=="please fill out this field" || message.toLowerCase()=="please fill out this field.") ? "Please provide value" : "Please enter only numeric value";
         }
         else{
 
 
             if (node.validity.valueMissing) {
 
-                node.target.setCustomValidity("Please provide value");
+                node.setCustomValidity("Please provide value");
                 errorStr="Please provide value";
             } else if(!node.validity.valid) {
-                node.target.setCustomValidity("Please provide valid email address.");
+                node.setCustomValidity("Please provide valid email address.");
                 errorStr="Please provide valid email address."
             }
         }
@@ -307,7 +307,7 @@ handleGeneralSubmit(event) {
                                     <img src="public/images/help-red.png" alt="" />
                                     </button>
                                  </td>
-                                 <td className="input-fields"><input type="email" title={this.props.t('RequiredField.ErrorMsg')} name = "email_address" id = "email_address"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required   className="required-field emailfield" placeholder={this.props.t('General.Tab.Project.ProjectEmail.Placeholder')} /></td>
+                                 <td className="input-fields"><input type="email"  name = "email_address" id = "email_address"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required   className="required-field emailfield" placeholder={this.props.t('General.Tab.Project.ProjectEmail.Placeholder')} /></td>
                               </tr>
                                       </tbody>
                            </table>

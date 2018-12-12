@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
+import axios from 'axios';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+let token = document.head.querySelector('meta[name="csrf-token"]');
+if (token) { window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content; }
+else { console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'); }
 const CustomTable = {
     padding: "0px"
 };
@@ -27,6 +32,22 @@ class EconomicModal extends Component {
         this.cloneGeneralItem = this.cloneGeneralItem.bind(this);
         this.cloneChpItem = this.cloneChpItem.bind(this);
         this.cloneMaintenenceItem = this.cloneMaintenenceItem.bind(this);
+    }
+    calculateCWUCost=() => {
+        axios.post("adcalc/getTemperatureMeteonorm")
+            .then(res => {
+                const persons = res.data;
+                this.setState({ persons });
+                console.log(persons);
+            });
+    }
+    calculateCHPCost=() => {
+        axios.get("adcalc/calculateCHPCost")
+            .then(res => {
+                const persons = res.data;
+                this.setState({ persons });
+                console.log(persons);
+            });
     }
     myFunction(elem) {
         if (typeof elem.currentTarget == "undefined") return false;
@@ -280,6 +301,7 @@ class EconomicModal extends Component {
         $(".modal-backdrop").remove();
         $("#economic-information").hide();
     }
+
 
     showAllErrorMessages() {
         var form = $("form.economic-information-form"),
@@ -1067,13 +1089,16 @@ class EconomicModal extends Component {
                                                                 className="icon-field onlynumeric"
                                                                 name="chp_basement"
                                                                 id="chp_basement"
+
+                                                                onChange={() => this.calculateCWUCost()}
                                                             />
                                                             <span className="pricesymbol">
                                                                 €
                                                             </span>
                                                             <i
-                                                                className="fa fa-calculator dropdown-calci disabled"
+                                                                className="fa fa-calculator dropdown-calci "
                                                                 aria-hidden="true"
+                                                                onClick={() => this.calculateCHPCost()}
                                                             />
                                                         </td>
                                                         <td className="input-label">

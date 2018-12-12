@@ -30,7 +30,7 @@ Route::get('/{pdf}/generate-pdf','PdfGenerateController@generatePDF')
          ->where('id', '[0-9]+')->middleware('auth');
 
 
-         
+
 Route::get('/{pdf}/generate-html','PdfGenerateController@generateHtml')
    // Route::get('/{user}/edit','UsersController@edit')
          ->name('pdf.generate-html')
@@ -166,6 +166,10 @@ Route::group(
         Route::post('/storeProfileInformation', 'AdcalcController@storeProfileInformation');
         Route::post('/storeChillerInformation', 'AdcalcController@storeChillerInformation');
         Route::post('/storeRecoolerInformation', 'AdcalcController@storeRecoolerInformation');
+        Route::post('/calculateAdsorptionSystem', 'AdcalcController@calculateAdsorptionSystem');
+        Route::post('/calculateCWUCost', 'AdcalcController@calculateCWUCost');
+        Route::post('/calculateCHPCost', 'AdcalcController@calculateCHPCost');
+        Route::post('/getTemperatureMeteonorm', 'AdcalcController@getTemperatureMeteonorm');
 
 
 

@@ -332,6 +332,27 @@ class AdcalcController extends Controller
     }
 
 
+    function getTemperatureMeteonorm(){
+        $resArr = array();
+
+        $myfile = file_get_contents(public_path().'/location_data/berlin.txt');
+        $resArr = json_decode($myfile, true);
+        //print_r($resArr);
+        // $sum =0;
+        // foreach($resArr['payload']['meteonorm']['target'] as $result_arry)
+        // {
+
+        //   foreach($result_arry as $val)
+        //   {
+        //    $sum+=$val;
+        //   }
+        // }
+        ///echo $sum;
+       // print_r(array_column($resArr['payload']['meteonorm']['target'], 'ta'));
+        $result = array_sum(array_column($resArr['payload']['meteonorm']['target'], 'ta')); // output 5
+        return $result ;
+    }
+
     function coldWaterCircuit($tempIn,$Qlt,$vlt)
     {
         $_p=.999;
@@ -359,23 +380,26 @@ class AdcalcController extends Controller
         return number_format((float)$COP, 4, '.', '');
     }
 
+
+
     /**
      * Calculation for CWU cost
      *
      */
-    function calculateCWUCost(){
-        $Fcwu= 4732.2487*pow(QN_CWU, -0.7382)+109.3;
+    function calculateCWUCost($QN_CWU,$QN_CWUmax){
+        //return response()->json(array('cost'=>200));
+        $Fcwu= 4732.2487*pow($QN_CWU, -0.7382)+109.3;
         //Investment costs
-        $kcwuinvestment= QN_CWU*$Fcwu;
+        $kcwuinvestment= $QN_CWU*$Fcwu;
         //Maintenance costs
-        $kcwumaintainence= QN_CWUmax*$Fcwu;
-        return Response::json(array('investment'=>$kcwuinvestment,'maintenence'=>$$kcwuinvestment));
+        $kcwumaintainence= $QN_CWUmax*$Fcwu;
+        return Response::json(array('investment'=>$kcwuinvestment,'maintenence'=>$kcwuinvestment));
     }
     /***
      * Calculation for CHP cos.
      *
      */
-    function calculateCHPCost($electricCapacity)
+    function calculateCHPCost($Pel)
     {
         //The costs of module are calculated by:
         $Km= a.pow($Pel,b)*$Pel;
@@ -390,27 +414,111 @@ class AdcalcController extends Controller
     function calculateAdsorptionSystem($Tn_AirIn, $Tn_AirInMin, $Tn_MtInMin,$Qth_NomSt, $dT_NomSt, $n_St,$Qth_NomRk, $dT_NomRk, $n_Rk){
 
         if($Tn_AirIn < $Tn_AirInMin ){
-           $valueSetArr= setValueOnTrue($Tn_MtInMin);
-        }
-        else{
-                $dT_St = $dT_NomSt;
-                $dT_RkMin = $dT_NomRk;
-                $Qth_MtRk1 = 0;
-                $Set_MtIn = 0;
-                $Tn_MtIn = $Tn_AirIn + $dT_St + $dT_RkMin;
-        }
-
-    }
-
-    function setValueOnTrue(){
             $Set_MtIn = 1;
             $Tn_MtIn =  $Tn_MtInMin;
             $Qth_MtRk1 = 0;
-            return array('Set_MtIn'=>$Set_MtIn,'Tn_MtIn'=>$Tn_MtIn,'Qth_MtRk1'=>$Qth_MtRk1);
+        }
+        else{
+            $dT_St = $dT_NomSt;
+            $dT_RkMin = $dT_NomRk;
+            $Qth_MtRk1 = 0;
+            $Set_MtIn = 0;
+            $Tn_MtIn = $Tn_AirIn + $dT_St + $dT_RkMin;
+        }
+
+
+        $resultCoolingSystemArr= $this->calculateCoolingSystem($Mod_Ad, $Mod_Cwu, $Qth_HeatMax, $Tn_HtIn, $Tn_MtIn, $Tn_LtIn, $n_AsHt, $n_AsLt, $n_ApHt, $n_ApLt);
+        $Qth_MtRk1 = $resultCoolingSystemArr['Qth_MtAd'] + $resultCoolingSystemArr['Qth_MtCwu'];
+        if($Tn_MtIn < $Tn_MtInMin){
+
+        }
+        else{
+            $dT_Rk = $Tn_MtIn - $dT_St - $Tn_AirIn ;
+
+        }
+        $resultRecoolingSystemArr=$this->calculateRecoolingSystem($type_Rk, $Tn_MtInMin, $Tn_AirIn, $p_AirIn, $Rh_AirIn, $Qth_MtAd, $Qth_MtCwu, $Qth_NomSt, $dT_NomSt, $n_St, $Qth_NomRk, $dT_NomRk, $n_Rk);
+        if($Set_MtIn == 1){
+            $dT_St= $resultRecoolingSystemArr['dT_St'];
+            $dT_RkMin=$resultRecoolingSystemArr['dT_RkMin'];
+        }
+        else{
+
+        }
+
+       return array('dT_St' => $dT_St, 'dT_Rk' => $dT_Rk, 'dT_RkMin' => $dT_RkMin, 'Tn_MtIn' => $Tn_MtIn);
+
+
+
     }
 
 
 
+    function calculateCoolingSystem($Mod_Ad, $Mod_Cwu, $Qth_HeatMax, $Tn_HtIn, $Tn_MtIn, $Tn_LtIn, $n_AsHt, $n_AsLt, $n_ApHt, $n_ApLt){
+        $Qth_MtAd=$this->calculateADKA();
+        $Qth_MtCwu= $this->calculateCWU();
+        $this->calculateMaxCapacityHeatSource();
+        return array('Qth_MtAd' => $Qth_MtAd, 'Qth_MtCwu' => $Qth_MtCwu);
+    }
+    function calculateADKA(){
+
+    }
+    function calculateRecoolingSystem($type_Rk, $Tn_MtInMin, $Tn_AirIn, $p_AirIn, $Rh_AirIn, $Qth_MtAd, $Qth_MtCwu, $Qth_NomSt, $dT_NomSt, $n_St, $Qth_NomRk, $dT_NomRk, $n_Rk)
+    {
+
+
+        $dT_St = $this->calculateSystemSepration($Qth_MtAd, $Qth_NomSt, $dT_NomSt, $n_St);
+        switch ($type_Rk) {
+            case 'closed recooler':
+                $dT_RkMin = $this->calculateClosedRecooler($Qth_MtAd, $Qth_MtCwu, $Qth_NomRk, $dT_NomRk, $n_Rk);
+                break;
+            case 'open recooler':
+                $dT_RkMin = $this->calculateOpenRecooler($Tn_AirIn, $p_AirIn, $Rh_AirIn, $Tn_MtIn, $dT_St);
+                break;
+            case 'springs/geothermal':
+                $dT_RkMin = 0;
+                break;
+
+            default:
+                $dT_RkMin = 0;
+                break;
+        }
+        return array('dT_St' => $dT_St, 'dT_RkMin' => $dT_RkMin);
+
+    }
+    /**
+     * calculate System Sepration
+     *
+     */
+
+    function calculateSystemSepration($Qth_MtAd, $Qth_NomSt, $dT_NomSt, $n_St){
+        if($Qth_NomSt = 0 || $n_St = 0){
+            $dT_St = 0;
+        }
+        else{
+            $Qth_MtSt = $Qth_MtAd;
+            $dT_St = $Qth_MtSt * $dt_NomSt / ($Qth_NomSt * $n_St);
+        }
+        return $dT_St;
+    }
+    /**
+     * calculate Closed Recooler
+     *
+     */
+    function calculateClosedRecooler($Qth_MtAd, $Qth_MtCwu, $Qth_NomRk, $dT_NomRk, $n_Rk){
+        $Qth_MtRk = $Qth_MtAd + $Qth_MtCwu;
+        $dT_RkMin = $Qth_MtRk * $dt_NomRk / ($Qth_NomRk * $n_Rk);
+        return $dT_RkMin;
+    }
+    /**
+     *  calculate Open Recooler
+     */
+    function calculateOpenRecooler($Tn_AirIn, $p_AirIn, $Rh_AirIn,$Tn_MtIn, $dT_St){
+        //$Tn_WbAirIn = f(Tn_AirIn, p_AirIn, Rh_AirIn) (Coolprop);
+        $Tn_RkIn = $Tn_MtIn + $dT_St;
+        $Tn_RkOut = $Tn_RkIn - (0.7 * ($Tn_RkIn - $Tn_WbAirIn));
+        $dT_RkMin =$Tn_RkOut - $Tn_AirIn;
+        return $dT_RkMin;
+    }
 
 
 
