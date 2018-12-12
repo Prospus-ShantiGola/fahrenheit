@@ -684,17 +684,12 @@ class Tiles extends React.Component {
                             <h3>33,708 €/a</h3>
                         </li>
 
-                          {(() => {
-                            if (coolingProfileData[0].cooling_base_load_from != "") {
-                                return (
-                                     <li>
-                            <p>Temperature</p>
-                            <h3><img src="public/images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_from}°C</h3>
-                        </li>
-                                )
-                            }
-                        })()}
+                        
 
+                          <li>
+                            <p>Temperature</p>
+                            <h3><img src="public/images/degree-icon.png" alt="" /> { coolingProfileData[0].cooling_base_load_to }°C</h3>
+                        </li>
 
 
                     </ul>
@@ -713,16 +708,18 @@ class Tiles extends React.Component {
                                             <tr key={h} data-id={h}>
                                                 <th>
 
-                                                {(data.cooling_radiant_cooling_office != "") ? data.cooling_radiant_cooling_office : ""}
+                                     
+                                                 {data.cooling_radiant_cooling_office}
 
                                                     <ul className="list-inline">
                                                         <li>
 
-                                                            {(data.cooling_cooling_other != "") ? data.cooling_cooling_other + "°C" : ""}
+                                                         
+                                                            {data.cooling_cooling_other}°C
 
                                                       </li>
-                                                        <li>  {(data.cooling_cooling_hours != "") ? data.cooling_cooling_hours + "h" : ""}	</li>
-                                                        <li> {(data.cooling_base_load_to != "") ? data.cooling_base_load_to + "kW" : ""} </li>
+                                                        <li>   {data.cooling_cooling_hours} h	</li>
+                                                        <li> {data.cooling_base_load_to} kW </li>
                                                     </ul>
                                                 </th>
                                                 <td><span className="edit-option" data-id={h} data-toggle="modal" data-backdrop="false" data-target={this.props.modalId} ><i className="fa fa-pencil-square-o" aria-hidden="true" onClick={() => this.editHeatRecord(h, { hiddenmode: "coolingprofileformMode", hiddenmodekey: "coolingprofileformModeKey" })}></i></span>

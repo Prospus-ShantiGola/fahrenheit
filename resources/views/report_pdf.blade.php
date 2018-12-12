@@ -121,6 +121,7 @@ img {max-width:100%;}
 section.report {
     padding: 100px 0 50px;
 }
+section {width:100%;float:left;}
 .report h1 span {
     float: right;
     display: inline-block;
@@ -128,7 +129,9 @@ section.report {
 }
 .report h1 {
     margin: 0 0 3px;
-    font-size: 33px; background-image:none; padding-left:0;
+    font-size: 33px; 
+	background-image:none;
+	 padding-left:0;
 }
 .report h2 {
     text-align: right;
@@ -150,13 +153,14 @@ ul.project-data-list {
     float: left;
 }
 .project-data-list li:nth-child(2n) {
-    font-weight: 300;     width: 80%;
+    font-weight: 300;     
+	width: 80%;
 }
 .project-data-list li:nth-child(2n+1) {
     width: 20%;
 }
 .project-data-list li {
-
+ min-height:30px;
     float: left;
     padding: 2px 0;
     color: #066899;
@@ -174,7 +178,12 @@ section.contact-address {
 }
 
 .contact-address img {
-    margin: 20px 0;
+    margin: 20px 0; clear:both;
+}
+footer ul.list-inline {
+    margin: 0;
+    padding: 0;
+	    width: 100%;
 }
 .contact-address p {
     margin: 0;
@@ -182,13 +191,33 @@ section.contact-address {
     font-size: 15px;
 }
 footer {
-    padding: 100px 0;
+    padding: 80px 25px 26px;
+    width: 100%;
+    float: left;
 }
 footer li {
-    float: left;
-    width: 33.3%;
-    text-align: center;
-    color: #066899;
+    color: #066899; 
+	list-style: none;
+	text-align:right;
+}
+table.project-data-list {table-layout:auto;
+width:100%;} 
+body .project-data-list th {
+    text-align: left;
+    border-bottom: none!important;
+    width: 20%;
+    white-space: normal!important;
+	color: #066899;
+    font-size: 14px;
+    font-weight: 400;
+}
+body .project-data-list td {
+    text-align: left;
+    border-bottom: none!important;
+    width: 80%;
+	color: #066899;
+    font-size: 14px;
+    font-weight: 300;
 }
  h1 {
     font-weight: 500;
@@ -217,6 +246,8 @@ h6 {
 
 .table {
     table-layout: fixed;
+	 width:100%;    
+	 border-collapse: collapse;
 }
 .table td {
     padding: 3px 10px;
@@ -481,11 +512,6 @@ h6 {
 .table-fivteeen tr td:last-child { background:#f1f1f1; text-align:right;}
 
 .table-fivteeen tr td:nth-child(3) {  text-align:right;}
-
-footer li:first-child {
-    text-align: left;
-    padding-left: 65px;
-}
 .table-two tr:nth-child(2) th {
     font-weight: 300;
     padding-left: 49px;
@@ -528,16 +554,19 @@ footer li:first-child {
     width: 100%;
 }
   }
-
 </style>
-    <style>
+<style>
   hr {
     border: 0;
     border-top: 1px solid #00618C;
-    width: 90%;
+    width: 95%;
     margin: 0 auto 4em;
+	background-color: #00618C;
+	color:#00618C;
 }
+
   </style>
+  
 </head>
 <body>
 
@@ -568,16 +597,24 @@ footer li:first-child {
  <div class="container">
    <div class="project-data-edtails">
      <h6>Project Data</h6>
-     <ul class="project-data-list">
-       <li>Project Name</li>
-       <li > {{ optional($general_info)->project_name}}</li>
-       <li>Project Number</li>
-       <li>{{ optional($general_info)->project_number}}</li>
-       <li>Project-address </li>
-       <li> {{ optional($general_info)->location}}</li>
-       <li>Contact Person</li>
-       <li>{{ optional($general_info)->contact}}</li>
-     </ul>
+     <table class="project-data-list">
+     <tr>
+       <th>Project Name</th>
+       <td > {{ optional($general_info)->project_name}}</td>
+       </tr>
+       <tr>
+       <th>Project Number</th>
+       <td>{{ optional($general_info)->project_number}}</td>
+       </tr>
+       <tr>
+        <th >Project-address </th>
+       <td align="left"> {{ optional($general_info)->location}}</td>
+       </tr>
+       <tr>
+       <th>Contact Person</th>
+       <td>{{ optional($general_info)->contact}}</td>
+       </tr>
+     </table>
    </div>
  </div>
 </section>

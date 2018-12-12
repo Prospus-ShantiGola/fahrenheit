@@ -60,7 +60,8 @@
         }
         if($_SERVER['HTTP_HOST']=="localhost"){
             ?>
-            LOGGED_IN_ROLE = "expert";
+           // LOGGED_IN_ROLE = "expert";
+           LOGGED_IN_ROLE = "expert";
             <?php
         }
 ?>
