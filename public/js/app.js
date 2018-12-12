@@ -555,6 +555,12 @@ module.exports = g;
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(38);
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -656,7 +662,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(41)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -753,7 +759,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -795,7 +801,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -893,7 +899,7 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -921,7 +927,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3462,7 +3468,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13833,12 +13839,6 @@ return jQuery;
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(38);
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14203,7 +14203,7 @@ module.exports = emptyObject;
 
 
 
-var emptyFunction = __webpack_require__(6);
+var emptyFunction = __webpack_require__(7);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -15463,7 +15463,7 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(9);
 
 
 
@@ -15545,7 +15545,7 @@ __webpack_require__(57);
 
 
 window._ = __webpack_require__(35);
-window.Popper = __webpack_require__(9).default;
+window.Popper = __webpack_require__(10).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -15554,7 +15554,7 @@ window.Popper = __webpack_require__(9).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(10);
+  window.$ = window.jQuery = __webpack_require__(11);
 
   __webpack_require__(37);
 } catch (e) {}
@@ -15565,7 +15565,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(11);
+window.axios = __webpack_require__(4);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -32751,7 +32751,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(10), __webpack_require__(9)) :
+   true ? factory(exports, __webpack_require__(11), __webpack_require__(10)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -36701,7 +36701,7 @@ module.exports = function(module) {
 var utils = __webpack_require__(2);
 var bind = __webpack_require__(12);
 var Axios = __webpack_require__(40);
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 
 /**
  * Create an instance of Axios
@@ -36784,7 +36784,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 var utils = __webpack_require__(2);
 var InterceptorManager = __webpack_require__(50);
 var dispatchRequest = __webpack_require__(51);
@@ -37513,7 +37513,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(2);
 var transformData = __webpack_require__(52);
 var isCancel = __webpack_require__(15);
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 var isAbsoluteURL = __webpack_require__(53);
 var combineURLs = __webpack_require__(54);
 
@@ -38119,12 +38119,12 @@ if (true) {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(5);
+var _assign = __webpack_require__(6);
 var invariant = __webpack_require__(17);
 var emptyObject = __webpack_require__(18);
 var warning = __webpack_require__(19);
-var emptyFunction = __webpack_require__(6);
-var checkPropTypes = __webpack_require__(7);
+var emptyFunction = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(8);
 
 // TODO: this is special because it gets imported during build.
 
@@ -39616,9 +39616,9 @@ var invariant = __webpack_require__(17);
 var React = __webpack_require__(0);
 var warning = __webpack_require__(19);
 var ExecutionEnvironment = __webpack_require__(60);
-var _assign = __webpack_require__(5);
-var emptyFunction = __webpack_require__(6);
-var checkPropTypes = __webpack_require__(7);
+var _assign = __webpack_require__(6);
+var emptyFunction = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(8);
 var getActiveElement = __webpack_require__(61);
 var shallowEqual = __webpack_require__(62);
 var containsNode = __webpack_require__(63);
@@ -61302,7 +61302,7 @@ exports.default = (0, _reactMultiLang.translate)(ChillerModal);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_PropTypes__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_warning__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_warning__ = __webpack_require__(9);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -61390,10 +61390,10 @@ function createProvider() {
 
 
 
-var assign = __webpack_require__(5);
+var assign = __webpack_require__(6);
 
 var ReactPropTypesSecret = __webpack_require__(20);
-var checkPropTypes = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(8);
 
 var printWarning = function() {};
 
@@ -62850,7 +62850,7 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifySubselectors;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(9);
 
 
 function verify(selector, methodName, displayName) {
@@ -63012,15 +63012,15 @@ var GeneralModal = function (_Component) {
             fieldLabel = fieldLabel.replace(":", "");
             var errorStr = "";
             if (node.className != "required-field emailfield") {
-               errorStr = message == "Please provide value" || message == "Please fill out this field." ? "Please provide value" : "Please enter only numeric value";
+               errorStr = message.toLowerCase() == "please provide value" || message.toLowerCase() == "please fill out this field" || message.toLowerCase() == "please fill out this field." ? "Please provide value" : "Please enter only numeric value";
             } else {
 
                if (node.validity.valueMissing) {
 
-                  node.target.setCustomValidity("Please provide value");
+                  node.setCustomValidity("Please provide value");
                   errorStr = "Please provide value";
                } else if (!node.validity.valid) {
-                  node.target.setCustomValidity("Please provide valid email address.");
+                  node.setCustomValidity("Please provide valid email address.");
                   errorStr = "Please provide valid email address.";
                }
             }
@@ -63377,7 +63377,7 @@ var GeneralModal = function (_Component) {
                                              _react2.default.createElement(
                                                 'td',
                                                 { className: 'input-fields' },
-                                                _react2.default.createElement('input', { type: 'email', title: this.props.t('RequiredField.ErrorMsg'), name: 'email_address', id: 'email_address', pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$', required: true, className: 'required-field emailfield', placeholder: this.props.t('General.Tab.Project.ProjectEmail.Placeholder') })
+                                                _react2.default.createElement('input', { type: 'email', name: 'email_address', id: 'email_address', pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$', required: true, className: 'required-field emailfield', placeholder: this.props.t('General.Tab.Project.ProjectEmail.Placeholder') })
                                              )
                                           )
                                        )
@@ -63601,6 +63601,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMultiLang = __webpack_require__(1);
 
+var _axios = __webpack_require__(4);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63609,6 +63613,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+var token = document.head.querySelector('meta[name="csrf-token"]');
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
 var CustomTable = {
     padding: "0px"
 };
@@ -63625,6 +63636,22 @@ var EconomicModal = function (_Component) {
         _classCallCheck(this, EconomicModal);
 
         var _this = _possibleConstructorReturn(this, (EconomicModal.__proto__ || Object.getPrototypeOf(EconomicModal)).call(this, props));
+
+        _this.calculateCWUCost = function () {
+            _axios2.default.post("adcalc/getTemperatureMeteonorm").then(function (res) {
+                var persons = res.data;
+                _this.setState({ persons: persons });
+                console.log(persons);
+            });
+        };
+
+        _this.calculateCHPCost = function () {
+            _axios2.default.get("adcalc/calculateCHPCost").then(function (res) {
+                var persons = res.data;
+                _this.setState({ persons: persons });
+                console.log(persons);
+            });
+        };
 
         _this.displayData = [];
         _this.state = {
@@ -64917,7 +64944,11 @@ var EconomicModal = function (_Component) {
                                                                 pattern: '\\d*',
                                                                 className: 'icon-field onlynumeric',
                                                                 name: 'chp_basement',
-                                                                id: 'chp_basement'
+                                                                id: 'chp_basement',
+
+                                                                onChange: function onChange() {
+                                                                    return _this2.calculateCWUCost();
+                                                                }
                                                             }),
                                                             _react2.default.createElement(
                                                                 'span',
@@ -64925,8 +64956,11 @@ var EconomicModal = function (_Component) {
                                                                 '\u20AC'
                                                             ),
                                                             _react2.default.createElement('i', {
-                                                                className: 'fa fa-calculator dropdown-calci disabled',
-                                                                'aria-hidden': 'true'
+                                                                className: 'fa fa-calculator dropdown-calci ',
+                                                                'aria-hidden': 'true',
+                                                                onClick: function onClick() {
+                                                                    return _this2.calculateCHPCost();
+                                                                }
                                                             })
                                                         ),
                                                         _react2.default.createElement(
@@ -68972,7 +69006,7 @@ var _AddRecoolerModal = __webpack_require__(107);
 
 var _AddRecoolerModal2 = _interopRequireDefault(_AddRecoolerModal);
 
-var _axios = __webpack_require__(11);
+var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
