@@ -21,6 +21,9 @@ img {max-width:100%;}
 .withunit input {
     position: relative;
 }
+.economic-data .price-listt h3 br {
+    display: none;
+}
 .withunit span:not(.invalid-feedback) {
     position: absolute;
     right: 5px;
@@ -58,14 +61,14 @@ li.pdtnam {
     width: 51%;
 }
 .economic-data li.pdtnam {
-    width: 44%;
+    width: 41%;
 }
 .economic-data li.pdtnum {
-    width: 56%;
+    width: 59%;
 }
 li.pdtnum {
     width: 43%;
-    float: right;
+    float: left; padding-left: 12px;
 }
 .price-listt .paybkprd h3 {
     font-size: 34px;
@@ -144,8 +147,8 @@ section.top-header {
     /*************** SCROLLBAR BASE CSS ***************/
 
 .scroll-wrapper {
-    overflow: hidden !important;
-    padding: 0 !important;
+   overflow: hidden !important;
+    padding: 0 0px 0 0px !important;
     position: relative;
 }
 
@@ -158,7 +161,7 @@ section.top-header {
     max-height: none;
     max-width: none !important;
     overflow: scroll !important;
-    padding: 0;
+    padding: 0 7px 0 0;
     position: relative !important;
     top: 0;
     width: auto !important;
@@ -276,7 +279,7 @@ section.top-header {
 
 /* scrollbar height/width & offset from container borders */
 .scrollbar-macosx > .scroll-element.scroll-x .scroll-bar { height: 7px; min-width: 10px; top: -9px; }
-.scrollbar-macosx > .scroll-element.scroll-y .scroll-bar { left: -9px; min-height: 10px; width: 7px; }
+.scrollbar-macosx > .scroll-element.scroll-y .scroll-bar { left: -6px; min-height: 10px; width: 6px; }
 
 .scrollbar-macosx > .scroll-element.scroll-x .scroll-element_outer { left: 2px; }
 .scrollbar-macosx > .scroll-element.scroll-x .scroll-element_size { left: -4px; }
@@ -753,13 +756,11 @@ h5.input-required {
     padding: 0; max-height: 170px;
     list-style: none;
 }
-.options .price-listt .clrs {
-    clear: inherit;
+.options .price-listt li.pdtnum {
+    padding-left: 0;
 }
-.options .price-listt h3 {
-    height: 27px;
-    overflow: hidden;
-}
+
+
 .chiller-div td:first-child {
     width: 40%;
 }
@@ -807,7 +808,11 @@ li.save-changes-btn {
     font-size: 22px;
     font-weight: 500;
     font-family: Roboto;
-    text-transform: capitalize;     word-wrap: break-word;
+    text-transform: capitalize;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis; width:100%;
+    white-space: nowrap;
 }
 .price-listt h3 span {
     font-weight: 400;
@@ -849,12 +854,14 @@ li.save-changes-btn {
 .add-icon {
     position: absolute;
     bottom: 13px;
-    right: 13px; cursor:pointer;
+    right: 13px; cursor:pointer; z-index: 9999;
 }
 .option-hover .right-list-content {
     float: right;
 }
-
+.compression-chillers .hover-list {
+    height: 150px;
+}
 .options-hover ul.price-listt {
     float: left;
 }
@@ -1366,9 +1373,22 @@ td.input-label.text-area-label {
     background: url(../images/select-arrow.png);
     background-repeat: no-repeat;
     -webkit-appearance: none; -moz-appearance: none;
-    background-position: 98% 50%;
+    background-position: 98% 50%;     cursor: pointer;
+}
+li.choose-language {
+    cursor: pointer;
+}
+.heating-load-profiles .hover-list .table td {
+    width: auto;
+}
+.option-general-div .input-fields ul li {cursor:pointer;}
+.heating-load-profiles .hover-list table ul.list-inline li:last-child {
+    padding-left: 10px;
 }
 
+a.nav-link.disabled {
+    opacity: 1;
+}
 .heating-load-general-div .input-fields ul li:first-child {
     width: 43%;
     vertical-align: middle;
@@ -1558,7 +1578,7 @@ select.required-field {
 
 .hover-list {
     padding-top: 3px;
-    clear: both; height: 132px;
+    clear: both; height: 175px;
 }
 .hover-list table td span {
     font-size: 20px;
@@ -2470,18 +2490,28 @@ color:#00618c;
 }
 .modal-content .nav-tabs li:first-child{
 width:297px;
-
-
 }
+#fahrenheit-system .modal-content .nav-tabs li:first-child{
+width:297px;
+}
+
+.cooling-load-profiles .hover-list .table td {
+    width: 28%;}
+
+
+
 .modal-content .nav-tabs li:first-child .nav-link{
 padding-right:10px;
 background:url(../images/inactive-tab-1.jpg) no-repeat;
 }
 .modal-content .nav-tabs li:first-child .nav-link.active{
 background:url(../images/active-tab-1.jpg) no-repeat;
-padding-right:8px;
+padding-right:30px;
 }
 
+#fahrenheit-system .modal-content .nav-tabs li:last-child{
+width:288px;
+}
 .modal-content .nav-tabs li:last-child{
 width:288px;
 }
@@ -2642,12 +2672,13 @@ li.save-changes-btn {
 
 .errorMessages
 {
-    float: left;
-    padding: 10px;
-    /* text-align: center; */
-    font-size: 14px;
+    color: #e73c37;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+    padding-top: 10px;
     list-style: none;
-    color: red;
 }
 .hide{
     display: none;
