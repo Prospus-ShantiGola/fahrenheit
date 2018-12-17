@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
-import axios from 'axios';
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-let token = document.head.querySelector('meta[name="csrf-token"]');
-if (token) { window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content; }
-else { console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'); }
+import EconomicModalRow from './EconomicModalRow';
+
 const CustomTable = {
     padding: "0px"
 };
@@ -22,8 +20,12 @@ class EconomicModal extends Component {
             role: this.props.role,
             investmentCounter: 0,
             maintenenceCounter: 0,
-            showdata: this.displayData
+            showdata: this.displayData,
+            
+            enableCalculator : false,
+            investmentData : {},
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
         this.myFunction = this.myFunction.bind(this);
@@ -32,23 +34,40 @@ class EconomicModal extends Component {
         this.cloneGeneralItem = this.cloneGeneralItem.bind(this);
         this.cloneChpItem = this.cloneChpItem.bind(this);
         this.cloneMaintenenceItem = this.cloneMaintenenceItem.bind(this);
+        
     }
-    calculateCWUCost=() => {
-        axios.post("adcalc/getTemperatureMeteonorm")
-            .then(res => {
-                const persons = res.data;
-                this.setState({ persons });
-                console.log(persons);
-            });
+
+    handleInvestmentData(evt) {
+        if(evt.target){
+            var key = evt.target.name;
+            var value = evt.target.value;
+            this.setState({
+                investmentData : {...this.state.investmentData, [key] : value}
+            },() => {
+                if(this.state.investmentData.chp_basement && this.state.investmentData.discount_chp_basement){
+                    this.setState({enableCalculator : true})
+                }
+            })
+        }
     }
-    calculateCHPCost=() => {
-        axios.get("adcalc/calculateCHPCost")
-            .then(res => {
-                const persons = res.data;
-                this.setState({ persons });
-                console.log(persons);
-            });
+
+    calculateDiscount(e){
+        if(this.state.investmentData.chp_basement && this.state.investmentData.discount_chp_basement){
+            this.setState({enableCalculator : true})
+            axios.post('http://localhost/fahrenheit/api/calculate-discount', {
+                amount: this.state.investmentData.chp_basement,
+                discount: this.state.investmentData.discount_chp_basement
+              })
+              .then(function (response) {
+                alert(`Final Value : ${response.data}`);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+        }
     }
+
+
     myFunction(elem) {
         if (typeof elem.currentTarget == "undefined") return false;
         var customInputId = elem.currentTarget.getAttribute("data-id");
@@ -302,7 +321,6 @@ class EconomicModal extends Component {
         $("#economic-information").hide();
     }
 
-
     showAllErrorMessages() {
         var form = $("form.economic-information-form"),
             errorList = $("ul.errorMessages", form),
@@ -449,7 +467,7 @@ class EconomicModal extends Component {
     }
 
     render() {
-        //console.log(this.state.role);
+        console.log(this.props.chillers,'Chiller in echo');
         projectData['economicData']=this.state.economicInformation;
 
         var expertFields = "";
@@ -1077,115 +1095,190 @@ class EconomicModal extends Component {
                                         >
                                             <table className="table">
                                                 <tbody>
-                                                    <tr>
-                                                        <td className="input-label">
-                                                        {this.props.t('Economic.Tab.Investments.CHPInTheBasement.Title')}:
-                                                        </td>
-                                                        <td className="input-fields symbmain">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="78,250"
-                                                                pattern="\d*"
-                                                                className="icon-field onlynumeric"
-                                                                name="chp_basement"
-                                                                id="chp_basement"
+                                                    {
+                                                        this.props.chillers.data && this.props.chillers.data.map((chiller,index) => {
+                                                            return <EconomicModalRow row={chiller} nameField={''}>
+                                                                <tr key={index}>
+                                                                    <td className="input-label">
+                                                                    {chiller.chillername ? chiller.chillername : `Heat Source ${index+1}`}
+                                                                    </td>
+                                                                    <td className="input-fields symbmain">
+                                                                        <input
+                                                                            type="text"
+                                                                            placeholder="100"
+                                                                            pattern="\d*"
+                                                                            className="icon-field onlynumeric"
+                                                                            name={`chiller_${index}`}
+                                                                            id={`chiller_${index}`}
+                                                                            defaultValue={100}
+                                                                            onChange={(e) => this.handleInvestmentData(e)}
+                                                                        />
+                                                                        <span className="pricesymbol">
+                                                                            €
+                                                                        </span>
+                                                                        <i
+                                                                            className={`fa fa-calculator dropdown-calci_test ${this.state.enableCalculator ? '' : 'disabled'}`}
+                                                                            aria-hidden="true"
+                                                                            /*onClick={(e) => this.calculateDiscount(e)}*/
+                                                                        />
+                                                                    </td>
+                                                                    <td className="input-label">
+                                                                        {this.props.t('DiscountText')}:
+                                                                    </td>
+                                                                    <td className="input-fields chp-base withunit">
+                                                                        <input
+                                                                            type="text"
+                                                                            pattern="\d*"
+                                                                            className="onlynumeric"
+                                                                            placeholder="0"
+                                                                            name={`chiller_discount_${index}`}
+                                                                            id={`chiller_discount_${index}`}
+                                                                            onChange={(e) => this.handleInvestmentData(e)}
+                                                                        />
+                                                                        <span>%</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </EconomicModalRow>                                                         
+                                                        })
+                                                    }
+                                                    {/* Heat Sources */} 
 
-                                                                onChange={() => this.calculateCWUCost()}
-                                                            />
-                                                            <span className="pricesymbol">
-                                                                €
-                                                            </span>
-                                                            <i
-                                                                className="fa fa-calculator dropdown-calci "
-                                                                aria-hidden="true"
-                                                                onClick={() => this.calculateCHPCost()}
-                                                            />
-                                                        </td>
-                                                        <td className="input-label">
-                                                            {this.props.t('DiscountText')}:
-                                                        </td>
-                                                        <td className="input-fields chp-base withunit">
-                                                            <input
-                                                                type="text"
-                                                                pattern="\d*"
-                                                                className="onlynumeric"
-                                                                placeholder="0"
-                                                                name="discount_chp_basement"
-                                                                id="discount_chp_basement"
-                                                            />
-                                                            <span>%</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="input-label">
+                                                    {
+                                                        this.props.heatSources.data && this.props.heatSources.data.map((heatSource,index) => {
+                                                            return <tr key={index}>
+                                                                <td className="input-label">
+                                                                {heatSource.heat_name ? heatSource.heat_name : `Heat Source ${index+1}`}
+                                                                </td>
+                                                                <td className="input-fields symbmain">
+                                                                    <input
+                                                                        type="text"
+                                                                        placeholder="100"
+                                                                        pattern="\d*"
+                                                                        className="icon-field onlynumeric"
+                                                                        name={`chiller_${index}`}
+                                                                        id={`chiller_${index}`}
+                                                                        defaultValue={100}
+                                                                        onChange={(e) => this.handleInvestmentData(e)}
+                                                                    />
+                                                                    <span className="pricesymbol">
+                                                                        €
+                                                                    </span>
+                                                                    <i
+                                                                        className={`fa fa-calculator dropdown-calci_test ${this.state.enableCalculator ? '' : 'disabled'}`}
+                                                                        aria-hidden="true"
+                                                                        /*onClick={(e) => this.calculateDiscount(e)}*/
+                                                                    />
+                                                                </td>
+                                                                <td className="input-label">
+                                                                    {this.props.t('DiscountText')}:
+                                                                </td>
+                                                                <td className="input-fields chp-base withunit">
+                                                                    <input
+                                                                        type="text"
+                                                                        pattern="\d*"
+                                                                        className="onlynumeric"
+                                                                        placeholder="0"
+                                                                        name={`chiller_discount_${index}`}
+                                                                        id={`chiller_discount_${index}`}
+                                                                        onChange={(e) => this.handleInvestmentData(e)}
+                                                                    />
+                                                                    <span>%</span>
+                                                                </td>
+                                                            </tr>
+                                                        
+                                                        })
+                                                    }
+                                                    {
+                                                        this.props.heatingLoadingProfiles.data && this.props.heatingLoadingProfiles.data.map((heatingProfile,index) => {
+                                                            return <tr key={index}>
+                                                                <td className="input-label">
+                                                                {heatingProfile.profile_name ? heatingProfile.profile_name : `Heating Loading ${index+1}`}
+                                                                </td>
+                                                                <td className="input-fields symbmain">
+                                                                    <input
+                                                                        type="text"
+                                                                        placeholder="100"
+                                                                        pattern="\d*"
+                                                                        className="icon-field onlynumeric"
+                                                                        name={`chiller_${index}`}
+                                                                        id={`chiller_${index}`}
+                                                                        defaultValue={100}
+                                                                        onChange={(e) => this.handleInvestmentData(e)}
+                                                                    />
+                                                                    <span className="pricesymbol">
+                                                                        €
+                                                                    </span>
+                                                                    <i
+                                                                        className={`fa fa-calculator dropdown-calci_test ${this.state.enableCalculator ? '' : 'disabled'}`}
+                                                                        aria-hidden="true"
+                                                                        /*onClick={(e) => this.calculateDiscount(e)}*/
+                                                                    />
+                                                                </td>
+                                                                <td className="input-label">
+                                                                    {this.props.t('DiscountText')}:
+                                                                </td>
+                                                                <td className="input-fields chp-base withunit">
+                                                                    <input
+                                                                        type="text"
+                                                                        pattern="\d*"
+                                                                        className="onlynumeric"
+                                                                        placeholder="0"
+                                                                        name={`chiller_discount_${index}`}
+                                                                        id={`chiller_discount_${index}`}
+                                                                        onChange={(e) => this.handleInvestmentData(e)}
+                                                                    />
+                                                                    <span>%</span>
+                                                                </td>
+                                                            </tr>
+                                                        
+                                                        })
+                                                    }{
+                                                        this.props.coolingLoadingProfiles.data && this.props.coolingLoadingProfiles.data.map((coolingProfile,index) => {
+                                                            return <tr key={index}>
+                                                                <td className="input-label">
+                                                                {coolingProfile.heat_name ? coolingProfile.heat_name : `Cooling Loading ${index+1}`}
+                                                                </td>
+                                                                <td className="input-fields symbmain">
+                                                                    <input
+                                                                        type="text"
+                                                                        placeholder="100"
+                                                                        pattern="\d*"
+                                                                        className="icon-field onlynumeric"
+                                                                        name={`chiller_${index}`}
+                                                                        id={`chiller_${index}`}
+                                                                        defaultValue={100}
+                                                                        onChange={(e) => this.handleInvestmentData(e)}
+                                                                    />
+                                                                    <span className="pricesymbol">
+                                                                        €
+                                                                    </span>
+                                                                    <i
+                                                                        className={`fa fa-calculator dropdown-calci_test ${this.state.enableCalculator ? '' : 'disabled'}`}
+                                                                        aria-hidden="true"
+                                                                        /*onClick={(e) => this.calculateDiscount(e)}*/
+                                                                    />
+                                                                </td>
+                                                                <td className="input-label">
+                                                                    {this.props.t('DiscountText')}:
+                                                                </td>
+                                                                <td className="input-fields chp-base withunit">
+                                                                    <input
+                                                                        type="text"
+                                                                        pattern="\d*"
+                                                                        className="onlynumeric"
+                                                                        placeholder="0"
+                                                                        name={`chiller_discount_${index}`}
+                                                                        id={`chiller_discount_${index}`}
+                                                                        onChange={(e) => this.handleInvestmentData(e)}
+                                                                    />
+                                                                    <span>%</span>
+                                                                </td>
+                                                            </tr>
+                                                        
+                                                        })
+                                                    }
 
-                                                            {this.props.t('Economic.Tab.Investments.Chiller1.Title')}:
-                                                        </td>
-                                                        <td className="input-fields symbmain">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="16,251"
-                                                                pattern="\d*"
-                                                                className="icon-field onlynumeric"
-                                                                name="chiller"
-                                                                id="chiller"
-                                                            />
-                                                            <span className="pricesymbol">
-                                                                €
-                                                            </span>
-                                                            <i
-                                                                className="fa fa-calculator dropdown-calci disabled"
-                                                                aria-hidden="true"
-                                                            />
-                                                        </td>
-                                                        <td className="input-label">
-                                                            {this.props.t('DiscountText')}:
-                                                        </td>
-                                                        <td className="input-fields chp-base withunit">
-                                                            <input
-                                                                type="text"
-                                                                pattern="\d*"
-                                                                className="onlynumeric"
-                                                                placeholder="0"
-                                                                name="chiller_discount"
-                                                                id="chiller_discount"
-                                                            />
-                                                            <span>%</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="input-label">
-                                                             {this.props.t('Economic.Tab.Investments.RadiantCoolingOffice.Title')}:
-                                                        </td>
-                                                        <td className="input-fields symbmain">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="8,550"
-                                                                pattern="\d*"
-                                                                className="onlynumeric"
-                                                                name="radiant_cooling_office"
-                                                                id="radiant_cooling_office"
-                                                            />
-                                                            <span className="pricesymbol">
-                                                                €
-                                                            </span>
-                                                        </td>
-                                                        <td className="input-label">
-                                                            {this.props.t('DiscountText')}:
-                                                        </td>
-                                                        <td className="input-fields chp-base withunit">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="0"
-                                                                pattern="\d*"
-                                                                className="onlynumeric"
-                                                                name="radiant_discount"
-                                                                id="radiant_discount"
-                                                            />
-                                                            <span>%</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
+                                                   {/* <tr>
                                                         <td className="input-label">
                                                         {this.props.t('Economic.Tab.Investments.eCoo10X.Title')}:
                                                         </td>
@@ -1216,7 +1309,7 @@ class EconomicModal extends Component {
                                                             />
                                                             <span>%</span>
                                                         </td>
-                                                    </tr>
+                                                    </tr>*/}
                                                     <tr
                                                         id="custom_1"
                                                         className="multiple"
@@ -1566,4 +1659,16 @@ class EconomicModal extends Component {
         );
     }
 }
+
+const mapStates = state => { 
+    return {
+        chillers : state.chillers,
+        heatSources : state.heatSources,
+        heatingLoadingProfiles : state.heatingLoadingProfiles,
+        coolingLoadingProfiles : state.coolingLoadingProfiles,
+    }
+}
+
+EconomicModal = connect(mapStates)(EconomicModal);
+
 export default translate(EconomicModal);

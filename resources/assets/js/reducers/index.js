@@ -1,24 +1,13 @@
-import { ADD_CHILLERS,ADD_GENERAL } from "../constants/action-types";
-const initialState = {
-  chillers: [],
-  heatsources:[],
-  generalData:[],
-  economicData:[],
-  option:[],
-  coompressionchillers:[],
-  heatingprofiles:[],
-  fahrenheit:[]
-};
+import { combineReducers } from 'redux';
 
-export const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_CHILLERS:
-      state.chillers.push(action.payload);
-      return state;
-    case ADD_GENERAL:
-      state.generalData.push(action.payload);
-      return state;
-    default:
-      return state;
-  }
-};
+import chillers from './chillers';
+import heatSources from './heat-sources';
+import heatingLoadingProfiles from './heating-profiles';
+import coolingLoadingProfiles from './cooling-profiles';
+
+export default combineReducers({
+  chillers : chillers,
+  heatSources : heatSources,
+  heatingLoadingProfiles : heatingLoadingProfiles,
+  coolingLoadingProfiles : coolingLoadingProfiles,
+});

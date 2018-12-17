@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 import Tiles from './Tiles';
 import ChillerModal from './ChillerModal';
 import GeneralModal from './GeneralModal';
@@ -9,6 +11,7 @@ import CoolingProfileModal from './CoolingProfileModal';
 import OptionsModal from './OptionsModal';
 import FahrenheitSystemModal from './FahrenheitSystemModal';
 import { translate, setLanguage, getLanguage } from 'react-multi-lang';
+import * as actionCreator from '../actions'
 
 class Adcalc extends Component {
     constructor(props) {
@@ -67,6 +70,10 @@ class Adcalc extends Component {
                     chillerRecord: this.state.compressionChilerStateChange.chillerRecord.concat(result.compressionChiller)
                 }
             });
+
+            this.props.dispatch(
+                actionCreator.addChiller(result.compressionChiller)
+            );
         } else {
 
             this.state.compressionChilerStateChange.chillerRecord[result.compressionChiller.chillerformModeKey] = result.compressionChiller
@@ -79,8 +86,11 @@ class Adcalc extends Component {
             this.setState({heatSourceStateChange:{
                 stateChange:result.state,
                 heatSourceRecord:this.state.heatSourceStateChange.heatSourceRecord.concat(result.heatSource)
-                }
-});
+                } 
+            });
+            this.props.dispatch(
+                actionCreator.addHeatSource(result.heatSource)
+            );
         }else{
             this.state.heatSourceStateChange.heatSourceRecord[result.heatSource.heatsourceformModeKey]= result.heatSource
             this.forceUpdate()
@@ -94,7 +104,10 @@ class Adcalc extends Component {
                 stateChange:result.state,
                 heatingProfileRecord:this.state.heatingProfileStateChange.heatingProfileRecord.concat(result.HeatingProfile)
                 }
-});
+            });
+            this.props.dispatch(
+                actionCreator.addHeatingProfile(result.HeatingProfile)
+            );
         }else{
             this.state.heatingProfileStateChange.heatingProfileRecord[result.HeatingProfile.heatingprofileformModeKey]= result.HeatingProfile
             this.forceUpdate()
@@ -108,7 +121,10 @@ class Adcalc extends Component {
                 stateChange:result.state,
                 coolingProfileRecord:this.state.coolingProfileStateChange.coolingProfileRecord.concat(result.CoolingProfile)
                 }
-});
+            });
+            this.props.dispatch(
+                actionCreator.addCoolingProfile(result.CoolingProfile)
+            );
         }else{
             this.state.coolingProfileStateChange.coolingProfileRecord[result.CoolingProfile.coolingprofileformModeKey]= result.CoolingProfile
             this.forceUpdate()
@@ -117,32 +133,39 @@ class Adcalc extends Component {
 
     }
     handleGeneralForm (result)  {
-        this.setState({generalStateChange:{
-                                            generalRecord:result.generalInformation,
-                                            stateChange:result.state
-                                          }
+        this.setState({
+            generalStateChange:{
+                generalRecord:result.generalInformation,
+                stateChange:result.state
+            }
         });
     }
     handleOptionForm (result)  {
-        this.setState({optionStateChange:{
-                                            optionsRecord:result.optionInformation,
-                                            stateChange:result.state
-                                          }
+        this.setState({
+            optionStateChange:{
+                optionsRecord:result.optionInformation,
+                stateChange:result.state
+            }
         });
     }
     handleEconomicForm (result)  {
-        this.setState({economicStateChange:{
-                                            economicRecord:result.economicInformation,
-                                            stateChange:result.state
-                                          }
+        this.setState({
+            economicStateChange:{
+                economicRecord:result.economicInformation,
+                stateChange:result.state
+            }
         });
     }
     handleFahrenheitForm (result)  {
-        this.setState({fahrenheitSystemStateChange:{
-                                            fahrenheitSystemRecord:result.economicInformation,
-                                            stateChange:result.state
-                                          }
+        this.setState({
+            fahrenheitSystemStateChange:{
+                fahrenheitSystemRecord:result.economicInformation,
+                stateChange:result.state
+            }
         });
+    }
+
+    componentDidMount(){ 
     }
 
     render() {
@@ -532,4 +555,11 @@ class Adcalc extends Component {
         );
     }
 }
-export default translate(Adcalc);
+
+const mapStateToProps = (state) => {
+    return {
+        chillers: state.chillers
+    }
+};
+
+export default translate(connect(mapStateToProps)(Adcalc));
