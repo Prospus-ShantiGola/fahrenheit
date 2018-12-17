@@ -74009,15 +74009,42 @@ var AddRecooler = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (AddRecooler.__proto__ || Object.getPrototypeOf(AddRecooler)).call(this, props));
 
-    _this.state = { recoolerInformation: '', role: 'user', selectedSource: selectedSource };
+    _this.state = {
+      recoolerInformation: '',
+      role: 'user',
+      selectedSource: selectedSource,
+      products: []
+    };
     _this.handleAddRecoolerSubmit = _this.handleAddRecoolerSubmit.bind(_this);
     _this.changeState = _this.changeState.bind(_this);
+    _this.getProductsData = _this.getProductsData.bind(_this);
     return _this;
   }
 
   _createClass(AddRecooler, [{
+    key: 'getProductsData',
+    value: function getProductsData() {
+      var _this2 = this;
+
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 're_cooler';
+
+      var url = '/recooling-products-data/' + type;
+
+      axios.get(url).then(function (response) {
+        if (response.data) {
+          console.log('products data', response.data);
+          _this2.setState({ products: response.data });
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+
+      this.getProductsData('re_cooler');
+
       jQuery(".help-toggle").unbind('click');
       jQuery(".help-toggle").click(function () {
         jQuery(".input-help-label").toggle();
@@ -74154,11 +74181,17 @@ var AddRecooler = function (_Component) {
       this.setState({
         selectedSource: elem.target.value
       });
+
+      if (elem.target.value === 'Re-cooler') {
+        this.getProductsData('re_cooler');
+      } else {
+        this.getProductsData('circuit_separation');
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       //projectData['recooling']=this.state.recoolerInformation;
       var recoolingHtml = void 0,
@@ -74343,7 +74376,7 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'select',
                                 { className: 'required-field', name: 'recooler_component', id: 'recooler_component', onChange: function onChange(elem) {
-                                    return _this2.changeField(elem);
+                                    return _this3.changeField(elem);
                                   } },
                                 _react2.default.createElement(
                                   'option',
@@ -74352,7 +74385,7 @@ var AddRecooler = function (_Component) {
                                 ),
                                 _react2.default.createElement(
                                   'option',
-                                  { value: 'Circuit separation' },
+                                  { value: 'Circuit-separation' },
                                   this.props.t('Fahrenheit.Tab.Recooling.CircuitSeparation.Title')
                                 )
                               ),
@@ -74387,16 +74420,13 @@ var AddRecooler = function (_Component) {
                               _react2.default.createElement(
                                 'select',
                                 { className: 'required-field', name: 'recooler_product', id: 'recooler_product' },
-                                _react2.default.createElement(
-                                  'option',
-                                  { value: 'eRec 20 | 58' },
-                                  'eRec 20 | 58'
-                                ),
-                                _react2.default.createElement(
-                                  'option',
-                                  { value: 'eRec 20 | 50' },
-                                  'eRec 20 | 50'
-                                )
+                                this.state.products && this.state.products.map(function (product) {
+                                  return _react2.default.createElement(
+                                    'option',
+                                    { key: product.id, value: product.product_name },
+                                    product.product_name
+                                  );
+                                })
                               )
                             )
                           ),

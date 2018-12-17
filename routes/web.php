@@ -180,3 +180,11 @@ return false;
 });
 
 
+Route::get('/calculate', function(){
+     return view('pages.calculate');
+});
+
+Route::post('/calculate-data', 'CalculateDataController@calculateData');
+Route::get('/recooling-products-data/{type}', 'CalculateDataController@getRecoolingProducts');
+
+
