@@ -73265,15 +73265,58 @@ var AddChiller = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (AddChiller.__proto__ || Object.getPrototypeOf(AddChiller)).call(this, props));
 
-        _this.state = { chillerInformation: '', role: 'user', selectedSource: selectedSource, formMode: formmode, formKey: formkey };
+        _this.state = {
+            chillerInformation: '',
+            role: 'user',
+            selectedSource: selectedSource,
+            formMode: formmode,
+            formKey: formkey,
+            adsorbents: [],
+            chillerProducts: []
+        };
         _this.handleAddChillerSubmit = _this.handleAddChillerSubmit.bind(_this);
         _this.changeState = _this.changeState.bind(_this);
+        _this.getAdsorbentData = _this.getAdsorbentData.bind(_this);
         return _this;
     }
 
     _createClass(AddChiller, [{
+        key: 'getChillerProducts',
+        value: function getChillerProducts(typeId) {
+            var _this2 = this;
+
+            var url = '/get-chiller-products/' + typeId;
+
+            axios.get(url).then(function (response) {
+                if (response.data) {
+                    console.log('chiller products data', response.data);
+                    _this2.setState({ chillerProducts: response.data });
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'getAdsorbentData',
+        value: function getAdsorbentData() {
+            var _this3 = this;
+
+            var url = '/get-chiller-adsorbent-types';
+
+            axios.get(url).then(function (response) {
+                if (response.data) {
+                    console.log('adsorbent data', response.data);
+                    _this3.setState({ adsorbents: response.data });
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
+            this.getAdsorbentData();
+
             jQuery(".help-toggle").unbind('click');
             jQuery(".help-toggle").click(function () {
                 jQuery(".input-help-label").toggle();
@@ -73443,9 +73486,16 @@ var AddChiller = function (_Component) {
             });
         }
     }, {
+        key: 'handleAdsorbentChange',
+        value: function handleAdsorbentChange(e) {
+            if (e.target.value) {
+                this.getChillerProducts(e.target.value);
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this4 = this;
 
             //projectData['chillerInfo']=this.state.chillerInformation;
             var adsorbentHtml,
@@ -73476,22 +73526,23 @@ var AddChiller = function (_Component) {
                         { className: 'input-fields' },
                         _react2.default.createElement(
                             'select',
-                            { className: 'required-field', id: 'chiller_adsorbent', name: 'chiller_adsorbent' },
+                            { className: 'required-field', id: 'chiller_adsorbent', name: 'chiller_adsorbent', onChange: function onChange(e) {
+                                    return _this4.handleAdsorbentChange(e);
+                                } },
                             _react2.default.createElement(
                                 'option',
-                                null,
-                                'Silica gel'
+                                { value: '' },
+                                'Select adsorbent'
                             ),
-                            _react2.default.createElement(
-                                'option',
-                                null,
-                                'option1'
-                            ),
-                            _react2.default.createElement(
-                                'option',
-                                null,
-                                'option2'
-                            )
+                            this.state.adsorbents && this.state.adsorbents.map(function (adsorbent) {
+                                return _react2.default.createElement(
+                                    'option',
+                                    {
+                                        key: adsorbent.chiller_adsorbent_types_id,
+                                        value: adsorbent.chiller_adsorbent_types_id },
+                                    adsorbent.chiller_adsorbent_type
+                                );
+                            })
                         )
                     )
                 );
@@ -73693,7 +73744,7 @@ var AddChiller = function (_Component) {
                                                             _react2.default.createElement(
                                                                 'select',
                                                                 { className: 'required-field', id: 'chiller_chiller_type', name: 'chiller_chiller_type', onChange: function onChange(elem) {
-                                                                        return _this2.changeField(elem);
+                                                                        return _this4.changeField(elem);
                                                                     } },
                                                                 _react2.default.createElement(
                                                                     'option',
@@ -73707,10 +73758,10 @@ var AddChiller = function (_Component) {
                                                                 )
                                                             ),
                                                             _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', ref: function ref(addchillerformMode) {
-                                                                    _this2.addchillerformMode = addchillerformMode;
+                                                                    _this4.addchillerformMode = addchillerformMode;
                                                                 }, id: 'addchillerformMode', name: 'addchillerformMode', value: this.state.formMode }),
                                                             _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', ref: function ref(addchillerformModeKey) {
-                                                                    _this2.addchillerformModeKey = addchillerformModeKey;
+                                                                    _this4.addchillerformModeKey = addchillerformModeKey;
                                                                 }, id: 'addchillerformModeKey', name: 'addchillerformModeKey', value: this.state.formKey })
                                                         )
                                                     ),
@@ -73742,19 +73793,18 @@ var AddChiller = function (_Component) {
                                                                 { className: 'required-field', id: 'chiller_product', name: 'chiller_product' },
                                                                 _react2.default.createElement(
                                                                     'option',
-                                                                    null,
-                                                                    'eCoo 20 ST'
+                                                                    { value: '' },
+                                                                    'Select product'
                                                                 ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    null,
-                                                                    'option1'
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    null,
-                                                                    'option2'
-                                                                )
+                                                                this.state.chillerProducts && this.state.chillerProducts.map(function (product) {
+                                                                    return _react2.default.createElement(
+                                                                        'option',
+                                                                        {
+                                                                            key: product.id,
+                                                                            value: product.id },
+                                                                        product.product_name
+                                                                    );
+                                                                })
                                                             )
                                                         )
                                                     ),

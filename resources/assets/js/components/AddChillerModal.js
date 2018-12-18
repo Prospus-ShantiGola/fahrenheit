@@ -14,13 +14,57 @@ class AddChiller extends Component {
 
   constructor(props){
         super(props);
-        this.state = {chillerInformation: '',role:'user',selectedSource:selectedSource,formMode:formmode,formKey:formkey};
+        this.state = {
+            chillerInformation: '',
+            role:'user',
+            selectedSource:selectedSource,
+            formMode:formmode,
+            formKey:formkey,
+            adsorbents : [],
+            chillerProducts : [],
+        };
         this.handleAddChillerSubmit = this.handleAddChillerSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
+        this.getAdsorbentData = this.getAdsorbentData.bind(this);
       }
+
+    getChillerProducts(typeId) {
+        let url = '/get-chiller-products/' + typeId;
+
+        axios.get(url)
+            .then((response) => {
+                if (response.data) {
+                    console.log('chiller products data', response.data)
+                    this.setState({ chillerProducts: response.data })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }
+
+    getAdsorbentData() {
+        let url = '/get-chiller-adsorbent-types';
+
+        axios.get(url)
+            .then((response) => {
+                if (response.data) {
+                    console.log('adsorbent data', response.data)
+                    this.setState({ adsorbents : response.data })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }
+
 
 
        componentDidMount(){
+           this.getAdsorbentData();
+
         jQuery(".help-toggle").unbind('click');
         jQuery(".help-toggle").click(function(){
             jQuery(".input-help-label").toggle();
@@ -199,6 +243,12 @@ class AddChiller extends Component {
 
     }
 
+    handleAdsorbentChange(e){
+        if (e.target.value){
+            this.getChillerProducts(e.target.value)
+        }
+    }
+
     render() {
         //projectData['chillerInfo']=this.state.chillerInformation;
         var adsorbentHtml,productHtml="";
@@ -212,10 +262,17 @@ class AddChiller extends Component {
                 </button>
                 </td>
                 <td className="input-fields">
-                    <select className="required-field" id="chiller_adsorbent" name="chiller_adsorbent">
-                        <option>Silica gel</option>
-                        <option>option1</option>
-                        <option>option2</option>
+                    <select className="required-field" id="chiller_adsorbent" name="chiller_adsorbent" onChange={(e) => this.handleAdsorbentChange(e)}>
+                        <option value=''>Select adsorbent</option>
+                        {
+                            this.state.adsorbents && this.state.adsorbents.map((adsorbent) => {
+                                return <option 
+                                    key={adsorbent.chiller_adsorbent_types_id} 
+                                    value={adsorbent.chiller_adsorbent_types_id}>
+                                    {adsorbent.chiller_adsorbent_type}
+                                </option>
+                            })
+                        }
                     </select>
                 </td>
             </tr>);
@@ -311,9 +368,16 @@ class AddChiller extends Component {
                                                     </td>
                                                     <td className="input-fields">
                                                         <select className="required-field" id="chiller_product" name="chiller_product">
-                                                            <option>eCoo 20 ST</option>
-                                                            <option>option1</option>
-                                                            <option>option2</option>
+                                                            <option value=''>Select product</option>
+                                                            {
+                                                                this.state.chillerProducts && this.state.chillerProducts.map((product) => {
+                                                                    return <option
+                                                                        key={product.id}
+                                                                        value={product.id}>
+                                                                        {product.product_name}
+                                                                    </option>
+                                                                })
+                                                            }
                                                         </select>
                                                     </td>
                                                 </tr>
