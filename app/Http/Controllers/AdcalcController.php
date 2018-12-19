@@ -361,6 +361,273 @@ class AdcalcController extends Controller
         return $tempOut;
     }
 
+    /*/*
+      Function to calculate $a and $b for cooling capacity of sika
+     */
+    function calculateCoolingCapacity($ht_in,$lt_in)
+    {
+       
+
+
+        $res =  DB::select('SELECT id,a,b,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt,power(abs(ht-'.$ht_in.'),2) + power(abs(lt-'.$lt_in.'),2)*10 as dist FROM `calculations` order by dist limit 0,8');
+        $temp=array();
+        
+        foreach ($res as  $value) {
+
+             $temp[]=$value;
+        }
+       // echo "<pre>";
+     //  print_r($temp);
+       // die;
+
+      //  echo $ht_in." LT_____________".$lt_in;
+        $temp = json_decode(json_encode($temp), true);
+        print_r($temp);
+  
+        if($temp[0]['ht']  == $ht_in && $temp[0]['lt'] == $lt_in){
+         // take a0 and b0
+ 
+          
+          //echo "<br/>";
+          $a6 = $temp[0]['a'];
+          $b6 = $temp[0]['b'];
+          //echo "a6==> ".$a6."</br>";
+        //  echo "b6==> ".$b6."</br>";
+        }
+        else if ($temp[0]['ht'] == $ht_in) {
+       echo '2nd';
+        echo "<br/>";
+
+
+        // $a6= (($a2-$a0)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$a0;
+        // echo "a6==>".$a6."</br>";
+        // $b6= (($b2-$b0)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$b0;
+        // echo "b6==>".$b6."</br>";
+
+
+     //   echo '2nd';
+     //    echo "<br/>";
+        $a6= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$temp[0]['a'];
+      //  echo "a6==> ".$a6."</br>";
+        $b6= (($temp[1]['b']-$temp[0]['b'])/($temp[1]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$temp[0]['b'];
+       // echo "b6==> ".$b6."</br>";
+
+
+    }
+
+    else if ($temp[0]['lt'] == $lt_in) {
+       echo '3rd';
+        echo "<br/>";
+    $a6= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['a'];
+  //  echo "a4==> ".$a6."</br>";
+    $b6= (($temp[1]['b']-$temp[0]['b'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['b'];
+  //  echo "b4==> ".$b6."</br>";
+    }
+
+ else{
+
+    // usort($temp,'sortByLt');
+
+     usort($temp, 'self::sortByLt');
+     echo '4th';
+     echo "<br/>";
+     // echo ($temp[1]['a']-$temp[0]['a']);
+     // die;
+    $a4= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['a'];
+
+
+
+   // echo "a4==> ".$a4."</br>";
+    $a5= (($temp[3]['a']-$temp[2]['a'])/($temp[3]['ht']-$temp[2]['ht']))*($ht_in-$temp[2]['ht'])+$temp[2]['a'];
+   // echo "a5==> ".$a5."</br>";
+    $a6= (($a5-$a4)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$a4;
+   // echo "a6==> ".$a6."</br>";
+    $b4= (($temp[1]['b']-$temp[0]['b'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['b'];
+   // echo "b4==> ".$b4."</br>";
+    $b5= (($temp[3]['b']-$temp[2]['b'])/($temp[3]['ht']-$temp[2]['ht']))*($ht_in-$temp[2]['ht'])+$temp[2]['b'];
+    ///echo "b5==> ".$b5."</br>";
+    $b6= (($b5-$b4)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$b4;
+   // echo "b6==> ".$b6."</br>";
+
+    }
+
+    $final_array['a']=   $a6;
+    $final_array['b']=   $b6;
+
+    return $final_array;
+          
+    }   
+private static function sortByLt($a, $b)
+    {
+        $a = $a['lt'];
+        $b = $b['lt'];
+
+        if ($a == $b) return 0;
+        return ($a < $b) ? -1 : 1;
+    }
+
+
+    /*/*
+      Function to calculate $a and $b  &c for thermal COP of sika
+     */
+    function calculateCopVariable($ht_in,$lt_in)
+    {
+       
+
+
+        $res =  DB::select('SELECT id,aa as a,bb as b,c,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt,power(abs(ht-'.$ht_in.'),2) + power(abs(lt-'.$lt_in.'),2)*10 as dist FROM `calculations` order by dist limit 0,4');
+        $temp=array();
+        
+        foreach ($res as  $value) {
+
+             $temp[]=$value;
+        }
+       // echo "<pre>";
+       // print_r($temp);
+       // die;
+
+      //  echo $ht_in." LT_____________".$lt_in;
+        $temp = json_decode(json_encode($temp), true);
+  
+        if($temp[0]['ht']  == $ht_in && $temp[0]['lt'] == $lt_in){
+         // take a0 and b0
+
+          
+        //  echo "<br/>";
+          $a6 = $temp[0]['a'];
+          $b6 = $temp[0]['b'];
+          $c6 = $temp[0]['c'];
+          //echo "a6==> ".$a6."</br>";
+        //  echo "b6==> ".$b6."</br>";
+        }
+        else if ($temp[0]['ht'] == $ht_in) {
+     // echo '2nd';
+       //echo "<br/>";
+
+
+        // $a6= (($a2-$a0)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$a0;
+        // echo "a6==>".$a6."</br>";
+        // $b6= (($b2-$b0)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$b0;
+        // echo "b6==>".$b6."</br>";
+
+
+     //   echo '2nd';
+     //    echo "<br/>";
+        $a6= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$temp[0]['a'];
+      //  echo "a6==> ".$a6."</br>";
+      
+        $b6= (($temp[1]['b']-$temp[0]['b'])/($temp[1]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$temp[0]['b'];
+      
+        $c6= (($temp[1]['c']-$temp[0]['c'])/($temp[1]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$temp[0]['c'];
+       // echo "b6==> ".$b6."</br>";
+
+
+    }
+
+    else if ($temp[0]['lt'] == $lt_in) {
+       //echo '3rd';
+        //echo "<br/>";
+    $a6= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['a'];
+  //  echo "a4==> ".$a6."</br>";
+    $b6= (($temp[1]['b']-$temp[0]['b'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['b'];
+  //  echo "b4==> ".$b6."</br>";
+    $c6= (($temp[1]['c']-$temp[0]['c'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['c'];
+    }
+
+ else{
+
+     //echo '4th';
+     //echo "<br/>";
+      usort($temp, 'self::sortByLt');
+    $a4= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['a'];
+   // echo "a4==> ".$a4."</br>";
+    $a5= (($temp[3]['a']-$temp[2]['a'])/($temp[3]['ht']-$temp[2]['ht']))*($ht_in-$temp[2]['ht'])+$temp[2]['a'];
+   // echo "a5==> ".$a5."</br>";
+    $a6= (($a5-$a4)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$a4;
+
+   // echo "a6==> ".$a6."</br>";
+    $b4= (($temp[1]['b']-$temp[0]['b'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['b'];
+   // echo "b4==> ".$b4."</br>";
+    $b5= (($temp[3]['b']-$temp[2]['b'])/($temp[3]['ht']-$temp[2]['ht']))*($ht_in-$temp[2]['ht'])+$temp[2]['b'];
+    ///echo "b5==> ".$b5."</br>";
+    $b6= (($b5-$b4)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$b4;
+   // echo "b6==> ".$b6."</br>";
+
+
+    $c4= (($temp[1]['c']-$temp[0]['c'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['c'];
+   // echo "b4==> ".$b4."</br>";
+    $c5= (($temp[3]['c']-$temp[2]['c'])/($temp[3]['ht']-$temp[2]['ht']))*($ht_in-$temp[2]['ht'])+$temp[2]['c'];
+    ///echo "b5==> ".$b5."</br>";
+    $c6= (($c5-$c4)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$c4;
+
+
+    }
+
+    $final_array['aa']=   $a6;
+    $final_array['bb']=   $b6;
+    $final_array['c']=   $c6;
+  //  print_r($final_array);
+    return $final_array;
+          
+    }   
+
+
+
+    
+
+    public function calculateData(Request $request)
+    {
+            
+        $ht_in = $request->drive_temperature;
+        $lt_in = $request->cold_water;
+        $mt_in = $request->outdoor_temperature;
+
+            // return (int) $request->cold_water +
+        //         (int) $request->drive_temperature +
+        //         (int) $request->outdoor_temperature;   
+        
+        
+        $final_ab_value =   $this->calculateCoolingCapacity($ht_in,$lt_in);      
+        
+        //cooling capcity
+        $Qlt =   $this->calculateQLT($final_ab_value,$mt_in);
+
+        $final_abc_value = $this->calculateCopVariable($ht_in,$lt_in);
+
+
+         $COP =  $this-> calculateCOP($final_abc_value,$mt_in);
+
+        // heat capacity
+        $Qht =  $this->heatCapacity($COP,$Qlt);
+// die;
+      
+
+
+     $output['a'] =   $final_ab_value['a'];
+     $output['b'] =   $final_ab_value['b'];
+     $output['Qth_LtAd'] =   number_format((float)$Qlt, 4, '.', '');
+
+    $output['aa'] =  $final_abc_value['aa'];
+    $output['bb'] =  $final_abc_value['bb'];
+    $output['COP'] = number_format((float)$COP, 4, '.', ''); 
+
+    $output['Qth_HtAd'] = $Qht ;
+
+
+
+// print_r($output);
+
+     
+
+    // $final_array['Qth_LtAd'] = 
+ return json_encode($output);
+    }
+
+
+    /**
+     *  Function to calculate necessary drive heat” (Qth_HtAd) in kW
+     *  heat capacity Qth_HtAd
+     */
     function heatCapacity($COP,$Qlt)
     {
 
@@ -368,16 +635,35 @@ class AdcalcController extends Controller
         return $result;
     }
 
-    function calculateQLT($_a, $_b)
+
+
+
+
+    /**
+     *  Function to calculate necessary drive heat” (Qth_LtAd) in kW
+     *  cooling capacity Qth_LtAd
+     */
+    function calculateQLT($final_array,$mt_in)
     {
-        $Qlt= $_b * (float)log(MT) + $_a;
-        return number_format((float)$Qlt, 4, '.', '');
+        $_a = $final_array['a'];
+        $_b = $final_array['b'];
+
+        $Qlt = $_b * (float)log($mt_in) + $_a;
+        return  $Qlt;       
     }
 
-    function calculateCOP($_a, $_b, $_c)
+    function calculateCOP($final_array,$mt_in)
     {
-        $COP= $_a+($_b*MT)+$_c*(pow(MT, 2));
-        return number_format((float)$COP, 4, '.', '');
+
+        $_a = $final_array['aa'];
+        $_b = $final_array['bb'];
+        $_c = $final_array['c'];
+
+
+        $cop = $_a+($_b*$mt_in)+$_c*(pow($mt_in, 2));
+
+        return $cop;
+       // return number_format((float)$COP, 4, '.', '');
     }
 
 

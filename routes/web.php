@@ -184,7 +184,7 @@ Route::get('/calculate', function(){
      return view('pages.calculate');
 });
 
-Route::post('/calculate-data', 'CalculateDataController@calculateData');
+Route::post('/calculate-data', 'AdcalcController@calculateData');
 Route::get('/recooling-products-data/{type}', 'CalculateDataController@getRecoolingProducts');
 Route::get('/get-chiller-adsorbent-types', 'CalculateDataController@getChillerAdsorbentTypes');
 Route::get('/get-chiller-products/{type_id}', 'CalculateDataController@getChillerProducts');

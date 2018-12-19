@@ -97,21 +97,44 @@ projectData={};
     <legend>Calculate</legend>
         <div class="form-group">
             <label for="Drive_temperature">Drive temperature</label>
-            <input type="number" class="form-control" id="Drive_temperature" name="drive_temperature" aria-describedby="textHelp" placeholder="(Tn_HtIn) – limitation: 55 to 95 °C">
+            <input type="text" class="form-control" id="Drive_temperature" required name="drive_temperature" aria-describedby="textHelp" placeholder="Tn_HtIn">
         </div>
         <div class="form-group">
             <label for="cold_water">Cold water inlet temperature</label>
-            <input type="number" class="form-control" id="cold_water" name="cold_water" aria-describedby="textHelp" placeholder="(Tn_LtIn) – limitation: 15 to 25 °C">
+            <input type="text" class="form-control" id="cold_water" name="cold_water" required aria-describedby="textHelp" placeholder="Tn_LtIn">
         </div>
         <div class="form-group">
-            <label for="Outdoor_temperature">Outdoor temperature</label>
-            <input type="number" class="form-control" id="Outdoor_temperature" name="outdoor_temperature" aria-describedby="textHelp" placeholder="(Tn_AirIn) – limitation: 20 to 30 °C">
+            <label for="Outdoor_temperature">Re-cooling Temperature</label>
+            <input type="text" class="form-control" id="Outdoor_temperature" name="outdoor_temperature" required aria-describedby="textHelp" placeholder="Tn_MtIn">
+        </div>
+        <div class="form-group">
+            <label for="Outdoor_temperature">Adsorption Chiller</label>
+            <select class="form-control" id="adsorption_chiller" name="adsorption_chiller"  >
+            <option value = "0">Select Adsorption Chiller</option>
+            <option value = "eCoo10">eCoo10</option>
+            <option value = "eCoo10">eCoo20</option>
+            <option value = "eCoo10">eCoo30</option>
+            <option value = "eCoo10">eCoo10X</option>
+            <option value = "eCoo10">eCoo20X</option>
+            <option value = "eCoo10">eCoo30X</option>
+            <option value = "eCoo10">eCoo40X</option>
+            </select>
+           <!--  <input type="text" class="form-control" id="adsorption_chiller" name="adsorption_chiller" required aria-describedby="textHelp" placeholder=""> -->
+        </div>
+        <div class="form-group">
+            <label for="Outdoor_temperature">Mod Type</label>
+            <select class="form-control" id="adsorption_chiller" name="adsorption_chiller"  >
+            
+            <option value = "sika">sika</option>
+            
+            </select>
+           <!--  <input type="text" class="form-control" id="adsorption_chiller" name="adsorption_chiller" required aria-describedby="textHelp" placeholder=""> -->
         </div>
     
     </fieldset>
     <div id="res" class="mb-2"></div>
-    <button type="submit" class="btn btn-primary" disabled>Create System</button>
-    <button type="submit" class="btn btn-default">Calculate</button>
+    <button type="submit" class="btn btn-primary hide"  disabled>Create System</button>
+    <button type="submit" class="btn btn-primary">Calculate</button>
     </fieldset>
     </form>
     </div>
@@ -136,12 +159,20 @@ projectData={};
             event.preventDefault();
 
             var data = $(event.target).serialize();
-            console.log(data);
+          //  console.log(data);
 
 
             axios.post('{{ url('calculate-data')}}', data)
             .then(function (response) {
-                $('#res').html('Calculation  : ' + response.data);
+                console.log('a: '+ response.data.a);
+                console.log('b: '+ response.data.b);
+                console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
+
+                // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
+                // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
+                // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
+                $('#res').html('Calculation for Cooling Capacity are below:  <br/>  a:  ' + response.data.a +'<br/> b:  '+ response.data.b +'<br/>Cooling capacity(Qth_LtAd):  '+ response.data.Qth_LtAd+'KW <br/><br/>Calculation for Thermal COP are below:  <br/>  a:  ' + response.data.aa +'<br/> b:  '+ response.data.bb +'<br/>COP:  '+ response.data.COP +'<br/><br/> Heat capacity(Qth_HtAd): '+ response.data.Qth_HtAd+'KW' );
+
             })
             .catch(function (error) {
                 console.log(error);
