@@ -184,7 +184,7 @@ Route::get('/calculate', function(){
      return view('pages.calculate');
 });
 
-Route::post('/calculate-data', 'CalculateDataController@calculateData');
+Route::post('/calculate-data', 'AdcalcController@calculateData');
 Route::get('/recooling-products-data/{type}', 'CalculateDataController@getRecoolingProducts');
 
 
