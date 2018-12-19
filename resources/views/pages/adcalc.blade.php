@@ -46,9 +46,7 @@
         }*/
     </style>
     <script>
-       <?php
-            if($user = Auth::user())
-{ ?>
+       <?php if($user = Auth::user()) { ?>
 
     LOGGED_IN_ROLE= "<?php echo (Auth::user()->user_type_id ==3) ? 'expert':'user' ;?>";
 <?php
