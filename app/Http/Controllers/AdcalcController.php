@@ -435,11 +435,11 @@ class AdcalcController extends Controller
      // die;
     $a4= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['a'];
 
-
-
    // echo "a4==> ".$a4."</br>";
     $a5= (($temp[3]['a']-$temp[2]['a'])/($temp[3]['ht']-$temp[2]['ht']))*($ht_in-$temp[2]['ht'])+$temp[2]['a'];
-   // echo "a5==> ".$a5."</br>";
+    
+    
+    // echo "a5==> ".$a5."</br>";
     $a6= (($a5-$a4)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$a4;
    // echo "a6==> ".$a6."</br>";
     $b4= (($temp[1]['b']-$temp[0]['b'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['b'];
@@ -581,10 +581,6 @@ private static function sortByLt($a, $b)
         $ht_in = $request->drive_temperature;
         $lt_in = $request->cold_water;
         $mt_in = $request->outdoor_temperature;
-
-            // return (int) $request->cold_water +
-        //         (int) $request->drive_temperature +
-        //         (int) $request->outdoor_temperature;   
         
         
         $final_ab_value =   $this->calculateCoolingCapacity($ht_in,$lt_in);      
