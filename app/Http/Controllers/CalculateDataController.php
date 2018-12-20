@@ -51,5 +51,20 @@ class CalculateDataController extends Controller
 
         return response()->json($chiller_products);
     }
+
+    public function getChillerOpratingModes(Request $request){
+        $opratingModes = DB::table('chiller_operating_modes')->get();
+        return response()->json($opratingModes);
+    }
+
+    public function getChillerIntegratedSepSystem(Request $request){
+        $sysSep = DB::table('chiller_int_sys_separations')->get();
+        return response()->json($sysSep);
+    }
+
+    public function getChillerIntegratedCWU(Request $request){
+        $intCwus = DB::table('chiller_int_cold_water_units')->get();
+        return response()->json($intCwus);
+    }
 }
   

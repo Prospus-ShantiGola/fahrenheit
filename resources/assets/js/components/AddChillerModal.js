@@ -60,6 +60,54 @@ class AddChiller extends Component {
 
     }
 
+    getChillerOpratingModes() {
+        let url = '/get-chiller-oprating-modes';
+
+        axios.get(url)
+            .then((response) => {
+                if (response.data) {
+                    console.log('adsorbent data', response.data)
+                    this.setState({ adsorbents: response.data })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }
+    getChillerIntegratedSepSystem() {
+        let url = '/get-chiller-integrated-system-sepration';
+
+        axios.get(url)
+            .then((response) => {
+                if (response.data) {
+                    console.log('adsorbent data', response.data)
+                    this.setState({ adsorbents: response.data })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }
+
+    getChillerIntegratedCWU() {
+        let url = '/get-chiller-integrated-cwu';
+
+        axios.get(url)
+            .then((response) => {
+                if (response.data) {
+                    console.log('adsorbent data', response.data)
+                    this.setState({ adsorbents: response.data })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }
+
+    
 
 
        componentDidMount(){
@@ -379,6 +427,57 @@ class AddChiller extends Component {
                                                                 })
                                                             }
                                                         </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                        <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.OperatingMode.Title')}:</td>
+                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.ChillerType.InfoTool')}
+                                                        data-original-title="" title="">
+                                                        <img src="public/images/help-red.png" alt="" />
+                                                    </button>
+                                                    </td>
+                                                    <td className="input-fields">
+                                                        <select className="required-field" id="chiller_chiller_type" name="chiller_chiller_type" onChange={(elem) => this.changeField(elem)}>
+                                                            <option value="Adsorption">Adsorption</option>
+                                                            <option value="Compression">Compression</option>
+                                                        </select>
+                                                        <input type="hidden" placeholder="Chiller 1" ref={addchillerformMode => { this.addchillerformMode = addchillerformMode; }} id="addchillerformMode" name="addchillerformMode" value={this.state.formMode} />
+                                                        <input type="hidden" placeholder="Chiller 1" ref={addchillerformModeKey => { this.addchillerformModeKey = addchillerformModeKey; }} id="addchillerformModeKey" name="addchillerformModeKey" value={this.state.formKey} />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                        <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.IntegratedSystemSepration.Title')}:</td>
+                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.ChillerType.InfoTool')}
+                                                        data-original-title="" title="">
+                                                        <img src="public/images/help-red.png" alt="" />
+                                                    </button>
+                                                    </td>
+                                                    <td className="input-fields">
+                                                        <select className="required-field" id="chiller_chiller_type" name="chiller_chiller_type" onChange={(elem) => this.changeField(elem)}>
+                                                            <option value="Adsorption">Adsorption</option>
+                                                            <option value="Compression">Compression</option>
+                                                        </select>
+                                                        <input type="hidden" placeholder="Chiller 1" ref={addchillerformMode => { this.addchillerformMode = addchillerformMode; }} id="addchillerformMode" name="addchillerformMode" value={this.state.formMode} />
+                                                        <input type="hidden" placeholder="Chiller 1" ref={addchillerformModeKey => { this.addchillerformModeKey = addchillerformModeKey; }} id="addchillerformModeKey" name="addchillerformModeKey" value={this.state.formKey} />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                        <td className="input-label">{this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.IntegratedColdWaterUnit.Title')}:</td>
+                                                    <td className="input-help-label"><button type="button" className="" data-container="body" data-trigger="hover" data-toggle="popover"
+                                                        data-placement="bottom" data-content={this.props.t('Fahrenheit.Tab.Chiller.TAB.TechnicalData.ChillerType.InfoTool')}
+                                                        data-original-title="" title="">
+                                                        <img src="public/images/help-red.png" alt="" />
+                                                    </button>
+                                                    </td>
+                                                    <td className="input-fields">
+                                                        <select className="required-field" id="chiller_chiller_type" name="chiller_chiller_type" onChange={(elem) => this.changeField(elem)}>
+                                                            <option value="Adsorption">Adsorption</option>
+                                                            <option value="Compression">Compression</option>
+                                                        </select>
+                                                        <input type="hidden" placeholder="Chiller 1" ref={addchillerformMode => { this.addchillerformMode = addchillerformMode; }} id="addchillerformMode" name="addchillerformMode" value={this.state.formMode} />
+                                                        <input type="hidden" placeholder="Chiller 1" ref={addchillerformModeKey => { this.addchillerformModeKey = addchillerformModeKey; }} id="addchillerformModeKey" name="addchillerformModeKey" value={this.state.formKey} />
                                                     </td>
                                                 </tr>
                                                 <tr>

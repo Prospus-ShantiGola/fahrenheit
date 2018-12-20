@@ -685,6 +685,21 @@
                             "Placeholder":"1 piece",
                             "InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."
                         },
+                        "OperatingMode": {
+                            "Title": "Oprating Mode",
+                            "Placeholder": "€/a",
+                            "InfoTool": "Address explanation/tip"
+                        },
+                        "IntegratedSystemSepration": {
+                            "Title": "Integrated System Sepration",
+                            "Placeholder": "€/a",
+                            "InfoTool": "Address explanation/tip"
+                        },
+                        "IntegratedColdWaterUnit": {
+                            "Title": "Integrated Cold Water Unit",
+                            "Placeholder": "€/a",
+                            "InfoTool": "Address explanation/tip"
+                        },
                         "GroupInterconnection": {
                             "Title":"Group interconnection",
                             "Placeholder":"1 piece",
