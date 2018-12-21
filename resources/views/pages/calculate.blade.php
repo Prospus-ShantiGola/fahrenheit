@@ -63,7 +63,7 @@
     <fieldset>
     <legend>Calculate</legend>
         <div class="form-group">
-            <label for="Drive_temperature">Drive temperature</label>
+            <label for="Drive_temperature">Drive temperature (Tn_HtIn)</label>
             <input 
                 type="range" 
                 class="form-control" 
@@ -73,9 +73,18 @@
                 aria-describedby="textHelp" 
                 placeholder="Tn_HtIn"
             />
+      <!--       <input 
+                type="text" 
+                class="form-control" 
+                id="Drive_temperature" 
+                required 
+                name="drive_temperature" 
+                aria-describedby="textHelp" 
+                placeholder="Tn_HtIn"
+            /> -->
         </div>
         <div class="form-group">
-            <label for="cold_water">Cold water inlet temperature</label>
+            <label for="cold_water">Cold water inlet temperature (Tn_LtIn)</label>
             <input  
                 type="range" 
                 class="form-control" 
@@ -85,9 +94,19 @@
                 aria-describedby="textHelp" 
                 placeholder="Tn_LtIn"
             />
+
+     <!--        <input  
+                type="text" 
+                class="form-control" 
+                id="cold_water" 
+                name="cold_water" 
+                required 
+                aria-describedby="textHelp" 
+                placeholder="Tn_LtIn"
+            /> -->
         </div>
         <div class="form-group">
-            <label for="Outdoor_temperature">Re-cooling Temperature</label>
+            <label for="Outdoor_temperature">Re-cooling temperature (Tn_MtIn)</label>
             <input  
                 type="range" 
                 class="form-control" 
@@ -97,26 +116,31 @@
                 aria-describedby="textHelp" 
                 placeholder="Tn_MtIn"
             />
+
+          <!--     <input  
+                type="text" 
+                class="form-control" 
+                id="Outdoor_temperature" 
+                name="outdoor_temperature" 
+                required 
+                aria-describedby="textHelp" 
+                placeholder="Tn_MtIn"
+            /> -->
         </div>
         <div class="form-group">
             <label for="Outdoor_temperature">Adsorption Chiller</label>
-            <select class="form-control" id="adsorption_chiller" name="adsorption_chiller"  >
-                <option value = "0">Select Adsorption Chiller</option>
-                <option value = "eCoo10">eCoo10</option>
-                <option value = "eCoo10">eCoo20</option>
-                <option value = "eCoo10">eCoo30</option>
-                <option value = "eCoo10">eCoo10X</option>
-                <option value = "eCoo10">eCoo20X</option>
-                <option value = "eCoo10">eCoo30X</option>
-                <option value = "eCoo10">eCoo40X</option>
+            <select class="form-control" id="adsorption_chiller" name="adsorption_chiller" required  >
+                <option value = "">Select Adsorption Chiller</option>
+                <option value = "sika">eCoo10</option>
+                <option value = "sika">eCoo20</option>
+                <option value = "sika">eCoo30</option>
+                <option value = "sikax">eCoo10X</option>
+                <option value = "sikax">eCoo20X</option>
+                <option value = "sikax">eCoo30X</option>
+                <option value = "sikax">eCoo40X</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="Outdoor_temperature">Mod Type</label>
-            <select class="form-control" id="adsorption_chiller" name="adsorption_chiller"  >
-                <option value = "sika">sika</option>
-            </select>
-        </div>
+  
     
     </fieldset>
     <div id="res" class="mb-2"></div>
@@ -147,21 +171,21 @@
         $(function() {
             $('#Drive_temperature').ionRangeSlider({
                 min: 55,
-                max: 95,
-                from: 60,
+                max: 90,
+                from: 55,
                 skin: "round",
             });
 
             $('#cold_water').ionRangeSlider({
-                min: 15,
-                max: 25,
+                min: 12,
+                max: 20,
                 from: 12,
                 skin: "round",
             });
 
             $('#Outdoor_temperature').ionRangeSlider({
-                min: 20,
-                max: 30,
+                min: 23,
+                max: 35,
                 from: 22,
                 skin: "round",
             });
@@ -183,7 +207,7 @@
                 // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
                 // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
                 // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-                $('#res').html('Calculation for Cooling Capacity are below:  <br/>  a:  ' + response.data.a +'<br/> b:  '+ response.data.b +'<br/>Cooling capacity(Qth_LtAd):  '+ response.data.Qth_LtAd+'KW <br/><br/>Calculation for Thermal COP are below:  <br/>  a:  ' + response.data.aa +'<br/> b:  '+ response.data.bb +'<br/>COP:  '+ response.data.COP +'<br/><br/> Heat capacity(Qth_HtAd): '+ response.data.Qth_HtAd+'KW' );
+                $('#res').html('Calculation for Cooling Capacity are below:  <br/>  a:  ' + response.data.a +'<br/> b:  '+ response.data.b +'<br/>Cooling capacity(Qth_LtAd):  '+ response.data.Qth_LtAd+'KW <br/><br/>Calculation for Thermal COP are below:  <br/>  a:  ' + response.data.aa +'<br/> b:  '+ response.data.bb +'<br/> c:  '+ response.data.c +'<br/> COP:  '+ response.data.COP +'<br/><br/> Heat capacity(Qth_HtAd): '+ response.data.Qth_HtAd+'KW' );
 
             })
             .catch(function (error) {
