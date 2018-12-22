@@ -364,12 +364,14 @@ class AdcalcController extends Controller
     /*/*
       Function to calculate $a and $b for cooling capacity of sika
      */
-    function calculateCoolingCapacity($ht_in,$lt_in)
+    function calculateCoolingCapacity($ht_in,$lt_in,$chiller_type)
     {
+        // $ht_in = ,$lt_in
        
+        //'SELECT id,a,b,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt,power(abs(ht-'.$ht_in.'),2) + power(abs(lt-'.$lt_in.'),2)*10 as dist FROM `calculations` order by dist limit 0,8'
 
-
-        $res =  DB::select('SELECT id,a,b,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt,power(abs(ht-'.$ht_in.'),2) + power(abs(lt-'.$lt_in.'),2)*10 as dist FROM `calculations` order by dist limit 0,8');
+       
+        $res =  DB::select('SELECT id,a,b,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt FROM `calculations` where type_data ="'.$chiller_type.'" AND    ht in (select * from  (select distinct ht FROM calculations order by abs(ht-'.$ht_in.') LIMIT 0,2) as ht1 ) and lt in (select * from ( select distinct lt FROM calculations order by abs(lt-'.$lt_in.')LIMIT 0,2)as lt1) order by ht, lt');
         $temp=array();
         
         foreach ($res as  $value) {
@@ -382,7 +384,7 @@ class AdcalcController extends Controller
 
       //  echo $ht_in." LT_____________".$lt_in;
         $temp = json_decode(json_encode($temp), true);
-        print_r($temp);
+        //print_r($temp);
   
         if($temp[0]['ht']  == $ht_in && $temp[0]['lt'] == $lt_in){
          // take a0 and b0
@@ -395,8 +397,8 @@ class AdcalcController extends Controller
         //  echo "b6==> ".$b6."</br>";
         }
         else if ($temp[0]['ht'] == $ht_in) {
-       echo '2nd';
-        echo "<br/>";
+       // echo '2nd';
+       //  echo "<br/>";
 
 
         // $a6= (($a2-$a0)/($temp[2]['lt']-$temp[0]['lt']))*($lt_in-$temp[0]['lt'])+$a0;
@@ -416,8 +418,8 @@ class AdcalcController extends Controller
     }
 
     else if ($temp[0]['lt'] == $lt_in) {
-       echo '3rd';
-        echo "<br/>";
+       // echo '3rd';
+       //  echo "<br/>";
     $a6= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['a'];
   //  echo "a4==> ".$a6."</br>";
     $b6= (($temp[1]['b']-$temp[0]['b'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['b'];
@@ -429,8 +431,8 @@ class AdcalcController extends Controller
     // usort($temp,'sortByLt');
 
      usort($temp, 'self::sortByLt');
-     echo '4th';
-     echo "<br/>";
+     // echo '4th';
+     // echo "<br/>";
      // echo ($temp[1]['a']-$temp[0]['a']);
      // die;
     $a4= (($temp[1]['a']-$temp[0]['a'])/($temp[1]['ht']-$temp[0]['ht']))*($ht_in-$temp[0]['ht'])+$temp[0]['a'];
@@ -470,12 +472,13 @@ private static function sortByLt($a, $b)
     /*/*
       Function to calculate $a and $b  &c for thermal COP of sika
      */
-    function calculateCopVariable($ht_in,$lt_in)
+    function calculateCopVariable($ht_in,$lt_in,$chiller_type)
     {
        
+        
 
-
-        $res =  DB::select('SELECT id,aa as a,bb as b,c,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt,power(abs(ht-'.$ht_in.'),2) + power(abs(lt-'.$lt_in.'),2)*10 as dist FROM `calculations` order by dist limit 0,4');
+//SELECT id,aa as a,bb as b,c,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt,power(abs(ht-'.$ht_in.'),2) + power(abs(lt-'.$lt_in.'),2)*10 as dist FROM `calculations` order by dist limit 0,4';
+        $res =  DB::select('SELECT id,aa as a,bb as b,c,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt FROM `calculations` where type_data ="'.$chiller_type.'" AND   ht in (select * from  (select distinct ht FROM calculations order by abs(ht-'.$ht_in.') LIMIT 0,2) as ht1 ) and lt in (select * from ( select distinct lt FROM calculations order by abs(lt-'.$lt_in.')LIMIT 0,2)as lt1) order by ht, lt');
         $temp=array();
         
         foreach ($res as  $value) {
@@ -581,14 +584,20 @@ private static function sortByLt($a, $b)
         $ht_in = $request->drive_temperature;
         $lt_in = $request->cold_water;
         $mt_in = $request->outdoor_temperature;
+        $mt_in = $request->outdoor_temperature;
+        $adsorption_chiller =  $request->adsorption_chiller;
+
+
         
         
-        $final_ab_value =   $this->calculateCoolingCapacity($ht_in,$lt_in);      
+        $final_ab_value =   $this->calculateCoolingCapacity($ht_in,$lt_in,$adsorption_chiller);      
         
         //cooling capcity
-        $Qlt =   $this->calculateQLT($final_ab_value,$mt_in);
+         $Qlt =   $this->calculateQLT($final_ab_value,$mt_in);
 
-        $final_abc_value = $this->calculateCopVariable($ht_in,$lt_in);
+     
+
+        $final_abc_value = $this->calculateCopVariable($ht_in,$lt_in,$adsorption_chiller);
 
 
          $COP =  $this-> calculateCOP($final_abc_value,$mt_in);
@@ -605,11 +614,12 @@ private static function sortByLt($a, $b)
 
     $output['aa'] =  $final_abc_value['aa'];
     $output['bb'] =  $final_abc_value['bb'];
+    $output['c'] =  $final_abc_value['c'];
     $output['COP'] = number_format((float)$COP, 4, '.', ''); 
 
     $output['Qth_HtAd'] = $Qht ;
 
-
+return  $output;
 
 // print_r($output);
 
