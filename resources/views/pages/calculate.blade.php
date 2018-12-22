@@ -11,7 +11,6 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.css" />
     
 
     <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
@@ -20,9 +19,7 @@
     <link rel="stylesheet" href="{{ asset('public/css/frontstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/jquery.bootstrap.year.calendar.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
-
-    <script src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyADkOuDbCZkoIvNvEw2BvLYcXOLjd-oAhQ"></script>
+    <link rel="stylesheet" href="{{ url('node_modules/ion-rangeslider/css/ion.rangeSlider.min.css') }}"/>
 
      <script>
         <?php if($user = Auth::user()) { ?>
@@ -59,13 +56,13 @@
     
     <div class='row justify-content-center'>
     <div class='col-sm-8 mt-4 mb-4'>
-    <form onsubmit="return submitForm(event)">
+    <form id='calculation-form'>
     <fieldset>
     <legend>Calculate</legend>
         <div class="form-group">
             <label for="Drive_temperature">Drive temperature (Tn_HtIn)</label>
             <input 
-                type="range" 
+                type="number" 
                 class="form-control" 
                 id="Drive_temperature" 
                 required 
@@ -73,20 +70,11 @@
                 aria-describedby="textHelp" 
                 placeholder="Tn_HtIn"
             />
-      <!--       <input 
-                type="text" 
-                class="form-control" 
-                id="Drive_temperature" 
-                required 
-                name="drive_temperature" 
-                aria-describedby="textHelp" 
-                placeholder="Tn_HtIn"
-            /> -->
         </div>
         <div class="form-group">
             <label for="cold_water">Cold water inlet temperature (Tn_LtIn)</label>
             <input  
-                type="range" 
+                type="number" 
                 class="form-control" 
                 id="cold_water" 
                 name="cold_water" 
@@ -94,21 +82,11 @@
                 aria-describedby="textHelp" 
                 placeholder="Tn_LtIn"
             />
-
-     <!--        <input  
-                type="text" 
-                class="form-control" 
-                id="cold_water" 
-                name="cold_water" 
-                required 
-                aria-describedby="textHelp" 
-                placeholder="Tn_LtIn"
-            /> -->
         </div>
         <div class="form-group">
             <label for="Outdoor_temperature">Re-cooling temperature (Tn_MtIn)</label>
             <input  
-                type="range" 
+                type="number" 
                 class="form-control" 
                 id="Outdoor_temperature" 
                 name="outdoor_temperature" 
@@ -116,16 +94,6 @@
                 aria-describedby="textHelp" 
                 placeholder="Tn_MtIn"
             />
-
-          <!--     <input  
-                type="text" 
-                class="form-control" 
-                id="Outdoor_temperature" 
-                name="outdoor_temperature" 
-                required 
-                aria-describedby="textHelp" 
-                placeholder="Tn_MtIn"
-            /> -->
         </div>
         <div class="form-group">
             <label for="Outdoor_temperature">Adsorption Chiller</label>
@@ -145,7 +113,7 @@
     </fieldset>
     <div id="res" class="mb-2"></div>
     <button type="submit" class="btn btn-primary hide"  disabled>Create System</button>
-    <button type="submit" class="btn btn-primary">Calculate</button>
+    <button type="submit" class="btn btn-primary hide">Calculate</button>
     </fieldset>
     </form>
     </div>
@@ -164,8 +132,6 @@
     <script src="{{ asset('public/js/jquery.scrollbar.js') }}"></script>
     <script src="{{ asset('public/js/Sortable.js') }}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
-
     <script>
         
         $(function() {
@@ -174,6 +140,10 @@
                 max: 90,
                 from: 55,
                 skin: "round",
+                //step: 0.1,
+                onFinish: function (data) {
+                    submitForm();
+                },
             });
 
             $('#cold_water').ionRangeSlider({
@@ -181,6 +151,10 @@
                 max: 20,
                 from: 12,
                 skin: "round",
+                //step: 0.1,
+                onFinish: function (data) {
+                    submitForm();
+                },
             });
 
             $('#Outdoor_temperature').ionRangeSlider({
@@ -188,31 +162,43 @@
                 max: 35,
                 from: 22,
                 skin: "round",
+                //step :0.1,
+                onFinish: function (data) {
+                    submitForm();
+                },
             });
         });
 
-        function submitForm(event){
-            event.preventDefault();
+        function handleForm(){
+            setTimeout(function(){
+                submitForm()
+            },1000);
+        }
 
-            var data = $(event.target).serialize();
-          //  console.log(data);
+        function submitForm(){
+            //event.preventDefault();
+
+            var form = $(`#calculation-form`);
+
+            var data = form.serialize();
+            console.log(`Form Submited`,data);
 
 
-            axios.post('{{ url('calculate-data')}}', data)
-            .then(function (response) {
-                console.log('a: '+ response.data.a);
-                console.log('b: '+ response.data.b);
-                console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
+            axios.post('{{ url('calculate-data') }}', data)
+                .then(function (response) {
+                    console.log('a: '+ response.data.a);
+                    console.log('b: '+ response.data.b);
+                    console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
 
-                // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-                // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-                // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-                $('#res').html('Calculation for Cooling Capacity are below:  <br/>  a:  ' + response.data.a +'<br/> b:  '+ response.data.b +'<br/>Cooling capacity(Qth_LtAd):  '+ response.data.Qth_LtAd+'KW <br/><br/>Calculation for Thermal COP are below:  <br/>  a:  ' + response.data.aa +'<br/> b:  '+ response.data.bb +'<br/> c:  '+ response.data.c +'<br/> COP:  '+ response.data.COP +'<br/><br/> Heat capacity(Qth_HtAd): '+ response.data.Qth_HtAd+'KW' );
+                    // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
+                    // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
+                    // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
+                    $('#res').html('Calculation for Cooling Capacity are below:  <br/>  a:  ' + response.data.a +'<br/> b:  '+ response.data.b +'<br/>Cooling capacity(Qth_LtAd):  '+ response.data.Qth_LtAd+'KW <br/><br/>Calculation for Thermal COP are below:  <br/>  a:  ' + response.data.aa +'<br/> b:  '+ response.data.bb +'<br/> c:  '+ response.data.c +'<br/> COP:  '+ response.data.COP +'<br/><br/> Heat capacity(Qth_HtAd): '+ response.data.Qth_HtAd+'KW' );
 
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
 
         

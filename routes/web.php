@@ -191,5 +191,4 @@ Route::get('/get-chiller-products/{type_id}', 'CalculateDataController@getChille
 Route::get('/get-chiller-oprating-modes', 'CalculateDataController@getChillerOpratingModes');
 Route::get('/get-chiller-integrated-system-sepration','CalculateDataController@getChillerIntegratedSepSystem');
 Route::get('/get-chiller-integrated-cwu', 'CalculateDataController@getChillerIntegratedCWU');
-
-
+Route::get('/get-chiller-product-intercons', 'CalculateDataController@getChillerProductIntercons');

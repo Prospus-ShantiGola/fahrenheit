@@ -6,26 +6,26 @@ use DB;
 use Illuminate\Http\Request;
 
 class CalculateDataController extends Controller
-{ 
+{
     public function calculateData(Request $request)
     {
 
-        return (int) $request->cold_water +
-                (int) $request->drive_temperature +
-                (int) $request->outdoor_temperature;
+        return (int)$request->cold_water +
+            (int)$request->drive_temperature +
+            (int)$request->outdoor_temperature;
     }
 
     public function getRecoolingProducts(Request $request, $type = 're_cooler')
     {
         $recooling_products = DB::table('recooling_products')->where('rooling_component_type', $type)->get();
 
-        if($recooling_products->isNotEmpty()){
+        if ($recooling_products->isNotEmpty()) {
             $recooling_products = $recooling_products->map(function ($item) {
                 $item->id = $item->recooling_products_id;
                 return $item;
             });
         }
-        
+
 
         return response()->json($recooling_products->toArray());
     }
@@ -52,19 +52,28 @@ class CalculateDataController extends Controller
         return response()->json($chiller_products);
     }
 
-    public function getChillerOpratingModes(Request $request){
+    public function getChillerOpratingModes(Request $request)
+    {
         $opratingModes = DB::table('chiller_operating_modes')->get();
         return response()->json($opratingModes);
     }
 
-    public function getChillerIntegratedSepSystem(Request $request){
+    public function getChillerIntegratedSepSystem(Request $request)
+    {
         $sysSep = DB::table('chiller_int_sys_separations')->get();
         return response()->json($sysSep);
     }
 
-    public function getChillerIntegratedCWU(Request $request){
+    public function getChillerIntegratedCWU(Request $request)
+    {
         $intCwus = DB::table('chiller_int_cold_water_units')->get();
         return response()->json($intCwus);
+    }
+    
+    public function getChillerProductIntercons(Request $request)
+    {
+        $productIntercons = DB::table('chiller_product_intercons')->get();
+        return response()->json($productIntercons);
     }
 }
   
