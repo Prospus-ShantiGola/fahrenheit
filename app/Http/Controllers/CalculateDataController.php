@@ -58,15 +58,28 @@ class CalculateDataController extends Controller
         return response()->json($opratingModes);
     }
 
-    public function getChillerIntegratedSepSystem(Request $request)
+    public function getChillerIntegratedSepSystem(Request $request, $productId)
     {
-        $sysSep = DB::table('chiller_int_sys_separations')->get();
+        $sysSep = DB::table('chiller_int_sys_separations')
+            ->select('chiller_int_sys_separations.*')
+            ->join('chiller_products_int_sys_sep', function ($join) use ($productId) {
+                $join->on('chiller_products_int_sys_sep.int_sys_sep_id', '=', 'chiller_int_sys_separations.chiller_int_sys_separations_id')
+                    ->where('chiller_products_int_sys_sep.product_id', $productId);
+            })
+            ->get();
         return response()->json($sysSep);
     }
 
-    public function getChillerIntegratedCWU(Request $request)
+    public function getChillerIntegratedCWU(Request $request, $productId)
     {
-        $intCwus = DB::table('chiller_int_cold_water_units')->get();
+        $intCwus = DB::table('chiller_int_cold_water_units')
+            ->select('chiller_int_cold_water_units.*')
+            ->join('chiller_products_int_cwu', function ($join) use($productId) {
+                $join->on('chiller_products_int_cwu.int_cwu_id', '=', 'chiller_int_cold_water_units.chiller_int_cold_water_units_id')
+                    ->where('chiller_products_int_cwu.product_id', $productId);
+            })
+            ->get();
+        
         return response()->json($intCwus);
     }
     

@@ -189,6 +189,6 @@ Route::get('/recooling-products-data/{type}', 'CalculateDataController@getRecool
 Route::get('/get-chiller-adsorbent-types', 'CalculateDataController@getChillerAdsorbentTypes');
 Route::get('/get-chiller-products/{type_id}', 'CalculateDataController@getChillerProducts');
 Route::get('/get-chiller-oprating-modes', 'CalculateDataController@getChillerOpratingModes');
-Route::get('/get-chiller-integrated-system-sepration','CalculateDataController@getChillerIntegratedSepSystem');
-Route::get('/get-chiller-integrated-cwu', 'CalculateDataController@getChillerIntegratedCWU');
+Route::get('/get-chiller-integrated-system-sepration/{productId}','CalculateDataController@getChillerIntegratedSepSystem');
+Route::get('/get-chiller-integrated-cwu/{productId}', 'CalculateDataController@getChillerIntegratedCWU');
 Route::get('/get-chiller-product-intercons', 'CalculateDataController@getChillerProductIntercons');

@@ -79,8 +79,8 @@ class AddChiller extends Component {
             });
 
     }
-    getChillerIntegratedSepSystem() {
-        let url = '/get-chiller-integrated-system-sepration';
+    getChillerIntegratedSepSystem(productId) {
+        let url = `/get-chiller-integrated-system-sepration/${productId}`;
 
         axios.get(url)
             .then((response) => {
@@ -95,8 +95,8 @@ class AddChiller extends Component {
 
     }
 
-    getChillerIntegratedCWU() {
-        let url = '/get-chiller-integrated-cwu';
+    getChillerIntegratedCWU(productId) {
+        let url = `/get-chiller-integrated-cwu/${productId}`;
 
         axios.get(url)
             .then((response) => {
@@ -172,8 +172,6 @@ class AddChiller extends Component {
     componentDidMount() {
         this.getAdsorbentData();
         this.getChillerOpratingModes();
-        this.getChillerIntegratedSepSystem();
-        this.getChillerIntegratedCWU();
         this.getChillerProductIntercons();
 
 
@@ -324,6 +322,13 @@ class AddChiller extends Component {
         }
     }
 
+    handleProductChange(e){
+        if(e.target.value){
+            this.getChillerIntegratedSepSystem(e.target.value);
+            this.getChillerIntegratedCWU(e.target.value);
+        }
+    }
+
     render() {
         var adsorbentHtml, productHtml = "";
         if (this.state.selectedSource == "Adsorption") {
@@ -449,7 +454,7 @@ class AddChiller extends Component {
                                                         </button>
                                                         </td>
                                                         <td className="input-fields">
-                                                            <select className="required-field" id="chiller_product" name="chiller_product">
+                                                            <select className="required-field" id="chiller_product" name="chiller_product" onChange={(e) => this.handleProductChange(e)}>
                                                                 <option value=''>Select product</option>
                                                                 {
                                                                     this.state.chillerProducts && this.state.chillerProducts.map((product) => {
@@ -495,6 +500,7 @@ class AddChiller extends Component {
                                                         </td>
                                                         <td className="input-fields">
                                                             <select className="required-field" id="integrated_system_sepration" name="integrated_system_sepration">
+                                                                <option value=''>Select System Sepration</option>
                                                                 {
                                                                     this.state.integrated_system_sepration && this.state.integrated_system_sepration.map((intSysSep) => {
                                                                         return <option
@@ -517,6 +523,7 @@ class AddChiller extends Component {
                                                         </td>
                                                         <td className="input-fields">
                                                             <select className="required-field" id="integrated_cwu" name="integrated_cwu">
+                                                                <option value=''>Select CWU</option>
                                                                 {
                                                                     this.state.integrated_cwu && this.state.integrated_cwu.map((intCwu) => {
                                                                         return <option

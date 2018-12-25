@@ -97,7 +97,7 @@
         </div>
         <div class="form-group">
             <label for="Outdoor_temperature">Adsorption Chiller</label>
-            <select class="form-control" id="adsorption_chiller" name="adsorption_chiller" required  >
+            <select class="form-control" id="adsorption_chiller" name="adsorption_chiller" onchange='return submitForm()' required  >
                 <option value = "sika">eCoo10</option>
                 <option value = "sika">eCoo20</option>
                 <option value = "sika">eCoo30</option>
