@@ -19,8 +19,13 @@
     <link rel="stylesheet" href="{{ asset('public/css/frontstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/jquery.bootstrap.year.calendar.css') }}">
-    <link rel="stylesheet" href="{{ url('node_modules/ion-rangeslider/css/ion.rangeSlider.min.css') }}"/>
-
+    {{-- <link rel="stylesheet" href="{{ url('node_modules/ion-rangeslider/css/ion.rangeSlider.min.css') }}"/> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+    <script>
+    window.app = {
+        url : '{{ config("app.url") }}',
+    };
+   </script>
      <script>
         <?php if($user = Auth::user()) { ?>
         LOGGED_IN_ROLE= "<?php echo (Auth::user()->user_type_id ==3) ? 'expert':'user' ;?>";
@@ -130,6 +135,7 @@
     <script src="{{ asset('public/js/script.js') }}"></script>
     <script src="{{ asset('public/js/jquery.scrollbar.js') }}"></script>
     <script src="{{ asset('public/js/Sortable.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
 
     <script>
         
