@@ -130,7 +130,7 @@
         <div class="form-group">
             <label for="Outdoor_temperature">Adsorption Chiller</label>
             <select class="form-control" id="adsorption_chiller" name="adsorption_chiller" required  >
-                <option value = "">Select Adsorption Chiller</option>
+              <!--   <option value = "">Select Adsorption Chiller</option> -->
                 <option value = "sika">eCoo10</option>
                 <option value = "sika">eCoo20</option>
                 <option value = "sika">eCoo30</option>
@@ -195,7 +195,9 @@
             event.preventDefault();
 
             var data = $(event.target).serialize();
-          //  console.log(data);
+            var chiller_type=$('#adsorption_chiller option:selected').text();
+             console.log(chiller_type);
+             data = data+'&chiller_type='+chiller_type;
 
 
             axios.post('{{ url('calculate-data')}}', data)
