@@ -611,7 +611,7 @@ private static function sortByLt($a, $b)
 
         $this->calculateADKA($adka_input);
     
-        
+      die;  
         
         $final_ab_value =   $this->calculateCoolingCapacity($ht_in,$lt_in,$adsorption_chiller);      
         
@@ -643,7 +643,7 @@ private static function sortByLt($a, $b)
     return  $output;
 
 
-    return json_encode($output);
+   // return json_encode($output);
     }
 
 
@@ -721,6 +721,9 @@ private static function sortByLt($a, $b)
        return $cal_constant;
     }
 
+    /** 
+     * Calculation adka ppt 2 Calculation of an ADKA
+     */
     function calculateADKA($adka_input){
 
       
@@ -735,14 +738,36 @@ private static function sortByLt($a, $b)
 
        if(($n_AsHt*$n_ApHt) == ($n_AsLt*$n_ApLt))
        {
-
+         echo 'correct';
        }
        else
        {
          echo 'error';
        }
     }
+    /**
+     * 2.1 calculation for serial connection of HT
+     */
+    function calculateSerialConnection($Mod_Ad,$Tn_HtIn,$n_AsHt,$n_ApHt )
+    {
+        $i_Ad = 1;
+        $i_Ap = 1;
+        $i_As = 1;
+        $Tn_HtI = $Tn_HtIn;
 
+
+
+    }
+
+    function  calculateModuleValue()
+    {
+
+    }
+
+    function calculateFirstCoefficient($Mod_Ad,$Tn_HtIn,$Tn_LtIn)
+    {
+
+    }
     function calculateAdsorptionSystem($Tn_AirIn, $Tn_AirInMin, $Tn_MtInMin,$Qth_NomSt, $dT_NomSt, $n_St,$Qth_NomRk, $dT_NomRk, $n_Rk){
 
         if($Tn_AirIn < $Tn_AirInMin ){

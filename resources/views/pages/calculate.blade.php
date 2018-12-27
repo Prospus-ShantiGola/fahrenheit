@@ -180,16 +180,16 @@
             //event.preventDefault();
 
 
-            // var data = $(event.target).serialize();
-            // var chiller_type=$('#adsorption_chiller option:selected').text();
-            //  console.log(chiller_type);
-            //  data = data+'&chiller_type='+chiller_type;
-
+         
             var form = $('#calculation-form');
 
 
             var data = form.serialize();
-            console.log(`Form Submited`,data);
+           // console.log(`Form Submited`,data);
+           var chiller_type=$('#adsorption_chiller option:selected').text();
+             console.log(chiller_type);
+             data = data+'&chiller_type='+chiller_type;
+
 
 
             axios.post('{{ url('calculate-data') }}', data)
