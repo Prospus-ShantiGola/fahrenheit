@@ -102,14 +102,16 @@
         </div>
         <div class="form-group">
             <label for="Outdoor_temperature">Adsorption Chiller</label>
+
             <select class="form-control" id="adsorption_chiller" name="adsorption_chiller" onchange='return submitForm()' required  >
-                <option value = "sika">eCoo10</option>
-                <option value = "sika">eCoo20</option>
-                <option value = "sika">eCoo30</option>
-                <option value = "sikax">eCoo10X</option>
-                <option value = "sikax">eCoo20X</option>
-                <option value = "sikax">eCoo30X</option>
-                <option value = "sikax">eCoo40X</option>
+
+                <option value = "1">eCoo10</option>
+                <option value = "1">eCoo20</option>
+                <option value = "1">eCoo30</option>
+                <option value = "2">eCoo10X</option>
+                <option value = "2">eCoo20X</option>
+                <option value = "2">eCoo30X</option>
+                <option value = "2">eCoo40X</option>
             </select>
         </div>
   
@@ -181,13 +183,19 @@
         }
 
         function submitForm(){
-            var form = $(`#calculation-form`);
+            //event.preventDefault();
+
+
+         
+            var form = $('#calculation-form');
+
 
             var data = form.serialize();
-            var chiller_type=$('#adsorption_chiller option:selected').text();
-            data = data+'&chiller_type='+chiller_type;
+           // console.log(`Form Submited`,data);
+           var chiller_type=$('#adsorption_chiller option:selected').text();
+             console.log(chiller_type);
+             data = data+'&chiller_type='+chiller_type;
 
-            console.log(`Form Submited`,data);
 
 
             axios.post('{{ url('calculate-data') }}', data)
@@ -199,8 +207,11 @@
                     // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
                     // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
                     // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-                    $('#res').html('Calculation for Cooling Capacity are below:  <br/>  a:  ' + response.data.a +'<br/> b:  '+ response.data.b +'<br/>Cooling capacity(Qth_LtAd):  '+ response.data.Qth_LtAd+'KW <br/><br/>Calculation for Thermal COP are below:  <br/>  a:  ' + response.data.aa +'<br/> b:  '+ response.data.bb +'<br/> c:  '+ response.data.c +'<br/> COP:  '+ response.data.COP +'<br/><br/> Heat capacity(Qth_HtAd): '+ response.data.Qth_HtAd+'KW' );
 
+                    //$('#res').html('Calculation for Cooling Capacity are below:  <br/>  a:  ' + response.data.a +'<br/> b:  '+ response.data.b +'<br/>Cooling capacity(Qth_LtAd):  '+ response.data.Qth_LtAd+'KW <br/><br/>Calculation for Thermal COP are below:  <br/>  a:  ' + response.data.aa +'<br/> b:  '+ response.data.bb +'<br/> c:  '+ response.data.c +'<br/> COP:  '+ response.data.COP +'<br/><br/> Heat capacity(Qth_HtAd): '+ response.data.Qth_HtAd+'KW <br/><br/> Recooling capacity(Qth_MtAd): '+ response.data.Qth_MtAd+'KW <br/><br/> HT Inlet temperature(THt_in): '+ response.data.Tht_in +'<br/> HT Outlet temperature(THt_out): '+ response.data.Tht_out +'<br/><br/> LT Inlet temperature(TLt_in): '+ response.data.Tlt_in +'<br/> LT Outlet temperature(TLt_out): '+ response.data.Tlt_out +'<br/><br/> MT Inlet temperature(TMt_in): '+ response.data.Tmt_in +'<br/> MT Outlet temperature(Tmt_out): '+ response.data.Tmt_out+'<br/><br/>   Volume flow (Vht): '+ response.data.vht +'<br/> Volume flow (Vlt): '+ response.data.vlt +'<br/> Volume flow (Vmt): '+ response.data.vmt);
+
+
+                    $('#res').html('Calculation of  ADKA:  <br/>  Qth_Lt:  ' + response.data.Qth_Lt +'<br/> COPth:  '+ response.data.COPth +'<br/>Qth_Mt:  '+response.data.Qth_Mt+'<br/>  Qth_Ht:  ' + response.data.Qth_Ht +'<br/> Tn_LtOut:  '+ response.data.Tn_LtOut +'<br/> Tn_MtOut:  '+ response.data.Tn_MtOut +' <br/> Tn_Ht_Out:  '+ response.data.Tn_HtOut +'<br/> Vf_Ht: '+ response.data.Vf_Ht+'<br/> Vf_Mt: '+ response.data.Vf_Mt+'<br/> Vf_Lt: '+ response.data.Vf_Lt );
                 })
                 .catch(function (error) {
                     console.log(error);
