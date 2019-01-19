@@ -10,9 +10,9 @@ class CalculateDataController extends Controller
     public function calculateData(Request $request)
     {
 
-        return (int)$request->cold_water +
-            (int)$request->drive_temperature +
-            (int)$request->outdoor_temperature;
+        return (int) $request->cold_water +
+            (int) $request->drive_temperature +
+            (int) $request->outdoor_temperature;
     }
 
     public function getRecoolingProducts(Request $request, $type = 're_cooler')

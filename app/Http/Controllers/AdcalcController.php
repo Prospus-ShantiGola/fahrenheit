@@ -586,8 +586,31 @@ private static function sortByLt($a, $b)
         $mt_in = $request->outdoor_temperature;
         $mt_in = $request->outdoor_temperature;
         $adsorption_chiller =  $request->adsorption_chiller;
+        $chiller_type =  $request->chiller_type;
 
 
+
+        $temp_constant = $this->getCalConstant($chiller_type);
+     //   dd( $temp_constant );
+        // echo $temp_constant[0]->chiller_type;
+        // die;
+        // echo "<pre>";print_r($temp_constant);
+
+
+//$temp = json_decode(json_encode($temp), true);
+
+        $adka_input['Mod_Ad'] = $adsorption_chiller;
+        $adka_input['Tn_HtIn'] = $ht_in;
+        $adka_input['Tn_MtIn'] = $mt_in;
+        $adka_input['Tn_LtIn'] = $lt_in;
+        $adka_input['n_AsHt'] = $temp_constant[0]->n_AsHt;
+        $adka_input['n_AsLt'] = $temp_constant[0]->n_AsLt;
+        $adka_input['n_ApHt'] = $temp_constant[0]->n_ApHt;
+        $adka_input['n_ApLt'] = $temp_constant[0]->n_ApLt;
+
+
+        $this->calculateADKA($adka_input);
+    
         
         
         $final_ab_value =   $this->calculateCoolingCapacity($ht_in,$lt_in,$adsorption_chiller);      
@@ -604,13 +627,12 @@ private static function sortByLt($a, $b)
 
         // heat capacity
         $Qht =  $this->heatCapacity($COP,$Qlt);
-// die;
-      
+   
 
 
-     $output['a'] =   $final_ab_value['a'];
-     $output['b'] =   $final_ab_value['b'];
-     $output['Qth_LtAd'] =   number_format((float)$Qlt, 4, '.', '');
+    $output['a'] =   $final_ab_value['a'];
+    $output['b'] =   $final_ab_value['b'];
+    $output['Qth_LtAd'] =   number_format((float)$Qlt, 4, '.', '');
 
     $output['aa'] =  $final_abc_value['aa'];
     $output['bb'] =  $final_abc_value['bb'];
@@ -618,15 +640,10 @@ private static function sortByLt($a, $b)
     $output['COP'] = number_format((float)$COP, 4, '.', ''); 
 
     $output['Qth_HtAd'] = $Qht ;
+    return  $output;
 
-return  $output;
 
-// print_r($output);
-
-     
-
-    // $final_array['Qth_LtAd'] = 
- return json_encode($output);
+    return json_encode($output);
     }
 
 
@@ -636,14 +653,9 @@ return  $output;
      */
     function heatCapacity($COP,$Qlt)
     {
-
-        $result= $Qlt/$COP;
+        $result = $Qlt/$COP;
         return $result;
     }
-
-
-
-
 
     /**
      *  Function to calculate necessary drive heat” (Qth_LtAd) in kW
@@ -658,21 +670,19 @@ return  $output;
         return  $Qlt;       
     }
 
+    /**
+     *  Function to calculate COP
+     */
     function calculateCOP($final_array,$mt_in)
     {
-
         $_a = $final_array['aa'];
         $_b = $final_array['bb'];
         $_c = $final_array['c'];
 
-
         $cop = $_a+($_b*$mt_in)+$_c*(pow($mt_in, 2));
-
         return $cop;
-       // return number_format((float)$COP, 4, '.', '');
+
     }
-
-
 
     /**
      * Calculation for CWU cost
@@ -687,6 +697,7 @@ return  $output;
         $kcwumaintainence= $QN_CWUmax*$Fcwu;
         return Response::json(array('investment'=>$kcwuinvestment,'maintenence'=>$kcwuinvestment));
     }
+
     /***
      * Calculation for CHP cos.
      *
@@ -701,6 +712,35 @@ return  $output;
         $ki=$km*0.39;
         $chpCost=$km+$kt+$ki;
         return Response::json(array('cost'=>$chpCost));
+    }
+
+    function getCalConstant($chiller_type)
+    {
+      
+       $cal_constant = DB::table('cal_constants')->where('chiller_type', $chiller_type)->get();
+       return $cal_constant;
+    }
+
+    function calculateADKA($adka_input){
+
+      
+       $Mod_Ad =  $adka_input['Mod_Ad'] ;
+       $Tn_HtIn = $adka_input['Tn_HtIn'] ;
+       $Tn_MtIn =  $adka_input['Tn_MtIn'] ;
+       $Tn_LtIn =  $adka_input['Tn_LtIn'] ;
+       $n_AsHt  = $adka_input['n_AsHt'] ;
+       $n_AsLt   = $adka_input['n_AsLt'];
+       $n_ApHt  = $adka_input['n_ApHt'] ;
+       $n_ApLt = $adka_input['n_ApLt'] ;
+
+       if(($n_AsHt*$n_ApHt) == ($n_AsLt*$n_ApLt))
+       {
+
+       }
+       else
+       {
+         echo 'error';
+       }
     }
 
     function calculateAdsorptionSystem($Tn_AirIn, $Tn_AirInMin, $Tn_MtInMin,$Qth_NomSt, $dT_NomSt, $n_St,$Qth_NomRk, $dT_NomRk, $n_Rk){
@@ -751,9 +791,7 @@ return  $output;
         $this->calculateMaxCapacityHeatSource();
         return array('Qth_MtAd' => $Qth_MtAd, 'Qth_MtCwu' => $Qth_MtCwu);
     }
-    function calculateADKA(){
-
-    }
+   
     function calculateRecoolingSystem($type_Rk, $Tn_MtInMin, $Tn_AirIn, $p_AirIn, $Rh_AirIn, $Qth_MtAd, $Qth_MtCwu, $Qth_NomSt, $dT_NomSt, $n_St, $Qth_NomRk, $dT_NomRk, $n_Rk)
     {
 

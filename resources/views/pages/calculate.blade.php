@@ -181,11 +181,12 @@
         }
 
         function submitForm(){
-            //event.preventDefault();
-
             var form = $(`#calculation-form`);
 
             var data = form.serialize();
+            var chiller_type=$('#adsorption_chiller option:selected').text();
+            data = data+'&chiller_type='+chiller_type;
+
             console.log(`Form Submited`,data);
 
 
