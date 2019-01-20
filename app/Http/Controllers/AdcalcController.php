@@ -635,6 +635,41 @@ private static function sortByLt($a, $b)
 
     public function calculateData(Request $request)
     {
+        // Sending Test data for test
+        $data = [
+            [
+                'product_name' =>'eCoo10' ,
+                'cooling_capacity' => '9.4kw',
+                'driving_heat' => '18.0kw'
+            ], 
+            [
+                'product_name' => 'eCoo10',
+                'cooling_capacity' => '9.4kw',
+                'driving_heat' => '18.0kw'
+            ], 
+            [
+                'product_name' => 'eCoo20',
+                'cooling_capacity' => '18.4kw',
+                'driving_heat' => '36.0kw'
+            ], 
+            [
+                'product_name' => 'eCoo30',
+                'cooling_capacity' => '14.4kw',
+                'driving_heat' => '28.0kw'
+            ], 
+            [
+                'product_name' => 'eCoo10x',
+                'cooling_capacity' => '28.0kw',
+                'driving_heat' => '53.9kw'
+            ], 
+            [
+                'product_name' => 'eCoo20x',
+                'cooling_capacity' => '56.4kw',
+                'driving_heat' => '107.9kw'
+            ]
+        ];
+
+        return response()->json($data);
             
         $ht_in = $request->drive_temperature;
         $lt_in = $request->cold_water;
