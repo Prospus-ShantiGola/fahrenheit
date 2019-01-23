@@ -65,7 +65,7 @@
                             <legend>Calculate</legend>
                             <div class="row mt-3">
                                 <div class="form-group col-sm-8">
-                                    <label for="Drive_temperature_inlet">Drive temperature Inlet (Tn_HtIn)</label>
+                                    <label for="Drive_temperature_inlet">Drive temperature inlet</label>
                                     <input 
                                         type="number" 
                                         class="form-control" 
@@ -77,13 +77,13 @@
                                     />
                                 </div>
                                 <div class="form-group col-sm-3 ml-3">
-                                    <label for="drive_temperature_outlet">Drive temperature Outlet</label>
-                                    <p class='pt-2 drive_temperature_outlet_holder'>62.8 C</p>
+                                    <label for="drive_temperature_outlet">Drive temperature outlet</label>
+                                    <p class='pt-2 drive_temperature_outlet_holder'>51.1 <span>&#8451;</span></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-8">
-                                    <label for="cold_water_inlet">Cold water temperature Inlet (Tn_LtIn)</label>
+                                    <label for="cold_water_inlet">Chilled water temperature inlet</label>
                                     <input  
                                         type="number" 
                                         class="form-control" 
@@ -95,14 +95,14 @@
                                     />
                                 </div>
                                 <div class="form-group col-sm-3 ml-3">
-                                    <label for="cold_water_outlet">Cold water temperature Outlet</label>
-                                    <p class='pt-2 cold_water_outlet_holder'>14.8 C</p>
+                                    <label for="cold_water_outlet">Chilled water temperature outlet</label>
+                                    <p class='pt-2 cold_water_outlet_holder'>10.2 <span>&#8451;</span></p>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="form-group col-sm-8">
-                                    <label for="recooling_temperature_inlet">Re-cooling temperature Inlet (Tn_MtIn)</label>
+                                    <label for="recooling_temperature_inlet">Re-cooling temperature inlet</label>
                                     <input  
                                         type="number" 
                                         class="form-control" 
@@ -114,20 +114,30 @@
                                     />
                                 </div>
                                 <div class="form-group col-sm-3 ml-3">
-                                    <label for="recooling_temperature_outlet">Re-cooling temperature Outlet</label>
-                                    <p class='pt-2 recooling_temperature_outlet_holder'>31.6 C</p>
+                                    <label for="recooling_temperature_outlet">Re-cooling temperature outlet</label>
+                                    <p class='pt-2 recooling_temperature_outlet_holder'>25.9 <span>&#8451;</span></p>
                                 </div>
                             </div>
                             <div id="res" class="mb-2"></div>
                             <button type="submit" class="btn btn-primary hide"  disabled>Create System</button>
                             <button type="submit" class="btn btn-primary hide">Calculate</button>
                         </fieldset>
+
+                        <!-- <select class="form-control" id="adsorption_chiller" name="adsorption_chiller" onchange='return submitForm()' required  >
+                        <option value = "1">eCoo10</option>
+                        <option value = "1">eCoo20</option>
+                        <option value = "1">eCoo30</option>
+                        <option value = "2">eCoo10X</option>
+                        <option value = "2">eCoo20X</option>
+                        <option value = "2">eCoo30X</option>
+                        <option value = "2">eCoo40X</option> -->
+                    </select> 
                     </form>
                 </div>
             </div>
             <div class="row mt-1">
                 <div class="form-group col-sm-8">
-                    <table class="table table-light result-table" style='display:none'>
+                    <table class="table table-lightt result-table" >
                         <thead>
                             <tr>
                             <th scope="col">Adsorption Chiller</th>
@@ -138,15 +148,7 @@
                         <tbody id='data-result'>
                         </tbody>
                     </table>
-                    {{-- <select class="form-control" id="adsorption_chiller" name="adsorption_chiller" onchange='return submitForm()' required  >
-                        <option value = "1">eCoo10</option>
-                        <option value = "1">eCoo20</option>
-                        <option value = "1">eCoo30</option>
-                        <option value = "2">eCoo10X</option>
-                        <option value = "2">eCoo20X</option>
-                        <option value = "2">eCoo30X</option>
-                        <option value = "2">eCoo40X</option>
-                    </select> --}}
+                    
                 </div>  
             </div>
         </div>
@@ -217,7 +219,10 @@
             console.log(chiller_type);
             data = data+'&chiller_type='+chiller_type;
 
-
+            $('#data-result').html('<div>Loading...</div>');
+              $('.drive_temperature_outlet_holder').html('');
+                        $('.cold_water_outlet_holder').html('');
+                        $('.recooling_temperature_outlet_holder').html('');
 
             axios.post('{{ url('calculate-data') }}', data)
                 .then(function (response) {
@@ -227,30 +232,28 @@
                         // Set data to html table from Response
                         $.each(response.data, function(index,data){
                             tableHtml += "<tr>\
-                                <td scope=\"row\">"+data.product_name+"</td>\
-                                <td>"+data.cooling_capacity+"</td>\
-                                <td>"+data.driving_heat+"</td>\
+                                <td scope=\"row\">"+data.product_name+" </td>\
+                                <td>"+data.cooling_capacity+"  </td>\
+                                <td>"+data.driving_heat+"  </td>\
                             </tr>";
+                            $('.drive_temperature_outlet_holder').html(data.driving_temp_outlet+" <span>&#8451;</span>");
+                        $('.cold_water_outlet_holder').html(data.cold_water_temp_outlet + " <span>&#8451;</span>");
+                        $('.recooling_temperature_outlet_holder').html(data.recooling_temp_outlet+" <span>&#8451;</span>");
                         });
+                        
 
                         if(tableHtml.length){
                             $('#data-result').html(tableHtml);
-                            $('.result-table').show();
+                            //$('.result-table').show();
                         }
 
-                        console.log('a: '+ response.data.a);
-                        console.log('b: '+ response.data.b);
-                        console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-
-
-                        // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-                        // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-                        // console.log('Qth_LtAd: '+ response.data.Qth_LtAd);
-
+                        
                         //$('#res').html('Calculation for Cooling Capacity are below:  <br/>  a:  ' + response.data.a +'<br/> b:  '+ response.data.b +'<br/>Cooling capacity(Qth_LtAd):  '+ response.data.Qth_LtAd+'KW <br/><br/>Calculation for Thermal COP are below:  <br/>  a:  ' + response.data.aa +'<br/> b:  '+ response.data.bb +'<br/> c:  '+ response.data.c +'<br/> COP:  '+ response.data.COP +'<br/><br/> Heat capacity(Qth_HtAd): '+ response.data.Qth_HtAd+'KW <br/><br/> Recooling capacity(Qth_MtAd): '+ response.data.Qth_MtAd+'KW <br/><br/> HT Inlet temperature(THt_in): '+ response.data.Tht_in +'<br/> HT Outlet temperature(THt_out): '+ response.data.Tht_out +'<br/><br/> LT Inlet temperature(TLt_in): '+ response.data.Tlt_in +'<br/> LT Outlet temperature(TLt_out): '+ response.data.Tlt_out +'<br/><br/> MT Inlet temperature(TMt_in): '+ response.data.Tmt_in +'<br/> MT Outlet temperature(Tmt_out): '+ response.data.Tmt_out+'<br/><br/>   Volume flow (Vht): '+ response.data.vht +'<br/> Volume flow (Vlt): '+ response.data.vlt +'<br/> Volume flow (Vmt): '+ response.data.vmt);
 
-                        $('#res').html('Calculation of  ADKA:  <br/>  Qth_Lt:  ' + response.data.Qth_Lt +'<br/> COPth:  '+ response.data.COPth +'<br/>Qth_Mt:  '+response.data.Qth_Mt+'<br/>  Qth_Ht:  ' + response.data.Qth_Ht +'<br/> Tn_LtOut:  '+ response.data.Tn_LtOut +'<br/> Tn_MtOut:  '+ response.data.Tn_MtOut +' <br/> Tn_Ht_Out:  '+ response.data.Tn_HtOut +'<br/> Vf_Ht: '+ response.data.Vf_Ht+'<br/> Vf_Mt: '+ response.data.Vf_Mt+'<br/> Vf_Lt: '+ response.data.Vf_Lt );
+                     //   $('#res').html('Calculation of  ADKA:  <br/>  Qth_Lt:  ' + response.data.Qth_Lt +'<br/> COPth:  '+ response.data.COPth +'<br/>Qth_Mt:  '+response.data.Qth_Mt+'<br/>  Qth_Ht:  ' + response.data.Qth_Ht +'<br/> Tn_LtOut:  '+ response.data.Tn_LtOut +'<br/> Tn_MtOut:  '+ response.data.Tn_MtOut +' <br/> Tn_Ht_Out:  '+ response.data.Tn_HtOut +'<br/> Vf_Ht: '+ response.data.Vf_Ht+'<br/> Vf_Mt: '+ response.data.Vf_Mt+'<br/> Vf_Lt: '+ response.data.Vf_Lt );
                     }
+
+
                 })
                 .catch(function (error) {
                     console.log(error);

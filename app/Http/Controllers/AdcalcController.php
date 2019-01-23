@@ -636,50 +636,63 @@ private static function sortByLt($a, $b)
     public function calculateData(Request $request)
     {
         // Sending Test data for test
-        $data = [
-            [
-                'product_name' =>'eCoo10' ,
-                'cooling_capacity' => '9.4kw',
-                'driving_heat' => '18.0kw'
-            ], 
-            [
-                'product_name' => 'eCoo10',
-                'cooling_capacity' => '9.4kw',
-                'driving_heat' => '18.0kw'
-            ], 
-            [
-                'product_name' => 'eCoo20',
-                'cooling_capacity' => '18.4kw',
-                'driving_heat' => '36.0kw'
-            ], 
-            [
-                'product_name' => 'eCoo30',
-                'cooling_capacity' => '14.4kw',
-                'driving_heat' => '28.0kw'
-            ], 
-            [
-                'product_name' => 'eCoo10x',
-                'cooling_capacity' => '28.0kw',
-                'driving_heat' => '53.9kw'
-            ], 
-            [
-                'product_name' => 'eCoo20x',
-                'cooling_capacity' => '56.4kw',
-                'driving_heat' => '107.9kw'
-            ]
-        ];
+        // $data = [
+        //     [
+        //         'product_name' =>'eCoo10' ,
+        //         'cooling_capacity' => '9.4kw',
+        //         'driving_heat' => '18.0kw'
+        //     ], 
+        //     [
+        //         'product_name' => 'eCoo10',
+        //         'cooling_capacity' => '9.4kw',
+        //         'driving_heat' => '18.0kw'
+        //     ], 
+        //     [
+        //         'product_name' => 'eCoo20',
+        //         'cooling_capacity' => '18.4kw',
+        //         'driving_heat' => '36.0kw'
+        //     ], 
+        //     [
+        //         'product_name' => 'eCoo30',
+        //         'cooling_capacity' => '14.4kw',
+        //         'driving_heat' => '28.0kw'
+        //     ], 
+        //     [
+        //         'product_name' => 'eCoo10x',
+        //         'cooling_capacity' => '28.0kw',
+        //         'driving_heat' => '53.9kw'
+        //     ], 
+        //     [
+        //         'product_name' => 'eCoo20x',
+        //         'cooling_capacity' => '56.4kw',
+        //         'driving_heat' => '107.9kw'
+        //     ]
+        // ];
 
-        return response()->json($data);
-            
+  //          echo "<pre>" ;print_r($data);
+  //        return response()->json($data);
+  // die;
+          
         $ht_in = $request->drive_temperature;
         $lt_in = $request->cold_water;
-        $mt_in = $request->outdoor_temperature;
-        $mt_in = $request->outdoor_temperature;
-        $mod_types_id =  $request->adsorption_chiller;
+        $mt_in = $request->outdoor_temperature;   
+
+        $mod_types_id =  $request->adsorption_chiller; 
+        $chiller_type =  $request->chiller_type;    
+        
+        $chillerarray  = array('eCoo10'=>'1','eCoo20'=>'1','eCoo30'=>'1','eCoo10X'=>'2','eCoo20X'=>'2','eCoo30X'=>'2','eCoo40X'=>'2');
+        $i=0;
+        foreach ($chillerarray as $key => $value) {
+         // echo $key."_______".$value;
+         // echo "<br/>";
+        
+   
+         // die;
+        $mod_types_id =  $value; 
 
 
 
-        $chiller_type =  $request->chiller_type;
+        $chiller_type =  $key;
 
         $temp_constant = $this->getCalConstant($chiller_type);
 
@@ -698,11 +711,27 @@ private static function sortByLt($a, $b)
         $adka_input['cal_constants_id'] = $temp_constant->cal_constants_id;
 
         //echo "<pre>";print_r($adka_input);die;
-       $output = $this->calculateADKA($adka_input);
-       // echo "dsd";
-       //   echo "<pre>" ;print_r($output);
+        $output = $this->calculateADKA($adka_input);
 
-        return json_encode($output);
+        //'product_name' =>'eCoo10' ,
+        //         'cooling_capacity' => '9.4kw',
+        //         'driving_heat' => '18.0kw'
+        // echo "dsd";
+       // echo "<pre>" ;print_r($output);
+        //       die;
+
+        $cal_out[$i]['product_name'] = $key;     
+        $cal_out[$i]['cooling_capacity'] =   number_format($output['Qth_Lt'], 1, '.', '')." kW";  // $output['Qth_Lt'];
+        $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 1, '.', '')." kW";
+
+        $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 1, '.', ''); 
+        $cal_out[$i]['cold_water_temp_outlet'] = number_format($output['Tn_LtOut'], 1, '.', '');
+        $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 1, '.', '');
+        $i++;  
+     }
+
+    return response()->json($cal_out);
+        return json_encode($cal_out);
     }
 
     /** 
