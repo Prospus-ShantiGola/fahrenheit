@@ -21,6 +21,19 @@
     <link rel="stylesheet" href="{{ asset('public/css/jquery.bootstrap.year.calendar.css') }}">
     {{-- <link rel="stylesheet" href="{{ url('node_modules/ion-rangeslider/css/ion.rangeSlider.min.css') }}"/> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+    <style>
+    @media (max-width: 992px){
+        .table thead th, .table thead th, .table thead th, .table td, .table th, .form-control label {
+            font-size: small !important;
+        }
+    }
+    .temperature_input {
+        width:1rem;
+        border:none;
+        background:none;
+        pointer-events : none;
+    }
+    </style>
     <script>
     window.app = {
         url : '{{ config("app.url") }}',
@@ -63,7 +76,7 @@
                     <form id='calculation-form'>
                         <fieldset>
                             <legend>Calculate</legend>
-                            <div class="row mt-3">
+                            <div class="row calculate-form mt-3">
                                 <div class="form-group col-sm-8">
                                     <label for="Drive_temperature_inlet">Drive temperature inlet</label>
                                     <input 
@@ -76,9 +89,21 @@
                                         placeholder="Tn_HtIn"
                                     />
                                 </div>
-                                <div class="form-group col-sm-3 ml-3">
-                                    <label for="drive_temperature_outlet">Drive temperature outlet</label>
-                                    <p class='pt-2 drive_temperature_outlet_holder'>51.1 <span>&#8451;</span></p>
+                                <div class="form-group col-sm-3 ml-lg-3">
+                                    <label for="drive_temperature_outlet float-left">Drive temperature outlet</label>
+                                    <div class='clearfix'></div>
+                                    <div class='d-inline float-left'>
+                                        <a href='javascript:void(0);' field='dtu' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                            <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                        </a>
+                                        <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
+                                            <input type='text' class='temperature_input' name='dtu' value='4' onchange='return temperatureChanged(event)' /><span>&#8451;</span>
+                                        </p>
+                                        <a href='javascript:void(0);' field='dtu' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class='clearfix'></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -94,9 +119,22 @@
                                         placeholder="Tn_LtIn"
                                     />
                                 </div>
-                                <div class="form-group col-sm-3 ml-3">
-                                    <label for="cold_water_outlet">Chilled water temperature outlet</label>
-                                    <p class='pt-2 cold_water_outlet_holder'>10.2 <span>&#8451;</span></p>
+                                <div class="form-group col-sm-3 ml-lg-3">
+                                    <label for="cold_water_outlet float-left">Chilled water temperature outlet</label>
+                                    <div class='clearfix'></div>
+                                    <div class='d-inline float-left'>
+                                        <a href='javascript:void(0);' field='cwt_output' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                            <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                        </a>
+                                        <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
+                                            <input type='text' class='temperature_input' name='cwt_output' value='4' onchange='return temperatureChanged(event)' /><span>&#8451;</span>
+                                        </p>
+                                        <a href='javascript:void(0);' field='cwt_output' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class='clearfix'></div>
+                                    {{-- <p class='pt-2 cold_water_outlet_holder'>10.2 <span>&#8451;</span></p> --}}
                                 </div>
                             </div>
                             
@@ -113,7 +151,7 @@
                                         placeholder="Tn_MtIn"
                                     />
                                 </div>
-                                <div class="form-group col-sm-3 ml-3">
+                                <div class="form-group col-sm-3 ml-lg-3">
                                     <label for="recooling_temperature_outlet">Re-cooling temperature outlet</label>
                                     <p class='pt-2 recooling_temperature_outlet_holder'>25.9 <span>&#8451;</span></p>
                                 </div>
@@ -199,6 +237,51 @@
             });
         });
 
+        jQuery(document).ready(function(){
+        // This button will increment the value
+        $('.qtyplus').click(function(e){
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            fieldName = $(this).attr('field');
+            // Get its current value
+            var currentVal = parseInt($('input[name='+fieldName+']').val());
+            // If is not undefined
+            if (!isNaN(currentVal)) {
+                // Increment
+                var newValue = currentVal + 1;
+                $('input[name='+fieldName+']').val(newValue > 4 ? 4 : newValue).trigger('change');
+            } else {
+                // Otherwise put a 0 there
+                $('input[name='+fieldName+']').val(0).trigger('change');
+            }
+        });
+        // This button will decrement the value till 0
+        $(".qtyminus").click(function(e) {
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            fieldName = $(this).attr('field');
+            // Get its current value
+            var currentVal = parseInt($('input[name='+fieldName+']').val());
+            // If it isn't undefined or its greater than 0
+            if (!isNaN(currentVal) && currentVal > 0) {
+                // Decrement one
+                var newValue = currentVal - 1;
+                $('input[name='+fieldName+']').val(newValue < 1 ? 1 : newValue).trigger('change');
+            } else {
+                // Otherwise put a 0 there
+                $('input[name='+fieldName+']').val(0).trigger('change');
+            }
+        });
+    });
+
+    function temperatureChanged(event){
+            setTimeout(function(){
+                submitForm()
+            },1000);
+    }
+
         function handleForm(){
             setTimeout(function(){
                 submitForm()
@@ -258,6 +341,32 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+        }
+
+        function changeTemperature(event, type){
+            var $targetEl = $(event.target).parent().find('.temperature_input');
+            var oldValue = $targetEl.val();
+            var newValue = oldValue || 4;
+
+            console.log('target',$targetEl)
+            console.log('oldValue',oldValue)
+           
+
+            if(type == 'inc'){
+                if(newValue){
+                    newValue = parseInt(oldValue) + 1;
+                    $targetEl.val(newValue > 4 ? 4 : newValue);
+                }
+            }
+            if(type == 'dec'){
+                if(newValue){
+                    newValue = parseInt(oldValue) - 1;
+                    $targetEl.val(newValue < 1 ? 1 : newValue);
+                }
+            }
+
+             console.log('type',type)
+            console.log('newValue',newValue)
         }
         
     </script>
