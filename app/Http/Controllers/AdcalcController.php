@@ -643,7 +643,7 @@ private static function sortByLt($a, $b)
         $mod_types_id =  $request->adsorption_chiller; 
         $chiller_type =  $request->chiller_type;    
         
-        $calculation_type = 'recalculation'; //re
+        $calculation_type = 'calculation'; //re
         $n_AsHt_input =  3;
         $n_AsLt_input =  2;
         //'eCoo10'=>'1',array('eCoo10'=>'1');  //array('eCoo20'=>'1');  //
