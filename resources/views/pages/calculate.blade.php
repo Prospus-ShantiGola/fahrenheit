@@ -141,7 +141,7 @@
                         <thead>
                             <tr>
                             <th scope="col">Adsorption Chiller</th>
-                            <th scope="col">Cooling Capicity</th>
+                            <th scope="col">Cooling Capacity</th>
                             <th scope="col">Driving Heat</th>
                             </tr>
                         </thead>
@@ -228,9 +228,18 @@
                 .then(function (response) {
 
                     if(response.status === 200 && response.data){
+                    
                         var tableHtml = '';
                         // Set data to html table from Response
                         $.each(response.data, function(index,data){
+                            if(data.no_record =='false')
+                            {
+                                 tableHtml += "<tr>\
+                                <td scope='row'>No chiller found. </td>  </tr>";              
+                            
+                            }
+                            else
+                            {
                             tableHtml += "<tr>\
                                 <td scope=\"row\">"+data.product_name+" </td>\
                                 <td>"+data.cooling_capacity+"  </td>\
@@ -239,6 +248,7 @@
                             $('.drive_temperature_outlet_holder').html(data.driving_temp_outlet+" <span>&#8451;</span>");
                         $('.cold_water_outlet_holder').html(data.cold_water_temp_outlet + " <span>&#8451;</span>");
                         $('.recooling_temperature_outlet_holder').html(data.recooling_temp_outlet+" <span>&#8451;</span>");
+                         }
                         });
                         
 

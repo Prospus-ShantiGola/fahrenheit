@@ -635,43 +635,6 @@ private static function sortByLt($a, $b)
 
     public function calculateData(Request $request)
     {
-        // Sending Test data for test
-        // $data = [
-        //     [
-        //         'product_name' =>'eCoo10' ,
-        //         'cooling_capacity' => '9.4kw',
-        //         'driving_heat' => '18.0kw'
-        //     ], 
-        //     [
-        //         'product_name' => 'eCoo10',
-        //         'cooling_capacity' => '9.4kw',
-        //         'driving_heat' => '18.0kw'
-        //     ], 
-        //     [
-        //         'product_name' => 'eCoo20',
-        //         'cooling_capacity' => '18.4kw',
-        //         'driving_heat' => '36.0kw'
-        //     ], 
-        //     [
-        //         'product_name' => 'eCoo30',
-        //         'cooling_capacity' => '14.4kw',
-        //         'driving_heat' => '28.0kw'
-        //     ], 
-        //     [
-        //         'product_name' => 'eCoo10x',
-        //         'cooling_capacity' => '28.0kw',
-        //         'driving_heat' => '53.9kw'
-        //     ], 
-        //     [
-        //         'product_name' => 'eCoo20x',
-        //         'cooling_capacity' => '56.4kw',
-        //         'driving_heat' => '107.9kw'
-        //     ]
-        // ];
-
-  //          echo "<pre>" ;print_r($data);
-  //        return response()->json($data);
-  // die;
           
         $ht_in = $request->drive_temperature;
         $lt_in = $request->cold_water;
@@ -680,58 +643,115 @@ private static function sortByLt($a, $b)
         $mod_types_id =  $request->adsorption_chiller; 
         $chiller_type =  $request->chiller_type;    
         
-        $chillerarray  = array('eCoo10'=>'1','eCoo20'=>'1','eCoo30'=>'1','eCoo10X'=>'2','eCoo20X'=>'2','eCoo30X'=>'2','eCoo40X'=>'2');
-        $i=0;
-        foreach ($chillerarray as $key => $value) {
-         // echo $key."_______".$value;
-         // echo "<br/>";
-        
-   
-         // die;
-        $mod_types_id =  $value; 
+        $calculation_type = 'recalculation'; //re
+        $n_AsHt_input =  3;
+        $n_AsLt_input =  2;
+        //'eCoo10'=>'1',array('eCoo10'=>'1');  //array('eCoo20'=>'1');  //
+         $chillerarray  = array('eCoo10'=>'1','eCoo20'=>'1','eCoo30'=>'1','eCoo10X'=>'2','eCoo20X'=>'2','eCoo30X'=>'2','eCoo40X'=>'2');
 
 
+            $i=0;
 
-        $chiller_type =  $key;
+            $cal_out = array();
+         
+            foreach ($chillerarray as $key => $value) {
+       
+            $mod_types_id =  $value; 
 
-        $temp_constant = $this->getCalConstant($chiller_type);
+            $chiller_type =  $key;
 
-        $modtype = $this->getModType($mod_types_id);
-    //echo "<pre>";print_r($modtype);die;
+            $temp_constant = $this->getCalConstant($chiller_type);
 
-        $adka_input['Mod_Ad'] = $modtype->mod_type;
-        $adka_input['Mod_ad_id'] = $modtype->mod_types_id;
-        $adka_input['Tn_HtIn'] = $ht_in;
-        $adka_input['Tn_MtIn'] = $mt_in;
-        $adka_input['Tn_LtIn'] = $lt_in;
-        $adka_input['n_AsHt'] = $temp_constant->n_AsHt;
-        $adka_input['n_AsLt'] = $temp_constant->n_AsLt;
-        $adka_input['n_ApHt'] = $temp_constant->n_ApHt;
-        $adka_input['n_ApLt'] = $temp_constant->n_ApLt;
-        $adka_input['cal_constants_id'] = $temp_constant->cal_constants_id;
+            $modtype = $this->getModType($mod_types_id);
+            //   echo "<pre>";print_r($temp_constant);
+            // echo "<pre>";print_r($modtype);//die;
 
-        //echo "<pre>";print_r($adka_input);die;
-        $output = $this->calculateADKA($adka_input);
 
-        //'product_name' =>'eCoo10' ,
-        //         'cooling_capacity' => '9.4kw',
-        //         'driving_heat' => '18.0kw'
-        // echo "dsd";
-       // echo "<pre>" ;print_r($output);
-        //       die;
+               
+             if($calculation_type=='calculation')
+            {
+                $adka_input['Tn_HtIn'] = $ht_in;
+                $adka_input['Tn_MtIn'] = $mt_in;
+                $adka_input['Tn_LtIn'] = $lt_in;
+                $adka_input['Mod_Ad'] = $modtype->mod_type;
+                $adka_input['Mod_ad_id'] = $modtype->mod_types_id;
+                
+                $adka_input['n_AsHt'] = $temp_constant->n_AsHt;
+                $adka_input['n_AsLt'] = $temp_constant->n_AsLt;
+                $adka_input['n_ApHt'] = $temp_constant->n_ApHt;
+                $adka_input['n_ApLt'] = $temp_constant->n_ApLt;
+                $adka_input['cal_constants_id'] = $temp_constant->cal_constants_id;
 
-        $cal_out[$i]['product_name'] = $key;     
-        $cal_out[$i]['cooling_capacity'] =   number_format($output['Qth_Lt'], 1, '.', '')." kW";  // $output['Qth_Lt'];
-        $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 1, '.', '')." kW";
+                    $output = $this->calculateADKA($adka_input);
+      
 
-        $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 1, '.', ''); 
-        $cal_out[$i]['cold_water_temp_outlet'] = number_format($output['Tn_LtOut'], 1, '.', '');
-        $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 1, '.', '');
-        $i++;  
-     }
+                    $cal_out[$i]['product_name'] = $key;     
+                    $cal_out[$i]['cooling_capacity'] =   number_format($output['Qth_Lt'], 1, '.', '')." kW";  // $output['Qth_Lt'];
+                    $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 1, '.', '')." kW";
+
+                    $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 1, '.', ''); 
+                    $cal_out[$i]['cold_water_temp_outlet'] = number_format($output['Tn_LtOut'], 1, '.', '');
+                    $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 1, '.', '');
+                    $i++;  
+            }
+            else
+            {   
+                //echo  $key; echo "<br/>";
+                $total_modules = $temp_constant->total_module;
+                  $n_ApHt_calculated = round($total_modules/$n_AsHt_input); //number of modules/n_AsHt ; 
+
+                // echo "<br/>";
+                  $n_ApLt_calculated = round($total_modules/$n_AsLt_input); //number of modules/n_AsHt ; 
+                //  echo "<br/>";
+
+                if((($n_AsHt_input * $n_ApHt_calculated) == $total_modules) && (($n_AsLt_input * $n_ApLt_calculated) == $total_modules) )
+                {
+                    $adka_input['Tn_HtIn'] = $ht_in;
+                    $adka_input['Tn_MtIn'] = $mt_in;
+                    $adka_input['Tn_LtIn'] = $lt_in;
+                    $adka_input['Mod_Ad']   = $modtype->mod_type;
+                    $adka_input['Mod_ad_id'] = $modtype->mod_types_id;
+                    
+                    $adka_input['n_AsHt'] = $n_AsHt_input;
+                    $adka_input['n_AsLt'] = $n_AsLt_input;
+                    $adka_input['n_ApHt'] = $n_ApHt_calculated;
+                    $adka_input['n_ApLt'] = $n_ApLt_calculated;
+                    $adka_input['cal_constants_id'] = $temp_constant->cal_constants_id;
+
+
+                    //print_r($adka_input);die;
+                    $output = $this->calculateADKA($adka_input);
+      
+
+                    $cal_out[$i]['product_name'] = $key;     
+                    $cal_out[$i]['cooling_capacity'] =   number_format($output['Qth_Lt'], 1, '.', '')." kW";  // $output['Qth_Lt'];
+                    $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 1, '.', '')." kW";
+
+                    $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 1, '.', ''); 
+                    $cal_out[$i]['cold_water_temp_outlet'] = number_format($output['Tn_LtOut'], 1, '.', '');
+                    $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 1, '.', '');
+                    $i++;  
+
+                } 
+                else
+                {
+
+                     $i++;  
+                } 
+
+            }
+
+            
+        }
+        if(empty($cal_out))
+        {
+            $cal_out[0]['no_record'] = 'false';
+        }
+    //echo "<pre>";print_r($cal_out);
+// // die;
 
     return response()->json($cal_out);
-        return json_encode($cal_out);
+     
     }
 
     /** 
@@ -811,8 +831,9 @@ private static function sortByLt($a, $b)
         $adka_calculations_id = $ht_array['adka_calculations_id'];
         $Mod_Ad =  $ht_array['Mod_Ad'] ;
         $Tn_HtIn  = $ht_array['Tn_HtIn'] ;
-        $n_AsHt = $ht_array['n_AsHt'] ;
-       $n_ApHt  = $ht_array['n_ApHt'] ;
+         $n_AsHt = $ht_array['n_AsHt'] ;
+       // echo "<br/>";
+        $n_ApHt  = $ht_array['n_ApHt'] ;
         $Mod_ad_id =  $ht_array['Mod_ad_id'];
        // print_r($ht_array);
 
@@ -820,23 +841,31 @@ private static function sortByLt($a, $b)
         $i_Ap = 1;
         $i_As = 1;
         $Tn_HtI = $Tn_HtIn;
-        $action = 'update';
-
-        for($i_Ap = 1 ; $i_Ap<=$n_ApHt;){
+       
 
 
-            if($i_Ap == 1)
+ if($i_Ap == 1)
             {
-                  $output = $this->addHtSerialCalculation($adka_calculations_id,$Mod_Ad,$Tn_HtI,$Mod_ad_id,$action);
+                //echo "**********";    echo "<br/>";
+                  $output = $this->addHtSerialCalculation($adka_calculations_id,$Mod_Ad,$Tn_HtI,$Mod_ad_id,'update');
             }
+        for($i_Ap = 1 ; $i_Ap<=$n_ApHt;){
+       // for($i_Ad = 1 ; $i_Ad<=$n_ApHt;){
+// echo  $i_Ad."_i_Ad";
+//  echo "<br/>" ;
+//  echo  $i_As."i_As";
+//   echo "<br/>" ;
+
+           
                  
 
         if($i_As == $n_AsHt)
         {
-          
+          // echo '*';
 
             if($i_Ap == $n_ApHt)
             {
+              //echo 'return ';die;
                  return  $output;
             }
             else
@@ -844,9 +873,9 @@ private static function sortByLt($a, $b)
 
                
                  $Tn_HtI = $output['Tht_in'] ;  
-                 $action = 'add';
-
-                 $output = $this->addHtSerialCalculation($adka_calculations_id,$Mod_Ad,$Tn_HtI,$Mod_ad_id,$action);
+                 
+ // echo "______________"; echo "<br/>" ;echo "<br/>";
+                 $output = $this->addHtSerialCalculation($adka_calculations_id,$Mod_Ad,$Tn_HtI,$Mod_ad_id,'add');
               
                 $i_Ap = $i_Ap + 1;
                 $i_As = 1;
@@ -855,12 +884,23 @@ private static function sortByLt($a, $b)
 
         }
         else
-        {
-            $i_As = $i_As+1;
-            $i_Ad = $i_Ad+1;
+        { 
+            // echo "<br/>";
+            //  echo '%%%';
+            //  echo "<br/>";
+          
           
 
-            $Tn_HtI = $output['Tht_out'];
+                  $Tn_HtI =  number_format($output['Tht_out'], 1, '.', ''); //$output['Tht_out'];
+               
+ // echo "__rrrrrrrrrrrrrrrr"; echo "<br/>" ;echo "<br/>";
+                 $output = $this->addHtSerialCalculation($adka_calculations_id,$Mod_Ad,$Tn_HtI,$Mod_ad_id,'add');
+        
+           
+         // echo "<br/>";
+                 $i_As = $i_As+1;
+                 $i_Ad = $i_Ad+1;
+
         }
 
          }
@@ -879,7 +919,8 @@ private static function sortByLt($a, $b)
 
        $output = $this->calculateModuleValue($Mod_Ad,$Tn_HtI, $tn_mtIn, $Tn_LtIn,$Mod_ad_id);
      
-        //echo "<pre>";print_r($output);
+     //   echo "<pre>";print_r($output);
+        // die;
      //  store value in database
 
  // die;
@@ -923,7 +964,7 @@ private static function sortByLt($a, $b)
      */
     function calculateSerialLTConnection($lt_array)
     {
-           
+           //die;
 
        // $adka_calculations_id = $lt_array['adka_calculations_id'];
         $Mod_Ad =  $lt_array['Mod_Ad'] ;
@@ -934,7 +975,7 @@ private static function sortByLt($a, $b)
 
        // print_r($lt_array);
 
-        $i_Ad = $n_AsLt * $n_ApLt;
+          $i_Ad = $n_AsLt * $n_ApLt;
         $i_Ap = 1;
         $i_As = 1;
         $Tn_LtI = $Tn_LtIn;
@@ -977,12 +1018,15 @@ private static function sortByLt($a, $b)
         }
         else
         {
-            $i_As = $i_As+1;
-            $i_Ad = $i_Ad+1;
+            
             $offset = $i_Ad;
           
 
-            $Tn_LtI = $output['Tlt_out'];
+            $Tn_LtI =   number_format($output['Tlt_out'], 1, '.', ''); //$output['Tht_out']; //$output['Tlt_out'];
+
+             $output = $this->addLTSerialCalculation($Mod_Ad,$Tn_LtI,$Mod_ad_id,$action,$offset);
+             $i_As = $i_As+1;
+            $i_Ad = $i_Ad+1;
         }
 
          }
@@ -995,9 +1039,10 @@ private static function sortByLt($a, $b)
     function addLTSerialCalculation($Mod_Ad,$Tn_LtI,$Mod_ad_id,$action,$offset)
     {
         //SELECT * FROM adka_calculations ORDER BY adka_calculations_id DESC LIMIT 1
-        $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id')->offset($offset-1)->limit(1)->first();  //->first();
+     $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id')->offset($offset-1)->limit(1)->first();  // toSql(); 
       //  $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id', 'asc')->get();
        // dd($adka_info);
+       // die;
 
         //echo "<pre>";print_r($adka_info);die;
         $Tn_HtIn = $adka_info->tn_htIn;
@@ -1136,8 +1181,8 @@ private static function sortByLt($a, $b)
 
        
         $Tn_MtOut = $this->calculateOutletTempMt($Qth_Mt,$Tn_MtIn,$Vf_Mt,$medium ='water');
-        $Tn_HtOut = $this->calculateOutletTempHt($Qth_Ht,$Tn_HtIn,$Vf_Ht,$medium ='water');
-        $Tn_LtOut = $this->calculateOutletTempLt($Qth_Lt,$Tn_LtIn,$Vf_Lt,$medium ='water');
+       // $Tn_HtOut =  $Tn_HtOut;   // $this->calculateOutletTempHt($Qth_Ht,$Tn_HtIn,$Vf_Ht,$medium ='water');
+       // $Tn_LtOut =   $Tn_LtOut; // $this->calculateOutletTempLt($Qth_Lt,$Tn_LtIn,$Vf_Lt,$medium ='water');
 
         $adka_final['Tn_MtOut'] =  $Tn_MtOut;
         $adka_final['Tn_HtOut'] =  $Tn_HtOut;
@@ -1222,9 +1267,9 @@ private static function sortByLt($a, $b)
         //recooling capacity
         $Qmt = $this->calculateRecoolingCapacity($Qlt,$Qht,$COP);
 
-        $Tltout = $this->calculateOutletTemperatureLT($Tn_LtIn,$Qlt,$_p,$_cp,$vlt);
+        $Tltout =  $this->calculateOutletTempLt($Qlt,$Tn_LtIn,$vlt,$medium ='water');//$this->calculateOutletTemperatureLT($Tn_LtIn,$Qlt,$_p,$_cp,$vlt);
 
-        $Thtout = $this->calculateOutletTemperatureHT($Tn_HtI,$Qht,$_p,$_cp,$vht);
+        $Thtout =    $this->calculateOutletTempHt($Qht,$Tn_HtI,$vht,$medium ='water');  ///$this->calculateOutletTemperatureHT($Tn_HtI,$Qht,$_p,$_cp,$vht);
         $Tmtout = $this->calculateOutletTemperatureMT($Tn_MtIn,$Qmt,$_p,$_cp,$vmt);
 
         $output['a'] =   $final_ab_value['a'];
@@ -1240,9 +1285,9 @@ private static function sortByLt($a, $b)
 
         $output['Qth_MtAd'] = number_format((float)$Qmt, 4, '.', '');
         $output['Tlt_in'] = $Tn_LtIn;
-        $output['Tlt_out'] = number_format((float)$Tltout, 4, '.', ''); 
+        $output['Tlt_out'] =      $Tltout  ;   ///number_format((float)$Tltout, 4, '.', ''); 
         $output['Tht_in'] = $Tn_HtI; 
-        $output['Tht_out'] = number_format((float)$Thtout, 4, '.', ''); 
+        $output['Tht_out'] =    $Thtout; ////number_format((float)$Thtout, 4, '.', ''); 
         $output['Tmt_in'] = $Tn_MtIn; 
         $output['Tmt_out'] = number_format((float)$Tmtout, 4, '.', ''); 
         $output['vlt'] = $vlt; 
