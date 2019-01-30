@@ -277,9 +277,9 @@
     });
 
     function temperatureChanged(event){
-            setTimeout(function(){
-                submitForm()
-            },1000);
+        setTimeout(function(){
+            submitForm()
+        },1000);
     }
 
         function handleForm(){
