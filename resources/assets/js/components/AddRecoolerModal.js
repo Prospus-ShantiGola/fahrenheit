@@ -12,13 +12,40 @@ class AddRecooler extends Component {
 
   constructor(props){
         super(props);
-        this.state = {recoolerInformation: '',role:'user',selectedSource:selectedSource};
+        this.state = {
+          recoolerInformation: '',
+          role:'user',
+          selectedSource:selectedSource,
+          products : []
+        };
         this.handleAddRecoolerSubmit = this.handleAddRecoolerSubmit.bind(this);
         this.changeState = this.changeState.bind(this);
+        this.getProductsData = this.getProductsData.bind(this);
+      }
+
+
+      getProductsData(type = 're_cooler') {
+        let url = '/recooling-products-data/' + type;
+       
+        axios.get(url)
+          .then((response) => {
+            if (response.data){
+              console.log('products data', response.data)
+              this.setState({products : response.data})
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        
       }
 
 
        componentDidMount(){
+
+  
+         this.getProductsData('re_cooler')
+
         jQuery(".help-toggle").unbind('click');
         jQuery(".help-toggle").click(function(){
             jQuery(".input-help-label").toggle();
@@ -165,6 +192,12 @@ class AddRecooler extends Component {
             selectedSource:elem.target.value
         });
 
+      if (elem.target.value === 'Re-cooler'){
+        this.getProductsData('re_cooler')
+      }else{
+        this.getProductsData('circuit_separation')
+      }
+
     }
 
 
@@ -237,7 +270,7 @@ class AddRecooler extends Component {
                           <td className="input-fields">
                             <select className="required-field" name="recooler_component" id="recooler_component"  onChange={(elem) => this.changeField(elem)}>
                               <option value="Re-cooler">Re-cooler</option>
-                              <option value="Circuit separation">{this.props.t('Fahrenheit.Tab.Recooling.CircuitSeparation.Title')}</option>
+                              <option value="Circuit-separation">{this.props.t('Fahrenheit.Tab.Recooling.CircuitSeparation.Title')}</option>
                             </select>
                             <input type="hidden" placeholder="Chiller 1" id="addrecoolerformMode" name="addrecoolerformMode" value="add" />
                             <input type="hidden" placeholder="Chiller 1" id="addrecoolerformModeKey" name="addrecoolerformModeKey" value="" />
@@ -254,8 +287,11 @@ class AddRecooler extends Component {
                           </td>
                           <td className="input-fields">
                             <select className="required-field"  name="recooler_product" id="recooler_product">
-                              <option value="eRec 20 | 58">eRec 20 | 58</option>
-                              <option value="eRec 20 | 50">eRec 20 | 50</option>
+                              {
+                                this.state.products && this.state.products.map((product) => {
+                                  return <option key={ product.id } value={product.product_name}>{product.product_name}</option>
+                                })
+                              }
                             </select>
                           </td>
                         </tr>

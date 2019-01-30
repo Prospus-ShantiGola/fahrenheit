@@ -82,36 +82,7 @@
 
 
 
- <script src="{{ asset('public/js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.9.2/jarallax.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.9.2/jarallax-element.min.js"></script>
-    <script src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
-    <script type="text/javascript">
-        jQuery('.jarallax').jarallax({
-            speed: 0.1
-        });
-    </script>
     <script>
-        var owl = jQuery('#home-banner');
-        owl.owlCarousel({
-            margin: 10,
-            loop: true,
-            dots: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 1
-                },
-                1000: {
-                    items: 1
-                }
-            }
-        })
 
         //loggin variable for jQuery
        var loggedIn = {{ auth()->check() ? 'true' : 'false' }};
