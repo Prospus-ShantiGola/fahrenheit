@@ -93,15 +93,17 @@
                                     <label for="drive_temperature_outlet float-left">Drive temperature outlet</label>
                                     <div class='clearfix'></div>
                                     <div class='d-inline float-left'>
-                                        <a href='javascript:void(0);' field='dtu' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <input type='text' class='temperature_input float-left mt-2' name='dtu_up' value='1' onchange='return temperatureChanged(event)' />
+                                        <a href='javascript:void(0);' field='dtu_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                         </a>
                                         <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
-                                            <input type='text' class='temperature_input' name='dtu' value='4' onchange='return temperatureChanged(event)' /><span>&#8451;</span>
+                                            25.9 <span>&#8451;
                                         </p>
-                                        <a href='javascript:void(0);' field='dtu' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <a href='javascript:void(0);' field='dtu_down' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
+                                         <input type='text' class='temperature_input float-left mt-2' name='dtu_down' value='4' onchange='return temperatureChanged(event)' />
                                     </div>
                                     <div class='clearfix'></div>
                                 </div>
@@ -123,15 +125,17 @@
                                     <label for="cold_water_outlet float-left">Chilled water temperature outlet</label>
                                     <div class='clearfix'></div>
                                     <div class='d-inline float-left'>
-                                        <a href='javascript:void(0);' field='cwt_output' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <input type='text' class='temperature_input float-left mt-2' name='cwt_output_up' value='1' onchange='return temperatureChanged(event)' />
+                                        <a href='javascript:void(0);' field='cwt_output_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                         </a>
                                         <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
-                                            <input type='text' class='temperature_input' name='cwt_output' value='4' onchange='return temperatureChanged(event)' /><span>&#8451;</span>
+                                            25.9 <span>&#8451;
                                         </p>
-                                        <a href='javascript:void(0);' field='cwt_output' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <a href='javascript:void(0);' field='cwt_output_down' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
+                                        <input type='text' class='temperature_input float-left mt-2' name='cwt_output_down' value='4' onchange='return temperatureChanged(event)' />
                                     </div>
                                     <div class='clearfix'></div>
                                     {{-- <p class='pt-2 cold_water_outlet_holder'>10.2 <span>&#8451;</span></p> --}}
