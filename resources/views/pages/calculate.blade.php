@@ -28,7 +28,7 @@
         }
     }
     .temperature_input {
-        width:1rem;
+        width:2.4rem;
         border:none;
         background:none;
         pointer-events : none;
@@ -93,17 +93,18 @@
                                     <label for="drive_temperature_outlet float-left">Drive temperature outlet</label>
                                     <div class='clearfix'></div>
                                     <div class='d-inline float-left'>
-                                        <input type='text' class='temperature_input float-left mt-2' name='dtu_up' value='1' onchange='return temperatureChanged(event)' />
-                                        <a href='javascript:void(0);' field='dtu_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                       
+                                        <a href='javascript:void(0);' field='dt_output_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                         </a>
                                         <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
-                                            25.9 <span>&#8451;
+                                         <input type='text' class='temperature_input float-left' name='dt_output_up' data-value='25.9' value='25.9' onchange='return temperatureChanged(event)' />
+                                            {{-- 25.9 <span>&#8451; --}}
                                         </p>
-                                        <a href='javascript:void(0);' field='dtu_down' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <a href='javascript:void(0);' field='dt_output_up' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left disabled' >
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
-                                         <input type='text' class='temperature_input float-left mt-2' name='dtu_down' value='4' onchange='return temperatureChanged(event)' />
+                                        <input type='hidden' class='temperature_input float-left mt-2' name='dt_temperature' value='' onchange='return temperatureChanged(event)' />
                                     </div>
                                     <div class='clearfix'></div>
                                 </div>
@@ -125,17 +126,17 @@
                                     <label for="cold_water_outlet float-left">Chilled water temperature outlet</label>
                                     <div class='clearfix'></div>
                                     <div class='d-inline float-left'>
-                                        <input type='text' class='temperature_input float-left mt-2' name='cwt_output_up' value='1' onchange='return temperatureChanged(event)' />
                                         <a href='javascript:void(0);' field='cwt_output_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                         </a>
                                         <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
-                                            25.9 <span>&#8451;
+                                        <input type='text' class='temperature_input float-left' name='cwt_output_up' data-value='25.9' value='25.9' onchange='return temperatureChanged(event)' />
+                                            {{-- 25.9 <span>&#8451; --}}
                                         </p>
-                                        <a href='javascript:void(0);' field='cwt_output_down' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <a href='javascript:void(0);' field='cwt_output_up' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left disabled' >
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
-                                        <input type='text' class='temperature_input float-left mt-2' name='cwt_output_down' value='4' onchange='return temperatureChanged(event)' />
+                                        <input type='hidden' class='temperature_input float-left mt-2' name='cwt_output_down' value='4' onchange='return temperatureChanged(event)' />
                                     </div>
                                     <div class='clearfix'></div>
                                     {{-- <p class='pt-2 cold_water_outlet_holder'>10.2 <span>&#8451;</span></p> --}}
@@ -249,15 +250,23 @@
             // Get the field name
             fieldName = $(this).attr('field');
             // Get its current value
-            var currentVal = parseInt($('input[name='+fieldName+']').val());
+            var currentVal = parseFloat($('input[name='+fieldName+']').val());
+            var intialVal = parseFloat($('input[name='+fieldName+']').data('value'));
             // If is not undefined
             if (!isNaN(currentVal)) {
                 // Increment
                 var newValue = currentVal + 1;
-                $('input[name='+fieldName+']').val(newValue > 4 ? 4 : newValue).trigger('change');
+                if(newValue > (intialVal + 4)){
+                    //$('input[name='+fieldName+']').val(4);
+                    $(this).parent().find('.qtyminus').removeClass('disabled');
+                    $(this).addClass('disabled');
+                }else{
+                    $(this).parent().find('.qtyminus').removeClass('disabled');
+                     $('input[name='+fieldName+']').val(parseFloat(newValue)).trigger('change');
+                }
             } else {
                 // Otherwise put a 0 there
-                $('input[name='+fieldName+']').val(0).trigger('change');
+                //$('input[name='+fieldName+']').val(0).trigger('change');
             }
         });
         // This button will decrement the value till 0
@@ -267,12 +276,20 @@
             // Get the field name
             fieldName = $(this).attr('field');
             // Get its current value
-            var currentVal = parseInt($('input[name='+fieldName+']').val());
-            // If it isn't undefined or its greater than 0
+            var currentVal = parseFloat($('input[name='+fieldName+']').val());
+            var intialVal = parseFloat($('input[name='+fieldName+']').data('value'));
+            // If it isn't undefinor its greater than 0
             if (!isNaN(currentVal) && currentVal > 0) {
                 // Decrement one
                 var newValue = currentVal - 1;
-                $('input[name='+fieldName+']').val(newValue < 1 ? 1 : newValue).trigger('change');
+                if(newValue < intialVal){
+                    //$('input[name='+fieldName+']').val(1);
+                    $(this).parent().find('.qtyplus').removeClass('disabled');
+                    $(this).addClass('disabled');
+                }else{
+                    $(this).parent().find('.qtyplus').removeClass('disabled');
+                    $('input[name='+fieldName+']').val(newValue).trigger('change');
+                }
             } else {
                 // Otherwise put a 0 there
                 $('input[name='+fieldName+']').val(0).trigger('change');
