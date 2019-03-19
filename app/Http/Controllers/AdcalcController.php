@@ -1225,13 +1225,14 @@ class AdcalcController extends Controller
 
 
 
+        $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
+        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
 
 
 
-
-        $Tn_MtOut =   $this->calculateOutletTempMt($Qth_Mt, $Tn_MtIn, $Vf_Mt, $medium = 'water');
-        $Tn_HtOut =   $this->calculateOutletTempHt($Qth_Ht,$Tn_HtIn,$Vf_Ht,$medium ='water');
-        $Tn_LtOut =   $this->calculateOutletTempLt($Qth_Lt,$Tn_LtIn,$Vf_Lt,$medium ='water');
+        $Tn_MtOut =   $this->calculateOutletTempMt($Qth_Mt, $Tn_MtIn, $Vf_Mt, $medium = 'water',$rho,$cp);
+        $Tn_HtOut =   $this->calculateOutletTempHt($Qth_Ht,$Tn_HtIn,$Vf_Ht,$medium ='water',$rho,$cp);
+        $Tn_LtOut =   $this->calculateOutletTempLt($Qth_Lt,$Tn_LtIn,$Vf_Lt,$medium ='water',$rho,$cp);
 
         $adka_final['Tn_MtOut'] = $Tn_MtOut;
         $adka_final['Tn_HtOut'] = $Tn_HtOut;
@@ -1249,11 +1250,10 @@ class AdcalcController extends Controller
     /**
      * function to calculate outlet temperatures 
      */
-    function calculateOutletTempMt($Qth, $Tn_In, $Vf, $medium)
+    function calculateOutletTempMt($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
     {
         $Qth = $Qth * -1000;
-        $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
-        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
+        
 
         $Tn_Out = $Tn_In - (($Qth) / ($Vf * $rho * $cp));
 
@@ -1261,11 +1261,11 @@ class AdcalcController extends Controller
 
     }
 
-    function calculateOutletTempHT($Qth, $Tn_In, $Vf, $medium)
+    function calculateOutletTempHT($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
     {
         $Qth = $Qth * 1000;
-        $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
-        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
+       // $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
+        //$cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
 
         $Tn_HtOut = $Tn_In - (($Qth) / ($Vf * $rho * $cp));
 
@@ -1273,11 +1273,11 @@ class AdcalcController extends Controller
 
     }
 
-    function calculateOutletTempLT($Qth, $Tn_In, $Vf, $medium)
+    function calculateOutletTempLT($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
     {
         $Qth = $Qth * 1000;
-        $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
-        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
+      //  $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
+     //   $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
 
         $Tn_LtOut = $Tn_In - (($Qth) / ($Vf * $rho * $cp));
 
@@ -1288,10 +1288,10 @@ class AdcalcController extends Controller
     function calculateModuleValue($Mod_Ad, $Tn_HtI, $Tn_MtIn, $Tn_LtIn, $Mod_ad_id)
     {   
         //Contants 
-        $_p = 0.993991038; //0.999;
+        $rho = 0.993991038; //0.999;
 
-        $_cp = 1.160973538; //4.18
- //4.18;
+        $cp = 1.160973538; //4.18
+
 
         $volume_flow = $this->getMachineVolumeFlow($Mod_ad_id);
         $vlt = $volume_flow->vf_lt;
@@ -1316,12 +1316,14 @@ class AdcalcController extends Controller
         //recooling capacity
         $Qmt = $this->calculateRecoolingCapacity($Qlt, $Qht, $COP);
 
-        $Tltout = $this->calculateOutletTempLt($Qlt, $Tn_LtIn, $vlt, $medium = 'water');//$this->calculateOutletTemperatureLT($Tn_LtIn,$Qlt,$_p,$_cp,$vlt);  // 
+        $Tltout = $this->calculateOutletTempLt($Qlt, $Tn_LtIn, $vlt, $medium = 'water',$rho,$cp);
+        //$this->calculateOutletTemperatureLT($Tn_LtIn,$Qlt,$rho,$cp,$vlt);  // 
  
-        $Thtout =  $this->calculateOutletTempHt($Qht, $Tn_HtI, $vht, $medium = 'water');  //$this->calculateOutletTemperatureHT($Tn_HtI,$Qht,$_p,$_cp,$vht);  //
+        $Thtout =  $this->calculateOutletTempHt($Qht, $Tn_HtI, $vht, $medium = 'water',$rho,$cp);
+        //$this->calculateOutletTemperatureHT($Tn_HtI,$Qht,$rho,$cp,$vht);  //
 
 
-        $Tmtout =  $this->calculateOutletTempMt($Qmt, $Tn_MtIn, $vmt, $medium = 'water');// $this->calculateOutletTemperatureMT($Tn_MtIn, $Qmt, $_p, $_cp, $vmt);
+        $Tmtout =  $this->calculateOutletTempMt($Qmt, $Tn_MtIn, $vmt, $medium = 'water',$rho,$cp);// $this->calculateOutletTemperatureMT($Tn_MtIn, $Qmt, $rho, $cp, $vmt);
 
         $output['a'] = $final_ab_value['a'];
         $output['b'] = $final_ab_value['b'];
