@@ -76,9 +76,10 @@
                     <form id='calculation-form'>
                         <fieldset>
                             <legend>Calculate</legend>
+                            <input type = "hidden" class= "calculation_type" name ="calculation_type" value = "calculation">
                             <div class="row calculate-form mt-3">
                                 <div class="form-group col-sm-8">
-                                    <label for="Drive_temperature_inlet">Drive temperature inlet</label>
+                                    <label for="Drive_temperature_inlet">Drive temperature inlet <span class = "drive_temp_connected"></span></label>
                                     <input 
                                         type="number" 
                                         class="form-control" 
@@ -93,24 +94,24 @@
                                     <label for="drive_temperature_outlet float-left">Drive temperature outlet</label>
                                     <div class='clearfix'></div>
                                     <div class='d-inline float-left'>
-                                        <input type='text' class='temperature_input float-left mt-2' name='dtu_up' value='1' onchange='return temperatureChanged(event)' />
-                                        <a href='javascript:void(0);' field='dtu_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <input type='hidden' class='temperature_input global_input float-left mt-2 dtu_up' name='dtu_up' value='1' onchange='return temperatureChanged(event)' />
+                                        <a href='javascript:void(0);' field='dtu_up' class='qtyplus disabled rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                         </a>
                                         <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
-                                            25.9 <span>&#8451;
+                                            51.1 <span>&#8451;
                                         </p>
-                                        <a href='javascript:void(0);' field='dtu_down' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <a href='javascript:void(0);' field='dtu_down' class='qtyminus rounded  px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
-                                         <input type='text' class='temperature_input float-left mt-2' name='dtu_down' value='4' onchange='return temperatureChanged(event)' />
+                                         <input type='text' class='temperature_input float-left mt-2' name='dtu_down' value='' onchange='return temperatureChanged(event)' />
                                     </div>
                                     <div class='clearfix'></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-8">
-                                    <label for="cold_water_inlet">Chilled water temperature inlet</label>
+                                    <label for="cold_water_inlet">Chilled water temperature  <span class = "chilled_temp_connected">   </span></label>
                                     <input  
                                         type="number" 
                                         class="form-control" 
@@ -125,17 +126,17 @@
                                     <label for="cold_water_outlet float-left">Chilled water temperature outlet</label>
                                     <div class='clearfix'></div>
                                     <div class='d-inline float-left'>
-                                        <input type='text' class='temperature_input float-left mt-2' name='cwt_output_up' value='1' onchange='return temperatureChanged(event)' />
-                                        <a href='javascript:void(0);' field='cwt_output_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <input type='hidden' class='temperature_input global_input float-left mt-2 cwt_output_up' name='cwt_output_up' value='1' onchange='return temperatureChanged(event)' />
+                                        <a href='javascript:void(0);' field='cwt_output_up' class='qtyplus disabled rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                         </a>
-                                        <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
-                                            25.9 <span>&#8451;
+                                        <p class='px-1 py-2 cold_water_outlet_holder float-left'>
+                                            10.2 <span>&#8451;
                                         </p>
-                                        <a href='javascript:void(0);' field='cwt_output_down' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <a href='javascript:void(0);' field='cwt_output_down' class='qtyminus  rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
-                                        <input type='text' class='temperature_input float-left mt-2' name='cwt_output_down' value='4' onchange='return temperatureChanged(event)' />
+                                        <input type='text' class='temperature_input float-left mt-2' name='cwt_output_down' value='' onchange='return temperatureChanged(event)' />
                                     </div>
                                     <div class='clearfix'></div>
                                     {{-- <p class='pt-2 cold_water_outlet_holder'>10.2 <span>&#8451;</span></p> --}}
@@ -157,7 +158,7 @@
                                 </div>
                                 <div class="form-group col-sm-3 ml-lg-3">
                                     <label for="recooling_temperature_outlet">Re-cooling temperature outlet</label>
-                                    <p class='pt-2 recooling_temperature_outlet_holder'>25.9 <span>&#8451;</span></p>
+                                    <p class='pt-2 recooling_temperature_outlet_holder' style =" padding: 44px;">25.9 <span>&#8451;</span></p>
                                 </div>
                             </div>
                             <div id="res" class="mb-2"></div>
@@ -207,6 +208,7 @@
 
     <script>    
         $(function() {
+
             $('#Drive_temperature').ionRangeSlider({
                 min: 55,
                 max: 90,
@@ -214,6 +216,8 @@
                 skin: "round",
                 //step: 0.1,
                 onFinish: function (data) {
+                    // $('.global_input').val('1');
+                    // $('.calculation_type').val('calculation');
                     submitForm();
                 },
             });
@@ -225,6 +229,8 @@
                 skin: "round",
                 //step: 0.1,
                 onFinish: function (data) {
+                    // $('.global_input').val('1');
+                    // $('.calculation_type').val('calculation');
                     submitForm();
                 },
             });
@@ -236,6 +242,8 @@
                 skin: "round",
                 //step :0.1,
                 onFinish: function (data) {
+                    // $('.calculation_type').val('calculation');
+                    //  $('.global_input').val('1');
                     submitForm();
                 },
             });
@@ -248,14 +256,44 @@
             e.preventDefault();
             // Get the field name
             fieldName = $(this).attr('field');
+            $('.calculation_type').val('recalculation');
             // Get its current value
             var currentVal = parseInt($('input[name='+fieldName+']').val());
             // If is not undefined
             if (!isNaN(currentVal)) {
-                // Increment
-                var newValue = currentVal + 1;
-                $('input[name='+fieldName+']').val(newValue > 4 ? 4 : newValue).trigger('change');
+                // Decreament
+                var newValue = currentVal - 1;
+        
+                // if(newValue ==4)
+                // {
+                   
+                //     $(this).addClass('disabled');
+                // }
+                // else if(newValue ==2)
+                // {
+                //     $(this).siblings('.qtyminus').removeClass('disabled');
+                // }
+
+
+                 var newValue = currentVal - 1;
+            
+
+                if(newValue ==1)
+                {
+                   
+                    $(this).addClass('disabled');
+                }
+                else if(newValue ==3)
+                {
+                    $(this).siblings('.qtyminus').removeClass('disabled');
+                }
+
+
+                
+                 $('input[name='+fieldName+']').val(newValue > 4 ? 4 : newValue).trigger('change');
+                
             } else {
+                  
                 // Otherwise put a 0 there
                 $('input[name='+fieldName+']').val(0).trigger('change');
             }
@@ -265,13 +303,40 @@
             // Stop acting like a button
             e.preventDefault();
             // Get the field name
-            fieldName = $(this).attr('field');
+            fieldName = $(this).closest('.d-inline').find('.temperature_input').attr('name');
+            //alert(fieldName)
+            $('.calculation_type').val('recalculation');
             // Get its current value
-            var currentVal = parseInt($('input[name='+fieldName+']').val());
+ 
+            var currentVal =  parseInt($('input[name='+fieldName+']').val());
             // If it isn't undefined or its greater than 0
             if (!isNaN(currentVal) && currentVal > 0) {
                 // Decrement one
-                var newValue = currentVal - 1;
+
+                var newValue = currentVal +1;
+            
+
+                if(newValue ==4)
+                {
+                   
+                    $(this).addClass('disabled');
+                }
+                else if(newValue ==2)
+                {
+                    $(this).siblings('.qtyplus').removeClass('disabled');
+                }
+
+
+                //  if(newValue ==4)
+                // {
+                   
+                //     $(this).addClass('disabled');
+                // }
+                // else if(newValue ==2)
+                // {
+                //     $(this).siblings('.qtyminus').removeClass('disabled');
+                // }
+
                 $('input[name='+fieldName+']').val(newValue < 1 ? 1 : newValue).trigger('change');
             } else {
                 // Otherwise put a 0 there
@@ -295,10 +360,7 @@
         function submitForm(){
             //event.preventDefault();
 
-
-         
             var form = $('#calculation-form');
-
 
             var data = form.serialize();
             // console.log(`Form Submited`,data);
@@ -310,9 +372,13 @@
               $('.drive_temperature_outlet_holder').html('');
                         $('.cold_water_outlet_holder').html('');
                         $('.recooling_temperature_outlet_holder').html('');
+                        $('.drive_temp_connected').html('');
+                            $('.chilled_temp_connected').html('');
 
             axios.post('{{ url('calculate-data') }}', data)
                 .then(function (response) {
+                    //alert(response.data.length)
+                   // alert(response.data.no_record)
 
                     if(response.status === 200 && response.data){
                     
@@ -332,10 +398,75 @@
                                 <td>"+data.cooling_capacity+"  </td>\
                                 <td>"+data.driving_heat+"  </td>\
                             </tr>";
+                          //  alert(data.driving_temp_outlet)
                             $('.drive_temperature_outlet_holder').html(data.driving_temp_outlet+" <span>&#8451;</span>");
                         $('.cold_water_outlet_holder').html(data.cold_water_temp_outlet + " <span>&#8451;</span>");
                         $('.recooling_temperature_outlet_holder').html(data.recooling_temp_outlet+" <span>&#8451;</span>");
+
+                        if($('.calculation_type').val()=='recalculation')
+                        {
+                            //alert( Object.keys(response.data).length); cwt_output_up
+                            var n_asht =  $('.dtu_up').val();
+                            var n_aslt =    $('.cwt_output_up').val();
+                            var number_count = Object.keys(response.data).length;
+
+                            if(n_asht !='1' || n_aslt !='1' )
+                            {
+                            //     var drive_html   =   '('+number_count+' modules at drive circuit are serial connected)';
+                            //     var chilled_html = '('+number_count+' modules at chilled water circuit are serial connected)';
+                            // }
+                            // else
+                            // {
+                                if(n_asht =='1')
+                                {
+                                    var module_input = 'module';
+                                    var is_input = 'is';
+
+                                }else
+                                {
+                                    var module_input = 'modules';
+                                    var is_input = 'are';
+
+
+                                    var drive_html = '('+n_asht +' '+ module_input + ' at drive circuit '+is_input+' connected in series.)';
+                                     // var chilled_html = '('+n_aslt+' '+n_aslt_input +' at chilled water circuit '+n_aslt_is_input+' serial connected)';
+                                }
+
+                                if(n_aslt =='1')
+                                {
+                                    var n_aslt_input = 'module';
+                                    var n_aslt_is_input = 'is';
+
+                                }else
+                                {
+                                    var n_aslt_input = 'modules';
+                                    var n_aslt_is_input = 'are';
+
+                                    // var drive_html = '('+n_asht +' '+ module_input + ' at drive circuit '+is_input+' serial connected)';
+                                     var chilled_html = '('+n_aslt+' '+n_aslt_input +' at chilled water circuit '+n_aslt_is_input+' connected in series.)';
+                                }
+
+                                // if(number_count == 1)
+                                // {
+                                // var drive_html = '('+n_asht +' '+ module_input +' at drive circuit '+is_input+' serial connected)';
+                                // var chilled_html = '('+n_aslt+' '+module_input +' module at chilled water circuit '+is_input+' serial connected)';
+                                // }
+                                // else 
+                                // {
+                                    
+                               // }
+
+                            }
+                            
+                            $('.drive_temp_connected').html(drive_html);
+                            $('.chilled_temp_connected').html(chilled_html);
+                        }
+                         
+
                          }
+
+
+
                         });
                         
 
