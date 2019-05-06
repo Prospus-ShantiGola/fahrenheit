@@ -79,7 +79,7 @@
                             <input type = "hidden" class= "calculation_type" name ="calculation_type" value = "calculation">
                             <div class="row calculate-form mt-3">
                                 <div class="form-group col-sm-8">
-                                    <label for="Drive_temperature_inlet">Drive temperature inlet <span class = "drive_temp_connected"></span></label>
+                                    <label for="Drive_temperature_inlet">Drive temperature inlet </label>
                                     <input 
                                         type="number" 
                                         class="form-control" 
@@ -111,7 +111,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-8">
-                                    <label for="cold_water_inlet">Chilled water temperature  <span class = "chilled_temp_connected">   </span></label>
+                                    <label for="cold_water_inlet">Chilled water temperature  </label>
                                     <input  
                                         type="number" 
                                         class="form-control" 
@@ -178,7 +178,11 @@
                     </form>
                 </div>
             </div>
+            <span class = "drive_temp_connected" style="color:red;"></span><br/>
+                <span class = "chilled_temp_connected" style="color:red;">   </span>
+                <span class = "no_chiller_connected" style="color:red;">   </span>
             <div class="row mt-1">
+
                 <div class="form-group col-sm-8">
                     <table class="table table-lightt result-table" >
                         <thead>
@@ -374,12 +378,14 @@
                         $('.recooling_temperature_outlet_holder').html('');
                         $('.drive_temp_connected').html('');
                             $('.chilled_temp_connected').html('');
+                             $('.no_chiller_connected').html('');
 
             axios.post('{{ url('calculate-data') }}', data)
                 .then(function (response) {
                     //alert(response.data.length)
                    // alert(response.data.no_record)
-
+                        var n_asht =  $('.dtu_up').val();
+                            var n_aslt =    $('.cwt_output_up').val();
                     if(response.status === 200 && response.data){
                     
                         var tableHtml = '';
@@ -388,8 +394,9 @@
                             if(data.no_record =='false')
                             {
                                  tableHtml += "<tr>\
-                                <td scope='row'>No chiller found. </td>  </tr>";              
-                            
+                                <td scope='row'>No chiller found. </td>  </tr>";   
+                               var no_data =  'n_AsHt = '+n_asht+' and n_AsLt = '+n_aslt+', This connection is impossible.';           
+                            $('.no_chiller_connected').html(no_data);
                             }
                             else
                             {
@@ -406,8 +413,7 @@
                         if($('.calculation_type').val()=='recalculation')
                         {
                             //alert( Object.keys(response.data).length); cwt_output_up
-                            var n_asht =  $('.dtu_up').val();
-                            var n_aslt =    $('.cwt_output_up').val();
+                           
                             var number_count = Object.keys(response.data).length;
 
                             if(n_asht !='1' || n_aslt !='1' )
