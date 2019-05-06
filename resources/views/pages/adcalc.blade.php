@@ -21,6 +21,11 @@
     <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}">
 
    <link rel="stylesheet" href="{{ asset('public/css/jquery.bootstrap.year.calendar.css') }}">
+   <script>
+    window.app = {
+        url : '{{ config("app.url") }}',
+    };
+   </script>
 
     <!--   <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}">
       <link rel="stylesheet" href="{{ asset('public/css/font-awesome.min.css') }}">
@@ -46,9 +51,7 @@
         }*/
     </style>
     <script>
-       <?php
-            if($user = Auth::user())
-{ ?>
+       <?php if($user = Auth::user()) { ?>
 
     LOGGED_IN_ROLE= "<?php echo (Auth::user()->user_type_id ==3) ? 'expert':'user' ;?>";
 <?php
