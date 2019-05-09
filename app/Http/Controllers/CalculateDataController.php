@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class CalculateDataController extends Controller
 {
+    public function showCalculatePage()
+    {
+        $chiller_products = DB::table('chiller_products')->get();
+
+        if ($chiller_products->isNotEmpty()) {
+            $chiller_products = $chiller_products->map(function ($item) {
+                $item->id = $item->chiller_products_id;
+                return $item;
+            });
+        }
+
+        return view('pages.calculate', compact( 'chiller_products'));
+    }
+    
     public function calculateData(Request $request)
     {
         return (int) $request->cold_water +
@@ -86,6 +100,21 @@ class CalculateDataController extends Controller
     {
         $productIntercons = DB::table('chiller_product_intercons')->get();
         return response()->json($productIntercons);
+    }
+
+    public function getAllChillerProducts(Request $request)
+    {
+        $chiller_products = DB::table('chiller_products')->get();
+
+        if ($chiller_products->isNotEmpty()) {
+            $chiller_products = $chiller_products->map(function ($item) {
+                $item->id = $item->chiller_products_id;
+                return $item;
+            });
+        }
+
+
+        return response()->json($chiller_products);
     }
 }
   

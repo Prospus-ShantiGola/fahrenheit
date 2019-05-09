@@ -28,7 +28,7 @@
         }
     }
     .temperature_input {
-        width:2.4rem;
+        width:1rem;
         border:none;
         background:none;
         pointer-events : none;
@@ -76,9 +76,10 @@
                     <form id='calculation-form'>
                         <fieldset>
                             <legend>Calculate</legend>
+                            <input type = "hidden" class= "calculation_type" name ="calculation_type" value = "calculation">
                             <div class="row calculate-form mt-3">
                                 <div class="form-group col-sm-8">
-                                    <label for="Drive_temperature_inlet">Drive temperature inlet</label>
+                                    <label for="Drive_temperature_inlet">Drive temperature inlet </label>
                                     <input 
                                         type="number" 
                                         class="form-control" 
@@ -93,25 +94,24 @@
                                     <label for="drive_temperature_outlet float-left">Drive temperature outlet</label>
                                     <div class='clearfix'></div>
                                     <div class='d-inline float-left'>
-                                       
-                                        <a href='javascript:void(0);' field='dt_output_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <input type='hidden' class='temperature_input global_input float-left mt-2 dtu_up' name='dtu_up' value='1' onchange='return temperatureChanged(event)' />
+                                        <a href='javascript:void(0);' field='dtu_up' class='qtyplus disabled rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                         </a>
                                         <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
-                                         <input type='text' class='temperature_input float-left' name='dt_output_up' data-value='25.9' value='25.9' onchange='return temperatureChanged(event)' />
-                                            {{-- 25.9 <span>&#8451; --}}
+                                            51.1 <span>&#8451;
                                         </p>
-                                        <a href='javascript:void(0);' field='dt_output_up' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left disabled' >
+                                        <a href='javascript:void(0);' field='dtu_down' class='qtyminus rounded  px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
-                                        <input type='hidden' class='temperature_input float-left mt-2' name='dt_temperature' value='' onchange='return temperatureChanged(event)' />
+                                         <input type='text' class='temperature_input float-left mt-2' name='dtu_down' value='' onchange='return temperatureChanged(event)' />
                                     </div>
                                     <div class='clearfix'></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-8">
-                                    <label for="cold_water_inlet">Chilled water temperature inlet</label>
+                                    <label for="cold_water_inlet">Chilled water temperature  </label>
                                     <input  
                                         type="number" 
                                         class="form-control" 
@@ -126,24 +126,24 @@
                                     <label for="cold_water_outlet float-left">Chilled water temperature outlet</label>
                                     <div class='clearfix'></div>
                                     <div class='d-inline float-left'>
-                                        <a href='javascript:void(0);' field='cwt_output_up' class='qtyplus rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
+                                        <input type='hidden' class='temperature_input global_input float-left mt-2 cwt_output_up' name='cwt_output_up' value='1' onchange='return temperatureChanged(event)' />
+                                        <a href='javascript:void(0);' field='cwt_output_up' class='qtyplus disabled rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                         </a>
-                                        <p class='px-1 py-2 drive_temperature_outlet_holder float-left'>
-                                        <input type='text' class='temperature_input float-left' name='cwt_output_up' data-value='25.9' value='25.9' onchange='return temperatureChanged(event)' />
-                                            {{-- 25.9 <span>&#8451; --}}
+                                        <p class='px-1 py-2 cold_water_outlet_holder float-left'>
+                                            10.2 <span>&#8451;
                                         </p>
-                                        <a href='javascript:void(0);' field='cwt_output_up' class='qtyminus rounded px-2 my-2 mx-1 bg-light text-dark float-left disabled' >
+                                        <a href='javascript:void(0);' field='cwt_output_down' class='qtyminus  rounded px-2 my-2 mx-1 bg-light text-dark float-left' >
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
-                                        <input type='hidden' class='temperature_input float-left mt-2' name='cwt_output_down' value='4' onchange='return temperatureChanged(event)' />
+                                        <input type='text' class='temperature_input float-left mt-2' name='cwt_output_down' value='' onchange='return temperatureChanged(event)' />
                                     </div>
                                     <div class='clearfix'></div>
                                     {{-- <p class='pt-2 cold_water_outlet_holder'>10.2 <span>&#8451;</span></p> --}}
                                 </div>
                             </div>
                             
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="form-group col-sm-8">
                                     <label for="recooling_temperature_inlet">Re-cooling temperature inlet</label>
                                     <input  
@@ -158,7 +158,92 @@
                                 </div>
                                 <div class="form-group col-sm-3 ml-lg-3">
                                     <label for="recooling_temperature_outlet">Re-cooling temperature outlet</label>
-                                    <p class='pt-2 recooling_temperature_outlet_holder'>25.9 <span>&#8451;</span></p>
+                                    <p class='pt-2 recooling_temperature_outlet_holder' style =" padding: 44px;">25.9 <span>&#8451;</span></p>
+                                </div>
+                            </div> --}}
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <h4>AdKA</h4>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Type</label>
+                                                <select class="form-control" id="AdKA_type" name="AdKA_type">
+                                                    @if ($chiller_products->isNotEmpty())
+                                                        @foreach ($chiller_products as $chiller_product)
+                                                            <option value="{{$chiller_product->id}}">
+                                                                {{ $chiller_product->product_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_AdKA</label>
+                                                <input class="form-control" type="number" name='n_AdKA' value="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_AsHT</label>
+                                                <input class="form-control" type="number" name='n_AsHT' value="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_AsLT</label>
+                                                <input class="form-control" type="number" name='n_AsLT' value="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h4>Circuit Seperation</h4>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Type</label>
+                                                <select class="form-control" id="Circuit_Seperation_type"
+                                                    name="Circuit_Seperation_type">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_ST</label>
+                                                <input class="form-control" type="number" name='n_ST' value="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Oth_NomSt</label>
+                                                <input class="form-control" type="number" name='Oth_NomSt' value="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">dt_NomSt</label>
+                                                <input class="form-control" type="number" name='dt_NomSt' value="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h4>Re-Cooler</h4>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Type</label>
+                                                <select class="form-control" id="Re_Cooler_type" name="Re_Cooler_type">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_RK</label>
+                                                <input class="form-control" type="number" name='n_RK' value="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Oth_NomRk</label>
+                                                <input class="form-control" type="number" name='Oth_NomRk' value="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">dt_NomRk</label>
+                                                <input class="form-control" type="number" name='dt_NomRk' value="1">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div id="res" class="mb-2"></div>
@@ -178,7 +263,11 @@
                     </form>
                 </div>
             </div>
+            <span class = "drive_temp_connected" style="color:red;"></span><br/>
+                <span class = "chilled_temp_connected" style="color:red;">   </span>
+                <span class = "no_chiller_connected" style="color:red;">   </span>
             <div class="row mt-1">
+
                 <div class="form-group col-sm-8">
                     <table class="table table-lightt result-table" >
                         <thead>
@@ -208,6 +297,7 @@
 
     <script>    
         $(function() {
+
             $('#Drive_temperature').ionRangeSlider({
                 min: 55,
                 max: 90,
@@ -215,6 +305,8 @@
                 skin: "round",
                 //step: 0.1,
                 onFinish: function (data) {
+                    // $('.global_input').val('1');
+                    // $('.calculation_type').val('calculation');
                     submitForm();
                 },
             });
@@ -226,6 +318,8 @@
                 skin: "round",
                 //step: 0.1,
                 onFinish: function (data) {
+                    // $('.global_input').val('1');
+                    // $('.calculation_type').val('calculation');
                     submitForm();
                 },
             });
@@ -237,6 +331,8 @@
                 skin: "round",
                 //step :0.1,
                 onFinish: function (data) {
+                    // $('.calculation_type').val('calculation');
+                    //  $('.global_input').val('1');
                     submitForm();
                 },
             });
@@ -249,24 +345,46 @@
             e.preventDefault();
             // Get the field name
             fieldName = $(this).attr('field');
+            $('.calculation_type').val('recalculation');
             // Get its current value
-            var currentVal = parseFloat($('input[name='+fieldName+']').val());
-            var intialVal = parseFloat($('input[name='+fieldName+']').data('value'));
+            var currentVal = parseInt($('input[name='+fieldName+']').val());
             // If is not undefined
             if (!isNaN(currentVal)) {
-                // Increment
-                var newValue = currentVal + 1;
-                if(newValue > (intialVal + 4)){
-                    //$('input[name='+fieldName+']').val(4);
-                    $(this).parent().find('.qtyminus').removeClass('disabled');
+                // Decreament
+                var newValue = currentVal - 1;
+        
+                // if(newValue ==4)
+                // {
+                   
+                //     $(this).addClass('disabled');
+                // }
+                // else if(newValue ==2)
+                // {
+                //     $(this).siblings('.qtyminus').removeClass('disabled');
+                // }
+
+
+                 var newValue = currentVal - 1;
+            
+
+                if(newValue ==1)
+                {
+                   
                     $(this).addClass('disabled');
-                }else{
-                    $(this).parent().find('.qtyminus').removeClass('disabled');
-                     $('input[name='+fieldName+']').val(parseFloat(newValue)).trigger('change');
                 }
+                else if(newValue ==3)
+                {
+                    $(this).siblings('.qtyminus').removeClass('disabled');
+                }
+
+
+                
+                 $('input[name='+fieldName+']').val(newValue > 4 ? 4 : newValue).trigger('change');
+                
             } else {
+                  
                 // Otherwise put a 0 there
-                //$('input[name='+fieldName+']').val(0).trigger('change');
+                $('input[name='+fieldName+']').val(0).trigger('change');
             }
         });
         // This button will decrement the value till 0
@@ -274,22 +392,41 @@
             // Stop acting like a button
             e.preventDefault();
             // Get the field name
-            fieldName = $(this).attr('field');
+            fieldName = $(this).closest('.d-inline').find('.temperature_input').attr('name');
+            //alert(fieldName)
+            $('.calculation_type').val('recalculation');
             // Get its current value
-            var currentVal = parseFloat($('input[name='+fieldName+']').val());
-            var intialVal = parseFloat($('input[name='+fieldName+']').data('value'));
-            // If it isn't undefinor its greater than 0
+ 
+            var currentVal =  parseInt($('input[name='+fieldName+']').val());
+            // If it isn't undefined or its greater than 0
             if (!isNaN(currentVal) && currentVal > 0) {
                 // Decrement one
-                var newValue = currentVal - 1;
-                if(newValue < intialVal){
-                    //$('input[name='+fieldName+']').val(1);
-                    $(this).parent().find('.qtyplus').removeClass('disabled');
+
+                var newValue = currentVal +1;
+            
+
+                if(newValue ==4)
+                {
+                   
                     $(this).addClass('disabled');
-                }else{
-                    $(this).parent().find('.qtyplus').removeClass('disabled');
-                    $('input[name='+fieldName+']').val(newValue).trigger('change');
                 }
+                else if(newValue ==2)
+                {
+                    $(this).siblings('.qtyplus').removeClass('disabled');
+                }
+
+
+                //  if(newValue ==4)
+                // {
+                   
+                //     $(this).addClass('disabled');
+                // }
+                // else if(newValue ==2)
+                // {
+                //     $(this).siblings('.qtyminus').removeClass('disabled');
+                // }
+
+                $('input[name='+fieldName+']').val(newValue < 1 ? 1 : newValue).trigger('change');
             } else {
                 // Otherwise put a 0 there
                 $('input[name='+fieldName+']').val(0).trigger('change');
@@ -312,10 +449,7 @@
         function submitForm(){
             //event.preventDefault();
 
-
-         
             var form = $('#calculation-form');
-
 
             var data = form.serialize();
             // console.log(`Form Submited`,data);
@@ -327,10 +461,16 @@
               $('.drive_temperature_outlet_holder').html('');
                         $('.cold_water_outlet_holder').html('');
                         $('.recooling_temperature_outlet_holder').html('');
+                        $('.drive_temp_connected').html('');
+                            $('.chilled_temp_connected').html('');
+                             $('.no_chiller_connected').html('');
 
             axios.post('{{ url('calculate-data') }}', data)
                 .then(function (response) {
-
+                    //alert(response.data.length)
+                   // alert(response.data.no_record)
+                        var n_asht =  $('.dtu_up').val();
+                            var n_aslt =    $('.cwt_output_up').val();
                     if(response.status === 200 && response.data){
                     
                         var tableHtml = '';
@@ -339,8 +479,9 @@
                             if(data.no_record =='false')
                             {
                                  tableHtml += "<tr>\
-                                <td scope='row'>No chiller found. </td>  </tr>";              
-                            
+                                <td scope='row'>No chiller found. </td>  </tr>";   
+                               var no_data =  'n_AsHt = '+n_asht+' and n_AsLt = '+n_aslt+', This connection is impossible.';           
+                            $('.no_chiller_connected').html(no_data);
                             }
                             else
                             {
@@ -349,10 +490,74 @@
                                 <td>"+data.cooling_capacity+"  </td>\
                                 <td>"+data.driving_heat+"  </td>\
                             </tr>";
+                          //  alert(data.driving_temp_outlet)
                             $('.drive_temperature_outlet_holder').html(data.driving_temp_outlet+" <span>&#8451;</span>");
                         $('.cold_water_outlet_holder').html(data.cold_water_temp_outlet + " <span>&#8451;</span>");
                         $('.recooling_temperature_outlet_holder').html(data.recooling_temp_outlet+" <span>&#8451;</span>");
+
+                        if($('.calculation_type').val()=='recalculation')
+                        {
+                            //alert( Object.keys(response.data).length); cwt_output_up
+                           
+                            var number_count = Object.keys(response.data).length;
+
+                            if(n_asht !='1' || n_aslt !='1' )
+                            {
+                            //     var drive_html   =   '('+number_count+' modules at drive circuit are serial connected)';
+                            //     var chilled_html = '('+number_count+' modules at chilled water circuit are serial connected)';
+                            // }
+                            // else
+                            // {
+                                if(n_asht =='1')
+                                {
+                                    var module_input = 'module';
+                                    var is_input = 'is';
+
+                                }else
+                                {
+                                    var module_input = 'modules';
+                                    var is_input = 'are';
+
+
+                                    var drive_html = '('+n_asht +' '+ module_input + ' at drive circuit '+is_input+' connected in series.)';
+                                     // var chilled_html = '('+n_aslt+' '+n_aslt_input +' at chilled water circuit '+n_aslt_is_input+' serial connected)';
+                                }
+
+                                if(n_aslt =='1')
+                                {
+                                    var n_aslt_input = 'module';
+                                    var n_aslt_is_input = 'is';
+
+                                }else
+                                {
+                                    var n_aslt_input = 'modules';
+                                    var n_aslt_is_input = 'are';
+
+                                    // var drive_html = '('+n_asht +' '+ module_input + ' at drive circuit '+is_input+' serial connected)';
+                                     var chilled_html = '('+n_aslt+' '+n_aslt_input +' at chilled water circuit '+n_aslt_is_input+' connected in series.)';
+                                }
+
+                                // if(number_count == 1)
+                                // {
+                                // var drive_html = '('+n_asht +' '+ module_input +' at drive circuit '+is_input+' serial connected)';
+                                // var chilled_html = '('+n_aslt+' '+module_input +' module at chilled water circuit '+is_input+' serial connected)';
+                                // }
+                                // else 
+                                // {
+                                    
+                               // }
+
+                            }
+                            
+                            $('.drive_temp_connected').html(drive_html);
+                            $('.chilled_temp_connected').html(chilled_html);
+                        }
+                         
+
                          }
+
+
+
                         });
                         
 

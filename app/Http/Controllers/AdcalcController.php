@@ -369,10 +369,10 @@ class AdcalcController extends Controller
     function calculateCoolingCapacity($ht_in, $lt_in, $chiller_type)
     {
         // $ht_in = ,$lt_in
-       
-        //'SELECT id,a,b,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt,power(abs(ht-'.$ht_in.'),2) + power(abs(lt-'.$lt_in.'),2)*10 as dist FROM `calculations` order by dist limit 0,8'
-   //     echo 'SELECT id,a,b,abs(ht-'.$ht_in.') as htdist, abs (lt-'.$lt_in.') as ltdist,ht,lt,(b*LN(25)+a) as Qlt FROM `calculations` where type_data ="'.$chiller_type.'" AND    ht in (select * from  (select distinct ht FROM calculations order by abs(ht-'.$ht_in.') LIMIT 0,2) as ht1 ) and lt in (select * from ( select distinct lt FROM calculations order by abs(lt-'.$lt_in.')LIMIT 0,2)as lt1) order by ht, lt';
-
+ //       echo $ht_in."__________". $lt_in."__________".$chiller_type;
+ //       echo "<br/>";
+ //   echo 'SELECT id,a,b,abs(ht-' . $ht_in . ') as htdist, abs (lt-' . $lt_in . ') as ltdist,ht,lt,(b*LN(25)+a) as Qlt FROM `calculations` where type_data ="' . $chiller_type . '" AND    ht in (select * from  (select distinct ht FROM calculations order by abs(ht-' . $ht_in . ') LIMIT 0,2) as ht1 ) and lt in (select * from ( select distinct lt FROM calculations order by abs(lt-' . $lt_in . ')LIMIT 0,2)as lt1) order by ht, lt';
+ // echo "<br/>"; echo "<br/>"; echo "<br/>";
         $res = DB::select('SELECT id,a,b,abs(ht-' . $ht_in . ') as htdist, abs (lt-' . $lt_in . ') as ltdist,ht,lt,(b*LN(25)+a) as Qlt FROM `calculations` where type_data ="' . $chiller_type . '" AND    ht in (select * from  (select distinct ht FROM calculations order by abs(ht-' . $ht_in . ') LIMIT 0,2) as ht1 ) and lt in (select * from ( select distinct lt FROM calculations order by abs(lt-' . $lt_in . ')LIMIT 0,2)as lt1) order by ht, lt');
         $temp = array();
 
@@ -635,11 +635,17 @@ class AdcalcController extends Controller
         $mod_types_id = $request->adsorption_chiller;
         $chiller_type = $request->chiller_type;
 
-        $calculation_type = 'calculation'; //re
-        $n_AsHt_input = 3;
-        $n_AsLt_input = 2;
+
+        $calculation_type = $request->calculation_type; //'calculation'; //re
+        $n_AsHt_input =  $request->dtu_up; //3;
+        $n_AsLt_input =  $request->cwt_output_up; //2;
         //'eCoo10'=>'1',array('eCoo10'=>'1');  //array('eCoo20'=>'1');  //
         $chillerarray = array('eCoo10' => '1', 'eCoo20' => '1', 'eCoo30' => '1', 'eCoo10X' => '2', 'eCoo20X' => '2', 'eCoo30X' => '2', 'eCoo40X' => '2');
+
+
+        // $chillerarray = array( 'eCoo20' => '1',  'eCoo20X' => '2',  'eCoo40X' => '2');
+      //$chillerarray = array( 'eCoo30X' => '2');
+
 
 
         $i = 0;
@@ -661,6 +667,7 @@ class AdcalcController extends Controller
 
 
             if ($calculation_type == 'calculation') {
+
                 $adka_input['Tn_HtIn'] = $ht_in;
                 $adka_input['Tn_MtIn'] = $mt_in;
                 $adka_input['Tn_LtIn'] = $lt_in;
@@ -672,6 +679,7 @@ class AdcalcController extends Controller
                 $adka_input['n_ApHt'] = $temp_constant->n_ApHt;
                 $adka_input['n_ApLt'] = $temp_constant->n_ApLt;
                 $adka_input['cal_constants_id'] = $temp_constant->cal_constants_id;
+                $adka_input['calculation_type'] = $calculation_type;
 
                 $output = $this->calculateADKA($adka_input);
 
@@ -684,16 +692,34 @@ class AdcalcController extends Controller
                 $cal_out[$i]['cold_water_temp_outlet'] = number_format($output['Tn_LtOut'], 1, '.', '');
                 $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 1, '.', '');
                 $i++;
-            } else {   
-                //echo  $key; echo "<br/>";
+
+            } 
+            else
+             {   
+                
                 $total_modules = $temp_constant->total_module;
+          
+         
                 $n_ApHt_calculated = round($total_modules / $n_AsHt_input); //number of modules/n_AsHt ; 
 
-                // echo "<br/>";
+               
+           
                 $n_ApLt_calculated = round($total_modules / $n_AsLt_input); //number of modules/n_AsHt ; 
-                //  echo "<br/>";
+              
 
                 if ((($n_AsHt_input * $n_ApHt_calculated) == $total_modules) && (($n_AsLt_input * $n_ApLt_calculated) == $total_modules)) {
+                      //   echo "<br/>";echo "<br/>";
+                      // echo  "************************________________".$key; echo "<br/>";
+                    // echo 'total modules_______' . $total_modules;
+                    // echo "<br />";
+                    // echo 'non_rounded_n_ApHt_calculated___'.$dd = $total_modules / $n_AsHt_input;
+
+                    // echo "<br/>"; echo "<br />"; echo 'n_ApHt_calculated_____'. $n_ApHt_calculated;
+                    // echo "<br/>";
+                    // echo 'non_rounded_n_ApLt_calculated___'.$ww = $total_modules / $n_AsLt_input;
+                    // echo "<br/>"; echo "<br/>";    echo  'n_ApLt_calculated________'. $n_ApLt_calculated;
+                    // echo "<br/>"; 
+
                     $adka_input['Tn_HtIn'] = $ht_in;
                     $adka_input['Tn_MtIn'] = $mt_in;
                     $adka_input['Tn_LtIn'] = $lt_in;
@@ -705,19 +731,23 @@ class AdcalcController extends Controller
                     $adka_input['n_ApHt'] = $n_ApHt_calculated;
                     $adka_input['n_ApLt'] = $n_ApLt_calculated;
                     $adka_input['cal_constants_id'] = $temp_constant->cal_constants_id;
-
+                     $adka_input['calculation_type'] = $calculation_type;
 
                     //print_r($adka_input);die;
                     $output = $this->calculateADKA($adka_input);
 
+                    // echo "calculateADKA";
+                    // echo "<br/>";
+                 //   echo "<pre>";   print_r($output);
+                    // die;
 
                     $cal_out[$i]['product_name'] = $key;
-                    $cal_out[$i]['cooling_capacity'] = number_format($output['Qth_Lt'], 1, '.', '') . " kW";  // $output['Qth_Lt'];
-                    $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 1, '.', '') . " kW";
+                    $cal_out[$i]['cooling_capacity'] = number_format($output['Qth_Lt'], 2, '.', '') . " kW";  // $output['Qth_Lt'];
+                    $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 2, '.', '') . " kW";
 
-                    $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 1, '.', '');
-                    $cal_out[$i]['cold_water_temp_outlet'] = number_format($output['Tn_LtOut'], 1, '.', '');
-                    $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 1, '.', '');
+                    $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 2, '.', '');
+                    $cal_out[$i]['cold_water_temp_outlet'] = floor($output['Tn_LtOut'] * 10) / 10; //number_format($output['Tn_LtOut'], 1, '.', '');
+                    $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 2, '.', '');
                     $i++;
 
                 } else {
@@ -732,17 +762,17 @@ class AdcalcController extends Controller
         if (empty($cal_out)) {
             $cal_out[0]['no_record'] = 'false';
         }
-    //echo "<pre>";print_r($cal_out);
-// // die;
+
+//         // echo 'last_final';
+//         echo "<br/>";
+// echo "<pre>";print_r($cal_out);
+// die;
 
         return response()->json($cal_out);
 
     }
 
-    /** 
-     * Calculation adka ppt 2 Calculation of an ADKA
-     */
-    function calculateADKA($adka_input)
+    function calculateADKA_old($adka_input)
     {
 
         DB::table('adka_calculations')->truncate();
@@ -787,39 +817,234 @@ class AdcalcController extends Controller
 
       //  print_r($adka_data);
             $ht_array = $this->calculateSerialHTConnection($adka_data);
-     //  $Qth_Lt1 = $ht_array['Qth_LtAd'];
+             ///$Qth_Lt1 = $ht_array['Qth_LtAd'];
+      // die;
 
-      
        // print_r($ht_array);
        // die;
             $lt_array = $this->calculateSerialLTConnection($adka_data_lt);
 // die;
 
             $adka_final = $this->finalAdkaCalculation($n_ApHt, $n_AsHt, $n_ApLt);
+// echo "ADKAAAA____________";
+            // echo "<pre>";print_r($adka_final);
 
         } else {
             $adka_final['error'] = 'error';
         }
 
+        return $adka_final;
+    }
+
+     /** 
+     * Calculation adka ppt 2 Calculation of an ADKA
+     */
+    function calculateADKA($adka_input)
+    {
+        
+        DB::table('adka_calculations')->truncate();
+
+        $Mod_Ad = $adka_input['Mod_Ad'];
+        $Mod_ad_id = $adka_input['Mod_ad_id'];
+        $Tn_HtIn = $adka_input['Tn_HtIn'];
+        $Tn_MtIn = $adka_input['Tn_MtIn'];
+        $Tn_LtIn = $adka_input['Tn_LtIn'];
+        $n_AsHt = $adka_input['n_AsHt'];
+        $n_AsLt = $adka_input['n_AsLt'];
+        $n_ApHt = $adka_input['n_ApHt'];
+        $n_ApLt = $adka_input['n_ApLt'];
+        $calculation_type = $adka_input['calculation_type'];
+        $cal_constants_id = $adka_input['cal_constants_id'];
+
+        if (($n_AsHt * $n_ApHt) == ($n_AsLt * $n_ApLt)) {
+        // echo 'correct';
+
+            $data['tn_htIn'] = $Tn_HtIn;
+            $data['tn_mtIn'] = $Tn_MtIn;      // if user not provided the company , can later change
+            $data['tn_ltIn'] = $Tn_LtIn;
+            $data['cal_constants_id'] = $cal_constants_id;
+
+            $result = AdkaCalculation::create($data)->id;
+            $adka_calculations_id = DB::getPdo()->lastInsertId();
+
+
+            $adka_data['adka_calculations_id'] = $adka_calculations_id;
+            $adka_data['Mod_Ad'] = $Mod_Ad;
+            $adka_data['Tn_HtIn'] = $Tn_HtIn;
+            $adka_data['n_AsHt'] = $n_AsHt;
+            $adka_data['n_ApHt'] = $n_ApHt;
+            $adka_data['Mod_ad_id'] = $Mod_ad_id;
+              $adka_data['Mod_ad_id'] = $Mod_ad_id;
+
+
+        // $adka_data_lt['adka_calculations_id'] = $adka_calculations_id;
+            $adka_data_lt['Mod_Ad'] = $Mod_Ad;
+            $adka_data_lt['Tn_LtIn'] = $Tn_LtIn;
+            $adka_data_lt['n_AsLt'] = $n_AsLt;
+            $adka_data_lt['n_ApLt'] = $n_ApLt;
+            $adka_data_lt['Mod_ad_id'] = $Mod_ad_id;
+
+             $adka_input['calculation_type'] = $calculation_type;
+   
+      
+ 
+       // print_r($ht_array);
+            for($i=0; $i<=400;)
+            { 
+                // echo "<pre>";
+                // echo 'loop runs in_________'.$i;
+
+                //  echo "<br/>"; echo "<br/>"; echo "<br/>";
+ 
+                if($i==0)
+                {
+                    $ht_array = $this->calculateSerialHTConnection($adka_data);
+
+                }
+                else
+                {
+
+                    
+
+                    $ht_array = $this->calculateSerialHTConnectionupdate($adka_data);
+                    
+                }
+           // $ht_array = $this->calculateSerialHTConnection($adka_data);
+
+          $sumQlt1 = $this->getSumUpCoolingCapacity();
+          // $sumQlt1 = $this->getFirstRecord();
+
+
+
+
+         
+            $resultht = $this->getFirstRecord();
+          
+           // $sumQlt1 = $resultht['qth_lt'] ;
+            $previous_htin  = $resultht['tn_htIn'] ;
+            $previous_htout  = $resultht['tn_htout'] ;
+            $previous_ltin  = $resultht['tn_ltIn'] ;
+            $previous_ltout  = $resultht['tn_ltout'] ;
+
+
+           // echo $sumQlt1."______sumQlt1"; echo "<br/>";
+           // die;
+            $lt_array = $this->calculateSerialLTConnection($adka_data_lt);
+           //  $lt_array = $this->calculateSerialLTConnection_old($adka_data_lt);
+
+
+             $sumQlt2 = $this->getSumUpCoolingCapacity();
+         
+            $resultlt = $this->getFirstRecord();
+
+           // echo "<br/>";
+           // $sumQlt2 = $resultlt['qth_lt'] ;
+            $previous_htin2  = $resultlt['tn_htIn'] ;
+            $previous_htout2  = $resultlt['tn_htout'] ;
+            $previous_ltin2  = $resultlt['tn_ltIn'] ;
+            $previous_ltout2  = $resultlt['tn_ltout'] ;
+//             echo $sumQlt2."__________sumQlt2"; echo "<br/>";
+//              // die; 
+//             echo "<br/>";echo "<br/>";echo "<br/>";
+//             echo "______sumQlt1___".$sumQlt1."__________sumQlt2_____".$sumQlt2;
+// echo "<br/>";echo "<br/>";echo "<br/>";
+        
+
+             if($sumQlt1 == $sumQlt2)
+            {
+               
+                // echo 'enter______________*******************' ;
+                // echo "<br/>";echo "<br/>";echo "<br/>";
+
+                // if( $previous_htin  ==  $previous_htout2 &&  $previous_ltout == $previous_ltin2 )
+                // {
+                //     $adka_final = $this->finalAdkaCalculation($n_ApHt, $n_AsHt, $n_ApLt);  
+                // break;
+                // }
+                // else 
+                //     {
+                //         $i++;
+                //             }
+                   $adka_final = $this->finalAdkaCalculation($n_ApHt, $n_AsHt, $n_ApLt);  
+                 break;
+            }
+            else
+            {
+                $i++;
+           
+            }  
+
+            }
+       // die;
+           
+           
+// echo "ADKAAAA____________";
+            // echo "<pre>";print_r($adka_final);
+
+        } else {
+            $adka_final['error'] = 'error';
+        }
 
         return $adka_final;
     }
+
+   
+
+    function getFirstRecord()
+    {
+      $adka_info = DB::table('adka_calculations')->first();  
+        //$adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id', 'desc')->first(); 
+
+       // echo "<pre>";print_r($adka_info);die;
+   $adka_info = json_decode(json_encode($adka_info), true);
+       return  $adka_info;
+      
+    }
+      function getLastRecord()
+    {
+    // $adka_info = DB::table('adka_calculations')->first();  
+    $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id', 'desc')->first(); 
+
+      //  echo "<pre>";print_r($adka_info);die;
+        $adka_info = json_decode(json_encode($adka_info), true);
+       return  $adka_info;
+      
+    }
+
+
+    function getSumUpCoolingCapacity()
+    {
+         $adka_info = DB::table('adka_calculations')->sum('adka_calculations.qth_lt');
+        //$adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id', 'desc')->first(); 
+
+    //    echo "<pre>";print_r($adka_info);die;
+         $adka_info = json_decode(json_encode($adka_info), true);
+       return  $adka_info;
+    }
+
+
     /**
      * 2.1 calculation for serial connection of HT  $Mod_Ad,$Tn_HtIn,$n_AsHt,$n_ApHt
      */
     function calculateSerialHTConnection($ht_array)
     {
-            //echo "<pre>";
+        // echo "<br/>";
+        //  echo "calculateSerialHTConnection____________";
+        //  echo "<br/>";
+        //  echo "<br/>";
 
+         // delete 
         $adka_calculations_id = $ht_array['adka_calculations_id'];
         $Mod_Ad = $ht_array['Mod_Ad'];
         $Tn_HtIn = $ht_array['Tn_HtIn'];
         $n_AsHt = $ht_array['n_AsHt'];
-       // echo "<br/>";
+   
         $n_ApHt = $ht_array['n_ApHt'];
         $Mod_ad_id = $ht_array['Mod_ad_id'];
-       // print_r($ht_array);
-
+        // echo "n_AsHt___".$n_AsHt;
+        // echo "<br/>";
+        // echo "n_ApHt___".$n_ApHt;
+        // echo "<br/>";
         $i_Ad = 1;
         $i_Ap = 1;
         $i_As = 1;
@@ -828,80 +1053,99 @@ class AdcalcController extends Controller
 
 
         if ($i_Ap == 1) {
-                //echo "**********";    echo "<br/>";
+               // echo "**********";    echo "<br/>";
             $output = $this->addHtSerialCalculation($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'update');
         }
+
         for ($i_Ap = 1; $i_Ap <= $n_ApHt; ) {
-       // for($i_Ad = 1 ; $i_Ad<=$n_ApHt;){
-// echo  $i_Ad."_i_Ad";
-//  echo "<br/>" ;
-//  echo  $i_As."i_As";
-//   echo "<br/>" ;
+            // echo 'for';
+
+            // echo "<br/>" ;   echo "<br/>" ;
+            // echo  $i_Ap."____________i_Ap";
+            // echo "<br/>" ;   
+            // echo  $i_Ad."_i_Ad";
+            // echo "<br/>" ;
+            // echo  $i_As."i_As";
+            // echo "<br/>" ;
 
 
-
+            //$output = $this->addHtSerialCalculation($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'add');
 
             if ($i_As == $n_AsHt) {
-          // echo '*';
-
+          //       echo "<br/>" ;
+          // echo 'iff';
                 if ($i_Ap == $n_ApHt) {
-              //echo 'return ';die;
+             // echo "<br/>" ;
+             // echo 'return loop';
+             //  echo "<br/>" ;
                     return $output;
                 } else {
-
-
-                    $Tn_HtI = $output['Tht_in'];  
-                 
- // echo "______________"; echo "<br/>" ;echo "<br/>";
-                    $output = $this->addHtSerialCalculation($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'add');
-
-                    $i_Ap = $i_Ap + 1;
                     $i_As = 1;
                     $i_Ad = $i_Ad + 1;
+                     $i_Ap = $i_Ap + 1;
+                // echo "<br/>" ;
+                // echo "<br/>" ;
+
+                // echo "enter in this loop";
+                // echo "<br/>" ;
+                     //echo 'Tn_HtI' ;
+                  $Tn_HtI =  $Tn_HtIn; //$output['Tht_in'];  
+                 
+
+                    $output = $this->addHtSerialCalculation($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'add');
+
+                   
+                   
                 }
 
             } else { 
-            // echo "<br/>";
-            //  echo '%%%';
-            //  echo "<br/>";
 
+                
+   
+                $i_Ad = $i_Ad + 1;
+                $i_As = $i_As + 1;
+               // echo 'Tht_out' .  
 
-
-                $Tn_HtI = number_format($output['Tht_out'], 1, '.', ''); //$output['Tht_out'];
-               
- // echo "__rrrrrrrrrrrrrrrr"; echo "<br/>" ;echo "<br/>";
+                $Tn_HtI =  number_format($output['Tht_out'], 2, '.', ''); //
+              
+                // echo "__rrrrrrrrrrrrrrrr"; echo "<br/>" ;echo "<br/>";
                 $output = $this->addHtSerialCalculation($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'add');
         
            
-         // echo "<br/>";
-                $i_As = $i_As + 1;
-                $i_Ad = $i_Ad + 1;
+                // echo "<br/>";
+            
 
             }
 
         }
+        
 
     }
-
     function addHtSerialCalculation($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, $action)
     {
-        $adka_info = DB::table('adka_calculations')->where('adka_calculations_id', $adka_calculations_id)->first();
-
+        //$adka_info = DB::table('adka_calculations')->where('adka_calculations_id', $adka_calculations_id)->first();
+        $adka_info = DB::table('adka_calculations')->first();
         // echo "<pre>";print_r($adka_info);die;
         $Tn_LtIn = $adka_info->tn_ltIn;
         // echo "<br/>";
         $tn_mtIn = $adka_info->tn_mtIn;
         $cal_constants_id = $adka_info->cal_constants_id;
+        $adka_calculations_id = $adka_info->adka_calculations_id;
+
 
         $output = $this->calculateModuleValue($Mod_Ad, $Tn_HtI, $tn_mtIn, $Tn_LtIn, $Mod_ad_id);
-     
-     //   echo "<pre>";print_r($output);
+        // echo "<br/>"; echo "<br/>";
+        // echo "value ".$action." in database ;";
+        // echo "<br/>"; echo "<br/>";
+
+        // echo "addHtSerialCalculation";echo "<br/>";
+        // echo "<pre>";print_r($output);echo "<br/>";echo "<br/>";
         // die;
-     //  store value in database
+        //  store value in database
 
- // die;
+        // die;
 
-      //  $data['adka_calculations_id'] =  $adka_calculations_id ;
+        //  $data['adka_calculations_id'] =  $adka_calculations_id ;
 
         $data['tn_htIn'] = $output['Tht_in'];
         $data['tn_mtIn'] = $output['Tmt_in'];      // if user not provided the company , can later change
@@ -925,74 +1169,272 @@ class AdcalcController extends Controller
 
             $result = AdkaCalculation::create($data)->id;
             $adka_calculations_id = DB::getPdo()->lastInsertId();
+
+            
+          
         }
 
 
         return $output;
     }
 
+    /**
+     * 2.1 calculation for serial connection of HT  $Mod_Ad,$Tn_HtIn,$n_AsHt,$n_ApHt
+     */
+    function calculateSerialHTConnectionupdate($ht_array)
+    {
+
+//        AdkaCalculation::where('adka_calculations_id', '!=', 3)->delete();
+        $adka_calculations_id = $ht_array['adka_calculations_id'];
+//       echo "<pre>";print_r($ht_array);
+// die;
+      
+       // die;
+        // $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id')->offset($offset - 1)->limit(1)->first();
+                //echo "<pre>";print_r($adka_info);
+   
+
+        $Mod_Ad = $ht_array['Mod_Ad'];
+        $Tn_HtIn = $ht_array['Tn_HtIn'];
+        $n_AsHt = $ht_array['n_AsHt'];
+   
+        $n_ApHt = $ht_array['n_ApHt'];
+        $Mod_ad_id = $ht_array['Mod_ad_id'];
+        // echo "n_AsHt___".$n_AsHt;
+        // echo "<br/>";
+        // echo "n_ApHt___".$n_ApHt;
+        // echo "<br/>";
+        $i_Ad = 1;
+        $i_Ap = 1;
+        $i_As = 1;
+        $Tn_HtI = $Tn_HtIn;
+        $offset = $i_Ad;
+     //   $i= 3;
+  //  $offset = $i;
+
+        if ($i_Ap == 1) {
+               // echo "**********";    echo "<br/>";
+           /// $output = $this->addHtSerialCalculation($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'update');
+              $output = $this->addHtSerialCalculationupdate($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'update',$offset);
+        }
+
+        for ($i_Ap = 1; $i_Ap <= $n_ApHt; ) {
+            // echo 'for';
+            // $i = $i-1;
+
+            // echo "<br/>" ;   echo "<br/>" ;
+            // echo  $i_Ap."____________i_Ap";
+            // echo "<br/>" ;   
+            // echo  $i_Ad."_i_Ad";
+            // echo "<br/>" ;
+            // echo  $i_As."i_As";
+            // echo "<br/>" ;
+
+
+            //$output = $this->addHtSerialCalculation($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'add');
+
+            if ($i_As == $n_AsHt) {
+          //       echo "<br/>" ;
+          // echo 'iff';
+                if ($i_Ap == $n_ApHt) {
+             // echo "<br/>" ;
+             // echo 'return loop';
+             //  echo "<br/>" ;
+                    return $output;
+                } else {
+                    $i_As = 1;
+                    $i_Ad = $i_Ad + 1;
+                     $i_Ap = $i_Ap + 1;
+                // echo "<br/>" ;
+                // echo "<br/>" ;
+                    $offset = $i_Ad;
+                     //$offset = $i;
+                // echo "enter in this loop";
+                // echo "<br/>" ;
+                     //echo 'Tn_HtI' ;
+                  $Tn_HtI =  $Tn_HtIn; //$output['Tht_in'];  
+                 
+
+                      $output = $this->addHtSerialCalculationupdate($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, 'update',$offset);
+                   
+                   
+                }
+
+            } else { 
+
+                
+   
+                $i_Ad = $i_Ad + 1;
+                $i_As = $i_As + 1;
+               // echo 'Tht_out' .  
+                $offset = $i_Ad;
+                //$offset = $i;
+
+                $Tn_HtI =  number_format($output['Tht_out'], 2, '.', ''); //
+              
+                // echo "__rrrrrrrrrrrrrrrr"; echo "<br/>" ;echo "<br/>";
+               $output = $this->addHtSerialCalculationupdate($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id,  'update',$offset);
+           
+                // echo "<br/>";
+            
+
+            }
+
+        }
+        
+
+    }
+    
+
+    function addHtSerialCalculationupdate($adka_calculations_id, $Mod_Ad, $Tn_HtI, $Mod_ad_id, $action,$offset)
+    {
+        // echo "addHtSerialCalculationupdate___________offset____ht".$offset ;
+        //$adka_info = DB::table('adka_calculations')->where('adka_calculations_id', $adka_calculations_id)->first();
+       // echo 'off'.$offset;die;
+        // echo "<br/>"; echo 'adka_calculations_id'.$adka_calculations_id;
+         $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id')->offset($offset - 1)->limit(1)->first();
+       //echo "<pre>";print_r($adka_info);
+       // die;
+        // die;
+        $Tn_LtIn = $adka_info->tn_ltIn;
+        // echo "<br/>";
+        $tn_mtIn = $adka_info->tn_mtIn;
+        $cal_constants_id = $adka_info->cal_constants_id;
+         $adka_calculations_id = $adka_info->adka_calculations_id;
+
+
+        $output = $this->calculateModuleValue($Mod_Ad, $Tn_HtI, $tn_mtIn, $Tn_LtIn, $Mod_ad_id);
+        // echo "<br/>"; echo "<br/>";
+        // echo "value ".$action." in database ;";
+        // echo "<br/>"; echo "<br/>";
+
+        // echo "addHtSerialCalculation";echo "<br/>";
+        // echo "<pre>";print_r($output);echo "<br/>";echo "<br/>";
+        // die;
+        //  store value in database
+
+        // die;
+
+        //  $data['adka_calculations_id'] =  $adka_calculations_id ;
+
+        $data['tn_htIn'] = $output['Tht_in'];
+        $data['tn_mtIn'] = $output['Tmt_in'];      // if user not provided the company , can later change
+        $data['tn_ltIn'] = $output['Tlt_in'];
+        $data['cal_constants_id'] = $cal_constants_id;
+        $data['qth_lt'] = $output['Qth_LtAd'];
+        $data['qth_ht'] = $output['Qth_HtAd'];
+        $data['qth_mt'] = $output['Qth_MtAd'];
+        $data['cop_th'] = $output['COP'];
+        $data['tn_htout'] = $output['Tht_out'];
+        $data['tn_mtout'] = $output['Tmt_out'];
+        $data['tn_ltout'] = $output['Tlt_out'];
+        $data['vf_ht'] = $output['vht'];
+        $data['vf_mt'] = $output['vmt'];
+        $data['vf_lt'] = $output['vlt'];
+
+        if ($action == 'update') {
+           // echo 'update___________';
+            $ad_cal = AdkaCalculation::findOrFail($adka_calculations_id);
+            $ad_cal->update($data);
+        } else {
+
+            $result = AdkaCalculation::create($data)->id;
+            $adka_calculations_id = DB::getPdo()->lastInsertId();
+
+            
+          
+        }
+
+
+        return $output;
+    }
+
+    
+
 
     /**
      * 2.1 calculation for serial connection of LT  $Mod_Ad,$Tn_LtIn,$n_AsLt,$n_ApLt
      */
     function calculateSerialLTConnection($lt_array)
-    {
-           //die;
+    {  
+        // echo "<br/>";
+        // echo "<br/>";
+        //  echo "_______________________________________calculateSerialLTConnection";
+
+        //     echo "<br/>";
 
        // $adka_calculations_id = $lt_array['adka_calculations_id'];
         $Mod_Ad = $lt_array['Mod_Ad'];
         $Tn_LtIn = $lt_array['Tn_LtIn'];
         $n_AsLt = $lt_array['n_AsLt'];
+         // echo "<br/>";
         $n_ApLt = $lt_array['n_ApLt'];
         $Mod_ad_id = $lt_array['Mod_ad_id'];
+        // echo $n_AsLt."___n_AsLt";
 
+        // echo "<br/>";
+        // echo $n_ApLt."____n_ApLt";
+        // echo "<br/>";
        // print_r($lt_array);
-
-        $i_Ad = $n_AsLt * $n_ApLt;
+//echo "<br/>";
+      $i_Ad = $n_AsLt * $n_ApLt;
+  //   echo "<br/>";
+      // echo "<br/>";
         $i_Ap = 1;
         $i_As = 1;
-        $Tn_LtI = $Tn_LtIn;
+      $Tn_LtI = $Tn_LtIn;
+    // echo "<br/>";
         $action = 'update';
 
-        $offset = $i_Ad;
-
-        for ($i_Ap == 1; $i_Ap <= $n_ApLt; ) {
-
-
-            if ($i_Ap == 1) {
+     $offset = $i_Ad;
+        if ($i_Ap == 1) {
                 $output = $this->addLTSerialCalculation($Mod_Ad, $Tn_LtI, $Mod_ad_id, $action, $offset);
             }
 
+        for ($i_Ap == 1; $i_Ap <= $n_ApLt; ) {
+
+            // echo 'entre for loop';
+
+            // echo "<br/>";
+
 
             if ($i_As == $n_AsLt) {
-
+           // echo "<br/>";
+           //  echo 'first';
+           //  echo "<br/>";
 
                 if ($i_Ap == $n_ApLt) {
+                    //   echo "<br/>";
+                    // echo'return ';
                     return $output;
                 } else {
 
 
-                    $Tn_LtI = $output['Tlt_in'];
+                    $Tn_LtI =  $Tn_LtIn;//$output['Tlt_in'];
                     $action = 'update';
-
-                    $output = $this->addLTSerialCalculation($Mod_Ad, $Tn_LtI, $Mod_ad_id, $action, $offset);
-
                     $i_Ap = $i_Ap + 1;
                     $i_As = 1;
                     $i_Ad = $i_Ad - 1;
                     $offset = $i_Ad;
+                    $output = $this->addLTSerialCalculation($Mod_Ad, $Tn_LtI, $Mod_ad_id, $action, $offset);
+
+                   
                 }
 
             } else {
+  // echo "<br/>";
+  //                   echo'elssssssseeee ';
 
+                 $i_As = $i_As + 1;
+                $i_Ad = $i_Ad - 1;
                 $offset = $i_Ad;
 
 
-                $Tn_LtI = number_format($output['Tlt_out'], 1, '.', ''); //$output['Tht_out']; //$output['Tlt_out'];
-
+//echo "<pre>";print_r($output);
+                $Tn_LtI =  number_format($output['Tlt_out'], 2, '.', '');  //
+ 
                 $output = $this->addLTSerialCalculation($Mod_Ad, $Tn_LtI, $Mod_ad_id, $action, $offset);
-                $i_As = $i_As + 1;
-                $i_Ad = $i_Ad + 1;
+               
             }
 
         }
@@ -1002,17 +1444,33 @@ class AdcalcController extends Controller
        // $result = AdkaCalculation::update($data)->id;
         //$adka_calculations_id = DB::getPdo()->lastInsertId();
     }
+
+
     function addLTSerialCalculation($Mod_Ad, $Tn_LtI, $Mod_ad_id, $action, $offset)
     {
-        //SELECT * FROM adka_calculations ORDER BY adka_calculations_id DESC LIMIT 1
-        $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id')->offset($offset - 1)->limit(1)->first();  // toSql(); 
-      //  $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id', 'asc')->get();
-       // dd($adka_info);
-       // die;
-
-        //echo "<pre>";print_r($adka_info);die;
-        $Tn_HtIn = $adka_info->tn_htIn;
+         // echo "<br/>";    echo "<br/>";    echo "<br/>";
+         // echo 'offset_________________'.$offset;
         // echo "<br/>";
+        //SELECT * FROM adka_calculations ORDER BY adka_calculations_id DESC LIMIT 1
+           // echo  $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id')->offset($offset - 1)->limit(1)->toSql(); 
+           // echo "<br/>";  echo "<br/>";  echo "<br/>";
+         // echo  DB::table('adka_calculations')->orderBy('adka_calculations_id')->offset($offset - 1)->limit(1)->toSql();  
+        $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id')->offset($offset - 1)->limit(1)->first();  // 
+       
+      //  $adka_info = DB::table('adka_calculations')->orderBy('adka_calculations_id', 'asc')->get();
+      //  print_r($adka_info);
+   
+
+        // echo "<pre>";print_r($adka_info);
+        //   echo "<br/>";  echo "<br/>";  echo "<br/>";
+
+
+
+        $Tn_HtIn = $adka_info->tn_htIn;
+        //  echo "<br/>";  echo "<br/>";  echo "<br/>";
+        // echo'input__________'. $Tn_LtI;
+        //  echo "<br/>";
+        // echo "value   ".$action."  in the database"; echo "<br/>";  echo "<br/>"; 
 
      //   echo "<pre>";print_r($adka_info);die;
         $tn_mtIn = $adka_info->tn_mtIn;
@@ -1020,10 +1478,13 @@ class AdcalcController extends Controller
 
         $output = $this->calculateModuleValue($Mod_Ad, $Tn_HtIn, $tn_mtIn, $Tn_LtI, $Mod_ad_id);
      
-        // echo "<pre>";print_r($output);
-        // // store value in database
+      // echo "<pre>";print_r($output);
+        // store value in database
 
-        // // die;
+        // die;
+
+
+
         $adka_calculations_id = $adka_info->adka_calculations_id;
 
         $data['adka_calculations_id'] = $adka_calculations_id;
@@ -1052,13 +1513,16 @@ class AdcalcController extends Controller
             $adka_calculations_id = DB::getPdo()->lastInsertId();
         }
 
-
         return $output;
+
     }
 
     function finalAdkaCalculation($n_ApHt, $n_AsHt, $n_ApLt)
     {
         $i_Ad = 1;
+        $medium  = 'Water';
+         $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
+        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
         $adka_count = DB::table('adka_calculations')->count();
 
         $n_AdMax = $adka_count;
@@ -1072,9 +1536,12 @@ class AdcalcController extends Controller
         // }
         $result = DB::table('adka_calculations')->get();
         $result = json_decode(json_encode($result), true);
-     //    echo count($result);
-    //  echo "<pre>";   print_r($result);
-     //    die;
+     //    echo "<br/>"; echo "<br/>"; 
+    // echo"finalAdkaCalculation___" .count($result);
+    //     echo "<pre>";   print_r($result);
+        // die;
+
+       // echo "****************************************";
         $Qth_Lt = 0;
         $Qth_Ht = 0;
         $Qth_Mt = 0;
@@ -1102,7 +1569,8 @@ class AdcalcController extends Controller
             if ($i == 0) {
                 $Tn_HtIn = $value['tn_htIn'];
                 $Tn_MtIn = $value['tn_mtIn'];
-                $Tn_LtOut = $value['tn_ltout'];
+               $Tn_LtOut = $value['tn_ltout'];
+          
 
 
 
@@ -1122,10 +1590,14 @@ class AdcalcController extends Controller
         }
 
 
-       // $Qth_Mt =  $Qth_Mt*-1000;  //=B21*-1000
+    // $Qth_Mt =  $Qth_Mt*-1000;  //=B21*-1000
 
-        $adka_final['Qth_Lt'] = $Qth_Lt;
-        $adka_final['Qth_Ht'] = $Qth_Ht;
+    // $Qth_Ht =106.291;
+    // $Qth_Mt = 158.266;
+    // $Qth_Lt = 51.975;
+
+        $adka_final['Qth_Lt'] =  $Qth_Lt;
+        $adka_final['Qth_Ht'] =  $Qth_Ht;
         $adka_final['Qth_Mt'] = $Qth_Mt;
         $adka_final['COPth'] = $COPth;
 
@@ -1138,22 +1610,38 @@ class AdcalcController extends Controller
 
 
 
+       
+
+       
+  //        echo 'Tn_HtIn_______'.$Tn_HtIn;
+  //         echo "<br/>";
+  //       echo 'Tn_MtIn_______'.$Tn_MtIn;        echo "<br/>";
+        
+  //         echo 'Tn_LtIn_______'.$Tn_LtIn;
+  //         echo "<br/>";
+
+        
+  //        echo 'Qth_Ht_______'.$Qth_Ht ;
+  //        echo "<br/>";
+  //        echo 'Qth_Mt_______'.$Qth_Mt ;
+  //                 echo "<br/>";
+  // echo "Qth_Lt______".$Qth_Lt;
+  //         echo "<br/>";
+      
+
+        $Tn_HtOut =   $this->calculateOutletTempHt($Qth_Ht,$Tn_HtIn,$Vf_Ht,$medium,$rho,$cp);
 
 
-
-
-        $Tn_MtOut = $this->calculateOutletTempMt($Qth_Mt, $Tn_MtIn, $Vf_Mt, $medium = 'water');
-       // $Tn_HtOut =  $Tn_HtOut;   // $this->calculateOutletTempHt($Qth_Ht,$Tn_HtIn,$Vf_Ht,$medium ='water');
-       // $Tn_LtOut =   $Tn_LtOut; // $this->calculateOutletTempLt($Qth_Lt,$Tn_LtIn,$Vf_Lt,$medium ='water');
+        $Tn_MtOut =   $this->calculateOutletTempMt($Qth_Mt, $Tn_MtIn, $Vf_Mt, $medium ,$rho,$cp);
+     
+        $Tn_LtOut =   $this->calculateOutletTempLt($Qth_Lt,$Tn_LtIn,$Vf_Lt,$medium,$rho,$cp);
 
         $adka_final['Tn_MtOut'] = $Tn_MtOut;
         $adka_final['Tn_HtOut'] = $Tn_HtOut;
         $adka_final['Tn_LtOut'] = $Tn_LtOut;
 
 
-      // echo "<pre>";   print_r($adka_final);
-      // die;
-
+      
 
         return $adka_final;
 
@@ -1162,11 +1650,18 @@ class AdcalcController extends Controller
     /**
      * function to calculate outlet temperatures 
      */
-    function calculateOutletTempMt($Qth, $Tn_In, $Vf, $medium)
+    function calculateOutletTempMt($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
     {
         $Qth = $Qth * -1000;
-        $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
-        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
+
+
+
+         $data_set = $this->calculateCoolPropVariable($Tn_In, $medium);
+         // echo "<pre>";
+         // print_r($data_set);
+         // die;
+         $rho = $data_set['rho'];
+         $cp = $data_set['cp'];
 
         $Tn_Out = $Tn_In - (($Qth) / ($Vf * $rho * $cp));
 
@@ -1174,11 +1669,17 @@ class AdcalcController extends Controller
 
     }
 
-    function calculateOutletTempHT($Qth, $Tn_In, $Vf, $medium)
+    function calculateOutletTempHT($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
     {
         $Qth = $Qth * 1000;
-        $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
-        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
+       // $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
+        //$cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
+
+
+         $data_set = $this->calculateCoolPropVariable($Tn_In, $medium);
+        
+         $rho = $data_set['rho'];
+         $cp = $data_set['cp'];
 
         $Tn_HtOut = $Tn_In - (($Qth) / ($Vf * $rho * $cp));
 
@@ -1186,12 +1687,16 @@ class AdcalcController extends Controller
 
     }
 
-    function calculateOutletTempLT($Qth, $Tn_In, $Vf, $medium)
+    function calculateOutletTempLT($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
     {
         $Qth = $Qth * 1000;
-        $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
-        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
+      //  $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
+     //   $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
 
+        $data_set = $this->calculateCoolPropVariable($Tn_In, $medium);
+        
+         $rho = $data_set['rho'];
+         $cp = $data_set['cp'];
         $Tn_LtOut = $Tn_In - (($Qth) / ($Vf * $rho * $cp));
 
         return $Tn_LtOut;
@@ -1200,11 +1705,19 @@ class AdcalcController extends Controller
 
     function calculateModuleValue($Mod_Ad, $Tn_HtI, $Tn_MtIn, $Tn_LtIn, $Mod_ad_id)
     {   
-        //Contants 
-        $_p = 0.993991038; //0.999;
 
-        $_cp = 1.160973538; //4.18
- //4.18;
+        // echo "<br/>";   echo "<br/>";   echo "<br/>"; 
+        // echo 'calculateModuleValue________';
+        //   echo "<br/>"; 
+
+
+// echo  'Tn_HtI_____________'.$Tn_HtI."*******************". $Tn_LtIn;
+        //Contants 
+        $rho = 0.993991038; //0.999;
+
+        $cp = 1.160973538; //4.18
+        $medium = 'Water';
+
 
         $volume_flow = $this->getMachineVolumeFlow($Mod_ad_id);
         $vlt = $volume_flow->vf_lt;
@@ -1229,33 +1742,55 @@ class AdcalcController extends Controller
         //recooling capacity
         $Qmt = $this->calculateRecoolingCapacity($Qlt, $Qht, $COP);
 
-        $Tltout = $this->calculateOutletTempLt($Qlt, $Tn_LtIn, $vlt, $medium = 'water');//$this->calculateOutletTemperatureLT($Tn_LtIn,$Qlt,$_p,$_cp,$vlt);
+        $Tltout = $this->calculateOutletTempLt($Qlt, $Tn_LtIn, $vlt, $medium ,$rho,$cp);
+        //$this->calculateOutletTemperatureLT($Tn_LtIn,$Qlt,$rho,$cp,$vlt);  // 
+ 
+        $Thtout =  $this->calculateOutletTempHt($Qht, $Tn_HtI, $vht, $medium ,$rho,$cp);
+        //$this->calculateOutletTemperatureHT($Tn_HtI,$Qht,$rho,$cp,$vht);  //
 
-        $Thtout = $this->calculateOutletTempHt($Qht, $Tn_HtI, $vht, $medium = 'water');  ///$this->calculateOutletTemperatureHT($Tn_HtI,$Qht,$_p,$_cp,$vht);
-        $Tmtout = $this->calculateOutletTemperatureMT($Tn_MtIn, $Qmt, $_p, $_cp, $vmt);
 
+        $Tmtout =  $this->calculateOutletTempMt($Qmt, $Tn_MtIn, $vmt, $medium,$rho,$cp);// $this->calculateOutletTemperatureMT($Tn_MtIn, $Qmt, $rho, $cp, $vmt);
+// echo $COP;echo "<br/>";
+// echo (float)$COP;
+// echo "<br/>";
+// echo "<br/>";
+// echo number_format((float)$Qlt, 4, '.', '');
+// echo "<br/>";
+// die;
         $output['a'] = $final_ab_value['a'];
         $output['b'] = $final_ab_value['b'];
-        $output['Qth_LtAd'] = number_format((float)$Qlt, 4, '.', '');
+        $output['Qth_LtAd'] =   number_format($Qlt, 2, '.', '');
 
         $output['aa'] = $final_abc_value['aa'];
         $output['bb'] = $final_abc_value['bb'];
         $output['c'] = $final_abc_value['c'];
-        $output['COP'] = number_format((float)$COP, 4, '.', '');
+        $output['COP'] = number_format($COP, 2, '.', '');
 
-        $output['Qth_HtAd'] = number_format((float)$Qht, 4, '.', '');
+        $output['Qth_HtAd'] = number_format($Qht, 2, '.', '');
 
-        $output['Qth_MtAd'] = number_format((float)$Qmt, 4, '.', '');
+        $output['Qth_MtAd'] =  number_format($Qmt, 2, '.', '');
+
         $output['Tlt_in'] = $Tn_LtIn;
-        $output['Tlt_out'] = $Tltout;   ///number_format((float)$Tltout, 4, '.', ''); 
+        $output['Tlt_out'] =   number_format($Tltout,2, '.', ''); //$Tltout;
         $output['Tht_in'] = $Tn_HtI;
-        $output['Tht_out'] = $Thtout; ////number_format((float)$Thtout, 4, '.', ''); 
+        $output['Tht_out'] = number_format($Thtout,2, '.', '');  //$Thtout;
         $output['Tmt_in'] = $Tn_MtIn;
-        $output['Tmt_out'] = number_format((float)$Tmtout, 4, '.', '');
+        $output['Tmt_out'] = number_format((float)$Tmtout, 2, '.', '');//$Tmtout;
         $output['vlt'] = $vlt;
         $output['vht'] = $vht;
         $output['vmt'] = $vmt;
 
+        // $test['Qth_LtAd'] =   number_format($Qlt, 2, '.', '');
+        // $test['Tlt_in'] = $Tn_LtIn;
+        // $test['Tlt_out'] =number_format((float)$Tltout, 2, '.', ''); // $Tltout; 
+        // $test['Tht_in'] = $Tn_HtI;
+        // $test['Tht_out'] = number_format((float)$Thtout, 2, '.', ''); // $Thtout;
+        // $test['Tmt_in'] = $Tn_MtIn;
+        // $test['Tmt_out'] =  number_format((float)$Tmtout, 2, '.', ''); //$Tmtout;
+
+        // echo "<pre>"; print_r($output);
+        // echo "<br/>"; echo "<br/>";
+        // // // die;
 
         return $output;
     }
@@ -1294,6 +1829,7 @@ class AdcalcController extends Controller
     function calculateHeatCapacity($COP, $Qlt)
     {
         $Qht = $Qlt / $COP;
+      //  $Qht = $Qlt * $COP;
         return $Qht;
     }
 
@@ -1545,6 +2081,32 @@ class AdcalcController extends Controller
         $Tn_RkOut = $Tn_RkIn - (0.7 * ($Tn_RkIn - $Tn_WbAirIn));
         $dT_RkMin = $Tn_RkOut - $Tn_AirIn;
         return $dT_RkMin;
+    }
+
+    function calculateCoolPropVariable($input_temp, $medium)
+    {
+        $url='http://18.208.180.99/demo/index.php'; // Specify your url
+        $data= array('q'=>$input_temp,'medium'=>$medium); // Add parameters in key value
+        $ch = curl_init(); // Initialize cURL
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+        $res = curl_exec($ch);
+
+
+        curl_close($ch);
+      
+
+        $result = explode(',', $res);
+       $data=  array('rho'=> $result['0'],'cp'=>$result['1'] );
+     // echo "<pre>";
+     //    print_r($data);
+        return  $data;
+
+
     }
 
 
