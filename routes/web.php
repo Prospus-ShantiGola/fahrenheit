@@ -180,10 +180,10 @@ return false;
 });
 
 
-Route::get('/calculate', 'CalculateDataController@showCalculatePage');
+Route::get('/calculate', 'CalculateDataController@calculate');
 
-Route::post('/calculate-data', 'AdcalcController@calculateData');
-Route::get('/recooling-products-data/{type}', 'CalculateDataController@getRecoolingProducts');
+Route::post('/calculate-data', 'CalculateDataController@calculateData');
+// Route::get('/recooling-products-data', 'CalculateDataController@getRecoolingProducts');
 Route::get('/get-chiller-adsorbent-types', 'CalculateDataController@getChillerAdsorbentTypes');
 Route::get('/get-chiller-products/{type_id}', 'CalculateDataController@getChillerProducts');
 Route::get('/get-chiller-oprating-modes', 'CalculateDataController@getChillerOpratingModes');
@@ -192,3 +192,6 @@ Route::get('/get-chiller-integrated-cwu/{productId}', 'CalculateDataController@g
 Route::get('/get-chiller-product-intercons', 'CalculateDataController@getChillerProductIntercons');
 
 Route::get('/get-all-chiller-products', 'CalculateDataController@getAllChillerProducts');
+
+
+Route::post('/getNomValue', 'CalculateDataController@getNomValue');
