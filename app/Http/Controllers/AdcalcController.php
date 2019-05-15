@@ -1,4 +1,14 @@
 <?php
+// $Id: AdcalcController.php
+
+/**
+ * @file:
+ * Controller file to maintain the function used in saving tile information on Adcalc Page as well as function used in calculating ADKA.
+ * author : Prospus
+ * contact : support@prospus.com
+ * copyright reserved with Prospus Consulting Pvt. Ltd.
+ */
+
 
 namespace App\Http\Controllers;
 
@@ -29,7 +39,7 @@ use App\Models\Fahrenheit;
 
 class AdcalcController extends Controller
 {
-
+    
     public function index()
     {
         $user = array();
@@ -38,6 +48,10 @@ class AdcalcController extends Controller
         }
         return view('pages.adcalc')->with(compact('user'));
     }
+
+    /*
+     * Function to store compression chiller tile's value of adcalc page in database 
+     */
     public function storeCompressionChiller(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -46,14 +60,15 @@ class AdcalcController extends Controller
             'compressor' => 'required',
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails()){
             return response()->json(['errors' => $validator->errors()->keys()]);
         }
         return response()->json(['success' => 'Record is successfully added']);
-
     }
 
-
+    /*
+     * Function to store general information tile's value of adcalc page in database 
+     */
     public function storeGeneralInformation(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -67,6 +82,10 @@ class AdcalcController extends Controller
         return response()->json(['success' => 'Record is successfully added']);
 
     }
+
+    /*
+     * Function to store economic information tile's value of adcalc page in database 
+     */
     public function storeEconomicInformation(Request $request)
     {
         $validator = \Validator::make($request->all(), []);
@@ -76,9 +95,12 @@ class AdcalcController extends Controller
         }
         return response()->json(['success' => 'Record is successfully added']);
 
-    }
-    public function storeHeatSourceInformation(Request $request)
-    {
+    } 
+
+    /*
+     * Function to store heat source information tile's value of adcalc page in database 
+     */
+    public function storeHeatSourceInformation(Request $request){
         $validator = \Validator::make($request->all(), [
             'heat_type' => 'required',
             'drive_temp' => 'sometimes|required',
@@ -91,6 +113,10 @@ class AdcalcController extends Controller
         return response()->json(['success' => 'Record is successfully added']);
 
     }
+
+    /*
+     * Function to store heating profile information tile's value of adcalc page in database 
+     */
     public function storeHeatingProfileInformation(Request $request)
     {
         $validator = \Validator::make($request->all(), []);
@@ -101,6 +127,10 @@ class AdcalcController extends Controller
         return response()->json(['success' => 'Record is successfully added']);
 
     }
+
+    /*
+     * Function to store cooling profile information tile's value of adcalc page in database 
+     */
     public function storeCoolingProfileInformation(Request $request)
     {
         $validator = \Validator::make($request->all(), []);
@@ -113,7 +143,7 @@ class AdcalcController extends Controller
     }
 
     /**
-     * Store project information.
+     * Function to store project information collectively in database 
      *
      */
     public function storeProjectInformation(Request $request)
@@ -121,32 +151,40 @@ class AdcalcController extends Controller
         DB::enableQueryLog();
         $generalData = $request->input('generalData');
         $economicData = $request->input('economicData');
-        $chillers = $request->input('chiller') ?? array(); //coolingloadprofile
-        $chillerDatas = $request->input('chillerData') ?? array(); //compressionchiller
-        $heatSourceDatas = $request->input('heatSourceData') ?? array(); //heat source
-        $heatingprofiles = $request->input('heatingprofile') ?? array(); //heatingprofile
-        $chillerInfos = $request->input('chillerInfo') ?? array(); //fahrenheit chiller
-        $recoolings = $request->input('recooling') ?? array(); //fahrenheit recooling
-        $option = $request->input('option') ?? array(); //heatingprofile
-
-
+        $chillers = $request->input('chiller') ?? array(); 
+        $chillerDatas = $request->input('chillerData') ?? array(); 
+        $heatSourceDatas = $request->input('heatSourceData') ?? array(); 
+        $heatingprofiles = $request->input('heatingprofile') ?? array();
+        $chillerInfos = $request->input('chillerInfo') ?? array();
+        $recoolings = $request->input('recooling') ?? array(); 
+        $option = $request->input('option') ?? array(); 
 
         if (empty($generalData)) {
             return response()->json(['errors' => 'Please provide the mandatory field', 'key' => 'general']);
-        } else {
-            $email_address = $generalData['personal_email_address'];  //user can be single but project can be multiple so assign multiple project user personal email (as user)
+
+        }
+        else
+        {
+            //user can be single but project can be multiple so assign multiple project user personal email (as user)
+            $email_address = $generalData['personal_email_address']; 
             if ($user = Auth::user()) {
                 $user = Auth::user()->id;
-            } else {
-                //dd($email_address);
+            }
+            else
+            {
+              
                 $user_exist = User::where('email', $email_address)->get();
                 //check if user exist if not logged in then assign all the entries by their id
                 if ($user_exist->count() > 0) {
                     $user = $user_exist[0]->id;
-                    //dd($insertedId);
-                } else {
-                    $data['name'] = $generalData['editor'] ?? "new user";            //if user not provided the name, can later change
-                    $data['company'] = $generalData['company'] ?? "fahrenheit";      // if user not provided the company , can later change
+     
+                } 
+                else 
+                {
+                    //if user not provided the name, can later change
+                    $data['name'] = $generalData['editor'] ?? "new user";     
+                    // if user not provided the company , can later change       
+                    $data['company'] = $generalData['company'] ?? "fahrenheit";      
                     $data['phoneno'] = $generalData['phone_number'] ?? "0000000000";
                     $data['email'] = $generalData['personal_email_address'];
                     $data['password'] = bcrypt(rand(1, 15));
@@ -167,24 +205,21 @@ class AdcalcController extends Controller
 
                 if (count($chillers) > 0) {
 
-                        //economicData
-
+                    //economicData
                     $economicData['unique_row_id'] = $insertedId;
                     $option[0]['unique_row_id'] = $insertedId;
-                        //dd($economicData);
+               
                     $economicId = EconomicData::create($economicData);
                     $economicId = DB::getPdo()->lastInsertId();
                     $optionId = Option::create($option[0]);
-                        //dd(DB::getQueryLog());
-                       // dd($optionId);
-
-                        //dd($id);
+                   
                     $input = array();
                     $finalSubmitArr = array();
                     $economicData['eeg_apportion_costs[]'] = $economicData['eeg_apportion_costs[]'] ?? array();
                     $economicData['planning[]'] = $economicData['planning[]'] ?? array();
                     $economicData['eeg_chp_apportion_costs[]'] = $economicData['eeg_chp_apportion_costs[]'] ?? array();
                     $economicData['planning_maintenence[]'] = $economicData['planning_maintenence[]'] ?? array();
+                    
                     foreach ($economicData['eeg_apportion_costs[]'] as $key => $eeg_apportion_cost) {
                         $input['economic_data_id'] = $economicId;
                         $input['tab_name'] = 'general';
@@ -214,7 +249,7 @@ class AdcalcController extends Controller
                         $input['additional_field_discount'] = $economicData['planning_discount[]'][$key]['value'];
                         $finalSubmitArr[] = $input;
                     }
-                        //dd($finalSubmitArr);
+                     
                     foreach ($economicData['planning_maintenence[]'] as $key => $planning_maintenence) {
                         $input['economic_data_id'] = $economicId;
                         $input['tab_name'] = 'maintenence';
@@ -224,15 +259,15 @@ class AdcalcController extends Controller
                         $input['additional_field_discount'] = null;
                         $finalSubmitArr[] = $input;
                     }
-                        //dd($finalSubmitArr);
+                   
                     foreach ($finalSubmitArr as $record) {
                         $result = EconomicDataAdditionalInfo::create($record);
-                          //  dd(DB::getQueryLog());
+                          
                     }
 
                     //coolingloadprofile
                     foreach ($chillers as $chiller) {
-                        # iterate over the list of chiller.
+                        // iterate over the list of chiller.
                         $chiller['unique_row_id'] = $insertedId;
                         $result = CoolingLoadProfile::create($chiller);
                         //dd($result);
@@ -240,15 +275,15 @@ class AdcalcController extends Controller
 
                     //heatingprofiles
                     foreach ($heatingprofiles as $heatingprofile) {
-                        # iterate over the list of heatingprofiles.
+                        // iterate over the list of heatingprofiles.
                         $heatingprofile['unique_row_id'] = $insertedId;
                         $result = HeatingLoadProfile::create($heatingprofile);
-                        //dd($result);
+                       
                     }
 
                     //compressionchiller
                     foreach ($chillerDatas as $chillerData) {
-                        # iterate over the list of chillerDatas.
+                        //iterate over the list of chillerDatas.
                         $chillerData['unique_row_id'] = $insertedId;
                         $result = CompressionChiller::create($chillerData);
                         //dd($result);
@@ -256,7 +291,7 @@ class AdcalcController extends Controller
 
                     //heatSourceDatas
                     foreach ($heatSourceDatas as $heatSourceData) {
-                        # iterate over the list of heatSourceDatas.
+                        //iterate over the list of heatSourceDatas.
                         $heatSourceData['unique_row_id'] = $insertedId;
                         $result = HeatSource::create($heatSourceData);
                         //dd($result);
@@ -339,18 +374,7 @@ class AdcalcController extends Controller
 
         $myfile = file_get_contents(public_path() . '/location_data/berlin.txt');
         $resArr = json_decode($myfile, true);
-        //print_r($resArr);
-        // $sum =0;
-        // foreach($resArr['payload']['meteonorm']['target'] as $result_arry)
-        // {
-
-        //   foreach($result_arry as $val)
-        //   {
-        //    $sum+=$val;
-        //   }
-        // }
-        ///echo $sum;
-       // print_r(array_column($resArr['payload']['meteonorm']['target'], 'ta'));
+     
         $result = array_sum(array_column($resArr['payload']['meteonorm']['target'], 'ta')); // output 5
         return $result;
     }
@@ -368,11 +392,7 @@ class AdcalcController extends Controller
      */
     function calculateCoolingCapacity($ht_in, $lt_in, $chiller_type)
     {
-        // $ht_in = ,$lt_in
- //       echo $ht_in."__________". $lt_in."__________".$chiller_type;
- //       echo "<br/>";
- //   echo 'SELECT id,a,b,abs(ht-' . $ht_in . ') as htdist, abs (lt-' . $lt_in . ') as ltdist,ht,lt,(b*LN(25)+a) as Qlt FROM `calculations` where type_data ="' . $chiller_type . '" AND    ht in (select * from  (select distinct ht FROM calculations order by abs(ht-' . $ht_in . ') LIMIT 0,2) as ht1 ) and lt in (select * from ( select distinct lt FROM calculations order by abs(lt-' . $lt_in . ')LIMIT 0,2)as lt1) order by ht, lt';
- // echo "<br/>"; echo "<br/>"; echo "<br/>";
+
         $res = DB::select('SELECT id,a,b,abs(ht-' . $ht_in . ') as htdist, abs (lt-' . $lt_in . ') as ltdist,ht,lt,(b*LN(25)+a) as Qlt FROM `calculations` where type_data ="' . $chiller_type . '" AND    ht in (select * from  (select distinct ht FROM calculations order by abs(ht-' . $ht_in . ') LIMIT 0,2) as ht1 ) and lt in (select * from ( select distinct lt FROM calculations order by abs(lt-' . $lt_in . ')LIMIT 0,2)as lt1) order by ht, lt');
         $temp = array();
 
@@ -624,6 +644,26 @@ class AdcalcController extends Controller
         return $volume_flow;
     }
 
+    /**
+     *
+     */
+    public function calculate()
+    {
+        $cal_constants = DB::table('cal_constants')->get();
+
+        if ($cal_constants->isNotEmpty()) {
+            $cal_constants = $cal_constants->map(function ($item) {
+                $item->id = $item->cal_constants_id;
+                return $item;
+            });
+        }
+
+        $circuit_sep  = $this->getRecoolingProducts($type ='circuit_separation');
+        $re_cooler  = $this->getRecoolingProducts($type ='re_cooler');
+
+        return view('pages.calculate', compact( 'cal_constants','circuit_sep','re_cooler'));
+    }
+
 
     public function calculateData(Request $request)
     {
@@ -633,19 +673,28 @@ class AdcalcController extends Controller
         $mt_in = $request->outdoor_temperature;
 
         $mod_types_id = $request->adsorption_chiller;
-        $chiller_type = $request->chiller_type;
+        $chiller_type = trim($request->chiller_type);
+        $qth_nomst = trim($request->qth_nomst);
+        $dt_nomst = trim($request->dt_nomst);
+        $qth_nomrk = trim($request->qth_nomrk);
+        $dt_nomrk = trim($request->dt_nomrk);
 
 
         $calculation_type = $request->calculation_type; //'calculation'; //re
         $n_AsHt_input =  $request->dtu_up; //3;
         $n_AsLt_input =  $request->cwt_output_up; //2;
-        //'eCoo10'=>'1',array('eCoo10'=>'1');  //array('eCoo20'=>'1');  //
+
+        $tn_airln = $request->tn_airln;
+      
+      if($tn_airln)
+      {
+        $chillerarray = array($chiller_type => $mod_types_id);
+
+      }
+      else
+      {
         $chillerarray = array('eCoo10' => '1', 'eCoo20' => '1', 'eCoo30' => '1', 'eCoo10X' => '2', 'eCoo20X' => '2', 'eCoo30X' => '2', 'eCoo40X' => '2');
-
-
-        // $chillerarray = array( 'eCoo20' => '1',  'eCoo20X' => '2',  'eCoo40X' => '2');
-      //$chillerarray = array( 'eCoo30X' => '2');
-
+      }
 
 
         $i = 0;
@@ -683,14 +732,53 @@ class AdcalcController extends Controller
 
                 $output = $this->calculateADKA($adka_input);
 
+            //  echo "<pre>";   print_r($output);
+               //   die;
 
-                $cal_out[$i]['product_name'] = $key;
-                $cal_out[$i]['cooling_capacity'] = number_format($output['Qth_Lt'], 1, '.', '') . " kW";  // $output['Qth_Lt'];
-                $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 1, '.', '') . " kW";
+                  if($tn_airln)
 
-                $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 1, '.', '');
-                $cal_out[$i]['cold_water_temp_outlet'] = number_format($output['Tn_LtOut'], 1, '.', '');
-                $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 1, '.', '');
+                  {
+                    $Qth_Mt = $output['Qth_Mt'];
+                    $dt_st = $this->calculateDtSt($Qth_Mt, $dt_nomst,$qth_nomst);
+              
+                     $dT_rk = $this->calculateDtRk($Qth_Mt, $dt_nomrk,$qth_nomrk);
+               
+                   $tn_mtIn = $output['Tn_MtIn'] +  $dt_st + $dT_rk ;
+                     
+
+
+                    $adka_input['Tn_MtIn'] = $tn_mtIn;
+
+           
+                    $output = $this->calculateADKA($adka_input);
+                  }
+
+                    $cal_out[$i]['product_name'] = $key;
+                    $cal_out[$i]['cooling_capacity'] = number_format($output['Qth_Lt'], 2, '.', '') . " kW";  // $output['Qth_Lt'];
+                    $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 2, '.', '') . " kW";
+
+                    $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 2, '.', '');
+                    $cal_out[$i]['cold_water_temp_outlet'] = floor($output['Tn_LtOut'] * 10) / 10; //number_format($output['Tn_LtOut'], 1, '.', '');
+                
+                     $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 2, '.', '');
+                
+                    $cal_out[$i]['COPth'] = number_format($output['COPth'], 3, '.', '');
+                    $cal_out[$i]['Tn_MtIn'] = number_format($tn_mtIn, 2, '.', '');
+
+
+
+                   //   $cal_out[$i]['product_name'] = $key;
+                   //  $cal_out[$i]['cooling_capacity'] = number_format($Qlt, 2, '.', '') . " kW";  // $output['Qth_Lt'];
+                   //  $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 2, '.', '') . " kW";
+
+                   //  $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 2, '.', '');
+                   //  $cal_out[$i]['cold_water_temp_outlet'] = floor($output['Tn_LtOut'] * 10) / 10;
+                   //  $cal_out[$i]['recooling_temp_outlet_old'] = number_format($output['Tn_MtOut'], 2, '.', '');
+                   //  $cal_out[$i]['recooling_temp_outlet'] = number_format($Tn_MtOut, 2, '.', '');
+                   // $cal_out[$i]['COPth'] = number_format($COP, 3, '.', '');
+                   //  $cal_out[$i]['Tn_MtIn'] = number_format($tn_mtIn, 2, '.', '');
+
+
                 $i++;
 
             } 
@@ -708,17 +796,7 @@ class AdcalcController extends Controller
               
 
                 if ((($n_AsHt_input * $n_ApHt_calculated) == $total_modules) && (($n_AsLt_input * $n_ApLt_calculated) == $total_modules)) {
-                      //   echo "<br/>";echo "<br/>";
-                      // echo  "************************________________".$key; echo "<br/>";
-                    // echo 'total modules_______' . $total_modules;
-                    // echo "<br />";
-                    // echo 'non_rounded_n_ApHt_calculated___'.$dd = $total_modules / $n_AsHt_input;
-
-                    // echo "<br/>"; echo "<br />"; echo 'n_ApHt_calculated_____'. $n_ApHt_calculated;
-                    // echo "<br/>";
-                    // echo 'non_rounded_n_ApLt_calculated___'.$ww = $total_modules / $n_AsLt_input;
-                    // echo "<br/>"; echo "<br/>";    echo  'n_ApLt_calculated________'. $n_ApLt_calculated;
-                    // echo "<br/>"; 
+                 
 
                     $adka_input['Tn_HtIn'] = $ht_in;
                     $adka_input['Tn_MtIn'] = $mt_in;
@@ -738,8 +816,25 @@ class AdcalcController extends Controller
 
                     // echo "calculateADKA";
                     // echo "<br/>";
-                 //   echo "<pre>";   print_r($output);
+                //   echo "<pre>";   print_r($output);
                     // die;
+
+                 if($tn_airln)
+                  {
+                    $Qth_Mt = $output['Qth_Mt'];
+                    $dt_st = $this->calculateDtSt($Qth_Mt, $dt_nomst,$qth_nomst);
+              
+                     $dT_rk = $this->calculateDtRk($Qth_Mt, $dt_nomrk,$qth_nomrk);
+               
+                   $tn_mtIn = $output['Tn_MtIn'] +  $dt_st + $dT_rk ;
+                     
+
+
+                    $adka_input['Tn_MtIn'] = $tn_mtIn;
+
+           
+                    $output = $this->calculateADKA($adka_input);
+                  }
 
                     $cal_out[$i]['product_name'] = $key;
                     $cal_out[$i]['cooling_capacity'] = number_format($output['Qth_Lt'], 2, '.', '') . " kW";  // $output['Qth_Lt'];
@@ -747,7 +842,12 @@ class AdcalcController extends Controller
 
                     $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 2, '.', '');
                     $cal_out[$i]['cold_water_temp_outlet'] = floor($output['Tn_LtOut'] * 10) / 10; //number_format($output['Tn_LtOut'], 1, '.', '');
-                    $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 2, '.', '');
+                
+                     $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 2, '.', '');
+                
+                    $cal_out[$i]['COPth'] = number_format($output['COPth'], 3, '.', '');
+                    $cal_out[$i]['Tn_MtIn'] = number_format($tn_mtIn, 2, '.', '');
+
                     $i++;
 
                 } else {
@@ -764,7 +864,7 @@ class AdcalcController extends Controller
         }
 
 //         // echo 'last_final';
-//         echo "<br/>";
+// //         echo "<br/>";
 // echo "<pre>";print_r($cal_out);
 // die;
 
@@ -772,70 +872,7 @@ class AdcalcController extends Controller
 
     }
 
-    function calculateADKA_old($adka_input)
-    {
-
-        DB::table('adka_calculations')->truncate();
-
-        $Mod_Ad = $adka_input['Mod_Ad'];
-        $Mod_ad_id = $adka_input['Mod_ad_id'];
-        $Tn_HtIn = $adka_input['Tn_HtIn'];
-        $Tn_MtIn = $adka_input['Tn_MtIn'];
-        $Tn_LtIn = $adka_input['Tn_LtIn'];
-        $n_AsHt = $adka_input['n_AsHt'];
-        $n_AsLt = $adka_input['n_AsLt'];
-        $n_ApHt = $adka_input['n_ApHt'];
-        $n_ApLt = $adka_input['n_ApLt'];
-        $cal_constants_id = $adka_input['cal_constants_id'];
-
-        if (($n_AsHt * $n_ApHt) == ($n_AsLt * $n_ApLt)) {
-        // echo 'correct';
-
-            $data['tn_htIn'] = $Tn_HtIn;
-            $data['tn_mtIn'] = $Tn_MtIn;      // if user not provided the company , can later change
-            $data['tn_ltIn'] = $Tn_LtIn;
-            $data['cal_constants_id'] = $cal_constants_id;
-
-            $result = AdkaCalculation::create($data)->id;
-            $adka_calculations_id = DB::getPdo()->lastInsertId();
-
-
-            $adka_data['adka_calculations_id'] = $adka_calculations_id;
-            $adka_data['Mod_Ad'] = $Mod_Ad;
-            $adka_data['Tn_HtIn'] = $Tn_HtIn;
-            $adka_data['n_AsHt'] = $n_AsHt;
-            $adka_data['n_ApHt'] = $n_ApHt;
-            $adka_data['Mod_ad_id'] = $Mod_ad_id;
-
-
-        // $adka_data_lt['adka_calculations_id'] = $adka_calculations_id;
-            $adka_data_lt['Mod_Ad'] = $Mod_Ad;
-            $adka_data_lt['Tn_LtIn'] = $Tn_LtIn;
-            $adka_data_lt['n_AsLt'] = $n_AsLt;
-            $adka_data_lt['n_ApLt'] = $n_ApLt;
-            $adka_data_lt['Mod_ad_id'] = $Mod_ad_id;
-
-      //  print_r($adka_data);
-            $ht_array = $this->calculateSerialHTConnection($adka_data);
-             ///$Qth_Lt1 = $ht_array['Qth_LtAd'];
-      // die;
-
-       // print_r($ht_array);
-       // die;
-            $lt_array = $this->calculateSerialLTConnection($adka_data_lt);
-// die;
-
-            $adka_final = $this->finalAdkaCalculation($n_ApHt, $n_AsHt, $n_ApLt);
-// echo "ADKAAAA____________";
-            // echo "<pre>";print_r($adka_final);
-
-        } else {
-            $adka_final['error'] = 'error';
-        }
-
-        return $adka_final;
-    }
-
+   
      /** 
      * Calculation adka ppt 2 Calculation of an ADKA
      */
@@ -874,7 +911,7 @@ class AdcalcController extends Controller
             $adka_data['n_AsHt'] = $n_AsHt;
             $adka_data['n_ApHt'] = $n_ApHt;
             $adka_data['Mod_ad_id'] = $Mod_ad_id;
-              $adka_data['Mod_ad_id'] = $Mod_ad_id;
+           
 
 
         // $adka_data_lt['adka_calculations_id'] = $adka_calculations_id;
@@ -1521,8 +1558,7 @@ class AdcalcController extends Controller
     {
         $i_Ad = 1;
         $medium  = 'Water';
-         $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
-        $cp = 1.160973538;  //f(Tn_In, medium) (CoolProp)
+       
         $adka_count = DB::table('adka_calculations')->count();
 
         $n_AdMax = $adka_count;
@@ -1629,16 +1665,18 @@ class AdcalcController extends Controller
   //         echo "<br/>";
       
 
-        $Tn_HtOut =   $this->calculateOutletTempHt($Qth_Ht,$Tn_HtIn,$Vf_Ht,$medium,$rho,$cp);
+        $Tn_HtOut =   $this->calculateOutletTempHt($Qth_Ht,$Tn_HtIn,$Vf_Ht,$medium);
 
 
-        $Tn_MtOut =   $this->calculateOutletTempMt($Qth_Mt, $Tn_MtIn, $Vf_Mt, $medium ,$rho,$cp);
+        $Tn_MtOut =   $this->calculateOutletTempMt($Qth_Mt, $Tn_MtIn, $Vf_Mt, $medium);
      
-        $Tn_LtOut =   $this->calculateOutletTempLt($Qth_Lt,$Tn_LtIn,$Vf_Lt,$medium,$rho,$cp);
+        $Tn_LtOut =   $this->calculateOutletTempLt($Qth_Lt,$Tn_LtIn,$Vf_Lt,$medium);
 
         $adka_final['Tn_MtOut'] = $Tn_MtOut;
         $adka_final['Tn_HtOut'] = $Tn_HtOut;
         $adka_final['Tn_LtOut'] = $Tn_LtOut;
+        $adka_final['Tn_MtIn'] = $Tn_MtIn;
+
 
 
       
@@ -1650,7 +1688,7 @@ class AdcalcController extends Controller
     /**
      * function to calculate outlet temperatures 
      */
-    function calculateOutletTempMt($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
+    function calculateOutletTempMt($Qth, $Tn_In, $Vf, $medium)
     {
         $Qth = $Qth * -1000;
 
@@ -1669,7 +1707,7 @@ class AdcalcController extends Controller
 
     }
 
-    function calculateOutletTempHT($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
+    function calculateOutletTempHT($Qth, $Tn_In, $Vf, $medium)
     {
         $Qth = $Qth * 1000;
        // $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
@@ -1687,7 +1725,7 @@ class AdcalcController extends Controller
 
     }
 
-    function calculateOutletTempLT($Qth, $Tn_In, $Vf, $medium,$rho,$cp)
+    function calculateOutletTempLT($Qth, $Tn_In, $Vf, $medium)
     {
         $Qth = $Qth * 1000;
       //  $rho = 0.993991038; // f(Tn_In, medium) (Coolprop)
@@ -1706,16 +1744,7 @@ class AdcalcController extends Controller
     function calculateModuleValue($Mod_Ad, $Tn_HtI, $Tn_MtIn, $Tn_LtIn, $Mod_ad_id)
     {   
 
-        // echo "<br/>";   echo "<br/>";   echo "<br/>"; 
-        // echo 'calculateModuleValue________';
-        //   echo "<br/>"; 
-
-
-// echo  'Tn_HtI_____________'.$Tn_HtI."*******************". $Tn_LtIn;
-        //Contants 
-        $rho = 0.993991038; //0.999;
-
-        $cp = 1.160973538; //4.18
+   
         $medium = 'Water';
 
 
@@ -1742,14 +1771,14 @@ class AdcalcController extends Controller
         //recooling capacity
         $Qmt = $this->calculateRecoolingCapacity($Qlt, $Qht, $COP);
 
-        $Tltout = $this->calculateOutletTempLt($Qlt, $Tn_LtIn, $vlt, $medium ,$rho,$cp);
+        $Tltout = $this->calculateOutletTempLt($Qlt, $Tn_LtIn, $vlt, $medium);
         //$this->calculateOutletTemperatureLT($Tn_LtIn,$Qlt,$rho,$cp,$vlt);  // 
  
-        $Thtout =  $this->calculateOutletTempHt($Qht, $Tn_HtI, $vht, $medium ,$rho,$cp);
+        $Thtout =  $this->calculateOutletTempHt($Qht, $Tn_HtI, $vht, $medium );
         //$this->calculateOutletTemperatureHT($Tn_HtI,$Qht,$rho,$cp,$vht);  //
 
 
-        $Tmtout =  $this->calculateOutletTempMt($Qmt, $Tn_MtIn, $vmt, $medium,$rho,$cp);// $this->calculateOutletTemperatureMT($Tn_MtIn, $Qmt, $rho, $cp, $vmt);
+        $Tmtout =  $this->calculateOutletTempMt($Qmt, $Tn_MtIn, $vmt, $medium);// $this->calculateOutletTemperatureMT($Tn_MtIn, $Qmt, $rho, $cp, $vmt);
 // echo $COP;echo "<br/>";
 // echo (float)$COP;
 // echo "<br/>";
@@ -2108,7 +2137,52 @@ class AdcalcController extends Controller
 
 
     }
+    function calculateDtSt($Qth_Mt, $dT_NomSt,$Qth_NomSt)
+    {
+        $dt_st = ($Qth_Mt*$dT_NomSt)/$Qth_NomSt;
+        return $dt_st;
+    }
+    function calculateDtRk($Qth_Mt, $dT_NomRk,$Qth_NomRk)
+    {
+        $dt_rk = ($Qth_Mt*$dT_NomRk)/$Qth_NomRk;
+        return $dt_rk;
+    }
 
+    public function getRecoolingProducts($type)
+    {
+        $recooling_products = DB::table('recooling_products')->where('recooling_component_type', $type)->get();
+
+        if ($recooling_products->isNotEmpty()) {
+            $recooling_products = $recooling_products->map(function ($item) {
+                $item->id = $item->recooling_products_id;
+                return $item;
+            });
+        }
+
+        return $recooling_products;
+    }
+
+
+    public function getNomValue(Request $request)
+    {
+       
+        $recooling_products_id =  $request->recooling_products_id;
+        $product_type =  $request->product_type;
+        $recooling_products = DB::table('recooling_products')->where('recooling_products_id', $recooling_products_id)->first();
+
+        if($product_type =='re_cooler')
+        {
+            $qth_value = $recooling_products->qth_nomrk;
+            $dt_value = $recooling_products->dt_nomrk;
+        }
+        else
+        {
+            $qth_value = $recooling_products->qth_nomst;
+            $dt_value = $recooling_products->dt_nomst;
+        }
+        return  $qth_value .'~'.$dt_value;
+        
+    }
 
 
 

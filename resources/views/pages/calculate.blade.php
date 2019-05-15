@@ -143,7 +143,7 @@
                                 </div>
                             </div>
                             
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="form-group col-sm-8">
                                     <label for="recooling_temperature_inlet">Re-cooling temperature inlet</label>
                                     <input  
@@ -159,6 +159,117 @@
                                 <div class="form-group col-sm-3 ml-lg-3">
                                     <label for="recooling_temperature_outlet">Re-cooling temperature outlet</label>
                                     <p class='pt-2 recooling_temperature_outlet_holder' style =" padding: 44px;">25.9 <span>&#8451;</span></p>
+                                </div>
+                            </div> --}}
+
+                              <div class="row">
+                                <div class="form-group col-sm-8">
+                                    <label for="recooling_temperature_inlet">Tn_Airln</label>
+                                    <input  
+                                        type="number" 
+                                        class="form-control" 
+                                        id="Outdoor_temperature" 
+                                        name="outdoor_temperature" 
+                                        required 
+                                        aria-describedby="textHelp" 
+                                        placeholder="Tn_MtIn"
+                                    />
+                                </div>
+                                <input type = 'hidden' name = 'tn_airln' value="1">
+                               
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <h4>AdKA</h4>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Type</label>
+                                                <select class="form-control" id="adsorption_chiller" name="adsorption_chiller"  onchange='return submitForm()' required >
+                                                    @if ($cal_constants->isNotEmpty())
+                                                        @foreach ($cal_constants as $cal_constant)
+                                                            <option value="{{$cal_constant->mod_types_id}}">
+                                                                {{ $cal_constant->chiller_type }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_AdKA</label>
+                                                <input class="form-control number_validation" type="text" name='n_adka' value="1"  pattern="[0-9]*"><span id="errmsg"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_AsHT</label>
+                                                <input class="form-control number_validation" type="text" name='n_asht' value="1"><span id="errmsg"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_AsLT</label>
+                                                <input class="form-control number_validation " type="text" name='n_aslt' value="1"><span id="errmsg"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h4>Circuit Separation</h4>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Type</label>
+                                               
+
+                                                <select class="form-control" id="circuit_separation" name="circuit_separation" data-type =  "circuit_separation" onchange='getNomValue(this);' >
+                                                    @if ($circuit_sep->isNotEmpty())
+                                                        @foreach ($circuit_sep as $circuit_separation)
+                                                            <option value="{{$circuit_separation->recooling_products_id}}">
+                                                                {{ $circuit_separation->product_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_ST</label>
+                                                <input class="form-control number_validation" type="text" name='n_st' value="1"><span id="errmsg"></span>
+                                            </div>
+                                            <div class="form-group qth_value">
+                                                <label for="exampleFormControlSelect1">Qth_NomSt</label>
+                                                <input class="form-control  " disabled type="text" name='qth_nomst' value="39">
+                                                <input class="form-control  "  type="hidden" name='qth_nomst' value="39">
+                                            </div>
+                                            <div class="form-group dt_value">
+                                                <label for="exampleFormControlSelect1">dt_NomSt</label>
+                                                <input class="form-control  " disabled type="text" name='dt_nomst' value="2">
+                                                <input class="form-control  "  type="hidden" name='dt_nomst' value="2">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h4>Re-Cooler</h4>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Type</label>
+                                                <select class="form-control" id="recooler_type" name="recooler_type"data-type =  "re_cooler" onchange='getNomValue(this);' >
+                                                    @if ($re_cooler->isNotEmpty())
+                                                        @foreach ($re_cooler as $re_cooler_type)
+                                                            <option value="{{$re_cooler_type->recooling_products_id}}">
+                                                                {{ $re_cooler_type->product_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">n_RK</label>
+                                                <input class="form-control number_validation" type="text" name='n_rk' value="1"><span id="errmsg"></span>
+                                            </div>
+                                            <div class="form-group qth_value">
+                                                <label for="exampleFormControlSelect1">Qth_NomRk</label>
+                                                <input class="form-control " disabled="" type="text" name='qth_nomrk' value="29">
+                                                  <input class="form-control " type="hidden" name='qth_nomrk' value="29">
+                                            </div>
+                                            <div class="form-group dt_value">
+                                                <label for="exampleFormControlSelect1">dt_NomRk</label>
+                                                <input class="form-control " disabled type="text" name='dt_nomrk' value="2">
+                                                <input class="form-control "  type="hidden" name='dt_nomrk' value="2">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div id="res" class="mb-2"></div>
@@ -183,7 +294,7 @@
                 <span class = "no_chiller_connected" style="color:red;">   </span>
             <div class="row mt-1">
 
-                <div class="form-group col-sm-8">
+               <!--  <div class="form-group col-sm-8">
                     <table class="table table-lightt result-table" >
                         <thead>
                             <tr>
@@ -196,7 +307,7 @@
                         </tbody>
                     </table>
                     
-                </div>  
+                </div>  --> 
             </div>
         </div>
     </div>
@@ -218,10 +329,8 @@
                 max: 90,
                 from: 55,
                 skin: "round",
-                //step: 0.1,
                 onFinish: function (data) {
-                    // $('.global_input').val('1');
-                    // $('.calculation_type').val('calculation');
+                    
                     submitForm();
                 },
             });
@@ -231,23 +340,21 @@
                 max: 20,
                 from: 12,
                 skin: "round",
-                //step: 0.1,
+             
                 onFinish: function (data) {
-                    // $('.global_input').val('1');
-                    // $('.calculation_type').val('calculation');
+                
                     submitForm();
                 },
             });
 
             $('#Outdoor_temperature').ionRangeSlider({
-                min: 23,
-                max: 35,
-                from: 22,
+                min: 17,
+                max: 40,
+                from: 17,
                 skin: "round",
-                //step :0.1,
+               
                 onFinish: function (data) {
-                    // $('.calculation_type').val('calculation');
-                    //  $('.global_input').val('1');
+             
                     submitForm();
                 },
             });
@@ -267,20 +374,7 @@
             if (!isNaN(currentVal)) {
                 // Decreament
                 var newValue = currentVal - 1;
-        
-                // if(newValue ==4)
-                // {
                    
-                //     $(this).addClass('disabled');
-                // }
-                // else if(newValue ==2)
-                // {
-                //     $(this).siblings('.qtyminus').removeClass('disabled');
-                // }
-
-
-                 var newValue = currentVal - 1;
-            
 
                 if(newValue ==1)
                 {
@@ -291,14 +385,12 @@
                 {
                     $(this).siblings('.qtyminus').removeClass('disabled');
                 }
-
-
                 
                  $('input[name='+fieldName+']').val(newValue > 4 ? 4 : newValue).trigger('change');
                 
             } else {
                   
-                // Otherwise put a 0 there
+               
                 $('input[name='+fieldName+']').val(0).trigger('change');
             }
         });
@@ -330,16 +422,7 @@
                     $(this).siblings('.qtyplus').removeClass('disabled');
                 }
 
-
-                //  if(newValue ==4)
-                // {
-                   
-                //     $(this).addClass('disabled');
-                // }
-                // else if(newValue ==2)
-                // {
-                //     $(this).siblings('.qtyminus').removeClass('disabled');
-                // }
+             
 
                 $('input[name='+fieldName+']').val(newValue < 1 ? 1 : newValue).trigger('change');
             } else {
@@ -372,7 +455,7 @@
             console.log(chiller_type);
             data = data+'&chiller_type='+chiller_type;
 
-            $('#data-result').html('<div>Loading...</div>');
+            $('#res').html('<div>Loading...</div>');
               $('.drive_temperature_outlet_holder').html('');
                         $('.cold_water_outlet_holder').html('');
                         $('.recooling_temperature_outlet_holder').html('');
@@ -382,8 +465,8 @@
 
             axios.post('{{ url('calculate-data') }}', data)
                 .then(function (response) {
-                    //alert(response.data.length)
-                   // alert(response.data.no_record)
+                     $('#res').html('');
+                 
                         var n_asht =  $('.dtu_up').val();
                             var n_aslt =    $('.cwt_output_up').val();
                     if(response.status === 200 && response.data){
@@ -400,29 +483,29 @@
                             }
                             else
                             {
-                            tableHtml += "<tr>\
-                                <td scope=\"row\">"+data.product_name+" </td>\
-                                <td>"+data.cooling_capacity+"  </td>\
-                                <td>"+data.driving_heat+"  </td>\
-                            </tr>";
-                          //  alert(data.driving_temp_outlet)
+                            // tableHtml += "<tr>\
+                            //     <td scope=\"row\">"+data.product_name+" </td>\
+                            //     <td>"+data.cooling_capacity+"  </td>\
+                            //     <td>"+data.driving_heat+"  </td>\
+                            // </tr>";
+
+                        
+
+                            $('#res').html('Results:  <br/>  Tn_MtIn:  ' + data.Tn_MtIn +'<span>&#8451;</span><br/> Tmt_out:  '+ data.recooling_temp_outlet+" <span>&#8451;</span>" +'<br/>Qth_Lt:  '+ data.cooling_capacity+' <br/> COP:  '+ data.COPth);
+                          
                             $('.drive_temperature_outlet_holder').html(data.driving_temp_outlet+" <span>&#8451;</span>");
                         $('.cold_water_outlet_holder').html(data.cold_water_temp_outlet + " <span>&#8451;</span>");
                         $('.recooling_temperature_outlet_holder').html(data.recooling_temp_outlet+" <span>&#8451;</span>");
 
                         if($('.calculation_type').val()=='recalculation')
                         {
-                            //alert( Object.keys(response.data).length); cwt_output_up
+                           
                            
                             var number_count = Object.keys(response.data).length;
 
                             if(n_asht !='1' || n_aslt !='1' )
                             {
-                            //     var drive_html   =   '('+number_count+' modules at drive circuit are serial connected)';
-                            //     var chilled_html = '('+number_count+' modules at chilled water circuit are serial connected)';
-                            // }
-                            // else
-                            // {
+                            
                                 if(n_asht =='1')
                                 {
                                     var module_input = 'module';
@@ -435,7 +518,7 @@
 
 
                                     var drive_html = '('+n_asht +' '+ module_input + ' at drive circuit '+is_input+' connected in series.)';
-                                     // var chilled_html = '('+n_aslt+' '+n_aslt_input +' at chilled water circuit '+n_aslt_is_input+' serial connected)';
+                                   
                                 }
 
                                 if(n_aslt =='1')
@@ -448,19 +531,11 @@
                                     var n_aslt_input = 'modules';
                                     var n_aslt_is_input = 'are';
 
-                                    // var drive_html = '('+n_asht +' '+ module_input + ' at drive circuit '+is_input+' serial connected)';
+                                   
                                      var chilled_html = '('+n_aslt+' '+n_aslt_input +' at chilled water circuit '+n_aslt_is_input+' connected in series.)';
                                 }
 
-                                // if(number_count == 1)
-                                // {
-                                // var drive_html = '('+n_asht +' '+ module_input +' at drive circuit '+is_input+' serial connected)';
-                                // var chilled_html = '('+n_aslt+' '+module_input +' module at chilled water circuit '+is_input+' serial connected)';
-                                // }
-                                // else 
-                                // {
-                                    
-                               // }
+                                
 
                             }
                             
@@ -468,9 +543,7 @@
                             $('.chilled_temp_connected').html(chilled_html);
                         }
                          
-
                          }
-
 
 
                         });
@@ -519,7 +592,38 @@
              console.log('type',type)
             console.log('newValue',newValue)
         }
+
+        function getNomValue(obj)
+        {
+            var recooling_products_id = jQuery(obj).val();
+            var product_type = jQuery(obj).data('type');
+               data = 'recooling_products_id='+recooling_products_id+'&product_type='+product_type;
+               axios.post('{{ url('getNomValue') }}', data)
+                .then(function (response) { 
+                    console.log(response);
+                 var temp  = response.data.split('~');
+                // alert(temp[0])
+                var qth_value = temp[0];
+                var dt_value = temp[1]; 
+                jQuery(obj).closest('.form-group').siblings('.qth_value').find('input').val(qth_value)
+                    jQuery(obj).closest('.form-group').siblings('.dt_value').find('input').val(dt_value)
+                });
+
+        }
         
+
+        $(document).ready(function () {
+  //called when key is pressed in textbox
+  $(".number_validation").keypress(function (e) {
+
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $(this).siblings("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+});
     </script>
     </body>
     
