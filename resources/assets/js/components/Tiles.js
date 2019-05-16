@@ -1,44 +1,49 @@
 import React from 'react';
 
-import {DeleteModal} from './DeleteModal';
-import {ErrorBoundary} from './ErrorBoundary';
+import { DeleteModal } from './DeleteModal';
+import { ErrorBoundary } from './ErrorBoundary';
 import { translate } from 'react-multi-lang';
+import InputRange from 'react-input-range';
 
-const hideEle={
-    visibility:"hidden"
+const hideEle = {
+    visibility: "hidden"
+}
+const tdBorder = {
+    borderTop: "0px"
 }
 class Tiles extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            compressionChillerData:[],
-            compressionDataChange:false,
-            generalData:[],
-            generalDataChange:false,
-            optionData:[],
-            optionDataChange:false,
-            economicData:[],
-            economicDataChange:false,
-            heatSourceData:[],
-            heatSourceDataChange:false,
-            heatingProfileData:[],
-            heatingProfileDataChange:false,
-            coolingProfileData:[],
-            coolingProfileDataChange:false,
-            fahrenheitData:[],
-            fahrenheitDataChange:this.props.datachanged,
-               };
-        this.editRecord=this.editRecord.bind(this);
-        this.editHeatRecord=this.editHeatRecord.bind(this);
-        this.deleteRecord=this.deleteRecord.bind(this);
-        this.updateCompressionList=this.updateCompressionList.bind(this);
-        this.updateHeatSourceList=this.updateHeatSourceList.bind(this);
-        this.handleChillerDeleteEntry=this.handleChillerDeleteEntry.bind(this);
-        this.handleHeatSourceDeleteEntry=this.handleHeatSourceDeleteEntry.bind(this);
-        this.arrayMove=this.arrayMove.bind(this);
+            value: 2,
+            compressionChillerData: [],
+            compressionDataChange: false,
+            generalData: [],
+            generalDataChange: false,
+            optionData: [],
+            optionDataChange: false,
+            economicData: [],
+            economicDataChange: false,
+            heatSourceData: [],
+            heatSourceDataChange: false,
+            heatingProfileData: [],
+            heatingProfileDataChange: false,
+            coolingProfileData: [],
+            coolingProfileDataChange: false,
+            fahrenheitData: [],
+            fahrenheitDataChange: this.props.datachanged,
+        };
+        this.editRecord = this.editRecord.bind(this);
+        this.editHeatRecord = this.editHeatRecord.bind(this);
+        this.deleteRecord = this.deleteRecord.bind(this);
+        this.updateCompressionList = this.updateCompressionList.bind(this);
+        this.updateHeatSourceList = this.updateHeatSourceList.bind(this);
+        this.handleChillerDeleteEntry = this.handleChillerDeleteEntry.bind(this);
+        this.handleHeatSourceDeleteEntry = this.handleHeatSourceDeleteEntry.bind(this);
+        this.arrayMove = this.arrayMove.bind(this);
     }
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
 
         switch (nextProps.title) {
             case CHILLER_TITLE:
@@ -52,8 +57,8 @@ class Tiles extends React.Component {
                 this.setState({
                     generalDataChange: nextProps.dataChange
                 });
-                    this.state.generalData[0] = nextProps.dataRecord
-                    this.forceUpdate()
+                this.state.generalData[0] = nextProps.dataRecord
+                this.forceUpdate()
 
                 break;
             case OPTION_TILE:
@@ -61,8 +66,8 @@ class Tiles extends React.Component {
                     optionDataChange: nextProps.dataChange
                 });
 
-                    this.state.optionData[0] = nextProps.dataRecord
-                    this.forceUpdate();
+                this.state.optionData[0] = nextProps.dataRecord
+                this.forceUpdate();
                 break;
             case ECONOMIC_TITLE:
                 this.setState({
@@ -97,69 +102,102 @@ class Tiles extends React.Component {
                 });
                 break;
             case FAHRENHEIT_SYSTEM:
-            this.setState({
-                fahrenheitData: nextProps.dataRecord,
-                fahrenheitDataChange: nextProps.dataChange
-            });
-            break;
+                this.setState({
+                    fahrenheitData: nextProps.dataRecord,
+                    fahrenheitDataChange: nextProps.dataChange
+                });
+                break;
             default:
                 break;
         }
     }
-    componentDidUpdate(){
+    initializeAutocomplete(elem) {
+        var input = document.getElementById(elem.target.id);
+        // var options = {
+        //   types: ['(regions)'],
+        //   componentRestrictions: {country: "IN"}
+        // };
+        var options = {}
+
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            var lat = place.geometry.location.lat();
+            var lng = place.geometry.location.lng();
+            var placeId = place.place_id;
+            // to set city name, using the locality param
+            var componentForm = {
+                locality: 'short_name',
+            };
+
+            console.log(lat, lng);
+            // initialize(lat, lng);
+            // //Drawing map on the basis of latitude and longitude.
+            // getMapInfo(lat, lng,place)
+        });
+    }
+    setTempState(value) {
+        console.log(value)
+        axios.get('/user?ID=12345')
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        this.setState({ value })
+    }
+    componentDidUpdate() {
 
     }
-    componentWillUnmount(){
-       // console.log("component unmount")
+    componentWillUnmount() {
+        // console.log("component unmount")
     }
-    componentDidMount(){
+    componentDidMount() {
 
 
 
-        var that=this;
+        var that = this;
 
-        if(that.props.title==HEAT_SOURCE_TITLE){
-      //  log(`isClamped: ${this.linesEllipsis.isClamped()} when page didMount`)
-    //    console.log("Lineellipses",this.linesEllipsis.state.clamped);
-    //    console.log("Lineellipses state",this.linesEllipsis);
+        if (that.props.title == HEAT_SOURCE_TITLE) {
+            //  log(`isClamped: ${this.linesEllipsis.isClamped()} when page didMount`)
+            //    console.log("Lineellipses",this.linesEllipsis.state.clamped);
+            //    console.log("Lineellipses state",this.linesEllipsis);
 
         }
 
-        if(this.state.compressionChillerData.length==0)
-        {
-          this.setState({
-              compressionDataChange: false
+        if (this.state.compressionChillerData.length == 0) {
+            this.setState({
+                compressionDataChange: false
             });
         }
-        else{
+        else {
             jQuery(".scrollbar-macosx").scrollbar();
         }
-        if(this.state.heatSourceData.length==0)
-        {
+        if (this.state.heatSourceData.length == 0) {
 
-          this.setState({
-              heatSourceDataChange: false
+            this.setState({
+                heatSourceDataChange: false
             });
         }
-        else{
+        else {
             jQuery(".scrollbar-macosx").scrollbar();
         }
-        if(this.state.heatingProfileData.length==0)
-        {
-          this.setState({
-            heatingProfileDataChange: false
+        if (this.state.heatingProfileData.length == 0) {
+            this.setState({
+                heatingProfileDataChange: false
             });
         }
-        else{
+        else {
             jQuery(".scrollbar-macosx").scrollbar();
         }
-        if(this.state.coolingProfileData.length==0)
-        {
-          this.setState({
-            coolingProfileDataChange: false
+        if (this.state.coolingProfileData.length == 0) {
+            this.setState({
+                coolingProfileDataChange: false
             });
         }
-        else{
+        else {
             jQuery(".scrollbar-macosx").scrollbar();
         }
 
@@ -175,103 +213,103 @@ class Tiles extends React.Component {
         //     // alert('AAAA')
         //     jQuery(".scrollbar-macosx").scrollbar();
         // }
-        $(document).on('show.bs.modal','#general-information', function () {
-            if(that.props.title==GENERAL_TILE){
-                var dataObj=that.state.generalData[0];
-                if(typeof dataObj !='undefined'){
-
-                for (var key in dataObj) {
-                    if (dataObj.hasOwnProperty(key)) {
-                        //console.log($(this.props.modalId).find(key),this.props.modalId,key);
-
-                        $(that.props.modalId).find('#'+key).val(dataObj[key]);
-                    }
-                }
-                $(that.props.modalId).find('#generalformMode').val("edit");
-                 }
-                }
-                //Do stuff here
-            });
-            $(document).on('show.bs.modal','#economic-information', function () {
-                if(that.props.title==ECONOMIC_TITLE){
-                    $( "ul.errorMessages" ).addClass('hide');
-                    var dataObj=that.state.economicData[0];
-                    if(NO_CUSTOM_FIELD >0 ){
-                        if($("#FinancialItem_"+(NO_CUSTOM_FIELD-1)).next('tr').length>0){
-                            $("#FinancialItem_"+(NO_CUSTOM_FIELD-1)).nextAll('tr').not('.clone').remove();
-                        }
-                    }else{
-                        $("#FinancialItem_0").nextAll('tr').not('.clone').remove();
-                    }
-                    if(NO_CUSTOM_FIELD_MAINTENENCE >0 ){
-                        if($("#MaintenenceItem_"+(NO_CUSTOM_FIELD_MAINTENENCE-1)).next('tr').length>0){
-                            $("#MaintenenceItem_"+(NO_CUSTOM_FIELD_MAINTENENCE-1)).nextAll('tr').not('.clone').remove();
-                        }
-                    }else{
-                        $("#MaintenenceItem_0").nextAll('tr').not('.clone').remove();
-                    }
-                    if(NO_CUSTOM_FIELD_GENERAL >0 ){
-                        if($("#generalItem_"+(NO_CUSTOM_FIELD_GENERAL-1)).next('tr').length>0){
-                            $("#generalItem_"+(NO_CUSTOM_FIELD_GENERAL-1)).nextAll('tr').not('.clone').remove();
-                        }
-                    }else{
-                        $("#generalItem_").nextAll('tr').not('.clone').remove();
-                    }
-                    if(NO_CUSTOM_FIELD_CHP >0 ){
-                        if($("#chpItem_"+(NO_CUSTOM_FIELD_CHP-1)).next('tr').length>0){
-                            $("#chpItem_"+(NO_CUSTOM_FIELD_CHP-1)).nextAll('tr').not('.clone').remove();
-                        }
-                    }else{
-                        $("#chpTable tr.multiple").remove();
-                    }
-
-                    if(typeof dataObj !='undefined'){
+        $(document).on('show.bs.modal', '#general-information', function () {
+            if (that.props.title == GENERAL_TILE) {
+                var dataObj = that.state.generalData[0];
+                if (typeof dataObj != 'undefined') {
 
                     for (var key in dataObj) {
                         if (dataObj.hasOwnProperty(key)) {
                             //console.log($(this.props.modalId).find(key),this.props.modalId,key);
-                            if(key.indexOf("[]") != -1)  continue;
-                            $(that.props.modalId).find('#'+key).val(dataObj[key]);
+
+                            $(that.props.modalId).find('#' + key).val(dataObj[key]);
+                        }
+                    }
+                    $(that.props.modalId).find('#generalformMode').val("edit");
+                }
+            }
+            //Do stuff here
+        });
+        $(document).on('show.bs.modal', '#economic-information', function () {
+            if (that.props.title == ECONOMIC_TITLE) {
+                $("ul.errorMessages").addClass('hide');
+                var dataObj = that.state.economicData[0];
+                if (NO_CUSTOM_FIELD > 0) {
+                    if ($("#FinancialItem_" + (NO_CUSTOM_FIELD - 1)).next('tr').length > 0) {
+                        $("#FinancialItem_" + (NO_CUSTOM_FIELD - 1)).nextAll('tr').not('.clone').remove();
+                    }
+                } else {
+                    $("#FinancialItem_0").nextAll('tr').not('.clone').remove();
+                }
+                if (NO_CUSTOM_FIELD_MAINTENENCE > 0) {
+                    if ($("#MaintenenceItem_" + (NO_CUSTOM_FIELD_MAINTENENCE - 1)).next('tr').length > 0) {
+                        $("#MaintenenceItem_" + (NO_CUSTOM_FIELD_MAINTENENCE - 1)).nextAll('tr').not('.clone').remove();
+                    }
+                } else {
+                    $("#MaintenenceItem_0").nextAll('tr').not('.clone').remove();
+                }
+                if (NO_CUSTOM_FIELD_GENERAL > 0) {
+                    if ($("#generalItem_" + (NO_CUSTOM_FIELD_GENERAL - 1)).next('tr').length > 0) {
+                        $("#generalItem_" + (NO_CUSTOM_FIELD_GENERAL - 1)).nextAll('tr').not('.clone').remove();
+                    }
+                } else {
+                    $("#generalItem_").nextAll('tr').not('.clone').remove();
+                }
+                if (NO_CUSTOM_FIELD_CHP > 0) {
+                    if ($("#chpItem_" + (NO_CUSTOM_FIELD_CHP - 1)).next('tr').length > 0) {
+                        $("#chpItem_" + (NO_CUSTOM_FIELD_CHP - 1)).nextAll('tr').not('.clone').remove();
+                    }
+                } else {
+                    $("#chpTable tr.multiple").remove();
+                }
+
+                if (typeof dataObj != 'undefined') {
+
+                    for (var key in dataObj) {
+                        if (dataObj.hasOwnProperty(key)) {
+                            //console.log($(this.props.modalId).find(key),this.props.modalId,key);
+                            if (key.indexOf("[]") != -1) continue;
+                            $(that.props.modalId).find('#' + key).val(dataObj[key]);
                         }
                     }
                     $(that.props.modalId).find('#economicformMode').val("edit");
 
-                     }
-                    }
-                    //Do stuff here
-                });
+                }
+            }
+            //Do stuff here
+        });
 
 
     }
-    updateCompressionList(clonedArr){
-       //console.log("sorting finish",clonedArr);
-       this.setState({
-        compressionChillerData: clonedArr
-      });
-
-    }
-    updateHeatSourceList(clonedArr){
+    updateCompressionList(clonedArr) {
         //console.log("sorting finish",clonedArr);
         this.setState({
-         heatSourceData: clonedArr
-       });
+            compressionChillerData: clonedArr
+        });
 
-     }
-    editRecord(elemKey){
-        let dataObj=this.state.compressionChillerData[elemKey];
+    }
+    updateHeatSourceList(clonedArr) {
+        //console.log("sorting finish",clonedArr);
+        this.setState({
+            heatSourceData: clonedArr
+        });
+
+    }
+    editRecord(elemKey) {
+        let dataObj = this.state.compressionChillerData[elemKey];
         for (var key in dataObj) {
             if (dataObj.hasOwnProperty(key)) {
                 //console.log($(this.props.modalId).find(key),this.props.modalId,key);
-                $(this.props.modalId).find('#'+key).val(dataObj[key]);
+                $(this.props.modalId).find('#' + key).val(dataObj[key]);
             }
         }
         $(this.props.modalId).find('#chillerformMode').val("edit");
         $(this.props.modalId).find('#chillerformModeKey').val(elemKey);
         //$(this.props.modalId).find
     }
-    editHeatRecord(elemKey,modalID){
-        let dataObj="";
-        let elemModal=modalID.hiddenmodekey;
+    editHeatRecord(elemKey, modalID) {
+        let dataObj = "";
+        let elemModal = modalID.hiddenmodekey;
         switch (elemModal) {
             case 'heatsourceformModeKey':
                 dataObj = this.state.heatSourceData[elemKey];
@@ -291,19 +329,19 @@ class Tiles extends React.Component {
         for (var key in dataObj) {
             if (dataObj.hasOwnProperty(key)) {
                 //console.log($(this.props.modalId).find(key),this.props.modalId,key);
-                $(this.props.modalId).find('#'+key).val(dataObj[key]);
+                $(this.props.modalId).find('#' + key).val(dataObj[key]);
             }
         }
-        $(this.props.modalId).find('#'+modalID.hiddenmode).val("edit");
-        $(this.props.modalId).find('#'+modalID.hiddenmodekey).val(elemKey);
+        $(this.props.modalId).find('#' + modalID.hiddenmode).val("edit");
+        $(this.props.modalId).find('#' + modalID.hiddenmodekey).val(elemKey);
         //$(this.props.modalId).find
     }
-    deleteRecord(eleId,eleM){
-        var modalId=eleM.target.getAttribute('data-modal');
-        $("#"+modalId).find("#entry-id").attr('data-id',eleId);
-        $("#"+modalId).modal("show");
+    deleteRecord(eleId, eleM) {
+        var modalId = eleM.target.getAttribute('data-modal');
+        $("#" + modalId).find("#entry-id").attr('data-id', eleId);
+        $("#" + modalId).modal("show");
     }
-    handleChillerDeleteEntry(result){
+    handleChillerDeleteEntry(result) {
         //console.log(result);
         if (result.modalFor == "compressionChiller") {
             var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
@@ -327,10 +365,10 @@ class Tiles extends React.Component {
         }
     }
 
-    handleHeatSourceDeleteEntry(result){
+    handleHeatSourceDeleteEntry(result) {
         var clonedArrDelete = this.state.compressionChillerData; // make a separate copy of the array
         clonedArrDelete.splice(result.elementId, 1);
-        this.setState({compressionChillerData: clonedArrDelete});
+        this.setState({ compressionChillerData: clonedArrDelete });
 
     }
     arrayMove(arr, old_index, new_index) {
@@ -356,15 +394,15 @@ class Tiles extends React.Component {
         //projectData['chiller']=this.state.coolingProfileData;
         //projectData['coompressionchiller']=this.state.compressionChillerData;
         //projectData['fahrenheit']=this.state.fahrenheitData;
-        var priceFullList,pricelist,requiredMsg="";
-        if(this.props.required=="yes"){
-            var requiredMsg=<h5 className="input-required">{this.props.t('InputRequired')}</h5>;
-            if(this.props.title == FAHRENHEIT_SYSTEM){
-                var requiredMsg=<h5 className="input-required">{this.props.t('Fahrenheit.InputRequired')}</h5>;
+        var priceFullList, pricelist, requiredMsg = "";
+        if (this.props.required == "yes") {
+            var requiredMsg = <h5 className="input-required">{this.props.t('InputRequired')}</h5>;
+            if (this.props.title == FAHRENHEIT_SYSTEM) {
+                var requiredMsg = <h5 className="input-required">{this.props.t('Fahrenheit.InputRequired')}</h5>;
             }
         }
 
-        var deleteModal="";
+        var deleteModal = "";
         if (this.props.title == CHILLER_TITLE) {
             if (this.state.compressionDataChange == true && this.state.compressionChillerData.length != 0) {
                 var bodyContent = "Are you sure you want to delete the chiller entry? Please confirm by clicking Yes.";
@@ -380,13 +418,13 @@ class Tiles extends React.Component {
                             <h3>3</h3>
                         </li>
 
-                          {(() => {
+                        {(() => {
                             if (this.state.compressionChillerData[0].temperature != "") {
                                 return (
-                                      <li>
-                            <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
-                            <h3><img src='public/images/degree-icon.png' alt='' /> {(this.state.compressionChillerData[0].temperature != "") ? this.state.compressionChillerData[0].temperature + "°C" : ""}</h3>
-                        </li>
+                                    <li>
+                                        <p>{this.props.t('Tiles.CompressionChiller.Temperature')}</p>
+                                        <h3><img src='public/images/degree-icon.png' alt='' /> {(this.state.compressionChillerData[0].temperature != "") ? this.state.compressionChillerData[0].temperature + "°C" : ""}</h3>
+                                    </li>
                                 )
                             }
                         })()}
@@ -469,13 +507,28 @@ class Tiles extends React.Component {
             }
         }
         if (this.props.title == HEAT_SOURCE_TITLE) {
+            var heatForm = (
+                <form>
+                    <table className="table">
+
+                        <tr>
+                            <td className="input-label" style={tdBorder}>{this.props.t('HeatSource.Tab.TechnicalData.DriveTemperature.Title')}:</td>
+                            <td className="input-fields" style={tdBorder}><InputRange
+                                maxValue={20}
+                                minValue={0}
+                                value={this.state.value}
+                                onChange={value => this.setTempState(value)} /></td>
+                        </tr>
+                    </table>
+                </form>
+            )
             if (this.state.heatSourceDataChange == true && this.state.heatSourceData.length != 0) {
                 projectData['heatsource'] = this.state.heatSourceData;
                 let heatSourceData = this.state.heatSourceData;
                 var pricelist = (
                     <ul className="price-listt scrollbar-macosx">
 
-                         {(() => {
+                        {(() => {
                             if (heatSourceData[0].heat_capacity != "") {
                                 return (
                                     <li>
@@ -514,14 +567,14 @@ class Tiles extends React.Component {
                                                     {data.heat_name}
                                                     <ul className="list-inline">
 
-                                                      {(() => {
-                            if (data.heat_capacity != "") {
-                                return (
-                                     <li>{data.heat_capacity} kW
+                                                        {(() => {
+                                                            if (data.heat_capacity != "") {
+                                                                return (
+                                                                    <li>{data.heat_capacity} kW
                                                       </li>
-                                )
-                            }
-                        })()}
+                                                                )
+                                                            }
+                                                        })()}
 
                                                         <li>85°C </li>
                                                     </ul>
@@ -576,7 +629,7 @@ class Tiles extends React.Component {
             }
             else {
                 var priceFullList = <p>
-                    {this.props.hoverText}</p>;
+                    {heatForm}</p>;
             }
         }
 
@@ -669,6 +722,38 @@ class Tiles extends React.Component {
             }
         }
         if (this.props.title == COOLING_LOAD_PROFILE_TITLE) {
+            var coolingLoadForm = (
+                <form>
+                    <table className="table">
+                        <tr>
+                            <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.Title')}:</td>
+                            <td className="input-fields" style={tdBorder}>
+                                <select className="required-field" onChange={(elem) => this.changeField(elem)} name="cooling_profile_type" id="cooling_profile_type">
+                                    <option value="Office Space">Office Space</option>
+                                    <option value="Process cooling">Process Cooling</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.Title')}:</td>
+                            <td className="input-fields" style={tdBorder}>
+                                <ul className="list-inline">
+                                    <li className="withunit"><input type="text" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" /><span>kW</span></li>
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.ChilledWaterTemperature.Title')}:</td>
+                            <td className="input-fields" style={tdBorder}><InputRange
+                                maxValue={20}
+                                minValue={0}
+                                value={this.state.value}
+                                onChange={value => this.setTempState(value)} /></td>
+                        </tr>
+                    </table>
+                </form>
+            )
             COOLING_FORM_STATUS = (this.state.coolingProfileData.length == 0) ? false : true; //use to validate the form.
             if (this.state.coolingProfileDataChange == true && this.state.coolingProfileData.length != 0) {
                 projectData['chiller'] = this.state.coolingProfileData;
@@ -684,11 +769,11 @@ class Tiles extends React.Component {
                             <h3>33,708 €/a</h3>
                         </li>
 
-                        
 
-                          <li>
+
+                        <li>
                             <p>Temperature</p>
-                            <h3><img src="public/images/degree-icon.png" alt="" /> { coolingProfileData[0].cooling_base_load_to }°C</h3>
+                            <h3><img src="public/images/degree-icon.png" alt="" /> {coolingProfileData[0].cooling_base_load_to}°C</h3>
                         </li>
 
 
@@ -708,13 +793,13 @@ class Tiles extends React.Component {
                                             <tr key={h} data-id={h}>
                                                 <th>
 
-                                     
-                                                 {data.cooling_radiant_cooling_office}
+
+                                                    {data.cooling_radiant_cooling_office}
 
                                                     <ul className="list-inline">
                                                         <li>
 
-                                                         
+
                                                             {data.cooling_cooling_other}°C
 
                                                       </li>
@@ -772,196 +857,89 @@ class Tiles extends React.Component {
                 }
             }
             else {
-                var priceFullList = <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+                var priceFullList = <p className="scrollbar-macosx">{coolingLoadForm}</p>;
             }
         }
         if (this.props.title == GENERAL_TILE) {
+            var generalForm = (
+                <form>
+                    <table className="table">
+                        <tr>
+                            <td className="input-label" style={tdBorder}>{this.props.t('General.Tab.Personal.PersonalAddress.Title')}:</td>
 
+                            <td className="input-fields" style={tdBorder}>
+                                <select>
+                                    <option value="munich">munich</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="input-label" style={tdBorder}>{this.props.t('General.Tab.Project.ProjectTemp.Title')}:</td>
+                            <td className="input-fields" style={tdBorder}><InputRange
+                                maxValue={20}
+                                minValue={0}
+                                value={this.state.value}
+                                onChange={value => this.setTempState(value)} /></td>
+                        </tr>
+                    </table>
+                </form>
+            )
             if (this.state.generalDataChange) {
                 projectData['generalData'] = this.state.generalData;
-                store.dispatch( addGeneralData(this.state.generalData) )
+                store.dispatch(addGeneralData(this.state.generalData))
                 var pricelist = (
-
                     <ul className="price-listt plnewblock scrollbar-macosx">
-                        {(() => {
-                            if (this.state.generalData[0].project_name != "") {
-                                return (
-                                    <li className="pdtnam">
-                                        <p>{this.props.t('General.Tab.Project.ProjectName.Title')}</p>
-                                        <h3 className="textUpper">{this.state.generalData[0].project_name}</h3>
-                                    </li>
-                                )
-                            }
-                        })()}
-
-
-                        {(() => {
-                            if (this.state.generalData[0].project_number != "") {
-                                return (
-                                    <li className="pdtnum">
-                            <p>{this.props.t('General.Tab.Project.ProjectNumber.Title')}</p>
-                            <h3 className="textUpper">{this.state.generalData[0].project_number}</h3>
-                        </li>
-                                )
-                            }
-                        })()}
-
                         <div className="clrs"></div>
-                        {(() => {
-                            if (this.state.generalData[0].editor != "") {
-                                return (
-                                    <li>
-                                    <p>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}</p>
-                                    <h3 className="textUpper">{this.state.generalData[0].editor}</h3>
-                                </li>
-                                )
-                            }
-                        })()}
-
                         <li>
                             <p>{this.props.t('General.Tab.Project.ProjectLocation.Title')}</p>
                             <h3 className="textUpper">{this.state.generalData[0].location}</h3>
                         </li>
                     </ul>
-
                 );
-
-                var priceFullList = (
-
-                    <div className="hover-list scrollbar-macosx">
-                    <div className="table-responsive">
-
-                        <table className="table">
-                            <tbody>
-
-                            {(() => {
-                            if (this.state.generalData[0].project_name != "") {
-                                return (
-                                    <tr>
-                                    <th>{this.props.t('General.Tab.Project.ProjectName.Title')}:</th>
-                                    <td>{this.state.generalData[0].project_name}</td>
-                                </tr>
-                                )
-                            }
-                        })()}
-
-                        {(() => {
-                            if (this.state.generalData[0].project_number != "") {
-                                return (
-                                    <tr>
-                                    <th>{this.props.t('General.Tab.Project.ProjectNumber.Title')}:</th>
-                                    <td>{this.state.generalData[0].project_number}</td>
-                                </tr>
-                                )
-                            }
-                        })()}
-
-
-                         {(() => {
-                            if (this.state.generalData[0].editor != "") {
-                                return (
-                                    <tr>
-                                    <th>{this.props.t('General.Tab.Personal.PersonalEditor.Title')}: </th>
-                                    <td>{this.state.generalData[0].editor}</td>
-                                </tr>
-                                )
-                            }
-                        })()}
-
-
-                         {(() => {
-                            if (this.state.generalData[0].location != "") {
-                                return (
-                                   <tr>
-                                    <th>{this.props.t('General.Tab.Project.ProjectLocation.Title')}:</th>
-                                    <td>{this.state.generalData[0].location}</td>
-                                </tr>
-                                )
-                            }
-                        })()}
-
-                        {(() => {
-                            if (this.state.generalData[0].customer != "") {
-                                return (
-                                  <tr>
-                                    <th>{this.props.t('General.Tab.Project.ProjectContact.Title')}: </th>
-                                    <td>{this.state.generalData[0].customer}</td>
-                                </tr>
-                                )
-                            }
-                        })()}
-
-                         {(() => {
-                            if (this.state.generalData[0].phone_number != "") {
-                                return (
-                                 <tr>
-                                    <th>{this.props.t('General.Tab.Project.ProjectPhone.Title')}:</th>
-                                    <td>{this.state.generalData[0].phone_number}</td>
-                                </tr>
-                                )
-                            }
-                        })()}
-
-                              {(() => {
-                            if (this.state.generalData[0].email_address != "") {
-                                return (
-                                <tr>
-                                    <th>{this.props.t('General.Tab.Project.ProjectEmail.Title')}:</th>
-                                    <td>{this.state.generalData[0].email_address}</td>
-                                </tr>
-                                )
-                            }
-                            })()}
-
-
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>  );
-           //     jQuery(".general-information .scrollbar-macosx").scrollbar();
+                var priceFullList = generalForm
+                //     jQuery(".general-information .scrollbar-macosx").scrollbar();
                 var requiredMsg = "";
             }
-            else{
-                var priceFullList = <p className="scrollbar-macosx">{this.props.hoverText}</p>;
+            else {
+
+                var priceFullList = <p className="scrollbar-macosx">{generalForm}</p>;
             }
 
         }
         if (this.props.title == OPTION_TILE) {
             var pricelist = (
                 <ul className="price-listt">
-                              <li>
-                                 <p>Re-cooling Type</p>
-                                 <h3>DRY</h3>
-                              </li>
-                              <li>
-                                 <p>Free cooling</p>
-                                 <h3>YES <span>(chilled water temperature)</span></h3>
-                              </li>
-                           </ul>
+                    <li>
+                        <p>Re-cooling Type</p>
+                        <h3>DRY</h3>
+                    </li>
+                    <li>
+                        <p>Free cooling</p>
+                        <h3>YES <span>(chilled water temperature)</span></h3>
+                    </li>
+                </ul>
 
             );
             var priceFullList = (<div><ul className="price-listt">
-            <li>
-               <p>Language</p>
-               <h3>English</h3>
-            </li>
-            <li>
-               <p>BAFA 2018</p>
-               <h3>Calculate</h3>
-            </li>
-            <li>
-               <p>Re-cooling Type</p>
-               <h3>Dry</h3>
-            </li>
-         </ul>
-         <ul className="right-list-content">
-            <li>
-               <p>Free cooling</p>
-               <h3>Yes <span>(chilled water temperature)</span></h3>
-            </li>
-         </ul></div>);
+                <li>
+                    <p>Language</p>
+                    <h3>English</h3>
+                </li>
+                <li>
+                    <p>BAFA 2018</p>
+                    <h3>Calculate</h3>
+                </li>
+                <li>
+                    <p>Re-cooling Type</p>
+                    <h3>Dry</h3>
+                </li>
+            </ul>
+                <ul className="right-list-content">
+                    <li>
+                        <p>Free cooling</p>
+                        <h3>Yes <span>(chilled water temperature)</span></h3>
+                    </li>
+                </ul></div>);
             if (this.state.optionDataChange) {
                 projectData['option'] = this.state.optionData;
                 var pricelist = (
@@ -969,28 +947,28 @@ class Tiles extends React.Component {
 
 
 
-                         {(() => {
+                        {(() => {
                             if (this.state.optionData[0].option_language != "") {
 
-                            if(this.state.optionData[0].option_language =="en" ){
-                                  return (
-                                          <li className="pdtnam">
-                            <p>Language</p>
-                            <h3 className="textUpper">ENGLISH</h3>
-                        </li>
+                                if (this.state.optionData[0].option_language == "en") {
+                                    return (
+                                        <li className="pdtnam">
+                                            <p>Language</p>
+                                            <h3 className="textUpper">ENGLISH</h3>
+                                        </li>
 
-                                )
-                            }
-                            else{
-                                return (
-                                                          <li className="pdtnam">
-                            <p>Language</p>
-                            <h3 className="textUpper">GERMAN</h3>
-                        </li>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <li className="pdtnam">
+                                            <p>Language</p>
+                                            <h3 className="textUpper">GERMAN</h3>
+                                        </li>
 
-                                )
+                                    )
 
-                            }
+                                }
 
                             }
                         })()}
@@ -1019,40 +997,40 @@ class Tiles extends React.Component {
 
 
 
-                             {(() => {
-                            if (this.state.optionData[0].option_language != "") {
+                            {(() => {
+                                if (this.state.optionData[0].option_language != "") {
 
-                            if(this.state.optionData[0].option_language =="en" ){
-                                  return (
-                                          <tr>
-                                    <th>Language: </th>
-                                   <td>English</td></tr>
+                                    if (this.state.optionData[0].option_language == "en") {
+                                        return (
+                                            <tr>
+                                                <th>Language: </th>
+                                                <td>English</td></tr>
 
-                                )
-                            }
-                            else{
-                                return (
-                                          <tr>
-                                    <th>Language: </th>
-                                   <td>German</td></tr>
+                                        )
+                                    }
+                                    else {
+                                        return (
+                                            <tr>
+                                                <th>Language: </th>
+                                                <td>German</td></tr>
 
-                                )
+                                        )
 
-                            }
+                                    }
 
-                            }
-                        })()}
+                                }
+                            })()}
 
-                             {(() => {
-                            if (this.state.optionData[0].profile_bafa != "") {
-                                return (
-                                    <tr>
-                                <th>BAFA 2018: </th>
-                                <td>{this.state.optionData[0].profile_bafa}</td>
-                            </tr>
-                                )
-                            }
-                        })()}
+                            {(() => {
+                                if (this.state.optionData[0].profile_bafa != "") {
+                                    return (
+                                        <tr>
+                                            <th>BAFA 2018: </th>
+                                            <td>{this.state.optionData[0].profile_bafa}</td>
+                                        </tr>
+                                    )
+                                }
+                            })()}
 
 
 
@@ -1065,7 +1043,7 @@ class Tiles extends React.Component {
                                 <th>Free cooling: </th>
                                 <td>{this.state.optionData[0].free_recooling}
 
-                      </td>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -1138,27 +1116,27 @@ class Tiles extends React.Component {
                     <ul className="price-listt plnewblock">
 
 
-                     {(() => {
+                        {(() => {
                             if (this.state.economicData[0].electric_price != "") {
                                 return (
-                                      <li className="pdtnam">
-                            <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
-                            <h3>{this.state.economicData[0].electric_price}<br />
-                                €/kWh</h3>
-                        </li>
+                                    <li className="pdtnam">
+                                        <p>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}</p>
+                                        <h3>{this.state.economicData[0].electric_price}<br />
+                                            €/kWh</h3>
+                                    </li>
 
                                 )
                             }
                         })()}
 
 
-                         {(() => {
+                        {(() => {
                             if (this.state.economicData[0].own_usage_of_electricity != "") {
                                 return (
-                                                  <li className="pdtnum">
-                            <p>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}</p>
-                            <h3>{this.state.economicData[0].own_usage_of_electricity}%</h3>
-                        </li>
+                                    <li className="pdtnum">
+                                        <p>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}</p>
+                                        <h3>{this.state.economicData[0].own_usage_of_electricity}%</h3>
+                                    </li>
 
                                 )
                             }
@@ -1167,26 +1145,26 @@ class Tiles extends React.Component {
 
                         <div className="clrs"></div>
 
-                         {(() => {
+                        {(() => {
                             if (this.state.economicData[0].gas_price != "") {
                                 return (
-                           <li className="pdtnam">
-                            <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
-                            <h3>{this.state.economicData[0].gas_price}<br />
-                                €/kWh</h3>
-                        </li>
+                                    <li className="pdtnam">
+                                        <p>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}</p>
+                                        <h3>{this.state.economicData[0].gas_price}<br />
+                                            €/kWh</h3>
+                                    </li>
 
                                 )
                             }
                         })()}
 
-                         {(() => {
+                        {(() => {
                             if (this.state.economicData[0].subsidy_for_electricity != "") {
                                 return (
-                           <li className="pdtnum">
-                            <p>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</p>
-                            <h3>{this.state.economicData[0].subsidy_for_electricity}</h3>
-                        </li>
+                                    <li className="pdtnum">
+                                        <p>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</p>
+                                        <h3>{this.state.economicData[0].subsidy_for_electricity}</h3>
+                                    </li>
 
                                 )
                             }
@@ -1204,49 +1182,49 @@ class Tiles extends React.Component {
                         <table className="table">
                             <tbody>
 
-                             {(() => {
-                            if (this.state.economicData[0].electric_price != "") {
-                                return (
-                                   <tr>
-                                    <th>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}:</th>
-                                    <td>{this.state.economicData[0].electric_price} €/kWh</td>
-                                </tr>
-                                )
-                            }
-                        })()}
+                                {(() => {
+                                    if (this.state.economicData[0].electric_price != "") {
+                                        return (
+                                            <tr>
+                                                <th>{this.props.t('Economic.Tab.General.ElectricityPrice.Title')}:</th>
+                                                <td>{this.state.economicData[0].electric_price} €/kWh</td>
+                                            </tr>
+                                        )
+                                    }
+                                })()}
 
-                               {(() => {
-                            if (this.state.economicData[0].gas_price != "") {
-                                return (
-                                  <tr>
-                                    <th>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}:</th>
-                                    <td>{this.state.economicData[0].gas_price} €/kWh</td>
-                                </tr>
-                                )
-                            }
-                        })()}
+                                {(() => {
+                                    if (this.state.economicData[0].gas_price != "") {
+                                        return (
+                                            <tr>
+                                                <th>{this.props.t('Economic.Tab.CHP.GasPrice.Title')}:</th>
+                                                <td>{this.state.economicData[0].gas_price} €/kWh</td>
+                                            </tr>
+                                        )
+                                    }
+                                })()}
 
-                           {(() => {
-                            if (this.state.economicData[0].own_usage_of_electricity != "") {
-                                return (
-                                 <tr>
-                                    <th>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}: </th>
-                                    <td>{this.state.economicData[0].own_usage_of_electricity}%</td>
-                                </tr>
-                                )
-                            }
-                        })()}
+                                {(() => {
+                                    if (this.state.economicData[0].own_usage_of_electricity != "") {
+                                        return (
+                                            <tr>
+                                                <th>{this.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')}: </th>
+                                                <td>{this.state.economicData[0].own_usage_of_electricity}%</td>
+                                            </tr>
+                                        )
+                                    }
+                                })()}
 
-                             {(() => {
-                            if (this.state.economicData[0].subsidy_for_electricity != "") {
-                                return (
-                                  <tr>
-                                    <th>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</th>
-                                    <td>{this.state.economicData[0].subsidy_for_electricity}</td>
-                                </tr>
-                                )
-                            }
-                        })()}
+                                {(() => {
+                                    if (this.state.economicData[0].subsidy_for_electricity != "") {
+                                        return (
+                                            <tr>
+                                                <th>{this.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')}</th>
+                                                <td>{this.state.economicData[0].subsidy_for_electricity}</td>
+                                            </tr>
+                                        )
+                                    }
+                                })()}
 
 
 
@@ -1445,7 +1423,7 @@ class Tiles extends React.Component {
                     </div>
                     {deleteModal}
                 </div>
-                </ErrorBoundary>
+            </ErrorBoundary>
         );
     }
 }

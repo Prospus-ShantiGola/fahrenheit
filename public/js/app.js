@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 31);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,7 +73,7 @@
 if (false) {
   module.exports = require('./cjs/react.production.min.js');
 } else {
-  module.exports = __webpack_require__(57);
+  module.exports = __webpack_require__(60);
 }
 
 
@@ -94,7 +94,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["translate"] = translate;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_hoist_non_react_statics__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_hoist_non_react_statics__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_hoist_non_react_statics__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -221,8 +221,8 @@ function translate(Component) {
 "use strict";
 
 
-var bind = __webpack_require__(16);
-var isBuffer = __webpack_require__(38);
+var bind = __webpack_require__(19);
+var isBuffer = __webpack_require__(41);
 
 /*global toString:true*/
 
@@ -528,6 +528,40 @@ module.exports = {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (true) {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(69)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = require('./factoryWithThrowingShims')();
+}
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -549,7 +583,7 @@ var ADD_HEATING_PROFILE = exports.ADD_HEATING_PROFILE = "ADD_HEATING_PROFILE";
 var ADD_COOLING_PROFILE = exports.ADD_COOLING_PROFILE = "ADD_COOLING_PROFILE";
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var g;
@@ -576,14 +610,14 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(75);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
@@ -594,14 +628,91 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 6 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _captialize = __webpack_require__(93);
+
+Object.defineProperty(exports, 'captialize', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_captialize).default;
+  }
+});
+
+var _clamp = __webpack_require__(94);
+
+Object.defineProperty(exports, 'clamp', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_clamp).default;
+  }
+});
+
+var _distanceTo = __webpack_require__(95);
+
+Object.defineProperty(exports, 'distanceTo', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_distanceTo).default;
+  }
+});
+
+var _isDefined = __webpack_require__(96);
+
+Object.defineProperty(exports, 'isDefined', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_isDefined).default;
+  }
+});
+
+var _isNumber = __webpack_require__(97);
+
+Object.defineProperty(exports, 'isNumber', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_isNumber).default;
+  }
+});
+
+var _isObject = __webpack_require__(98);
+
+Object.defineProperty(exports, 'isObject', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_isObject).default;
+  }
+});
+
+var _length = __webpack_require__(99);
+
+Object.defineProperty(exports, 'length', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_length).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(2);
-var normalizeHeaderName = __webpack_require__(41);
+var normalizeHeaderName = __webpack_require__(44);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -617,10 +728,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(17);
+    adapter = __webpack_require__(20);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(17);
+    adapter = __webpack_require__(20);
   }
   return adapter;
 }
@@ -695,10 +806,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -795,7 +906,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -811,7 +922,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 var printWarning = function() {};
 
 if (true) {
-  var ReactPropTypesSecret = __webpack_require__(21);
+  var ReactPropTypesSecret = __webpack_require__(24);
   var loggedTypeFailures = {};
 
   printWarning = function(text) {
@@ -893,7 +1004,7 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -924,7 +1035,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -948,7 +1059,7 @@ function _extends() {
 }
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -969,7 +1080,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -980,7 +1091,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return applyMiddleware; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return compose; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__DO_NOT_USE__ActionTypes", function() { return ActionTypes; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(78);
 
 
 /**
@@ -1620,7 +1731,117 @@ if ("development" !== 'production' && typeof isCrushed.name === 'string' && isCr
 
 
 /***/ }),
-/* 13 */
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @copyright 2015, Andrey Popp <8mayday@gmail.com>
+ *
+ * The decorator may be used on classes or methods
+ * ```
+ * @autobind
+ * class FullBound {}
+ *
+ * class PartBound {
+ *   @autobind
+ *   method () {}
+ * }
+ * ```
+ */
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports['default'] = autobind;
+
+function autobind() {
+  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  if (args.length === 1) {
+    return boundClass.apply(undefined, args);
+  } else {
+    return boundMethod.apply(undefined, args);
+  }
+}
+
+/**
+ * Use boundMethod to bind all methods on the target.prototype
+ */
+function boundClass(target) {
+  // (Using reflect to get all keys including symbols)
+  var keys = undefined;
+  // Use Reflect if exists
+  if (typeof Reflect !== 'undefined' && typeof Reflect.ownKeys === 'function') {
+    keys = Reflect.ownKeys(target.prototype);
+  } else {
+    keys = Object.getOwnPropertyNames(target.prototype);
+    // use symbols if support is provided
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      keys = keys.concat(Object.getOwnPropertySymbols(target.prototype));
+    }
+  }
+
+  keys.forEach(function (key) {
+    // Ignore special case target method
+    if (key === 'constructor') {
+      return;
+    }
+
+    var descriptor = Object.getOwnPropertyDescriptor(target.prototype, key);
+
+    // Only methods need binding
+    if (typeof descriptor.value === 'function') {
+      Object.defineProperty(target.prototype, key, boundMethod(target, key, descriptor));
+    }
+  });
+  return target;
+}
+
+/**
+ * Return a descriptor removing the value and returning a getter
+ * The getter will return a .bind version of the function
+ * and memoize the result against a symbol on the instance
+ */
+function boundMethod(target, key, descriptor) {
+  var fn = descriptor.value;
+
+  if (typeof fn !== 'function') {
+    throw new Error('@autobind decorator can only be applied to methods not: ' + typeof fn);
+  }
+
+  // In IE11 calling Object.defineProperty has a side-effect of evaluating the
+  // getter for the property which is being replaced. This causes infinite
+  // recursion and an "Out of stack space" error.
+  var definingProperty = false;
+
+  return {
+    configurable: true,
+    get: function get() {
+      if (definingProperty || this === target.prototype || this.hasOwnProperty(key)) {
+        return fn;
+      }
+
+      var boundFn = fn.bind(this);
+      definingProperty = true;
+      Object.defineProperty(this, key, {
+        value: boundFn,
+        configurable: true,
+        writable: true
+      });
+      definingProperty = false;
+      return boundFn;
+    }
+  };
+}
+module.exports = exports['default'];
+
+
+/***/ }),
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4198,10 +4419,10 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
 
 /***/ }),
-/* 14 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14572,13 +14793,13 @@ return jQuery;
 
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(37);
+module.exports = __webpack_require__(40);
 
 /***/ }),
-/* 16 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14596,19 +14817,19 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 17 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(2);
-var settle = __webpack_require__(42);
-var buildURL = __webpack_require__(44);
-var parseHeaders = __webpack_require__(45);
-var isURLSameOrigin = __webpack_require__(46);
-var createError = __webpack_require__(18);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(47);
+var settle = __webpack_require__(45);
+var buildURL = __webpack_require__(47);
+var parseHeaders = __webpack_require__(48);
+var isURLSameOrigin = __webpack_require__(49);
+var createError = __webpack_require__(21);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(50);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -14705,7 +14926,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(48);
+      var cookies = __webpack_require__(51);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -14783,13 +15004,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 18 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(43);
+var enhanceError = __webpack_require__(46);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -14808,7 +15029,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 19 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14820,7 +15041,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 20 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14846,7 +15067,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14865,7 +15086,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14905,12 +15126,12 @@ if (false) {
   checkDCE();
   module.exports = require('./cjs/react-dom.production.min.js');
 } else {
-  module.exports = __webpack_require__(58);
+  module.exports = __webpack_require__(61);
 }
 
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14922,47 +15143,13 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (true) {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(66)(isValidElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = require('./factoryWithThrowingShims')();
-}
-
-
-/***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return subscriptionShape; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return storeShape; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_prop_types__);
 
 var subscriptionShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
@@ -14978,25 +15165,25 @@ var storeShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 });
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_assertThisInitialized__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react_is__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_Subscription__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_PropTypes__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_Subscription__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_PropTypes__ = __webpack_require__(27);
 
 
 
@@ -15292,7 +15479,7 @@ _ref) {
 }
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15301,19 +15488,19 @@ _ref) {
 if (false) {
   module.exports = require('./cjs/react-is.production.min.js');
 } else {
-  module.exports = __webpack_require__(69);
+  module.exports = __webpack_require__(72);
 }
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = wrapMapToPropsConstant;
 /* unused harmony export getDependsOnOwnProps */
 /* harmony export (immutable) */ __webpack_exports__["b"] = wrapMapToPropsFunc;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(31);
 
 function wrapMapToPropsConstant(getConstant) {
   return function initConstantSelector(dispatch, options) {
@@ -15380,13 +15567,13 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 }
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifyPlainObject;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isPlainObject__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__warning__ = __webpack_require__(11);
 
 
 function verifyPlainObject(value, displayName, methodName) {
@@ -15396,7 +15583,66 @@ function verifyPlainObject(value, displayName, methodName) {
 }
 
 /***/ }),
-/* 30 */
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Label;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @ignore
+ * @param {Object} props
+ * @param {InputRangeClassNames} props.classNames
+ * @param {Function} props.formatLabel
+ * @param {string} props.type
+ */
+function Label(props) {
+  var labelValue = props.formatLabel ? props.formatLabel(props.children, props.type) : props.children;
+
+  return _react2.default.createElement(
+    'span',
+    { className: props.classNames[props.type + 'Label'] },
+    _react2.default.createElement(
+      'span',
+      { className: props.classNames.labelContainer },
+      labelValue
+    )
+  );
+}
+
+/**
+ * @type {Object}
+ * @property {Function} children
+ * @property {Function} classNames
+ * @property {Function} formatLabel
+ * @property {Function} type
+ */
+Label.propTypes = {
+  children: _propTypes2.default.node.isRequired,
+  classNames: _propTypes2.default.objectOf(_propTypes2.default.string).isRequired,
+  formatLabel: _propTypes2.default.func,
+  type: _propTypes2.default.string.isRequired
+};
+module.exports = exports['default'];
+//# sourceMappingURL=label.js.map
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15407,7 +15653,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addCoolingProfile = exports.addHeatingProfile = exports.addHeatSource = exports.addChiller = exports.addFahrenheitData = exports.addCoolingProfileData = exports.addCompressionChillerData = exports.addHeatingProfileData = exports.addHeatSourceData = exports.addOptionData = exports.addEconomicData = exports.addGeneralData = undefined;
 
-var _actionTypes = __webpack_require__(3);
+var _actionTypes = __webpack_require__(4);
 
 var addGeneralData = exports.addGeneralData = function addGeneralData(data) {
 	return { type: _actionTypes.ADD_GENERAL, payload: data };
@@ -15448,15 +15694,15 @@ var addCoolingProfile = exports.addCoolingProfile = function addCoolingProfile(d
 };
 
 /***/ }),
-/* 31 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(32);
-module.exports = __webpack_require__(107);
+__webpack_require__(35);
+module.exports = __webpack_require__(126);
 
 
 /***/ }),
-/* 32 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15468,7 +15714,7 @@ module.exports = __webpack_require__(107);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(33);
+__webpack_require__(36);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -15478,17 +15724,17 @@ __webpack_require__(33);
 
 //require('ion-rangeslider')
 
-__webpack_require__(56);
+__webpack_require__(59);
 
 /***/ }),
-/* 33 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-window._ = __webpack_require__(34);
-window.Popper = __webpack_require__(13).default;
+window._ = __webpack_require__(37);
+window.Popper = __webpack_require__(16).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -15497,9 +15743,9 @@ window.Popper = __webpack_require__(13).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(14);
+  window.$ = window.jQuery = __webpack_require__(17);
 
-  __webpack_require__(36);
+  __webpack_require__(39);
 } catch (e) {}
 
 /**
@@ -15508,7 +15754,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(15);
+window.axios = __webpack_require__(18);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.baseURL = window.app.url;
@@ -15545,7 +15791,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -32657,10 +32903,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(35)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(38)(module)))
 
 /***/ }),
-/* 35 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -32688,7 +32934,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -32697,7 +32943,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(14), __webpack_require__(13)) :
+   true ? factory(exports, __webpack_require__(17), __webpack_require__(16)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -36638,16 +36884,16 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(2);
-var bind = __webpack_require__(16);
-var Axios = __webpack_require__(39);
-var defaults = __webpack_require__(6);
+var bind = __webpack_require__(19);
+var Axios = __webpack_require__(42);
+var defaults = __webpack_require__(8);
 
 /**
  * Create an instance of Axios
@@ -36680,15 +36926,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(20);
-axios.CancelToken = __webpack_require__(54);
-axios.isCancel = __webpack_require__(19);
+axios.Cancel = __webpack_require__(23);
+axios.CancelToken = __webpack_require__(57);
+axios.isCancel = __webpack_require__(22);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(55);
+axios.spread = __webpack_require__(58);
 
 module.exports = axios;
 
@@ -36697,7 +36943,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports) {
 
 /*!
@@ -36724,16 +36970,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(8);
 var utils = __webpack_require__(2);
-var InterceptorManager = __webpack_require__(49);
-var dispatchRequest = __webpack_require__(50);
+var InterceptorManager = __webpack_require__(52);
+var dispatchRequest = __webpack_require__(53);
 
 /**
  * Create a new instance of Axios
@@ -36810,7 +37056,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -37000,7 +37246,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37019,13 +37265,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(18);
+var createError = __webpack_require__(21);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -37052,7 +37298,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37080,7 +37326,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37153,7 +37399,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37213,7 +37459,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37288,7 +37534,7 @@ module.exports = (
 
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37331,7 +37577,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37391,7 +37637,7 @@ module.exports = (
 
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37450,18 +37696,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(2);
-var transformData = __webpack_require__(51);
-var isCancel = __webpack_require__(19);
-var defaults = __webpack_require__(6);
-var isAbsoluteURL = __webpack_require__(52);
-var combineURLs = __webpack_require__(53);
+var transformData = __webpack_require__(54);
+var isCancel = __webpack_require__(22);
+var defaults = __webpack_require__(8);
+var isAbsoluteURL = __webpack_require__(55);
+var combineURLs = __webpack_require__(56);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -37543,7 +37789,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37570,7 +37816,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37591,7 +37837,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37612,13 +37858,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(20);
+var Cancel = __webpack_require__(23);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -37676,7 +37922,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37710,7 +37956,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37722,37 +37968,37 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(22);
+var _reactDom = __webpack_require__(25);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Breadcrumb = __webpack_require__(63);
+var _Breadcrumb = __webpack_require__(66);
 
 var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
 
-var _Adcalc = __webpack_require__(64);
+var _Adcalc = __webpack_require__(67);
 
 var _Adcalc2 = _interopRequireDefault(_Adcalc);
 
 var _reactMultiLang = __webpack_require__(1);
 
-var _de = __webpack_require__(98);
+var _de = __webpack_require__(117);
 
 var _de2 = _interopRequireDefault(_de);
 
-var _en = __webpack_require__(99);
+var _en = __webpack_require__(118);
 
 var _en2 = _interopRequireDefault(_en);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(6);
 
-var _index = __webpack_require__(100);
+var _index = __webpack_require__(119);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(30);
+var _index3 = __webpack_require__(33);
 
-var _Success = __webpack_require__(106);
+var _Success = __webpack_require__(125);
 
 var _Success2 = _interopRequireDefault(_Success);
 
@@ -38044,7 +38290,7 @@ if (document.getElementById('content')) {
 }
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38065,8 +38311,8 @@ if (true) {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(7);
-var checkPropTypes = __webpack_require__(8);
+var _assign = __webpack_require__(9);
+var checkPropTypes = __webpack_require__(10);
 
 // TODO: this is special because it gets imported during build.
 
@@ -39891,7 +40137,7 @@ module.exports = react;
 
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39913,10 +40159,10 @@ if (true) {
 'use strict';
 
 var React = __webpack_require__(0);
-var _assign = __webpack_require__(7);
-var checkPropTypes = __webpack_require__(8);
-var scheduler = __webpack_require__(59);
-var tracing = __webpack_require__(61);
+var _assign = __webpack_require__(9);
+var checkPropTypes = __webpack_require__(10);
+var scheduler = __webpack_require__(62);
+var tracing = __webpack_require__(64);
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -59625,7 +59871,7 @@ module.exports = reactDom;
 
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59634,12 +59880,12 @@ module.exports = reactDom;
 if (false) {
   module.exports = require('./cjs/scheduler.production.min.js');
 } else {
-  module.exports = __webpack_require__(60);
+  module.exports = __webpack_require__(63);
 }
 
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60278,10 +60524,10 @@ exports.unstable_shouldYield = unstable_shouldYield;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60290,12 +60536,12 @@ exports.unstable_shouldYield = unstable_shouldYield;
 if (false) {
   module.exports = require('./cjs/scheduler-tracing.production.min.js');
 } else {
-  module.exports = __webpack_require__(62);
+  module.exports = __webpack_require__(65);
 }
 
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60722,7 +60968,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60789,7 +61035,7 @@ var Breadcrumb = function (_Component) {
 exports.default = Breadcrumb;
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60805,47 +61051,47 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(6);
 
-var _Tiles = __webpack_require__(83);
+var _Tiles = __webpack_require__(86);
 
 var _Tiles2 = _interopRequireDefault(_Tiles);
 
-var _ChillerModal = __webpack_require__(87);
+var _ChillerModal = __webpack_require__(106);
 
 var _ChillerModal2 = _interopRequireDefault(_ChillerModal);
 
-var _GeneralModal = __webpack_require__(88);
+var _GeneralModal = __webpack_require__(107);
 
 var _GeneralModal2 = _interopRequireDefault(_GeneralModal);
 
-var _EconomicModal = __webpack_require__(89);
+var _EconomicModal = __webpack_require__(108);
 
 var _EconomicModal2 = _interopRequireDefault(_EconomicModal);
 
-var _HeatSourceModal = __webpack_require__(91);
+var _HeatSourceModal = __webpack_require__(110);
 
 var _HeatSourceModal2 = _interopRequireDefault(_HeatSourceModal);
 
-var _HeatingProfileModal = __webpack_require__(92);
+var _HeatingProfileModal = __webpack_require__(111);
 
 var _HeatingProfileModal2 = _interopRequireDefault(_HeatingProfileModal);
 
-var _CoolingProfileModal = __webpack_require__(93);
+var _CoolingProfileModal = __webpack_require__(112);
 
 var _CoolingProfileModal2 = _interopRequireDefault(_CoolingProfileModal);
 
-var _OptionsModal = __webpack_require__(94);
+var _OptionsModal = __webpack_require__(113);
 
 var _OptionsModal2 = _interopRequireDefault(_OptionsModal);
 
-var _FahrenheitSystemModal = __webpack_require__(95);
+var _FahrenheitSystemModal = __webpack_require__(114);
 
 var _FahrenheitSystemModal2 = _interopRequireDefault(_FahrenheitSystemModal);
 
 var _reactMultiLang = __webpack_require__(1);
 
-var _actions = __webpack_require__(30);
+var _actions = __webpack_require__(33);
 
 var actionCreator = _interopRequireWildcard(_actions);
 
@@ -61038,7 +61284,7 @@ var Adcalc = function (_Component) {
                     tileCls: 'general-information data-box',
                     required: "yes",
                     edit: 'yes',
-                    editCls: 'edit-icon myBtn_multi',
+                    editCls: 'edit-icon myBtn_multi hide',
                     editIcon: 'public/images/edit-icon.png',
                     add: 'no',
                     hoverText: this.props.t('Tiles.General.hoverText'),
@@ -61053,7 +61299,7 @@ var Adcalc = function (_Component) {
                 Economic: {
                     title: ECONOMIC_TITLE,
                     header: this.props.t('Tiles.Economic.Title'),
-                    tileCls: 'economic-data data-box',
+                    tileCls: 'economic-data data-box disabled',
                     required: "no",
                     edit: 'yes',
                     editCls: 'edit-icon myBtn_multi',
@@ -61071,7 +61317,7 @@ var Adcalc = function (_Component) {
                 Options: {
                     title: OPTION_TILE,
                     header: this.props.t('Tiles.Options.Title'),
-                    tileCls: 'options data-box',
+                    tileCls: 'options data-box disabled',
                     required: "no",
                     edit: 'yes',
                     editCls: 'edit-icon myBtn_multi',
@@ -61092,7 +61338,7 @@ var Adcalc = function (_Component) {
                     tileCls: 'heat-sources data-box',
                     required: "no",
                     edit: 'yes',
-                    editCls: 'add-icon myBtn_multi',
+                    editCls: 'add-icon myBtn_multi hide',
                     editIcon: 'public/images/add-icon.png',
                     add: 'no',
                     hoverText: this.props.t('Tiles.HeatSource.hoverText'),
@@ -61108,7 +61354,7 @@ var Adcalc = function (_Component) {
                 HeatingLoadProfile: {
                     title: HEAT_LOAD_PROFILE_TITLE,
                     header: this.props.t('Tiles.HeatingLoadProfile.Title'),
-                    tileCls: 'heating-load-profiles data-box',
+                    tileCls: 'heating-load-profiles data-box disabled',
                     required: "no",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
@@ -61126,7 +61372,7 @@ var Adcalc = function (_Component) {
                 CompressionChiller: {
                     title: CHILLER_TITLE,
                     header: this.props.t('Tiles.CompressionChiller.Title'),
-                    tileCls: 'compression-chillers data-box',
+                    tileCls: 'compression-chillers data-box disabled',
                     required: "no",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
@@ -61163,7 +61409,7 @@ var Adcalc = function (_Component) {
                 FahrenheitSystem: {
                     title: FAHRENHEIT_SYSTEM,
                     header: this.props.t('Tiles.FahrenheitSystem.Title'),
-                    tileCls: 'fahrenheit-system-box data-box',
+                    tileCls: 'fahrenheit-system-box data-box disabled',
                     required: "yes",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
@@ -61281,18 +61527,18 @@ var mapStateToProps = function mapStateToProps(state) {
 exports.default = (0, _reactMultiLang.translate)((0, _reactRedux.connect)(mapStateToProps)(Adcalc));
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = createProvider;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_PropTypes__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_warning__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_PropTypes__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_warning__ = __webpack_require__(11);
 
 
 
@@ -61364,7 +61610,7 @@ function createProvider(storeKey) {
 /* harmony default export */ __webpack_exports__["b"] = (createProvider());
 
 /***/ }),
-/* 66 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61377,10 +61623,10 @@ function createProvider(storeKey) {
 
 
 
-var assign = __webpack_require__(7);
+var assign = __webpack_require__(9);
 
-var ReactPropTypesSecret = __webpack_require__(21);
-var checkPropTypes = __webpack_require__(8);
+var ReactPropTypesSecret = __webpack_require__(24);
+var checkPropTypes = __webpack_require__(10);
 
 var printWarning = function() {};
 
@@ -61926,7 +62172,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 /***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61940,7 +62186,7 @@ function _assertThisInitialized(self) {
 }
 
 /***/ }),
-/* 68 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61950,7 +62196,7 @@ function _assertThisInitialized(self) {
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-var ReactIs = __webpack_require__(27);
+var ReactIs = __webpack_require__(29);
 var REACT_STATICS = {
     childContextTypes: true,
     contextType: true,
@@ -62034,7 +62280,7 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62248,7 +62494,7 @@ exports.isStrictMode = isStrictMode;
 
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62304,7 +62550,7 @@ module.exports = invariant;
 
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62399,19 +62645,19 @@ function () {
 
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export createConnect */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mapStateToProps__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mergeProps__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__selectorFactory__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_connectAdvanced__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_shallowEqual__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mapDispatchToProps__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mapStateToProps__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mergeProps__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__selectorFactory__ = __webpack_require__(84);
 
 
 
@@ -62512,7 +62758,7 @@ function createConnect(_temp) {
 /* harmony default export */ __webpack_exports__["a"] = (createConnect());
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62548,15 +62794,15 @@ function shallowEqual(objA, objB) {
 }
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(30);
 
 
 function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
@@ -62577,11 +62823,11 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject]);
 
 /***/ }),
-/* 75 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(77);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(80);
 /* global window */
 
 
@@ -62602,10 +62848,10 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4), __webpack_require__(76)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5), __webpack_require__(79)(module)))
 
 /***/ }),
-/* 76 */
+/* 79 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -62635,7 +62881,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 77 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62660,7 +62906,7 @@ function symbolObservablePonyfill(root) {
 
 
 /***/ }),
-/* 78 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62683,13 +62929,13 @@ function isPlainObject(obj) {
 }
 
 /***/ }),
-/* 79 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export whenMapStateToPropsIsFunction */
 /* unused harmony export whenMapStateToPropsIsMissing */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(30);
 
 function whenMapStateToPropsIsFunction(mapStateToProps) {
   return typeof mapStateToProps === 'function' ? Object(__WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__["b" /* wrapMapToPropsFunc */])(mapStateToProps, 'mapStateToProps') : undefined;
@@ -62702,7 +62948,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing]);
 
 /***/ }),
-/* 80 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62710,8 +62956,8 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* unused harmony export wrapMergePropsFunc */
 /* unused harmony export whenMergePropsIsFunction */
 /* unused harmony export whenMergePropsIsOmitted */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_verifyPlainObject__ = __webpack_require__(31);
 
 
 function defaultMergeProps(stateProps, dispatchProps, ownProps) {
@@ -62750,15 +62996,15 @@ function whenMergePropsIsOmitted(mergeProps) {
 /* harmony default export */ __webpack_exports__["a"] = ([whenMergePropsIsFunction, whenMergePropsIsOmitted]);
 
 /***/ }),
-/* 81 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export impureFinalPropsSelectorFactory */
 /* unused harmony export pureFinalPropsSelectorFactory */
 /* harmony export (immutable) */ __webpack_exports__["a"] = finalPropsSelectorFactory;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__verifySubselectors__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutPropertiesLoose__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__verifySubselectors__ = __webpack_require__(85);
 
 
 function impureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch) {
@@ -62848,12 +63094,12 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 }
 
 /***/ }),
-/* 82 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = verifySubselectors;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warning__ = __webpack_require__(11);
 
 
 function verify(selector, methodName, displayName) {
@@ -62873,7 +63119,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 }
 
 /***/ }),
-/* 83 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62889,11 +63135,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DeleteModal = __webpack_require__(84);
+var _DeleteModal = __webpack_require__(87);
 
-var _ErrorBoundary = __webpack_require__(85);
+var _ErrorBoundary = __webpack_require__(88);
 
 var _reactMultiLang = __webpack_require__(1);
+
+var _reactInputRange = __webpack_require__(90);
+
+var _reactInputRange2 = _interopRequireDefault(_reactInputRange);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -62906,6 +63156,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var hideEle = {
     visibility: "hidden"
 };
+var tdBorder = {
+    borderTop: "0px"
+};
 
 var Tiles = function (_React$Component) {
     _inherits(Tiles, _React$Component);
@@ -62916,6 +63169,7 @@ var Tiles = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
         _this.state = {
+            value: 2,
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: [],
@@ -63013,6 +63267,45 @@ var Tiles = function (_React$Component) {
                 default:
                     break;
             }
+        }
+    }, {
+        key: 'initializeAutocomplete',
+        value: function initializeAutocomplete(elem) {
+            var input = document.getElementById(elem.target.id);
+            // var options = {
+            //   types: ['(regions)'],
+            //   componentRestrictions: {country: "IN"}
+            // };
+            var options = {};
+
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                var lat = place.geometry.location.lat();
+                var lng = place.geometry.location.lng();
+                var placeId = place.place_id;
+                // to set city name, using the locality param
+                var componentForm = {
+                    locality: 'short_name'
+                };
+
+                console.log(lat, lng);
+                // initialize(lat, lng);
+                // //Drawing map on the basis of latitude and longitude.
+                // getMapInfo(lat, lng,place)
+            });
+        }
+    }, {
+        key: 'setTempState',
+        value: function setTempState(value) {
+            console.log(value);
+            axios.get('/user?ID=12345').then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            this.setState({ value: value });
         }
     }, {
         key: 'componentDidUpdate',
@@ -63453,6 +63746,35 @@ var Tiles = function (_React$Component) {
                 }
             }
             if (this.props.title == HEAT_SOURCE_TITLE) {
+                var heatForm = _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement(
+                        'table',
+                        { className: 'table' },
+                        _react2.default.createElement(
+                            'tr',
+                            null,
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-label', style: tdBorder },
+                                this.props.t('HeatSource.Tab.TechnicalData.DriveTemperature.Title'),
+                                ':'
+                            ),
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-fields', style: tdBorder },
+                                _react2.default.createElement(_reactInputRange2.default, {
+                                    maxValue: 20,
+                                    minValue: 0,
+                                    value: this.state.value,
+                                    onChange: function onChange(value) {
+                                        return _this2.setTempState(value);
+                                    } })
+                            )
+                        )
+                    )
+                );
                 if (this.state.heatSourceDataChange == true && this.state.heatSourceData.length != 0) {
                     projectData['heatsource'] = this.state.heatSourceData;
                     var heatSourceData = this.state.heatSourceData;
@@ -63619,7 +63941,7 @@ var Tiles = function (_React$Component) {
                     var priceFullList = _react2.default.createElement(
                         'p',
                         null,
-                        this.props.hoverText
+                        heatForm
                     );
                 }
             }
@@ -63772,6 +64094,93 @@ var Tiles = function (_React$Component) {
                 }
             }
             if (this.props.title == COOLING_LOAD_PROFILE_TITLE) {
+                var coolingLoadForm = _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement(
+                        'table',
+                        { className: 'table' },
+                        _react2.default.createElement(
+                            'tr',
+                            null,
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-label', style: tdBorder },
+                                this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.Title'),
+                                ':'
+                            ),
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-fields', style: tdBorder },
+                                _react2.default.createElement(
+                                    'select',
+                                    { className: 'required-field', onChange: function onChange(elem) {
+                                            return _this2.changeField(elem);
+                                        }, name: 'cooling_profile_type', id: 'cooling_profile_type' },
+                                    _react2.default.createElement(
+                                        'option',
+                                        { value: 'Office Space' },
+                                        'Office Space'
+                                    ),
+                                    _react2.default.createElement(
+                                        'option',
+                                        { value: 'Process cooling' },
+                                        'Process Cooling'
+                                    )
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'tr',
+                            null,
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-label', style: tdBorder },
+                                this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.Title'),
+                                ':'
+                            ),
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-fields', style: tdBorder },
+                                _react2.default.createElement(
+                                    'ul',
+                                    { className: 'list-inline' },
+                                    _react2.default.createElement(
+                                        'li',
+                                        { className: 'withunit' },
+                                        _react2.default.createElement('input', { type: 'text', required: true, placeholder: '50.0', pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', id: 'cooling_max_cooling_load' }),
+                                        _react2.default.createElement(
+                                            'span',
+                                            null,
+                                            'kW'
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'tr',
+                            null,
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-label', style: tdBorder },
+                                this.props.t('CoolingProfile.Tab.TechnicalData.ChilledWaterTemperature.Title'),
+                                ':'
+                            ),
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-fields', style: tdBorder },
+                                _react2.default.createElement(_reactInputRange2.default, {
+                                    maxValue: 20,
+                                    minValue: 0,
+                                    value: this.state.value,
+                                    onChange: function onChange(value) {
+                                        return _this2.setTempState(value);
+                                    } })
+                            )
+                        )
+                    )
+                );
                 COOLING_FORM_STATUS = this.state.coolingProfileData.length == 0 ? false : true; //use to validate the form.
                 if (this.state.coolingProfileDataChange == true && this.state.coolingProfileData.length != 0) {
                     projectData['chiller'] = this.state.coolingProfileData;
@@ -63942,73 +64351,70 @@ var Tiles = function (_React$Component) {
                     var priceFullList = _react2.default.createElement(
                         'p',
                         { className: 'scrollbar-macosx' },
-                        this.props.hoverText
+                        coolingLoadForm
                     );
                 }
             }
             if (this.props.title == GENERAL_TILE) {
-
+                var generalForm = _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement(
+                        'table',
+                        { className: 'table' },
+                        _react2.default.createElement(
+                            'tr',
+                            null,
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-label', style: tdBorder },
+                                this.props.t('General.Tab.Personal.PersonalAddress.Title'),
+                                ':'
+                            ),
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-fields', style: tdBorder },
+                                _react2.default.createElement(
+                                    'select',
+                                    null,
+                                    _react2.default.createElement(
+                                        'option',
+                                        { value: 'munich' },
+                                        'munich'
+                                    )
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'tr',
+                            null,
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-label', style: tdBorder },
+                                this.props.t('General.Tab.Project.ProjectTemp.Title'),
+                                ':'
+                            ),
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-fields', style: tdBorder },
+                                _react2.default.createElement(_reactInputRange2.default, {
+                                    maxValue: 20,
+                                    minValue: 0,
+                                    value: this.state.value,
+                                    onChange: function onChange(value) {
+                                        return _this2.setTempState(value);
+                                    } })
+                            )
+                        )
+                    )
+                );
                 if (this.state.generalDataChange) {
                     projectData['generalData'] = this.state.generalData;
                     store.dispatch(addGeneralData(this.state.generalData));
                     var pricelist = _react2.default.createElement(
                         'ul',
                         { className: 'price-listt plnewblock scrollbar-macosx' },
-                        function () {
-                            if (_this2.state.generalData[0].project_name != "") {
-                                return _react2.default.createElement(
-                                    'li',
-                                    { className: 'pdtnam' },
-                                    _react2.default.createElement(
-                                        'p',
-                                        null,
-                                        _this2.props.t('General.Tab.Project.ProjectName.Title')
-                                    ),
-                                    _react2.default.createElement(
-                                        'h3',
-                                        { className: 'textUpper' },
-                                        _this2.state.generalData[0].project_name
-                                    )
-                                );
-                            }
-                        }(),
-                        function () {
-                            if (_this2.state.generalData[0].project_number != "") {
-                                return _react2.default.createElement(
-                                    'li',
-                                    { className: 'pdtnum' },
-                                    _react2.default.createElement(
-                                        'p',
-                                        null,
-                                        _this2.props.t('General.Tab.Project.ProjectNumber.Title')
-                                    ),
-                                    _react2.default.createElement(
-                                        'h3',
-                                        { className: 'textUpper' },
-                                        _this2.state.generalData[0].project_number
-                                    )
-                                );
-                            }
-                        }(),
                         _react2.default.createElement('div', { className: 'clrs' }),
-                        function () {
-                            if (_this2.state.generalData[0].editor != "") {
-                                return _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    _react2.default.createElement(
-                                        'p',
-                                        null,
-                                        _this2.props.t('General.Tab.Personal.PersonalEditor.Title')
-                                    ),
-                                    _react2.default.createElement(
-                                        'h3',
-                                        { className: 'textUpper' },
-                                        _this2.state.generalData[0].editor
-                                    )
-                                );
-                            }
-                        }(),
                         _react2.default.createElement(
                             'li',
                             null,
@@ -64024,163 +64430,15 @@ var Tiles = function (_React$Component) {
                             )
                         )
                     );
-
-                    var priceFullList = _react2.default.createElement(
-                        'div',
-                        { className: 'hover-list scrollbar-macosx' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'table-responsive' },
-                            _react2.default.createElement(
-                                'table',
-                                { className: 'table' },
-                                _react2.default.createElement(
-                                    'tbody',
-                                    null,
-                                    function () {
-                                        if (_this2.state.generalData[0].project_name != "") {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                null,
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    _this2.props.t('General.Tab.Project.ProjectName.Title'),
-                                                    ':'
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _this2.state.generalData[0].project_name
-                                                )
-                                            );
-                                        }
-                                    }(),
-                                    function () {
-                                        if (_this2.state.generalData[0].project_number != "") {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                null,
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    _this2.props.t('General.Tab.Project.ProjectNumber.Title'),
-                                                    ':'
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _this2.state.generalData[0].project_number
-                                                )
-                                            );
-                                        }
-                                    }(),
-                                    function () {
-                                        if (_this2.state.generalData[0].editor != "") {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                null,
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    _this2.props.t('General.Tab.Personal.PersonalEditor.Title'),
-                                                    ': '
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _this2.state.generalData[0].editor
-                                                )
-                                            );
-                                        }
-                                    }(),
-                                    function () {
-                                        if (_this2.state.generalData[0].location != "") {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                null,
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    _this2.props.t('General.Tab.Project.ProjectLocation.Title'),
-                                                    ':'
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _this2.state.generalData[0].location
-                                                )
-                                            );
-                                        }
-                                    }(),
-                                    function () {
-                                        if (_this2.state.generalData[0].customer != "") {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                null,
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    _this2.props.t('General.Tab.Project.ProjectContact.Title'),
-                                                    ': '
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _this2.state.generalData[0].customer
-                                                )
-                                            );
-                                        }
-                                    }(),
-                                    function () {
-                                        if (_this2.state.generalData[0].phone_number != "") {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                null,
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    _this2.props.t('General.Tab.Project.ProjectPhone.Title'),
-                                                    ':'
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _this2.state.generalData[0].phone_number
-                                                )
-                                            );
-                                        }
-                                    }(),
-                                    function () {
-                                        if (_this2.state.generalData[0].email_address != "") {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                null,
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    _this2.props.t('General.Tab.Project.ProjectEmail.Title'),
-                                                    ':'
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _this2.state.generalData[0].email_address
-                                                )
-                                            );
-                                        }
-                                    }()
-                                )
-                            )
-                        )
-                    );
+                    var priceFullList = generalForm;
                     //     jQuery(".general-information .scrollbar-macosx").scrollbar();
                     var requiredMsg = "";
                 } else {
+
                     var priceFullList = _react2.default.createElement(
                         'p',
                         { className: 'scrollbar-macosx' },
-                        this.props.hoverText
+                        generalForm
                     );
                 }
             }
@@ -65396,7 +65654,7 @@ exports.default = (0, _reactMultiLang.translate)(Tiles);
 //   });
 
 /***/ }),
-/* 84 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65510,7 +65768,7 @@ var DeleteModal = exports.DeleteModal = function (_Component) {
 }(_react.Component);
 
 /***/ }),
-/* 85 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65575,7 +65833,7 @@ var ErrorBoundary = exports.ErrorBoundary = function (_React$Component) {
 }(_react2.default.Component);
 
 /***/ }),
-/* 86 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65650,7 +65908,2155 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 87 */
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inputRange = __webpack_require__(91);
+
+var _inputRange2 = _interopRequireDefault(_inputRange);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @ignore
+ * @typedef {Object} ClientRect
+ * @property {number} height
+ * @property {number} left
+ * @property {number} top
+ * @property {number} width
+ */
+
+/**
+ * @typedef {Object} InputRangeClassNames
+ * @property {string} activeTrack
+ * @property {string} disabledInputRange
+ * @property {string} inputRange
+ * @property {string} labelContainer
+ * @property {string} maxLabel
+ * @property {string} minLabel
+ * @property {string} slider
+ * @property {string} sliderContainer
+ * @property {string} track
+ * @property {string} valueLabel
+ */
+
+/**
+ * @typedef {Function} LabelFormatter
+ * @param {number} value
+ * @param {string} type
+ * @return {string}
+ */
+
+/**
+ * @ignore
+ * @typedef {Object} Point
+ * @property {number} x
+ * @property {number} y
+ */
+
+/**
+ * @typedef {Object} Range
+ * @property {number} min - Min value
+ * @property {number} max - Max value
+ */
+
+exports.default = _inputRange2.default;
+module.exports = exports['default'];
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _desc, _value, _class;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _autobindDecorator = __webpack_require__(15);
+
+var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
+
+var _valueTransformer = __webpack_require__(92);
+
+var valueTransformer = _interopRequireWildcard(_valueTransformer);
+
+var _defaultClassNames = __webpack_require__(100);
+
+var _defaultClassNames2 = _interopRequireDefault(_defaultClassNames);
+
+var _label = __webpack_require__(32);
+
+var _label2 = _interopRequireDefault(_label);
+
+var _rangePropType = __webpack_require__(101);
+
+var _rangePropType2 = _interopRequireDefault(_rangePropType);
+
+var _valuePropType = __webpack_require__(102);
+
+var _valuePropType2 = _interopRequireDefault(_valuePropType);
+
+var _slider = __webpack_require__(103);
+
+var _slider2 = _interopRequireDefault(_slider);
+
+var _track = __webpack_require__(104);
+
+var _track2 = _interopRequireDefault(_track);
+
+var _utils = __webpack_require__(7);
+
+var _keyCodes = __webpack_require__(105);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+  var desc = {};
+  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+    desc[key] = descriptor[key];
+  });
+  desc.enumerable = !!desc.enumerable;
+  desc.configurable = !!desc.configurable;
+
+  if ('value' in desc || desc.initializer) {
+    desc.writable = true;
+  }
+
+  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+    return decorator(target, property, desc) || desc;
+  }, desc);
+
+  if (context && desc.initializer !== void 0) {
+    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+    desc.initializer = undefined;
+  }
+
+  if (desc.initializer === void 0) {
+    Object['define' + 'Property'](target, property, desc);
+    desc = null;
+  }
+
+  return desc;
+}
+
+/**
+ * A React component that allows users to input numeric values within a range
+ * by dragging its sliders.
+ */
+var InputRange = (_class = function (_React$Component) {
+  _inherits(InputRange, _React$Component);
+
+  _createClass(InputRange, null, [{
+    key: 'propTypes',
+
+    /**
+     * @ignore
+     * @override
+     * @return {Object}
+     */
+    get: function get() {
+      return {
+        allowSameValues: _propTypes2.default.bool,
+        ariaLabelledby: _propTypes2.default.string,
+        ariaControls: _propTypes2.default.string,
+        classNames: _propTypes2.default.objectOf(_propTypes2.default.string),
+        disabled: _propTypes2.default.bool,
+        draggableTrack: _propTypes2.default.bool,
+        formatLabel: _propTypes2.default.func,
+        maxValue: _rangePropType2.default,
+        minValue: _rangePropType2.default,
+        name: _propTypes2.default.string,
+        onChangeStart: _propTypes2.default.func,
+        onChange: _propTypes2.default.func.isRequired,
+        onChangeComplete: _propTypes2.default.func,
+        step: _propTypes2.default.number,
+        value: _valuePropType2.default
+      };
+    }
+
+    /**
+     * @ignore
+     * @override
+     * @return {Object}
+     */
+
+  }, {
+    key: 'defaultProps',
+    get: function get() {
+      return {
+        allowSameValues: false,
+        classNames: _defaultClassNames2.default,
+        disabled: false,
+        maxValue: 10,
+        minValue: 0,
+        step: 1
+      };
+    }
+
+    /**
+     * @param {Object} props
+     * @param {boolean} [props.allowSameValues]
+     * @param {string} [props.ariaLabelledby]
+     * @param {string} [props.ariaControls]
+     * @param {InputRangeClassNames} [props.classNames]
+     * @param {boolean} [props.disabled = false]
+     * @param {Function} [props.formatLabel]
+     * @param {number|Range} [props.maxValue = 10]
+     * @param {number|Range} [props.minValue = 0]
+     * @param {string} [props.name]
+     * @param {string} props.onChange
+     * @param {Function} [props.onChangeComplete]
+     * @param {Function} [props.onChangeStart]
+     * @param {number} [props.step = 1]
+     * @param {number|Range} props.value
+     */
+
+  }]);
+
+  function InputRange(props) {
+    _classCallCheck(this, InputRange);
+
+    /**
+     * @private
+     * @type {?number}
+     */
+    var _this = _possibleConstructorReturn(this, (InputRange.__proto__ || Object.getPrototypeOf(InputRange)).call(this, props));
+
+    _this.startValue = null;
+
+    /**
+     * @private
+     * @type {?Component}
+     */
+    _this.node = null;
+
+    /**
+     * @private
+     * @type {?Component}
+     */
+    _this.trackNode = null;
+
+    /**
+     * @private
+     * @type {bool}
+     */
+    _this.isSliderDragging = false;
+
+    /**
+     * @private
+     * @type {?string}
+     */
+    _this.lastKeyMoved = null;
+    return _this;
+  }
+
+  /**
+   * @ignore
+   * @override
+   * @return {void}
+   */
+
+
+  _createClass(InputRange, [{
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.removeDocumentMouseUpListener();
+      this.removeDocumentTouchEndListener();
+    }
+
+    /**
+     * Return the CSS class name of the component
+     * @private
+     * @return {string}
+     */
+
+  }, {
+    key: 'getComponentClassName',
+    value: function getComponentClassName() {
+      if (!this.props.disabled) {
+        return this.props.classNames.inputRange;
+      }
+
+      return this.props.classNames.disabledInputRange;
+    }
+
+    /**
+     * Return the bounding rect of the track
+     * @private
+     * @return {ClientRect}
+     */
+
+  }, {
+    key: 'getTrackClientRect',
+    value: function getTrackClientRect() {
+      return this.trackNode.getClientRect();
+    }
+
+    /**
+     * Return the slider key closest to a point
+     * @private
+     * @param {Point} position
+     * @return {string}
+     */
+
+  }, {
+    key: 'getKeyByPosition',
+    value: function getKeyByPosition(position) {
+      var values = valueTransformer.getValueFromProps(this.props, this.isMultiValue());
+      var positions = valueTransformer.getPositionsFromValues(values, this.props.minValue, this.props.maxValue, this.getTrackClientRect());
+
+      if (this.isMultiValue()) {
+        var distanceToMin = (0, _utils.distanceTo)(position, positions.min);
+        var distanceToMax = (0, _utils.distanceTo)(position, positions.max);
+
+        if (distanceToMin < distanceToMax) {
+          return 'min';
+        }
+      }
+
+      return 'max';
+    }
+
+    /**
+     * Return all the slider keys
+     * @private
+     * @return {string[]}
+     */
+
+  }, {
+    key: 'getKeys',
+    value: function getKeys() {
+      if (this.isMultiValue()) {
+        return ['min', 'max'];
+      }
+
+      return ['max'];
+    }
+
+    /**
+     * Return true if the difference between the new and the current value is
+     * greater or equal to the step amount of the component
+     * @private
+     * @param {Range} values
+     * @return {boolean}
+     */
+
+  }, {
+    key: 'hasStepDifference',
+    value: function hasStepDifference(values) {
+      var currentValues = valueTransformer.getValueFromProps(this.props, this.isMultiValue());
+
+      return (0, _utils.length)(values.min, currentValues.min) >= this.props.step || (0, _utils.length)(values.max, currentValues.max) >= this.props.step;
+    }
+
+    /**
+     * Return true if the component accepts a min and max value
+     * @private
+     * @return {boolean}
+     */
+
+  }, {
+    key: 'isMultiValue',
+    value: function isMultiValue() {
+      return (0, _utils.isObject)(this.props.value);
+    }
+
+    /**
+     * Return true if the range is within the max and min value of the component
+     * @private
+     * @param {Range} values
+     * @return {boolean}
+     */
+
+  }, {
+    key: 'isWithinRange',
+    value: function isWithinRange(values) {
+      if (this.isMultiValue()) {
+        return values.min >= this.props.minValue && values.max <= this.props.maxValue && this.props.allowSameValues ? values.min <= values.max : values.min < values.max;
+      }
+
+      return values.max >= this.props.minValue && values.max <= this.props.maxValue;
+    }
+
+    /**
+     * Return true if the new value should trigger a render
+     * @private
+     * @param {Range} values
+     * @return {boolean}
+     */
+
+  }, {
+    key: 'shouldUpdate',
+    value: function shouldUpdate(values) {
+      return this.isWithinRange(values) && this.hasStepDifference(values);
+    }
+
+    /**
+     * Update the position of a slider
+     * @private
+     * @param {string} key
+     * @param {Point} position
+     * @return {void}
+     */
+
+  }, {
+    key: 'updatePosition',
+    value: function updatePosition(key, position) {
+      var values = valueTransformer.getValueFromProps(this.props, this.isMultiValue());
+      var positions = valueTransformer.getPositionsFromValues(values, this.props.minValue, this.props.maxValue, this.getTrackClientRect());
+
+      positions[key] = position;
+      this.lastKeyMoved = key;
+
+      this.updatePositions(positions);
+    }
+
+    /**
+     * Update the positions of multiple sliders
+     * @private
+     * @param {Object} positions
+     * @param {Point} positions.min
+     * @param {Point} positions.max
+     * @return {void}
+     */
+
+  }, {
+    key: 'updatePositions',
+    value: function updatePositions(positions) {
+      var values = {
+        min: valueTransformer.getValueFromPosition(positions.min, this.props.minValue, this.props.maxValue, this.getTrackClientRect()),
+        max: valueTransformer.getValueFromPosition(positions.max, this.props.minValue, this.props.maxValue, this.getTrackClientRect())
+      };
+
+      var transformedValues = {
+        min: valueTransformer.getStepValueFromValue(values.min, this.props.step),
+        max: valueTransformer.getStepValueFromValue(values.max, this.props.step)
+      };
+
+      this.updateValues(transformedValues);
+    }
+
+    /**
+     * Update the value of a slider
+     * @private
+     * @param {string} key
+     * @param {number} value
+     * @return {void}
+     */
+
+  }, {
+    key: 'updateValue',
+    value: function updateValue(key, value) {
+      var values = valueTransformer.getValueFromProps(this.props, this.isMultiValue());
+
+      values[key] = value;
+
+      this.updateValues(values);
+    }
+
+    /**
+     * Update the values of multiple sliders
+     * @private
+     * @param {Range|number} values
+     * @return {void}
+     */
+
+  }, {
+    key: 'updateValues',
+    value: function updateValues(values) {
+      if (!this.shouldUpdate(values)) {
+        return;
+      }
+
+      this.props.onChange(this.isMultiValue() ? values : values.max);
+    }
+
+    /**
+     * Increment the value of a slider by key name
+     * @private
+     * @param {string} key
+     * @return {void}
+     */
+
+  }, {
+    key: 'incrementValue',
+    value: function incrementValue(key) {
+      var values = valueTransformer.getValueFromProps(this.props, this.isMultiValue());
+      var value = values[key] + this.props.step;
+
+      this.updateValue(key, value);
+    }
+
+    /**
+     * Decrement the value of a slider by key name
+     * @private
+     * @param {string} key
+     * @return {void}
+     */
+
+  }, {
+    key: 'decrementValue',
+    value: function decrementValue(key) {
+      var values = valueTransformer.getValueFromProps(this.props, this.isMultiValue());
+      var value = values[key] - this.props.step;
+
+      this.updateValue(key, value);
+    }
+
+    /**
+     * Listen to mouseup event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'addDocumentMouseUpListener',
+    value: function addDocumentMouseUpListener() {
+      this.removeDocumentMouseUpListener();
+      this.node.ownerDocument.addEventListener('mouseup', this.handleMouseUp);
+    }
+
+    /**
+     * Listen to touchend event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'addDocumentTouchEndListener',
+    value: function addDocumentTouchEndListener() {
+      this.removeDocumentTouchEndListener();
+      this.node.ownerDocument.addEventListener('touchend', this.handleTouchEnd);
+    }
+
+    /**
+     * Stop listening to mouseup event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeDocumentMouseUpListener',
+    value: function removeDocumentMouseUpListener() {
+      this.node.ownerDocument.removeEventListener('mouseup', this.handleMouseUp);
+    }
+
+    /**
+     * Stop listening to touchend event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeDocumentTouchEndListener',
+    value: function removeDocumentTouchEndListener() {
+      this.node.ownerDocument.removeEventListener('touchend', this.handleTouchEnd);
+    }
+
+    /**
+     * Handle any "mousemove" event received by the slider
+     * @private
+     * @param {SyntheticEvent} event
+     * @param {string} key
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleSliderDrag',
+    value: function handleSliderDrag(event, key) {
+      var _this2 = this;
+
+      if (this.props.disabled) {
+        return;
+      }
+
+      var position = valueTransformer.getPositionFromEvent(event, this.getTrackClientRect());
+      this.isSliderDragging = true;
+      requestAnimationFrame(function () {
+        return _this2.updatePosition(key, position);
+      });
+    }
+
+    /**
+     * Handle any "mousemove" event received by the track
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleTrackDrag',
+    value: function handleTrackDrag(event, prevEvent) {
+      if (this.props.disabled || !this.props.draggableTrack || this.isSliderDragging) {
+        return;
+      }
+
+      var _props = this.props,
+          maxValue = _props.maxValue,
+          minValue = _props.minValue,
+          _props$value = _props.value,
+          max = _props$value.max,
+          min = _props$value.min;
+
+
+      var position = valueTransformer.getPositionFromEvent(event, this.getTrackClientRect());
+      var value = valueTransformer.getValueFromPosition(position, minValue, maxValue, this.getTrackClientRect());
+      var stepValue = valueTransformer.getStepValueFromValue(value, this.props.step);
+
+      var prevPosition = valueTransformer.getPositionFromEvent(prevEvent, this.getTrackClientRect());
+      var prevValue = valueTransformer.getValueFromPosition(prevPosition, minValue, maxValue, this.getTrackClientRect());
+      var prevStepValue = valueTransformer.getStepValueFromValue(prevValue, this.props.step);
+
+      var offset = prevStepValue - stepValue;
+
+      var transformedValues = {
+        min: min - offset,
+        max: max - offset
+      };
+
+      this.updateValues(transformedValues);
+    }
+
+    /**
+     * Handle any "keydown" event received by the slider
+     * @private
+     * @param {SyntheticEvent} event
+     * @param {string} key
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleSliderKeyDown',
+    value: function handleSliderKeyDown(event, key) {
+      if (this.props.disabled) {
+        return;
+      }
+
+      switch (event.keyCode) {
+        case _keyCodes.LEFT_ARROW:
+        case _keyCodes.DOWN_ARROW:
+          event.preventDefault();
+          this.decrementValue(key);
+          break;
+
+        case _keyCodes.RIGHT_ARROW:
+        case _keyCodes.UP_ARROW:
+          event.preventDefault();
+          this.incrementValue(key);
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    /**
+     * Handle any "mousedown" event received by the track
+     * @private
+     * @param {SyntheticEvent} event
+     * @param {Point} position
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleTrackMouseDown',
+    value: function handleTrackMouseDown(event, position) {
+      if (this.props.disabled) {
+        return;
+      }
+
+      var _props2 = this.props,
+          maxValue = _props2.maxValue,
+          minValue = _props2.minValue,
+          _props2$value = _props2.value,
+          max = _props2$value.max,
+          min = _props2$value.min;
+
+
+      event.preventDefault();
+
+      var value = valueTransformer.getValueFromPosition(position, minValue, maxValue, this.getTrackClientRect());
+      var stepValue = valueTransformer.getStepValueFromValue(value, this.props.step);
+
+      if (!this.props.draggableTrack || stepValue > max || stepValue < min) {
+        this.updatePosition(this.getKeyByPosition(position), position);
+      }
+    }
+
+    /**
+     * Handle the start of any mouse/touch event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleInteractionStart',
+    value: function handleInteractionStart() {
+      if (this.props.onChangeStart) {
+        this.props.onChangeStart(this.props.value);
+      }
+
+      if (this.props.onChangeComplete && !(0, _utils.isDefined)(this.startValue)) {
+        this.startValue = this.props.value;
+      }
+    }
+
+    /**
+     * Handle the end of any mouse/touch event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleInteractionEnd',
+    value: function handleInteractionEnd() {
+      if (this.isSliderDragging) {
+        this.isSliderDragging = false;
+      }
+
+      if (!this.props.onChangeComplete || !(0, _utils.isDefined)(this.startValue)) {
+        return;
+      }
+
+      if (this.startValue !== this.props.value) {
+        this.props.onChangeComplete(this.props.value);
+      }
+
+      this.startValue = null;
+    }
+
+    /**
+     * Handle any "keydown" event received by the component
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleKeyDown',
+    value: function handleKeyDown(event) {
+      this.handleInteractionStart(event);
+    }
+
+    /**
+     * Handle any "keyup" event received by the component
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleKeyUp',
+    value: function handleKeyUp(event) {
+      this.handleInteractionEnd(event);
+    }
+
+    /**
+     * Handle any "mousedown" event received by the component
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleMouseDown',
+    value: function handleMouseDown(event) {
+      this.handleInteractionStart(event);
+      this.addDocumentMouseUpListener();
+    }
+
+    /**
+     * Handle any "mouseup" event received by the component
+     * @private
+     * @param {SyntheticEvent} event
+     */
+
+  }, {
+    key: 'handleMouseUp',
+    value: function handleMouseUp(event) {
+      this.handleInteractionEnd(event);
+      this.removeDocumentMouseUpListener();
+    }
+
+    /**
+     * Handle any "touchstart" event received by the component
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleTouchStart',
+    value: function handleTouchStart(event) {
+      this.handleInteractionStart(event);
+      this.addDocumentTouchEndListener();
+    }
+
+    /**
+     * Handle any "touchend" event received by the component
+     * @private
+     * @param {SyntheticEvent} event
+     */
+
+  }, {
+    key: 'handleTouchEnd',
+    value: function handleTouchEnd(event) {
+      this.handleInteractionEnd(event);
+      this.removeDocumentTouchEndListener();
+    }
+
+    /**
+     * Return JSX of sliders
+     * @private
+     * @return {JSX.Element}
+     */
+
+  }, {
+    key: 'renderSliders',
+    value: function renderSliders() {
+      var _this3 = this;
+
+      var values = valueTransformer.getValueFromProps(this.props, this.isMultiValue());
+      var percentages = valueTransformer.getPercentagesFromValues(values, this.props.minValue, this.props.maxValue);
+      var keys = this.props.allowSameValues && this.lastKeyMoved === 'min' ? this.getKeys().reverse() : this.getKeys();
+
+      return keys.map(function (key) {
+        var value = values[key];
+        var percentage = percentages[key];
+
+        var _props3 = _this3.props,
+            maxValue = _props3.maxValue,
+            minValue = _props3.minValue;
+
+
+        if (key === 'min') {
+          maxValue = values.max;
+        } else {
+          minValue = values.min;
+        }
+
+        var slider = _react2.default.createElement(_slider2.default, {
+          ariaLabelledby: _this3.props.ariaLabelledby,
+          ariaControls: _this3.props.ariaControls,
+          classNames: _this3.props.classNames,
+          formatLabel: _this3.props.formatLabel,
+          key: key,
+          maxValue: maxValue,
+          minValue: minValue,
+          onSliderDrag: _this3.handleSliderDrag,
+          onSliderKeyDown: _this3.handleSliderKeyDown,
+          percentage: percentage,
+          type: key,
+          value: value });
+
+        return slider;
+      });
+    }
+
+    /**
+     * Return JSX of hidden inputs
+     * @private
+     * @return {JSX.Element}
+     */
+
+  }, {
+    key: 'renderHiddenInputs',
+    value: function renderHiddenInputs() {
+      var _this4 = this;
+
+      if (!this.props.name) {
+        return [];
+      }
+
+      var isMultiValue = this.isMultiValue();
+      var values = valueTransformer.getValueFromProps(this.props, isMultiValue);
+
+      return this.getKeys().map(function (key) {
+        var value = values[key];
+        var name = isMultiValue ? '' + _this4.props.name + (0, _utils.captialize)(key) : _this4.props.name;
+
+        return _react2.default.createElement('input', { key: key, type: 'hidden', name: name, value: value });
+      });
+    }
+
+    /**
+     * @ignore
+     * @override
+     * @return {JSX.Element}
+     */
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this5 = this;
+
+      var componentClassName = this.getComponentClassName();
+      var values = valueTransformer.getValueFromProps(this.props, this.isMultiValue());
+      var percentages = valueTransformer.getPercentagesFromValues(values, this.props.minValue, this.props.maxValue);
+
+      return _react2.default.createElement(
+        'div',
+        {
+          'aria-disabled': this.props.disabled,
+          ref: function ref(node) {
+            _this5.node = node;
+          },
+          className: componentClassName,
+          onKeyDown: this.handleKeyDown,
+          onKeyUp: this.handleKeyUp,
+          onMouseDown: this.handleMouseDown,
+          onTouchStart: this.handleTouchStart },
+        _react2.default.createElement(
+          _label2.default,
+          {
+            classNames: this.props.classNames,
+            formatLabel: this.props.formatLabel,
+            type: 'min' },
+          this.props.minValue
+        ),
+        _react2.default.createElement(
+          _track2.default,
+          {
+            classNames: this.props.classNames,
+            draggableTrack: this.props.draggableTrack,
+            ref: function ref(trackNode) {
+              _this5.trackNode = trackNode;
+            },
+            percentages: percentages,
+            onTrackDrag: this.handleTrackDrag,
+            onTrackMouseDown: this.handleTrackMouseDown },
+          this.renderSliders()
+        ),
+        _react2.default.createElement(
+          _label2.default,
+          {
+            classNames: this.props.classNames,
+            formatLabel: this.props.formatLabel,
+            type: 'max' },
+          this.props.maxValue
+        ),
+        this.renderHiddenInputs()
+      );
+    }
+  }]);
+
+  return InputRange;
+}(_react2.default.Component), (_applyDecoratedDescriptor(_class.prototype, 'handleSliderDrag', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleSliderDrag'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleTrackDrag', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleTrackDrag'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleSliderKeyDown', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleSliderKeyDown'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleTrackMouseDown', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleTrackMouseDown'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleInteractionStart', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleInteractionStart'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleInteractionEnd', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleInteractionEnd'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleKeyDown', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleKeyDown'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleKeyUp', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleKeyUp'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleMouseDown', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMouseDown'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleMouseUp', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMouseUp'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleTouchStart', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleTouchStart'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleTouchEnd', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleTouchEnd'), _class.prototype)), _class);
+exports.default = InputRange;
+module.exports = exports['default'];
+//# sourceMappingURL=input-range.js.map
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.getPercentageFromPosition = getPercentageFromPosition;
+exports.getValueFromPosition = getValueFromPosition;
+exports.getValueFromProps = getValueFromProps;
+exports.getPercentageFromValue = getPercentageFromValue;
+exports.getPercentagesFromValues = getPercentagesFromValues;
+exports.getPositionFromValue = getPositionFromValue;
+exports.getPositionsFromValues = getPositionsFromValues;
+exports.getPositionFromEvent = getPositionFromEvent;
+exports.getStepValueFromValue = getStepValueFromValue;
+
+var _utils = __webpack_require__(7);
+
+/**
+ * Convert a point into a percentage value
+ * @ignore
+ * @param {Point} position
+ * @param {ClientRect} clientRect
+ * @return {number} Percentage value
+ */
+function getPercentageFromPosition(position, clientRect) {
+  var length = clientRect.width;
+  var sizePerc = position.x / length;
+
+  return sizePerc || 0;
+}
+
+/**
+ * Convert a point into a model value
+ * @ignore
+ * @param {Point} position
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @param {ClientRect} clientRect
+ * @return {number}
+ */
+function getValueFromPosition(position, minValue, maxValue, clientRect) {
+  var sizePerc = getPercentageFromPosition(position, clientRect);
+  var valueDiff = maxValue - minValue;
+
+  return minValue + valueDiff * sizePerc;
+}
+
+/**
+ * Convert props into a range value
+ * @ignore
+ * @param {Object} props
+ * @param {boolean} isMultiValue
+ * @return {Range}
+ */
+function getValueFromProps(props, isMultiValue) {
+  if (isMultiValue) {
+    return _extends({}, props.value);
+  }
+
+  return {
+    min: props.minValue,
+    max: props.value
+  };
+}
+
+/**
+ * Convert a model value into a percentage value
+ * @ignore
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @return {number}
+ */
+function getPercentageFromValue(value, minValue, maxValue) {
+  var validValue = (0, _utils.clamp)(value, minValue, maxValue);
+  var valueDiff = maxValue - minValue;
+  var valuePerc = (validValue - minValue) / valueDiff;
+
+  return valuePerc || 0;
+}
+
+/**
+ * Convert model values into percentage values
+ * @ignore
+ * @param {Range} values
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @return {Range}
+ */
+function getPercentagesFromValues(values, minValue, maxValue) {
+  return {
+    min: getPercentageFromValue(values.min, minValue, maxValue),
+    max: getPercentageFromValue(values.max, minValue, maxValue)
+  };
+}
+
+/**
+ * Convert a value into a point
+ * @ignore
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @param {ClientRect} clientRect
+ * @return {Point} Position
+ */
+function getPositionFromValue(value, minValue, maxValue, clientRect) {
+  var length = clientRect.width;
+  var valuePerc = getPercentageFromValue(value, minValue, maxValue);
+  var positionValue = valuePerc * length;
+
+  return {
+    x: positionValue,
+    y: 0
+  };
+}
+
+/**
+ * Convert a range of values into points
+ * @ignore
+ * @param {Range} values
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @param {ClientRect} clientRect
+ * @return {Range}
+ */
+function getPositionsFromValues(values, minValue, maxValue, clientRect) {
+  return {
+    min: getPositionFromValue(values.min, minValue, maxValue, clientRect),
+    max: getPositionFromValue(values.max, minValue, maxValue, clientRect)
+  };
+}
+
+/**
+ * Convert an event into a point
+ * @ignore
+ * @param {Event} event
+ * @param {ClientRect} clientRect
+ * @return {Point}
+ */
+function getPositionFromEvent(event, clientRect) {
+  var length = clientRect.width;
+
+  var _ref = event.touches ? event.touches[0] : event,
+      clientX = _ref.clientX;
+
+  return {
+    x: (0, _utils.clamp)(clientX - clientRect.left, 0, length),
+    y: 0
+  };
+}
+
+/**
+ * Convert a value into a step value
+ * @ignore
+ * @param {number} value
+ * @param {number} valuePerStep
+ * @return {number}
+ */
+function getStepValueFromValue(value, valuePerStep) {
+  return Math.round(value / valuePerStep) * valuePerStep;
+}
+//# sourceMappingURL=value-transformer.js.map
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = captialize;
+/**
+ * Captialize a string
+ * @ignore
+ * @param {string} string
+ * @return {string}
+ */
+function captialize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+module.exports = exports["default"];
+//# sourceMappingURL=captialize.js.map
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = clamp;
+/**
+ * Clamp a value between a min and max value
+ * @ignore
+ * @param {number} value
+ * @param {number} min
+ * @param {number} max
+ * @return {number}
+ */
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+module.exports = exports["default"];
+//# sourceMappingURL=clamp.js.map
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = distanceTo;
+/**
+ * Calculate the distance between pointA and pointB
+ * @ignore
+ * @param {Point} pointA
+ * @param {Point} pointB
+ * @return {number} Distance
+ */
+function distanceTo(pointA, pointB) {
+  var xDiff = Math.pow(pointB.x - pointA.x, 2);
+  var yDiff = Math.pow(pointB.y - pointA.y, 2);
+
+  return Math.sqrt(xDiff + yDiff);
+}
+module.exports = exports["default"];
+//# sourceMappingURL=distance-to.js.map
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isDefined;
+/**
+ * Check if a value is defined
+ * @ignore
+ * @param {*} value
+ * @return {boolean}
+ */
+function isDefined(value) {
+  return value !== undefined && value !== null;
+}
+module.exports = exports["default"];
+//# sourceMappingURL=is-defined.js.map
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isNumber;
+/**
+ * Check if a value is a number
+ * @ignore
+ * @param {*} value
+ * @return {boolean}
+ */
+function isNumber(value) {
+  return typeof value === 'number';
+}
+module.exports = exports['default'];
+//# sourceMappingURL=is-number.js.map
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = isObject;
+/**
+ * Check if a value is an object
+ * @ignore
+ * @param {*} value
+ * @return {boolean}
+ */
+function isObject(value) {
+  return value !== null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object';
+}
+module.exports = exports['default'];
+//# sourceMappingURL=is-object.js.map
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = length;
+/**
+ * Calculate the absolute difference between two numbers
+ * @ignore
+ * @param {number} numA
+ * @param {number} numB
+ * @return {number}
+ */
+function length(numA, numB) {
+  return Math.abs(numA - numB);
+}
+module.exports = exports["default"];
+//# sourceMappingURL=length.js.map
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * Default CSS class names
+ * @ignore
+ * @type {InputRangeClassNames}
+ */
+var DEFAULT_CLASS_NAMES = {
+  activeTrack: 'input-range__track input-range__track--active',
+  disabledInputRange: 'input-range input-range--disabled',
+  inputRange: 'input-range',
+  labelContainer: 'input-range__label-container',
+  maxLabel: 'input-range__label input-range__label--max',
+  minLabel: 'input-range__label input-range__label--min',
+  slider: 'input-range__slider',
+  sliderContainer: 'input-range__slider-container',
+  track: 'input-range__track input-range__track--background',
+  valueLabel: 'input-range__label input-range__label--value'
+};
+
+exports.default = DEFAULT_CLASS_NAMES;
+module.exports = exports['default'];
+//# sourceMappingURL=default-class-names.js.map
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = rangePropType;
+
+var _utils = __webpack_require__(7);
+
+/**
+ * @ignore
+ * @param {Object} props - React component props
+ * @return {?Error} Return Error if validation fails
+ */
+function rangePropType(props) {
+  var maxValue = props.maxValue,
+      minValue = props.minValue;
+
+
+  if (!(0, _utils.isNumber)(minValue) || !(0, _utils.isNumber)(maxValue)) {
+    return new Error('"minValue" and "maxValue" must be a number');
+  }
+
+  if (minValue >= maxValue) {
+    return new Error('"minValue" must be smaller than "maxValue"');
+  }
+}
+module.exports = exports['default'];
+//# sourceMappingURL=range-prop-type.js.map
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = valuePropType;
+
+var _utils = __webpack_require__(7);
+
+/**
+ * @ignore
+ * @param {Object} props
+ * @return {?Error} Return Error if validation fails
+ */
+function valuePropType(props, propName) {
+  var maxValue = props.maxValue,
+      minValue = props.minValue;
+
+  var value = props[propName];
+
+  if (!(0, _utils.isNumber)(value) && (!(0, _utils.isObject)(value) || !(0, _utils.isNumber)(value.min) || !(0, _utils.isNumber)(value.max))) {
+    return new Error('"' + propName + '" must be a number or a range object');
+  }
+
+  if ((0, _utils.isNumber)(value) && (value < minValue || value > maxValue)) {
+    return new Error('"' + propName + '" must be in between "minValue" and "maxValue"');
+  }
+
+  if ((0, _utils.isObject)(value) && (value.min < minValue || value.min > maxValue || value.max < minValue || value.max > maxValue)) {
+    return new Error('"' + propName + '" must be in between "minValue" and "maxValue"');
+  }
+}
+module.exports = exports['default'];
+//# sourceMappingURL=value-prop-type.js.map
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _desc, _value, _class;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _autobindDecorator = __webpack_require__(15);
+
+var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
+
+var _label = __webpack_require__(32);
+
+var _label2 = _interopRequireDefault(_label);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+  var desc = {};
+  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+    desc[key] = descriptor[key];
+  });
+  desc.enumerable = !!desc.enumerable;
+  desc.configurable = !!desc.configurable;
+
+  if ('value' in desc || desc.initializer) {
+    desc.writable = true;
+  }
+
+  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+    return decorator(target, property, desc) || desc;
+  }, desc);
+
+  if (context && desc.initializer !== void 0) {
+    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+    desc.initializer = undefined;
+  }
+
+  if (desc.initializer === void 0) {
+    Object['define' + 'Property'](target, property, desc);
+    desc = null;
+  }
+
+  return desc;
+}
+
+/**
+ * @ignore
+ */
+var Slider = (_class = function (_React$Component) {
+  _inherits(Slider, _React$Component);
+
+  _createClass(Slider, null, [{
+    key: 'propTypes',
+
+    /**
+     * Accepted propTypes of Slider
+     * @override
+     * @return {Object}
+     * @property {Function} ariaLabelledby
+     * @property {Function} ariaControls
+     * @property {Function} className
+     * @property {Function} formatLabel
+     * @property {Function} maxValue
+     * @property {Function} minValue
+     * @property {Function} onSliderDrag
+     * @property {Function} onSliderKeyDown
+     * @property {Function} percentage
+     * @property {Function} type
+     * @property {Function} value
+     */
+    get: function get() {
+      return {
+        ariaLabelledby: _propTypes2.default.string,
+        ariaControls: _propTypes2.default.string,
+        classNames: _propTypes2.default.objectOf(_propTypes2.default.string).isRequired,
+        formatLabel: _propTypes2.default.func,
+        maxValue: _propTypes2.default.number,
+        minValue: _propTypes2.default.number,
+        onSliderDrag: _propTypes2.default.func.isRequired,
+        onSliderKeyDown: _propTypes2.default.func.isRequired,
+        percentage: _propTypes2.default.number.isRequired,
+        type: _propTypes2.default.string.isRequired,
+        value: _propTypes2.default.number.isRequired
+      };
+    }
+
+    /**
+     * @param {Object} props
+     * @param {string} [props.ariaLabelledby]
+     * @param {string} [props.ariaControls]
+     * @param {InputRangeClassNames} props.classNames
+     * @param {Function} [props.formatLabel]
+     * @param {number} [props.maxValue]
+     * @param {number} [props.minValue]
+     * @param {Function} props.onSliderKeyDown
+     * @param {Function} props.onSliderDrag
+     * @param {number} props.percentage
+     * @param {number} props.type
+     * @param {number} props.value
+     */
+
+  }]);
+
+  function Slider(props) {
+    _classCallCheck(this, Slider);
+
+    /**
+     * @private
+     * @type {?Component}
+     */
+    var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
+
+    _this.node = null;
+    return _this;
+  }
+
+  /**
+   * @ignore
+   * @override
+   * @return {void}
+   */
+
+
+  _createClass(Slider, [{
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.removeDocumentMouseMoveListener();
+      this.removeDocumentMouseUpListener();
+      this.removeDocumentTouchEndListener();
+      this.removeDocumentTouchMoveListener();
+    }
+
+    /**
+     * @private
+     * @return {Object}
+     */
+
+  }, {
+    key: 'getStyle',
+    value: function getStyle() {
+      var perc = (this.props.percentage || 0) * 100;
+      var style = {
+        position: 'absolute',
+        left: perc + '%'
+      };
+
+      return style;
+    }
+
+    /**
+     * Listen to mousemove event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'addDocumentMouseMoveListener',
+    value: function addDocumentMouseMoveListener() {
+      this.removeDocumentMouseMoveListener();
+      this.node.ownerDocument.addEventListener('mousemove', this.handleMouseMove);
+    }
+
+    /**
+     * Listen to mouseup event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'addDocumentMouseUpListener',
+    value: function addDocumentMouseUpListener() {
+      this.removeDocumentMouseUpListener();
+      this.node.ownerDocument.addEventListener('mouseup', this.handleMouseUp);
+    }
+
+    /**
+     * Listen to touchmove event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'addDocumentTouchMoveListener',
+    value: function addDocumentTouchMoveListener() {
+      this.removeDocumentTouchMoveListener();
+      this.node.ownerDocument.addEventListener('touchmove', this.handleTouchMove);
+    }
+
+    /**
+     * Listen to touchend event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'addDocumentTouchEndListener',
+    value: function addDocumentTouchEndListener() {
+      this.removeDocumentTouchEndListener();
+      this.node.ownerDocument.addEventListener('touchend', this.handleTouchEnd);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeDocumentMouseMoveListener',
+    value: function removeDocumentMouseMoveListener() {
+      this.node.ownerDocument.removeEventListener('mousemove', this.handleMouseMove);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeDocumentMouseUpListener',
+    value: function removeDocumentMouseUpListener() {
+      this.node.ownerDocument.removeEventListener('mouseup', this.handleMouseUp);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeDocumentTouchMoveListener',
+    value: function removeDocumentTouchMoveListener() {
+      this.node.ownerDocument.removeEventListener('touchmove', this.handleTouchMove);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeDocumentTouchEndListener',
+    value: function removeDocumentTouchEndListener() {
+      this.node.ownerDocument.removeEventListener('touchend', this.handleTouchEnd);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleMouseDown',
+    value: function handleMouseDown() {
+      this.addDocumentMouseMoveListener();
+      this.addDocumentMouseUpListener();
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleMouseUp',
+    value: function handleMouseUp() {
+      this.removeDocumentMouseMoveListener();
+      this.removeDocumentMouseUpListener();
+    }
+
+    /**
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleMouseMove',
+    value: function handleMouseMove(event) {
+      this.props.onSliderDrag(event, this.props.type);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleTouchStart',
+    value: function handleTouchStart() {
+      this.addDocumentTouchEndListener();
+      this.addDocumentTouchMoveListener();
+    }
+
+    /**
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleTouchMove',
+    value: function handleTouchMove(event) {
+      this.props.onSliderDrag(event, this.props.type);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleTouchEnd',
+    value: function handleTouchEnd() {
+      this.removeDocumentTouchMoveListener();
+      this.removeDocumentTouchEndListener();
+    }
+
+    /**
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleKeyDown',
+    value: function handleKeyDown(event) {
+      this.props.onSliderKeyDown(event, this.props.type);
+    }
+
+    /**
+     * @override
+     * @return {JSX.Element}
+     */
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var style = this.getStyle();
+
+      return _react2.default.createElement(
+        'span',
+        {
+          className: this.props.classNames.sliderContainer,
+          ref: function ref(node) {
+            _this2.node = node;
+          },
+          style: style },
+        _react2.default.createElement(
+          _label2.default,
+          {
+            classNames: this.props.classNames,
+            formatLabel: this.props.formatLabel,
+            type: 'value' },
+          this.props.value
+        ),
+        _react2.default.createElement('div', {
+          'aria-labelledby': this.props.ariaLabelledby,
+          'aria-controls': this.props.ariaControls,
+          'aria-valuemax': this.props.maxValue,
+          'aria-valuemin': this.props.minValue,
+          'aria-valuenow': this.props.value,
+          className: this.props.classNames.slider,
+          draggable: 'false',
+          onKeyDown: this.handleKeyDown,
+          onMouseDown: this.handleMouseDown,
+          onTouchStart: this.handleTouchStart,
+          role: 'slider',
+          tabIndex: '0' })
+      );
+    }
+  }]);
+
+  return Slider;
+}(_react2.default.Component), (_applyDecoratedDescriptor(_class.prototype, 'handleMouseDown', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMouseDown'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleMouseUp', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMouseUp'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleMouseMove', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMouseMove'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleTouchStart', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleTouchStart'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleTouchMove', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleTouchMove'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleTouchEnd', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleTouchEnd'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleKeyDown', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleKeyDown'), _class.prototype)), _class);
+exports.default = Slider;
+module.exports = exports['default'];
+//# sourceMappingURL=slider.js.map
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _desc, _value, _class;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _autobindDecorator = __webpack_require__(15);
+
+var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+  var desc = {};
+  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+    desc[key] = descriptor[key];
+  });
+  desc.enumerable = !!desc.enumerable;
+  desc.configurable = !!desc.configurable;
+
+  if ('value' in desc || desc.initializer) {
+    desc.writable = true;
+  }
+
+  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+    return decorator(target, property, desc) || desc;
+  }, desc);
+
+  if (context && desc.initializer !== void 0) {
+    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+    desc.initializer = undefined;
+  }
+
+  if (desc.initializer === void 0) {
+    Object['define' + 'Property'](target, property, desc);
+    desc = null;
+  }
+
+  return desc;
+}
+
+/**
+ * @ignore
+ */
+var Track = (_class = function (_React$Component) {
+  _inherits(Track, _React$Component);
+
+  _createClass(Track, null, [{
+    key: 'propTypes',
+
+    /**
+     * @override
+     * @return {Object}
+     * @property {Function} children
+     * @property {Function} classNames
+     * @property {Boolean} draggableTrack
+     * @property {Function} onTrackDrag
+     * @property {Function} onTrackMouseDown
+     * @property {Function} percentages
+     */
+    get: function get() {
+      return {
+        children: _propTypes2.default.node.isRequired,
+        classNames: _propTypes2.default.objectOf(_propTypes2.default.string).isRequired,
+        draggableTrack: _propTypes2.default.bool,
+        onTrackDrag: _propTypes2.default.func,
+        onTrackMouseDown: _propTypes2.default.func.isRequired,
+        percentages: _propTypes2.default.objectOf(_propTypes2.default.number).isRequired
+      };
+    }
+
+    /**
+     * @param {Object} props
+     * @param {InputRangeClassNames} props.classNames
+     * @param {Boolean} props.draggableTrack
+     * @param {Function} props.onTrackDrag
+     * @param {Function} props.onTrackMouseDown
+     * @param {number} props.percentages
+     */
+
+  }]);
+
+  function Track(props) {
+    _classCallCheck(this, Track);
+
+    /**
+     * @private
+     * @type {?Component}
+     */
+    var _this = _possibleConstructorReturn(this, (Track.__proto__ || Object.getPrototypeOf(Track)).call(this, props));
+
+    _this.node = null;
+    _this.trackDragEvent = null;
+    return _this;
+  }
+
+  /**
+   * @private
+   * @return {ClientRect}
+   */
+
+
+  _createClass(Track, [{
+    key: 'getClientRect',
+    value: function getClientRect() {
+      return this.node.getBoundingClientRect();
+    }
+
+    /**
+     * @private
+     * @return {Object} CSS styles
+     */
+
+  }, {
+    key: 'getActiveTrackStyle',
+    value: function getActiveTrackStyle() {
+      var width = (this.props.percentages.max - this.props.percentages.min) * 100 + '%';
+      var left = this.props.percentages.min * 100 + '%';
+
+      return { left: left, width: width };
+    }
+
+    /**
+     * Listen to mousemove event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'addDocumentMouseMoveListener',
+    value: function addDocumentMouseMoveListener() {
+      this.removeDocumentMouseMoveListener();
+      this.node.ownerDocument.addEventListener('mousemove', this.handleMouseMove);
+    }
+
+    /**
+     * Listen to mouseup event
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'addDocumentMouseUpListener',
+    value: function addDocumentMouseUpListener() {
+      this.removeDocumentMouseUpListener();
+      this.node.ownerDocument.addEventListener('mouseup', this.handleMouseUp);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeDocumentMouseMoveListener',
+    value: function removeDocumentMouseMoveListener() {
+      this.node.ownerDocument.removeEventListener('mousemove', this.handleMouseMove);
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeDocumentMouseUpListener',
+    value: function removeDocumentMouseUpListener() {
+      this.node.ownerDocument.removeEventListener('mouseup', this.handleMouseUp);
+    }
+
+    /**
+     * @private
+     * @param {SyntheticEvent} event
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleMouseMove',
+    value: function handleMouseMove(event) {
+      if (!this.props.draggableTrack) {
+        return;
+      }
+
+      if (this.trackDragEvent !== null) {
+        this.props.onTrackDrag(event, this.trackDragEvent);
+      }
+
+      this.trackDragEvent = event;
+    }
+
+    /**
+     * @private
+     * @return {void}
+     */
+
+  }, {
+    key: 'handleMouseUp',
+    value: function handleMouseUp() {
+      if (!this.props.draggableTrack) {
+        return;
+      }
+
+      this.removeDocumentMouseMoveListener();
+      this.removeDocumentMouseUpListener();
+      this.trackDragEvent = null;
+    }
+
+    /**
+     * @private
+     * @param {SyntheticEvent} event - User event
+     */
+
+  }, {
+    key: 'handleMouseDown',
+    value: function handleMouseDown(event) {
+      var clientX = event.touches ? event.touches[0].clientX : event.clientX;
+      var trackClientRect = this.getClientRect();
+      var position = {
+        x: clientX - trackClientRect.left,
+        y: 0
+      };
+
+      this.props.onTrackMouseDown(event, position);
+
+      if (this.props.draggableTrack) {
+        this.addDocumentMouseMoveListener();
+        this.addDocumentMouseUpListener();
+      }
+    }
+
+    /**
+     * @private
+     * @param {SyntheticEvent} event - User event
+     */
+
+  }, {
+    key: 'handleTouchStart',
+    value: function handleTouchStart(event) {
+      event.preventDefault();
+
+      this.handleMouseDown(event);
+    }
+
+    /**
+     * @override
+     * @return {JSX.Element}
+     */
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var activeTrackStyle = this.getActiveTrackStyle();
+
+      return _react2.default.createElement(
+        'div',
+        {
+          className: this.props.classNames.track,
+          onMouseDown: this.handleMouseDown,
+          onTouchStart: this.handleTouchStart,
+          ref: function ref(node) {
+            _this2.node = node;
+          } },
+        _react2.default.createElement('div', {
+          style: activeTrackStyle,
+          className: this.props.classNames.activeTrack }),
+        this.props.children
+      );
+    }
+  }]);
+
+  return Track;
+}(_react2.default.Component), (_applyDecoratedDescriptor(_class.prototype, 'handleMouseMove', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMouseMove'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleMouseUp', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMouseUp'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleMouseDown', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleMouseDown'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleTouchStart', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'handleTouchStart'), _class.prototype)), _class);
+exports.default = Track;
+module.exports = exports['default'];
+//# sourceMappingURL=track.js.map
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/** @ignore */
+var DOWN_ARROW = exports.DOWN_ARROW = 40;
+
+/** @ignore */
+var LEFT_ARROW = exports.LEFT_ARROW = 37;
+
+/** @ignore */
+var RIGHT_ARROW = exports.RIGHT_ARROW = 39;
+
+/** @ignore */
+var UP_ARROW = exports.UP_ARROW = 38;
+//# sourceMappingURL=key-codes.js.map
+
+/***/ }),
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65666,7 +68072,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(6);
 
 var _reactMultiLang = __webpack_require__(1);
 
@@ -66268,7 +68674,7 @@ var ChillerModal = function (_Component) {
 exports.default = (0, _reactMultiLang.translate)(ChillerModal);
 
 /***/ }),
-/* 88 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66981,7 +69387,7 @@ var GeneralModal = function (_Component) {
 exports.default = (0, _reactMultiLang.translate)(GeneralModal);
 
 /***/ }),
-/* 89 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66999,11 +69405,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(6);
 
 var _reactMultiLang = __webpack_require__(1);
 
-var _EconomicModalRow = __webpack_require__(90);
+var _EconomicModalRow = __webpack_require__(109);
 
 var _EconomicModalRow2 = _interopRequireDefault(_EconomicModalRow);
 
@@ -69106,7 +71512,7 @@ EconomicModal = (0, _reactRedux.connect)(mapStates)(EconomicModal);
 exports.default = (0, _reactMultiLang.translate)(EconomicModal);
 
 /***/ }),
-/* 90 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69151,7 +71557,7 @@ var EconomicModalRow = function (_Component) {
 }(_react.Component);
 
 /***/ }),
-/* 91 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70083,7 +72489,7 @@ var HeatSourceModal = function (_React$Component) {
 exports.default = (0, _reactMultiLang.translate)(HeatSourceModal);
 
 /***/ }),
-/* 92 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70793,7 +73199,7 @@ var HeatingProfileModal = function (_React$Component) {
 exports.default = (0, _reactMultiLang.translate)(HeatingProfileModal);
 
 /***/ }),
-/* 93 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71600,7 +74006,7 @@ var CoolingProfileModal = function (_React$Component) {
 exports.default = (0, _reactMultiLang.translate)(CoolingProfileModal);
 
 /***/ }),
-/* 94 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72495,7 +74901,7 @@ var OptionsModal = function (_Component) {
 exports.default = (0, _reactMultiLang.translate)(OptionsModal);
 
 /***/ }),
-/* 95 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72513,15 +74919,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMultiLang = __webpack_require__(1);
 
-var _AddChillerModal = __webpack_require__(96);
+var _AddChillerModal = __webpack_require__(115);
 
 var _AddChillerModal2 = _interopRequireDefault(_AddChillerModal);
 
-var _AddRecoolerModal = __webpack_require__(97);
+var _AddRecoolerModal = __webpack_require__(116);
 
 var _AddRecoolerModal2 = _interopRequireDefault(_AddRecoolerModal);
 
-var _axios = __webpack_require__(15);
+var _axios = __webpack_require__(18);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -73224,7 +75630,7 @@ var FahrenheitSystemModal = function (_React$Component) {
 exports.default = (0, _reactMultiLang.translate)(FahrenheitSystemModal);
 
 /***/ }),
-/* 96 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74221,7 +76627,7 @@ var AddChiller = function (_Component) {
 exports.default = (0, _reactMultiLang.translate)(AddChiller);
 
 /***/ }),
-/* 97 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75027,19 +77433,19 @@ var AddRecooler = function (_Component) {
 exports.default = (0, _reactMultiLang.translate)(AddRecooler);
 
 /***/ }),
-/* 98 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = {"Tiles":{"General":{"Title":"Allgemeine Information","hoverText":"Wir benötigen den Standort, um die spezifischen Wetterdaten zu erhalten."},"Economic":{"Title":"Wirtschaftsdaten","hoverText":"Wir benötigen den Standort, um die spezifischen Wetterdaten zu erhalten."},"Options":{"Title":"Optionen","hoverText":"Wir benötigen den Standort, um die spezifischen Wetterdaten zu erhalten."},"HeatSource":{"Title":"Hitzequelle","hoverText":"Definieren Sie die verfügbaren oder geplanten Wärmequellen, damit das vorgeschlagene Fahrenheit-System für diese Quellen geeignet ist."},"HeatingLoadProfile":{"Title":"Heizlastprofil","hoverText":"Wählen Sie ein oder mehrere vordefinierte Heizlastprofile und wir wissen, wie viel Wärme von Ihren Wärmequellen zur Verfügung steht. Planen Sie eine neue Wärmequelle? Dann können wir die Rentabilität des gesamten Systems berechnen!"},"CompressionChiller":{"Title":"Kompressionskühler","hoverText":"Haben Sie bereits eine Kompressionskältemaschine oder planen Sie eine neue zu installieren? Definieren Sie Ihre Kältemaschinen und wir werden unser System mit Ihnen vergleichen."},"CoolingLoadProfile":{"Title":"Kühllastprofil","hoverText":"Definieren Sie Ihr Kühllastprofil und benötigen Sie Kühlkapazität, damit wir Ihnen ein System vorschlagen können!"},"FahrenheitSystem":{"Title":"Fahrenheit System","hoverText":"Bitte geben Sie die erforderlichen Eingaben an, damit wir Ihnen ein Fahrenheit-System vorschlagen können."}},"General":{"Title":"Allgemeine Information","Tab":{"Project":{"Title":"Projektdaten","ProjectNumber":{"Title":"Projektnummer","Placeholder":"Neues Projekt","InfoTool":"Projektnummer Erklärung / Tipp"},"ProjectName":{"Title":"Projektname","Placeholder":"Testprojekt","InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."},"ProjectLocation":{"Title":"Ort","Placeholder":"Halle/Saale","InfoTool":"Standorterläuterung / Tipp"},"ProjectCustomer":{"Title":"Kunde","Placeholder":"HabWarmWillKalt Gmbh","InfoTool":"Kundenerklärung / Trinkgeld"},"ProjectContact":{"Title":"Kontakt","Placeholder":"Mr. Inhaber","InfoTool":"Kontakt Erklärung / Tipp"},"ProjectPhone":{"Title":"Tel. Nummer","Placeholder":"0123 456","InfoTool":"Tel. Nummer Erklärung / Tipp"},"ProjectEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"E-Mail Erklärung / Trinkgeld"}},"Personal":{"Title":"Persönliche Daten","PersonalEditor":{"Title":"Editor","Placeholder":"HabWarmWillKalt Gmbh","InfoTool":"Editor Erklärung / Tipp"},"PersonalCompany":{"Title":"Unternehmen","Placeholder":"Gmbh","InfoTool":"Firmenerklärung / Trinkgeld"},"PersonalAddress":{"Title":"Adresse","Placeholder":"Halle/Saale","InfoTool":"Adresse Erklärung / Tipp"},"PersonalPhone":{"Title":"Tel. Nummer","Placeholder":"0123 456","InfoTool":"Tel. Nummer Erklärung / Tipp"},"PersonalMobile":{"Title":"Handy, Mobiltelefon","Placeholder":"Mr. Inhaber","InfoTool":"Mobile Erklärung / Tipp"},"PersonalEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"E-Mail Erklärung / Trinkgeld"}}}},"Economic":{"Title":"Wirtschaftsdaten","Tab":{"General":{"Title":"Allgemeines","ElectricityPrice":{"Title":"Elektrizitätspreis","Placeholder":0.18,"InfoTool":"Strompreis-Erklärung / Trinkgeld"},"HeatPrice":{"Title":"Wärmepreis","Placeholder":0,"InfoTool":"Wärme Preis"},"ElectricityPriceIncrease":{"Title":"Strompreisanstieg","Placeholder":0,"InfoTool":"Standorterläuterung / Tipp"},"CalculatedInterestRate":{"Title":"Berechneter Zinssatz","Placeholder":0.7,"InfoTool":"Berechnete Zinssatzerklärung / Tipp"},"InflationRate":{"Title":"Inflationsrate","Placeholder":1.6,"InfoTool":"Inflationsrate Erklärung / Tipp"}},"CHP":{"Title":"CHP","OwnUsageOfElectricity":{"Title":"Eigenverbrauch von Strom","Placeholder":0,"InfoTool":"Strompreis-Erklärung / Trinkgeld"},"KWKEubsidyForElectricity":{"Title":"KWK-Zuschuss für Strom","Placeholder":0,"InfoTool":"KWK-Zuschuss für Strom"},"GasPrice":{"Title":"Gaspreis","Placeholder":0,"InfoTool":"Standorterläuterung / Tipp"},"FOREXPERTS":{"Title":"FÜR EXPERTEN","Placeholder":"","InfoTool":""},"ElectricitySalesPrice":{"Title":"Stromverkaufspreis","Placeholder":0,"InfoTool":"Verkaufspreis-Erklärung / Trinkgeld"},"EnergyTaxRefund":{"Title":"Erstattung der Energiesteuer","Placeholder":0,"InfoTool":"Inflationsrate Erklärung / Tipp"},"EEGAllocationPortion":{"Title":"EEG-Zuteilungsanteil","Placeholder":0,"InfoTool":"EEG-Umlage-Anteil explanation/tip"},"EEGApportionmentCosts":{"Title":"EEG-Umlegungskosten","Placeholder":0,"InfoTool":"Inflationsrate Erklärung / Tipp"}},"Investments":{"Title":"Investitionen","CHPInTheBasement":{"Title":"BHKW im Keller","Placeholder":0,"InfoTool":"Standorterläuterung / Tipp"},"Chiller1":{"Title":"Kühler 1","Placeholder":0,"InfoTool":"Standorterläuterung / Tipp"},"RadiantCoolingOffice":{"Title":"Strahlendes kühlendes Büro","Placeholder":0,"InfoTool":"Standorterläuterung / Tipp"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}},"Maintenence":{"Title":"Wartung","CHPInTheBasement":{"Title":"BHKW im Keller","Placeholder":0,"InfoTool":"Standorterläuterung / Tipp"},"Chiller1":{"Title":"Kühler 1","Placeholder":0,"InfoTool":"Standorterläuterung / Tipp"},"RadiantCoolingOffice":{"Title":"Strahlendes kühlendes Büro","Placeholder":0,"InfoTool":"Standorterläuterung / Tipp"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}}}},"HeatSource":{"Title":"Hitzequelle","Tab":{"TechnicalData":{"Title":"TECHNISCHE DATEN","Name":{"Title":"Name","Placeholder":"BHKW im Keller","InfoTool":"Projektnummer Erklärung / Tipp"},"TypeOfHeatSource":{"Title":"Art der Wärmequelle","Placeholder":"inhaber@gmbh.de","InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."},"DriveTemperature":{"Title":"Antriebstemperatur","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"HeatCapacity":{"Title":"Wärmekapazität","Placeholder":"inhaber@gmbh.de","InfoTool":"Kontakt Erklärung / Tipp"},"ElectricCapacity":{"Title":"Elektrische Kapazität","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"ThermalEfficiency":{"Title":"Thermischen Wirkungsgrad","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"ElectricEfficiency":{"Title":"Elektrische Effizienz","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"ManufacturerText":{"Title":"Hersteller","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"TypeText":{"Title":"Art","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"OperationHours":{"Title":"Öffnungszeiten","Placeholder":"inhaber@gmbh.de","InfoTool":"Standorterläuterung / Tipp"},"NewInstallation":{"Title":"Neue Installation","Placeholder":"inhaber@gmbh.de","InfoTool":"Standorterläuterung / Tipp"}},"CalculationData":{"Title":"Berechnungsdaten","InvestmentCosts":{"Title":"Investitionskosten","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor Erklärung / Tipp"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Firmenerklärung / Trinkgeld"},"MaintenanceCosts":{"Title":"Instandhaltungskosten","Placeholder":"inhaber@gmbh.de","InfoTool":"Adresse Erklärung / Tipp"}}}},"Compression":{"Title":"Kompressionskältemaschinen","Tab":{"TechnicalData":{"Title":"TECHNISCHE DATEN","Name":{"Title":"Name","Placeholder":"Kühler 1","InfoTool":"Projektnummer Erklärung / Tipp"},"Refrigerant":{"Title":"Kältemittel","Placeholder":"Kühler 1","InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."},"Manufacturer":{"Title":"Hersteller","Placeholder":"Kühler 1","InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."},"CompressorType":{"Title":"Kompressortyp","Placeholder":"Kühler 1","InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."},"ChilledWaterTemperature":{"Title":"Kaltwassertemperatur","Placeholder":"Kühler 1","InfoTool":"Kundenerklärung / Trinkgeld"}},"CalculationData":{"Title":"Berechnungsdaten","InvestmentCosts":{"Title":"Investitionskosten","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor Erklärung / Tipp"},"Discount":{"Title":"Rabatt","Placeholder":"inhaber@gmbh.de","InfoTool":"Firmenerklärung / Trinkgeld"},"MaintenanceCosts":{"Title":"Instandhaltungskosten","Placeholder":"inhaber@gmbh.de","InfoTool":"Adresse Erklärung / Tipp"}}}},"HeatingProfile":{"Title":"Heizlastprofil","Tab":{"TechnicalData":{"Title":"TECHNISCHE DATEN","Name":{"Title":"Name","Placeholder":"Büro Süd","InfoTool":"Projektnummer Erklärung / Tipp"},"ProfileType":{"Title":"Profiltyp","Placeholder":"inhaber@gmbh.de","InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."},"MaxHeatingLoad":{"Title":"Max. Heizlast","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"BaseLoad":{"Title":"Grundlast","Placeholder":"inhaber@gmbh.de","InfoTool":"Kontakt Erklärung / Tipp"},"ZeroLoad":{"Title":"Nulllast","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"From":{"Title":"von","Placeholder":"","InfoTool":""},"At":{"Title":"beim","Placeholder":"","InfoTool":""}},"CalculationData":{"Title":"Berechnungsdaten","InvestmentCosts":{"Title":"Investitionskosten","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor Erklärung / Tipp"},"Discount":{"Title":"Rabatt","Placeholder":"inhaber@gmbh.de","InfoTool":"Firmenerklärung / Trinkgeld"},"MaintenanceCosts":{"Title":"Instandhaltungskosten","Placeholder":"inhaber@gmbh.de","InfoTool":"Adresse Erklärung / Tipp"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"CoolingProfile":{"Title":"Kühllastprofil","Tab":{"TechnicalData":{"Title":"TECHNISCHE DATEN","Name":{"Title":"Name","Placeholder":"Strahlendes kühlendes Büro","InfoTool":"Projektnummer Erklärung / Tipp"},"ProfileType":{"Title":"Profiltyp","Placeholder":"inhaber@gmbh.de","InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann und wir Sie kontaktieren können, wenn wir Fragen zu Ihrem Projekt haben."},"InletTemperature":{"Title":"Eintrittstemperatur des gekühlten Wassers","Placeholder":"inhaber@gmbh.de","InfoTool":"Adresse Erklärung / Tipp"},"MaxCoolingLoad":{"Title":"Max. Kühllast","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"BaseLoad":{"Title":"Grundlast","Placeholder":"inhaber@gmbh.de","InfoTool":"Kontakt Erklärung / Tipp"},"ZeroLoad":{"Title":"Nulllast","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"CoolingHour":{"Title":"Kühlstunden","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Trinkgeld"},"From":{"Title":"von","Placeholder":"","InfoTool":""},"At":{"Title":"beim","Placeholder":"","InfoTool":""}},"CalculationData":{"Title":"Berechnungsdaten","InvestmentCosts":{"Title":"Investitionskosten","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor Erklärung / Tipp"},"Discount":{"Title":"Rabatt","Placeholder":"inhaber@gmbh.de","InfoTool":"Firmenerklärung / Trinkgeld"},"MaintenanceCosts":{"Title":"Instandhaltungskosten","Placeholder":"inhaber@gmbh.de","InfoTool":"Adresse Erklärung / Tipp"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Options":{"Title":"Optionen","Tab":{"GENERAL":{"Title":"ALLGEMEINES","Language":{"Title":"Sprache","Placeholder":"","InfoTool":"Projektnummer Erklärung / Tipp"},"Bafa":{"Title":"BAFA 2018","Placeholder":"inhaber@gmbh.de","InfoTool":"Hier können Sie Ihren Namen eingeben, damit er im Bericht erscheinen kann, und wir können Sie kontaktieren, wenn wir Fragen zu Ihrem Projekt haben."},"RecoolingMethod":{"Title":"Rückkühlmethode","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Tipp"},"RecoolingTemperature":{"Title":"Rückkühltemperatur","Placeholder":"inhaber@gmbh.de","InfoTool":"Kontakterklärung / Tipp"},"FreeCooling":{"Title":"Gratis Erfrischung","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Tipp"},"HeatSources":{"Title":"Wärmequellen","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Tipp"},"HeatSupply":{"Title":"Wärmeversorgung","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Tipp"},"HeatSource":{"Title":"Konventionelle Wärmequelle","Placeholder":"inhaber@gmbh.de","InfoTool":"Standorterklärung / Tipp"},"CalculationMethod":{"Title":"Rechenmethode","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Tipp"},"AmbientTemperature":{"Title":"Umgebungstemperaturstufe","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Tipp"},"HeatingLoadProfile":{"Title":"Heizlastprofil","Placeholder":"inhaber@gmbh.de","InfoTool":"Kundenerklärung / Tipp"},"CoolingLoadProfile":{"Title":"Kühllastprofil","Placeholder":"","InfoTool":"Kundenerklärung / Tipp"}},"ProjectSpecification":{"Title":"PROJEKT-SPEZIFIKATIONEN","BusSystem":{"Title":"Bussystem","Placeholder":"inhaber@gmbh.de","InfoTool":"Editorerklärung / Tipp"},"Controller":{"Title":"Regler","Placeholder":"inhaber@gmbh.de","InfoTool":"Unternehmenserklärung / Tipp"},"PressureDrop":{"Title":"Druckabfall in den Rohrleitungen","Placeholder":"inhaber@gmbh.de","InfoTool":"Adresserklärung / Tipp"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Fahrenheit":{"Title":"Fahrenheit System","Tab":{"GENERAL":{"Title":"GENERAL","Language":{"Title":"Language","Placeholder":"","InfoTool":"Project number explanation/tip"},"Bafa":{"Title":"BAFA 2018","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"RecoolingMethod":{"Title":"Re-cooling Method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"RecoolingTemperature":{"Title":"Re-cooling Temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"FreeCooling":{"Title":"Free Cooling","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSources":{"Title":"Heat Sources","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSupply":{"Title":"Heat Supply","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSource":{"Title":"Conventional heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"CalculationMethod":{"Title":"Calculation method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"AmbientTemperature":{"Title":"Ambient temperature step","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatingLoadProfile":{"Title":"Heating load profile","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingLoadProfile":{"Title":"Cooling load profile","Placeholder":"","InfoTool":"Customer explanation/tip"}},"ProjectSpecification":{"Title":"PROJECT SPECIFICATIONS","BusSystem":{"Title":"Bus system","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Controller":{"Title":"Controller","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"PressureDrop":{"Title":"Pressure drop in the piping","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"RequiredField":{"Message":"Pflichtfeld","Note":"Hinweis: Bitte füllen Sie die erforderlichen Felder in beiden Registerkarten aus","ErrorMsg":"Bitte füllen Sie dieses Feld aus"},"SaveButton":"Änderungen speichern","InputRequired":"Eine Eingabe ist erforderlich","DiscountText":"Rabatt","ErrorMessage":"Fehler auf dieser Seite","AdditionalMessage":"Zusätzliche Möglichkeiten für wirtschaftliche Berechnungen stehen zur Verfügung!"}
 
 /***/ }),
-/* 99 */
+/* 118 */
 /***/ (function(module, exports) {
 
-module.exports = {"Tiles":{"General":{"Title":"General Information","hoverText":"We need the location to get the specific weather data."},"Economic":{"Title":"Economic Data","hoverText":"We need the location to get the specific weather data."},"Options":{"Title":"Options","hoverText":"We need the location to get the specific weather data.","Language":"Language","ReCoolingType":"Re-cooling Type"},"HeatSource":{"Title":"Heat Sources","hoverText":"Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.","HeatCapacity":"Heat Capacity","AvailableHeat":"Available Heat","Temperature":"Temperature"},"HeatingLoadProfile":{"Title":"Heating Load Profile","hoverText":"Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources. Are you planning a new heat source? Then we can calculate the profitability of the whole system!"},"CompressionChiller":{"Title":"Compression Chillers","hoverText":"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.","HoverCoolingTitle":"Cooling Capacity","NumberofCompressor":"Number of Compressors","Temperature":"Temperature"},"CoolingLoadProfile":{"Title":"Cooling Load Profile","hoverText":"Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!"},"FahrenheitSystem":{"Title":"Fahrenheit System","hoverText":"Please provide the required inputs so we can suggest a Fahrenheit system for you."}},"General":{"Title":"General Information","Tab":{"Project":{"Title":"Project Data","ProjectNumber":{"Title":"Project number","Placeholder":"New Project","InfoTool":"Project number explanation/tip"},"ProjectName":{"Title":"Project name","Placeholder":"Test Project","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProjectLocation":{"Title":"Location","Placeholder":"Halle/Saale","InfoTool":"Location explanation/tip"},"ProjectCustomer":{"Title":"Customer","Placeholder":"HabWarmWillKalt Gmbh ","InfoTool":"Customer explanation/tip"},"ProjectContact":{"Title":"Contact","Placeholder":"Mr. Inhaber","InfoTool":"Contact explanation/tip"},"ProjectPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"ProjectEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}},"Personal":{"Title":"Personal Data","PersonalEditor":{"Title":"Editor","Placeholder":"HabWarmWillKalt Gmbh","InfoTool":"Editor explanation/tip"},"PersonalCompany":{"Title":"Company","Placeholder":"Gmbh","InfoTool":"Company explanation/tip"},"PersonalAddress":{"Title":"Address","Placeholder":"Halle/Saale","InfoTool":"Address explanation/tip"},"PersonalPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"PersonalMobile":{"Title":"Mobile","Placeholder":"Mr. Inhaber","InfoTool":"Mobile explanation/tip"},"PersonalEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}}}},"Economic":{"Title":"Economic Data","Tab":{"General":{"Title":"General","ElectricityPrice":{"Title":"Electricity price","Placeholder":"0.180","InfoTool":"Electricity price explanation/tip"},"HeatPrice":{"Title":"Heat price","Placeholder":"0.000","InfoTool":"Heat Price"},"ElectricityPriceIncrease":{"Title":"Electricity price increase","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"CalculatedInterestRate":{"Title":"Calculated interest rate","Placeholder":"0.700","InfoTool":"Calculated interest rate explanation/tip"},"InflationRate":{"Title":"Inflation rate","Placeholder":"1.600","InfoTool":"Inflation rate explanation/tip"}},"CHP":{"Title":"CHP","OwnUsageOfElectricity":{"Title":"Own usage of electricity","Placeholder":"0.000","InfoTool":"Electricity price explanation/tip"},"KWKEubsidyForElectricity":{"Title":"KWK-subsidy for electricity","Placeholder":"0.000","InfoTool":"KWK-subsidy for electricity"},"GasPrice":{"Title":"Gas price","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"FOREXPERTS":{"Title":"FOR EXPERTS","Placeholder":"","InfoTool":""},"ElectricitySalesPrice":{"Title":"Electricity sales price","Placeholder":"0.000","InfoTool":"Electricity sales price explanation/tip"},"EnergyTaxRefund":{"Title":"Energy tax refund","Placeholder":"0.000","InfoTool":"Inflation rate explanation/tip"},"EEGAllocationPortion":{"Title":"EEG allocation portion","Placeholder":"0.000","InfoTool":"EEG-Umlage-Anteil explanation/tip"},"EEGApportionmentCosts":{"Title":"EEG apportionment costs","Placeholder":"0.000","InfoTool":"Inflation rate explanation/tip"}},"Investments":{"Title":"INVESTMENTS","CHPInTheBasement":{"Title":"CHP in the basement","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"Chiller1":{"Title":"Chiller 1","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"RadiantCoolingOffice":{"Title":"Radiant cooling office","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}},"Maintenence":{"Title":"Maintenence","CHPInTheBasement":{"Title":"CHP in the basement","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"Chiller1":{"Title":"Chiller 1","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"RadiantCoolingOffice":{"Title":"Radiant cooling office","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}}}},"HeatSource":{"Title":"Heat Source","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"CHP in the basement","InfoTool":"Project number explanation/tip"},"TypeOfHeatSource":{"Title":"Type of heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"DriveTemperature":{"Title":"Drive temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatCapacity":{"Title":"Heat capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ElectricCapacity":{"Title":"Electric capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ThermalEfficiency":{"Title":"Thermal efficiency","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ElectricEfficiency":{"Title":"Electric efficiency","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ManufacturerText":{"Title":"Manufacturer","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"TypeText":{"Title":"Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"OperationHours":{"Title":"Operation hours","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"NewInstallation":{"Title":"New installation","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}}},"Compression":{"Title":"Compression Chillers","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Chiller 1","InfoTool":"Project number explanation/tip"},"Refrigerant":{"Title":"Refrigerant","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"Manufacturer":{"Title":"Manufacturer","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"CompressorType":{"Title":"Compressor type","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ChilledWaterTemperature":{"Title":"Chilled water temperature","Placeholder":"Chiller 1","InfoTool":"Customer explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}}},"HeatingProfile":{"Title":"Heating Load Profile","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Office South","InfoTool":"Project number explanation/tip"},"ProfileType":{"Title":"Profile Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"MaxHeatingLoad":{"Title":"Max. heating load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"BaseLoad":{"Title":"Base load","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ZeroLoad":{"Title":"Zero load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"From":{"Title":"from","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"},"At":{"Title":"at","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"CoolingProfile":{"Title":"Cooling Load Profile","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Radiant cooling office","InfoTool":"Project number explanation/tip"},"ProfileType":{"Title":"Profile Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InletTemperature":{"Title":"Chilled water inlet temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"},"MaxCoolingLoad":{"Title":"Max. cooling load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"BaseLoad":{"Title":"Base load","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ZeroLoad":{"Title":"Zero load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingHour":{"Title":"Cooling hours","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"From":{"Title":"from","Placeholder":"","InfoTool":""},"At":{"Title":"at","Placeholder":"","InfoTool":""}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Options":{"Title":"Options","Tab":{"GENERAL":{"Title":"GENERAL","Language":{"Title":"Language","Placeholder":"","InfoTool":"Project number explanation/tip"},"Bafa":{"Title":"BAFA 2018","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"RecoolingMethod":{"Title":"Re-cooling Method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"RecoolingTemperature":{"Title":"Re-cooling Temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"FreeCooling":{"Title":"Free Cooling","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSources":{"Title":"Heat Sources","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSupply":{"Title":"Heat Supply","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSource":{"Title":"Conventional heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"CalculationMethod":{"Title":"Calculation method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"AmbientTemperature":{"Title":"Ambient temperature step","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatingLoadProfile":{"Title":"Heating load profile","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingLoadProfile":{"Title":"Cooling load profile","Placeholder":"","InfoTool":"Customer explanation/tip"}},"ProjectSpecification":{"Title":"PROJECT SPECIFICATIONS","BusSystem":{"Title":"Bus system","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Controller":{"Title":"Controller","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"PressureDrop":{"Title":"Pressure drop in the piping","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Fahrenheit":{"Title":"Fahrenheit System","Tab":{"Chiller":{"Title":"Chiller","AdsorptionProductGroup":{"Title":"Adsorption chillers product group","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"CompressionChillerGroup":{"Title":"Compression chiller product group"},"RecoolerProductGroup":{"Title":"Re-cooler product group"},"Adsorbent":{"Title":"Adsorbent","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProductInterconnection":{"Title":"Product interconnection","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"Function":{"Title":"Function","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"TAB":{"TechnicalData":{"Title":"TECHNICAL DATA","AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ChillerType":{"Title":"Chiller type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"NumberOfChillers":{"Title":"Number of chillers","Placeholder":"1 piece","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"OperatingMode":{"Title":"Oprating Mode","Placeholder":"€/a","InfoTool":"Address explanation/tip"},"IntegratedSystemSepration":{"Title":"Integrated System Sepration","Placeholder":"€/a","InfoTool":"Address explanation/tip"},"IntegratedColdWaterUnit":{"Title":"Integrated Cold Water Unit","Placeholder":"€/a","InfoTool":"Address explanation/tip"},"GroupInterconnection":{"Title":"Group interconnection","Placeholder":"1 piece","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InvestmentCosts":{"Title":"Investment costs","Placeholder":"€","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"%","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"€/a","InfoTool":"Address explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."}}}},"Recooling":{"Title":"Re-cooling System","RecoolingMethod":{"Title":"Re-cooling method","Placeholder":" ","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"PrimaryVolumeFlowRate":{"Title":"Primary volume flow rate","Placeholder":" ","InfoTool":"Project number explanation/tip"},"AddReCoolingSystem":{"Title":"Add a Re-cooling System","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"Components":{"Title":"Components","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"CircuitSeparation":{"Title":"Circuit separation","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"Product":{"Title":"Product","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"NumberOfUnits":{"Title":"Number of units","Placeholder":"1 piece","InfoTool":"Project number explanation/tip"},"Name":{"Title":"Name","Placeholder":" ","InfoTool":"Project number explanation/tip"},"ReCoolingCapacity":{"Title":"Re-cooling capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"TemperatureDifference":{"Title":"Temperature difference","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"SecondaryVolumeFloRate":{"Title":"Secondary volume flow rate","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"ElectricalPowerConsumption":{"Title":"Electrical power consumption","Placeholder":"","InfoTool":"Project number explanation/tip"},"AvailableByCustomer":{"Title":"Available/provided by customer","Placeholder":"","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InvestmentCosts":{"Title":"Investment costs","Placeholder":"","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"","InfoTool":"Address explanation/tip"}}},"InputRequired":"More inputs are required to suggest a system"},"RequiredField":{"Message":"Required field","Note":"Note : Please fill the required fields in both tabs","ErrorMsg":"please fill out this field"},"SaveButton":"save changes","InputRequired":"An input is required","DiscountText":"Discount","ErrorMessage":"Error on this page","AdditionalMessage":"Additional options for economic calculations are available!"}
+module.exports = {"Tiles":{"General":{"Title":"General Information","hoverText":"We need the location to get the specific weather data."},"Economic":{"Title":"Economic Data","hoverText":"We need the location to get the specific weather data."},"Options":{"Title":"Options","hoverText":"We need the location to get the specific weather data.","Language":"Language","ReCoolingType":"Re-cooling Type"},"HeatSource":{"Title":"Heat Sources","hoverText":"Define the available or planned heat sources so that the suggested Fahrenheit system would be suitable for those sources.","HeatCapacity":"Heat Capacity","AvailableHeat":"Available Heat","Temperature":"Temperature"},"HeatingLoadProfile":{"Title":"Heating Load Profile","hoverText":"Choose one or more predefined heating load profiles and we will know how much heat will be available from your heat sources. Are you planning a new heat source? Then we can calculate the profitability of the whole system!"},"CompressionChiller":{"Title":"Compression Chillers","hoverText":"Do you already have an existing compression chiller or you are planning to install a new one? Define your chillers and we will compare our system with yours.","HoverCoolingTitle":"Cooling Capacity","NumberofCompressor":"Number of Compressors","Temperature":"Temperature"},"CoolingLoadProfile":{"Title":"Cooling Load Profile","hoverText":"Define your cooling load profile and require cooling capacity so we can suggest a syatem for you!"},"FahrenheitSystem":{"Title":"Fahrenheit System","hoverText":"Please provide the required inputs so we can suggest a Fahrenheit system for you."}},"General":{"Title":"General Information","Tab":{"Project":{"Title":"Project Data","ProjectNumber":{"Title":"Project number","Placeholder":"New Project","InfoTool":"Project number explanation/tip"},"ProjectName":{"Title":"Project name","Placeholder":"Test Project","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProjectLocation":{"Title":"Location","Placeholder":"Halle/Saale","InfoTool":"Location explanation/tip"},"ProjectCustomer":{"Title":"Customer","Placeholder":"HabWarmWillKalt Gmbh ","InfoTool":"Customer explanation/tip"},"ProjectContact":{"Title":"Contact","Placeholder":"Mr. Inhaber","InfoTool":"Contact explanation/tip"},"ProjectPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"ProjectEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"},"ProjectTemp":{"Title":"Outdoor temp.","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}},"Personal":{"Title":"Personal Data","PersonalEditor":{"Title":"Editor","Placeholder":"HabWarmWillKalt Gmbh","InfoTool":"Editor explanation/tip"},"PersonalCompany":{"Title":"Company","Placeholder":"Gmbh","InfoTool":"Company explanation/tip"},"PersonalAddress":{"Title":"Address","Placeholder":"Halle/Saale","InfoTool":"Address explanation/tip"},"PersonalPhone":{"Title":"Tel. Number","Placeholder":"0123 456","InfoTool":"Tel. number explanation/tip"},"PersonalMobile":{"Title":"Mobile","Placeholder":"Mr. Inhaber","InfoTool":"Mobile explanation/tip"},"PersonalEmail":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Email explanation/tip"}}}},"Economic":{"Title":"Economic Data","Tab":{"General":{"Title":"General","ElectricityPrice":{"Title":"Electricity price","Placeholder":"0.180","InfoTool":"Electricity price explanation/tip"},"HeatPrice":{"Title":"Heat price","Placeholder":"0.000","InfoTool":"Heat Price"},"ElectricityPriceIncrease":{"Title":"Electricity price increase","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"CalculatedInterestRate":{"Title":"Calculated interest rate","Placeholder":"0.700","InfoTool":"Calculated interest rate explanation/tip"},"InflationRate":{"Title":"Inflation rate","Placeholder":"1.600","InfoTool":"Inflation rate explanation/tip"}},"CHP":{"Title":"CHP","OwnUsageOfElectricity":{"Title":"Own usage of electricity","Placeholder":"0.000","InfoTool":"Electricity price explanation/tip"},"KWKEubsidyForElectricity":{"Title":"KWK-subsidy for electricity","Placeholder":"0.000","InfoTool":"KWK-subsidy for electricity"},"GasPrice":{"Title":"Gas price","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"FOREXPERTS":{"Title":"FOR EXPERTS","Placeholder":"","InfoTool":""},"ElectricitySalesPrice":{"Title":"Electricity sales price","Placeholder":"0.000","InfoTool":"Electricity sales price explanation/tip"},"EnergyTaxRefund":{"Title":"Energy tax refund","Placeholder":"0.000","InfoTool":"Inflation rate explanation/tip"},"EEGAllocationPortion":{"Title":"EEG allocation portion","Placeholder":"0.000","InfoTool":"EEG-Umlage-Anteil explanation/tip"},"EEGApportionmentCosts":{"Title":"EEG apportionment costs","Placeholder":"0.000","InfoTool":"Inflation rate explanation/tip"}},"Investments":{"Title":"INVESTMENTS","CHPInTheBasement":{"Title":"CHP in the basement","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"Chiller1":{"Title":"Chiller 1","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"RadiantCoolingOffice":{"Title":"Radiant cooling office","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}},"Maintenence":{"Title":"Maintenence","CHPInTheBasement":{"Title":"CHP in the basement","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"Chiller1":{"Title":"Chiller 1","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"RadiantCoolingOffice":{"Title":"Radiant cooling office","Placeholder":"0.000","InfoTool":"Location explanation/tip"},"eCoo10X":{"Title":"eCoo 10X","Placeholder":"","InfoTool":""}}}},"HeatSource":{"Title":"Heat Source","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"CHP in the basement","InfoTool":"Project number explanation/tip"},"TypeOfHeatSource":{"Title":"Type of heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"DriveTemperature":{"Title":"Drive temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatCapacity":{"Title":"Heat capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ElectricCapacity":{"Title":"Electric capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ThermalEfficiency":{"Title":"Thermal efficiency","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ElectricEfficiency":{"Title":"Electric efficiency","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ManufacturerText":{"Title":"Manufacturer","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"TypeText":{"Title":"Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"OperationHours":{"Title":"Operation hours","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"NewInstallation":{"Title":"New installation","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}}},"Compression":{"Title":"Compression Chillers","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Chiller 1","InfoTool":"Project number explanation/tip"},"Refrigerant":{"Title":"Refrigerant","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"Manufacturer":{"Title":"Manufacturer","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"CompressorType":{"Title":"Compressor type","Placeholder":"Chiller 1","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ChilledWaterTemperature":{"Title":"Chilled water temperature","Placeholder":"Chiller 1","InfoTool":"Customer explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}}},"HeatingProfile":{"Title":"Heating Load Profile","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Office South","InfoTool":"Project number explanation/tip"},"ProfileType":{"Title":"Profile Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"MaxHeatingLoad":{"Title":"Max. heating load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"BaseLoad":{"Title":"Base load","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ZeroLoad":{"Title":"Zero load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"From":{"Title":"from","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"},"At":{"Title":"at","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"CoolingProfile":{"Title":"Cooling Load Profile","Tab":{"TechnicalData":{"Title":"TECHNICAL DATA","Name":{"Title":"Name","Placeholder":"Radiant cooling office","InfoTool":"Project number explanation/tip"},"ProfileType":{"Title":"Profile Type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InletTemperature":{"Title":"Chilled water inlet temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"},"MaxCoolingLoad":{"Title":"Max. cooling load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"ChilledWaterTemperature":{"Title":"Chilled water temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"BaseLoad":{"Title":"Base load","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"ZeroLoad":{"Title":"Zero load","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingHour":{"Title":"Cooling hours","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"From":{"Title":"from","Placeholder":"","InfoTool":""},"At":{"Title":"at","Placeholder":"","InfoTool":""}},"CalculationData":{"Title":"CALCULATION DATA","InvestmentCosts":{"Title":"Investment costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Email","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Options":{"Title":"Options","Tab":{"GENERAL":{"Title":"GENERAL","Language":{"Title":"Language","Placeholder":"","InfoTool":"Project number explanation/tip"},"Bafa":{"Title":"BAFA 2018","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"RecoolingMethod":{"Title":"Re-cooling Method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"RecoolingTemperature":{"Title":"Re-cooling Temperature","Placeholder":"inhaber@gmbh.de","InfoTool":"Contact explanation/tip"},"FreeCooling":{"Title":"Free Cooling","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSources":{"Title":"Heat Sources","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSupply":{"Title":"Heat Supply","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatSource":{"Title":"Conventional heat source","Placeholder":"inhaber@gmbh.de","InfoTool":"Location explanation/tip"},"CalculationMethod":{"Title":"Calculation method","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"AmbientTemperature":{"Title":"Ambient temperature step","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"HeatingLoadProfile":{"Title":"Heating load profile","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"CoolingLoadProfile":{"Title":"Cooling load profile","Placeholder":"","InfoTool":"Customer explanation/tip"}},"ProjectSpecification":{"Title":"PROJECT SPECIFICATIONS","BusSystem":{"Title":"Bus system","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"Controller":{"Title":"Controller","Placeholder":"inhaber@gmbh.de","InfoTool":"Company explanation/tip"},"PressureDrop":{"Title":"Pressure drop in the piping","Placeholder":"inhaber@gmbh.de","InfoTool":"Address explanation/tip"}}},"HeatingDemand":{"Title":"Heating Demand"},"UnusedHeat":{"Title":"Unused Heat"}},"Fahrenheit":{"Title":"Fahrenheit System","Tab":{"Chiller":{"Title":"Chiller","AdsorptionProductGroup":{"Title":"Adsorption chillers product group","Placeholder":"inhaber@gmbh.de","InfoTool":"Editor explanation/tip"},"CompressionChillerGroup":{"Title":"Compression chiller product group"},"RecoolerProductGroup":{"Title":"Re-cooler product group"},"Adsorbent":{"Title":"Adsorbent","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ProductInterconnection":{"Title":"Product interconnection","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"Function":{"Title":"Function","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"TAB":{"TechnicalData":{"Title":"TECHNICAL DATA","AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"ChillerType":{"Title":"Chiller type","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"NumberOfChillers":{"Title":"Number of chillers","Placeholder":"1 piece","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"OperatingMode":{"Title":"Oprating Mode","Placeholder":"€/a","InfoTool":"Address explanation/tip"},"IntegratedSystemSepration":{"Title":"Integrated System Sepration","Placeholder":"€/a","InfoTool":"Address explanation/tip"},"IntegratedColdWaterUnit":{"Title":"Integrated Cold Water Unit","Placeholder":"€/a","InfoTool":"Address explanation/tip"},"GroupInterconnection":{"Title":"Group interconnection","Placeholder":"1 piece","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InvestmentCosts":{"Title":"Investment costs","Placeholder":"€","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"%","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"€/a","InfoTool":"Address explanation/tip"}},"CalculationData":{"Title":"CALCULATION DATA","AddChiller":{"Title":"Add a Chiller","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."}}}},"Recooling":{"Title":"Re-cooling System","RecoolingMethod":{"Title":"Re-cooling method","Placeholder":" ","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"PrimaryVolumeFlowRate":{"Title":"Primary volume flow rate","Placeholder":" ","InfoTool":"Project number explanation/tip"},"AddReCoolingSystem":{"Title":"Add a Re-cooling System","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"Components":{"Title":"Components","Placeholder":"inhaber@gmbh.de","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"CircuitSeparation":{"Title":"Circuit separation","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"Product":{"Title":"Product","Placeholder":"inhaber@gmbh.de","InfoTool":"Customer explanation/tip"},"NumberOfUnits":{"Title":"Number of units","Placeholder":"1 piece","InfoTool":"Project number explanation/tip"},"Name":{"Title":"Name","Placeholder":" ","InfoTool":"Project number explanation/tip"},"ReCoolingCapacity":{"Title":"Re-cooling capacity","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"TemperatureDifference":{"Title":"Temperature difference","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"SecondaryVolumeFloRate":{"Title":"Secondary volume flow rate","Placeholder":"inhaber@gmbh.de","InfoTool":"Project number explanation/tip"},"ElectricalPowerConsumption":{"Title":"Electrical power consumption","Placeholder":"","InfoTool":"Project number explanation/tip"},"AvailableByCustomer":{"Title":"Available/provided by customer","Placeholder":"","InfoTool":"Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project."},"InvestmentCosts":{"Title":"Investment costs","Placeholder":"","InfoTool":"Editor explanation/tip"},"Discount":{"Title":"Discount","Placeholder":"","InfoTool":"Company explanation/tip"},"MaintenanceCosts":{"Title":"Maintenance costs","Placeholder":"","InfoTool":"Address explanation/tip"}}},"InputRequired":"More inputs are required to suggest a system"},"RequiredField":{"Message":"Required field","Note":"Note : Please fill the required fields in both tabs","ErrorMsg":"please fill out this field"},"SaveButton":"save changes","InputRequired":"An input is required","DiscountText":"Discount","ErrorMessage":"Error on this page","AdditionalMessage":"Additional options for economic calculations are available!"}
 
 /***/ }),
-/* 100 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75049,9 +77455,9 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _redux = __webpack_require__(12);
+var _redux = __webpack_require__(14);
 
-var _index = __webpack_require__(101);
+var _index = __webpack_require__(120);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -75061,7 +77467,7 @@ var store = (0, _redux.createStore)(_index2.default, window.__REDUX_DEVTOOLS_EXT
 exports.default = store;
 
 /***/ }),
-/* 101 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75071,21 +77477,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(12);
+var _redux = __webpack_require__(14);
 
-var _chillers = __webpack_require__(102);
+var _chillers = __webpack_require__(121);
 
 var _chillers2 = _interopRequireDefault(_chillers);
 
-var _heatSources = __webpack_require__(103);
+var _heatSources = __webpack_require__(122);
 
 var _heatSources2 = _interopRequireDefault(_heatSources);
 
-var _heatingProfiles = __webpack_require__(104);
+var _heatingProfiles = __webpack_require__(123);
 
 var _heatingProfiles2 = _interopRequireDefault(_heatingProfiles);
 
-var _coolingProfiles = __webpack_require__(105);
+var _coolingProfiles = __webpack_require__(124);
 
 var _coolingProfiles2 = _interopRequireDefault(_coolingProfiles);
 
@@ -75099,7 +77505,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 102 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75111,7 +77517,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _actionTypes = __webpack_require__(3);
+var _actionTypes = __webpack_require__(4);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -75137,7 +77543,7 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 103 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75149,7 +77555,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _actionTypes = __webpack_require__(3);
+var _actionTypes = __webpack_require__(4);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -75175,7 +77581,7 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 104 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75187,7 +77593,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _actionTypes = __webpack_require__(3);
+var _actionTypes = __webpack_require__(4);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -75213,7 +77619,7 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 105 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75225,7 +77631,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _actionTypes = __webpack_require__(3);
+var _actionTypes = __webpack_require__(4);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -75250,7 +77656,7 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 106 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75266,7 +77672,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(22);
+var _reactDom = __webpack_require__(25);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -75368,7 +77774,7 @@ var Success = function (_Component) {
 exports.default = Success;
 
 /***/ }),
-/* 107 */
+/* 126 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

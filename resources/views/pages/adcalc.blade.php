@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="shortcut icon" href="{{ asset('public/images/cropped-flake-32x32.png') }}" >
+        <link rel="shortcut icon" href="{{ asset('/images/cropped-flake-32x32.png') }}" >
 
         <title>FAHRENHEIT</title>
 
@@ -13,37 +13,38 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
 
-    <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 
-      <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/css/frontstyle.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/frontstyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/owl.carousel.min.css') }}">
+    <link href="{{ asset('/css/VPyEor.css') }}" rel="stylesheet">
 
-   <link rel="stylesheet" href="{{ asset('public/css/jquery.bootstrap.year.calendar.css') }}">
+   <link rel="stylesheet" href="{{ asset('/css/jquery.bootstrap.year.calendar.css') }}">
    <script>
     window.app = {
         url : '{{ config("app.url") }}',
     };
    </script>
 
-    <!--   <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('public/css/font-awesome.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
-      <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}">
+    <!--   <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+      <link rel="stylesheet" href="{{ asset('/css/owl.carousel.min.css') }}">
 
 
-    // <script src="{{ asset('public/js/app.js') }}" defer></script> -->
+    // <script src="{{ asset('/js/app.js') }}" defer></script> -->
 
     <script src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyADkOuDbCZkoIvNvEw2BvLYcXOLjd-oAhQ"></script>
 
-    <script src="{{ asset('public/js/app.js') }}" defer></script>
-    <script src="{{ asset('public/js/script.js') }}" defer></script>
+    <script src="{{ asset('/js/app.js') }}" defer></script>
+    <script src="{{ asset('/js/script.js') }}" defer></script>
 
 
 
-    <script src="{{ asset('public/js/jquery.scrollbar.js') }}" defer></script>
-    <script src="{{ asset('public/js/Sortable.js') }}" defer></script>
+    <script src="{{ asset('/js/jquery.scrollbar.js') }}" defer></script>
+    <script src="{{ asset('/js/Sortable.js') }}" defer></script>
 
     <style>
        /* .hide{
