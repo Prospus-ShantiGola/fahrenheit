@@ -28,7 +28,9 @@ class Tiles extends React.Component {
             chilledwatertemp: 2,
             compressionChillerData: [],
             compressionDataChange: false,
-            generalData: [],
+            generalData: {
+                location:'munich'
+            },
             generalDataChange: false,
             optionData: [],
             optionDataChange: false,
@@ -156,6 +158,26 @@ class Tiles extends React.Component {
     setCoolingState(value) {
         this.setState({ chilledwatertemp:value})
     }
+    selectTemp(value){
+        console.log(value)
+        var port = 3000;
+        var that=this;
+        var locationName=value.target.value
+        axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
+        
+                    axios.get('/location_data/'+locationName+'.json')
+                    .then((response) => {
+                        var maxVal=that.getVal(response.data,'temprature');
+                        
+                        that.setState({ outdoortemp:{
+                            max:maxVal.max,
+                            min:maxVal.min
+                        },
+                        cityData:response.data,
+                    generalData:{location:locationName} })
+                    })
+                    .catch((error) => {response.json(error)})
+    }
     componentDidUpdate() {
 
     }
@@ -169,16 +191,18 @@ class Tiles extends React.Component {
                 total = total + arr[i][prop];
         }
         this.setState({
-            totalHours:total
+            totalHours:total,
+            generalDataChange:true,
+            location:value
         })
     }
     getVal(arr, prop) {
         var max;
         var min;
         for (var i=0 ; i<arr.length ; i++) {
-            if (!max || parseInt(arr[i][prop]) > parseInt(max[prop]))
+            if (!max || arr[i][prop] > max[prop])
                 max = arr[i];
-            if (!min || parseInt(arr[i][prop]) < parseInt(min[prop]))
+            if (!min || arr[i][prop] < min[prop])
                 min = arr[i];
         }
         var returnVal={
@@ -199,7 +223,7 @@ class Tiles extends React.Component {
 
         }
         if(that.props.title==GENERAL_TILE){
-            var port = 8000;
+            var port = 3000;
 axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
 
             axios.get('/location_data/munich.json')
@@ -212,7 +236,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                 },
                 cityData:response.data })
             })
-            .catch((error) => {res.json(error)})
+            .catch((error) => {response.json(error)})
             
         }
 
@@ -916,9 +940,19 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         <tr>
                             <td className="input-label" style={tdBorder}>{this.props.t('General.Tab.Personal.PersonalAddress.Title')}:</td>
 
-                            <td className="input-fields" style={tdBorder}>
+                            <td className="input-fields" style={tdBorder} onChange={value => this.selectTemp(value)} >
                                 <select>
                                     <option value="munich">munich</option>
+                                    <option value="accra">accra</option>
+                                    <option value="dubai">dubai</option>
+                                    <option value="losagelos">losagelos</option>
+                                    <option value="madrid">madrid</option>
+                                    <option value="melbourne">melbourne</option>
+                                    <option value="meuchen">meuchen</option>
+                                    <option value="rio">rio</option>
+                                    <option value="seuol">seuol</option>
+                                    <option value="singapore">singapore</option>
+                                    <option value="warzawa">warzawa</option>
                                 </select>
                             </td>
                         </tr>
@@ -942,7 +976,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         <div className="clrs"></div>
                         <li>
                             <p>{this.props.t('General.Tab.Project.ProjectLocation.Title')}</p>
-                            <h3 className="textUpper">{this.state.generalData[0].location}</h3>
+                            <h3 className="textUpper">{this.state.generalData.location}</h3>
                         </li>
                     </ul>
                 );

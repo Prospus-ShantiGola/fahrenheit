@@ -1360,7 +1360,7 @@ td.input-label.text-area-label {
     padding: 0 3px;
 }
 .input-fields select {
-    color: #00618c;
+    color: #000;
     font-weight: 400;
     font-size: 14px;
     padding: 5px 20px 5px 10px;
@@ -1368,7 +1368,7 @@ td.input-label.text-area-label {
     outline: none;
     width: 100%;
     border-radius: 5px;
-    border: 1px solid #00618c;
+    border: 1px solid #ffffff;
     appearance: none;
     background: url(../images/select-arrow.png);
     background-repeat: no-repeat;
