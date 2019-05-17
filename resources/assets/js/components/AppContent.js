@@ -100,19 +100,23 @@ class AppContent extends Component {
                             <div className="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
                             <ul className="list-inline left-icon-list">
 
-                                <li ><a href="#"  onClick={this.validateForm} className= "add-new-adcalc "><img src="public/images/icon_1.png" alt="" className="toplinks" title="New project" /></a></li>
-                                <li className=""><a href="#"  onClick={this.submitForm} className= "add-new-adcalc "><img src="public/images/icon_2.png"  alt="" title="Save  project"/></a></li>
-                                <li className="disableCard"><a href="#"><img src="public/images/icon_3.png" alt="" title="Load project"/></a></li>
-
+                                <li ><a href="#"  onClick={this.validateForm} className= "add-new-adcalc "><img src="images/icon_1.png" alt="" className="toplinks" title="New project" /></a></li>
+                                <li className=""><a href="#"  onClick={this.submitForm} className= "add-new-adcalc "><img src="images/icon_2.png"  alt="" title="Save  project"/></a></li>
+                                <li className="disableCard"><a href="#"><img src="images/icon_3.png" alt="" title="Load project"/></a></li>
+                                <li data-language  = "de"  className  = "choose-language " ><img src="images/germany-flag.png" alt="" /></li>
+                                <li  data-language = "en" className ="choose-language"><img src="images/united-kingdom.png" alt="" /></li>
+                                <li className="disabled"><img src="images/poland-flag.png" alt="" /></li>
+                                <li className="disabled"><img src="images/italy.png" alt="" /></li>
+                                <li className="disabled"><img src="images/greece-flag.png" alt="" /></li>  
                             </ul>
                             </div>
                             <div className="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6">
                             <ul className="list-inline right-icon-list">
-                                <li className="disableCard"><a href="#"><img src="public/images/icon_4.png" alt="" title="Download"/></a></li>
-                                <li className="disableCard"><a href="#"><img src="public/images/icon_5.png" alt="" title="Upload"/></a></li>
-                                <li className={disableClass}><a href="#" ><img src="public/images/icon_6.png" alt="toggle" onClick={this.toggleRole} title="Toggle view"/></a></li>
-                                <li><div data-toggle="modal" data-target="#contact-form-modal" ><img src="public/images/icon_7.png" alt="" title="Contact us"/></div></li>
-                                <li><div data-toggle="modal" className= "login-modal"><img src="public/images/icon_8.png" alt="" title="My profile"/></div></li>
+                                <li className="disableCard"><a href="#"><img src="images/icon_4.png" alt="" title="Download"/></a></li>
+                                <li className="disableCard"><a href="#"><img src="images/icon_5.png" alt="" title="Upload"/></a></li>
+                                <li className={disableClass}><a href="#" ><img src="images/icon_6.png" alt="toggle" onClick={this.toggleRole} title="Toggle view"/></a></li>
+                                <li><div data-toggle="modal" data-target="#contact-form-modal" ><img src="images/icon_7.png" alt="" title="Contact us"/></div></li>
+                                <li><div data-toggle="modal" className= "login-modal"><img src="images/icon_8.png" alt="" title="My profile"/></div></li>
                             </ul>
                             </div>
                         </div>
@@ -137,7 +141,7 @@ class AppContent extends Component {
 
                <div className="right-head">
 
-                    <span className="close" data-dismiss="modal"><img src="public/images/cancle-icon.png" alt="" /></span>
+                    <span className="close" data-dismiss="modal"><img src="images/cancle-icon.png" alt="" /></span>
 
                </div>
             </div>

@@ -24,8 +24,10 @@ class Tiles extends React.Component {
                 
             },
             outdoortempvalue:2,
-            drivetemp: 2,
-            chilledwatertemp: 2,
+            drivetemp: 55,
+            chilledwatertemp: 12,
+            coolingType:"Office Space",
+            coolingLoad:50,
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: {
@@ -156,13 +158,15 @@ class Tiles extends React.Component {
         this.setState({ drivetemp:value})
     }
     setCoolingState(value) {
+        CHANGE_FORM=true;
         this.setState({ chilledwatertemp:value})
     }
     selectTemp(value){
-        console.log(value)
+        
         var port = 3000;
         var that=this;
         var locationName=value.target.value
+        CHANGE_FORM=true;
         axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
         
                     axios.get('/location_data/'+locationName+'.json')
@@ -211,6 +215,28 @@ class Tiles extends React.Component {
         }
         return returnVal;
     }
+    getCoolingLoadProfile(){
+        var bodyFormData = new FormData();
+        bodyFormData.set({
+            coolingType:this.state.coolingType,
+            coolingLoad:this.state.coolingLoad,
+            chilledwatertemp:this.state.chilledwatertemp
+        });
+        axios({
+            method: 'post',
+            url: '/controller/method',
+            data: bodyFormData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+            })
+            .then(function (response) {
+                //handle success
+                console.log(response);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+    }
     componentDidMount() {
         
 
@@ -234,10 +260,12 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                     max:maxVal.max,
                     min:maxVal.min
                 },
+                outdoortempvalue:maxVal.min,
                 cityData:response.data })
+                that.setTemp(response.data,'hours',maxVal.min)
             })
             .catch((error) => {response.json(error)})
-            
+           // this.setTemp(this.state.cityData,'hours',value)
         }
 
         if (this.state.compressionChillerData.length == 0) {
@@ -587,8 +615,8 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         <tr>
                             <td className="input-label" style={tdBorder}>{this.props.t('HeatSource.Tab.TechnicalData.DriveTemperature.Title')}:</td>
                             <td className="input-fields" style={tdBorder}><InputRange
-                                maxValue={20}
-                                minValue={0}
+                                maxValue={90}
+                                minValue={55}
                                 value={this.state.drivetemp}
                                 onChange={value => this.setHeatState(value)} /></td>
                         </tr>
@@ -801,7 +829,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         <tr>
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.Title')}:</td>
                             <td className="input-fields" style={tdBorder}>
-                                <select className="required-field" onChange={(elem) => this.changeField(elem)} name="cooling_profile_type" id="cooling_profile_type">
+                                <select className="required-field" onChange={(elem) => this.setState({coolingType:elem.target.value})} name="cooling_profile_type" id="cooling_profile_type">
                                     <option value="Office Space">Office Space</option>
                                     <option value="Process cooling">Process Cooling</option>
                                 </select>
@@ -811,7 +839,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.Title')}:</td>
                             <td className="input-fields" style={tdBorder}>
                                 <ul className="list-inline">
-                                    <li className="withunit"><input type="text" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" /><span>kW</span></li>
+                                    <li className="withunit"><input type="text" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" onKeyUp={(elem) => this.setState({coolingLoad:elem.target.value})} /><span>kW</span></li>
                                     
                                 </ul>
                             </td>
@@ -820,7 +848,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.ChilledWaterTemperature.Title')}:</td>
                             <td className="input-fields" style={tdBorder}><InputRange
                                 maxValue={20}
-                                minValue={0}
+                                minValue={12}
                                 value={this.state.chilledwatertemp}
                                 onChange={value => this.setCoolingState(value)} /></td>
                         </tr>
