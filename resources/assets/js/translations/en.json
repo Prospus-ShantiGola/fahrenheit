@@ -85,6 +85,11 @@
                     "Title":"Email",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Email explanation/tip"
+                },
+                "ProjectTemp": {
+                    "Title":"Outdoor temp.",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Email explanation/tip"
                 }
             },
             "Personal": {
@@ -476,6 +481,11 @@
                 },
                 "MaxCoolingLoad": {
                     "Title":"Max. cooling load",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
+                "ChilledWaterTemperature": {
+                    "Title":"Chilled water temperature",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
                 },

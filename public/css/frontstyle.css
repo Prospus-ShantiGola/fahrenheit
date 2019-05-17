@@ -911,7 +911,7 @@ ul.right-list-content {
     font-family: Roboto;
 }
 .general-info-hover p {
-    padding-top: 60px;
+   /* padding-top: 60px; */
 }
 
 .heat-sources-hover p {
@@ -960,7 +960,7 @@ ul.right-list-content {
     padding-top: 25px;
 }
 .cooling-load-hover  p {
-    padding-top: 45px;
+   /* padding-top: 45px; */
 }
 
 .fahrenheit-system-hover p {

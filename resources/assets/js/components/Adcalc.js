@@ -167,6 +167,7 @@ class Adcalc extends Component {
 
     componentDidMount(){ 
     }
+    
 
     render() {
         projectData['chillerData'] = this.state.compressionChilerStateChange.chillerRecord;
@@ -179,7 +180,7 @@ class Adcalc extends Component {
                 tileCls:'general-information data-box',
                 required:"yes",
                 edit:'yes',
-                editCls:'edit-icon myBtn_multi',
+                editCls:'edit-icon myBtn_multi hide',
                 editIcon:'public/images/edit-icon.png',
                 add:'no',
                 hoverText:this.props.t('Tiles.General.hoverText'),
@@ -198,7 +199,7 @@ class Adcalc extends Component {
             Economic:{
                 title:ECONOMIC_TITLE,
                 header:this.props.t('Tiles.Economic.Title'),
-                tileCls:'economic-data data-box',
+                tileCls:'economic-data data-box disabled',
                 required:"no",
                 edit:'yes',
                 editCls:'edit-icon myBtn_multi',
@@ -220,7 +221,7 @@ class Adcalc extends Component {
             Options:{
                 title:OPTION_TILE,
                 header:this.props.t('Tiles.Options.Title'),
-                tileCls:'options data-box',
+                tileCls:'options data-box disabled',
                 required:"no",
                 edit:'yes',
                 editCls:'edit-icon myBtn_multi',
@@ -245,7 +246,7 @@ class Adcalc extends Component {
                 tileCls:'heat-sources data-box',
                 required:"no",
                 edit:'yes',
-                editCls:'add-icon myBtn_multi',
+                editCls:'add-icon myBtn_multi hide',
                 editIcon:'public/images/add-icon.png',
                 add:'no',
                 hoverText:this.props.t('Tiles.HeatSource.hoverText'),
@@ -265,7 +266,7 @@ class Adcalc extends Component {
             HeatingLoadProfile:{
                 title:HEAT_LOAD_PROFILE_TITLE,
                 header:this.props.t('Tiles.HeatingLoadProfile.Title'),
-                tileCls:'heating-load-profiles data-box',
+                tileCls:'heating-load-profiles data-box disabled',
                 required:"no",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
@@ -287,7 +288,7 @@ class Adcalc extends Component {
             CompressionChiller:{
                 title:CHILLER_TITLE,
                 header:this.props.t('Tiles.CompressionChiller.Title'),
-                tileCls:'compression-chillers data-box',
+                tileCls:'compression-chillers data-box disabled',
                 required:"no",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',
@@ -332,7 +333,7 @@ class Adcalc extends Component {
             FahrenheitSystem:{
                 title:FAHRENHEIT_SYSTEM,
                 header:this.props.t('Tiles.FahrenheitSystem.Title'),
-                tileCls:'fahrenheit-system-box data-box',
+                tileCls:'fahrenheit-system-box data-box disabled',
                 required:"yes",
                 edit:'yes',
                 editCls:'add-icon myBtn_multi',

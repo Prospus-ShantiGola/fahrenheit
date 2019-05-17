@@ -113,22 +113,11 @@ class CalculateDataController extends Controller
                // calculate ADKA values 
                 $output = $this->calculateADKA($adka_input);
 
-                // if($tn_airln){
-                    
-                //     $Qth_Mt = $output['Qth_Mt'];
+                if($tn_airln){
 
-                //     $dt_st = $this->calculateDtSt($Qth_Mt, $dt_nomst,$qth_nomst);              
-                //     $dT_rk = $this->calculateDtRk($Qth_Mt, $dt_nomrk,$qth_nomrk);
-               
-                //     $tn_mtIn = $output['Tn_MtIn'] +  $dt_st + $dT_rk ;
-                    
-                //     // new input for Tn_Mtln value  to calculate again ADKA value 
-                //     $adka_input['Tn_MtIn'] = $tn_mtIn;
-
-                //     // calculate ADKA values for calculated  Tn_Mtln
-                //     $output = $this->calculateADKA($adka_input);
-                // }
-                 $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_capacity);
+                   $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_capacity);
+                }
+                 
 
                 $cal_out[$i]['product_name'] = $key;
                 $cal_out[$i]['cooling_capacity'] = number_format($output['Qth_Lt'], 2, '.', '') . " kW"; 
@@ -137,7 +126,7 @@ class CalculateDataController extends Controller
                 $cal_out[$i]['cold_water_temp_outlet'] = floor($output['Tn_LtOut'] * 10) / 10; 
                 $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 2, '.', '');                  
                 $cal_out[$i]['COPth'] = number_format($output['COPth'], 3, '.', '');
-                $cal_out[$i]['Tn_MtIn'] = number_format($tn_mtIn, 2, '.', '');
+                $cal_out[$i]['Tn_MtIn'] = number_format($output['Tn_MtIn'], 2, '.', '');
 
                 $i++;
 
@@ -166,30 +155,20 @@ class CalculateDataController extends Controller
 
                     if($tn_airln){
                     
-                        $Qth_Mt = $output['Qth_Mt'];
-
-                        $dt_st = $this->calculateDtSt($Qth_Mt, $dt_nomst,$qth_nomst);              
-                        $dT_rk = $this->calculateDtRk($Qth_Mt, $dt_nomrk,$qth_nomrk);
-                   
-                        $tn_mtIn = $output['Tn_MtIn'] +  $dt_st + $dT_rk ;
-                        
-                        // new input for Tn_Mtln value  to calculate again ADKA value 
-                        $adka_input['Tn_MtIn'] = $tn_mtIn;
-
-                        // calculate ADKA values for calculated  Tn_Mtln
-                        $output = $this->calculateADKA($adka_input);
+                        $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_capacity);
                     }
 
-                $cal_out[$i]['product_name'] = $key;
-                $cal_out[$i]['cooling_capacity'] = number_format($output['Qth_Lt'], 2, '.', '') . " kW"; 
-                $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 2, '.', '') . " kW";
-                $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 2, '.', '');
-                $cal_out[$i]['cold_water_temp_outlet'] = floor($output['Tn_LtOut'] * 10) / 10; 
-                $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 2, '.', '');                  
-                $cal_out[$i]['COPth'] = number_format($output['COPth'], 3, '.', '');
-                $cal_out[$i]['Tn_MtIn'] = number_format($tn_mtIn, 2, '.', '');
+                    $cal_out[$i]['product_name'] = $key;
+                    $cal_out[$i]['cooling_capacity'] = number_format($output['Qth_Lt'], 2, '.', '') . " kW"; 
+                    $cal_out[$i]['driving_heat'] = number_format($output['Qth_Ht'], 2, '.', '') . " kW";
+                    $cal_out[$i]['driving_temp_outlet'] = number_format($output['Tn_HtOut'], 2, '.', '');
+                    $cal_out[$i]['cold_water_temp_outlet'] = floor($output['Tn_LtOut'] * 10) / 10; 
+                    $cal_out[$i]['recooling_temp_outlet'] = number_format($output['Tn_MtOut'], 2, '.', '');                  
+                    $cal_out[$i]['COPth'] = number_format($output['COPth'], 3, '.', '');
+                    $cal_out[$i]['Tn_MtIn'] = number_format($output['Tn_MtIn'], 2, '.', '');
 
-                $i++;
+
+                    $i++;
 
                 } 
                 else {
@@ -214,20 +193,78 @@ class CalculateDataController extends Controller
     {
         if($tn_airln)
         {
-                    
-            $Qth_Mt = $output['Qth_Mt'];
+            // die('dd');       
+         // echo $Qth_Mt = $output['Qth_Mt'];
+         //              echo "<br/>";
+         //   echo $Qth_Lt = $output['Qth_Lt'];
+         //   // $output['Qth_Lt'] = 32.2;
+         //              echo "<br/>";
 
-            $dt_st = $this->calculateDtSt($Qth_Mt, $dt_nomst,$qth_nomst);              
-            $dT_rk = $this->calculateDtRk($Qth_Mt, $dt_nomrk,$qth_nomrk);
-       
-            $tn_mtIn = $output['Tn_MtIn'] +  $dt_st + $dT_rk ;
+         //  // echo "<pre>";print_r($output);
+         // // die;
+        
+            echo 'e_______'.$extra =2;
+
+             for($i = 0 ; $i<=800;)
+            {
+
+
+              echo '**************';
+                echo "<br/>";
+            echo "loop".$i;
+              echo "<br/>";
+             // if($i==1)
+             //    {
+             //        $output['Qth_Lt'] = 32.2;
+             //    }
+                echo "<pre>";print_r($output);
             
-            // new input for Tn_Mtln value  to calculate again ADKA value 
-            $adka_input['Tn_MtIn'] = $tn_mtIn;
+            echo "<br/>";
+            echo 'Qth_Mt___'.$Qth_Mt = $output['Qth_Mt'];
+                      echo "<br/>";
+            echo'Qth_Lt________'. $Qth_Lt = $output['Qth_Lt'];
+                      echo "<br/>";
 
-            // calculate ADKA values for calculated  Tn_Mtln
-            $output = $this->calculateADKA($adka_input);
 
+
+            if($Qth_Lt != $max_cooling_capacity)
+            {
+
+
+               if($i==0) {
+                $dt_st = $this->calculateDtSt($Qth_Mt, $dt_nomst,$qth_nomst);              
+                $dT_rk = $this->calculateDtRk($Qth_Mt, $dt_nomrk,$qth_nomrk);
+           
+                $tn_mtIn = $output['Tn_MtIn'] +  $dt_st + $dT_rk ;
+            }
+            else
+            {
+                $tn_mtIn = round($output['Tn_MtIn']) + $extra;
+            }
+                
+                // new input for Tn_Mtln value  to calculate again ADKA value 
+              echo 'tn_mtIn'.  $adka_input['Tn_MtIn'] = $tn_mtIn;
+               echo "<br/>";      echo "<br/>";
+                 // $Qth_Mt = $output['Qth_Mt'];
+
+                // calculate ADKA values for calculated  Tn_Mtln
+                $output = $this->calculateADKA($adka_input);
+                //$output['tn_mtIn'] = $tn_mtIn; 
+
+                $i++;
+
+            }
+           
+            else
+            {
+                echo 'enter';
+            }
+         }
+            
+         //   if()
+
+
+            return  $output;
         }
 
     }
