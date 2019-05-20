@@ -16,7 +16,16 @@ class Tiles extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 2,
+            totalHours:0,
+            cityData:[],
+            outdoortemp: {
+                max:0,
+                min:0,
+                
+            },
+            outdoortempvalue:2,
+            drivetemp: 2,
+            chilledwatertemp: 2,
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: [],
@@ -138,15 +147,14 @@ class Tiles extends React.Component {
         });
     }
     setTempState(value) {
-        console.log(value)
-        axios.get('/user?ID=12345')
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        this.setState({ value })
+        this.setState({ outdoortempvalue:value})
+        this.setTemp(this.state.cityData,'hours',value)
+    }
+    setHeatState(value) {
+        this.setState({ drivetemp:value})
+    }
+    setCoolingState(value) {
+        this.setState({ chilledwatertemp:value})
     }
     componentDidUpdate() {
 
@@ -154,9 +162,33 @@ class Tiles extends React.Component {
     componentWillUnmount() {
         // console.log("component unmount")
     }
+    setTemp(arr,prop,value){
+        var total=0
+        for (var i=0 ; i<arr.length ; i++) {
+            if (arr[i]['temprature'] > value)
+                total = total + arr[i][prop];
+        }
+        this.setState({
+            totalHours:total
+        })
+    }
+    getVal(arr, prop) {
+        var max;
+        var min;
+        for (var i=0 ; i<arr.length ; i++) {
+            if (!max || parseInt(arr[i][prop]) > parseInt(max[prop]))
+                max = arr[i];
+            if (!min || parseInt(arr[i][prop]) < parseInt(min[prop]))
+                min = arr[i];
+        }
+        var returnVal={
+            max:max.temprature,
+            min:min.temprature
+        }
+        return returnVal;
+    }
     componentDidMount() {
-
-
+        
 
         var that = this;
 
@@ -165,6 +197,23 @@ class Tiles extends React.Component {
             //    console.log("Lineellipses",this.linesEllipsis.state.clamped);
             //    console.log("Lineellipses state",this.linesEllipsis);
 
+        }
+        if(that.props.title==GENERAL_TILE){
+           // var port = 8000;
+//axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
+
+            axios.get('/public/location_data/munich.json')
+            .then((response) => {
+                var maxVal=that.getVal(response.data,'temprature');
+                
+                this.setState({ outdoortemp:{
+                    max:maxVal.max,
+                    min:maxVal.min
+                },
+                cityData:response.data })
+            })
+            .catch((error) => {res.json(error)})
+            
         }
 
         if (this.state.compressionChillerData.length == 0) {
@@ -516,8 +565,8 @@ class Tiles extends React.Component {
                             <td className="input-fields" style={tdBorder}><InputRange
                                 maxValue={20}
                                 minValue={0}
-                                value={this.state.value}
-                                onChange={value => this.setTempState(value)} /></td>
+                                value={this.state.drivetemp}
+                                onChange={value => this.setHeatState(value)} /></td>
                         </tr>
                     </table>
                 </form>
@@ -748,8 +797,8 @@ class Tiles extends React.Component {
                             <td className="input-fields" style={tdBorder}><InputRange
                                 maxValue={20}
                                 minValue={0}
-                                value={this.state.value}
-                                onChange={value => this.setTempState(value)} /></td>
+                                value={this.state.chilledwatertemp}
+                                onChange={value => this.setCoolingState(value)} /></td>
                         </tr>
                     </table>
                 </form>
@@ -876,11 +925,12 @@ class Tiles extends React.Component {
                         <tr>
                             <td className="input-label" style={tdBorder}>{this.props.t('General.Tab.Project.ProjectTemp.Title')}:</td>
                             <td className="input-fields" style={tdBorder}><InputRange
-                                maxValue={20}
-                                minValue={0}
-                                value={this.state.value}
+                                maxValue={this.state.outdoortemp.max}
+                                minValue={this.state.outdoortemp.min}
+                                value={this.state.outdoortempvalue}
                                 onChange={value => this.setTempState(value)} /></td>
                         </tr>
+                        <tr><td className="input-label" style={tdBorder} colSpan="2">On {this.state.totalHours} hours per year, it's warmer than {this.state.outdoortempvalue}°C.</td></tr>
                     </table>
                 </form>
             )

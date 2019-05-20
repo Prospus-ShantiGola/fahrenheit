@@ -63169,7 +63169,16 @@ var Tiles = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
         _this.state = {
-            value: 2,
+            totalHours: 0,
+            cityData: [],
+            outdoortemp: {
+                max: 0,
+                min: 0
+
+            },
+            outdoortempvalue: 2,
+            drivetemp: 2,
+            chilledwatertemp: 2,
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: [],
@@ -63299,13 +63308,18 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'setTempState',
         value: function setTempState(value) {
-            console.log(value);
-            axios.get('/user?ID=12345').then(function (response) {
-                console.log(response);
-            }).catch(function (error) {
-                console.log(error);
-            });
-            this.setState({ value: value });
+            this.setState({ outdoortempvalue: value });
+            this.setTemp(this.state.cityData, 'hours', value);
+        }
+    }, {
+        key: 'setHeatState',
+        value: function setHeatState(value) {
+            this.setState({ drivetemp: value });
+        }
+    }, {
+        key: 'setCoolingState',
+        value: function setCoolingState(value) {
+            this.setState({ chilledwatertemp: value });
         }
     }, {
         key: 'componentDidUpdate',
@@ -63316,8 +63330,35 @@ var Tiles = function (_React$Component) {
             // console.log("component unmount")
         }
     }, {
+        key: 'setTemp',
+        value: function setTemp(arr, prop, value) {
+            var total = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i]['temprature'] > value) total = total + arr[i][prop];
+            }
+            this.setState({
+                totalHours: total
+            });
+        }
+    }, {
+        key: 'getVal',
+        value: function getVal(arr, prop) {
+            var max;
+            var min;
+            for (var i = 0; i < arr.length; i++) {
+                if (!max || parseInt(arr[i][prop]) > parseInt(max[prop])) max = arr[i];
+                if (!min || parseInt(arr[i][prop]) < parseInt(min[prop])) min = arr[i];
+            }
+            var returnVal = {
+                max: max.temprature,
+                min: min.temprature
+            };
+            return returnVal;
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this2 = this;
 
             var that = this;
 
@@ -63326,6 +63367,22 @@ var Tiles = function (_React$Component) {
                 //    console.log("Lineellipses",this.linesEllipsis.state.clamped);
                 //    console.log("Lineellipses state",this.linesEllipsis);
 
+            }
+            if (that.props.title == GENERAL_TILE) {
+                // var port = 8000;
+                //axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
+
+                axios.get('/public/location_data/munich.json').then(function (response) {
+                    var maxVal = that.getVal(response.data, 'temprature');
+
+                    _this2.setState({ outdoortemp: {
+                            max: maxVal.max,
+                            min: maxVal.min
+                        },
+                        cityData: response.data });
+                }).catch(function (error) {
+                    res.json(error);
+                });
             }
 
             if (this.state.compressionChillerData.length == 0) {
@@ -63545,7 +63602,7 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             //console.log("render refresh",this.state.heatSourceData);
             //this.props.store.dispatch("ADD_GENERAL")
@@ -63613,21 +63670,21 @@ var Tiles = function (_React$Component) {
                             )
                         ),
                         function () {
-                            if (_this2.state.compressionChillerData[0].temperature != "") {
+                            if (_this3.state.compressionChillerData[0].temperature != "") {
                                 return _react2.default.createElement(
                                     'li',
                                     null,
                                     _react2.default.createElement(
                                         'p',
                                         null,
-                                        _this2.props.t('Tiles.CompressionChiller.Temperature')
+                                        _this3.props.t('Tiles.CompressionChiller.Temperature')
                                     ),
                                     _react2.default.createElement(
                                         'h3',
                                         null,
                                         _react2.default.createElement('img', { src: 'public/images/degree-icon.png', alt: '' }),
                                         ' ',
-                                        _this2.state.compressionChillerData[0].temperature != "" ? _this2.state.compressionChillerData[0].temperature + "°C" : ""
+                                        _this3.state.compressionChillerData[0].temperature != "" ? _this3.state.compressionChillerData[0].temperature + "°C" : ""
                                     )
                                 );
                             }
@@ -63681,16 +63738,16 @@ var Tiles = function (_React$Component) {
                                                     null,
                                                     _react2.default.createElement(
                                                         'span',
-                                                        { className: 'edit-option', 'data-id': i, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this2.props.modalId },
+                                                        { className: 'edit-option', 'data-id': i, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this3.props.modalId },
                                                         _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                return _this2.editRecord(i);
+                                                                return _this3.editRecord(i);
                                                             } })
                                                     ),
                                                     _react2.default.createElement(
                                                         'span',
                                                         { className: 'delete-optionn', 'data-id': i },
                                                         _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-modal', onClick: function onClick(elem) {
-                                                                return _this2.deleteRecord(i, elem);
+                                                                return _this3.deleteRecord(i, elem);
                                                             } })
                                                     ),
                                                     _react2.default.createElement(
@@ -63767,9 +63824,9 @@ var Tiles = function (_React$Component) {
                                 _react2.default.createElement(_reactInputRange2.default, {
                                     maxValue: 20,
                                     minValue: 0,
-                                    value: this.state.value,
+                                    value: this.state.drivetemp,
                                     onChange: function onChange(value) {
-                                        return _this2.setTempState(value);
+                                        return _this3.setHeatState(value);
                                     } })
                             )
                         )
@@ -63789,7 +63846,7 @@ var Tiles = function (_React$Component) {
                                     _react2.default.createElement(
                                         'p',
                                         null,
-                                        _this2.props.t('Tiles.HeatSource.HeatCapacity')
+                                        _this3.props.t('Tiles.HeatSource.HeatCapacity')
                                     ),
                                     _react2.default.createElement(
                                         'h3',
@@ -63881,16 +63938,16 @@ var Tiles = function (_React$Component) {
                                                     null,
                                                     _react2.default.createElement(
                                                         'span',
-                                                        { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this2.props.modalId },
+                                                        { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this3.props.modalId },
                                                         _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                return _this2.editHeatRecord(h, { hiddenmode: "heatsourceformMode", hiddenmodekey: "heatsourceformModeKey" });
+                                                                return _this3.editHeatRecord(h, { hiddenmode: "heatsourceformMode", hiddenmodekey: "heatsourceformModeKey" });
                                                             } })
                                                     ),
                                                     _react2.default.createElement(
                                                         'span',
                                                         { className: 'delete-optionn', 'data-id': h },
                                                         _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-heat-modal', onClick: function onClick(elem) {
-                                                                return _this2.deleteRecord(h, elem);
+                                                                return _this3.deleteRecord(h, elem);
                                                             } })
                                                     ),
                                                     _react2.default.createElement(
@@ -64029,16 +64086,16 @@ var Tiles = function (_React$Component) {
                                                     null,
                                                     _react2.default.createElement(
                                                         'span',
-                                                        { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this2.props.modalId },
+                                                        { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this3.props.modalId },
                                                         _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                return _this2.editHeatRecord(h, { hiddenmode: "heatingprofileformMode", hiddenmodekey: "heatingprofileformModeKey" });
+                                                                return _this3.editHeatRecord(h, { hiddenmode: "heatingprofileformMode", hiddenmodekey: "heatingprofileformModeKey" });
                                                             } })
                                                     ),
                                                     _react2.default.createElement(
                                                         'span',
                                                         { className: 'delete-optionn', 'data-id': h },
                                                         _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-heat-modal', onClick: function onClick(elem) {
-                                                                return _this2.deleteRecord(h, elem);
+                                                                return _this3.deleteRecord(h, elem);
                                                             } })
                                                     ),
                                                     _react2.default.createElement(
@@ -64115,7 +64172,7 @@ var Tiles = function (_React$Component) {
                                 _react2.default.createElement(
                                     'select',
                                     { className: 'required-field', onChange: function onChange(elem) {
-                                            return _this2.changeField(elem);
+                                            return _this3.changeField(elem);
                                         }, name: 'cooling_profile_type', id: 'cooling_profile_type' },
                                     _react2.default.createElement(
                                         'option',
@@ -64173,9 +64230,9 @@ var Tiles = function (_React$Component) {
                                 _react2.default.createElement(_reactInputRange2.default, {
                                     maxValue: 20,
                                     minValue: 0,
-                                    value: this.state.value,
+                                    value: this.state.chilledwatertemp,
                                     onChange: function onChange(value) {
-                                        return _this2.setTempState(value);
+                                        return _this3.setCoolingState(value);
                                     } })
                             )
                         )
@@ -64290,16 +64347,16 @@ var Tiles = function (_React$Component) {
                                                     null,
                                                     _react2.default.createElement(
                                                         'span',
-                                                        { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this2.props.modalId },
+                                                        { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this3.props.modalId },
                                                         _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                return _this2.editHeatRecord(h, { hiddenmode: "coolingprofileformMode", hiddenmodekey: "coolingprofileformModeKey" });
+                                                                return _this3.editHeatRecord(h, { hiddenmode: "coolingprofileformMode", hiddenmodekey: "coolingprofileformModeKey" });
                                                             } })
                                                     ),
                                                     _react2.default.createElement(
                                                         'span',
                                                         { className: 'delete-optionn', 'data-id': h },
                                                         _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-heat-modal', onClick: function onClick(elem) {
-                                                                return _this2.deleteRecord(h, elem);
+                                                                return _this3.deleteRecord(h, elem);
                                                             } })
                                                     ),
                                                     _react2.default.createElement(
@@ -64398,12 +64455,25 @@ var Tiles = function (_React$Component) {
                                 'td',
                                 { className: 'input-fields', style: tdBorder },
                                 _react2.default.createElement(_reactInputRange2.default, {
-                                    maxValue: 20,
-                                    minValue: 0,
-                                    value: this.state.value,
+                                    maxValue: this.state.outdoortemp.max,
+                                    minValue: this.state.outdoortemp.min,
+                                    value: this.state.outdoortempvalue,
                                     onChange: function onChange(value) {
-                                        return _this2.setTempState(value);
+                                        return _this3.setTempState(value);
                                     } })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'tr',
+                            null,
+                            _react2.default.createElement(
+                                'td',
+                                { className: 'input-label', style: tdBorder, colSpan: '2' },
+                                'On ',
+                                this.state.totalHours,
+                                ' hours per year, it\'s warmer than ',
+                                this.state.outdoortempvalue,
+                                '\xB0C.'
                             )
                         )
                     )
@@ -64559,9 +64629,9 @@ var Tiles = function (_React$Component) {
                         'ul',
                         { className: 'price-listt plnewblock' },
                         function () {
-                            if (_this2.state.optionData[0].option_language != "") {
+                            if (_this3.state.optionData[0].option_language != "") {
 
-                                if (_this2.state.optionData[0].option_language == "en") {
+                                if (_this3.state.optionData[0].option_language == "en") {
                                     return _react2.default.createElement(
                                         'li',
                                         { className: 'pdtnam' },
@@ -64648,9 +64718,9 @@ var Tiles = function (_React$Component) {
                                 'table',
                                 { className: 'table' },
                                 function () {
-                                    if (_this2.state.optionData[0].option_language != "") {
+                                    if (_this3.state.optionData[0].option_language != "") {
 
-                                        if (_this2.state.optionData[0].option_language == "en") {
+                                        if (_this3.state.optionData[0].option_language == "en") {
                                             return _react2.default.createElement(
                                                 'tr',
                                                 null,
@@ -64684,7 +64754,7 @@ var Tiles = function (_React$Component) {
                                     }
                                 }(),
                                 function () {
-                                    if (_this2.state.optionData[0].profile_bafa != "") {
+                                    if (_this3.state.optionData[0].profile_bafa != "") {
                                         return _react2.default.createElement(
                                             'tr',
                                             null,
@@ -64696,7 +64766,7 @@ var Tiles = function (_React$Component) {
                                             _react2.default.createElement(
                                                 'td',
                                                 null,
-                                                _this2.state.optionData[0].profile_bafa
+                                                _this3.state.optionData[0].profile_bafa
                                             )
                                         );
                                     }
@@ -64890,19 +64960,19 @@ var Tiles = function (_React$Component) {
                         'ul',
                         { className: 'price-listt plnewblock' },
                         function () {
-                            if (_this2.state.economicData[0].electric_price != "") {
+                            if (_this3.state.economicData[0].electric_price != "") {
                                 return _react2.default.createElement(
                                     'li',
                                     { className: 'pdtnam' },
                                     _react2.default.createElement(
                                         'p',
                                         null,
-                                        _this2.props.t('Economic.Tab.General.ElectricityPrice.Title')
+                                        _this3.props.t('Economic.Tab.General.ElectricityPrice.Title')
                                     ),
                                     _react2.default.createElement(
                                         'h3',
                                         null,
-                                        _this2.state.economicData[0].electric_price,
+                                        _this3.state.economicData[0].electric_price,
                                         _react2.default.createElement('br', null),
                                         '\u20AC/kWh'
                                     )
@@ -64910,19 +64980,19 @@ var Tiles = function (_React$Component) {
                             }
                         }(),
                         function () {
-                            if (_this2.state.economicData[0].own_usage_of_electricity != "") {
+                            if (_this3.state.economicData[0].own_usage_of_electricity != "") {
                                 return _react2.default.createElement(
                                     'li',
                                     { className: 'pdtnum' },
                                     _react2.default.createElement(
                                         'p',
                                         null,
-                                        _this2.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')
+                                        _this3.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title')
                                     ),
                                     _react2.default.createElement(
                                         'h3',
                                         null,
-                                        _this2.state.economicData[0].own_usage_of_electricity,
+                                        _this3.state.economicData[0].own_usage_of_electricity,
                                         '%'
                                     )
                                 );
@@ -64930,19 +65000,19 @@ var Tiles = function (_React$Component) {
                         }(),
                         _react2.default.createElement('div', { className: 'clrs' }),
                         function () {
-                            if (_this2.state.economicData[0].gas_price != "") {
+                            if (_this3.state.economicData[0].gas_price != "") {
                                 return _react2.default.createElement(
                                     'li',
                                     { className: 'pdtnam' },
                                     _react2.default.createElement(
                                         'p',
                                         null,
-                                        _this2.props.t('Economic.Tab.CHP.GasPrice.Title')
+                                        _this3.props.t('Economic.Tab.CHP.GasPrice.Title')
                                     ),
                                     _react2.default.createElement(
                                         'h3',
                                         null,
-                                        _this2.state.economicData[0].gas_price,
+                                        _this3.state.economicData[0].gas_price,
                                         _react2.default.createElement('br', null),
                                         '\u20AC/kWh'
                                     )
@@ -64950,19 +65020,19 @@ var Tiles = function (_React$Component) {
                             }
                         }(),
                         function () {
-                            if (_this2.state.economicData[0].subsidy_for_electricity != "") {
+                            if (_this3.state.economicData[0].subsidy_for_electricity != "") {
                                 return _react2.default.createElement(
                                     'li',
                                     { className: 'pdtnum' },
                                     _react2.default.createElement(
                                         'p',
                                         null,
-                                        _this2.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')
+                                        _this3.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')
                                     ),
                                     _react2.default.createElement(
                                         'h3',
                                         null,
-                                        _this2.state.economicData[0].subsidy_for_electricity
+                                        _this3.state.economicData[0].subsidy_for_electricity
                                     )
                                 );
                             }
@@ -64981,79 +65051,79 @@ var Tiles = function (_React$Component) {
                                     'tbody',
                                     null,
                                     function () {
-                                        if (_this2.state.economicData[0].electric_price != "") {
+                                        if (_this3.state.economicData[0].electric_price != "") {
                                             return _react2.default.createElement(
                                                 'tr',
                                                 null,
                                                 _react2.default.createElement(
                                                     'th',
                                                     null,
-                                                    _this2.props.t('Economic.Tab.General.ElectricityPrice.Title'),
+                                                    _this3.props.t('Economic.Tab.General.ElectricityPrice.Title'),
                                                     ':'
                                                 ),
                                                 _react2.default.createElement(
                                                     'td',
                                                     null,
-                                                    _this2.state.economicData[0].electric_price,
+                                                    _this3.state.economicData[0].electric_price,
                                                     ' \u20AC/kWh'
                                                 )
                                             );
                                         }
                                     }(),
                                     function () {
-                                        if (_this2.state.economicData[0].gas_price != "") {
+                                        if (_this3.state.economicData[0].gas_price != "") {
                                             return _react2.default.createElement(
                                                 'tr',
                                                 null,
                                                 _react2.default.createElement(
                                                     'th',
                                                     null,
-                                                    _this2.props.t('Economic.Tab.CHP.GasPrice.Title'),
+                                                    _this3.props.t('Economic.Tab.CHP.GasPrice.Title'),
                                                     ':'
                                                 ),
                                                 _react2.default.createElement(
                                                     'td',
                                                     null,
-                                                    _this2.state.economicData[0].gas_price,
+                                                    _this3.state.economicData[0].gas_price,
                                                     ' \u20AC/kWh'
                                                 )
                                             );
                                         }
                                     }(),
                                     function () {
-                                        if (_this2.state.economicData[0].own_usage_of_electricity != "") {
+                                        if (_this3.state.economicData[0].own_usage_of_electricity != "") {
                                             return _react2.default.createElement(
                                                 'tr',
                                                 null,
                                                 _react2.default.createElement(
                                                     'th',
                                                     null,
-                                                    _this2.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title'),
+                                                    _this3.props.t('Economic.Tab.CHP.OwnUsageOfElectricity.Title'),
                                                     ': '
                                                 ),
                                                 _react2.default.createElement(
                                                     'td',
                                                     null,
-                                                    _this2.state.economicData[0].own_usage_of_electricity,
+                                                    _this3.state.economicData[0].own_usage_of_electricity,
                                                     '%'
                                                 )
                                             );
                                         }
                                     }(),
                                     function () {
-                                        if (_this2.state.economicData[0].subsidy_for_electricity != "") {
+                                        if (_this3.state.economicData[0].subsidy_for_electricity != "") {
                                             return _react2.default.createElement(
                                                 'tr',
                                                 null,
                                                 _react2.default.createElement(
                                                     'th',
                                                     null,
-                                                    _this2.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')
+                                                    _this3.props.t('Economic.Tab.CHP.KWKEubsidyForElectricity.Title')
                                                 ),
                                                 _react2.default.createElement(
                                                     'td',
                                                     null,
-                                                    _this2.state.economicData[0].subsidy_for_electricity
+                                                    _this3.state.economicData[0].subsidy_for_electricity
                                                 )
                                             );
                                         }

@@ -203,9 +203,10 @@ class CalculateDataController extends Controller
          //  // echo "<pre>";print_r($output);
          // // die;
         
-            echo 'e_______'.$extra =2;
+            $extra = 1;
 
-             for($i = 0 ; $i<=800;)
+
+             for($i = 0 ; $i<=100;)
             {
 
 
@@ -220,9 +221,9 @@ class CalculateDataController extends Controller
                 echo "<pre>";print_r($output);
             
             echo "<br/>";
-            echo 'Qth_Mt___'.$Qth_Mt = $output['Qth_Mt'];
+           $Qth_Mt = $output['Qth_Mt'];
                       echo "<br/>";
-            echo'Qth_Lt________'. $Qth_Lt = $output['Qth_Lt'];
+          $Qth_Lt = $output['Qth_Lt'];
                       echo "<br/>";
 
 
@@ -239,12 +240,28 @@ class CalculateDataController extends Controller
             }
             else
             {
-                $tn_mtIn = round($output['Tn_MtIn']) + $extra;
+
+                if($Qth_Lt<15)
+                {
+                   
+                    $tn_mtIn = ($output['Tn_MtIn']) - 0.5;
+// echo "<br/>";
+                    // echo $tn_mtIn."eXTRA______________0.6";
+                    // echo "<br/>";
+                    $extra = 0.1;
+                }
+                else
+                {
+                  //  echo 'extra____________'.$extra;
+                     $tn_mtIn = ($output['Tn_MtIn']) + $extra;
+                }
+               
+                //$tn_mtIn = ($output['Tn_MtIn']) + $extra;
             }
                 
                 // new input for Tn_Mtln value  to calculate again ADKA value 
-              echo 'tn_mtIn'.  $adka_input['Tn_MtIn'] = $tn_mtIn;
-               echo "<br/>";      echo "<br/>";
+             $adka_input['Tn_MtIn'] = $tn_mtIn;
+               // echo "<br/>";      echo "<br/>";
                  // $Qth_Mt = $output['Qth_Mt'];
 
                 // calculate ADKA values for calculated  Tn_Mtln
