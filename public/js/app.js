@@ -63204,8 +63204,8 @@ var Tiles = function (_React$Component) {
             outdoortempvalue: 2,
             drivetemp: 55,
             chilledwatertemp: 12,
-            coolingType: "",
-            coolingLoad: "",
+            coolingType: "Office Space",
+            coolingLoad: 50,
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: {
@@ -63409,6 +63409,44 @@ var Tiles = function (_React$Component) {
                 min: min.temprature
             };
             return returnVal;
+        }
+    }, {
+        key: 'getCoolingLoadProfile',
+        value: function getCoolingLoadProfile() {
+            var bodyFormData = new FormData();
+            bodyFormData.set({
+                coolingType: this.state.coolingType,
+                coolingLoad: this.state.coolingLoad,
+                chilledwatertemp: this.state.chilledwatertemp
+            });
+            axios({
+                method: 'post',
+                url: '/controller/method',
+                data: bodyFormData,
+                config: { headers: { 'Content-Type': 'multipart/form-data' } }
+            }).then(function (response) {
+                //handle success
+                console.log(response);
+            }).catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+        }
+    }, {
+        key: 'calculateData',
+        value: function calculateData() {
+            axios({
+                method: 'post',
+                url: '/controller/method',
+                data: bodyFormData,
+                config: { headers: { 'Content-Type': 'multipart/form-data' } }
+            }).then(function (response) {
+                //handle success
+                console.log(response);
+            }).catch(function (response) {
+                //handle error
+                console.log(response);
+            });
         }
     }, {
         key: 'componentDidMount',
@@ -63615,6 +63653,13 @@ var Tiles = function (_React$Component) {
             var modalId = eleM.target.getAttribute('data-modal');
             $("#" + modalId).find("#entry-id").attr('data-id', eleId);
             $("#" + modalId).modal("show");
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(event) {
+            event.preventDefault();
+
+            // custom form handling here
         }
     }, {
         key: 'handleChillerDeleteEntry',
@@ -64211,7 +64256,7 @@ var Tiles = function (_React$Component) {
             if (this.props.title == COOLING_LOAD_PROFILE_TITLE) {
                 var coolingLoadForm = _react2.default.createElement(
                     'form',
-                    null,
+                    { onSubmit: this.onSubmit },
                     _react2.default.createElement(
                         'table',
                         { className: 'table' },

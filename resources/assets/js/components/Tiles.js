@@ -237,6 +237,30 @@ class Tiles extends React.Component {
                 console.log(response);
             });
     }
+
+    calculateData(){
+        var bodyFormData = new FormData();
+        bodyFormData.set({
+            coolingType:this.state.coolingType,
+            coolingLoad:this.state.coolingLoad,
+            chilledwatertemp:this.state.chilledwatertemp,
+            drivetemp:this.state.drivetemp
+        });
+        axios({
+            method: 'post',
+            url: '/CalculateData/calculateData',
+            data: bodyFormData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+            })
+            .then(function (response) {
+                //handle success
+                console.log(response);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+    }
     componentDidMount() {
         
 
@@ -441,6 +465,11 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
         var modalId = eleM.target.getAttribute('data-modal');
         $("#" + modalId).find("#entry-id").attr('data-id', eleId);
         $("#" + modalId).modal("show");
+    }
+    onSubmit (event) {
+        event.preventDefault();
+      
+        // custom form handling here
     }
     handleChillerDeleteEntry(result) {
         //console.log(result);
@@ -824,7 +853,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
         }
         if (this.props.title == COOLING_LOAD_PROFILE_TITLE) {
             var coolingLoadForm = (
-                <form>
+                <form onSubmit={this.onSubmit}>
                     <table className="table">
                         <tr>
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.Title')}:</td>
