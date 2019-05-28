@@ -48,7 +48,8 @@ class Adcalc extends Component {
             },
             fahrenheitSystemStateChange: {
                 stateChange: false,
-                fahrenheitSystemRecord: []
+                fahrenheitSystemRecord: [],
+                tileData:{}
             },
             logged_in_role: LOGGED_IN_ROLE,
             outdoortemp: '',
@@ -178,7 +179,10 @@ class Adcalc extends Component {
     }
     onGeneralDataChangeVal(result) {
         this.setState({
-            outdoortemp: result
+            outdoortemp: {
+                min:result.min,
+                max:result.max
+            }
         })
         this.calculateFunction()
     }
@@ -204,7 +208,8 @@ class Adcalc extends Component {
             chilledwatertemp: this.state.chilledwatertemp,
             coolingLoad: this.state.coolingLoad,
             drivetemp: this.state.drivetemp,
-            outdoortemp: this.state.outdoortemp
+            outdoortemp: this.state.outdoortemp.min,
+            maxoutdoortemp:this.state.outdoortemp.max
         }
         axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
 
@@ -220,6 +225,13 @@ class Adcalc extends Component {
         })
             .then((a) => { return a.json(); })
             .then(function (data) {
+                console.log(data);
+                that.setState({
+                    fahrenheitSystemStateChange: {
+                        stateChange: true,
+                        tileData:data
+                    }
+                });
             })
             .catch((err) => { console.log(err) })
         }
@@ -393,7 +405,7 @@ class Adcalc extends Component {
             FahrenheitSystem: {
                 title: FAHRENHEIT_SYSTEM,
                 header: this.props.t('Tiles.FahrenheitSystem.Title'),
-                tileCls: 'fahrenheit-system-box data-box disabled',
+                tileCls: 'fahrenheit-system-box data-box',
                 required: "yes",
                 edit: 'yes',
                 editCls: 'add-icon myBtn_multi',
@@ -600,7 +612,7 @@ class Adcalc extends Component {
                         rightpriceListeData={tiles.FahrenheitSystem.rightpriceListeData}
                         modalId={tiles.FahrenheitSystem.modalId}
                         dataChange={this.state.fahrenheitSystemStateChange.stateChange}
-                        dataRecord={this.state.fahrenheitSystemStateChange.fahrenheitSystemRecord}
+                        dataRecord={this.state.fahrenheitSystemStateChange.tileData}
                         multiple={tiles.CoolingLoadProfile.multiple}
                         store={store} />
                 </div>

@@ -751,9 +751,10 @@ h5.input-required {
 }
  ul.price-listt {
     position: absolute;
-    bottom: 10px;
+    /* bottom: 10px; */
     margin: 0;
-    padding: 0; max-height: 170px;
+    padding: 0; 
+    /* max-height: 170px; */
     list-style: none;
 }
 .options .price-listt li.pdtnum {

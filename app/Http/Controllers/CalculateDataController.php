@@ -45,7 +45,12 @@ class CalculateDataController extends Controller
      */
     public function calculateData(Request $request)
     {
-        dd($request);
+        $cal_out = array();
+        $cal_out['Tn_min']="32.18C";
+        $cal_out['Tmt_out']="34.18C";
+        $cal_out['Qth_Lt']="15C";
+        $cal_out['COP']="0.288";
+        return response()->json($cal_out);
         $ht_in = $request->drive_temperature;
         $lt_in = $request->cold_water;
         $mt_in = $request->outdoor_temperature;

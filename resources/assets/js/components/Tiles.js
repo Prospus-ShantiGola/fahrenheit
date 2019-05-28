@@ -4,7 +4,7 @@ import { DeleteModal } from './DeleteModal';
 import { ErrorBoundary } from './ErrorBoundary';
 import { translate } from 'react-multi-lang';
 import InputRange from 'react-input-range';
-
+const WAIT_INTERVAL = 1000
 const hideEle = {
     visibility: "hidden"
 }
@@ -28,7 +28,7 @@ class Tiles extends React.Component {
             drivetemp: 55,
             chilledwatertemp: 12,
             coolingType:"Office Space",
-            coolingLoad:50,
+            coolingLoad:'',
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: {
@@ -48,6 +48,7 @@ class Tiles extends React.Component {
             fahrenheitData: [],
             fahrenheitDataChange: this.props.datachanged,
         };
+        this.timer = null
         this.editRecord = this.editRecord.bind(this);
         this.editHeatRecord = this.editHeatRecord.bind(this);
         this.deleteRecord = this.deleteRecord.bind(this);
@@ -56,6 +57,7 @@ class Tiles extends React.Component {
         this.handleChillerDeleteEntry = this.handleChillerDeleteEntry.bind(this);
         this.handleHeatSourceDeleteEntry = this.handleHeatSourceDeleteEntry.bind(this);
         this.arrayMove = this.arrayMove.bind(this);
+        this.setCoolingTileValues=this.setCoolingTileValues.bind(this)
     }
     componentWillReceiveProps(nextProps) {
 
@@ -151,20 +153,7 @@ class Tiles extends React.Component {
             // getMapInfo(lat, lng,place)
         });
     }
-    setTempState(value) {
-        this.setState({ outdoortempvalue:value})       
-        this.props.onGeneralDatachange(value)
-    }
-    setHeatState(value) {
-        this.setState({ drivetemp:value})
-        this.props.onHeatSourcechange(value)
-    }
-    setCoolingState(value) {
-        CHANGE_FORM=true;
-        this.setState({ chilledwatertemp:value})        
-        this.setCoolingTileValues()     
-    }
-    setCoolingTileValues(){
+    validateCoolingLoad(){
         if(this.state.coolingLoad==""){
             this.setState({
                 errorMsg:"Please enter Max. Cooling Load"
@@ -176,12 +165,36 @@ class Tiles extends React.Component {
                 errorMsg:""
             })
         }
+    }
+    setTempState(value) {
+        this.setState({ outdoortempvalue:value})  
+        var result={
+            min:value,
+            max:this.state.outdoortemp.max
+        }
+        this.props.onGeneralDatachange(result)
+        this.validateCoolingLoad()
+    }
+    setHeatState(value) {
+        this.setState({ drivetemp:value})
+        this.props.onHeatSourcechange(value)
+        this.validateCoolingLoad()
+    }
+    setCoolingState(value) {
+        CHANGE_FORM=true;
+        this.setState({ chilledwatertemp:value})        
+        this.setCoolingTileValues()     
+    }
+    setCoolingTileValues(){
+        
+        this.validateCoolingLoad()
         var result={
             coolingLoad:this.state.coolingLoad,
             coolingType:this.state.coolingType,
             chilledwatertemp:this.state.chilledwatertemp
         } 
         this.props.coolingloadDatachange(result)
+        clearTimeout(this.timer)
     }
     selectTemp(value){
         
@@ -201,6 +214,8 @@ class Tiles extends React.Component {
                         },
                         cityData:response.data,
                     generalData:{location:locationName} })
+
+                    
                     })
                     .catch((error) => {response.json(error)})
     }
@@ -272,7 +287,7 @@ class Tiles extends React.Component {
                 coolingLoad:elem.target.value
             })
         }
-        this.setCoolingTileValues()
+        this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL)
     }
     componentDidMount() {
         
@@ -299,7 +314,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                 outdoortempvalue:maxVal.min,
                 cityData:response.data })
                 that.setTemp(response.data,'hours',maxVal.min)
-                this.props.onGeneralDatachange(maxVal.min)
+                that.props.onGeneralDatachange(this.state.outdoortemp)
             })
             .catch((error) => {response.json(error)})
            // this.setTemp(this.state.cityData,'hours',value)
@@ -882,10 +897,10 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.Title')}:</td>
                             <td className="input-fields" style={tdBorder}>
                                 <ul className="list-inline">
-                                    <li className="withunit"><input type="text" data-method="cooling_max_cooling_load" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" onKeyUp={(elem) => this.updateState(elem)} /><span>kW</span></li>
+                                    <li className="withunit"><input type="text" data-method="cooling_max_cooling_load" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" value={this.state.coolingLoad} id="cooling_max_cooling_load" onChange={(elem) => this.updateState(elem)} /><span>kW</span></li>
                                     
                                 </ul>
-                                {this.state.errorMsg}
+                                <span className="errorMessages">{this.state.errorMsg}</span>
                             </td>
                         </tr>
                         <tr>
@@ -1397,167 +1412,50 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
         if (this.props.title == FAHRENHEIT_SYSTEM) {
 
             if (this.state.fahrenheitDataChange) {
-                projectData['fahrenheit'] = this.state.fahrenheitData;
+                projectData= this.props.dataRecord;
                 var pricelist = (
                     <ul className="price-listt">
                         <li>
-                            <p>Recommended System</p>
-                            <h3>eCoo 20</h3>
+                            <p>Tn_MtLn:</p>
+                            <h3>{projectData.Tn_min}</h3>
                         </li>
                         <li>
-                            <p>Cooling demand coverage</p>
-                            <h3>83%</h3>
+                            <p>Tmt_out</p>
+                            <h3>{projectData.Tmt_out}</h3>
                         </li>
                         <li>
-                            <p>Adsorption electricity costs</p>
-                            <h3>8,252 €/a</h3>
+                            <p>Qth_Lt</p>
+                            <h3>{projectData.Qth_Lt}</h3>
                         </li>
                         <li className="paybkprd">
-                            <p>Payback period</p>
-                            <h3>2.8 a</h3>
-                        </li>
-
-                        <li>
-                            <p>Payback after 10 a</p>
-                            <h3>16,536 €</h3>
-                        </li>
-                        <li style={hideEle}>
-                            <p>Payback period</p>
-                            <h3>2.8 a</h3>
-                        </li>
-                        <li style={hideEle}>
-                            <p>Payback period</p>
-                            <h3>2.8 a</h3>
-                        </li>
-                        <li style={hideEle}>
-                            <p>Payback period</p>
-                            <h3>2.8 a</h3>
-                        </li>
+                            <p>COP</p>
+                            <h3>{projectData.COP}</h3>
+                        </li>                
 
                     </ul>
 
                 );
-                var priceFullList = (<div className="hover-list">
-                    <div className="recommendedsystem">
-                        <h3>Recommended system</h3>
-                        <table className="table">
-                            <tr>
-                                <td className="radio-input-select"><label className="radio-container">
-                                    <input type="radio" checked="checked" name="radio" />
-                                    <span className="checkmark"></span>
-                                </label>
-                                </td>
-                                <td>eCoo 20</td>
-                                <td>2.80 a</td>
-                                <td>16,536 €</td>
-                                <td className="edit-optionss"><span className="copy-option new-system"><img src="public/images/option1.png"
-                                    alt="" /></span>
-                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
-                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div className="other-suggested-system">
-                        <h3>Other suggested systems</h3>
-                        <table className="table">
-                            <tr>
-                                <td className="radio-input-select"><label className="radio-container">
-                                    <input type="radio" checked="" name="radio" />
-                                    <span className="checkmark"></span>
-                                </label>
-                                </td>
-                                <td>eCoo 10 ST* </td>
-                                <td>2.40 a</td>
-                                <td>10,153 €</td>
-                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
-                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
-                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="radio-input-select"><label className="radio-container">
-                                    <input type="radio" checked="" name="radio" />
-                                    <span className="checkmark"></span>
-                                </label>
-                                </td>
-                                <td>eCoo 10X*</td>
-                                <td>2.30 a</td>
-                                <td>11,335 €</td>
-                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
-                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
-                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="radio-input-select"><label className="radio-container">
-                                    <input type="radio" checked="" name="radio" />
-                                    <span className="checkmark"></span>
-                                </label>
-                                </td>
-                                <td>eCoo 20*</td>
-                                <td>2.23 a</td>
-                                <td>12,583 €</td>
-                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
-                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
-                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="radio-input-select"><label className="radio-container">
-                                    <input type="radio" checked="" name="radio" />
-                                    <span className="checkmark"></span>
-                                </label>
-                                </td>
-                                <td>eCoo 20 ST*</td>
-                                <td>2.76 a</td>
-                                <td>15,985 €</td>
-                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
-                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
-                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div className="manual-sysytemm">
-                        <h3>Manual System</h3>
-                        <table className="table">
-                            <tr>
-                                <td className="radio-input-select"><label className="radio-container">
-                                    <input type="radio" checked="" name="radio" />
-                                    <span className="checkmark"></span>
-                                </label>
-                                </td>
-                                <td>eCoo 10 ST* </td>
-                                <td>2.40 a</td>
-                                <td>10,153 €</td>
-                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
-                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
-                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
-                                </td>
-                            </tr>
-                            <tr className="clone-system">
-                                <td className="radio-input-select"><label className="radio-container">
-                                    <input type="radio" checked="" name="radio" />
-                                    <span className="checkmark"></span>
-                                </label>
-                                </td>
-                                <td>eCoo 10 ST* </td>
-                                <td>2.40 a</td>
-                                <td>10,153 €</td>
-                                <td className="edit-optionss"><span className="copy-option"><img src="public/images/option1.png" alt="" /></span>
-                                    <span className="open-pdf-option"><img src="public/images/eye-option.png" alt="" /></span>
-                                    <span className="open-calculator-option dropdown-calci"><img src="public/images/option3.png" alt="" /></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h6 className="note-textt">* Values are estimated. For a detailed calculation, click on the calculator.</h6>
-                    <div className="caculator-divv">
-                        <div className="calci-div"></div>
-                    </div>
+                var priceFullList = (                    
+                    <ul className="price-listt">
+                        <li>
+                            <p>Tn_MtLn:</p>
+                            <h3> 32.14c</h3>
+                        </li>
+                        <li>
+                            <p>Tmt_out</p>
+                            <h3>34.67C</h3>
+                        </li>
+                        <li>
+                            <p>Qth_Lt</p>
+                            <h3>15.00 KW</h3>
+                        </li>
+                        <li className="paybkprd">
+                            <p>COP</p>
+                            <h3>0.288</h3>
+                        </li>                
 
-                </div>);
+                    </ul>
+                );
                 var requiredMsg = "";
             }
             else {

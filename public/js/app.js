@@ -61172,7 +61172,8 @@ var Adcalc = function (_Component) {
             },
             fahrenheitSystemStateChange: {
                 stateChange: false,
-                fahrenheitSystemRecord: []
+                fahrenheitSystemRecord: [],
+                tileData: {}
             },
             logged_in_role: LOGGED_IN_ROLE,
             outdoortemp: '',
@@ -61307,7 +61308,10 @@ var Adcalc = function (_Component) {
         key: 'onGeneralDataChangeVal',
         value: function onGeneralDataChangeVal(result) {
             this.setState({
-                outdoortemp: result
+                outdoortemp: {
+                    min: result.min,
+                    max: result.max
+                }
             });
             this.calculateFunction();
         }
@@ -61339,7 +61343,8 @@ var Adcalc = function (_Component) {
                 chilledwatertemp: this.state.chilledwatertemp,
                 coolingLoad: this.state.coolingLoad,
                 drivetemp: this.state.drivetemp,
-                outdoortemp: this.state.outdoortemp
+                outdoortemp: this.state.outdoortemp.min,
+                maxoutdoortemp: this.state.outdoortemp.max
             };
             axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
 
@@ -61354,7 +61359,15 @@ var Adcalc = function (_Component) {
                     body: JSON.stringify(bodyFormData)
                 }).then(function (a) {
                     return a.json();
-                }).then(function (data) {}).catch(function (err) {
+                }).then(function (data) {
+                    console.log(data);
+                    that.setState({
+                        fahrenheitSystemStateChange: {
+                            stateChange: true,
+                            tileData: data
+                        }
+                    });
+                }).catch(function (err) {
                     console.log(err);
                 });
             }
@@ -61502,7 +61515,7 @@ var Adcalc = function (_Component) {
                 FahrenheitSystem: {
                     title: FAHRENHEIT_SYSTEM,
                     header: this.props.t('Tiles.FahrenheitSystem.Title'),
-                    tileCls: 'fahrenheit-system-box data-box disabled',
+                    tileCls: 'fahrenheit-system-box data-box',
                     required: "yes",
                     edit: 'yes',
                     editCls: 'add-icon myBtn_multi',
@@ -61594,7 +61607,7 @@ var Adcalc = function (_Component) {
                         required: tiles.FahrenheitSystem.required,
                         edit: tiles.FahrenheitSystem.edit,
                         mainclass: tiles.FahrenheitSystem.mainClass,
-                        tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.FahrenheitSystem.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.fahrenheitSystemStateChange.stateChange), _defineProperty(_React$createElement8, 'dataRecord', this.state.fahrenheitSystemStateChange.fahrenheitSystemRecord), _defineProperty(_React$createElement8, 'multiple', tiles.CoolingLoadProfile.multiple), _defineProperty(_React$createElement8, 'store', store), _React$createElement8))
+                        tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.FahrenheitSystem.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.fahrenheitSystemStateChange.stateChange), _defineProperty(_React$createElement8, 'dataRecord', this.state.fahrenheitSystemStateChange.tileData), _defineProperty(_React$createElement8, 'multiple', tiles.CoolingLoadProfile.multiple), _defineProperty(_React$createElement8, 'store', store), _React$createElement8))
                 ),
                 _react2.default.createElement(_ChillerModal2.default, { role: this.props.role, onChillerSubmit: this.handleChillerForm, store: store }),
                 _react2.default.createElement(_GeneralModal2.default, { role: this.props.role, onGeneralSubmit: this.handleGeneralForm }),
@@ -63244,6 +63257,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var WAIT_INTERVAL = 1000;
 var hideEle = {
     visibility: "hidden"
 };
@@ -63272,7 +63286,7 @@ var Tiles = function (_React$Component) {
             drivetemp: 55,
             chilledwatertemp: 12,
             coolingType: "Office Space",
-            coolingLoad: 50,
+            coolingLoad: '',
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: {
@@ -63292,6 +63306,7 @@ var Tiles = function (_React$Component) {
             fahrenheitData: [],
             fahrenheitDataChange: _this.props.datachanged
         };
+        _this.timer = null;
         _this.editRecord = _this.editRecord.bind(_this);
         _this.editHeatRecord = _this.editHeatRecord.bind(_this);
         _this.deleteRecord = _this.deleteRecord.bind(_this);
@@ -63300,6 +63315,7 @@ var Tiles = function (_React$Component) {
         _this.handleChillerDeleteEntry = _this.handleChillerDeleteEntry.bind(_this);
         _this.handleHeatSourceDeleteEntry = _this.handleHeatSourceDeleteEntry.bind(_this);
         _this.arrayMove = _this.arrayMove.bind(_this);
+        _this.setCoolingTileValues = _this.setCoolingTileValues.bind(_this);
         return _this;
     }
 
@@ -63402,16 +63418,36 @@ var Tiles = function (_React$Component) {
             });
         }
     }, {
+        key: 'validateCoolingLoad',
+        value: function validateCoolingLoad() {
+            if (this.state.coolingLoad == "") {
+                this.setState({
+                    errorMsg: "Please enter Max. Cooling Load"
+                });
+                return false;
+            } else {
+                this.setState({
+                    errorMsg: ""
+                });
+            }
+        }
+    }, {
         key: 'setTempState',
         value: function setTempState(value) {
             this.setState({ outdoortempvalue: value });
-            this.props.onGeneralDatachange(value);
+            var result = {
+                min: value,
+                max: this.state.outdoortemp.max
+            };
+            this.props.onGeneralDatachange(result);
+            this.validateCoolingLoad();
         }
     }, {
         key: 'setHeatState',
         value: function setHeatState(value) {
             this.setState({ drivetemp: value });
             this.props.onHeatSourcechange(value);
+            this.validateCoolingLoad();
         }
     }, {
         key: 'setCoolingState',
@@ -63423,21 +63459,15 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'setCoolingTileValues',
         value: function setCoolingTileValues() {
-            if (this.state.coolingLoad == "") {
-                this.setState({
-                    errorMsg: "Please enter Max. Cooling Load"
-                });
-            } else {
-                this.setState({
-                    errorMsg: ""
-                });
-            }
+
+            this.validateCoolingLoad();
             var result = {
                 coolingLoad: this.state.coolingLoad,
                 coolingType: this.state.coolingType,
                 chilledwatertemp: this.state.chilledwatertemp
             };
             this.props.coolingloadDatachange(result);
+            clearTimeout(this.timer);
         }
     }, {
         key: 'selectTemp',
@@ -63534,7 +63564,7 @@ var Tiles = function (_React$Component) {
                     coolingLoad: elem.target.value
                 });
             }
-            this.setCoolingTileValues();
+            this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL);
         }
     }, {
         key: 'componentDidMount',
@@ -63563,7 +63593,7 @@ var Tiles = function (_React$Component) {
                         outdoortempvalue: maxVal.min,
                         cityData: response.data });
                     that.setTemp(response.data, 'hours', maxVal.min);
-                    _this2.props.onGeneralDatachange(maxVal.min);
+                    that.props.onGeneralDatachange(_this2.state.outdoortemp);
                 }).catch(function (error) {
                     response.json(error);
                 });
@@ -64397,7 +64427,7 @@ var Tiles = function (_React$Component) {
                                     _react2.default.createElement(
                                         'li',
                                         { className: 'withunit' },
-                                        _react2.default.createElement('input', { type: 'text', 'data-method': 'cooling_max_cooling_load', required: true, placeholder: '50.0', pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', id: 'cooling_max_cooling_load', onKeyUp: function onKeyUp(elem) {
+                                        _react2.default.createElement('input', { type: 'text', 'data-method': 'cooling_max_cooling_load', required: true, placeholder: '50.0', pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', value: this.state.coolingLoad, id: 'cooling_max_cooling_load', onChange: function onChange(elem) {
                                                 return _this3.updateState(elem);
                                             } }),
                                         _react2.default.createElement(
@@ -64407,7 +64437,11 @@ var Tiles = function (_React$Component) {
                                         )
                                     )
                                 ),
-                                this.state.errorMsg
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: 'errorMessages' },
+                                    this.state.errorMsg
+                                )
                             )
                         ),
                         _react2.default.createElement(
@@ -65385,7 +65419,7 @@ var Tiles = function (_React$Component) {
             if (this.props.title == FAHRENHEIT_SYSTEM) {
 
                 if (this.state.fahrenheitDataChange) {
-                    projectData['fahrenheit'] = this.state.fahrenheitData;
+                    projectData = this.props.dataRecord;
                     var pricelist = _react2.default.createElement(
                         'ul',
                         { className: 'price-listt' },
@@ -65395,12 +65429,12 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Recommended System'
+                                'Tn_MtLn:'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                'eCoo 20'
+                                projectData.Tn_min
                             )
                         ),
                         _react2.default.createElement(
@@ -65409,12 +65443,12 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Cooling demand coverage'
+                                'Tmt_out'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '83%'
+                                projectData.Tmt_out
                             )
                         ),
                         _react2.default.createElement(
@@ -65423,12 +65457,12 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Adsorption electricity costs'
+                                'Qth_Lt'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '8,252 \u20AC/a'
+                                projectData.Qth_Lt
                             )
                         ),
                         _react2.default.createElement(
@@ -65437,12 +65471,30 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Payback period'
+                                'COP'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '2.8 a'
+                                projectData.COP
+                            )
+                        )
+                    );
+                    var priceFullList = _react2.default.createElement(
+                        'ul',
+                        { className: 'price-listt' },
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Tn_MtLn:'
+                            ),
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                ' 32.14c'
                             )
                         ),
                         _react2.default.createElement(
@@ -65451,445 +65503,41 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Payback after 10 a'
+                                'Tmt_out'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '16,536 \u20AC'
+                                '34.67C'
                             )
                         ),
                         _react2.default.createElement(
                             'li',
-                            { style: hideEle },
+                            null,
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Payback period'
+                                'Qth_Lt'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '2.8 a'
+                                '15.00 KW'
                             )
                         ),
                         _react2.default.createElement(
                             'li',
-                            { style: hideEle },
+                            { className: 'paybkprd' },
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Payback period'
+                                'COP'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '2.8 a'
+                                '0.288'
                             )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { style: hideEle },
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'Payback period'
-                            ),
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                '2.8 a'
-                            )
-                        )
-                    );
-                    var priceFullList = _react2.default.createElement(
-                        'div',
-                        { className: 'hover-list' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'recommendedsystem' },
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                'Recommended system'
-                            ),
-                            _react2.default.createElement(
-                                'table',
-                                { className: 'table' },
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: 'checked', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 20'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.80 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '16,536 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option new-system' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png',
-                                                alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'other-suggested-system' },
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                'Other suggested systems'
-                            ),
-                            _react2.default.createElement(
-                                'table',
-                                { className: 'table' },
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 10 ST* '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.40 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '10,153 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 10X*'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.30 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '11,335 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 20*'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.23 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '12,583 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 20 ST*'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.76 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '15,985 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'manual-sysytemm' },
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                'Manual System'
-                            ),
-                            _react2.default.createElement(
-                                'table',
-                                { className: 'table' },
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 10 ST* '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.40 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '10,153 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    { className: 'clone-system' },
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 10 ST* '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.40 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '10,153 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'h6',
-                            { className: 'note-textt' },
-                            '* Values are estimated. For a detailed calculation, click on the calculator.'
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'caculator-divv' },
-                            _react2.default.createElement('div', { className: 'calci-div' })
                         )
                     );
                     var requiredMsg = "";
@@ -71881,7 +71529,7 @@ var EconomicModalRow = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+   value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -71902,905 +71550,905 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var selectedSource = 'Process heat';
 var CustomTable = {
-    padding: "0px"
+   padding: "0px"
 };
 
 var HeatSourceModal = function (_React$Component) {
-    _inherits(HeatSourceModal, _React$Component);
+   _inherits(HeatSourceModal, _React$Component);
 
-    function HeatSourceModal(props) {
-        _classCallCheck(this, HeatSourceModal);
+   function HeatSourceModal(props) {
+      _classCallCheck(this, HeatSourceModal);
 
-        var _this = _possibleConstructorReturn(this, (HeatSourceModal.__proto__ || Object.getPrototypeOf(HeatSourceModal)).call(this, props));
+      var _this = _possibleConstructorReturn(this, (HeatSourceModal.__proto__ || Object.getPrototypeOf(HeatSourceModal)).call(this, props));
 
-        _this.state = { heatSource: '', selectedSource: selectedSource, lengthisButtonDisabled: false };
-        _this.handleHeatSubmit = _this.handleHeatSubmit.bind(_this);
-        _this.changeField = _this.changeField.bind(_this);
-        return _this;
-    }
+      _this.state = { heatSource: '', selectedSource: selectedSource, lengthisButtonDisabled: false };
+      _this.handleHeatSubmit = _this.handleHeatSubmit.bind(_this);
+      _this.changeField = _this.changeField.bind(_this);
+      return _this;
+   }
 
-    _createClass(HeatSourceModal, [{
-        key: 'myCustomFunction',
-        value: function myCustomFunction(elem) {
-            if (typeof elem.currentTarget == "undefined") return false;
-            var customInputId = elem.currentTarget.getAttribute("data-id");
+   _createClass(HeatSourceModal, [{
+      key: 'myCustomFunction',
+      value: function myCustomFunction(elem) {
+         if (typeof elem.currentTarget == "undefined") return false;
+         var customInputId = elem.currentTarget.getAttribute("data-id");
 
-            var customInput = document.getElementById(customInputId);
-            //console.log("input",customInput);
-            if (customInput.contentEditable == "true") {
-                customInput.contentEditable = "false";
-                elem.target.classList.add("fa-pencil-square-o");
-                elem.target.classList.remove("fa-check");
-                customInput.classList.remove("editable");
+         var customInput = document.getElementById(customInputId);
+         //console.log("input",customInput);
+         if (customInput.contentEditable == "true") {
+            customInput.contentEditable = "false";
+            elem.target.classList.add("fa-pencil-square-o");
+            elem.target.classList.remove("fa-check");
+            customInput.classList.remove("editable");
+         } else {
+            customInput.contentEditable = "true";
+            elem.target.classList.add("fa-check");
+            elem.target.classList.remove("fa-pencil-square-o");
+            customInput.classList.add("editable");
+         }
+      }
+   }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+         jQuery(".help-toggle").unbind('click');
+         jQuery(".help-toggle").click(function () {
+            jQuery(".input-help-label").toggle();
+         });
+         jQuery('body').on('click', function (e) {
+            jQuery('[data-toggle="popover"]').each(function () {
+               //the 'is' for buttons that trigger popups
+               //the 'has' for icons within a button that triggers a popup
+               if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                  jQuery(this).popover('hide');
+               }
+            });
+         });
+         // $(document).on('hide.bs.modal','#compression-Heat', function () {
+         //         $("#compression-Heat-form")[0].reset()
+         //             //Do stuff here
+         //         });
+
+
+         $('.close-modal-heatsource').on('click', function (e) {
+
+            var obj = this;
+            // alert('Heat')
+
+            if ($('#heat-source-form').hasClass('form-edited')) {
+               //alert('ccccccc')
+               e.preventDefault();
+
+               $('#compression-modal-confirm').modal('show');
             } else {
-                customInput.contentEditable = "true";
-                elem.target.classList.add("fa-check");
-                elem.target.classList.remove("fa-pencil-square-o");
-                customInput.classList.add("editable");
+               $("#heat-source").modal("hide");
+               $("#heat-source-form")[0].reset();
             }
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            jQuery(".help-toggle").unbind('click');
-            jQuery(".help-toggle").click(function () {
-                jQuery(".input-help-label").toggle();
-            });
-            jQuery('body').on('click', function (e) {
-                jQuery('[data-toggle="popover"]').each(function () {
-                    //the 'is' for buttons that trigger popups
-                    //the 'has' for icons within a button that triggers a popup
-                    if (!jQuery(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                        jQuery(this).popover('hide');
-                    }
-                });
-            });
-            // $(document).on('hide.bs.modal','#compression-Heat', function () {
-            //         $("#compression-Heat-form")[0].reset()
-            //             //Do stuff here
-            //         });
+         });
+      }
+   }, {
+      key: 'showAllHearSourceErrorMessages',
+      value: function showAllHearSourceErrorMessages() {
+         var form = $("form.heat-source-form"),
+             errorList = $("ul.errorMessages", form),
+             errorFound = true;
 
+         errorList.removeClass("hide");
+         errorList.empty();
+         // Find all invalid fields within the form.
+         var invalidFields = form.find(":invalid").each(function (index, node) {
+            // Find the field's corresponding label
+            var label = $("#" + node.id).parent("td").prev(),
+                tabId = $("#" + node.id).parents("div.tab-pane").attr("id"),
 
-            $('.close-modal-heatsource').on('click', function (e) {
+            // Opera incorrectly does not fill the validationMessage property.
+            message = node.validationMessage || "Invalid value.";
+            var tabTitle = $("a[data-target='#" + tabId + "']").text();
 
-                var obj = this;
-                // alert('Heat')
-
-                if ($('#heat-source-form').hasClass('form-edited')) {
-                    //alert('ccccccc')
-                    e.preventDefault();
-
-                    $('#compression-modal-confirm').modal('show');
-                } else {
-                    $("#heat-source").modal("hide");
-                    $("#heat-source-form")[0].reset();
-                }
-            });
-        }
-    }, {
-        key: 'showAllHearSourceErrorMessages',
-        value: function showAllHearSourceErrorMessages() {
-            var form = $("form.heat-source-form"),
-                errorList = $("ul.errorMessages", form),
-                errorFound = true;
-
-            errorList.removeClass("hide");
-            errorList.empty();
-            // Find all invalid fields within the form.
-            var invalidFields = form.find(":invalid").each(function (index, node) {
-                // Find the field's corresponding label
-                var label = $("#" + node.id).parent("td").prev(),
-                    tabId = $("#" + node.id).parents("div.tab-pane").attr("id"),
-
-                // Opera incorrectly does not fill the validationMessage property.
-                message = node.validationMessage || "Invalid value.";
-                var tabTitle = $("a[data-target='#" + tabId + "']").text();
-
-                if (label.hasClass("input-help-label")) {
-                    label = label.prev("td.input-label");
-                }
-                var fieldLabel = label.text();
-                fieldLabel = fieldLabel.replace(":", "");
-                var errorStr = "";
-                errorStr = message == "Please provide value" || message == "Please fill out this field." ? "Please provide value" : "Please enter only numeric value";
-                errorList.show().append("<li>" + errorStr + " in '" + fieldLabel + "' field of " + tabTitle + " tab</li>");
-                errorFound = false;
-            });
-            return errorFound;
-        }
-    }, {
-        key: 'handleHeatSubmitChange',
-        value: function handleHeatSubmitChange(heatSource) {
-            var result = {
-                heatSource: heatSource,
-                state: true
-            };
-
-            CHANGE_FORM = true;
-            this.props.onHeatSubmit(result);
-        }
-    }, {
-        key: 'handleHeatSubmit',
-        value: function handleHeatSubmit(e) {
-            if (!this.showAllHearSourceErrorMessages()) {
-                return false;
+            if (label.hasClass("input-help-label")) {
+               label = label.prev("td.input-label");
             }
-            var that = this;
-            this.btn.setAttribute("disabled", "disabled");
-            e.preventDefault();
-            var data = $('#heat-source-form').serialize();
-            //console.log(data);
-            fetch('adcalc/storeHeatSourceInformation', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Accept': 'application/json',
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: data
-            }).then(function (a) {
-                return a.json();
-            }).then(function (data) {
-                $("#heat-source-form").find('.invalid-feedback').hide();
-                jQuery.each(data.errors, function (key, value) {
-                    $("#heat-source-form").find('#' + value).siblings('.invalid-feedback').show();
-                });
+            var fieldLabel = label.text();
+            fieldLabel = fieldLabel.replace(":", "");
+            var errorStr = "";
+            errorStr = message == "Please provide value" || message == "Please fill out this field." ? "Please provide value" : "Please enter only numeric value";
+            errorList.show().append("<li>" + errorStr + " in '" + fieldLabel + "' field of " + tabTitle + " tab</li>");
+            errorFound = false;
+         });
+         return errorFound;
+      }
+   }, {
+      key: 'handleHeatSubmitChange',
+      value: function handleHeatSubmitChange(heatSource) {
+         var result = {
+            heatSource: heatSource,
+            state: true
+         };
 
-                if (typeof data.errors == "undefined") {
-                    var $form = $("#heat-source-form");
-                    var data = that.getFormData($form);
-                    that.setState({
-                        heatSource: data
-                    });
-                    that.handleHeatSubmitChange(that.state.heatSource);
-                    if ($("#heat-source-form #heatsourceformMode").val() == "add") {
-                        $("#heat-source-form")[0].reset();
-                    }
-                    $("#heat-source").modal("hide");
-                    that.btn.removeAttribute("disabled");
-                }
-            }).catch(function (err) {
-                console.log(err);
-            });
-        }
-    }, {
-        key: 'getFormData',
-        value: function getFormData($form) {
-            var unindexed_array = $form.serializeArray();
-            var indexed_array = {};
-
-            $.map(unindexed_array, function (n, i) {
-                indexed_array[n['name']] = n['value'];
+         CHANGE_FORM = true;
+         this.props.onHeatSubmit(result);
+      }
+   }, {
+      key: 'handleHeatSubmit',
+      value: function handleHeatSubmit(e) {
+         if (!this.showAllHearSourceErrorMessages()) {
+            return false;
+         }
+         var that = this;
+         this.btn.setAttribute("disabled", "disabled");
+         e.preventDefault();
+         var data = $('#heat-source-form').serialize();
+         //console.log(data);
+         fetch('adcalc/storeHeatSourceInformation', {
+            method: 'POST',
+            headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+               'Accept': 'application/json',
+               "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: data
+         }).then(function (a) {
+            return a.json();
+         }).then(function (data) {
+            $("#heat-source-form").find('.invalid-feedback').hide();
+            jQuery.each(data.errors, function (key, value) {
+               $("#heat-source-form").find('#' + value).siblings('.invalid-feedback').show();
             });
 
-            return indexed_array;
-        }
-    }, {
-        key: 'changeField',
-        value: function changeField(elem) {
-            //var selectedSource= (this.state.selectedSource=='CHP')?'hide':'';
-            //console.log(elem.target.value);
-            this.setState({
-                selectedSource: elem.target.value
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
+            if (typeof data.errors == "undefined") {
+               var $form = $("#heat-source-form");
+               var data = that.getFormData($form);
+               that.setState({
+                  heatSource: data
+               });
+               that.handleHeatSubmitChange(that.state.heatSource);
+               if ($("#heat-source-form #heatsourceformMode").val() == "add") {
+                  $("#heat-source-form")[0].reset();
+               }
+               $("#heat-source").modal("hide");
+               that.btn.removeAttribute("disabled");
+            }
+         }).catch(function (err) {
+            console.log(err);
+         });
+      }
+   }, {
+      key: 'getFormData',
+      value: function getFormData($form) {
+         var unindexed_array = $form.serializeArray();
+         var indexed_array = {};
 
-            if (this.props.role == "expert") {
-                var expertRoleHtml = _react2.default.createElement(
-                    'ul',
-                    { id: 'tabsJustifieddouble', className: 'nav nav-tabs double-tab' },
-                    _react2.default.createElement(
-                        'li',
-                        { className: 'nav-item' },
-                        _react2.default.createElement(
-                            'a',
-                            { href: '', 'data-target': '#technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
-                            this.props.t('HeatSource.Tab.TechnicalData.Title')
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        { className: 'nav-item' },
-                        _react2.default.createElement(
-                            'a',
-                            { href: '', 'data-target': '#calculation-data', 'data-toggle': 'tab', className: 'nav-link' },
-                            this.props.t('HeatSource.Tab.CalculationData.Title')
-                        )
-                    )
-                );
-            } else {
-                var expertRoleHtml = _react2.default.createElement(
-                    'ul',
-                    { id: 'tabsJustifiedsingle', className: 'nav nav-tabs single-tab singletabbox' },
-                    _react2.default.createElement(
-                        'li',
-                        { className: 'nav-item' },
-                        _react2.default.createElement(
-                            'a',
-                            { href: '', 'data-target': '#technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
-                            this.props.t('HeatSource.Tab.TechnicalData.Title')
-                        )
-                    ),
-                    expertRoleHtml
-                );
-            }
+         $.map(unindexed_array, function (n, i) {
+            indexed_array[n['name']] = n['value'];
+         });
 
-            if (this.state.selectedSource == "Process heat" || this.state.selectedSource == "District heat" || this.state.selectedSource == "other" || this.props.role == "expert") {
-                var conditionalHeatField = _react2.default.createElement(
-                    'tr',
-                    null,
-                    _react2.default.createElement(
-                        'td',
-                        { className: 'nested-table',
-                            colSpan: '3',
-                            style: CustomTable },
-                        _react2.default.createElement(
-                            'table',
-                            { className: 'table' },
-                            _react2.default.createElement(
-                                'tbody',
-                                null,
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-label' },
-                                        this.props.t('HeatSource.Tab.TechnicalData.DriveTemperature.Title'),
-                                        ':'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-help-label' },
-                                        _react2.default.createElement(
-                                            'button',
-                                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
-                                            _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-fields withunit' },
-                                        _react2.default.createElement('input', { type: 'text', required: 'required', placeholder: '85', pattern: '\\d*', className: 'required-field onlynumeric', name: 'drive_temp', id: 'drive_temp' }),
-                                        _react2.default.createElement(
-                                            'span',
-                                            null,
-                                            '\xB0C'
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-label' },
-                                        this.props.t('HeatSource.Tab.TechnicalData.HeatCapacity.Title'),
-                                        ':'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-help-label' },
-                                        _react2.default.createElement(
-                                            'button',
-                                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Contact explanation/tip' },
-                                            _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-fields withunit' },
-                                        _react2.default.createElement('input', { type: 'text', required: 'required', placeholder: '36', pattern: '\\d*', className: 'required-field onlynumeric', name: 'heat_capacity', id: 'heat_capacity' }),
-                                        _react2.default.createElement(
-                                            'span',
-                                            null,
-                                            'kw'
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                );
-            }
-            if (this.state.selectedSource == "CHP plant" && this.props.role == "expert") {
-                var conditionalCHPField = _react2.default.createElement(
-                    'tr',
-                    null,
-                    _react2.default.createElement(
-                        'td',
-                        { className: 'nested-table',
-                            colSpan: '3',
-                            style: CustomTable },
-                        _react2.default.createElement(
-                            'table',
-                            { className: 'table' },
-                            _react2.default.createElement(
-                                'tbody',
-                                null,
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-label' },
-                                        this.props.t('HeatSource.Tab.TechnicalData.ElectricCapacity.Title'),
-                                        ': '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-help-label' },
-                                        _react2.default.createElement(
-                                            'button',
-                                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
-                                            _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-fields withunit' },
-                                        _react2.default.createElement('input', { type: 'text', placeholder: '18', name: 'electricity_capacity', id: 'electricity_capacity' }),
-                                        _react2.default.createElement(
-                                            'span',
-                                            null,
-                                            'kw'
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-label' },
-                                        this.props.t('HeatSource.Tab.TechnicalData.ThermalEfficiency.Title'),
-                                        ':'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-help-label' },
-                                        _react2.default.createElement(
-                                            'button',
-                                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
-                                            _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-fields withunit' },
-                                        _react2.default.createElement('input', { type: 'text', placeholder: '54.8', name: 'thermal_efficienty', id: 'thermal_efficienty' }),
-                                        _react2.default.createElement(
-                                            'span',
-                                            null,
-                                            '%'
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-label' },
-                                        this.props.t('HeatSource.Tab.TechnicalData.ElectricEfficiency.Title'),
-                                        ':'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-help-label' },
-                                        _react2.default.createElement(
-                                            'button',
-                                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
-                                            _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-fields withunit' },
-                                        _react2.default.createElement('input', { type: 'text', placeholder: '34.5', name: 'electricity_efficienty', id: 'electricity_efficienty' }),
-                                        _react2.default.createElement(
-                                            'span',
-                                            null,
-                                            '%'
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                );
-            }
-            if (this.state.selectedSource == "CHP plant" || this.state.selectedSource == "Air compressor") {
-                var conditionalCHPAddField = _react2.default.createElement(
-                    'tr',
-                    null,
-                    _react2.default.createElement(
-                        'td',
-                        { className: 'nested-table',
-                            colSpan: '3',
-                            style: CustomTable },
-                        _react2.default.createElement(
-                            'table',
-                            { className: 'table' },
-                            _react2.default.createElement(
-                                'tbody',
-                                null,
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-label' },
-                                        this.props.t('HeatSource.Tab.TechnicalData.ManufacturerText.Title'),
-                                        ':'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-help-label' },
-                                        _react2.default.createElement(
-                                            'button',
-                                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
-                                            _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-fields' },
-                                        _react2.default.createElement(
-                                            'select',
-                                            { className: 'required-field', name: 'heat_manufacturer', id: 'heat_manufacturer' },
-                                            _react2.default.createElement(
-                                                'option',
-                                                { value: 'EC-Power' },
-                                                'EC-Power'
-                                            ),
-                                            _react2.default.createElement(
-                                                'option',
-                                                { value: 'option1' },
-                                                'option1'
-                                            ),
-                                            _react2.default.createElement(
-                                                'option',
-                                                { value: 'option2' },
-                                                'option2'
-                                            )
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-label' },
-                                        this.props.t('HeatSource.Tab.TechnicalData.TypeText.Title'),
-                                        ':'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-help-label' },
-                                        _react2.default.createElement(
-                                            'button',
-                                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
-                                            _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-fields' },
-                                        _react2.default.createElement(
-                                            'select',
-                                            { className: 'required-field', name: 'heat_manufacturer_type', id: 'heat_manufacturer_type' },
-                                            _react2.default.createElement(
-                                                'option',
-                                                { value: 'XRGI 15' },
-                                                'XRGI 15'
-                                            ),
-                                            _react2.default.createElement(
-                                                'option',
-                                                { value: 'option1' },
-                                                'option1'
-                                            ),
-                                            _react2.default.createElement(
-                                                'option',
-                                                { value: 'option2' },
-                                                'option2'
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                );
-            }
-            if (this.state.selectedSource == "CHP plant" || this.state.selectedSource == "District heat") {
-                var additionalOption = _react2.default.createElement(
-                    'p',
-                    { className: 'additional-options' },
-                    this.props.t('AdditionalMessage')
-                );
-            }
-            if (this.state.selectedSource == "Air compressor") {
-                var conditionalAirField = _react2.default.createElement(
-                    'tr',
-                    null,
-                    _react2.default.createElement(
-                        'td',
-                        { className: 'nested-table',
-                            colSpan: '3',
-                            style: CustomTable },
-                        _react2.default.createElement(
-                            'table',
-                            { className: 'table' },
-                            _react2.default.createElement(
-                                'tbody',
-                                null,
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-label' },
-                                        this.props.t('HeatSource.Tab.TechnicalData.OperationHours.Title'),
-                                        ':'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-help-label' },
-                                        _react2.default.createElement(
-                                            'button',
-                                            { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Location explanation/tip', 'data-original-title': '', title: '' },
-                                            _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'input-fields withunit' },
-                                        _react2.default.createElement('input', { type: 'text', placeholder: '4.000', name: 'operation_hours', id: 'operation_hours' }),
-                                        _react2.default.createElement(
-                                            'span',
-                                            null,
-                                            'h/a'
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                );
-            }
+         return indexed_array;
+      }
+   }, {
+      key: 'changeField',
+      value: function changeField(elem) {
+         //var selectedSource= (this.state.selectedSource=='CHP')?'hide':'';
+         //console.log(elem.target.value);
+         this.setState({
+            selectedSource: elem.target.value
+         });
+      }
+   }, {
+      key: 'render',
+      value: function render() {
+         var _this2 = this;
 
-            return _react2.default.createElement(
-                'div',
-                { className: 'modal modal_multi', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'heat-source' },
-                _react2.default.createElement(
-                    'form',
-                    { className: 'heat-source-form', id: 'heat-source-form' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'modal-content' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'modal-heading' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'left-head' },
-                                ' ',
-                                this.props.t('HeatSource.Title')
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'right-head' },
-                                _react2.default.createElement(
-                                    'ul',
-                                    { className: 'list-inline' },
-                                    _react2.default.createElement(
-                                        'li',
-                                        null,
-                                        _react2.default.createElement('input', { className: 'save-changes-btn', ref: function ref(btn) {
-                                                _this2.btn = btn;
-                                            }, onClick: this.handleHeatSubmit, type: 'submit', alt: 'Submit', value: this.props.t('SaveButton'), title: this.props.t('SaveButton') })
-                                    ),
-                                    _react2.default.createElement(
-                                        'li',
-                                        null,
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'close close_multi' },
-                                            _react2.default.createElement('img', { src: 'public/images/cancle-icon.png', alt: '', className: 'close close-modal-heatsource', 'aria-label': 'Close' })
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'modal-body-content' },
-                            expertRoleHtml,
-                            _react2.default.createElement(
-                                'div',
-                                { id: 'tabsJustifiedContent2', className: 'tab-content' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { id: 'technical-data', className: 'tab-pane fade  active show' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'option-general-div' },
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'table-responsive' },
-                                            _react2.default.createElement(
-                                                'table',
-                                                { className: 'table' },
-                                                _react2.default.createElement(
-                                                    'tbody',
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        'tr',
-                                                        null,
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-label' },
-                                                            ' ',
-                                                            this.props.t('HeatSource.Tab.TechnicalData.Name.Title'),
-                                                            ': '
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-help-label' },
-                                                            _react2.default.createElement(
-                                                                'button',
-                                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': this.props.t('HeatSource.Tab.TechnicalData.Name.Placeholder') },
-                                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                                            )
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-fields' },
-                                                            _react2.default.createElement('input', { type: 'text', name: 'heat_name', id: 'heat_name', placeholder: 'CHP in the basement' }),
-                                                            _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'heatsourceformMode', name: 'heatsourceformMode', value: 'add' }),
-                                                            _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'heatsourceformModeKey', name: 'heatsourceformModeKey', value: '' })
-                                                        )
-                                                    ),
-                                                    _react2.default.createElement(
-                                                        'tr',
-                                                        null,
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-label' },
-                                                            this.props.t('HeatSource.Tab.TechnicalData.TypeOfHeatSource.Title'),
-                                                            ':'
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-help-label' },
-                                                            _react2.default.createElement(
-                                                                'button',
-                                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
-                                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                                            )
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-fields' },
-                                                            _react2.default.createElement(
-                                                                'select',
-                                                                { className: 'required-field', name: 'heat_type', id: 'heat_type', required: 'required', onChange: function onChange(elem) {
-                                                                        return _this2.changeField(elem);
-                                                                    } },
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'Process heat' },
-                                                                    ' Process heat'
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'CHP plant' },
-                                                                    'CHP plant'
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'Air compressor' },
-                                                                    'Air compressor'
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'District heat' },
-                                                                    'District heat'
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'Solar thermal' },
-                                                                    'Solar thermal'
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'other' },
-                                                                    'other'
-                                                                )
-                                                            )
-                                                        )
-                                                    ),
-                                                    conditionalHeatField,
-                                                    conditionalCHPField,
-                                                    conditionalCHPAddField,
-                                                    conditionalAirField,
-                                                    _react2.default.createElement(
-                                                        'tr',
-                                                        null,
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-label' },
-                                                            this.props.t('HeatSource.Tab.TechnicalData.NewInstallation.Title'),
-                                                            ':'
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-help-label' },
-                                                            _react2.default.createElement(
-                                                                'button',
-                                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Location explanation/tip' },
-                                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                                            )
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-fields' },
-                                                            _react2.default.createElement(
-                                                                'select',
-                                                                { name: 'new_installation', id: 'new_installation' },
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'No' },
-                                                                    'No'
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'option1' },
-                                                                    'option1'
-                                                                ),
-                                                                _react2.default.createElement(
-                                                                    'option',
-                                                                    { value: 'option2' },
-                                                                    'option2'
-                                                                )
-                                                            )
-                                                        )
-                                                    )
-                                                )
-                                            )
-                                        ),
-                                        additionalOption
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { id: 'calculation-data', className: 'tab-pane fade' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'personal-data-div' },
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'table-responsive' },
-                                            _react2.default.createElement(
-                                                'table',
-                                                { className: 'table' },
-                                                _react2.default.createElement(
-                                                    'tbody',
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        'tr',
-                                                        null,
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-label' },
-                                                            this.props.t('HeatSource.Tab.CalculationData.InvestmentCosts.Title'),
-                                                            ': '
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-help-label' },
-                                                            _react2.default.createElement(
-                                                                'button',
-                                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Editor explanation/tip' },
-                                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                                            )
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-fields withunit' },
-                                                            _react2.default.createElement('input', { type: 'text', placeholder: '0', name: 'heat_investment_cost', id: 'heat_investment_cost' }),
-                                                            _react2.default.createElement(
-                                                                'span',
-                                                                null,
-                                                                '\u20AC'
-                                                            ),
-                                                            ' '
-                                                        )
-                                                    ),
-                                                    _react2.default.createElement(
-                                                        'tr',
-                                                        null,
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-label' },
-                                                            this.props.t('HeatSource.Tab.CalculationData.Discount.Title'),
-                                                            ':'
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-help-label' },
-                                                            _react2.default.createElement(
-                                                                'button',
-                                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Company explanation/tip' },
-                                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                                            )
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-fields withunit' },
-                                                            _react2.default.createElement('input', { type: 'text', placeholder: '0', name: 'heat_investment_discount', id: 'heat_investment_discount' }),
-                                                            _react2.default.createElement(
-                                                                'span',
-                                                                null,
-                                                                '%'
-                                                            )
-                                                        )
-                                                    ),
-                                                    _react2.default.createElement(
-                                                        'tr',
-                                                        null,
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-label' },
-                                                            this.props.t('HeatSource.Tab.CalculationData.MaintenanceCosts.Title'),
-                                                            ': '
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-help-label' },
-                                                            _react2.default.createElement(
-                                                                'button',
-                                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Address explanation/tip' },
-                                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
-                                                            )
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'td',
-                                                            { className: 'input-fields withunit' },
-                                                            _react2.default.createElement('input', { type: 'text', placeholder: '0', name: 'heat_maintenance_cost', id: 'heat_maintenance_cost' }),
-                                                            _react2.default.createElement(
-                                                                'span',
-                                                                null,
-                                                                '\u20AC/kWh'
-                                                            ),
-                                                            ' '
-                                                        )
-                                                    )
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'ul',
-                            { className: 'errorMessages hide' },
-                            this.props.t('ErrorMessage')
-                        )
-                    )
-                )
+         if (this.props.role == "expert") {
+            var expertRoleHtml = _react2.default.createElement(
+               'ul',
+               { id: 'tabsJustifieddouble', className: 'nav nav-tabs double-tab' },
+               _react2.default.createElement(
+                  'li',
+                  { className: 'nav-item' },
+                  _react2.default.createElement(
+                     'a',
+                     { href: '', 'data-target': '#technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
+                     this.props.t('HeatSource.Tab.TechnicalData.Title')
+                  )
+               ),
+               _react2.default.createElement(
+                  'li',
+                  { className: 'nav-item' },
+                  _react2.default.createElement(
+                     'a',
+                     { href: '', 'data-target': '#calculation-data', 'data-toggle': 'tab', className: 'nav-link' },
+                     this.props.t('HeatSource.Tab.CalculationData.Title')
+                  )
+               )
             );
-        }
-    }]);
+         } else {
+            var expertRoleHtml = _react2.default.createElement(
+               'ul',
+               { id: 'tabsJustifiedsingle', className: 'nav nav-tabs single-tab singletabbox' },
+               _react2.default.createElement(
+                  'li',
+                  { className: 'nav-item' },
+                  _react2.default.createElement(
+                     'a',
+                     { href: '', 'data-target': '#technical-data', 'data-toggle': 'tab', className: 'nav-link small active' },
+                     this.props.t('HeatSource.Tab.TechnicalData.Title')
+                  )
+               ),
+               expertRoleHtml
+            );
+         }
 
-    return HeatSourceModal;
+         if (this.state.selectedSource == "Process heat" || this.state.selectedSource == "District heat" || this.state.selectedSource == "other" || this.props.role == "expert") {
+            var conditionalHeatField = _react2.default.createElement(
+               'tr',
+               null,
+               _react2.default.createElement(
+                  'td',
+                  { className: 'nested-table',
+                     colSpan: '3',
+                     style: CustomTable },
+                  _react2.default.createElement(
+                     'table',
+                     { className: 'table' },
+                     _react2.default.createElement(
+                        'tbody',
+                        null,
+                        _react2.default.createElement(
+                           'tr',
+                           null,
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-label' },
+                              this.props.t('HeatSource.Tab.TechnicalData.DriveTemperature.Title'),
+                              ':'
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              _react2.default.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
+                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-fields withunit' },
+                              _react2.default.createElement('input', { type: 'text', required: 'required', placeholder: '85', pattern: '\\d*', className: 'required-field onlynumeric', name: 'drive_temp', id: 'drive_temp' }),
+                              _react2.default.createElement(
+                                 'span',
+                                 null,
+                                 '\xB0C'
+                              )
+                           )
+                        ),
+                        _react2.default.createElement(
+                           'tr',
+                           null,
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-label' },
+                              this.props.t('HeatSource.Tab.TechnicalData.HeatCapacity.Title'),
+                              ':'
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              _react2.default.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Contact explanation/tip' },
+                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-fields withunit' },
+                              _react2.default.createElement('input', { type: 'text', required: 'required', placeholder: '36', pattern: '\\d*', className: 'required-field onlynumeric', name: 'heat_capacity', id: 'heat_capacity' }),
+                              _react2.default.createElement(
+                                 'span',
+                                 null,
+                                 'kw'
+                              )
+                           )
+                        )
+                     )
+                  )
+               )
+            );
+         }
+         if (this.state.selectedSource == "CHP plant" && this.props.role == "expert") {
+            var conditionalCHPField = _react2.default.createElement(
+               'tr',
+               null,
+               _react2.default.createElement(
+                  'td',
+                  { className: 'nested-table',
+                     colSpan: '3',
+                     style: CustomTable },
+                  _react2.default.createElement(
+                     'table',
+                     { className: 'table' },
+                     _react2.default.createElement(
+                        'tbody',
+                        null,
+                        _react2.default.createElement(
+                           'tr',
+                           null,
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-label' },
+                              this.props.t('HeatSource.Tab.TechnicalData.ElectricCapacity.Title'),
+                              ': '
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              _react2.default.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
+                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-fields withunit' },
+                              _react2.default.createElement('input', { type: 'text', placeholder: '18', name: 'electricity_capacity', id: 'electricity_capacity' }),
+                              _react2.default.createElement(
+                                 'span',
+                                 null,
+                                 'kw'
+                              )
+                           )
+                        ),
+                        _react2.default.createElement(
+                           'tr',
+                           null,
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-label' },
+                              this.props.t('HeatSource.Tab.TechnicalData.ThermalEfficiency.Title'),
+                              ':'
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              _react2.default.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
+                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-fields withunit' },
+                              _react2.default.createElement('input', { type: 'text', placeholder: '54.8', name: 'thermal_efficienty', id: 'thermal_efficienty' }),
+                              _react2.default.createElement(
+                                 'span',
+                                 null,
+                                 '%'
+                              )
+                           )
+                        ),
+                        _react2.default.createElement(
+                           'tr',
+                           null,
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-label' },
+                              this.props.t('HeatSource.Tab.TechnicalData.ElectricEfficiency.Title'),
+                              ':'
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              _react2.default.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
+                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-fields withunit' },
+                              _react2.default.createElement('input', { type: 'text', placeholder: '34.5', name: 'electricity_efficienty', id: 'electricity_efficienty' }),
+                              _react2.default.createElement(
+                                 'span',
+                                 null,
+                                 '%'
+                              )
+                           )
+                        )
+                     )
+                  )
+               )
+            );
+         }
+         if (this.state.selectedSource == "CHP plant" || this.state.selectedSource == "Air compressor") {
+            var conditionalCHPAddField = _react2.default.createElement(
+               'tr',
+               null,
+               _react2.default.createElement(
+                  'td',
+                  { className: 'nested-table',
+                     colSpan: '3',
+                     style: CustomTable },
+                  _react2.default.createElement(
+                     'table',
+                     { className: 'table' },
+                     _react2.default.createElement(
+                        'tbody',
+                        null,
+                        _react2.default.createElement(
+                           'tr',
+                           null,
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-label' },
+                              this.props.t('HeatSource.Tab.TechnicalData.ManufacturerText.Title'),
+                              ':'
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              _react2.default.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
+                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-fields' },
+                              _react2.default.createElement(
+                                 'select',
+                                 { className: 'required-field', name: 'heat_manufacturer', id: 'heat_manufacturer' },
+                                 _react2.default.createElement(
+                                    'option',
+                                    { value: 'EC-Power' },
+                                    'EC-Power'
+                                 ),
+                                 _react2.default.createElement(
+                                    'option',
+                                    { value: 'option1' },
+                                    'option1'
+                                 ),
+                                 _react2.default.createElement(
+                                    'option',
+                                    { value: 'option2' },
+                                    'option2'
+                                 )
+                              )
+                           )
+                        ),
+                        _react2.default.createElement(
+                           'tr',
+                           null,
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-label' },
+                              this.props.t('HeatSource.Tab.TechnicalData.TypeText.Title'),
+                              ':'
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              _react2.default.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Customer explanation/tip' },
+                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-fields' },
+                              _react2.default.createElement(
+                                 'select',
+                                 { className: 'required-field', name: 'heat_manufacturer_type', id: 'heat_manufacturer_type' },
+                                 _react2.default.createElement(
+                                    'option',
+                                    { value: 'XRGI 15' },
+                                    'XRGI 15'
+                                 ),
+                                 _react2.default.createElement(
+                                    'option',
+                                    { value: 'option1' },
+                                    'option1'
+                                 ),
+                                 _react2.default.createElement(
+                                    'option',
+                                    { value: 'option2' },
+                                    'option2'
+                                 )
+                              )
+                           )
+                        )
+                     )
+                  )
+               )
+            );
+         }
+         if (this.state.selectedSource == "CHP plant" || this.state.selectedSource == "District heat") {
+            var additionalOption = _react2.default.createElement(
+               'p',
+               { className: 'additional-options' },
+               this.props.t('AdditionalMessage')
+            );
+         }
+         if (this.state.selectedSource == "Air compressor") {
+            var conditionalAirField = _react2.default.createElement(
+               'tr',
+               null,
+               _react2.default.createElement(
+                  'td',
+                  { className: 'nested-table',
+                     colSpan: '3',
+                     style: CustomTable },
+                  _react2.default.createElement(
+                     'table',
+                     { className: 'table' },
+                     _react2.default.createElement(
+                        'tbody',
+                        null,
+                        _react2.default.createElement(
+                           'tr',
+                           null,
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-label' },
+                              this.props.t('HeatSource.Tab.TechnicalData.OperationHours.Title'),
+                              ':'
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-help-label' },
+                              _react2.default.createElement(
+                                 'button',
+                                 { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Location explanation/tip', 'data-original-title': '', title: '' },
+                                 _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                              )
+                           ),
+                           _react2.default.createElement(
+                              'td',
+                              { className: 'input-fields withunit' },
+                              _react2.default.createElement('input', { type: 'text', placeholder: '4.000', name: 'operation_hours', id: 'operation_hours' }),
+                              _react2.default.createElement(
+                                 'span',
+                                 null,
+                                 'h/a'
+                              )
+                           )
+                        )
+                     )
+                  )
+               )
+            );
+         }
+
+         return _react2.default.createElement(
+            'div',
+            { className: 'modal modal_multi', role: 'dialog', 'aria-labelledby': 'mySmallModalLabel', 'aria-hidden': 'true', id: 'heat-source' },
+            _react2.default.createElement(
+               'form',
+               { className: 'heat-source-form', id: 'heat-source-form' },
+               _react2.default.createElement(
+                  'div',
+                  { className: 'modal-content' },
+                  _react2.default.createElement(
+                     'div',
+                     { className: 'modal-heading' },
+                     _react2.default.createElement(
+                        'div',
+                        { className: 'left-head' },
+                        ' ',
+                        this.props.t('HeatSource.Title')
+                     ),
+                     _react2.default.createElement(
+                        'div',
+                        { className: 'right-head' },
+                        _react2.default.createElement(
+                           'ul',
+                           { className: 'list-inline' },
+                           _react2.default.createElement(
+                              'li',
+                              null,
+                              _react2.default.createElement('input', { className: 'save-changes-btn', ref: function ref(btn) {
+                                    _this2.btn = btn;
+                                 }, onClick: this.handleHeatSubmit, type: 'submit', alt: 'Submit', value: this.props.t('SaveButton'), title: this.props.t('SaveButton') })
+                           ),
+                           _react2.default.createElement(
+                              'li',
+                              null,
+                              _react2.default.createElement(
+                                 'span',
+                                 { className: 'close close_multi' },
+                                 _react2.default.createElement('img', { src: 'public/images/cancle-icon.png', alt: '', className: 'close close-modal-heatsource', 'aria-label': 'Close' })
+                              )
+                           )
+                        )
+                     )
+                  ),
+                  _react2.default.createElement(
+                     'div',
+                     { className: 'modal-body-content' },
+                     expertRoleHtml,
+                     _react2.default.createElement(
+                        'div',
+                        { id: 'tabsJustifiedContent2', className: 'tab-content' },
+                        _react2.default.createElement(
+                           'div',
+                           { id: 'technical-data', className: 'tab-pane fade  active show' },
+                           _react2.default.createElement(
+                              'div',
+                              { className: 'option-general-div' },
+                              _react2.default.createElement(
+                                 'div',
+                                 { className: 'table-responsive' },
+                                 _react2.default.createElement(
+                                    'table',
+                                    { className: 'table' },
+                                    _react2.default.createElement(
+                                       'tbody',
+                                       null,
+                                       _react2.default.createElement(
+                                          'tr',
+                                          null,
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             ' ',
+                                             this.props.t('HeatSource.Tab.TechnicalData.Name.Title'),
+                                             ': '
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             _react2.default.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': this.props.t('HeatSource.Tab.TechnicalData.Name.Placeholder') },
+                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             _react2.default.createElement('input', { type: 'text', name: 'heat_name', id: 'heat_name', placeholder: 'CHP in the basement' }),
+                                             _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'heatsourceformMode', name: 'heatsourceformMode', value: 'add' }),
+                                             _react2.default.createElement('input', { type: 'hidden', placeholder: 'Chiller 1', id: 'heatsourceformModeKey', name: 'heatsourceformModeKey', value: '' })
+                                          )
+                                       ),
+                                       _react2.default.createElement(
+                                          'tr',
+                                          null,
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             this.props.t('HeatSource.Tab.TechnicalData.TypeOfHeatSource.Title'),
+                                             ':'
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             _react2.default.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Here you can enter your name, so it can appear in the report and we can contact you when we have questions about your project.' },
+                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             _react2.default.createElement(
+                                                'select',
+                                                { className: 'required-field', name: 'heat_type', id: 'heat_type', required: 'required', onChange: function onChange(elem) {
+                                                      return _this2.changeField(elem);
+                                                   } },
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'Process heat' },
+                                                   ' Process heat'
+                                                ),
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'CHP plant' },
+                                                   'CHP plant'
+                                                ),
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'Air compressor' },
+                                                   'Air compressor'
+                                                ),
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'District heat' },
+                                                   'District heat'
+                                                ),
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'Solar thermal' },
+                                                   'Solar thermal'
+                                                ),
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'other' },
+                                                   'other'
+                                                )
+                                             )
+                                          )
+                                       ),
+                                       conditionalHeatField,
+                                       conditionalCHPField,
+                                       conditionalCHPAddField,
+                                       conditionalAirField,
+                                       _react2.default.createElement(
+                                          'tr',
+                                          null,
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             this.props.t('HeatSource.Tab.TechnicalData.NewInstallation.Title'),
+                                             ':'
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             _react2.default.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Location explanation/tip' },
+                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-fields' },
+                                             _react2.default.createElement(
+                                                'select',
+                                                { name: 'new_installation', id: 'new_installation' },
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'No' },
+                                                   'No'
+                                                ),
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'option1' },
+                                                   'option1'
+                                                ),
+                                                _react2.default.createElement(
+                                                   'option',
+                                                   { value: 'option2' },
+                                                   'option2'
+                                                )
+                                             )
+                                          )
+                                       )
+                                    )
+                                 )
+                              ),
+                              additionalOption
+                           )
+                        ),
+                        _react2.default.createElement(
+                           'div',
+                           { id: 'calculation-data', className: 'tab-pane fade' },
+                           _react2.default.createElement(
+                              'div',
+                              { className: 'personal-data-div' },
+                              _react2.default.createElement(
+                                 'div',
+                                 { className: 'table-responsive' },
+                                 _react2.default.createElement(
+                                    'table',
+                                    { className: 'table' },
+                                    _react2.default.createElement(
+                                       'tbody',
+                                       null,
+                                       _react2.default.createElement(
+                                          'tr',
+                                          null,
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             this.props.t('HeatSource.Tab.CalculationData.InvestmentCosts.Title'),
+                                             ': '
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             _react2.default.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Editor explanation/tip' },
+                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-fields withunit' },
+                                             _react2.default.createElement('input', { type: 'text', placeholder: '0', name: 'heat_investment_cost', id: 'heat_investment_cost' }),
+                                             _react2.default.createElement(
+                                                'span',
+                                                null,
+                                                '\u20AC'
+                                             ),
+                                             ' '
+                                          )
+                                       ),
+                                       _react2.default.createElement(
+                                          'tr',
+                                          null,
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             this.props.t('HeatSource.Tab.CalculationData.Discount.Title'),
+                                             ':'
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             _react2.default.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Company explanation/tip' },
+                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-fields withunit' },
+                                             _react2.default.createElement('input', { type: 'text', placeholder: '0', name: 'heat_investment_discount', id: 'heat_investment_discount' }),
+                                             _react2.default.createElement(
+                                                'span',
+                                                null,
+                                                '%'
+                                             )
+                                          )
+                                       ),
+                                       _react2.default.createElement(
+                                          'tr',
+                                          null,
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-label' },
+                                             this.props.t('HeatSource.Tab.CalculationData.MaintenanceCosts.Title'),
+                                             ': '
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-help-label' },
+                                             _react2.default.createElement(
+                                                'button',
+                                                { type: 'button', className: '', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-trigger': 'hover', 'data-content': 'Address explanation/tip' },
+                                                _react2.default.createElement('img', { src: 'public/images/help-red.png', alt: '' })
+                                             )
+                                          ),
+                                          _react2.default.createElement(
+                                             'td',
+                                             { className: 'input-fields withunit' },
+                                             _react2.default.createElement('input', { type: 'text', placeholder: '0', name: 'heat_maintenance_cost', id: 'heat_maintenance_cost' }),
+                                             _react2.default.createElement(
+                                                'span',
+                                                null,
+                                                '\u20AC/kWh'
+                                             ),
+                                             ' '
+                                          )
+                                       )
+                                    )
+                                 )
+                              )
+                           )
+                        )
+                     )
+                  ),
+                  _react2.default.createElement(
+                     'ul',
+                     { className: 'errorMessages hide' },
+                     this.props.t('ErrorMessage')
+                  )
+               )
+            )
+         );
+      }
+   }]);
+
+   return HeatSourceModal;
 }(_react2.default.Component);
 
 exports.default = (0, _reactMultiLang.translate)(HeatSourceModal);
