@@ -144,22 +144,29 @@ class Tiles extends React.Component {
                 locality: 'short_name',
             };
 
-            console.log(lat, lng);
+            //console.log(lat, lng);
             // initialize(lat, lng);
             // //Drawing map on the basis of latitude and longitude.
             // getMapInfo(lat, lng,place)
         });
     }
     setTempState(value) {
-        this.setState({ outdoortempvalue:value})
-        this.setTemp(this.state.cityData,'hours',value)
+        this.setState({ outdoortempvalue:value})       
+        this.props.onGeneralDatachange(value)
     }
     setHeatState(value) {
         this.setState({ drivetemp:value})
+        this.props.onHeatSourcechange(value)
     }
     setCoolingState(value) {
         CHANGE_FORM=true;
-        this.setState({ chilledwatertemp:value})
+        this.setState({ chilledwatertemp:value})  
+        var result={
+            coolingLoad:this.state.coolingLoad,
+            coolingType:this.state.coolingType,
+            chilledwatertemp:this.state.chilledwatertemp
+        } 
+        this.props.coolingloadDatachange(result)   
     }
     selectTemp(value){
         
@@ -226,7 +233,7 @@ class Tiles extends React.Component {
         });
         axios({
             method: 'post',
-            url: 'CalculateData/getCoolingLoad',
+            url: '/controller/method',
             data: bodyFormData,
             config: { headers: {'Content-Type': 'multipart/form-data' }}
             })
@@ -443,6 +450,11 @@ class Tiles extends React.Component {
         var modalId = eleM.target.getAttribute('data-modal');
         $("#" + modalId).find("#entry-id").attr('data-id', eleId);
         $("#" + modalId).modal("show");
+    }
+    onSubmit (event) {
+        event.preventDefault();
+      
+        // custom form handling here
     }
     handleChillerDeleteEntry(result) {
         //console.log(result);
@@ -826,7 +838,7 @@ class Tiles extends React.Component {
         }
         if (this.props.title == COOLING_LOAD_PROFILE_TITLE) {
             var coolingLoadForm = (
-                <form>
+                <form onSubmit={this.onSubmit}>
                     <table className="table">
                         <tr>
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.Title')}:</td>

@@ -38172,6 +38172,24 @@ var AppContent = function (_Component) {
                                                     { href: '#' },
                                                     _react2.default.createElement('img', { src: 'public/images/icon_3.png', alt: '', title: 'Load project' })
                                                 )
+                                            ),
+                                            _react2.default.createElement(
+                                                'li',
+                                                { className: 'disableCard german-language' },
+                                                _react2.default.createElement(
+                                                    'a',
+                                                    { href: 'http://fahrenheit.prospus.com/users/lang/de' },
+                                                    'DE'
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                'li',
+                                                { className: 'disableCard english-language' },
+                                                _react2.default.createElement(
+                                                    'a',
+                                                    { href: 'http://fahrenheit.prospus.com/users/lang/de' },
+                                                    'EN'
+                                                )
                                             )
                                         )
                                     ),
@@ -61149,7 +61167,12 @@ var Adcalc = function (_Component) {
                 stateChange: false,
                 fahrenheitSystemRecord: []
             },
-            logged_in_role: LOGGED_IN_ROLE
+            logged_in_role: LOGGED_IN_ROLE,
+            outdoortemp: '',
+            drivetemp: '',
+            coolingType: 'Office Space',
+            chilledwatertemp: '',
+            coolingLoad: ''
         };
         _this.handleChillerForm = _this.handleChillerForm.bind(_this);
         _this.handleGeneralForm = _this.handleGeneralForm.bind(_this);
@@ -61159,6 +61182,10 @@ var Adcalc = function (_Component) {
         _this.handleHeatProfileForm = _this.handleHeatProfileForm.bind(_this);
         _this.handleCoolingProfileForm = _this.handleCoolingProfileForm.bind(_this);
         _this.handleFahrenheitForm = _this.handleFahrenheitForm.bind(_this);
+        _this.onGeneralDataChangeVal = _this.onGeneralDataChangeVal.bind(_this);
+        _this.onHeatSourceDataChangeVal = _this.onHeatSourceDataChangeVal.bind(_this);
+        _this.onCoolingLoadChangeVal = _this.onCoolingLoadChangeVal.bind(_this);
+        _this.calculateFunction = _this.calculateFunction.bind(_this);
         return _this;
     }
 
@@ -61264,6 +61291,60 @@ var Adcalc = function (_Component) {
                     fahrenheitSystemRecord: result.economicInformation,
                     stateChange: result.state
                 }
+            });
+        }
+    }, {
+        key: 'onGeneralDataChangeVal',
+        value: function onGeneralDataChangeVal(result) {
+            this.setState({
+                outdoortemp: result
+            });
+            this.calculateFunction();
+        }
+    }, {
+        key: 'onHeatSourceDataChangeVal',
+        value: function onHeatSourceDataChangeVal(result) {
+            this.setState({
+                drivetemp: result
+            });
+            this.calculateFunction();
+        }
+    }, {
+        key: 'onCoolingLoadChangeVal',
+        value: function onCoolingLoadChangeVal(result) {
+            this.setState({
+                coolingType: result.coolingType,
+                chilledwatertemp: result.chilledwatertemp,
+                coolingLoad: result.coolingLoad
+            });
+            this.calculateFunction();
+        }
+    }, {
+        key: 'calculateFunction',
+        value: function calculateFunction() {
+            //  var port = 3000;
+            var that = this;
+            var bodyFormData = {
+                coolingType: this.state.coolingType,
+                chilledwatertemp: this.state.chilledwatertemp,
+                coolingLoad: this.state.coolingLoad,
+                drivetemp: this.state.drivetemp,
+                outdoortemp: this.state.outdoortemp
+                //axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
+                // axios.get('/public/location_data/munich.json')
+
+            };fetch('/calculate-data', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyFormData)
+            }).then(function (a) {
+                return a.json();
+            }).then(function (data) {}).catch(function (err) {
+                console.log(err);
             });
         }
     }, {
@@ -61441,7 +61522,7 @@ var Adcalc = function (_Component) {
                         edit: tiles.edit,
                         mainclass: tiles.general.mainClass,
                         tileCls: tiles.general.tileCls
-                    }, _defineProperty(_React$createElement, 'required', tiles.general.required), _defineProperty(_React$createElement, 'edit', tiles.general.edit), _defineProperty(_React$createElement, 'editCls', tiles.general.editCls), _defineProperty(_React$createElement, 'editIcon', tiles.general.editIcon), _defineProperty(_React$createElement, 'add', tiles.general.add), _defineProperty(_React$createElement, 'hoverText', tiles.general.hoverText), _defineProperty(_React$createElement, 'hoverCls', tiles.general.hoverCls), _defineProperty(_React$createElement, 'priceLst', tiles.general.priceLst), _defineProperty(_React$createElement, 'priceData', tiles.general.priceData), _defineProperty(_React$createElement, 'rightpriceList', tiles.general.rightpriceList), _defineProperty(_React$createElement, 'rightpriceListeData', tiles.general.rightpriceListeData), _defineProperty(_React$createElement, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement, 'dataChange', this.state.generalStateChange.stateChange), _defineProperty(_React$createElement, 'dataRecord', this.state.generalStateChange.generalRecord), _defineProperty(_React$createElement, 'store', store), _React$createElement)),
+                    }, _defineProperty(_React$createElement, 'required', tiles.general.required), _defineProperty(_React$createElement, 'edit', tiles.general.edit), _defineProperty(_React$createElement, 'editCls', tiles.general.editCls), _defineProperty(_React$createElement, 'editIcon', tiles.general.editIcon), _defineProperty(_React$createElement, 'add', tiles.general.add), _defineProperty(_React$createElement, 'hoverText', tiles.general.hoverText), _defineProperty(_React$createElement, 'hoverCls', tiles.general.hoverCls), _defineProperty(_React$createElement, 'priceLst', tiles.general.priceLst), _defineProperty(_React$createElement, 'priceData', tiles.general.priceData), _defineProperty(_React$createElement, 'rightpriceList', tiles.general.rightpriceList), _defineProperty(_React$createElement, 'rightpriceListeData', tiles.general.rightpriceListeData), _defineProperty(_React$createElement, 'modalId', tiles.general.modalId), _defineProperty(_React$createElement, 'dataChange', this.state.generalStateChange.stateChange), _defineProperty(_React$createElement, 'dataRecord', this.state.generalStateChange.generalRecord), _defineProperty(_React$createElement, 'store', store), _defineProperty(_React$createElement, 'onGeneralDatachange', this.onGeneralDataChangeVal), _React$createElement)),
                     _react2.default.createElement(_Tiles2.default, (_React$createElement2 = {
                         title: tiles.Economic.title,
                         header: tiles.Economic.header,
@@ -61471,7 +61552,7 @@ var Adcalc = function (_Component) {
                                 required: tiles.HeatSource.required,
                                 edit: tiles.HeatSource.edit,
                                 mainclass: tiles.HeatSource.mainClass,
-                                tileCls: tiles.HeatSource.tileCls }, _defineProperty(_React$createElement4, 'required', tiles.HeatSource.required), _defineProperty(_React$createElement4, 'edit', tiles.HeatSource.edit), _defineProperty(_React$createElement4, 'editCls', tiles.HeatSource.editCls), _defineProperty(_React$createElement4, 'editIcon', tiles.HeatSource.editIcon), _defineProperty(_React$createElement4, 'add', tiles.HeatSource.add), _defineProperty(_React$createElement4, 'hoverText', tiles.HeatSource.hoverText), _defineProperty(_React$createElement4, 'hoverCls', tiles.HeatSource.hoverCls), _defineProperty(_React$createElement4, 'priceLst', tiles.HeatSource.priceLst), _defineProperty(_React$createElement4, 'priceData', tiles.HeatSource.priceData), _defineProperty(_React$createElement4, 'rightpriceList', tiles.HeatSource.rightpriceList), _defineProperty(_React$createElement4, 'rightpriceListeData', tiles.HeatSource.rightpriceListeData), _defineProperty(_React$createElement4, 'modalId', tiles.HeatSource.modalId), _defineProperty(_React$createElement4, 'dataChange', this.state.heatSourceStateChange.stateChange), _defineProperty(_React$createElement4, 'dataRecord', this.state.heatSourceStateChange.heatSourceRecord), _defineProperty(_React$createElement4, 'multiple', tiles.HeatSource.multiple), _defineProperty(_React$createElement4, 'store', store), _React$createElement4)),
+                                tileCls: tiles.HeatSource.tileCls }, _defineProperty(_React$createElement4, 'required', tiles.HeatSource.required), _defineProperty(_React$createElement4, 'edit', tiles.HeatSource.edit), _defineProperty(_React$createElement4, 'editCls', tiles.HeatSource.editCls), _defineProperty(_React$createElement4, 'editIcon', tiles.HeatSource.editIcon), _defineProperty(_React$createElement4, 'add', tiles.HeatSource.add), _defineProperty(_React$createElement4, 'hoverText', tiles.HeatSource.hoverText), _defineProperty(_React$createElement4, 'hoverCls', tiles.HeatSource.hoverCls), _defineProperty(_React$createElement4, 'priceLst', tiles.HeatSource.priceLst), _defineProperty(_React$createElement4, 'priceData', tiles.HeatSource.priceData), _defineProperty(_React$createElement4, 'rightpriceList', tiles.HeatSource.rightpriceList), _defineProperty(_React$createElement4, 'rightpriceListeData', tiles.HeatSource.rightpriceListeData), _defineProperty(_React$createElement4, 'modalId', tiles.HeatSource.modalId), _defineProperty(_React$createElement4, 'dataChange', this.state.heatSourceStateChange.stateChange), _defineProperty(_React$createElement4, 'dataRecord', this.state.heatSourceStateChange.heatSourceRecord), _defineProperty(_React$createElement4, 'multiple', tiles.HeatSource.multiple), _defineProperty(_React$createElement4, 'store', store), _defineProperty(_React$createElement4, 'onHeatSourcechange', this.onHeatSourceDataChangeVal), _React$createElement4)),
                             _react2.default.createElement(_Tiles2.default, (_React$createElement5 = { title: tiles.HeatingLoadProfile.title,
                                 header: tiles.HeatingLoadProfile.header,
                                 required: tiles.HeatingLoadProfile.required,
@@ -61493,7 +61574,7 @@ var Adcalc = function (_Component) {
                                 required: tiles.CoolingLoadProfile.required,
                                 edit: tiles.CoolingLoadProfile.edit,
                                 mainclass: tiles.CoolingLoadProfile.mainClass,
-                                tileCls: tiles.CoolingLoadProfile.tileCls }, _defineProperty(_React$createElement7, 'required', tiles.CoolingLoadProfile.required), _defineProperty(_React$createElement7, 'edit', tiles.CoolingLoadProfile.edit), _defineProperty(_React$createElement7, 'editCls', tiles.CoolingLoadProfile.editCls), _defineProperty(_React$createElement7, 'editIcon', tiles.CoolingLoadProfile.editIcon), _defineProperty(_React$createElement7, 'add', tiles.CoolingLoadProfile.add), _defineProperty(_React$createElement7, 'hoverText', tiles.CoolingLoadProfile.hoverText), _defineProperty(_React$createElement7, 'hoverCls', tiles.CoolingLoadProfile.hoverCls), _defineProperty(_React$createElement7, 'priceLst', tiles.CoolingLoadProfile.priceLst), _defineProperty(_React$createElement7, 'priceData', tiles.CoolingLoadProfile.priceData), _defineProperty(_React$createElement7, 'rightpriceList', tiles.CoolingLoadProfile.rightpriceList), _defineProperty(_React$createElement7, 'rightpriceListeData', tiles.CoolingLoadProfile.rightpriceListeData), _defineProperty(_React$createElement7, 'modalId', tiles.CoolingLoadProfile.modalId), _defineProperty(_React$createElement7, 'dataChange', this.state.coolingProfileStateChange.stateChange), _defineProperty(_React$createElement7, 'dataRecord', this.state.coolingProfileStateChange.coolingProfileRecord), _defineProperty(_React$createElement7, 'multiple', tiles.CoolingLoadProfile.multiple), _defineProperty(_React$createElement7, 'store', store), _React$createElement7))
+                                tileCls: tiles.CoolingLoadProfile.tileCls }, _defineProperty(_React$createElement7, 'required', tiles.CoolingLoadProfile.required), _defineProperty(_React$createElement7, 'edit', tiles.CoolingLoadProfile.edit), _defineProperty(_React$createElement7, 'editCls', tiles.CoolingLoadProfile.editCls), _defineProperty(_React$createElement7, 'editIcon', tiles.CoolingLoadProfile.editIcon), _defineProperty(_React$createElement7, 'add', tiles.CoolingLoadProfile.add), _defineProperty(_React$createElement7, 'hoverText', tiles.CoolingLoadProfile.hoverText), _defineProperty(_React$createElement7, 'hoverCls', tiles.CoolingLoadProfile.hoverCls), _defineProperty(_React$createElement7, 'priceLst', tiles.CoolingLoadProfile.priceLst), _defineProperty(_React$createElement7, 'priceData', tiles.CoolingLoadProfile.priceData), _defineProperty(_React$createElement7, 'rightpriceList', tiles.CoolingLoadProfile.rightpriceList), _defineProperty(_React$createElement7, 'rightpriceListeData', tiles.CoolingLoadProfile.rightpriceListeData), _defineProperty(_React$createElement7, 'modalId', tiles.CoolingLoadProfile.modalId), _defineProperty(_React$createElement7, 'dataChange', this.state.coolingProfileStateChange.stateChange), _defineProperty(_React$createElement7, 'dataRecord', this.state.coolingProfileStateChange.coolingProfileRecord), _defineProperty(_React$createElement7, 'multiple', tiles.CoolingLoadProfile.multiple), _defineProperty(_React$createElement7, 'store', store), _defineProperty(_React$createElement7, 'coolingloadDatachange', this.onCoolingLoadChangeVal), _React$createElement7))
                         )
                     ),
                     _react2.default.createElement(_Tiles2.default, (_React$createElement8 = { title: tiles.FahrenheitSystem.title,
@@ -61506,8 +61587,6 @@ var Adcalc = function (_Component) {
                 _react2.default.createElement(_ChillerModal2.default, { role: this.props.role, onChillerSubmit: this.handleChillerForm, store: store }),
                 _react2.default.createElement(_GeneralModal2.default, { role: this.props.role, onGeneralSubmit: this.handleGeneralForm }),
                 _react2.default.createElement(_EconomicModal2.default, { role: this.props.role, onEconomicSubmit: this.handleEconomicForm, store: store, heatSourceData: this.state.heatSourceStateChange.heatSourceStateChange }),
-                _react2.default.createElement(_HeatSourceModal2.default, { role: this.props.role, onHeatSubmit: this.handleHeatForm, store: store }),
-                _react2.default.createElement(_HeatingProfileModal2.default, { role: this.props.role, onHeatProfileSubmit: this.handleHeatProfileForm, store: store }),
                 _react2.default.createElement(_CoolingProfileModal2.default, { role: this.props.role, onCoolingProfileSubmit: this.handleCoolingProfileForm, store: store }),
                 _react2.default.createElement(_OptionsModal2.default, { role: this.props.role, onOptionSubmit: this.handleOptionForm }),
                 _react2.default.createElement(_FahrenheitSystemModal2.default, { role: this.props.role, onfinalSubmit: this.handleFahrenheitForm })
@@ -63303,7 +63382,7 @@ var Tiles = function (_React$Component) {
                     locality: 'short_name'
                 };
 
-                console.log(lat, lng);
+                //console.log(lat, lng);
                 // initialize(lat, lng);
                 // //Drawing map on the basis of latitude and longitude.
                 // getMapInfo(lat, lng,place)
@@ -63313,18 +63392,25 @@ var Tiles = function (_React$Component) {
         key: 'setTempState',
         value: function setTempState(value) {
             this.setState({ outdoortempvalue: value });
-            this.setTemp(this.state.cityData, 'hours', value);
+            this.props.onGeneralDatachange(value);
         }
     }, {
         key: 'setHeatState',
         value: function setHeatState(value) {
             this.setState({ drivetemp: value });
+            this.props.onHeatSourcechange(value);
         }
     }, {
         key: 'setCoolingState',
         value: function setCoolingState(value) {
             CHANGE_FORM = true;
             this.setState({ chilledwatertemp: value });
+            var result = {
+                coolingLoad: this.state.coolingLoad,
+                coolingType: this.state.coolingType,
+                chilledwatertemp: this.state.chilledwatertemp
+            };
+            this.props.coolingloadDatachange(result);
         }
     }, {
         key: 'selectTemp',
@@ -63397,7 +63483,7 @@ var Tiles = function (_React$Component) {
             });
             axios({
                 method: 'post',
-                url: 'CalculateData/getCoolingLoad',
+                url: '/controller/method',
                 data: bodyFormData,
                 config: { headers: { 'Content-Type': 'multipart/form-data' } }
             }).then(function (response) {
@@ -63613,6 +63699,13 @@ var Tiles = function (_React$Component) {
             var modalId = eleM.target.getAttribute('data-modal');
             $("#" + modalId).find("#entry-id").attr('data-id', eleId);
             $("#" + modalId).modal("show");
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(event) {
+            event.preventDefault();
+
+            // custom form handling here
         }
     }, {
         key: 'handleChillerDeleteEntry',
@@ -64209,7 +64302,7 @@ var Tiles = function (_React$Component) {
             if (this.props.title == COOLING_LOAD_PROFILE_TITLE) {
                 var coolingLoadForm = _react2.default.createElement(
                     'form',
-                    null,
+                    { onSubmit: this.onSubmit },
                     _react2.default.createElement(
                         'table',
                         { className: 'table' },

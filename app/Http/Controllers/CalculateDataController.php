@@ -45,6 +45,7 @@ class CalculateDataController extends Controller
      */
     public function calculateData(Request $request)
     {
+      //  dd($request);
         $ht_in = $request->drive_temperature;
         $lt_in = $request->cold_water;
         $mt_in = $request->outdoor_temperature;
