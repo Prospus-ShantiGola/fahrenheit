@@ -87,10 +87,16 @@
                     "InfoTool":"Email explanation/tip"
                 },
                 "ProjectTemp": {
-                    "Title":"Outdoor temp.",
+                    "Title":"Outdoor temperature",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Email explanation/tip"
-                }
+                },
+                "On":{
+                    "Title":"On"
+                },
+                "HourPerYear":{
+                    "Title":"hours per year, it's warmer than"
+                }  
             },
             "Personal": {
                 "Title": "Personal Data",
@@ -637,6 +643,22 @@
         },
         "UnusedHeat":{
             "Title":"Unused Heat"
+        },
+        "Freecooling":{
+            "Title":"Free cooling"
+        },
+        "ReCoolingType":{
+            "Title":"Re-cooling Type"
+        },
+        "Yes":{
+            "Title":"YES"
+        },
+        "ChilledWaterTemperature":{
+            "Title":"chilled water temperature"
+        },
+        "Dry":{
+          
+            "Title":"DRY"
         }
 
 

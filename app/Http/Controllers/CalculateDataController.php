@@ -64,12 +64,16 @@ class CalculateDataController extends Controller
         $tn_airln = $request->tn_airln;
 
         // for now required cooling capacity will be 15
-        $max_cooling_capacity =  15; 
+        $max_cooling_load =  15; 
+
       
         // when we have Tn_Airln value instead of Tn_Mtln and when we have calculate one chiller at a time
         if($tn_airln) {
 
-            $chillerarray = array($chiller_type => $mod_types_id);
+         //   $chillerarray = array($chiller_type => $mod_types_id);
+             $chillerarray = array('eCoo30X' => '2');
+
+
 
         }
         // when we need to calculate values for all chiller type 
@@ -89,6 +93,23 @@ class CalculateDataController extends Controller
             $chiller_type = $key;
 
             $temp_constant = $this->getCalConstant($chiller_type);
+          
+
+            $circuit_sep = $this->getRecoolingProductsByProduct($temp_constant->circuit_separation);
+            // echo "<pre>";print_r($circuit_sep);
+            //           die;
+
+            $qth_nomst = trim($circuit_sep->qth_nomst);
+            $dt_nomst = trim($circuit_sep->dt_nomst);
+            $qel_nomst = trim($circuit_sep->qel_nomst);
+
+            $recooler = $this->getRecoolingProductsByProduct($temp_constant->re_cooler);
+
+
+            $qth_nomrk = trim($recooler->qth_nomrk);
+            $dt_nomrk = trim($recooler->dt_nomrk);
+            $qel_nomrk = trim($recooler->qel_nomrk);
+
 
             $modtype = $this->getModType($mod_types_id);
 
@@ -115,7 +136,7 @@ class CalculateDataController extends Controller
 
                 if($tn_airln){
 
-                   $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_capacity);
+                   $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load);
                 }
                  
 
@@ -155,7 +176,7 @@ class CalculateDataController extends Controller
 
                     if($tn_airln){
                     
-                        $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_capacity);
+                        $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load);
                     }
 
                     $cal_out[$i]['product_name'] = $key;
@@ -181,106 +202,84 @@ class CalculateDataController extends Controller
         if (empty($cal_out)) {
             $cal_out[0]['no_record'] = 'false';
         }
+    //    echo "<pre>";print_r($cal_out);
 
-    return response()->json($cal_out);
+        return response()->json($cal_out);
 
     }
 
     /**
      * Function to calculate required cooling capacity on given outdoor temperature provided
      */
-    function calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_capacity)
+    function calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load)
     {
         if($tn_airln)
         {
-            // die('dd');       
-         // echo $Qth_Mt = $output['Qth_Mt'];
-         //              echo "<br/>";
-         //   echo $Qth_Lt = $output['Qth_Lt'];
-         //   // $output['Qth_Lt'] = 32.2;
-         //              echo "<br/>";
-
-         //  // echo "<pre>";print_r($output);
-         // // die;
+        
+            $max_cooling_capacity = 15;
+             $max_cooling_capacity =  $this->getCoolingLoad($profile_type, $highest_temp, $max_cooling_load,$constant_value,$Tn_AirIn);
+        
         
             $extra = 1;
+            $enter = '';
 
 
-             for($i = 0 ; $i<=100;)
+            for($i = 0 ; $i<=100;)
             {
-
-
-              echo '**************';
-                echo "<br/>";
-            echo "loop".$i;
-              echo "<br/>";
-             // if($i==1)
-             //    {
-             //        $output['Qth_Lt'] = 32.2;
-             //    }
-                echo "<pre>";print_r($output);
             
-            echo "<br/>";
-           $Qth_Mt = $output['Qth_Mt'];
-                      echo "<br/>";
-          $Qth_Lt = $output['Qth_Lt'];
-                      echo "<br/>";
-
-
-
-            if($Qth_Lt != $max_cooling_capacity)
-            {
-
-
-               if($i==0) {
-                $dt_st = $this->calculateDtSt($Qth_Mt, $dt_nomst,$qth_nomst);              
-                $dT_rk = $this->calculateDtRk($Qth_Mt, $dt_nomrk,$qth_nomrk);
-           
-                $tn_mtIn = $output['Tn_MtIn'] +  $dt_st + $dT_rk ;
-            }
-            else
-            {
-
-                if($Qth_Lt<15)
+          
+                if($output['Qth_Lt'] != $max_cooling_capacity)
                 {
-                   
-                    $tn_mtIn = ($output['Tn_MtIn']) - 0.5;
-// echo "<br/>";
-                    // echo $tn_mtIn."eXTRA______________0.6";
-                    // echo "<br/>";
-                    $extra = 0.1;
-                }
+
+                    if($i==0) {
+                        $dt_st = $this->calculateDtSt( $output['Qth_Mt'], $dt_nomst,$qth_nomst);              
+                        $dT_rk = $this->calculateDtRk($output['Qth_Mt'], $dt_nomrk,$qth_nomrk);
+
+                        $tn_mtIn = $output['Tn_MtIn'] +  $dt_st + $dT_rk ;
+                    }
+                    else
+                    {   
+
+                        if(($output['Qth_Lt']<$max_cooling_capacity) &&  ($enter ==''))
+                        {
+                           
+                          
+                            $tn_mtIn = ($output['Tn_MtIn']) - 0.5;                     
+                            $extra =  0.1;
+                            $enter = 'first';
+                           
+                         
+                        }
+                        else if(($output['Qth_Lt']<$max_cooling_capacity) &&  ($enter !=''))
+                        {
+                            
+                                $tn_mtIn = ($output['Tn_MtIn']) - 0.05; 
+                                $extra =  0.01;
+                                $enter = 'first'; 
+                        }
+                        else
+                        {
+                            $tn_mtIn = ($output['Tn_MtIn']) + $extra;
+
+                        }
+                           
+                    }
+                                          
+                    $adka_input['Tn_MtIn'] = $tn_mtIn;
+                 
+                    // new input for Tn_Mtln value  to calculate again ADKA value 
+                    // calculate ADKA values for calculated  Tn_Mtln
+                    $output = $this->calculateADKA($adka_input);
+                }           
                 else
                 {
-                  //  echo 'extra____________'.$extra;
-                     $tn_mtIn = ($output['Tn_MtIn']) + $extra;
+                    return  $output;
+                  
                 }
-               
-                //$tn_mtIn = ($output['Tn_MtIn']) + $extra;
-            }
-                
-                // new input for Tn_Mtln value  to calculate again ADKA value 
-             $adka_input['Tn_MtIn'] = $tn_mtIn;
-               // echo "<br/>";      echo "<br/>";
-                 // $Qth_Mt = $output['Qth_Mt'];
-
-                // calculate ADKA values for calculated  Tn_Mtln
-                $output = $this->calculateADKA($adka_input);
-                //$output['tn_mtIn'] = $tn_mtIn; 
 
                 $i++;
-
             }
-           
-            else
-            {
-                echo 'enter';
-            }
-         }
             
-         //   if()
-
-
             return  $output;
         }
 
@@ -1186,6 +1185,7 @@ class CalculateDataController extends Controller
      */
     public function getRecoolingProducts($type)
     {
+
         $recooling_products = DB::table('recooling_products')->where('recooling_component_type', $type)->get();
 
         if ($recooling_products->isNotEmpty()) {
@@ -1197,6 +1197,14 @@ class CalculateDataController extends Controller
 
         return $recooling_products;
     }
+    public function getRecoolingProductsByProduct($product_name)
+    {
+
+        $recooling_products = DB::table('recooling_products')->where('product_name', $product_name)->first();
+      
+        return $recooling_products;
+    }
+
 
     /**
      * Function to get qth_nomrk, dt_nomrk, qth_nomst, dt_nomst depending of the type of circuit separation or recooler type
@@ -1253,7 +1261,87 @@ class CalculateDataController extends Controller
         //Cooling load at out door temperature
         return $Q_load;     
     }
+    /**
+     * Function to get the number of revoultion of recooler(nom_rk)
+     */
+    public function getRecoolerRevoultionNumber($Qth_NomRk, $dT_NomRk, $Qth_Mt,$Qel_NomRK)
+    {
+        $UA_100 =  $Qth_NomRk/$dT_NomRk;
+
+        $UA_0 = $UA_100*0.03;
+
+        $UA_RK = $Qth_Mt/$dT_NomRk;
+
+
+        $final_value = ($UA_RK - $UA_0)/($UA_100 - $UA_0);
+        if($final_value>0)
+        {
+            $power_value =  1/0.8; 
+            $nom_rk = pow($final_value,$power_value);  //pow(3, 2)
+           
+        }
+        else
+        {
+            $nom_rk = 0;
+        }
+
+        //norRK has to be higher then 0.15 and below 1.00
+        //electrical consumption of recooler
+        $Qel_RK = pow($nom_rk ,2.8 )* $Qel_NomRK;
+
+        return $Qel_RK;
+    }
+
+    /**
+     * Function to get the number of revoultion of circuit separation(nom_st)
+     */
+    public function getcircitSeparationRevoultionNumber($Qth_NomSt, $dT_NomSt, $Qth_Mt,$Qel_NomST)
+    {
+        $UA_100 =  $Qth_NomSt/$dT_NomSt;
+
+        $UA_0 = $UA_100*0.03;
+
+        $UA_ST = $Qth_Mt/$dT_NomSt;
+
+
+        $final_value = ($UA_ST - $UA_0)/($UA_100 - $UA_0);
+        if($final_value>0)
+        {
+            $power_value =  1/0.8; 
+            $nom_st = pow($final_value,$power_value);  //pow(3, 2)
+           
+        }
+        else
+        {
+            $nom_st = 0;
+        }
+
+        //norST is equal to norRK but not below 0.35 and not above 1.00
+        //electrical consumption of circuit separation
+        //Qel_ST = norST^(2.8) * Qel_NomST
+        $Qel_ST = pow($nom_st ,2.8 )* $Qel_NomST;
+
+        return $Qel_ST;
+    } 
+
+    /**
+     * Function to calculate for 
+     */
+    public function getElectricalConsumptionADKA($nom_st,$adka_input_value )
+    {
+        return $Qel_value =  pow($nom_st ,2.8 )* $adka_input_value ;
+    }
+
+    // /**
+    //  * Function to calculate the electrical consumption for the adka
+    //  */
+    // public function getSumElectricalConsumptionADKA2($nom_st,$adka_input_value )
+    // {
+    //     $Qel_value =  $Qel_value =  pow($nom_st ,2.8 )* $adka_input_value ;
+    // }
+
+   
 
  
 }
-  
+        

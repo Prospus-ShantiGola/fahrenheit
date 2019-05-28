@@ -88,6 +88,9 @@
 .input-range {
   height: 1rem;
   position: relative;
-  width: 100%; }
+  width: 93%;
+  margin-left: 8px;
+
+   }
 
 /*# sourceMappingURL=react-input-range.css.map*/

@@ -195,3 +195,4 @@ Route::get('/get-all-chiller-products', 'CalculateDataController@getAllChillerPr
 
 
 Route::post('/getNomValue', 'CalculateDataController@getNomValue');
+Route::post('/getCoolingLoad', 'CalculateDataController@getCoolingLoad');

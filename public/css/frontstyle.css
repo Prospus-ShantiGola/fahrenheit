@@ -2,7 +2,8 @@
 
 /* CSS Document */
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
-body {background:#f0f0f0; padding:0; margin:0; font-family: 'Roboto', sans-serif !important;}
+body {/*background:#f0f0f0; */
+    padding:0; margin:0; font-family: 'Roboto', sans-serif !important;}
 img {max-width:100%;}
 
 .ppmb {
@@ -1056,7 +1057,7 @@ td.input-label {
     height: 37px; outline:none;
     width: 100%;
     border-radius: 5px;
-    border: 1px solid #00618c;
+    border: 1px solid #fff;
 }
 .input-fields input::placeholder {
     color: #00618c;
@@ -1125,7 +1126,7 @@ td.input-fields {
     position: relative;
 }
 input.required-field {
-    border-color: red;
+    /*border-color: red;*/
 }
 h3.inner-table-heading {
     color: #00618c;
@@ -1360,19 +1361,20 @@ td.input-label.text-area-label {
     padding: 0 3px;
 }
 .input-fields select {
-    color: #00618c;
+    color: #fff;
     font-weight: 400;
     font-size: 14px;
     padding: 5px 20px 5px 10px;
     height: 37px;
+    background: #3f51b5!important;
     outline: none;
     width: 100%;
     border-radius: 5px;
-    border: 1px solid #00618c;
+    border: 1px solid #ffffff;
     appearance: none;
-    background: url(../images/select-arrow.png);
+    background-image: url(../images/select-arrow.png);
     background-repeat: no-repeat;
-    -webkit-appearance: none; -moz-appearance: none;
+    /*-webkit-appearance: none; -moz-appearance: none;*/
     background-position: 98% 50%;     cursor: pointer;
 }
 li.choose-language {
@@ -1418,7 +1420,7 @@ li.selected-flag img {
 }
 
 select.required-field {
-    border-color: red;
+    /*border-color: red;*/
 }
 
 .modal-body-content .nav-tabs .nav-link:focus {   outline: none;}
@@ -2706,4 +2708,38 @@ div.col-auto i.fa {
 a:hover {
     color: #1d68a7;
     text-decoration: none !important;
+}
+
+/*------- custom css starts --------*/
+
+.labclr
+{
+
+    color: #000!important;
+}
+.rdbord
+{
+    border: 1px solid red!important;
+    border-radius: 5px!important;
+}
+.blbord
+{
+    border: 1px solid #00618c!important;
+    border-radius: 5px!important;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px)
+
+
+{
+
+    .input-fields ul li
+    {
+        padding: 0!important;
+    }
+
+    .input-fields select
+    {
+        padding: 0!important;
+    }
 }
