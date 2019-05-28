@@ -16,6 +16,7 @@ class Tiles extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            errorMsg:"",
             totalHours:0,
             cityData:[],
             outdoortemp: {
@@ -160,13 +161,27 @@ class Tiles extends React.Component {
     }
     setCoolingState(value) {
         CHANGE_FORM=true;
-        this.setState({ chilledwatertemp:value})  
+        this.setState({ chilledwatertemp:value})        
+        this.setCoolingTileValues()     
+    }
+    setCoolingTileValues(){
+        if(this.state.coolingLoad==""){
+            this.setState({
+                errorMsg:"Please enter Max. Cooling Load"
+            })
+            return false
+        }
+        else{
+            this.setState({
+                errorMsg:""
+            })
+        }
         var result={
             coolingLoad:this.state.coolingLoad,
             coolingType:this.state.coolingType,
             chilledwatertemp:this.state.chilledwatertemp
         } 
-        this.props.coolingloadDatachange(result)   
+        this.props.coolingloadDatachange(result)
     }
     selectTemp(value){
         
@@ -244,6 +259,21 @@ class Tiles extends React.Component {
                 console.log(response);
             });
     }
+    updateState(elem){
+        // coolingType
+        // coolingLoad
+        if(elem.target.attributes[1].value=='cooling_profile_type'){
+            this.setState({
+                coolingType:elem.target.value
+            })
+        }
+        else{
+            this.setState({
+                coolingLoad:elem.target.value
+            })
+        }
+        this.setCoolingTileValues()
+    }
     componentDidMount() {
         
         var that = this;
@@ -269,6 +299,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                 outdoortempvalue:maxVal.min,
                 cityData:response.data })
                 that.setTemp(response.data,'hours',maxVal.min)
+                this.props.onGeneralDatachange(maxVal.min)
             })
             .catch((error) => {response.json(error)})
            // this.setTemp(this.state.cityData,'hours',value)
@@ -841,7 +872,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         <tr>
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.Title')}:</td>
                             <td className="input-fields" style={tdBorder}>
-                                <select className="required-field" onChange={(elem) => this.setState({coolingType:elem.target.value})} name="cooling_profile_type" id="cooling_profile_type">
+                                <select className="required-field" data-method="cooling_profile_type" onChange={(elem) => this.updateState(elem)} name="cooling_profile_type" id="cooling_profile_type">
                                     <option value="Office Space">Office Space</option>
                                     <option value="Process cooling">Process Cooling</option>
                                 </select>
@@ -851,9 +882,10 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.Title')}:</td>
                             <td className="input-fields" style={tdBorder}>
                                 <ul className="list-inline">
-                                    <li className="withunit"><input type="text" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" onKeyUp={(elem) => this.setState({coolingLoad:elem.target.value})} /><span>kW</span></li>
+                                    <li className="withunit"><input type="text" data-method="cooling_max_cooling_load" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" id="cooling_max_cooling_load" onKeyUp={(elem) => this.updateState(elem)} /><span>kW</span></li>
                                     
                                 </ul>
+                                {this.state.errorMsg}
                             </td>
                         </tr>
                         <tr>

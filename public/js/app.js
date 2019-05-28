@@ -61176,9 +61176,9 @@ var Adcalc = function (_Component) {
             },
             logged_in_role: LOGGED_IN_ROLE,
             outdoortemp: '',
-            drivetemp: '',
+            drivetemp: 50,
             coolingType: 'Office Space',
-            chilledwatertemp: '',
+            chilledwatertemp: 12,
             coolingLoad: ''
         };
         _this.handleChillerForm = _this.handleChillerForm.bind(_this);
@@ -61219,7 +61219,8 @@ var Adcalc = function (_Component) {
         key: 'handleHeatForm',
         value: function handleHeatForm(result) {
             if (result.heatSource.heatsourceformMode == "add") {
-                this.setState({ heatSourceStateChange: {
+                this.setState({
+                    heatSourceStateChange: {
                         stateChange: result.state,
                         heatSourceRecord: this.state.heatSourceStateChange.heatSourceRecord.concat(result.heatSource)
                     }
@@ -61234,7 +61235,8 @@ var Adcalc = function (_Component) {
         key: 'handleHeatProfileForm',
         value: function handleHeatProfileForm(result) {
             if (result.HeatingProfile.heatingprofileformMode == "add") {
-                this.setState({ heatingProfileStateChange: {
+                this.setState({
+                    heatingProfileStateChange: {
                         stateChange: result.state,
                         heatingProfileRecord: this.state.heatingProfileStateChange.heatingProfileRecord.concat(result.HeatingProfile)
                     }
@@ -61249,7 +61251,8 @@ var Adcalc = function (_Component) {
         key: 'handleCoolingProfileForm',
         value: function handleCoolingProfileForm(result) {
             if (result.CoolingProfile.coolingprofileformMode == "add") {
-                this.setState({ coolingProfileStateChange: {
+                this.setState({
+                    coolingProfileStateChange: {
                         stateChange: result.state,
                         coolingProfileRecord: this.state.coolingProfileStateChange.coolingProfileRecord.concat(result.CoolingProfile)
                     }
@@ -61340,19 +61343,21 @@ var Adcalc = function (_Component) {
             };
             axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
 
-            fetch('/calculate-data', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(bodyFormData)
-            }).then(function (a) {
-                return a.json();
-            }).then(function (data) {}).catch(function (err) {
-                console.log(err);
-            });
+            if (this.state.coolingLoad != "") {
+                fetch('/calculate-data', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bodyFormData)
+                }).then(function (a) {
+                    return a.json();
+                }).then(function (data) {}).catch(function (err) {
+                    console.log(err);
+                });
+            }
         }
     }, {
         key: 'componentDidMount',
@@ -63255,6 +63260,7 @@ var Tiles = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
         _this.state = {
+            errorMsg: "",
             totalHours: 0,
             cityData: [],
             outdoortemp: {
@@ -63412,6 +63418,20 @@ var Tiles = function (_React$Component) {
         value: function setCoolingState(value) {
             CHANGE_FORM = true;
             this.setState({ chilledwatertemp: value });
+            this.setCoolingTileValues();
+        }
+    }, {
+        key: 'setCoolingTileValues',
+        value: function setCoolingTileValues() {
+            if (this.state.coolingLoad == "") {
+                this.setState({
+                    errorMsg: "Please enter Max. Cooling Load"
+                });
+            } else {
+                this.setState({
+                    errorMsg: ""
+                });
+            }
             var result = {
                 coolingLoad: this.state.coolingLoad,
                 coolingType: this.state.coolingType,
@@ -63501,6 +63521,22 @@ var Tiles = function (_React$Component) {
             });
         }
     }, {
+        key: 'updateState',
+        value: function updateState(elem) {
+            // coolingType
+            // coolingLoad
+            if (elem.target.attributes[1].value == 'cooling_profile_type') {
+                this.setState({
+                    coolingType: elem.target.value
+                });
+            } else {
+                this.setState({
+                    coolingLoad: elem.target.value
+                });
+            }
+            this.setCoolingTileValues();
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var _this2 = this;
@@ -63527,6 +63563,7 @@ var Tiles = function (_React$Component) {
                         outdoortempvalue: maxVal.min,
                         cityData: response.data });
                     that.setTemp(response.data, 'hours', maxVal.min);
+                    _this2.props.onGeneralDatachange(maxVal.min);
                 }).catch(function (error) {
                     response.json(error);
                 });
@@ -64326,8 +64363,8 @@ var Tiles = function (_React$Component) {
                                 { className: 'input-fields', style: tdBorder },
                                 _react2.default.createElement(
                                     'select',
-                                    { className: 'required-field', onChange: function onChange(elem) {
-                                            return _this3.setState({ coolingType: elem.target.value });
+                                    { className: 'required-field', 'data-method': 'cooling_profile_type', onChange: function onChange(elem) {
+                                            return _this3.updateState(elem);
                                         }, name: 'cooling_profile_type', id: 'cooling_profile_type' },
                                     _react2.default.createElement(
                                         'option',
@@ -64360,8 +64397,8 @@ var Tiles = function (_React$Component) {
                                     _react2.default.createElement(
                                         'li',
                                         { className: 'withunit' },
-                                        _react2.default.createElement('input', { type: 'text', required: true, placeholder: '50.0', pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', id: 'cooling_max_cooling_load', onKeyUp: function onKeyUp(elem) {
-                                                return _this3.setState({ coolingLoad: elem.target.value });
+                                        _react2.default.createElement('input', { type: 'text', 'data-method': 'cooling_max_cooling_load', required: true, placeholder: '50.0', pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', id: 'cooling_max_cooling_load', onKeyUp: function onKeyUp(elem) {
+                                                return _this3.updateState(elem);
                                             } }),
                                         _react2.default.createElement(
                                             'span',
@@ -64369,7 +64406,8 @@ var Tiles = function (_React$Component) {
                                             'kW'
                                         )
                                     )
-                                )
+                                ),
+                                this.state.errorMsg
                             )
                         ),
                         _react2.default.createElement(
