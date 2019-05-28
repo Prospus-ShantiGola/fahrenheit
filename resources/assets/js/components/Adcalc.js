@@ -50,7 +50,12 @@ class Adcalc extends Component {
                 stateChange:false,
                 fahrenheitSystemRecord:[]
             },
-            logged_in_role:LOGGED_IN_ROLE
+            logged_in_role:LOGGED_IN_ROLE,
+            outdoortemp:'',
+            drivetemp:'',
+            coolingType:'Office Space',
+            chilledwatertemp:'',
+            coolingLoad:''
         };
         this.handleChillerForm = this.handleChillerForm.bind(this);
         this.handleGeneralForm = this.handleGeneralForm.bind(this);
@@ -60,6 +65,10 @@ class Adcalc extends Component {
         this.handleHeatProfileForm = this.handleHeatProfileForm.bind(this);
         this.handleCoolingProfileForm = this.handleCoolingProfileForm.bind(this);
         this.handleFahrenheitForm = this.handleFahrenheitForm.bind(this);
+        this.onGeneralDataChangeVal=this.onGeneralDataChangeVal.bind(this);
+        this.onHeatSourceDataChangeVal=this.onHeatSourceDataChangeVal.bind(this);
+        this.onCoolingLoadChangeVal=this.onCoolingLoadChangeVal.bind(this);
+        this.calculateFunction=this.calculateFunction.bind(this);
     }
     handleChillerForm (result)  {
 
@@ -163,6 +172,53 @@ class Adcalc extends Component {
                 stateChange:result.state
             }
         });
+    }
+    onGeneralDataChangeVal(result){
+        this.setState({
+            outdoortemp:result
+        })
+        this.calculateFunction()
+    }
+    onHeatSourceDataChangeVal(result){
+        this.setState({
+            drivetemp:result
+        })
+        this.calculateFunction()
+    }
+    onCoolingLoadChangeVal(result){
+        this.setState({
+            coolingType:result.coolingType,
+            chilledwatertemp:result.chilledwatertemp,
+            coolingLoad:result.coolingLoad
+        })
+        this.calculateFunction()
+    }
+    calculateFunction(){
+        var port = 3000;
+        var that=this;
+        var bodyFormData={
+            coolingType:this.state.coolingType,
+            chilledwatertemp:this.state.chilledwatertemp,
+            coolingLoad:this.state.coolingLoad,
+            drivetemp:this.state.drivetemp,
+            outdoortemp:this.state.outdoortemp
+        }
+        axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
+        
+                    
+        fetch('/calculate-data', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyFormData)
+    })
+    .then((a) => {return a.json();})
+    .then(function (data) {
+    })
+    .catch((err) => {console.log(err)})
     }
 
     componentDidMount(){ 
@@ -382,7 +438,8 @@ class Adcalc extends Component {
                 modalId={tiles.general.modalId}
                 dataChange={this.state.generalStateChange.stateChange}
                 dataRecord={this.state.generalStateChange.generalRecord}
-                store={store}/>
+                store={store}
+                onGeneralDatachange={this.onGeneralDataChangeVal}/>
                 <Tiles
                 title={tiles.Economic.title}
                 header={tiles.Economic.header}
@@ -449,7 +506,8 @@ class Adcalc extends Component {
                         dataChange={this.state.heatSourceStateChange.stateChange}
                         dataRecord={this.state.heatSourceStateChange.heatSourceRecord}
                         multiple={tiles.HeatSource.multiple}
-                        store={store}/>
+                        store={store}
+                        onHeatSourcechange={this.onHeatSourceDataChangeVal}/>
 
                         <Tiles  title={tiles.HeatingLoadProfile.title}
                         header={tiles.HeatingLoadProfile.header}
@@ -516,7 +574,8 @@ class Adcalc extends Component {
                         dataChange={this.state.coolingProfileStateChange.stateChange}
                         dataRecord={this.state.coolingProfileStateChange.coolingProfileRecord}
                         multiple={tiles.CoolingLoadProfile.multiple}
-                        store={store}/>
+                        store={store}
+                        coolingloadDatachange={this.onCoolingLoadChangeVal}/>
                        </div>
                     </div>
                     <Tiles  title={tiles.FahrenheitSystem.title}
@@ -544,8 +603,8 @@ class Adcalc extends Component {
                  <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} store={store}/>
                  <GeneralModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
                  <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} store={store} heatSourceData={this.state.heatSourceStateChange.heatSourceStateChange}/>
-                 <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/>
-                 <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
+                 {/* <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/> */}
+                 {/* <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/> */}
                  <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store}/>
                  <OptionsModal role={this.props.role} onOptionSubmit={this.handleOptionForm} />
                  <FahrenheitSystemModal role={this.props.role} onfinalSubmit={this.handleFahrenheitForm} />

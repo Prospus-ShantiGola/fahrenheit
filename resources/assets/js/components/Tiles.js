@@ -144,22 +144,29 @@ class Tiles extends React.Component {
                 locality: 'short_name',
             };
 
-            console.log(lat, lng);
+            //console.log(lat, lng);
             // initialize(lat, lng);
             // //Drawing map on the basis of latitude and longitude.
             // getMapInfo(lat, lng,place)
         });
     }
     setTempState(value) {
-        this.setState({ outdoortempvalue:value})
-        this.setTemp(this.state.cityData,'hours',value)
+        this.setState({ outdoortempvalue:value})       
+        this.props.onGeneralDatachange(value)
     }
     setHeatState(value) {
         this.setState({ drivetemp:value})
+        this.props.onHeatSourcechange(value)
     }
     setCoolingState(value) {
         CHANGE_FORM=true;
-        this.setState({ chilledwatertemp:value})
+        this.setState({ chilledwatertemp:value})  
+        var result={
+            coolingLoad:this.state.coolingLoad,
+            coolingType:this.state.coolingType,
+            chilledwatertemp:this.state.chilledwatertemp
+        } 
+        this.props.coolingloadDatachange(result)   
     }
     selectTemp(value){
         
@@ -237,33 +244,8 @@ class Tiles extends React.Component {
                 console.log(response);
             });
     }
-
-    calculateData(){
-        var bodyFormData = new FormData();
-        bodyFormData.set({
-            coolingType:this.state.coolingType,
-            coolingLoad:this.state.coolingLoad,
-            chilledwatertemp:this.state.chilledwatertemp,
-            drivetemp:this.state.drivetemp
-        });
-        axios({
-            method: 'post',
-            url: '/CalculateData/calculateData',
-            data: bodyFormData,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
-            })
-            .then(function (response) {
-                //handle success
-                console.log(response);
-            })
-            .catch(function (response) {
-                //handle error
-                console.log(response);
-            });
-    }
     componentDidMount() {
         
-
         var that = this;
 
         if (that.props.title == HEAT_SOURCE_TITLE) {
@@ -513,6 +495,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
     }
 
     render() {
+        
         //console.log("render refresh",this.state.heatSourceData);
         //this.props.store.dispatch("ADD_GENERAL")
 
@@ -883,6 +866,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         </tr>
                     </table>
                 </form>
+                
             )
             COOLING_FORM_STATUS = (this.state.coolingProfileData.length == 0) ? false : true; //use to validate the form.
             if (this.state.coolingProfileDataChange == true && this.state.coolingProfileData.length != 0) {
@@ -989,6 +973,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
             else {
                 var priceFullList = <p className="scrollbar-macosx">{coolingLoadForm}</p>;
             }
+            
         }
         if (this.props.title == GENERAL_TILE) {
             var generalForm = (
