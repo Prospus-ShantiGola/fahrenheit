@@ -16,23 +16,23 @@ class Tiles extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            errorMsg:"",
-            totalHours:0,
-            cityData:[],
+            errorMsg: "",
+            totalHours: 0,
+            cityData: [],
             outdoortemp: {
-                max:0,
-                min:0,
-                
+                max: 0,
+                min: 0,
+
             },
-            outdoortempvalue:2,
+            outdoortempvalue: 2,
             drivetemp: 55,
             chilledwatertemp: 12,
-            coolingType:"Office Space",
-            coolingLoad:'',
+            coolingType: "Office Space",
+            coolingLoad: '',
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: {
-                location:'munich'
+                location: 'munich'
             },
             generalDataChange: false,
             optionData: [],
@@ -57,7 +57,7 @@ class Tiles extends React.Component {
         this.handleChillerDeleteEntry = this.handleChillerDeleteEntry.bind(this);
         this.handleHeatSourceDeleteEntry = this.handleHeatSourceDeleteEntry.bind(this);
         this.arrayMove = this.arrayMove.bind(this);
-        this.setCoolingTileValues=this.setCoolingTileValues.bind(this)
+        this.setCoolingTileValues = this.setCoolingTileValues.bind(this)
     }
     componentWillReceiveProps(nextProps) {
 
@@ -153,71 +153,73 @@ class Tiles extends React.Component {
             // getMapInfo(lat, lng,place)
         });
     }
-    validateCoolingLoad(){
-        if(this.state.coolingLoad==""){
+    validateCoolingLoad() {
+        if (this.state.coolingLoad == "") {
             this.setState({
-                errorMsg:"Please enter Max. Cooling Load"
+                errorMsg: "Please enter Max. Cooling Load"
             })
             return false
         }
-        else{
+        else {
             this.setState({
-                errorMsg:""
+                errorMsg: ""
             })
         }
     }
     setTempState(value) {
-        this.setState({ outdoortempvalue:value})  
-        var result={
-            min:value,
-            max:this.state.outdoortemp.max
+        this.setState({ outdoortempvalue: value })
+        var result = {
+            min: value,
+            max: this.state.outdoortemp.max
         }
         this.props.onGeneralDatachange(result)
         this.validateCoolingLoad()
     }
     setHeatState(value) {
-        this.setState({ drivetemp:value})
+        this.setState({ drivetemp: value })
         this.props.onHeatSourcechange(value)
         this.validateCoolingLoad()
     }
     setCoolingState(value) {
-        CHANGE_FORM=true;
-        this.setState({ chilledwatertemp:value})        
-        this.setCoolingTileValues()     
+        CHANGE_FORM = true;
+        this.setState({ chilledwatertemp: value })
+        this.setCoolingTileValues()
     }
-    setCoolingTileValues(){
-        
+    setCoolingTileValues() {
+
         this.validateCoolingLoad()
-        var result={
-            coolingLoad:this.state.coolingLoad,
-            coolingType:this.state.coolingType,
-            chilledwatertemp:this.state.chilledwatertemp
-        } 
+        var result = {
+            coolingLoad: this.state.coolingLoad,
+            coolingType: this.state.coolingType,
+            chilledwatertemp: this.state.chilledwatertemp
+        }
         this.props.coolingloadDatachange(result)
         clearTimeout(this.timer)
     }
-    selectTemp(value){
-        
-        var port = 3000;
-        var that=this;
-        var locationName=value.target.value
-        CHANGE_FORM=true;
-        axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
-        
-                    axios.get('/location_data/'+locationName+'.json')
-                    .then((response) => {
-                        var maxVal=that.getVal(response.data,'temprature');
-                        
-                        that.setState({ outdoortemp:{
-                            max:maxVal.max,
-                            min:maxVal.min
-                        },
-                        cityData:response.data,
-                    generalData:{location:locationName} })
+    selectTemp(value) {
 
-                    
-                    })
-                    .catch((error) => {response.json(error)})
+        var port = 3000;
+        var that = this;
+        var locationName = value.target.value
+        CHANGE_FORM = true;
+        axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
+
+        axios.get('/location_data/' + locationName + '.json')
+            .then((response) => {
+                var maxVal = that.getVal(response.data, 'temprature');
+
+                that.setState({
+                    outdoortemp: {
+                        max: maxVal.max,
+                        min: maxVal.min
+                    },
+                    cityData: response.data,
+                    generalData: { location: locationName }
+                })
+
+                that.props.onGeneralDatachange(this.state.outdoortemp)
+            })
+            .catch((error) => { response.json(error) })
     }
     componentDidUpdate() {
 
@@ -225,46 +227,46 @@ class Tiles extends React.Component {
     componentWillUnmount() {
         // console.log("component unmount")
     }
-    setTemp(arr,prop,value){
-        var total=0
-        for (var i=0 ; i<arr.length ; i++) {
+    setTemp(arr, prop, value) {
+        var total = 0
+        for (var i = 0; i < arr.length; i++) {
             if (arr[i]['temprature'] > value)
                 total = total + arr[i][prop];
         }
         this.setState({
-            totalHours:total,
-            generalDataChange:true,
-            location:value
+            totalHours: total,
+            generalDataChange: true,
+            location: value
         })
     }
     getVal(arr, prop) {
         var max;
         var min;
-        for (var i=0 ; i<arr.length ; i++) {
+        for (var i = 0; i < arr.length; i++) {
             if (!max || arr[i][prop] > max[prop])
                 max = arr[i];
             if (!min || arr[i][prop] < min[prop])
                 min = arr[i];
         }
-        var returnVal={
-            max:max.temprature,
-            min:min.temprature
+        var returnVal = {
+            max: max.temprature,
+            min: min.temprature
         }
         return returnVal;
     }
-    getCoolingLoadProfile(){
+    getCoolingLoadProfile() {
         var bodyFormData = new FormData();
         bodyFormData.set({
-            coolingType:this.state.coolingType,
-            coolingLoad:this.state.coolingLoad,
-            chilledwatertemp:this.state.chilledwatertemp
+            coolingType: this.state.coolingType,
+            coolingLoad: this.state.coolingLoad,
+            chilledwatertemp: this.state.chilledwatertemp
         });
         axios({
             method: 'post',
             url: '/controller/method',
             data: bodyFormData,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
-            })
+            config: { headers: { 'Content-Type': 'multipart/form-data' } }
+        })
             .then(function (response) {
                 //handle success
                 console.log(response);
@@ -274,23 +276,22 @@ class Tiles extends React.Component {
                 console.log(response);
             });
     }
-    updateState(elem){
-        // coolingType
-        // coolingLoad
-        if(elem.target.attributes[1].value=='cooling_profile_type'){
+    updateState(elem) {
+        
+        if (elem.target.attributes[1].value == 'cooling_profile_type') {
             this.setState({
-                coolingType:elem.target.value
+                coolingType: elem.target.value
             })
         }
-        else{
+        else {
             this.setState({
-                coolingLoad:elem.target.value
+                coolingLoad: elem.target.value
             })
         }
         this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL)
     }
     componentDidMount() {
-        
+
         var that = this;
 
         if (that.props.title == HEAT_SOURCE_TITLE) {
@@ -299,25 +300,27 @@ class Tiles extends React.Component {
             //    console.log("Lineellipses state",this.linesEllipsis);
 
         }
-        if(that.props.title==GENERAL_TILE){
+        if (that.props.title == GENERAL_TILE) {
             var port = 3000;
-axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
+            axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
 
             axios.get('/location_data/munich.json')
-            .then((response) => {
-                var maxVal=that.getVal(response.data,'temprature');
-                
-                this.setState({ outdoortemp:{
-                    max:maxVal.max,
-                    min:maxVal.min
-                },
-                outdoortempvalue:maxVal.min,
-                cityData:response.data })
-                that.setTemp(response.data,'hours',maxVal.min)
-                that.props.onGeneralDatachange(this.state.outdoortemp)
-            })
-            .catch((error) => {response.json(error)})
-           // this.setTemp(this.state.cityData,'hours',value)
+                .then((response) => {
+                    var maxVal = that.getVal(response.data, 'temprature');
+
+                    this.setState({
+                        outdoortemp: {
+                            max: maxVal.max,
+                            min: maxVal.min
+                        },
+                        outdoortempvalue: maxVal.min,
+                        cityData: response.data
+                    })
+                    that.setTemp(response.data, 'hours', maxVal.min)
+                    that.props.onGeneralDatachange(this.state.outdoortemp)
+                })
+                .catch((error) => { response.json(error) })
+            // this.setTemp(this.state.cityData,'hours',value)
         }
 
         if (this.state.compressionChillerData.length == 0) {
@@ -494,9 +497,9 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
         $("#" + modalId).find("#entry-id").attr('data-id', eleId);
         $("#" + modalId).modal("show");
     }
-    onSubmit (event) {
+    onSubmit(event) {
         event.preventDefault();
-      
+
         // custom form handling here
     }
     handleChillerDeleteEntry(result) {
@@ -541,7 +544,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
     }
 
     render() {
-        
+
         //console.log("render refresh",this.state.heatSourceData);
         //this.props.store.dispatch("ADD_GENERAL")
 
@@ -898,7 +901,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                             <td className="input-fields" style={tdBorder}>
                                 <ul className="list-inline">
                                     <li className="withunit"><input type="text" data-method="cooling_max_cooling_load" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" value={this.state.coolingLoad} id="cooling_max_cooling_load" onChange={(elem) => this.updateState(elem)} /><span>kW</span></li>
-                                    
+
                                 </ul>
                                 <span className="errorMessages">{this.state.errorMsg}</span>
                             </td>
@@ -913,7 +916,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         </tr>
                     </table>
                 </form>
-                
+
             )
             COOLING_FORM_STATUS = (this.state.coolingProfileData.length == 0) ? false : true; //use to validate the form.
             if (this.state.coolingProfileDataChange == true && this.state.coolingProfileData.length != 0) {
@@ -1020,7 +1023,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
             else {
                 var priceFullList = <p className="scrollbar-macosx">{coolingLoadForm}</p>;
             }
-            
+
         }
         if (this.props.title == GENERAL_TILE) {
             var generalForm = (
@@ -1412,7 +1415,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
         if (this.props.title == FAHRENHEIT_SYSTEM) {
 
             if (this.state.fahrenheitDataChange) {
-                projectData= this.props.dataRecord;
+                projectData = this.props.dataRecord;
                 var pricelist = (
                     <ul className="price-listt">
                         <li>
@@ -1430,12 +1433,12 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         <li className="paybkprd">
                             <p>COP</p>
                             <h3>{projectData.COP}</h3>
-                        </li>                
+                        </li>
 
                     </ul>
 
                 );
-                var priceFullList = (                    
+                var priceFullList = (
                     <ul className="price-listt">
                         <li>
                             <p>Tn_MtLn:</p>
@@ -1452,7 +1455,7 @@ axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + po
                         <li className="paybkprd">
                             <p>COP</p>
                             <h3>0.288</h3>
-                        </li>                
+                        </li>
 
                     </ul>
                 );
