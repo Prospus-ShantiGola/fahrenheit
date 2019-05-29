@@ -284,12 +284,12 @@ class Tiles extends React.Component {
     updateState(elem) {
             if (elem.target.attributes[1].value == 'cooling_profile_type') {
                 this.setState({
-                    coolingType: elem.target.value
+                    coolingType: elem.target.value,coolingProfileDataChanged:true
                 })
             }
             else {
                 this.setState({
-                    coolingLoad: elem.target.value
+                    coolingLoad: elem.target.value,coolingProfileDataChanged:true
                 })
             }
             this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL)
@@ -852,7 +852,7 @@ class Tiles extends React.Component {
                             <td className="input-label" style={tdBorder}>{this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.Title')}:</td>
                             <td className="input-fields" style={tdBorder}>
                                 <ul className="list-inline">
-                                    <li className="withunit"><input type="text" data-method="cooling_max_cooling_load" required placeholder="50.0" pattern="\d*" className="required-field onlynumeric" name="cooling_max_cooling_load" value={this.state.coolingLoad} id="cooling_max_cooling_load" onChange={(elem) => this.updateState(elem)} /><span>kW</span></li>
+                                    <li className="withunit"><input type="number" data-method="cooling_max_cooling_load" required placeholder="50.0" pattern="\d*" step="any" className="required-field onlynumeric" name="cooling_max_cooling_load" value={this.state.coolingLoad} id="cooling_max_cooling_load" onChange={(elem) => this.updateState(elem)} /><span>kW</span></li>
 
                                 </ul>
                                 <span className="errorMessages">{this.state.errorMsg}</span>

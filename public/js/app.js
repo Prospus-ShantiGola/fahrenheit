@@ -63571,11 +63571,11 @@ var Tiles = function (_React$Component) {
         value: function updateState(elem) {
             if (elem.target.attributes[1].value == 'cooling_profile_type') {
                 this.setState({
-                    coolingType: elem.target.value
+                    coolingType: elem.target.value, coolingProfileDataChanged: true
                 });
             } else {
                 this.setState({
-                    coolingLoad: elem.target.value
+                    coolingLoad: elem.target.value, coolingProfileDataChanged: true
                 });
             }
             this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL);
@@ -64337,7 +64337,7 @@ var Tiles = function (_React$Component) {
                                     _react2.default.createElement(
                                         'li',
                                         { className: 'withunit' },
-                                        _react2.default.createElement('input', { type: 'text', 'data-method': 'cooling_max_cooling_load', required: true, placeholder: '50.0', pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', value: this.state.coolingLoad, id: 'cooling_max_cooling_load', onChange: function onChange(elem) {
+                                        _react2.default.createElement('input', { type: 'number', 'data-method': 'cooling_max_cooling_load', required: true, placeholder: '50.0', pattern: '\\d*', step: 'any', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', value: this.state.coolingLoad, id: 'cooling_max_cooling_load', onChange: function onChange(elem) {
                                                 return _this4.updateState(elem);
                                             } }),
                                         _react2.default.createElement(
