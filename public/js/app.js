@@ -63307,11 +63307,11 @@ var Tiles = function (_React$Component) {
             economicData: [],
             economicDataChange: false,
             heatSourceData: [],
-            heatSourceDataChange: false,
+            heatSourceDataChanged: false,
             heatingProfileData: [],
             heatingProfileDataChange: false,
             coolingProfileData: [],
-            coolingProfileDataChange: false,
+            coolingProfileDataChanged: false,
             fahrenheitData: [],
             fahrenheitDataChange: _this.props.datachanged
         };
@@ -63455,7 +63455,7 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'setHeatState',
         value: function setHeatState(value) {
-            this.setState({ drivetemp: value });
+            this.setState({ drivetemp: value, heatSourceDataChanged: true });
             this.props.onHeatSourcechange(value);
             this.validateCoolingLoad();
         }
@@ -63463,7 +63463,7 @@ var Tiles = function (_React$Component) {
         key: 'setCoolingState',
         value: function setCoolingState(value) {
             CHANGE_FORM = true;
-            this.setState({ chilledwatertemp: value });
+            this.setState({ chilledwatertemp: value, coolingProfileDataChanged: true });
             this.setCoolingTileValues();
         }
     }, {
@@ -63569,18 +63569,16 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'updateState',
         value: function updateState(elem) {
-            if (/^\d+$/.test(elem.target.value)) {
-                if (elem.target.attributes[1].value == 'cooling_profile_type') {
-                    this.setState({
-                        coolingType: elem.target.value
-                    });
-                } else {
-                    this.setState({
-                        coolingLoad: elem.target.value
-                    });
-                }
-                this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL);
+            if (elem.target.attributes[1].value == 'cooling_profile_type') {
+                this.setState({
+                    coolingType: elem.target.value
+                });
+            } else {
+                this.setState({
+                    coolingLoad: elem.target.value
+                });
             }
+            this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL);
         }
     }, {
         key: 'componentDidMount',
@@ -64072,138 +64070,32 @@ var Tiles = function (_React$Component) {
                         )
                     )
                 );
-                if (this.state.heatSourceDataChange == true && this.state.heatSourceData.length != 0) {
+                if (this.state.heatSourceDataChanged) {
                     projectData['heatsource'] = this.state.heatSourceData;
                     var heatSourceData = this.state.heatSourceData;
                     var pricelist = _react2.default.createElement(
                         'ul',
                         { className: 'price-listt scrollbar-macosx' },
-                        function () {
-                            if (heatSourceData[0].heat_capacity != "") {
-                                return _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    _react2.default.createElement(
-                                        'p',
-                                        null,
-                                        _this4.props.t('Tiles.HeatSource.HeatCapacity')
-                                    ),
-                                    _react2.default.createElement(
-                                        'h3',
-                                        null,
-                                        heatSourceData[0].heat_capacity,
-                                        ' kW'
-                                    )
-                                );
-                            }
-                        }(),
                         _react2.default.createElement(
                             'li',
                             null,
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                this.props.t('Tiles.HeatSource.AvailableHeat')
+                                'Drive temperature'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '1,767,768 kWh/a'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                this.props.t('Tiles.HeatSource.Temperature')
-                            ),
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                _react2.default.createElement('img', { src: 'public/images/degree-icon.png', alt: '' }),
-                                ' 84\xB0C'
+                                this.state.drivetemp,
+                                ' kW'
                             )
                         )
                     );
 
                     var bodyContent = "Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
                     var deleteModal = _react2.default.createElement(_DeleteModal.DeleteModal, { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'heatSource', id: 'delete-heat-modal' });
-                    var priceFullList = _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'hover-list scrollbar-macosx' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'table-responsive' },
-                                _react2.default.createElement(
-                                    'table',
-                                    { className: 'table' },
-                                    _react2.default.createElement(
-                                        'tbody',
-                                        { className: 'heatsourcesTableBody' },
-                                        heatSourceData.map(function (data, h) {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                { key: h, 'data-id': h },
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    data.heat_name,
-                                                    _react2.default.createElement(
-                                                        'ul',
-                                                        { className: 'list-inline' },
-                                                        function () {
-                                                            if (data.heat_capacity != "") {
-                                                                return _react2.default.createElement(
-                                                                    'li',
-                                                                    null,
-                                                                    data.heat_capacity,
-                                                                    ' kW'
-                                                                );
-                                                            }
-                                                        }(),
-                                                        _react2.default.createElement(
-                                                            'li',
-                                                            null,
-                                                            '85\xB0C '
-                                                        )
-                                                    )
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        'span',
-                                                        { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this4.props.modalId },
-                                                        _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                return _this4.editHeatRecord(h, { hiddenmode: "heatsourceformMode", hiddenmodekey: "heatsourceformModeKey" });
-                                                            } })
-                                                    ),
-                                                    _react2.default.createElement(
-                                                        'span',
-                                                        { className: 'delete-optionn', 'data-id': h },
-                                                        _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-heat-modal', onClick: function onClick(elem) {
-                                                                return _this4.deleteRecord(h, elem);
-                                                            } })
-                                                    ),
-                                                    _react2.default.createElement(
-                                                        'span',
-                                                        { className: 'menu-bar-option drag-handler' },
-                                                        _react2.default.createElement('i', { className: 'fa fa-bars', 'aria-hidden': 'true' })
-                                                    )
-                                                )
-                                            );
-                                        })
-                                    )
-                                )
-                            )
-                        )
-                    );
-
+                    var priceFullList = heatForm;
                     var that = this;
                     if (typeof $('.heatsourcesTableBody')[0] != "undefined") {
                         jQuery(".heat-sources-hover .scrollbar-macosx").scrollbar();
@@ -64486,7 +64378,7 @@ var Tiles = function (_React$Component) {
                     )
                 );
                 COOLING_FORM_STATUS = this.state.coolingProfileData.length == 0 ? false : true; //use to validate the form.
-                if (this.state.coolingProfileDataChange == true && this.state.coolingProfileData.length != 0) {
+                if (this.state.coolingProfileDataChanged) {
                     projectData['chiller'] = this.state.coolingProfileData;
                     var coolingProfileData = this.state.coolingProfileData;
                     var pricelist = _react2.default.createElement(
@@ -64498,12 +64390,12 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Cooling Demand'
+                                this.props.t('CoolingProfile.Tab.TechnicalData.ProfileType.Title')
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '468,168 kWa/a'
+                                this.state.coolingType
                             )
                         ),
                         _react2.default.createElement(
@@ -64512,12 +64404,12 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Comoression Electricity Cost'
+                                this.props.t('CoolingProfile.Tab.TechnicalData.MaxCoolingLoad.Title')
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '33,708 \u20AC/a'
+                                this.state.coolingLoad
                             )
                         ),
                         _react2.default.createElement(
@@ -64526,14 +64418,14 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Temperature'
+                                this.props.t('CoolingProfile.Tab.TechnicalData.ChilledWaterTemperature.Title')
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
                                 _react2.default.createElement('img', { src: 'public/images/degree-icon.png', alt: '' }),
                                 ' ',
-                                coolingProfileData[0].cooling_base_load_to,
+                                this.state.chilledwatertemp,
                                 '\xB0C'
                             )
                         )
@@ -64541,84 +64433,7 @@ var Tiles = function (_React$Component) {
 
                     var bodyContent = "Are you sure you want to delete the heat entry? Please confirm by clicking Yes.";
                     var deleteModal = _react2.default.createElement(_DeleteModal.DeleteModal, { onDeleteChillerSubmit: this.handleChillerDeleteEntry, bodyContent: bodyContent, modalfor: 'coolingloadprofile', id: 'delete-heat-modal' });
-                    var priceFullList = _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'hover-list scrollbar-macosx' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'table-responsive' },
-                                _react2.default.createElement(
-                                    'table',
-                                    { className: 'table' },
-                                    _react2.default.createElement(
-                                        'tbody',
-                                        { className: 'coolingloadprofileTableBody' },
-                                        coolingProfileData.map(function (data, h) {
-                                            return _react2.default.createElement(
-                                                'tr',
-                                                { key: h, 'data-id': h },
-                                                _react2.default.createElement(
-                                                    'th',
-                                                    null,
-                                                    data.cooling_radiant_cooling_office,
-                                                    _react2.default.createElement(
-                                                        'ul',
-                                                        { className: 'list-inline' },
-                                                        _react2.default.createElement(
-                                                            'li',
-                                                            null,
-                                                            data.cooling_cooling_other,
-                                                            '\xB0C'
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'li',
-                                                            null,
-                                                            '   ',
-                                                            data.cooling_cooling_hours,
-                                                            ' h '
-                                                        ),
-                                                        _react2.default.createElement(
-                                                            'li',
-                                                            null,
-                                                            ' ',
-                                                            data.cooling_base_load_to,
-                                                            ' kW '
-                                                        )
-                                                    )
-                                                ),
-                                                _react2.default.createElement(
-                                                    'td',
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        'span',
-                                                        { className: 'edit-option', 'data-id': h, 'data-toggle': 'modal', 'data-backdrop': 'false', 'data-target': _this4.props.modalId },
-                                                        _react2.default.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true', onClick: function onClick() {
-                                                                return _this4.editHeatRecord(h, { hiddenmode: "coolingprofileformMode", hiddenmodekey: "coolingprofileformModeKey" });
-                                                            } })
-                                                    ),
-                                                    _react2.default.createElement(
-                                                        'span',
-                                                        { className: 'delete-optionn', 'data-id': h },
-                                                        _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true', 'data-modal': 'delete-heat-modal', onClick: function onClick(elem) {
-                                                                return _this4.deleteRecord(h, elem);
-                                                            } })
-                                                    ),
-                                                    _react2.default.createElement(
-                                                        'span',
-                                                        { className: 'menu-bar-option drag-handler' },
-                                                        _react2.default.createElement('i', { className: 'fa fa-bars', 'aria-hidden': 'true' })
-                                                    )
-                                                )
-                                            );
-                                        })
-                                    )
-                                )
-                            )
-                        )
-                    );
+                    var priceFullList = coolingLoadForm;
                     var requiredMsg = "";
 
                     var that = this;
