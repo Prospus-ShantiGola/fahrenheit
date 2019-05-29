@@ -63526,7 +63526,8 @@ var Tiles = function (_React$Component) {
             }
             this.setState({
                 totalHours: total,
-                outdoortempvalue: value
+                outdoortempvalue: value,
+                generalDataChanged: true
             });
         }
     }, {

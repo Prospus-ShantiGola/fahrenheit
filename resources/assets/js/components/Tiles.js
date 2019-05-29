@@ -241,7 +241,8 @@ class Tiles extends React.Component {
         }
         this.setState({
             totalHours: total,
-            outdoortempvalue: value
+            outdoortempvalue: value,
+            generalDataChanged: true,
         })
     }
     getVal(arr, prop) {
