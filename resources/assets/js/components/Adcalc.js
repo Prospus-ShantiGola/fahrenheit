@@ -216,12 +216,15 @@ class Adcalc extends Component {
             body: JSON.stringify(bodyFormData)
     })
     .then((a) => {return a.json();})
+
     .then(function (data) {
+        
     })
     .catch((err) => {console.log(err)})
     }
 
     componentDidMount(){ 
+
     }
     
 
