@@ -63434,12 +63434,13 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'setTempState',
         value: function setTempState(value) {
-            this.setState({ outdoortempvalue: value });
+
             var result = {
                 min: value,
                 max: this.state.outdoortemp.max
             };
             this.props.onGeneralDatachange(result);
+            this.setTemp(this.state.cityData, 'hours', value);
             this.validateCoolingLoad();
         }
     }, {
@@ -63508,14 +63509,15 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'setTemp',
         value: function setTemp(arr, prop, value) {
+            // this.setState({ outdoortempvalue: value })
             var total = 0;
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i]['temprature'] > value) total = total + arr[i][prop];
             }
             this.setState({
                 totalHours: total,
-                generalDataChange: true,
-                location: value
+                outdoortempvalue: value,
+                generalDataChange: true
             });
         }
     }, {
@@ -64767,8 +64769,8 @@ var Tiles = function (_React$Component) {
                     )
                 );
                 if (this.state.generalDataChange) {
-                    projectData['generalData'] = this.state.generalData;
-                    store.dispatch(addGeneralData(this.state.generalData));
+                    // projectData['generalData'] = this.state.generalData;
+                    // store.dispatch(addGeneralData(this.state.generalData))
                     var pricelist = _react2.default.createElement(
                         'ul',
                         { className: 'price-listt plnewblock scrollbar-macosx' },

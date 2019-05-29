@@ -167,13 +167,16 @@ class Tiles extends React.Component {
         }
     }
     setTempState(value) {
-        this.setState({ outdoortempvalue: value })
+        
+       
         var result = {
             min: value,
             max: this.state.outdoortemp.max
         }
         this.props.onGeneralDatachange(result)
+        this.setTemp(this.state.cityData,'hours',value)
         this.validateCoolingLoad()
+        
     }
     setHeatState(value) {
         this.setState({ drivetemp: value })
@@ -228,6 +231,7 @@ class Tiles extends React.Component {
         // console.log("component unmount")
     }
     setTemp(arr, prop, value) {
+       // this.setState({ outdoortempvalue: value })
         var total = 0
         for (var i = 0; i < arr.length; i++) {
             if (arr[i]['temprature'] > value)
@@ -235,8 +239,8 @@ class Tiles extends React.Component {
         }
         this.setState({
             totalHours: total,
-            generalDataChange: true,
-            location: value
+            outdoortempvalue: value,
+            generalDataChange:true
         })
     }
     getVal(arr, prop) {
@@ -1063,8 +1067,8 @@ class Tiles extends React.Component {
                 </form>
             )
             if (this.state.generalDataChange) {
-                projectData['generalData'] = this.state.generalData;
-                store.dispatch(addGeneralData(this.state.generalData))
+               // projectData['generalData'] = this.state.generalData;
+               // store.dispatch(addGeneralData(this.state.generalData))
                 var pricelist = (
                     <ul className="price-listt plnewblock scrollbar-macosx">
                         <div className="clrs"></div>
