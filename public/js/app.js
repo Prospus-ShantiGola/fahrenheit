@@ -61165,13 +61165,14 @@ var Adcalc = function (_Component) {
             },
             fahrenheitSystemStateChange: {
                 stateChange: false,
-                fahrenheitSystemRecord: []
+                fahrenheitSystemRecord: [],
+                tileData: {}
             },
             logged_in_role: LOGGED_IN_ROLE,
             outdoortemp: '',
-            drivetemp: '',
+            drivetemp: 50,
             coolingType: 'Office Space',
-            chilledwatertemp: '',
+            chilledwatertemp: 12,
             coolingLoad: ''
         };
         _this.handleChillerForm = _this.handleChillerForm.bind(_this);
@@ -61212,7 +61213,8 @@ var Adcalc = function (_Component) {
         key: 'handleHeatForm',
         value: function handleHeatForm(result) {
             if (result.heatSource.heatsourceformMode == "add") {
-                this.setState({ heatSourceStateChange: {
+                this.setState({
+                    heatSourceStateChange: {
                         stateChange: result.state,
                         heatSourceRecord: this.state.heatSourceStateChange.heatSourceRecord.concat(result.heatSource)
                     }
@@ -61227,7 +61229,8 @@ var Adcalc = function (_Component) {
         key: 'handleHeatProfileForm',
         value: function handleHeatProfileForm(result) {
             if (result.HeatingProfile.heatingprofileformMode == "add") {
-                this.setState({ heatingProfileStateChange: {
+                this.setState({
+                    heatingProfileStateChange: {
                         stateChange: result.state,
                         heatingProfileRecord: this.state.heatingProfileStateChange.heatingProfileRecord.concat(result.HeatingProfile)
                     }
@@ -61242,7 +61245,8 @@ var Adcalc = function (_Component) {
         key: 'handleCoolingProfileForm',
         value: function handleCoolingProfileForm(result) {
             if (result.CoolingProfile.coolingprofileformMode == "add") {
-                this.setState({ coolingProfileStateChange: {
+                this.setState({
+                    coolingProfileStateChange: {
                         stateChange: result.state,
                         coolingProfileRecord: this.state.coolingProfileStateChange.coolingProfileRecord.concat(result.CoolingProfile)
                     }
@@ -61297,7 +61301,10 @@ var Adcalc = function (_Component) {
         key: 'onGeneralDataChangeVal',
         value: function onGeneralDataChangeVal(result) {
             this.setState({
-                outdoortemp: result
+                outdoortemp: {
+                    min: result.min,
+                    max: result.max
+                }
             });
             this.calculateFunction();
         }
@@ -61322,30 +61329,41 @@ var Adcalc = function (_Component) {
     }, {
         key: 'calculateFunction',
         value: function calculateFunction() {
-            //  var port = 3000;
+            //   var port = 3000;
             var that = this;
             var bodyFormData = {
                 coolingType: this.state.coolingType,
                 chilledwatertemp: this.state.chilledwatertemp,
                 coolingLoad: this.state.coolingLoad,
                 drivetemp: this.state.drivetemp,
-                outdoortemp: this.state.outdoortemp
-                //axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
-                // axios.get('/public/location_data/munich.json')
-
-            };fetch('/calculate-data', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(bodyFormData)
-            }).then(function (a) {
-                return a.json();
-            }).then(function (data) {}).catch(function (err) {
-                console.log(err);
-            });
+                outdoortemp: this.state.outdoortemp.min,
+                maxoutdoortemp: this.state.outdoortemp.max
+            };
+            axios.defaults.baseURL = location.protocol + '//' + location.hostname;
+            // axios.get(url)
+            if (this.state.coolingLoad != "") {
+                fetch('calculate-data', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bodyFormData)
+                }).then(function (a) {
+                    return a.json();
+                }).then(function (data) {
+                    console.log(data);
+                    that.setState({
+                        fahrenheitSystemStateChange: {
+                            stateChange: true,
+                            tileData: data
+                        }
+                    });
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            }
         }
     }, {
         key: 'componentDidMount',
@@ -61475,8 +61493,8 @@ var Adcalc = function (_Component) {
                     tileCls: 'cooling-load-profiles data-box',
                     required: "yes",
                     edit: 'yes',
-                    // editCls:'add-icon myBtn_multi',
-                    // editIcon:'public/images/add-icon.png',
+                    // editCls: 'add-icon myBtn_multi',
+                    // editIcon: 'public/images/add-icon.png',
                     add: 'no',
                     hoverText: this.props.t('Tiles.CoolingLoadProfile.hoverText'),
                     mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
@@ -61490,11 +61508,11 @@ var Adcalc = function (_Component) {
                 FahrenheitSystem: {
                     title: FAHRENHEIT_SYSTEM,
                     header: this.props.t('Tiles.FahrenheitSystem.Title'),
-                    tileCls: 'fahrenheit-system-box data-box disabled',
+                    tileCls: 'fahrenheit-system-box data-box',
                     required: "yes",
                     edit: 'yes',
-                    editCls: 'add-icon myBtn_multi',
-                    editIcon: 'public/images/add-icon.png',
+                    // editCls: 'add-icon myBtn_multi',
+                    // editIcon: 'public/images/add-icon.png',
                     add: 'no',
                     hoverText: this.props.t('Tiles.FahrenheitSystem.hoverText'),
                     mainClass: 'col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4',
@@ -61582,7 +61600,7 @@ var Adcalc = function (_Component) {
                         required: tiles.FahrenheitSystem.required,
                         edit: tiles.FahrenheitSystem.edit,
                         mainclass: tiles.FahrenheitSystem.mainClass,
-                        tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.FahrenheitSystem.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.fahrenheitSystemStateChange.stateChange), _defineProperty(_React$createElement8, 'dataRecord', this.state.fahrenheitSystemStateChange.fahrenheitSystemRecord), _defineProperty(_React$createElement8, 'multiple', tiles.CoolingLoadProfile.multiple), _defineProperty(_React$createElement8, 'store', store), _React$createElement8))
+                        tileCls: tiles.FahrenheitSystem.tileCls }, _defineProperty(_React$createElement8, 'required', tiles.FahrenheitSystem.required), _defineProperty(_React$createElement8, 'edit', tiles.FahrenheitSystem.edit), _defineProperty(_React$createElement8, 'editCls', tiles.FahrenheitSystem.editCls), _defineProperty(_React$createElement8, 'editIcon', tiles.FahrenheitSystem.editIcon), _defineProperty(_React$createElement8, 'add', tiles.FahrenheitSystem.add), _defineProperty(_React$createElement8, 'hoverText', tiles.FahrenheitSystem.hoverText), _defineProperty(_React$createElement8, 'hoverCls', tiles.FahrenheitSystem.hoverCls), _defineProperty(_React$createElement8, 'priceLst', tiles.FahrenheitSystem.priceLst), _defineProperty(_React$createElement8, 'priceData', tiles.FahrenheitSystem.priceData), _defineProperty(_React$createElement8, 'rightpriceList', tiles.FahrenheitSystem.rightpriceList), _defineProperty(_React$createElement8, 'rightpriceListeData', tiles.FahrenheitSystem.rightpriceListeData), _defineProperty(_React$createElement8, 'modalId', tiles.FahrenheitSystem.modalId), _defineProperty(_React$createElement8, 'dataChange', this.state.fahrenheitSystemStateChange.stateChange), _defineProperty(_React$createElement8, 'dataRecord', this.state.fahrenheitSystemStateChange.tileData), _defineProperty(_React$createElement8, 'multiple', tiles.CoolingLoadProfile.multiple), _defineProperty(_React$createElement8, 'store', store), _React$createElement8))
                 ),
                 _react2.default.createElement(_ChillerModal2.default, { role: this.props.role, onChillerSubmit: this.handleChillerForm, store: store }),
                 _react2.default.createElement(_GeneralModal2.default, { role: this.props.role, onGeneralSubmit: this.handleGeneralForm }),
@@ -63232,6 +63250,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var WAIT_INTERVAL = 1000;
 var hideEle = {
     visibility: "hidden"
 };
@@ -63248,6 +63267,7 @@ var Tiles = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Tiles.__proto__ || Object.getPrototypeOf(Tiles)).call(this, props));
 
         _this.state = {
+            errorMsg: "",
             totalHours: 0,
             cityData: [],
             outdoortemp: {
@@ -63259,7 +63279,7 @@ var Tiles = function (_React$Component) {
             drivetemp: 55,
             chilledwatertemp: 12,
             coolingType: "Office Space",
-            coolingLoad: 50,
+            coolingLoad: '',
             compressionChillerData: [],
             compressionDataChange: false,
             generalData: {
@@ -63279,6 +63299,7 @@ var Tiles = function (_React$Component) {
             fahrenheitData: [],
             fahrenheitDataChange: _this.props.datachanged
         };
+        _this.timer = null;
         _this.editRecord = _this.editRecord.bind(_this);
         _this.editHeatRecord = _this.editHeatRecord.bind(_this);
         _this.deleteRecord = _this.deleteRecord.bind(_this);
@@ -63287,6 +63308,7 @@ var Tiles = function (_React$Component) {
         _this.handleChillerDeleteEntry = _this.handleChillerDeleteEntry.bind(_this);
         _this.handleHeatSourceDeleteEntry = _this.handleHeatSourceDeleteEntry.bind(_this);
         _this.arrayMove = _this.arrayMove.bind(_this);
+        _this.setCoolingTileValues = _this.setCoolingTileValues.bind(_this);
         return _this;
     }
 
@@ -63389,28 +63411,56 @@ var Tiles = function (_React$Component) {
             });
         }
     }, {
+        key: 'validateCoolingLoad',
+        value: function validateCoolingLoad() {
+            if (this.state.coolingLoad == "") {
+                this.setState({
+                    errorMsg: "Please enter Max. Cooling Load"
+                });
+                return false;
+            } else {
+                this.setState({
+                    errorMsg: ""
+                });
+            }
+        }
+    }, {
         key: 'setTempState',
         value: function setTempState(value) {
             this.setState({ outdoortempvalue: value });
-            this.props.onGeneralDatachange(value);
+            var result = {
+                min: value,
+                max: this.state.outdoortemp.max
+            };
+            this.props.onGeneralDatachange(result);
+            this.validateCoolingLoad();
         }
     }, {
         key: 'setHeatState',
         value: function setHeatState(value) {
             this.setState({ drivetemp: value });
             this.props.onHeatSourcechange(value);
+            this.validateCoolingLoad();
         }
     }, {
         key: 'setCoolingState',
         value: function setCoolingState(value) {
             CHANGE_FORM = true;
             this.setState({ chilledwatertemp: value });
+            this.setCoolingTileValues();
+        }
+    }, {
+        key: 'setCoolingTileValues',
+        value: function setCoolingTileValues() {
+
+            this.validateCoolingLoad();
             var result = {
                 coolingLoad: this.state.coolingLoad,
                 coolingType: this.state.coolingType,
                 chilledwatertemp: this.state.chilledwatertemp
             };
             this.props.coolingloadDatachange(result);
+            clearTimeout(this.timer);
         }
     }, {
         key: 'selectTemp',
@@ -63474,7 +63524,6 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'getCoolingLoadProfile',
         value: function getCoolingLoadProfile() {
-            //  alert('thus')
             var bodyFormData = new FormData();
             bodyFormData.set({
                 coolingType: this.state.coolingType,
@@ -63493,6 +63542,22 @@ var Tiles = function (_React$Component) {
                 //handle error
                 console.log(response);
             });
+        }
+    }, {
+        key: 'updateState',
+        value: function updateState(elem) {
+            // coolingType
+            // coolingLoad
+            if (elem.target.attributes[1].value == 'cooling_profile_type') {
+                this.setState({
+                    coolingType: elem.target.value
+                });
+            } else {
+                this.setState({
+                    coolingLoad: elem.target.value
+                });
+            }
+            this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL);
         }
     }, {
         key: 'componentDidMount',
@@ -63521,6 +63586,7 @@ var Tiles = function (_React$Component) {
                         outdoortempvalue: maxVal.min,
                         cityData: response.data });
                     that.setTemp(response.data, 'hours', maxVal.min);
+                    that.props.onGeneralDatachange(_this2.state.outdoortemp);
                 }).catch(function (error) {
                     response.json(error);
                 });
@@ -64320,8 +64386,8 @@ var Tiles = function (_React$Component) {
                                 { className: 'input-fields', style: tdBorder },
                                 _react2.default.createElement(
                                     'select',
-                                    { className: 'required-field', onChange: function onChange(value) {
-                                            return _this3.getCoolingLoadProfile();
+                                    { className: 'required-field', 'data-method': 'cooling_profile_type', onChange: function onChange(elem) {
+                                            return _this3.updateState(elem);
                                         }, name: 'cooling_profile_type', id: 'cooling_profile_type' },
                                     _react2.default.createElement(
                                         'option',
@@ -64354,8 +64420,8 @@ var Tiles = function (_React$Component) {
                                     _react2.default.createElement(
                                         'li',
                                         { className: 'withunit' },
-                                        _react2.default.createElement('input', { type: 'text', required: true, placeholder: '50.0', pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', id: 'cooling_max_cooling_load', onKeyUp: function onKeyUp(elem) {
-                                                return _this3.setState({ coolingLoad: elem.target.value });
+                                        _react2.default.createElement('input', { type: 'text', 'data-method': 'cooling_max_cooling_load', required: true, placeholder: '50.0', pattern: '\\d*', className: 'required-field onlynumeric', name: 'cooling_max_cooling_load', value: this.state.coolingLoad, id: 'cooling_max_cooling_load', onChange: function onChange(elem) {
+                                                return _this3.updateState(elem);
                                             } }),
                                         _react2.default.createElement(
                                             'span',
@@ -64363,6 +64429,11 @@ var Tiles = function (_React$Component) {
                                             'kW'
                                         )
                                     )
+                                ),
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: 'errorMessages' },
+                                    this.state.errorMsg
                                 )
                             )
                         ),
@@ -65351,7 +65422,7 @@ var Tiles = function (_React$Component) {
             if (this.props.title == FAHRENHEIT_SYSTEM) {
 
                 if (this.state.fahrenheitDataChange) {
-                    projectData['fahrenheit'] = this.state.fahrenheitData;
+                    projectData = this.props.dataRecord;
                     var pricelist = _react2.default.createElement(
                         'ul',
                         { className: 'price-listt' },
@@ -65361,12 +65432,12 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Recommended System'
+                                'Tn_MtIn:'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                'eCoo 20'
+                                projectData.Tn_MtIn
                             )
                         ),
                         _react2.default.createElement(
@@ -65375,12 +65446,12 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Cooling demand coverage'
+                                'Tmt_out'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '83%'
+                                projectData.recooling_temp_outlet
                             )
                         ),
                         _react2.default.createElement(
@@ -65389,12 +65460,12 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Adsorption electricity costs'
+                                'Qth_Lt'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '8,252 \u20AC/a'
+                                projectData.cooling_capacity
                             )
                         ),
                         _react2.default.createElement(
@@ -65403,12 +65474,30 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Payback period'
+                                'COP'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '2.8 a'
+                                projectData.COPth
+                            )
+                        )
+                    );
+                    var priceFullList = _react2.default.createElement(
+                        'ul',
+                        { className: 'price-listt' },
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Tn_MtLn:'
+                            ),
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                ' 32.14c'
                             )
                         ),
                         _react2.default.createElement(
@@ -65417,445 +65506,41 @@ var Tiles = function (_React$Component) {
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Payback after 10 a'
+                                'Tmt_out'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '16,536 \u20AC'
+                                '34.67C'
                             )
                         ),
                         _react2.default.createElement(
                             'li',
-                            { style: hideEle },
+                            null,
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Payback period'
+                                'Qth_Lt'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '2.8 a'
+                                '15.00 KW'
                             )
                         ),
                         _react2.default.createElement(
                             'li',
-                            { style: hideEle },
+                            { className: 'paybkprd' },
                             _react2.default.createElement(
                                 'p',
                                 null,
-                                'Payback period'
+                                'COP'
                             ),
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '2.8 a'
+                                '0.288'
                             )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { style: hideEle },
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'Payback period'
-                            ),
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                '2.8 a'
-                            )
-                        )
-                    );
-                    var priceFullList = _react2.default.createElement(
-                        'div',
-                        { className: 'hover-list' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'recommendedsystem' },
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                'Recommended system'
-                            ),
-                            _react2.default.createElement(
-                                'table',
-                                { className: 'table' },
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: 'checked', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 20'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.80 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '16,536 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option new-system' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png',
-                                                alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'other-suggested-system' },
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                'Other suggested systems'
-                            ),
-                            _react2.default.createElement(
-                                'table',
-                                { className: 'table' },
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 10 ST* '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.40 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '10,153 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 10X*'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.30 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '11,335 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 20*'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.23 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '12,583 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 20 ST*'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.76 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '15,985 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'manual-sysytemm' },
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                'Manual System'
-                            ),
-                            _react2.default.createElement(
-                                'table',
-                                { className: 'table' },
-                                _react2.default.createElement(
-                                    'tr',
-                                    null,
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 10 ST* '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.40 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '10,153 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'tr',
-                                    { className: 'clone-system' },
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'radio-input-select' },
-                                        _react2.default.createElement(
-                                            'label',
-                                            { className: 'radio-container' },
-                                            _react2.default.createElement('input', { type: 'radio', checked: '', name: 'radio' }),
-                                            _react2.default.createElement('span', { className: 'checkmark' })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        'eCoo 10 ST* '
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '2.40 a'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        '10,153 \u20AC'
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        { className: 'edit-optionss' },
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'copy-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/option1.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-pdf-option' },
-                                            _react2.default.createElement('img', { src: 'public/images/eye-option.png', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            { className: 'open-calculator-option dropdown-calci' },
-                                            _react2.default.createElement('img', { src: 'public/images/option3.png', alt: '' })
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'h6',
-                            { className: 'note-textt' },
-                            '* Values are estimated. For a detailed calculation, click on the calculator.'
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'caculator-divv' },
-                            _react2.default.createElement('div', { className: 'calci-div' })
                         )
                     );
                     var requiredMsg = "";

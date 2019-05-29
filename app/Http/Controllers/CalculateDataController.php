@@ -1,5 +1,5 @@
 <?php
-// $Id: calculateDataController.php
+// $Id: CalculateDataController.php
 
 /**
  * @file:
@@ -45,34 +45,73 @@ class CalculateDataController extends Controller
      */
     public function calculateData(Request $request)
     {
-      //  dd($request);
-        $ht_in = $request->drive_temperature;
-        $lt_in = $request->cold_water;
-        $mt_in = $request->outdoor_temperature;
-
-        $mod_types_id = $request->adsorption_chiller;
-        $chiller_type = trim($request->chiller_type);
-        $qth_nomst = trim($request->qth_nomst);
-        $dt_nomst = trim($request->dt_nomst);
-        $qth_nomrk = trim($request->qth_nomrk);
-        $dt_nomrk = trim($request->dt_nomrk);
+        // echo "<pre>"; print_r($request);
+        // die;
+// dd($request);
 
 
-        $calculation_type = $request->calculation_type; 
-        $n_AsHt_input =  $request->dtu_up;
-        $n_AsLt_input =  $request->cwt_output_up; 
 
-        $tn_airln = $request->tn_airln;
+        if(  $request->coolingType=='')
+        {
+            $ht_in = $request->drive_temperature;
+            $lt_in = $request->cold_water;
+            $mt_in = $request->outdoor_temperature;
 
-        // for now required cooling capacity will be 15
-        $max_cooling_load =  15; 
+            $mod_types_id = $request->adsorption_chiller;
+            $chiller_type = trim($request->chiller_type);
+            $qth_nomst = trim($request->qth_nomst);
+            $dt_nomst = trim($request->dt_nomst);
+            $qth_nomrk = trim($request->qth_nomrk);
+            $dt_nomrk = trim($request->dt_nomrk);
+
+
+            $calculation_type = $request->calculation_type; 
+            $n_AsHt_input =  $request->dtu_up;
+            $n_AsLt_input =  $request->cwt_output_up; 
+
+            $tn_airln = $request->tn_airln;
+
+            // for now required cooling capacity will be 15
+            $max_cooling_load =  15; 
+            $profile_type =  ''; 
+            $highest_temp_outdoor =  ''; 
+        }
+        else
+        {
+
+            $ht_in = $request->drivetemp;
+            $lt_in = $request->chilledwatertemp;
+            $mt_in = $request->outdoortemp;
+
+         //   $mod_types_id = $request->adsorption_chiller;
+          //  $chiller_type = trim($request->chiller_type);
+            //$qth_nomst = trim($request->qth_nomst);
+           // $dt_nomst = trim($request->dt_nomst);
+           // $qth_nomrk = trim($request->qth_nomrk);
+          // $dt_nomrk = trim($request->dt_nomrk);
+
+
+            $calculation_type = 'calculation'; 
+         //   $n_AsHt_input =  $request->dtu_up;
+           // $n_AsLt_input =  $request->cwt_output_up; 
+
+            $tn_airln = '1';
+
+            // for now required cooling capacity will be 15
+            $max_cooling_load =  $request->coolingLoad; 
+            $profile_type =  $request->coolingType; 
+             $highest_temp_outdoor =  $request->maxoutdoortemp; 
+
+        }
+        
 
       
         // when we have Tn_Airln value instead of Tn_Mtln and when we have calculate one chiller at a time
         if($tn_airln) {
 
          //   $chillerarray = array($chiller_type => $mod_types_id);
-             $chillerarray = array('eCoo30X' => '2');
+          
+        $chillerarray = array('eCoo10' => '1', 'eCoo20' => '1', 'eCoo30' => '1', 'eCoo10X' => '2', 'eCoo20X' => '2', 'eCoo30X' => '2', 'eCoo40X' => '2');
 
 
 
@@ -137,7 +176,7 @@ class CalculateDataController extends Controller
 
                 if($tn_airln){
 
-                   $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load);
+                   $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load,$profile_type,$highest_temp_outdoor);
                 }
                  
 
@@ -177,7 +216,7 @@ class CalculateDataController extends Controller
 
                     if($tn_airln){
                     
-                        $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load);
+                        $output = $this->calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load,$profile_type,$highest_temp_outdoor);
                     }
 
                     $cal_out[$i]['product_name'] = $key;
@@ -203,7 +242,12 @@ class CalculateDataController extends Controller
         if (empty($cal_out)) {
             $cal_out[0]['no_record'] = 'false';
         }
-    //    echo "<pre>";print_r($cal_out);
+       //     $cal_out = array();
+       //  $cal_out['Tn_min']="32.18C";
+       //  $cal_out['Tmt_out']="34.18C";
+       //  $cal_out['Qth_Lt']="15C";
+       //  $cal_out['COP']="0.288";
+       // return response()->json($cal_out);
 
         return response()->json($cal_out);
 
@@ -212,13 +256,13 @@ class CalculateDataController extends Controller
     /**
      * Function to calculate required cooling capacity on given outdoor temperature provided
      */
-    function calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load)
+    function calculateRequiredCoolingCapacity($tn_airln,$dt_nomst,$qth_nomst,$dt_nomrk,$qth_nomrk,$output,$adka_input,$max_cooling_load,$profile_type,$highest_temp_outdoor)
     {
         if($tn_airln)
         {
         
-            $max_cooling_capacity = 15;
-             $max_cooling_capacity =  $this->getCoolingLoad($profile_type, $highest_temp, $max_cooling_load,$constant_value,$Tn_AirIn);
+              $max_cooling_capacity = 15;
+             // $max_cooling_capacity =  $this->getCoolingLoad($profile_type, $highest_temp_outdoor, $max_cooling_load,$constant_value,$Tn_AirIn);
         
         
             $extra = 1;
