@@ -19,6 +19,7 @@ class Tiles extends React.Component {
             errorMsg: "",
             totalHours: 0,
             cityData: [],
+            selectedCounty:'',
             outdoortemp: {
                 max: 0,
                 min: 0,
@@ -34,7 +35,7 @@ class Tiles extends React.Component {
             generalData: {
                 location: 'munich'
             },
-            generalDataChange: false,
+            generalDataChanged: false,
             optionData: [],
             optionDataChange: false,
             economicData: [],
@@ -217,9 +218,10 @@ class Tiles extends React.Component {
                         min: maxVal.min
                     },
                     cityData: response.data,
-                    generalData: { location: locationName }
+                    generalData: { location: locationName },
+                    generalDataChanged: true,
+                    selectedCounty:locationName
                 })
-
                 that.props.onGeneralDatachange(this.state.outdoortemp)
             })
             .catch((error) => { response.json(error) })
@@ -239,8 +241,7 @@ class Tiles extends React.Component {
         }
         this.setState({
             totalHours: total,
-            outdoortempvalue: value,
-            generalDataChange:true
+            outdoortempvalue: value
         })
     }
     getVal(arr, prop) {
@@ -323,7 +324,7 @@ class Tiles extends React.Component {
                         cityData: response.data
                     })
                     that.setTemp(response.data, 'hours', maxVal.min)
-                    that.props.onGeneralDatachange(this.state.outdoortemp)
+                    //that.props.onGeneralDatachange(this.state.outdoortemp)
                 })
                 .catch((error) => { response.json(error) })
             // this.setTemp(this.state.cityData,'hours',value)
@@ -1039,7 +1040,7 @@ class Tiles extends React.Component {
                             <td className="input-label" style={tdBorder}>{this.props.t('General.Tab.Personal.PersonalAddress.Title')}:</td>
 
                             <td className="input-fields" style={tdBorder} onChange={value => this.selectTemp(value)} >
-                                <select>
+                                <select value={this.state.selectedCounty}>
                                     <option value="munich">munich</option>
                                     <option value="accra">accra</option>
                                     <option value="dubai">dubai</option>
@@ -1060,13 +1061,13 @@ class Tiles extends React.Component {
                                 maxValue={this.state.outdoortemp.max}
                                 minValue={this.state.outdoortemp.min}
                                 value={this.state.outdoortempvalue}
-                                onChange={value => this.setTempState(value)} /></td>
+                                onChange={value => this.setTempState(value)} /></td> 
                         </tr>
                         <tr><td className="input-label" style={tdBorder} colSpan="2">On {this.state.totalHours} hours per year, it's warmer than {this.state.outdoortempvalue}°C.</td></tr>
                     </table>
                 </form>
             )
-            if (this.state.generalDataChange) {
+            if (this.state.generalDataChanged) {
                // projectData['generalData'] = this.state.generalData;
                // store.dispatch(addGeneralData(this.state.generalData))
                 var pricelist = (

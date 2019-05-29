@@ -148,7 +148,7 @@ class AppContent extends Component {
       <div className="modal-body-content">
        <p>Make sure you fill in all required fields in the following tiles:</p>
        <ul>
-       {generalError}
+       <li>Cooling load profile : Max. cooling load</li>
 
        </ul>
       </div>

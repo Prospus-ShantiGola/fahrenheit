@@ -235,6 +235,11 @@ class Adcalc extends Component {
             })
             .catch((err) => { console.log(err) })
         }
+        else{
+            if(!$('#message-popup-modal').hasClass('in')){
+            $("#message-popup-modal").modal('show');
+            }
+        }
     }
 
     componentDidMount() {

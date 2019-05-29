@@ -219,9 +219,7 @@
       <div class="modal-body-content">
        <p>Make sure you fill in all required fields in the following tiles:</p>
        <ul>
-       <li>General Information</li>
-        <li> Economic Data</li>
-         <li> Cooling load profile</li>
+         <li>Cooling load profile : Max. cooling load</li>
        </ul>
       </div>
 
