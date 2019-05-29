@@ -63558,17 +63558,18 @@ var Tiles = function (_React$Component) {
     }, {
         key: 'updateState',
         value: function updateState(elem) {
-
-            if (elem.target.attributes[1].value == 'cooling_profile_type') {
-                this.setState({
-                    coolingType: elem.target.value
-                });
-            } else {
-                this.setState({
-                    coolingLoad: elem.target.value
-                });
+            if (/^\d+$/.test(elem.target.value)) {
+                if (elem.target.attributes[1].value == 'cooling_profile_type') {
+                    this.setState({
+                        coolingType: elem.target.value
+                    });
+                } else {
+                    this.setState({
+                        coolingLoad: elem.target.value
+                    });
+                }
+                this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL);
             }
-            this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL);
         }
     }, {
         key: 'componentDidMount',

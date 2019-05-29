@@ -277,18 +277,20 @@ class Tiles extends React.Component {
             });
     }
     updateState(elem) {
-        
-        if (elem.target.attributes[1].value == 'cooling_profile_type') {
-            this.setState({
-                coolingType: elem.target.value
-            })
-        }
-        else {
-            this.setState({
-                coolingLoad: elem.target.value
-            })
-        }
-        this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL)
+        if (/^\d+$/.test(elem.target.value)) {
+            if (elem.target.attributes[1].value == 'cooling_profile_type') {
+                this.setState({
+                    coolingType: elem.target.value
+                })
+            }
+            else {
+                this.setState({
+                    coolingLoad: elem.target.value
+                })
+            }
+            this.timer = setTimeout(this.setCoolingTileValues, WAIT_INTERVAL)
+          }
+       
     }
     componentDidMount() {
 
