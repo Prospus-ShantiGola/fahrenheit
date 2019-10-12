@@ -41,7 +41,7 @@
 
 
   <div class="modal fade"  id="contact-form-modal" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="margin-top: 225px!important;">
     <div class="modal-content">
 
       <!-- Modal Header -->
@@ -67,10 +67,10 @@
                                  <meta name="csrf-token" content="{{ csrf_token() }}"/>
                                     <tbody>
                                       <tr>
-                                       <td class="input-label"> {{ __('home.Contact_name')}}:</td>
+                                       <td class="input-label labclr"> {{ __('home.Contact_name')}}:</td>
 
 
-                                       <td class="input-fields "><input type="text" name = "full_name"  id = "full_name" placeholder="{{ __('home.Contact_name_placeholder')}}"  minlength="1" maxlength="25" required ="true"  class="required-field full_name" ></input>
+                                       <td class="input-fields"><input type="text" name = "full_name"  id = "full_name" placeholder="{{ __('home.Contact_name_placeholder')}}"  minlength="1" maxlength="25" required ="true"  class="required-field full_name rdbord" ></input>
 
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
@@ -78,23 +78,23 @@
                                        </td>
                                     </tr>
                                     <tr>
-                                       <td class="input-label"> {{ __('home.Contact_company')}}:   </td>
+                                       <td class="input-label labclr"> {{ __('home.Contact_company')}}:   </td>
 
-                                       <td class="input-fields"><input type="text" name= "company_type" placeholder="{{ __('home.Contact_company_placeholder')}}" minlength="1" maxlength="25"  class="company_type" ></input></td>
+                                       <td class="input-fields"><input type="text" name= "company_type" placeholder="{{ __('home.Contact_company_placeholder')}}" minlength="1" maxlength="25"  class="company_type blbord" ></input></td>
                                     </tr>
                                     <tr>
-                                       <td class="input-label"> {{ __('home.Contact_tel_number')}}:</td>
+                                       <td class="input-label labclr"> {{ __('home.Contact_tel_number')}}:</td>
 
-                                       <td class="input-fields"><input type="text" pattern="^\d{10}$"    name= "contact_number" id = "contact_number" placeholder="{{ __('home.Contact_tel_placeholder')}}" required ="true"    class="required-field contact_number"></input>
+                                       <td class="input-fields"><input type="text" pattern="^\d{10}$"    name= "contact_number" id = "contact_number" placeholder="{{ __('home.Contact_tel_placeholder')}}" required ="true"    class="required-field contact_number rdbord"></input>
                                          <span class="invalid-feedback  " role="alert">
                                             <strong></strong>
                                         </span>
                                        </td>
                                     </tr>
                                     <tr>
-                                       <td class="input-label">{{ __('home.Contact_email')}}:</td>
+                                       <td class="input-label labclr">{{ __('home.Contact_email')}}:</td>
 
-                                       <td class="input-fields"><input type="email" name= "emailaddress" id = "emailaddress" placeholder="{{ __('home.Contact_email_placeholder')}}" required ="true" minlength="1" maxlength="50"   class="required-field email_address"></input>
+                                       <td class="input-fields"><input type="email" name= "emailaddress" id = "emailaddress" placeholder="{{ __('home.Contact_email_placeholder')}}" required ="true" minlength="1" maxlength="50"   class="required-field email_address rdbord"></input>
                                          <span class="invalid-feedback " role="alert">
                                             <strong>dfsdf</strong>
                                         </span>
@@ -106,7 +106,7 @@
                                     </tr>
 
                                     <tr>
-                                       <td class="input-label text-area-label">{{ __('home.Contact_message')}}:</td>
+                                       <td class="input-label text-area-label labclr">{{ __('home.Contact_message')}}:</td>
 
                                        <td class="input-fields textarea-place"><textarea name= "message" class = "message"></textarea></td>
                                     </tr>

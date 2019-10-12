@@ -85,7 +85,18 @@
                     "Title":"Email",
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Email explanation/tip"
-                }
+                },
+                "ProjectTemp": {
+                    "Title":"Outdoor temperature",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Email explanation/tip"
+                },
+                "On":{
+                    "Title":"On"
+                },
+                "HourPerYear":{
+                    "Title":"hours per year, it's warmer than"
+                }  
             },
             "Personal": {
                 "Title": "Personal Data",
@@ -479,6 +490,11 @@
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Customer explanation/tip"
                 },
+                "ChilledWaterTemperature": {
+                    "Title":"Chilled water temperature",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
                 "BaseLoad": {
                     "Title":"Base load",
                     "Placeholder":"inhaber@gmbh.de",
@@ -627,6 +643,22 @@
         },
         "UnusedHeat":{
             "Title":"Unused Heat"
+        },
+        "Freecooling":{
+            "Title":"Free cooling"
+        },
+        "ReCoolingType":{
+            "Title":"Re-cooling Type"
+        },
+        "Yes":{
+            "Title":"YES"
+        },
+        "ChilledWaterTemperature":{
+            "Title":"chilled water temperature"
+        },
+        "Dry":{
+          
+            "Title":"DRY"
         }
 
 

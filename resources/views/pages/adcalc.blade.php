@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('public/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/frontstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/VPyEor.css') }}">
 
    <link rel="stylesheet" href="{{ asset('public/css/jquery.bootstrap.year.calendar.css') }}">
    <script>

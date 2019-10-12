@@ -1,0 +1,282 @@
+[
+  {
+    "temprature": 45.5,
+    "hours": 1
+  },
+  {
+    "temprature": 45,
+    "hours": 2
+  },
+  {
+    "temprature": 44.5,
+    "hours": 1
+  },
+  {
+    "temprature": 44,
+    "hours": 6
+  },
+  {
+    "temprature": 43.5,
+    "hours": 4
+  },
+  {
+    "temprature": 43,
+    "hours": 9
+  },
+  {
+    "temprature": 42.5,
+    "hours": 18
+  },
+  {
+    "temprature": 42,
+    "hours": 25
+  },
+  {
+    "temprature": 41.5,
+    "hours": 28
+  },
+  {
+    "temprature": 41,
+    "hours": 51
+  },
+  {
+    "temprature": 40.5,
+    "hours": 67
+  },
+  {
+    "temprature": 40,
+    "hours": 72
+  },
+  {
+    "temprature": 39.5,
+    "hours": 85
+  },
+  {
+    "temprature": 39,
+    "hours": 78
+  },
+  {
+    "temprature": 38.5,
+    "hours": 110
+  },
+  {
+    "temprature": 38,
+    "hours": 100
+  },
+  {
+    "temprature": 37.5,
+    "hours": 150
+  },
+  {
+    "temprature": 37,
+    "hours": 161
+  },
+  {
+    "temprature": 36.5,
+    "hours": 153
+  },
+  {
+    "temprature": 36,
+    "hours": 171
+  },
+  {
+    "temprature": 35.5,
+    "hours": 169
+  },
+  {
+    "temprature": 35,
+    "hours": 172
+  },
+  {
+    "temprature": 34.5,
+    "hours": 182
+  },
+  {
+    "temprature": 34,
+    "hours": 216
+  },
+  {
+    "temprature": 33.5,
+    "hours": 207
+  },
+  {
+    "temprature": 33,
+    "hours": 216
+  },
+  {
+    "temprature": 32.5,
+    "hours": 219
+  },
+  {
+    "temprature": 32,
+    "hours": 209
+  },
+  {
+    "temprature": 31.5,
+    "hours": 217
+  },
+  {
+    "temprature": 31,
+    "hours": 207
+  },
+  {
+    "temprature": 30.5,
+    "hours": 217
+  },
+  {
+    "temprature": 30,
+    "hours": 225
+  },
+  {
+    "temprature": 29.5,
+    "hours": 198
+  },
+  {
+    "temprature": 29,
+    "hours": 227
+  },
+  {
+    "temprature": 28.5,
+    "hours": 225
+  },
+  {
+    "temprature": 28,
+    "hours": 215
+  },
+  {
+    "temprature": 27.5,
+    "hours": 199
+  },
+  {
+    "temprature": 27,
+    "hours": 203
+  },
+  {
+    "temprature": 26.5,
+    "hours": 215
+  },
+  {
+    "temprature": 26,
+    "hours": 181
+  },
+  {
+    "temprature": 25.5,
+    "hours": 205
+  },
+  {
+    "temprature": 25,
+    "hours": 192
+  },
+  {
+    "temprature": 24.5,
+    "hours": 180
+  },
+  {
+    "temprature": 24,
+    "hours": 202
+  },
+  {
+    "temprature": 23.5,
+    "hours": 187
+  },
+  {
+    "temprature": 23,
+    "hours": 183
+  },
+  {
+    "temprature": 22.5,
+    "hours": 183
+  },
+  {
+    "temprature": 22,
+    "hours": 176
+  },
+  {
+    "temprature": 21.5,
+    "hours": 177
+  },
+  {
+    "temprature": 21,
+    "hours": 182
+  },
+  {
+    "temprature": 20.5,
+    "hours": 173
+  },
+  {
+    "temprature": 20,
+    "hours": 156
+  },
+  {
+    "temprature": 19.5,
+    "hours": 152
+  },
+  {
+    "temprature": 19,
+    "hours": 148
+  },
+  {
+    "temprature": 18.5,
+    "hours": 138
+  },
+  {
+    "temprature": 18,
+    "hours": 132
+  },
+  {
+    "temprature": 17.5,
+    "hours": 114
+  },
+  {
+    "temprature": 17,
+    "hours": 92
+  },
+  {
+    "temprature": 16.5,
+    "hours": 92
+  },
+  {
+    "temprature": 16,
+    "hours": 88
+  },
+  {
+    "temprature": 15.5,
+    "hours": 68
+  },
+  {
+    "temprature": 15,
+    "hours": 41
+  },
+  {
+    "temprature": 14.5,
+    "hours": 33
+  },
+  {
+    "temprature": 14,
+    "hours": 17
+  },
+  {
+    "temprature": 13.5,
+    "hours": 10
+  },
+  {
+    "temprature": 13,
+    "hours": 5
+  },
+  {
+    "temprature": 12.5,
+    "hours": 2
+  },
+  {
+    "temprature": 12,
+    "hours": ""
+  },
+  {
+    "temprature": 11.5,
+    "hours": ""
+  },
+  {
+    "temprature": 11,
+    "hours": 21
+  }
+]

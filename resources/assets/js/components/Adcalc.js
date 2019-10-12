@@ -47,10 +47,16 @@ class Adcalc extends Component {
                 chillerRecord:[]
             },
             fahrenheitSystemStateChange: {
-                stateChange:false,
-                fahrenheitSystemRecord:[]
+                stateChange: false,
+                fahrenheitSystemRecord: [],
+                tileData:{}
             },
-            logged_in_role:LOGGED_IN_ROLE
+            logged_in_role: LOGGED_IN_ROLE,
+            outdoortemp: '',
+            drivetemp: 50,
+            coolingType: 'Office Space',
+            chilledwatertemp: 12,
+            coolingLoad: ''
         };
         this.handleChillerForm = this.handleChillerForm.bind(this);
         this.handleGeneralForm = this.handleGeneralForm.bind(this);
@@ -60,8 +66,12 @@ class Adcalc extends Component {
         this.handleHeatProfileForm = this.handleHeatProfileForm.bind(this);
         this.handleCoolingProfileForm = this.handleCoolingProfileForm.bind(this);
         this.handleFahrenheitForm = this.handleFahrenheitForm.bind(this);
+        this.onGeneralDataChangeVal = this.onGeneralDataChangeVal.bind(this);
+        this.onHeatSourceDataChangeVal = this.onHeatSourceDataChangeVal.bind(this);
+        this.onCoolingLoadChangeVal = this.onCoolingLoadChangeVal.bind(this);
+        this.calculateFunction = this.calculateFunction.bind(this);
     }
-    handleChillerForm (result)  {
+    handleChillerForm(result) {
 
         if (result.compressionChiller.chillerformMode == "add") {
             this.setState({
@@ -81,276 +91,343 @@ class Adcalc extends Component {
 
         }
     }
-    handleHeatForm (result)  {
-        if(result.heatSource.heatsourceformMode=="add"){
-            this.setState({heatSourceStateChange:{
-                stateChange:result.state,
-                heatSourceRecord:this.state.heatSourceStateChange.heatSourceRecord.concat(result.heatSource)
-                } 
+    handleHeatForm(result) {
+        if (result.heatSource.heatsourceformMode == "add") {
+            this.setState({
+                heatSourceStateChange: {
+                    stateChange: result.state,
+                    heatSourceRecord: this.state.heatSourceStateChange.heatSourceRecord.concat(result.heatSource)
+                }
             });
             this.props.dispatch(
                 actionCreator.addHeatSource(result.heatSource)
             );
-        }else{
-            this.state.heatSourceStateChange.heatSourceRecord[result.heatSource.heatsourceformModeKey]= result.heatSource
+        } else {
+            this.state.heatSourceStateChange.heatSourceRecord[result.heatSource.heatsourceformModeKey] = result.heatSource
             this.forceUpdate()
         }
 
 
     }
-    handleHeatProfileForm (result)  {
-        if(result.HeatingProfile.heatingprofileformMode=="add"){
-            this.setState({heatingProfileStateChange:{
-                stateChange:result.state,
-                heatingProfileRecord:this.state.heatingProfileStateChange.heatingProfileRecord.concat(result.HeatingProfile)
+    handleHeatProfileForm(result) {
+        if (result.HeatingProfile.heatingprofileformMode == "add") {
+            this.setState({
+                heatingProfileStateChange: {
+                    stateChange: result.state,
+                    heatingProfileRecord: this.state.heatingProfileStateChange.heatingProfileRecord.concat(result.HeatingProfile)
                 }
             });
             this.props.dispatch(
                 actionCreator.addHeatingProfile(result.HeatingProfile)
             );
-        }else{
-            this.state.heatingProfileStateChange.heatingProfileRecord[result.HeatingProfile.heatingprofileformModeKey]= result.HeatingProfile
+        } else {
+            this.state.heatingProfileStateChange.heatingProfileRecord[result.HeatingProfile.heatingprofileformModeKey] = result.HeatingProfile
             this.forceUpdate()
         }
 
 
     }
-    handleCoolingProfileForm (result)  {
-        if(result.CoolingProfile.coolingprofileformMode=="add"){
-            this.setState({coolingProfileStateChange:{
-                stateChange:result.state,
-                coolingProfileRecord:this.state.coolingProfileStateChange.coolingProfileRecord.concat(result.CoolingProfile)
+    handleCoolingProfileForm(result) {
+        if (result.CoolingProfile.coolingprofileformMode == "add") {
+            this.setState({
+                coolingProfileStateChange: {
+                    stateChange: result.state,
+                    coolingProfileRecord: this.state.coolingProfileStateChange.coolingProfileRecord.concat(result.CoolingProfile)
                 }
             });
             this.props.dispatch(
                 actionCreator.addCoolingProfile(result.CoolingProfile)
             );
-        }else{
-            this.state.coolingProfileStateChange.coolingProfileRecord[result.CoolingProfile.coolingprofileformModeKey]= result.CoolingProfile
+        } else {
+            this.state.coolingProfileStateChange.coolingProfileRecord[result.CoolingProfile.coolingprofileformModeKey] = result.CoolingProfile
             this.forceUpdate()
         }
 
 
     }
-    handleGeneralForm (result)  {
+    handleGeneralForm(result) {
         this.setState({
-            generalStateChange:{
-                generalRecord:result.generalInformation,
-                stateChange:result.state
+            generalStateChange: {
+                generalRecord: result.generalInformation,
+                stateChange: result.state
             }
         });
     }
-    handleOptionForm (result)  {
+    handleOptionForm(result) {
         this.setState({
-            optionStateChange:{
-                optionsRecord:result.optionInformation,
-                stateChange:result.state
+            optionStateChange: {
+                optionsRecord: result.optionInformation,
+                stateChange: result.state
             }
         });
     }
-    handleEconomicForm (result)  {
+    handleEconomicForm(result) {
         this.setState({
-            economicStateChange:{
-                economicRecord:result.economicInformation,
-                stateChange:result.state
+            economicStateChange: {
+                economicRecord: result.economicInformation,
+                stateChange: result.state
             }
         });
     }
-    handleFahrenheitForm (result)  {
+    handleFahrenheitForm(result) {
         this.setState({
-            fahrenheitSystemStateChange:{
-                fahrenheitSystemRecord:result.economicInformation,
-                stateChange:result.state
+            fahrenheitSystemStateChange: {
+                fahrenheitSystemRecord: result.economicInformation,
+                stateChange: result.state
             }
         });
+    }
+    onGeneralDataChangeVal(result) {
+        this.setState({
+            outdoortemp: {
+                min:result.min,
+                max:result.max
+            }
+        })
+        this.calculateFunction()
+    }
+    onHeatSourceDataChangeVal(result) {
+        this.setState({
+            drivetemp: result
+        })
+        this.calculateFunction()
+    }
+    onCoolingLoadChangeVal(result) {
+        this.setState({
+            coolingType: result.coolingType,
+            chilledwatertemp: result.chilledwatertemp,
+            coolingLoad: result.coolingLoad
+        })
+        this.calculateFunction()
+    }
+    calculateFunction() {
+     //   var port = 3000;
+        var that = this;
+        var bodyFormData = {
+            coolingType: this.state.coolingType,
+            chilledwatertemp: this.state.chilledwatertemp,
+            coolingLoad: this.state.coolingLoad,
+            drivetemp: this.state.drivetemp,
+            outdoortemp: this.state.outdoortemp.min,
+            maxoutdoortemp:this.state.outdoortemp.max
+        }
+     axios.defaults.baseURL = location.protocol + '//' + location.hostname;
+// axios.get(url)
+        if(this.state.coolingLoad!=""){
+        fetch('calculate-data', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyFormData)
+        })
+            .then((a) => { return a.json(); })
+            .then(function (data) {
+                console.log(data);
+                that.setState({
+                    fahrenheitSystemStateChange: {
+                        stateChange: true,
+                        tileData:data
+                    }
+                });
+            })
+            .catch((err) => { console.log(err) })
+        }
+        else
+        {
+           // alert('Please provide Max cooling Load');
+        }
     }
 
-    componentDidMount(){ 
+    componentDidMount() {
     }
+
 
     render() {
         projectData['chillerData'] = this.state.compressionChilerStateChange.chillerRecord;
         projectData['heatSourceData'] = this.state.heatSourceStateChange.heatSourceRecord;
-        let store= this.props.store;
-        const tiles={
-            general:{
+        let store = this.props.store;
+        const tiles = {
+            general: {
                 title: GENERAL_TILE,
-                header:this.props.t('Tiles.General.Title'),
-                tileCls:'general-information data-box',
-                required:"yes",
-                edit:'yes',
-                editCls:'edit-icon myBtn_multi',
-                editIcon:'public/images/edit-icon.png',
-                add:'no',
-                hoverText:this.props.t('Tiles.General.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
-                hoverCls:'main-hover-box general-info-hover',
-                priceLst:'no',
-                priceData:{
+                header: this.props.t('Tiles.General.Title'),
+                tileCls: 'general-information data-box',
+                required: "yes",
+                edit: 'yes',
+                editCls: 'edit-icon myBtn_multi hide',
+                editIcon: 'public/images/edit-icon.png',
+                add: 'no',
+                hoverText: this.props.t('Tiles.General.hoverText'),
+                mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+                hoverCls: 'main-hover-box general-info-hover',
+                priceLst: 'no',
+                priceData: {
 
                 },
-                rightpriceList:'no',
-                rightpriceListeData:{
+                rightpriceList: 'no',
+                rightpriceListeData: {
 
                 },
-                modalId:'#general-information'
+                modalId: '#general-information'
             },
-            Economic:{
-                title:ECONOMIC_TITLE,
-                header:this.props.t('Tiles.Economic.Title'),
-                tileCls:'economic-data data-box',
-                required:"no",
-                edit:'yes',
-                editCls:'edit-icon myBtn_multi',
-                editIcon:'public/images/edit-icon.png',
-                add:'no',
-                hoverText:this.props.t('Tiles.Economic.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
-                hoverCls:'main-hover-box economic-hover',
-                priceLst:'no',
-                priceData:{
+            Economic: {
+                title: ECONOMIC_TITLE,
+                header: this.props.t('Tiles.Economic.Title'),
+                tileCls: 'economic-data data-box disabled',
+                required: "no",
+                edit: 'yes',
+                editCls: 'edit-icon myBtn_multi',
+                editIcon: 'public/images/edit-icon.png',
+                add: 'no',
+                hoverText: this.props.t('Tiles.Economic.hoverText'),
+                mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+                hoverCls: 'main-hover-box economic-hover',
+                priceLst: 'no',
+                priceData: {
 
                 },
-                rightpriceList:'no',
-                rightpriceListeData:{
+                rightpriceList: 'no',
+                rightpriceListeData: {
 
                 },
-                modalId:'#economic-information'
+                modalId: '#economic-information'
             },
-            Options:{
-                title:OPTION_TILE,
-                header:this.props.t('Tiles.Options.Title'),
-                tileCls:'options data-box',
-                required:"no",
-                edit:'yes',
-                editCls:'edit-icon myBtn_multi',
-                editIcon:'public/images/edit-icon.png',
-                add:'no',
-                hoverText:this.props.t('Tiles.Options.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
-                hoverCls:'main-hover-box options-hover',
-                priceLst:'no',
-                priceData:{
+            Options: {
+                title: OPTION_TILE,
+                header: this.props.t('Tiles.Options.Title'),
+                tileCls: 'options data-box disabled',
+                required: "no",
+                edit: 'yes',
+                editCls: 'edit-icon myBtn_multi',
+                editIcon: 'public/images/edit-icon.png',
+                add: 'no',
+                hoverText: this.props.t('Tiles.Options.hoverText'),
+                mainClass: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+                hoverCls: 'main-hover-box options-hover',
+                priceLst: 'no',
+                priceData: {
 
                 },
-                rightpriceList:'no',
-                rightpriceListeData:{
+                rightpriceList: 'no',
+                rightpriceListeData: {
 
                 },
-                modalId:'#profile-information'
+                modalId: '#profile-information'
             },
-            HeatSource:{
-                title:HEAT_SOURCE_TITLE,
-                header:this.props.t('Tiles.HeatSource.Title'),
-                tileCls:'heat-sources data-box',
-                required:"no",
-                edit:'yes',
-                editCls:'add-icon myBtn_multi',
-                editIcon:'public/images/add-icon.png',
-                add:'no',
-                hoverText:this.props.t('Tiles.HeatSource.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
-                hoverCls:'main-hover-box heat-sources-hover',
-                priceLst:'no',
-                priceData:{
+            HeatSource: {
+                title: HEAT_SOURCE_TITLE,
+                header: this.props.t('Tiles.HeatSource.Title'),
+                tileCls: 'heat-sources data-box',
+                required: "no",
+                edit: 'yes',
+                editCls: 'add-icon myBtn_multi hide',
+                editIcon: 'public/images/add-icon.png',
+                add: 'no',
+                hoverText: this.props.t('Tiles.HeatSource.hoverText'),
+                mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
+                hoverCls: 'main-hover-box heat-sources-hover',
+                priceLst: 'no',
+                priceData: {
 
                 },
-                rightpriceList:'no',
-                rightpriceListeData:{
+                rightpriceList: 'no',
+                rightpriceListeData: {
 
                 },
-                modalId:'#heat-source',
-                multiple:true
+                modalId: '#heat-source',
+                multiple: true
             },
-            HeatingLoadProfile:{
-                title:HEAT_LOAD_PROFILE_TITLE,
-                header:this.props.t('Tiles.HeatingLoadProfile.Title'),
-                tileCls:'heating-load-profiles data-box',
-                required:"no",
-                edit:'yes',
-                editCls:'add-icon myBtn_multi',
-                editIcon:'public/images/add-icon.png',
-                add:'no',
-                hoverText:this.props.t('Tiles.HeatingLoadProfile.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
-                hoverCls:'main-hover-box heating-load-hover',
-                priceLst:'no',
-                priceData:{
+            HeatingLoadProfile: {
+                title: HEAT_LOAD_PROFILE_TITLE,
+                header: this.props.t('Tiles.HeatingLoadProfile.Title'),
+                tileCls: 'heating-load-profiles data-box disabled',
+                required: "no",
+                edit: 'yes',
+                editCls: 'add-icon myBtn_multi',
+                editIcon: 'public/images/add-icon.png',
+                add: 'no',
+                hoverText: this.props.t('Tiles.HeatingLoadProfile.hoverText'),
+                mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
+                hoverCls: 'main-hover-box heating-load-hover',
+                priceLst: 'no',
+                priceData: {
 
                 },
-                rightpriceList:'no',
-                rightpriceListeData:{
+                rightpriceList: 'no',
+                rightpriceListeData: {
 
                 },
-                modalId:'#heating-profile'
+                modalId: '#heating-profile'
             },
-            CompressionChiller:{
-                title:CHILLER_TITLE,
-                header:this.props.t('Tiles.CompressionChiller.Title'),
-                tileCls:'compression-chillers data-box',
-                required:"no",
-                edit:'yes',
-                editCls:'add-icon myBtn_multi',
-                editIcon:'public/images/add-icon.png',
-                add:'no',
-                hoverText:this.props.t('Tiles.CompressionChiller.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
-                hoverCls:'main-hover-box compression-chillers-hover',
-                priceLst:'no',
-                priceData:{
+            CompressionChiller: {
+                title: CHILLER_TITLE,
+                header: this.props.t('Tiles.CompressionChiller.Title'),
+                tileCls: 'compression-chillers data-box disabled',
+                required: "no",
+                edit: 'yes',
+                editCls: 'add-icon myBtn_multi',
+                editIcon: 'public/images/add-icon.png',
+                add: 'no',
+                hoverText: this.props.t('Tiles.CompressionChiller.hoverText'),
+                mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
+                hoverCls: 'main-hover-box compression-chillers-hover',
+                priceLst: 'no',
+                priceData: {
 
                 },
-                rightpriceList:'no',
-                rightpriceListeData:{
+                rightpriceList: 'no',
+                rightpriceListeData: {
 
                 },
-                modalId:'#compression-chiller',
-                multiple:true
+                modalId: '#compression-chiller',
+                multiple: true
             },
-            CoolingLoadProfile:{
-                title:COOLING_LOAD_PROFILE_TITLE,
-                header:this.props.t('Tiles.CoolingLoadProfile.Title'),
-                tileCls:'cooling-load-profiles data-box',
-                required:"yes",
-                edit:'yes',
-                editCls:'add-icon myBtn_multi',
-                editIcon:'public/images/add-icon.png',
-                add:'no',
-                hoverText:this.props.t('Tiles.CoolingLoadProfile.hoverText'),
-                mainClass:'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
-                hoverCls:'main-hover-box cooling-load-hover',
-                priceLst:'no',
-                priceData:{
+            CoolingLoadProfile: {
+                title: COOLING_LOAD_PROFILE_TITLE,
+                header: this.props.t('Tiles.CoolingLoadProfile.Title'),
+                tileCls: 'cooling-load-profiles data-box',
+                required: "yes",
+                edit: 'yes',
+                // editCls: 'add-icon myBtn_multi',
+                // editIcon: 'public/images/add-icon.png',
+                add: 'no',
+                hoverText: this.props.t('Tiles.CoolingLoadProfile.hoverText'),
+                mainClass: 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6',
+                hoverCls: 'main-hover-box cooling-load-hover',
+                priceLst: 'no',
+                priceData: {
 
                 },
-                rightpriceList:'no',
-                rightpriceListeData:{
+                rightpriceList: 'no',
+                rightpriceListeData: {
 
                 },
-                modalId:'#cooling-profile'
+                modalId: '#cooling-profile'
             },
-            FahrenheitSystem:{
-                title:FAHRENHEIT_SYSTEM,
-                header:this.props.t('Tiles.FahrenheitSystem.Title'),
-                tileCls:'fahrenheit-system-box data-box',
-                required:"yes",
-                edit:'yes',
-                editCls:'add-icon myBtn_multi',
-                editIcon:'public/images/add-icon.png',
-                add:'no',
-                hoverText:this.props.t('Tiles.FahrenheitSystem.hoverText'),
-                mainClass:'col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4',
-                hoverCls:'main-hover-box fahrenheit-system-hover',
-                priceLst:'no',
-                priceData:{
+            FahrenheitSystem: {
+                title: FAHRENHEIT_SYSTEM,
+                header: this.props.t('Tiles.FahrenheitSystem.Title'),
+                tileCls: 'fahrenheit-system-box data-box',
+                required: "yes",
+                edit: 'yes',
+                // editCls: 'add-icon myBtn_multi',
+                // editIcon: 'public/images/add-icon.png',
+                add: 'no',
+                hoverText: this.props.t('Tiles.FahrenheitSystem.hoverText'),
+                mainClass: 'col-md-12 col-sm-12 col-12 col-lg-4 col-xl-4',
+                hoverCls: 'main-hover-box fahrenheit-system-hover',
+                priceLst: 'no',
+                priceData: {
 
                 },
-                rightpriceList:'no',
-                rightpriceListeData:{
+                rightpriceList: 'no',
+                rightpriceListeData: {
 
                 },
-                modalId:'#fahrenheit-system',
-                dataChange:false
+                modalId: '#fahrenheit-system',
+                dataChange: false
             }
 
         }
@@ -358,200 +435,203 @@ class Adcalc extends Component {
         return (
 
             <div className="bootom-data-box">
-                 <div className="row" >
+                <div className="row" >
 
-                <Tiles
-                title={tiles.general.title}
-                header={tiles.general.header}
-                required={tiles.general.required}
-                edit={tiles.edit}
-                mainclass={tiles.general.mainClass}
-                tileCls={tiles.general.tileCls}
-                required= {tiles.general.required}
-                edit={tiles.general.edit}
-                editCls={tiles.general.editCls}
-                editIcon={tiles.general.editIcon}
-                add={tiles.general.add}
-                hoverText={tiles.general.hoverText}
-                hoverCls={tiles.general.hoverCls}
-                priceLst={tiles.general.priceLst}
-                priceData={tiles.general.priceData}
-                rightpriceList={tiles.general.rightpriceList}
-                rightpriceListeData={tiles.general.rightpriceListeData}
-                modalId={tiles.general.modalId}
-                dataChange={this.state.generalStateChange.stateChange}
-                dataRecord={this.state.generalStateChange.generalRecord}
-                store={store}/>
-                <Tiles
-                title={tiles.Economic.title}
-                header={tiles.Economic.header}
-                required={tiles.Economic.required}
-                edit={tiles.Economic.edit}
-                mainclass={tiles.Economic.mainClass}
-                tileCls={tiles.Economic.tileCls} required= {tiles.Economic.required}
-                edit={tiles.Economic.edit}
-                editCls={tiles.Economic.editCls}
-                editIcon={tiles.Economic.editIcon}
-                add={tiles.Economic.add}
-                hoverText={tiles.Economic.hoverText}
-                hoverCls={tiles.Economic.hoverCls}
-                priceLst={tiles.Economic.priceLst}
-                priceData={tiles.Economic.priceData}
-                rightpriceList={tiles.Economic.rightpriceList}
-                rightpriceListeData={tiles.Economic.rightpriceListeData}
-                modalId={tiles.Economic.modalId}
-                dataChange={this.state.economicStateChange.stateChange}
-                dataRecord={this.state.economicStateChange.economicRecord}
-                store={store}/>
-                <Tiles
-                title={tiles.Options.title}
-                header={tiles.Options.header}
-                required={tiles.Options.required}
-                edit={tiles.Options.edit}
-                mainclass={tiles.Options.mainClass}
-                tileCls={tiles.Options.tileCls} required= {tiles.Options.required}
-                edit={tiles.Options.edit}
-                editCls={tiles.Options.editCls}
-                editIcon={tiles.Options.editIcon}
-                add={tiles.Options.add}
-                hoverText={tiles.Options.hoverText}
-                hoverCls={tiles.Options.hoverCls}
-                priceLst={tiles.Options.priceLst}
-                priceData={tiles.Options.priceData}
-                rightpriceList={tiles.Options.rightpriceList}
-                rightpriceListeData={tiles.Options.rightpriceListeData}
-                modalId={tiles.Options.modalId}
-                dataChange={this.state.optionStateChange.stateChange}
-                dataRecord={this.state.optionStateChange.optionsRecord}
-                store={store}/>
-                 </div>
-                 <div className="row">
+                    <Tiles
+                        title={tiles.general.title}
+                        header={tiles.general.header}
+                        required={tiles.general.required}
+                        edit={tiles.edit}
+                        mainclass={tiles.general.mainClass}
+                        tileCls={tiles.general.tileCls}
+                        required={tiles.general.required}
+                        edit={tiles.general.edit}
+                        editCls={tiles.general.editCls}
+                        editIcon={tiles.general.editIcon}
+                        add={tiles.general.add}
+                        hoverText={tiles.general.hoverText}
+                        hoverCls={tiles.general.hoverCls}
+                        priceLst={tiles.general.priceLst}
+                        priceData={tiles.general.priceData}
+                        rightpriceList={tiles.general.rightpriceList}
+                        rightpriceListeData={tiles.general.rightpriceListeData}
+                        modalId={tiles.general.modalId}
+                        dataChange={this.state.generalStateChange.stateChange}
+                        dataRecord={this.state.generalStateChange.generalRecord}
+                        store={store}
+                        onGeneralDatachange={this.onGeneralDataChangeVal} />
+                    <Tiles
+                        title={tiles.Economic.title}
+                        header={tiles.Economic.header}
+                        required={tiles.Economic.required}
+                        edit={tiles.Economic.edit}
+                        mainclass={tiles.Economic.mainClass}
+                        tileCls={tiles.Economic.tileCls} required={tiles.Economic.required}
+                        edit={tiles.Economic.edit}
+                        editCls={tiles.Economic.editCls}
+                        editIcon={tiles.Economic.editIcon}
+                        add={tiles.Economic.add}
+                        hoverText={tiles.Economic.hoverText}
+                        hoverCls={tiles.Economic.hoverCls}
+                        priceLst={tiles.Economic.priceLst}
+                        priceData={tiles.Economic.priceData}
+                        rightpriceList={tiles.Economic.rightpriceList}
+                        rightpriceListeData={tiles.Economic.rightpriceListeData}
+                        modalId={tiles.Economic.modalId}
+                        dataChange={this.state.economicStateChange.stateChange}
+                        dataRecord={this.state.economicStateChange.economicRecord}
+                        store={store} />
+                    <Tiles
+                        title={tiles.Options.title}
+                        header={tiles.Options.header}
+                        required={tiles.Options.required}
+                        edit={tiles.Options.edit}
+                        mainclass={tiles.Options.mainClass}
+                        tileCls={tiles.Options.tileCls} required={tiles.Options.required}
+                        edit={tiles.Options.edit}
+                        editCls={tiles.Options.editCls}
+                        editIcon={tiles.Options.editIcon}
+                        add={tiles.Options.add}
+                        hoverText={tiles.Options.hoverText}
+                        hoverCls={tiles.Options.hoverCls}
+                        priceLst={tiles.Options.priceLst}
+                        priceData={tiles.Options.priceData}
+                        rightpriceList={tiles.Options.rightpriceList}
+                        rightpriceListeData={tiles.Options.rightpriceListeData}
+                        modalId={tiles.Options.modalId}
+                        dataChange={this.state.optionStateChange.stateChange}
+                        dataRecord={this.state.optionStateChange.optionsRecord}
+                        store={store} />
+                </div>
+                <div className="row">
                     <div className="col-md-12 col-sm-12 col-12 col-lg-8 col-xl-8">
-                       <div className="row">
-                        <Tiles  title={tiles.HeatSource.title}
-                        header={tiles.HeatSource.header}
-                        required={tiles.HeatSource.required}
-                        edit={tiles.HeatSource.edit}
-                        mainclass={tiles.HeatSource.mainClass}
-                        tileCls={tiles.HeatSource.tileCls} required= {tiles.HeatSource.required}
-                        edit={tiles.HeatSource.edit}
-                        editCls={tiles.HeatSource.editCls}
-                        editIcon={tiles.HeatSource.editIcon}
-                        add={tiles.HeatSource.add}
-                        hoverText={tiles.HeatSource.hoverText}
-                        hoverCls={tiles.HeatSource.hoverCls}
-                        priceLst={tiles.HeatSource.priceLst}
-                        priceData={tiles.HeatSource.priceData}
-                        rightpriceList={tiles.HeatSource.rightpriceList}
-                        rightpriceListeData={tiles.HeatSource.rightpriceListeData}
-                        modalId={tiles.HeatSource.modalId}
-                        dataChange={this.state.heatSourceStateChange.stateChange}
-                        dataRecord={this.state.heatSourceStateChange.heatSourceRecord}
-                        multiple={tiles.HeatSource.multiple}
-                        store={store}/>
+                        <div className="row">
+                            <Tiles title={tiles.HeatSource.title}
+                                header={tiles.HeatSource.header}
+                                required={tiles.HeatSource.required}
+                                edit={tiles.HeatSource.edit}
+                                mainclass={tiles.HeatSource.mainClass}
+                                tileCls={tiles.HeatSource.tileCls} required={tiles.HeatSource.required}
+                                edit={tiles.HeatSource.edit}
+                                editCls={tiles.HeatSource.editCls}
+                                editIcon={tiles.HeatSource.editIcon}
+                                add={tiles.HeatSource.add}
+                                hoverText={tiles.HeatSource.hoverText}
+                                hoverCls={tiles.HeatSource.hoverCls}
+                                priceLst={tiles.HeatSource.priceLst}
+                                priceData={tiles.HeatSource.priceData}
+                                rightpriceList={tiles.HeatSource.rightpriceList}
+                                rightpriceListeData={tiles.HeatSource.rightpriceListeData}
+                                modalId={tiles.HeatSource.modalId}
+                                dataChange={this.state.heatSourceStateChange.stateChange}
+                                dataRecord={this.state.heatSourceStateChange.heatSourceRecord}
+                                multiple={tiles.HeatSource.multiple}
+                                store={store}
+                                onHeatSourcechange={this.onHeatSourceDataChangeVal} />
 
-                        <Tiles  title={tiles.HeatingLoadProfile.title}
-                        header={tiles.HeatingLoadProfile.header}
-                        required={tiles.HeatingLoadProfile.required}
-                        edit={tiles.HeatingLoadProfile.edit}
-                        mainclass={tiles.HeatingLoadProfile.mainClass}
-                        tileCls={tiles.HeatingLoadProfile.tileCls} required= {tiles.HeatingLoadProfile.required}
-                        edit={tiles.HeatingLoadProfile.edit}
-                        editCls={tiles.HeatingLoadProfile.editCls}
-                        editIcon={tiles.HeatingLoadProfile.editIcon}
-                        add={tiles.HeatingLoadProfile.add}
-                        hoverText={tiles.HeatingLoadProfile.hoverText}
-                        hoverCls={tiles.HeatingLoadProfile.hoverCls}
-                        priceLst={tiles.HeatingLoadProfile.priceLst}
-                        priceData={tiles.HeatingLoadProfile.priceData}
-                        rightpriceList={tiles.HeatingLoadProfile.rightpriceList}
-                        rightpriceListeData={tiles.HeatingLoadProfile.rightpriceListeData}
-                        modalId={tiles.HeatingLoadProfile.modalId}
-                        dataChange={this.state.heatingProfileStateChange.stateChange}
-                        dataRecord={this.state.heatingProfileStateChange.heatingProfileRecord}
-                        multiple={tiles.HeatSource.multiple}
-                        store={store}/>
-                       </div>
-                       <div className="row">
-                        <Tiles  title={tiles.CompressionChiller.title}
-                        header={tiles.CompressionChiller.header}
-                        required={tiles.CompressionChiller.required}
-                        edit={tiles.CompressionChiller.edit}
-                        mainclass={tiles.CompressionChiller.mainClass}
-                        tileCls={tiles.CompressionChiller.tileCls} required= {tiles.CompressionChiller.required}
-                        edit={tiles.CompressionChiller.edit}
-                        editCls={tiles.CompressionChiller.editCls}
-                        editIcon={tiles.CompressionChiller.editIcon}
-                        add={tiles.CompressionChiller.add}
-                        hoverText={tiles.CompressionChiller.hoverText}
-                        hoverCls={tiles.CompressionChiller.hoverCls}
-                        priceLst={tiles.CompressionChiller.priceLst}
-                        priceData={tiles.CompressionChiller.priceData}
-                        rightpriceList={tiles.CompressionChiller.rightpriceList}
-                        rightpriceListeData={tiles.CompressionChiller.rightpriceListeData}
-                        modalId={tiles.CompressionChiller.modalId}
-                        dataChange={this.state.compressionChilerStateChange.stateChange}
-                        dataRecord={this.state.compressionChilerStateChange.chillerRecord}
-                        multiple={tiles.CompressionChiller.multiple}
-                        store={store}/>
+                            <Tiles title={tiles.HeatingLoadProfile.title}
+                                header={tiles.HeatingLoadProfile.header}
+                                required={tiles.HeatingLoadProfile.required}
+                                edit={tiles.HeatingLoadProfile.edit}
+                                mainclass={tiles.HeatingLoadProfile.mainClass}
+                                tileCls={tiles.HeatingLoadProfile.tileCls} required={tiles.HeatingLoadProfile.required}
+                                edit={tiles.HeatingLoadProfile.edit}
+                                editCls={tiles.HeatingLoadProfile.editCls}
+                                editIcon={tiles.HeatingLoadProfile.editIcon}
+                                add={tiles.HeatingLoadProfile.add}
+                                hoverText={tiles.HeatingLoadProfile.hoverText}
+                                hoverCls={tiles.HeatingLoadProfile.hoverCls}
+                                priceLst={tiles.HeatingLoadProfile.priceLst}
+                                priceData={tiles.HeatingLoadProfile.priceData}
+                                rightpriceList={tiles.HeatingLoadProfile.rightpriceList}
+                                rightpriceListeData={tiles.HeatingLoadProfile.rightpriceListeData}
+                                modalId={tiles.HeatingLoadProfile.modalId}
+                                dataChange={this.state.heatingProfileStateChange.stateChange}
+                                dataRecord={this.state.heatingProfileStateChange.heatingProfileRecord}
+                                multiple={tiles.HeatSource.multiple}
+                                store={store} />
+                        </div>
+                        <div className="row">
+                            <Tiles title={tiles.CompressionChiller.title}
+                                header={tiles.CompressionChiller.header}
+                                required={tiles.CompressionChiller.required}
+                                edit={tiles.CompressionChiller.edit}
+                                mainclass={tiles.CompressionChiller.mainClass}
+                                tileCls={tiles.CompressionChiller.tileCls} required={tiles.CompressionChiller.required}
+                                edit={tiles.CompressionChiller.edit}
+                                editCls={tiles.CompressionChiller.editCls}
+                                editIcon={tiles.CompressionChiller.editIcon}
+                                add={tiles.CompressionChiller.add}
+                                hoverText={tiles.CompressionChiller.hoverText}
+                                hoverCls={tiles.CompressionChiller.hoverCls}
+                                priceLst={tiles.CompressionChiller.priceLst}
+                                priceData={tiles.CompressionChiller.priceData}
+                                rightpriceList={tiles.CompressionChiller.rightpriceList}
+                                rightpriceListeData={tiles.CompressionChiller.rightpriceListeData}
+                                modalId={tiles.CompressionChiller.modalId}
+                                dataChange={this.state.compressionChilerStateChange.stateChange}
+                                dataRecord={this.state.compressionChilerStateChange.chillerRecord}
+                                multiple={tiles.CompressionChiller.multiple}
+                                store={store} />
 
-                        <Tiles  title={tiles.CoolingLoadProfile.title}
-                        header={tiles.CoolingLoadProfile.header}
-                        required={tiles.CoolingLoadProfile.required}
-                        edit={tiles.CoolingLoadProfile.edit}
-                        mainclass={tiles.CoolingLoadProfile.mainClass}
-                        tileCls={tiles.CoolingLoadProfile.tileCls} required= {tiles.CoolingLoadProfile.required}
-                        edit={tiles.CoolingLoadProfile.edit}
-                        editCls={tiles.CoolingLoadProfile.editCls}
-                        editIcon={tiles.CoolingLoadProfile.editIcon}
-                        add={tiles.CoolingLoadProfile.add}
-                        hoverText={tiles.CoolingLoadProfile.hoverText}
-                        hoverCls={tiles.CoolingLoadProfile.hoverCls}
-                        priceLst={tiles.CoolingLoadProfile.priceLst}
-                        priceData={tiles.CoolingLoadProfile.priceData}
-                        rightpriceList={tiles.CoolingLoadProfile.rightpriceList}
-                        rightpriceListeData={tiles.CoolingLoadProfile.rightpriceListeData}
-                        modalId={tiles.CoolingLoadProfile.modalId}
-                        dataChange={this.state.coolingProfileStateChange.stateChange}
-                        dataRecord={this.state.coolingProfileStateChange.coolingProfileRecord}
-                        multiple={tiles.CoolingLoadProfile.multiple}
-                        store={store}/>
-                       </div>
+                            <Tiles title={tiles.CoolingLoadProfile.title}
+                                header={tiles.CoolingLoadProfile.header}
+                                required={tiles.CoolingLoadProfile.required}
+                                edit={tiles.CoolingLoadProfile.edit}
+                                mainclass={tiles.CoolingLoadProfile.mainClass}
+                                tileCls={tiles.CoolingLoadProfile.tileCls} required={tiles.CoolingLoadProfile.required}
+                                edit={tiles.CoolingLoadProfile.edit}
+                                editCls={tiles.CoolingLoadProfile.editCls}
+                                editIcon={tiles.CoolingLoadProfile.editIcon}
+                                add={tiles.CoolingLoadProfile.add}
+                                hoverText={tiles.CoolingLoadProfile.hoverText}
+                                hoverCls={tiles.CoolingLoadProfile.hoverCls}
+                                priceLst={tiles.CoolingLoadProfile.priceLst}
+                                priceData={tiles.CoolingLoadProfile.priceData}
+                                rightpriceList={tiles.CoolingLoadProfile.rightpriceList}
+                                rightpriceListeData={tiles.CoolingLoadProfile.rightpriceListeData}
+                                modalId={tiles.CoolingLoadProfile.modalId}
+                                dataChange={this.state.coolingProfileStateChange.stateChange}
+                                dataRecord={this.state.coolingProfileStateChange.coolingProfileRecord}
+                                multiple={tiles.CoolingLoadProfile.multiple}
+                                store={store}
+                                coolingloadDatachange={this.onCoolingLoadChangeVal} />
+                        </div>
                     </div>
-                    <Tiles  title={tiles.FahrenheitSystem.title}
-                    header={tiles.FahrenheitSystem.header}
-                required={tiles.FahrenheitSystem.required}
-                edit={tiles.FahrenheitSystem.edit}
-                mainclass={tiles.FahrenheitSystem.mainClass}
-                tileCls={tiles.FahrenheitSystem.tileCls} required= {tiles.FahrenheitSystem.required}
-                edit={tiles.FahrenheitSystem.edit}
-                editCls={tiles.FahrenheitSystem.editCls}
-                editIcon={tiles.FahrenheitSystem.editIcon}
-                add={tiles.FahrenheitSystem.add}
-                hoverText={tiles.FahrenheitSystem.hoverText}
-                hoverCls={tiles.FahrenheitSystem.hoverCls}
-                priceLst={tiles.FahrenheitSystem.priceLst}
-                priceData={tiles.FahrenheitSystem.priceData}
-                rightpriceList={tiles.FahrenheitSystem.rightpriceList}
-                rightpriceListeData={tiles.FahrenheitSystem.rightpriceListeData}
-                modalId={tiles.FahrenheitSystem.modalId}
-                dataChange={this.state.fahrenheitSystemStateChange.stateChange}
-                dataRecord={this.state.fahrenheitSystemStateChange.fahrenheitSystemRecord}
-                multiple={tiles.CoolingLoadProfile.multiple}
-                store={store}/>
-                 </div>
-                 <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} store={store}/>
-                 <GeneralModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
-                 <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} store={store} heatSourceData={this.state.heatSourceStateChange.heatSourceStateChange}/>
-                 <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/>
-                 <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/>
-                 <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store}/>
-                 <OptionsModal role={this.props.role} onOptionSubmit={this.handleOptionForm} />
-                 <FahrenheitSystemModal role={this.props.role} onfinalSubmit={this.handleFahrenheitForm} />
+                    <Tiles title={tiles.FahrenheitSystem.title}
+                        header={tiles.FahrenheitSystem.header}
+                        required={tiles.FahrenheitSystem.required}
+                        edit={tiles.FahrenheitSystem.edit}
+                        mainclass={tiles.FahrenheitSystem.mainClass}
+                        tileCls={tiles.FahrenheitSystem.tileCls} required={tiles.FahrenheitSystem.required}
+                        edit={tiles.FahrenheitSystem.edit}
+                        editCls={tiles.FahrenheitSystem.editCls}
+                        editIcon={tiles.FahrenheitSystem.editIcon}
+                        add={tiles.FahrenheitSystem.add}
+                        hoverText={tiles.FahrenheitSystem.hoverText}
+                        hoverCls={tiles.FahrenheitSystem.hoverCls}
+                        priceLst={tiles.FahrenheitSystem.priceLst}
+                        priceData={tiles.FahrenheitSystem.priceData}
+                        rightpriceList={tiles.FahrenheitSystem.rightpriceList}
+                        rightpriceListeData={tiles.FahrenheitSystem.rightpriceListeData}
+                        modalId={tiles.FahrenheitSystem.modalId}
+                        dataChange={this.state.fahrenheitSystemStateChange.stateChange}
+                        dataRecord={this.state.fahrenheitSystemStateChange.tileData}
+                        multiple={tiles.CoolingLoadProfile.multiple}
+                        store={store} />
+                </div>
+                <ChillerModal role={this.props.role} onChillerSubmit={this.handleChillerForm} store={store} />
+                <GeneralModal role={this.props.role} onGeneralSubmit={this.handleGeneralForm} />
+                <EconomicModal role={this.props.role} onEconomicSubmit={this.handleEconomicForm} store={store} heatSourceData={this.state.heatSourceStateChange.heatSourceStateChange} />
+                {/* <HeatSourceModal role={this.props.role} onHeatSubmit={this.handleHeatForm} store={store}/> */}
+                {/* <HeatingProfileModal role={this.props.role} onHeatProfileSubmit={this.handleHeatProfileForm} store={store}/> */}
+                <CoolingProfileModal role={this.props.role} onCoolingProfileSubmit={this.handleCoolingProfileForm} store={store} />
+                <OptionsModal role={this.props.role} onOptionSubmit={this.handleOptionForm} />
+                <FahrenheitSystemModal role={this.props.role} onfinalSubmit={this.handleFahrenheitForm} />
 
 
 
-              </div>
+            </div>
         );
     }
 }

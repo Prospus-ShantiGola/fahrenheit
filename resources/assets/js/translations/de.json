@@ -29,7 +29,7 @@
             "hoverText": "Definieren Sie Ihr Kühllastprofil und benötigen Sie Kühlkapazität, damit wir Ihnen ein System vorschlagen können!"
          },
          "FahrenheitSystem": {
-            "Title": "Fahrenheit System",
+            "Title": "Fahrenheit-System",
             "hoverText": "Bitte geben Sie die erforderlichen Eingaben an, damit wir Ihnen ein Fahrenheit-System vorschlagen können."
          }
       },
@@ -72,7 +72,19 @@
                   "Title": "Email",
                   "Placeholder": "inhaber@gmbh.de",
                   "InfoTool": "E-Mail Erklärung / Trinkgeld"
-               }
+               },
+                "ProjectTemp": {
+                    "Title":"Außentemperatur",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Email explanation/tip"
+                },
+                "On":{
+                    "Title":"auf"
+                },
+                "HourPerYear":{
+                    "Title":"Stunden pro Jahr ist es warmer als"
+                }  
+
             },
             "Personal": {
                "Title": "Persönliche Daten",
@@ -459,6 +471,12 @@
                     "Placeholder":"inhaber@gmbh.de",
                     "InfoTool":"Kundenerklärung / Trinkgeld"
                 },
+
+                "ChilledWaterTemperature": {
+                    "Title":"Kaltwassertemperatur",
+                    "Placeholder":"inhaber@gmbh.de",
+                    "InfoTool":"Customer explanation/tip"
+                },
                 "BaseLoad": {
                     "Title":"Grundlast",
                     "Placeholder":"inhaber@gmbh.de",
@@ -512,7 +530,6 @@
         "UnusedHeat":{
             "Title":"Unused Heat"
         }
-
 
     },
     "Options":{
@@ -607,12 +624,32 @@
         },
         "UnusedHeat":{
             "Title":"Unused Heat"
+        },
+        "Freecooling":{
+            "Title":"Gratis Erfrischung"
         }
+        ,
+        "ReCoolingType":{
+            "Title":"Art der Rückkühlung"
+        },
+        "Yes":{
+            "Title":"JA"
+        },
+        "ChilledWaterTemperature":{
+            "Title":"Kaltwassertemperatur"
+        },
+        "Dry":{
+          
+            "Title":"TROCKEN"
+        }
+
+
+
 
 
     },
     "Fahrenheit":{
-        "Title":"Fahrenheit System",
+        "Title":"Fahrenheit-System",
         "Tab": {
             "GENERAL": {
                 "Title":"GENERAL",
