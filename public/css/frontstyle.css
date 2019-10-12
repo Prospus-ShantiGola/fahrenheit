@@ -1126,7 +1126,7 @@ td.input-fields {
     position: relative;
 }
 input.required-field {
-    /*border-color: red;*/
+    border-color: red;
 }
 h3.inner-table-heading {
     color: #00618c;
@@ -1420,7 +1420,7 @@ li.selected-flag img {
 }
 
 select.required-field {
-    /*border-color: red;*/
+    border-color: red;
 }
 
 .modal-body-content .nav-tabs .nav-link:focus {   outline: none;}

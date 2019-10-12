@@ -235,6 +235,10 @@ class Adcalc extends Component {
             })
             .catch((err) => { console.log(err) })
         }
+        else
+        {
+           // alert('Please provide Max cooling Load');
+        }
     }
 
     componentDidMount() {

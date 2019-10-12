@@ -491,7 +491,7 @@
 
                         
 
-                            $('#res').html('Results:  <br/>  Tn_MtIn:  ' + data.Tn_MtIn +'<span>&#8451;</span><br/> Tmt_out:  '+ data.recooling_temp_outlet+" <span>&#8451;</span>" +'<br/>Qth_Lt:  '+ data.cooling_capacity+' <br/> COP:  '+ data.COPth);
+                            $('#res').html('Results:  <br/>  Tn_MtIn:  ' + data.Tn_min +'<span>&#8451;</span><br/> Tmt_out:  '+ data.Tmt_out+" <span>&#8451;</span>" +'<br/>Qth_Lt:  '+ data.Qth_Lt+' <br/> COP:  '+ data.COP);
                           
                             $('.drive_temperature_outlet_holder').html(data.driving_temp_outlet+" <span>&#8451;</span>");
                         $('.cold_water_outlet_holder').html(data.cold_water_temp_outlet + " <span>&#8451;</span>");
